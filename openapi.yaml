@@ -1,0 +1,322 @@
+openapi: 3.0.3
+info:
+  title: Graveyard Jokes API
+  description: Comedy platform API for joke sharing and community interaction
+  version: 1.0.0
+  contact:
+    name: Graveyard Jokes Studios Inc.
+    url: https://graveyardjokes.com
+    email: admin@graveyardjokes.com
+  license:
+    name: MIT
+servers:
+  - url: https://graveyardjokes.com
+    description: Production server
+  - url: http://graveyardjokes.test
+    description: Development server
+
+paths:
+  /api/random-joke:
+    get:
+      summary: Get random joke
+      description: Retrieves a random joke from the jokes database
+      operationId: getRandomJoke
+      tags:
+        - Jokes
+      responses:
+        '200':
+          description: Random joke retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Joke'
+              example:
+                id: "joke_001"
+                setup: "Why don't skeletons fight each other?"
+                punchline: "They don't have the guts!"
+                category: "graveyard"
+        '500':
+          description: Invalid joke data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '503':
+          description: No jokes available
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /api/fetch-og-image:
+    get:
+      summary: Fetch Open Graph image
+      description: Fetches and caches Open Graph images from external URLs
+      operationId: fetchOgImage
+      tags:
+        - Images
+      parameters:
+        - name: url
+          in: query
+          required: true
+          description: The URL to fetch the Open Graph image from
+          schema:
+            type: string
+            format: uri
+            maxLength: 2048
+          example: "https://example.com"
+      responses:
+        '200':
+          description: Image fetched and cached successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  url:
+                    type: string
+                    description: Public URL of the cached image
+                    example: "/storage/og-cache/abc123def456.jpg"
+        '404':
+          description: No image found on target page
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '422':
+          description: Invalid URL or private address
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '429':
+          description: Rate limited - try again later
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Failed to fetch image
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '502':
+          description: Failed to fetch target page or download image
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /contact:
+    post:
+      summary: Submit contact form
+      description: Submits a contact form message
+      operationId: submitContact
+      tags:
+        - Contact
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ContactRequest'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ContactRequest'
+      responses:
+        '302':
+          description: Form submitted successfully (redirect)
+          headers:
+            Location:
+              description: Redirect URL
+              schema:
+                type: string
+        '422':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationError'
+
+  /track-visit:
+    post:
+      summary: Track visitor
+      description: Tracks visitor information and location data
+      operationId: trackVisitor
+      tags:
+        - Analytics
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VisitorTrackingRequest'
+      responses:
+        '200':
+          description: Visit tracked successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: "Visit tracked successfully"
+                  data:
+                    $ref: '#/components/schemas/LocationData'
+        '500':
+          description: Tracking failed
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: "Tracking failed"
+    options:
+      summary: CORS preflight
+      description: Handles CORS preflight requests for visitor tracking
+      operationId: trackVisitorOptions
+      tags:
+        - Analytics
+      responses:
+        '200':
+          description: CORS preflight successful
+
+components:
+  schemas:
+    Joke:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique joke identifier
+          example: "joke_001"
+        setup:
+          type: string
+          description: The joke setup/question
+          example: "Why don't skeletons fight each other?"
+        punchline:
+          type: string
+          description: The joke punchline/answer
+          example: "They don't have the guts!"
+        category:
+          type: string
+          description: Joke category
+          example: "graveyard"
+      required:
+        - id
+        - setup
+        - punchline
+
+    ContactRequest:
+      type: object
+      properties:
+        first_name:
+          type: string
+          maxLength: 255
+          description: Contact's first name
+          example: "John"
+        last_name:
+          type: string
+          maxLength: 255
+          description: Contact's last name
+          example: "Doe"
+        email:
+          type: string
+          format: email
+          maxLength: 255
+          description: Contact's email address
+          example: "john.doe@example.com"
+        message:
+          type: string
+          maxLength: 5000
+          description: Contact message
+          example: "I love your jokes! Keep up the great work."
+      required:
+        - first_name
+        - last_name
+        - email
+        - message
+
+    VisitorTrackingRequest:
+      type: object
+      properties:
+        referrer:
+          type: string
+          description: Referring URL
+          example: "https://google.com"
+        subdomain:
+          type: string
+          description: Subdomain information
+          example: "www"
+
+    LocationData:
+      type: object
+      properties:
+        ip:
+          type: string
+          description: Visitor IP address
+          example: "192.168.1.1"
+        city:
+          type: string
+          description: Visitor city
+          example: "New York"
+        country:
+          type: string
+          description: Visitor country code
+          example: "US"
+        region:
+          type: string
+          description: Visitor region/state
+          example: "New York"
+        timezone:
+          type: string
+          description: Visitor timezone
+          example: "America/New_York"
+
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error message
+          example: "Service temporarily unavailable"
+      required:
+        - error
+
+    ValidationError:
+      type: object
+      properties:
+        message:
+          type: string
+          example: "The given data was invalid."
+        errors:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+          example:
+            email: ["The email field is required."]
+            message: ["The message field is required."]
+
+  securitySchemes: {}
+
+tags:
+  - name: Jokes
+    description: Joke retrieval endpoints
+  - name: Images
+    description: Image fetching and caching
+  - name: Contact
+    description: Contact form submission
+  - name: Analytics
+    description: Visitor tracking and analytics

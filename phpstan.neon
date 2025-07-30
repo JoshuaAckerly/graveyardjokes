@@ -1,0 +1,18 @@
+includes:
+  - ./vendor/larastan/larastan/extension.neon
+  - ./vendor/phpstan/phpstan/conf/bleedingEdge.neon
+  - ./phpstan-baseline.neon
+
+parameters:
+  level: max
+  paths:
+    - app
+    - routes
+    - database
+    - resources
+    - tests
+  inferPrivatePropertyTypeFromConstructor: true
+  reportUnmatchedIgnoredErrors: false
+
+rules:
+  # You can add or disable rules here

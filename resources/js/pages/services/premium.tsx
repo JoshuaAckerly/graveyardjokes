@@ -1,0 +1,218 @@
+import MainLayout from '@/Layouts/MainLayout';
+import { Head, Link } from '@inertiajs/react';
+import { motion } from 'framer-motion';
+import { ArrowLeft, Check } from 'lucide-react';
+import { useEffect, useRef, useState } from 'react';
+
+export default function PremiumPackage() {
+    const cdn = import.meta.env.VITE_ASSET_URL || '';
+    const paypalContainerRef = useRef<HTMLDivElement>(null);
+    const [isPayPalReady, setIsPayPalReady] = useState(false);
+
+    useEffect(() => {
+        // Check if PayPal script is already loaded
+        if (window.paypal) {
+            setIsPayPalReady(true);
+            return;
+        }
+
+        // Check if script is already being loaded
+        const existingScript = document.querySelector('script[src*="paypal.com/sdk"]');
+        if (existingScript) {
+            existingScript.addEventListener('load', () => setIsPayPalReady(true));
+            return;
+        }
+
+        // Load the script
+        const script = document.createElement('script');
+        script.src =
+            'https://www.paypal.com/sdk/js?client-id=BAAEThXfkghKIa87QQOlnsIur64eOCnBLuAxJeYWYDW5o366RczxK2o9F8DtrXnte6SY65yJRFso_mMA2o&components=hosted-buttons&enable-funding=venmo,paylater&disable-funding=card,credit&currency=USD';
+        script.async = true;
+        script.onload = () => setIsPayPalReady(true);
+        document.body.appendChild(script);
+    }, []);
+
+    useEffect(() => {
+        if (!isPayPalReady || !paypalContainerRef.current || !window.paypal?.HostedButtons) {
+            return;
+        }
+
+        try {
+            paypalContainerRef.current.innerHTML = '';
+            window.paypal
+                .HostedButtons({
+                    hostedButtonId: 'CZQNCK3FUPTN2',
+                })
+                .render(paypalContainerRef.current);
+        } catch (error) {
+            console.error('Failed to render PayPal button:', error);
+        }
+    }, [isPayPalReady]);
+
+    const features = [
+        'Everything in Professional',
+        'E-commerce/merch store',
+        'Event calendar & ticketing',
+        'Music/video streaming',
+        'Custom animations & effects',
+        'API integrations',
+        '6 months of support',
+        'Priority updates',
+    ];
+
+    return (
+        <>
+            <Head>
+                <title>Premium Package - $3,000+ | Graveyard Jokes Studios</title>
+                <meta
+                    name="description"
+                    content="Full-featured solution for serious professionals. E-commerce, streaming, custom integrations, and premium support."
+                />
+                <meta
+                    name="keywords"
+                    content="premium package, e-commerce, merch store, streaming, custom website, API integration, priority support, full-stack development"
+                />
+                <link rel="canonical" href="https://graveyardjokes.com/services/premium" />
+                {/* Open Graph */}
+                <meta property="og:title" content="Premium Package - $3,000+ | Graveyard Jokes Studios" />
+                <meta
+                    property="og:description"
+                    content="Full-featured solution for serious professionals. E-commerce, streaming, custom integrations, and premium support."
+                />
+                <meta property="og:image" content={`${cdn}/images/aboutBanner.webp`} />
+                <meta property="og:type" content="website" />
+                <meta property="og:url" content="https://graveyardjokes.com/services/premium" />
+                {/* Twitter */}
+                <meta name="twitter:card" content="summary_large_image" />
+                <meta name="twitter:title" content="Premium Package - $3,000+ | Graveyard Jokes Studios" />
+                <meta
+                    name="twitter:description"
+                    content="Full-featured solution for serious professionals. E-commerce, streaming, custom integrations, and premium support."
+                />
+                <meta name="twitter:image" content={`${cdn}/images/aboutBanner.webp`} />
+                {/* Structured Data (JSON-LD) */}
+                <script type="application/ld+json">
+                    {`
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "serviceType": "Web Design",
+  "name": "Premium Package",
+  "description": "Full-featured solution for serious professionals. E-commerce, streaming, custom integrations, and premium support.",
+  "provider": {
+    "@type": "Organization",
+    "name": "GraveYard Jokes Studios Inc.",
+    "url": "https://graveyardjokes.com"
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "3000",
+    "priceCurrency": "USD",
+    "availability": "https://schema.org/InStock"
+  },
+  "areaServed": "US",
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Premium Package Features",
+    "itemListElement": [
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Everything in Professional" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "E-commerce/merch store" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Event calendar & ticketing" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Music/video streaming" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Custom animations & effects" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "API integrations" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "6 months of support" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Priority updates" } }
+    ]
+  }
+}
+`}
+                </script>
+            </Head>
+
+            <MainLayout>
+                {/* Pay Over Time Section */}
+                <div className="mx-auto mb-8 max-w-2xl rounded-lg border-2 border-(--primary) bg-black/80 p-8 text-white shadow-xl">
+                    <div className="flex flex-col items-center gap-3">
+                        <span className="text-4xl">💀💸</span>
+                        <h2 className="text-2xl font-bold">Pay Over Time with PayPal</h2>
+                        <p className="mt-2 text-lg text-white/80">
+                            Want a killer website but your wallet's feeling a little... lifeless? <br />
+                            With PayPal's <span className="font-semibold text-(--primary)">Pay Over Time</span> options, you can break up your
+                            payments—no need to dig up your savings all at once!
+                        </p>
+                        <p className="mt-4 text-base text-white/60 italic">
+                            "Even the Grim Reaper appreciates flexible payments. He says, 'Why pay it all now when you can pay it... over time?'"
+                        </p>
+                        <div className="mt-4 rounded bg-white/10 px-4 py-2 text-sm text-white/80">
+                            Look for <span className="font-semibold text-(--primary)">Pay Later</span> at checkout!
+                        </div>
+                    </div>
+                </div>
+                <div className="mx-auto max-w-4xl px-4 py-8">
+                    <Link href="/services" className="mb-6 inline-flex items-center gap-2 text-white transition hover:text-(--primary)">
+                        <ArrowLeft className="h-5 w-5" />
+                        Back to Services
+                    </Link>
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.5 }}
+                        className="rounded-lg border-2 border-(--accent) bg-(--card) p-8"
+                    >
+                        <h1 className="mb-4 text-4xl font-bold text-white">Premium Package</h1>
+                        <div className="mb-6">
+                            <span className="text-5xl font-bold text-(--primary)">$3,000+</span>
+                            <p className="mt-2 text-lg text-white/80">
+                                Full-featured solution for serious professionals. E-commerce, streaming, custom integrations, and premium support.
+                            </p>
+                        </div>
+
+                        <div className="mb-8">
+                            <h2 className="mb-4 text-2xl font-semibold text-white">What's Included:</h2>
+                            <ul className="space-y-3">
+                                {features.map((feature, index) => (
+                                    <motion.li
+                                        key={index}
+                                        initial={{ opacity: 0, x: -20 }}
+                                        animate={{ opacity: 1, x: 0 }}
+                                        transition={{ delay: index * 0.1 }}
+                                        className="flex items-center gap-3"
+                                    >
+                                        <Check className="h-5 w-5 text-(--primary)" />
+                                        <span className="text-white">{feature}</span>
+                                    </motion.li>
+                                ))}
+                            </ul>
+                        </div>
+
+                        <div className="mb-8">
+                            <h3 className="mb-4 text-xl font-semibold text-white">Perfect For:</h3>
+                            <ul className="space-y-2 text-white/80">
+                                <li>• Established businesses needing comprehensive solutions</li>
+                                <li>• E-commerce stores with complex requirements</li>
+                                <li>• Content creators with streaming needs</li>
+                                <li>• Organizations requiring custom integrations</li>
+                            </ul>
+                        </div>
+
+                        <div className="rounded-lg bg-black/50 p-6">
+                            <h3 className="mb-4 text-xl font-semibold text-white">Ready to Get Started?</h3>
+                            <p className="mb-6 text-white/80">
+                                This premium package includes everything you need for a professional online presence with advanced features and
+                                ongoing support.
+                            </p>
+                            <div ref={paypalContainerRef} className="min-h-[50px]">
+                                {!isPayPalReady && (
+                                    <div className="flex items-center justify-center py-4">
+                                        <div className="text-white/60">Loading PayPal...</div>
+                                    </div>
+                                )}
+                            </div>
+                        </div>
+                    </motion.div>
+                </div>
+            </MainLayout>
+        </>
+    );
+}

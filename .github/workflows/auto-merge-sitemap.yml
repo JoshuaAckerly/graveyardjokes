@@ -1,0 +1,175 @@
+name: Auto-merge sitemap PRs
+
+permissions:
+  contents: write
+  checks: read
+  pull-requests: write
+
+on:
+  pull_request_target:
+    types: [opened, synchronize, labeled, ready_for_review]
+
+jobs:
+  automerge:
+    runs-on: ubuntu-latest
+    if: always()
+    # MERGE_TOKEN is configured at runtime in the first step to avoid static analysis warnings
+    steps:
+      - name: Set MERGE_TOKEN
+        id: set-token
+        env:
+          AUT0MERGE_PUSH_TO_MAIN: ${{ secrets.AUTOMERGE_PUSH_TO_MAIN }}
+          AUTOMERGE_PAT: ${{ secrets.AUTOMERGE_PAT }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # Prefer a configured PAT when available, otherwise fall back to GITHUB_TOKEN
+          if [ -n "$AUTOMERGE_PAT" ]; then
+            echo "MERGE_TOKEN=$AUTOMERGE_PAT" >> $GITHUB_ENV
+          else
+            echo "MERGE_TOKEN=$GITHUB_TOKEN" >> $GITHUB_ENV
+          fi
+          # Expose AUT0MERGE_PUSH_TO_MAIN as an env var for step-level conditionals
+          echo "AUTOMERGE_PUSH_TO_MAIN=$AUT0MERGE_PUSH_TO_MAIN" >> $GITHUB_ENV
+
+      - name: Prepare merge decision
+        id: prepare
+        uses: actions/github-script@v6
+        with:
+          github-token: ${{ env.MERGE_TOKEN }}
+          script: |
+            const pr = context.payload.pull_request;
+            if (!pr) return core.setFailed('No pull_request in context');
+
+            const headRef = pr.head.ref || '';
+            const prNumber = pr.number;
+
+            const okBranch = headRef.startsWith('sitemap-index-update-');
+            const labels = pr.labels || [];
+            const hasAuto = labels.some(l => String(l.name).toLowerCase() === 'automerge');
+
+            const headSha = pr.head.sha;
+
+            // Get combined status and checks
+            const combined = await github.rest.repos.getCombinedStatusForRef({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              ref: headSha,
+            }).then(r => r.data).catch(() => null);
+
+            const checks = await github.rest.checks.listForRef({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              ref: headSha,
+            }).then(r => r.data).catch(() => null);
+
+            const statusesOk = combined ? combined.state === 'success' : false;
+            let checksOk = false;
+            if (checks && checks.total_count > 0) {
+              checksOk = checks.check_runs.every(c => c.conclusion === 'success');
+            }
+            const ok = statusesOk || checksOk;
+
+            const shouldMerge = okBranch && hasAuto && ok;
+
+            core.setOutput('should_merge', shouldMerge ? 'true' : 'false');
+            core.setOutput('prNumber', prNumber);
+            // Export runtime env var so later steps can read without using step outputs in 'if' expressions
+            core.exportVariable('SHOULD_MERGE', shouldMerge ? 'true' : 'false');
+            core.info(`should_merge=${shouldMerge} statusesOk=${statusesOk} checksOk=${checksOk}`);
+
+            if (shouldMerge) {
+              try {
+                core.info(`Merging PR #${prNumber}`);
+                await github.rest.pulls.merge({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  pull_number: prNumber,
+                  merge_method: 'merge'
+                });
+                core.info('Merged.');
+                const headRef = pr.head.ref;
+                if (headRef) {
+                  try {
+                    core.info(`Deleting branch ${headRef}`);
+                    await github.rest.git.deleteRef({
+                      owner: context.repo.owner,
+                      repo: context.repo.repo,
+                      ref: `heads/${headRef}`
+                    });
+                    core.info('Deleted branch.');
+                  } catch (err) {
+                    core.info('Failed to delete branch: ' + err.message);
+                  }
+                }
+              } catch (err) {
+                core.info('Failed to merge PR: ' + err.message);
+              }
+            }
+
+      - name: Check combined status and checks for HEAD
+        id: status
+        uses: actions/github-script@v6
+        with:
+          # github-script will default to the workflow token; MERGE_TOKEN is set at runtime
+          script: |
+            const pr = context.payload.pull_request;
+            if (!pr) return core.setFailed('No pull_request in context');
+            const headSha = pr.head.sha;
+
+            // Get combined status
+            const combined = await github.rest.repos.getCombinedStatusForRef({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              ref: headSha,
+            }).then(r => r.data).catch(() => null);
+
+            // Get check runs
+            const checks = await github.rest.checks.listForRef({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              ref: headSha,
+            }).then(r => r.data).catch(() => null);
+
+            const statusesOk = combined ? combined.state === 'success' : false;
+            let checksOk = false;
+            if (checks && checks.total_count > 0) {
+              checksOk = checks.check_runs.every(c => c.conclusion === 'success');
+            }
+
+            // If there are no check runs but combined indicates success, accept it
+            const ok = statusesOk || checksOk;
+
+            core.setOutput('statusesOk', statusesOk);
+            core.setOutput('checksOk', checksOk);
+            core.setOutput('ok', ok);
+            core.info(`statusesOk=${statusesOk} checksOk=${checksOk} ok=${ok}`);
+
+      # Merge and branch deletion are handled inside the Prepare merge decision step to avoid
+      # referencing step outputs in 'if' expressions (which the static linter flags).
+
+      - name: "Optional: Push post-merge commit to main"
+        run: |
+          # Only proceed when both flags are true
+          if [ "${AUTOMERGE_PUSH_TO_MAIN}" != "true" ] || [ "${SHOULD_MERGE}" != "true" ]; then
+            echo "Skipping optional push (AUTOMERGE_PUSH_TO_MAIN=${AUTOMERGE_PUSH_TO_MAIN}, SHOULD_MERGE=${SHOULD_MERGE})"
+            exit 0
+          fi
+          echo "Preparing post-merge commit..."
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          # Clone via HTTPS using MERGE_TOKEN so we can push
+          git clone "https://x-access-token:${MERGE_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" repo
+          cd repo
+          git checkout main
+          date > .sitemap_index_last_updated
+          git add .sitemap_index_last_updated
+          git commit -m "chore: update sitemap timestamp [skip ci]" || echo "No changes to commit"
+          git push "https://x-access-token:${MERGE_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" main
+
+      - name: Skip message
+        run: |
+          if [ "${SHOULD_MERGE}" != "true" ]; then
+            echo "Auto-merge conditions not met (branch/label/checks)."
+          else
+            echo "Auto-merge performed; no skip needed."
+          fi

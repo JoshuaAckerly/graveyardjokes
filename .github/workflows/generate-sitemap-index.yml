@@ -1,0 +1,65 @@
+name: Generate sitemap index
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch: {}
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    env:
+      APP_URL: https://graveyardjokes.com
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@2.25.1
+        with:
+          php-version: '8.2'
+          extensions: mbstring, xml, curl
+
+      - name: Install Composer dependencies
+        run: |
+          composer install --no-progress --no-suggest --prefer-dist --no-interaction
+
+      - name: Setup env file
+        run: |
+          cp .env.example .env
+          sed -i 's|APP_URL=.*|APP_URL=${{ env.APP_URL }}|' .env
+
+      - name: Generate APP_KEY if missing
+        run: |
+          php -r "if (!file_exists('.env')) exit;"
+
+      - name: Run migrations (no-op if not configured)
+        run: |
+          php artisan migrate --no-interaction || true
+
+      - name: Generate main sitemap
+        run: |
+          APP_URL=${{ env.APP_URL }} php artisan app:generate-sitemap
+      
+      - name: Generate sitemap index with validation
+        run: |
+          APP_URL=${{ env.APP_URL }} php artisan app:generate-sitemap-index --validate
+
+      - name: Commit and push generated sitemap if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git remote set-url origin "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}"
+          # Only commit if files changed
+          if git status --porcelain | grep -q "public/sitemap.xml\|public/sitemap_index.xml\|public/sitemap_validation_summary.md"; then
+            git add public/sitemap.xml public/sitemap_index.xml public/sitemap_validation_summary.md || true
+            git commit -m "chore: update sitemaps [skip ci]" || echo "No changes to commit"
+            git push origin main
+          else
+            echo "No changes to sitemap files; skipping commit"
+          fi

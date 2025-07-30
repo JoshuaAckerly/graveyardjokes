@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" @class(['dark'=> ($appearance ?? 'system') == 'dark'])>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    {{-- Inline script to detect system dark mode preference and apply it immediately --}}
+    <script>
+        (function() {
+            const appearance = '{{ $appearance ?? "system" }}';
+
+            if (appearance === 'system') {
+                const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+                if (prefersDark) {
+                    document.documentElement.classList.add('dark');
+                }
+            }
+        })();
+    </script>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-1GXR54HSYZ"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+
+        gtag('config', 'G-1GXR54HSYZ', {
+            cookie_domain: '.graveyardjokes.com',
+            cookie_flags: 'SameSite=None;Secure'
+        });
+    </script>
+
+    {{-- Inline style to set the HTML background color based on our theme in app.css --}}
+    <style>
+        html {
+            background-color: oklch(1 0 0);
+        }
+
+        html.dark {
+            background-color: oklch(0.145 0 0);
+        }
+    </style>
+
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
+
+    <title inertia>{{ config('app.name', 'Laravel') }}</title>
+
+    @php
+        // Build an absolute canonical URL without query strings.
+        // Use the actual request host (scheme + host) so subdomains generate
+        // canonicals for themselves rather than being forced to the APP_URL.
+    $host = rtrim((string) request()->getSchemeAndHttpHost(), '/');
+        $path = request()->path();
+        $canonical = $host . ($path === '/' || $path === '' ? '/' : '/' . ltrim($path, '/'));
+    @endphp
+
+    <link rel="canonical" href="{{ $canonical }}">
+
+
+
+    <link rel="icon" href="/favicon.ico" sizes="any">
+
+    <link rel="preconnect" href="https://fonts.bunny.net">
+    <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />
+
+    {{-- PayPal SDK - Commented out temporarily to fix layout issues --}}
+    {{-- <script src="https://www.paypal.com/sdk/js?client-id=BAAEThXfkghKIa87QQOlnsIur64eOCnBLuAxJeYWYDW5o366RczxK2o9F8DtrXnte6SY65yJRFso_mMA2o&components=hosted-buttons&enable-funding=venmo,paylater&disable-funding=card,credit&currency=USD" data-sdk-integration-source="button-factory"></script> --}}
+
+    @routes
+    @viteReactRefresh
+    @vite(['resources/js/app.tsx', "resources/js/pages/{$page['component']}.tsx"])
+    @inertiaHead
+</head>
+
+<body class="font-sans antialiased">
+    @inertia
+</body>
+
+</html>

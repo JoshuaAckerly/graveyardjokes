@@ -1,0 +1,39 @@
+<?php
+
+namespace Tests\Unit;
+
+use GuzzleHttp\Client as GuzzleClient;
+use GuzzleHttp\Handler\MockHandler;
+use GuzzleHttp\HandlerStack;
+use GuzzleHttp\Psr7\Response;
+use GuzzleHttp\Psr7\Utils;
+use Tests\TestCase;
+
+class VisitorServiceGuzzleTest extends TestCase
+{
+    public function test_external_api_parsed_correctly(): void
+    {
+        // Mocked response from ipinfo
+        $body = json_encode([
+            'ip' => '1.2.3.4',
+            'city' => 'TestCity',
+            'country' => 'TC',
+            'region' => 'TestRegion',
+            'timezone' => 'UTC',
+        ]);
+
+        $mock = new MockHandler([
+            new Response(200, ['Content-Type' => 'application/json'], Utils::streamFor($body)),
+        ]);
+
+        $handlerStack = HandlerStack::create($mock);
+        $client = new GuzzleClient(['handler' => $handlerStack]);
+
+        $service = new \App\Modules\Visitor\Services\VisitorService($client);
+
+        $result = $service->getLocationFromIP('1.2.3.4');
+
+        $this->assertSame('TestCity', $result['city']);
+        $this->assertSame('TC', $result['country']);
+    }
+}

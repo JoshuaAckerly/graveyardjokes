@@ -1,0 +1,56 @@
+/.phpunit.cache
+/bootstrap/ssr
+/node_modules
+/public/build
+/public/hot
+/storage/*.key
+/storage/pail
+/vendor
+.env
+.env.backup
+.env.production
+.phpactor.json
+.phpunit.result.cache
+Homestead.json
+Homestead.yaml
+npm-debug.log
+yarn-error.log
+/auth.json
+/.fleet
+/.idea
+/.nova
+/.vscode
+/.zed
+
+# Generated files
+.rnd
+s3-organization-report.json
+s3-uncategorized-files.json
+sitemap_index.xml
+/public/sitemap.xml
+/public/sitemap_index.xml
+/public/sitemap_validation_summary.md
+
+# OS files
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# OG Image cache (generated dynamically)
+/public/storage/og-cache/*.png
+/storage/app/public/og-cache/*
+
+# Storage symlink
+/public/storage
+
+# Entire storage folder (generated files)
+/storage
+
+# ACME challenge files
+/public/.well-known/
+
+# Modified files to ignore
+database/factories/UserFactory.php
+resources/js/data/portfolioItems.json
