@@ -7,7 +7,6 @@ Route::get('/', function () {
     return Inertia::render('welcome');
 })->name('home');
 
-Route::get('/dashboard', fn () => Inertia::render('Dashboard'))->middleware('auth');
 
 
 require __DIR__.'/settings.php';
