@@ -1,6 +1,9 @@
 import React, { JSX } from "react"
 import { Head, router } from "@inertiajs/react"
 import { motion } from "framer-motion"
+import Carousel from "@/Components/carousel"
+import ApplicationLogo from "@/Components/applicationLogo"
+import MobileMenu from "@/Components/MobileMenu"
 
 export default function Home(): JSX.Element {
     const cdn = import.meta.env.VITE_ASSET_URL
@@ -26,14 +29,14 @@ export default function Home(): JSX.Element {
                 />
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
                 <link rel="icon" href={`${cdn}/favicon.ico`} />
-                    </Head>
+            </Head>
 
 
             <a href="/" className="sr-only">
                 Home Page
             </a>
 
-            <div className="relative z-0 max-w-full space-y-20 overflow-hidden rounded-2xl bg-[#3E403D] text-center pb-24 sm:pb-40 lg:pb-60">
+            <div className="relative z-0 max-w-full space-y-20 overflow-hidden bg-[#3E403D] text-center pb-24 sm:pb-40 lg:pb-60">
                 {/* Background Image and Gradient */}
                 <div className="absolute inset-0 max-h-96">
                     <img
@@ -44,6 +47,10 @@ export default function Home(): JSX.Element {
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-[#3E403D] to-transparent"></div>
                 </div>
+
+                <motion.div className="z-5" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.6 }}>
+                    <MobileMenu />
+                </motion.div>
 
                 {/* Content */}
                 <motion.div
@@ -59,7 +66,7 @@ export default function Home(): JSX.Element {
                         initial={{ opacity: 0, scale: 0.8 }}
                         animate={{ opacity: 1, scale: 1 }}
                         transition={{ duration: 0.8, delay: 0.2 }}
-                        className="rounded-2xl bg-[#1C1C1C] text-4xl font-bold text-white opacity-80 sm:text-6xl"
+                        className=" bg-[#1C1C1C] text-4xl font-bold text-white opacity-80 sm:text-6xl"
                     >
                         GraveYard Jokes Studios
                     </motion.h1>
@@ -82,7 +89,10 @@ export default function Home(): JSX.Element {
                         viewport={{ once: true, amount: 0.2 }}
                         transition={{ duration: 0.8 }}
                     >
-
+                        <ApplicationLogo
+                            logoSize="h-32 w-32 sm:h-48 sm:w-48"
+                            containerClasses="mx-auto mb-6"
+                        />
                     </motion.div>
 
                     <motion.p
@@ -117,7 +127,7 @@ export default function Home(): JSX.Element {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8, delay: 0.4 }}
                     >
-                        <p className="relative flex p-4 text-lg text-black shadow-lg md:m-auto rounded-2xl hover:bg-green-900 bg-customGreen md:max-w-screen-md">
+                        <p className="relative flex p-4 text-lg text-black shadow-lg md:m-auto  hover:bg-green-900 bg-gyjGreen md:max-w-screen-md">
                             Custom websites for musicians, artists, and
                             creatives who want to stand out online — whether
                             you're promoting your latest album, launching a
@@ -133,7 +143,7 @@ export default function Home(): JSX.Element {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: 0.8 }}
                 >
-
+                    <Carousel/>
                 </motion.div>
 
                 {/* Contact Button */}
@@ -143,7 +153,7 @@ export default function Home(): JSX.Element {
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.8, delay: 1 }}
                     whileHover={{ scale: 1.1 }}
-                    className="relative z-20 flex px-8 py-6 mx-auto text-sm font-semibold text-white transition duration-300 ease-in-out shadow-md bottom-2 rounded-2xl bg-customGreen hover:bg-green-900 focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:ring-offset-2 sm:px-12 sm:py-6 sm:text-lg"
+                    className="relative z-20 flex px-8 py-6 mx-auto text-sm font-semibold text-white transition duration-300 ease-in-out shadow-md bottom-2  bg-gyjGreen hover:bg-green-900 focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:ring-offset-2 sm:px-12 sm:py-6 sm:text-lg"
                     aria-label="Contact Us"
                     onClick={handleClick}
                 >
