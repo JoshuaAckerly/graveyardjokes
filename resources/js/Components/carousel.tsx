@@ -54,13 +54,13 @@ const Carousel: React.FC = () => {
         {carouselSlides.map((slide, index) => (
           <div
             key={index}
-            className="relative w-full flex-shrink-0 rounded-lg border-4 border-customGreen"
+            className="relative w-full flex-shrink-0  border-4 border-customGreen"
           >
             {/* Slide image */}
             <img
               src={`${cdn}${slide.image}`}
               loading="lazy"
-              className="max-h-[300px] w-full rounded-lg object-contain md:max-h-[500px]"
+              className="max-h-[300px] w-full  object-contain md:max-h-[500px]"
               alt={slide.title}
             />
 
