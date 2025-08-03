@@ -108,7 +108,7 @@ export default function Home(): JSX.Element {
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.8, delay: 0.4 }}
                         >
-                            <p className="relative flex p-4 text-lg text-black shadow-lg md:m-auto bg-green-400 hover:bg-green-900 bg-gyjGreen md:max-w-screen-md">
+                            <p className="relative flex p-4 text-lg text-black shadow-lg md:m-auto bg-green-400 hover:bg-green-900  md:max-w-screen-md">
                                 Custom websites for musicians, artists, and
                                 creatives who want to stand out online — whether
                                 you're promoting your latest album, launching a
@@ -124,7 +124,7 @@ export default function Home(): JSX.Element {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8, delay: 0.8 }}
                     >
-                        <Carousel />
+                        <Carousel/>
                     </motion.div>
 
                     {/* Contact Button */}

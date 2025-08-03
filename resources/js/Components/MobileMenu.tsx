@@ -64,6 +64,15 @@ export default function MobileMenu() {
                                         About
                                     </Link>
                                 </li>
+                                <li className="mb-4 bg-green-800">
+                                    <Link
+                                        href="/contact"
+                                        className="text-green-400 hover:underline"
+                                        onClick={() => setIsOpen(false)}
+                                    >
+                                        Contact
+                                    </Link>
+                                </li>
                             </ul>
                         </div>
                     </div>
