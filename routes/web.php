@@ -13,7 +13,7 @@ Route::get('/about', function () {
 })->name('about');
 
 Route::get('/contact', function () {
-    return Inertia::render('Contact');
+    return Inertia::render('contact');
 })->name('contact');
 
 Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
