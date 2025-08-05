@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
 
-const cdn: string = import.meta.env.VITE_ASSET_URL as string;
-
 interface Slide {
   image: string;
   title: string;
