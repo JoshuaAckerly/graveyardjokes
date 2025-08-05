@@ -31,14 +31,13 @@ const PricingCardDevelop = ({
     features: string[];
     buttonText: string;
 }) => (
-    <div className="flex flex-col items-center w-full p-6 transition-transform duration-300 bg-[#1c1c1c] shadow-lg  hover:scale-105">
+    <div className="flex flex-col items-center w-full p-6 transition-transform duration-300 bg-[var(--card)] shadow-lg  hover:scale-105">
         <h2 className="mb-4 text-2xl font-semibold text-white">{name}</h2>
-        <p className="mb-4 text-4xl font-bold text-customGreen">{price}</p>
+        <p className="mb-4 text-4xl font-bold text-[var(--accent)]">{price}</p>
         <p className="mb-4 text-lg text-white">Delivery Time: {deliveryTime}</p>
         <ul className="mb-6 space-y-2">
             {features.map((feature, idx) => (
                 <li key={idx} className="text-white">
-                    <span className="mr-2 text-customGreen">✔</span>
                     {feature}
                 </li>
             ))}
@@ -47,7 +46,7 @@ const PricingCardDevelop = ({
             href="https://www.fiverr.com/s/0bNavNk"
             target="_blank"
             rel="noopener noreferrer"
-            className="w-full px-6 py-3 text-lg font-medium text-white transition  bg-customGreen"
+            className="w-full px-6 py-3 text-lg font-medium text-white transition  bg-[--primary] hover:bg-[--accent] focus:ring-2 focus:ring-indigo-600 focus:ring-offset-2 focus:"
             aria-label={`Purchase ${buttonText} package`}
         >
             {buttonText}
@@ -264,43 +263,15 @@ export default function ContactPricing() {
                     name="description"
                     content="Contact Graveyard Jokes Studios for custom websites and explore affordable pricing packages for creatives, musicians, and small businesses."
                 />
-                <meta name="robots" content="index, follow" />
-                {/* Open Graph / Facebook */}
                 <meta
-                    property="og:title"
-                    content="Contact & Pricing | Graveyard Jokes Studios"
+                    name="keywords"
+                    content="contact, pricing, custom websites, web design, web development, musicians, artists, creatives, small business websites"
                 />
-                <meta
-                    property="og:description"
-                    content="Let's collaborate! Reach out to Graveyard Jokes Studios for custom web development and see our affordable pricing packages."
-                />
-                <meta
-                    property="og:image"
-                    content="https://graveyardjokes.com/images/ContactBanner.webp"
-                />
-                <meta
-                    property="og:url"
-                    content="https://graveyardjokes.com/contact"
-                />
-                <meta property="og:type" content="website" />
-                {/* Twitter */}
-                <meta name="twitter:card" content="summary_large_image" />
-                <meta
-                    name="twitter:title"
-                    content="Contact & Pricing | Graveyard Jokes Studios"
-                />
-                <meta
-                    name="twitter:description"
-                    content="Reach out to Graveyard Jokes Studios to get started on your custom website. We're here to build your vision. See our pricing packages."
-                />
-                <meta
-                    name="twitter:image"
-                    content="https://graveyardjokes.com/images/ContactBanner.webp"
-                />
+                <meta name="viewport" content="width=device-width, initial-scale=1" />
             </Head>
             <MainLayout>
                 {/* Pricing Section */}
-                <div className="relative max-w-full space-y-20 overflow-hidden  bg-[#3E403D] text-center mb-20">
+                <div className="relative max-w-full space-y-20 overflow-hidden  bg-[var(--color-foreground)] text-center mb-20">
                     {/* Background Image */}
                     <div className="absolute inset-0 z-0 max-h-96">
                         <img
@@ -309,7 +280,7 @@ export default function ContactPricing() {
                             alt="Pricing background"
                             className="object-cover w-full h-full opacity-60"
                         />
-                        <div className="absolute inset-0 bg-gradient-to-t from-[#3E403D] via-[#3E403D]/70 to-transparent"></div>
+                        <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-foreground)] to-transparent"></div>
                     </div>
 
                     {/* Pricing Section */}
@@ -339,83 +310,14 @@ export default function ContactPricing() {
                     </div>
 
                     <section className="py-16">
-                        <section className="relative z-10 max-w-5xl p-12 mx-auto mt-16 bg-[#1c1c1c] shadow-2xl -3xl">
-                            <h2 className="mb-4 text-4xl font-extrabold text-center text-white drop-shadow-sm">
-                                What I’ll Need From You
+                        <section className="relative z-10 max-w-5xl p-12 mx-auto mt-16 bg-[var(--card)] shadow-2xl -3xl">
+                            <h2 className="mb-6 text-3xl font-semibold text-center text-white">
+                                Interested in a custom website?
                             </h2>
-                            <p className="max-w-3xl mx-auto mb-4 font-medium leading-relaxed text-center text-white">
-                                To craft a portfolio site uniquely tailored to
-                                your goals, please share any of the following
-                                materials you'd love featured:
+                            <p className="mb-6 text-lg text-center text-white">
+                                Contact us to discuss your project and get a
+                                personalized quote.
                             </p>
-                            <div className="flex justify-center mb-4">
-                                <div className="grid grid-cols-1 gap-2 md:grid-cols-5">
-                                    {[
-                                        {
-                                            title: "🧾 Basic Info",
-                                            items: [
-                                                "Your full name (optional)",
-                                                "Your title or role (e.g., Software Engineer, Artist, Entrepreneur)",
-                                            ],
-                                        },
-                                        {
-                                            title: "📄 Content",
-                                            items: [
-                                                "Short bio / About Me (1–3 paragraphs)",
-                                                "Resume (PDF or Word)",
-                                                "Project links and descriptions (GitHub, screenshots, etc.)",
-                                                "Skills / Tech Stack",
-                                            ],
-                                        },
-                                        {
-                                            title: "🔗 Links",
-                                            items: [
-                                                "LinkedIn profile",
-                                                "GitHub / Portfolio / Blog / Medium",
-                                                "Social profiles you'd like to include",
-                                            ],
-                                        },
-                                        {
-                                            title: "🎨 Design Preferences",
-                                            items: [
-                                                "Brand colors / color scheme",
-                                                "Preferred font or mood (e.g., modern, minimal, bold)",
-                                                "Example sites you like (for inspiration)",
-                                            ],
-                                        },
-                                        {
-                                            title: "📷 Images",
-                                            items: [
-                                                "Headshot or profile picture",
-                                                "Logos, banners, or any custom graphics",
-                                                "Or I can choose professional stock images for you",
-                                            ],
-                                        },
-                                    ].map(({ title, items }) => (
-                                        <div
-                                            key={title}
-                                            className="space-y-2 duration-300 cursor-default -xl"
-                                        >
-                                            <h3 className="mb-4 text-2xl font-semibold text-customGreen">
-                                                {title}
-                                            </h3>
-                                            <ul className="space-y-2 text-white list-disc list-inside">
-                                                {items.map((item, i) => (
-                                                    <li
-                                                        key={i}
-                                                        className="px-3 py-1 list-none transition-colors duration-200 "
-                                                    >
-                                                        <span className="mr-2 text-customGreen">
-                                                            ✔
-                                                        </span>
-                                                        {item}
-                                                    </li>
-                                                ))}
-                                            </ul>
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
                             <motion.button
                                 type="button"
                                 initial={{ opacity: 0, scale: 0.8 }}

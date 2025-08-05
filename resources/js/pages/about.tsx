@@ -24,26 +24,33 @@ export default function About() {
                     name="description"
                     content="Meet Joshua Ackerly — the developer behind Graveyard Jokes Studios. Discover his journey, skills, and story behind the brand."
                 />
-                <meta name="robots" content="index, follow" />
-                <meta name="author" content="Joshua Ackerly" />
+                <meta
+                    name="keywords"
+                    content="Joshua Ackerly, Graveyard Jokes Studios, web developer, web designer, portfolio, skills, Laravel, React, Tailwind CSS"
+                />
                 <meta property="og:title" content="About Joshua Ackerly | Graveyard Jokes Studios" />
-                <meta property="og:description" content="Discover the origin of Graveyard Jokes Studios and the story of its creator, Joshua Ackerly — passionate about web development and creative expression." />
-                <meta property="og:image" content="https://graveyardjokes.com/images/aboutBanner.webp" />
+                <meta
+                    property="og:description"
+                    content="Meet Joshua Ackerly — the developer behind Graveyard Jokes Studios. Discover his journey, skills, and story behind the brand."
+                />
+                <meta property="og:image" content={`${cdn}/images/aboutBanner.webp`} />
+                <meta property="og:type" content="website" />
                 <meta property="og:url" content="https://graveyardjokes.com/about" />
-                <meta property="og:type" content="profile" />
-                <meta property="og:site_name" content="Graveyard Jokes Studios" />
                 <meta name="twitter:card" content="summary_large_image" />
                 <meta name="twitter:title" content="About Joshua Ackerly | Graveyard Jokes Studios" />
-                <meta name="twitter:description" content="Explore the background, skills, and philosophy behind Graveyard Jokes Studios — a web development brand by Joshua Ackerly." />
-                <meta name="twitter:image" content="https://graveyardjokes.com/images/aboutBanner.webp" />
-            </Head>
+                <meta
+                    name="twitter:description"
+                    content="Meet Joshua Ackerly — the developer behind Graveyard Jokes Studios. Discover his journey, skills, and story behind the brand."
+                />
+                <meta name="twitter:image" content={`${cdn}/images/aboutBanner.webp`} />
+              </Head>
 
             <MainLayout>
                 <motion.main
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ duration: 0.4 }}
-                    className="relative z-0 max-w-full overflow-hidden  bg-[#3E403D] text-center shadow-lg"
+                    className="relative z-0 max-w-full overflow-hidden  bg-[var(--color-foreground)] text-center shadow-lg"
                 >
                     {/* Hero Banner */}
                     <div className="absolute inset-0 max-h-96">
@@ -53,11 +60,11 @@ export default function About() {
                             alt="Abstract graveyard-themed banner"
                             className="object-cover w-full h-full pointer-events-none opacity-80"
                         />
-                        <div className="absolute inset-0 bg-gradient-to-t from-[#3E403D] to-transparent" />
+                        <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-foreground)] to-transparent" />
                     </div>
                     <div className="relative z-10 flex flex-col items-center px-6 py-12 text-white sm:px-12">
                         <motion.h1
-                            className="text-4xl font-bold underline decoration-green-400"
+                            className="text-4xl font-bold underline decoration-[var(--color-primary)]"
                             initial={{ opacity: 0, y: -20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.6 }}
@@ -74,8 +81,8 @@ export default function About() {
                             animate={{ scale: 1, opacity: 1 }}
                             transition={{ duration: 0.6 }}
                         >
-                            <div className="flex items-center justify-center w-48 h-48 border-4 border-green-400 rounded-full shadow-xl sm:h-80 sm:w-80">
-                                <div className="flex items-center justify-center border-2 border-gray-400 rounded-full h-44 w-44 sm:h-72 sm:w-72">
+                            <div className="flex items-center justify-center w-48 h-48 border-4 border-[var(--primary)] rounded-full shadow-xl sm:h-80 sm:w-80">
+                                <div className="flex items-center justify-center border-2 border-[var(--accent)] rounded-full h-44 w-44 sm:h-72 sm:w-72">
                                     <img
                                         src={`${cdn}/images/profileImage.webp`}
                                         loading="lazy"
@@ -88,20 +95,20 @@ export default function About() {
 
                         {/* Bio Section (Mobile + Desktop) */}
                         <motion.div
-                            className="mt-8  border-2 border-gray-500 bg-[#1C1C1C] p-6 shadow-md text-gray-300 max-w-xl text-left"
+                            className="mt-8  border-2 border-[var(--accent)] bg-[var(--card)] p-6 shadow-md text-white max-w-xl text-left"
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             transition={{ delay: 0.5, duration: 0.6 }}
                         >
                             <p className="leading-relaxed">
                                 Hi! I’m{" "}
-                                <span className="font-semibold text-green-400">
+                                <span className="font-semibold text-[var(--primary)]">
                                     Joshua Ackerly
                                 </span>
                                 , a passionate web developer and designer. I
                                 thrive at the intersection of technology and
                                 creativity, using{" "}
-                                <span className="text-green-400">
+                                <span className="text-[var(--primary)] font-semibold">
                                     Laravel, React, and Tailwind CSS
                                 </span>{" "}
                                 to build functional, elegant, and expressive
@@ -114,16 +121,16 @@ export default function About() {
 
                     {/* Resume + CTA */}
                     <div className="mt-8 flex flex-col items-center gap-4">
-                        <a
+                        {/* <a
                             href={`${cdn}/documents/Joshua_Ackerly_Resume.pdf`}
                             download
-                            className="text-green-400 underline hover:text-green-300"
+                            className="text-[var(--primary)] underline hover:text-[var(--accent-foreground)] transition"
                         >
                             Download My Resume
-                        </a>
+                        </a> */}
                         <a
                             href="/contact"
-                            className="rounded-lg bg-green-500 px-6 py-3 font-semibold text-white shadow hover:bg-green-600 transition"
+                            className="rounded-lg bg-[var(--card)] px-6 py-3 font-semibold text-white shadow hover:bg-[var(--accent)] transition"
                         >
                             Let's Work Together
                         </a>
@@ -132,14 +139,14 @@ export default function About() {
                     {/* Skills Section */}
                     <div className="mt-16 px-4">
                         <motion.h2
-                            className="text-3xl font-semibold text-green-400 underline"
+                            className="text-3xl font-semibold text-[var(--primary)] underline"
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             transition={{ delay: 0.6, duration: 0.6 }}
                         >
                             Skills
                         </motion.h2>
-                        <div className="m-8 mx-auto max-w-4xl grid grid-cols-1 sm:grid-cols-2 gap-6  border-2 border-gray-600 bg-[#1C1C1C] p-8 shadow-md">
+                        <div className="m-8 mx-auto max-w-4xl grid grid-cols-1 sm:grid-cols-2 gap-6  border-2 border-[var(--accent)] bg-[var(--card)] p-8 shadow-md">
                             {skills.map((skill) => (
                                 <motion.div
                                     key={skill.name}
@@ -162,21 +169,13 @@ export default function About() {
                                     </div>
                                 </motion.div>
                             ))}
-                            <div className="flex justify-center col-span-1 sm:col-span-2 mt-8">
-                                <img
-                                    src={`${cdn}/images/joshua_ackerly_skill_radar_chart.svg`}
-                                    loading="lazy"
-                                    alt="Skill radar chart showing proficiency in web technologies"
-                                    className="w-full max-w-md border border-gray-500 rounded-lg shadow-lg"
-                                />
-                            </div>
                         </div>
                     </div>
 
                     {/* Story Section */}
                     <div className="flex flex-col items-center mt-10 px-4 pb-20">
                         <motion.h2
-                            className="text-3xl font-semibold text-green-400 underline"
+                            className="text-3xl font-semibold text-[var(--primary)] underline"
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             transition={{ delay: 0.6, duration: 0.6 }}
@@ -184,7 +183,7 @@ export default function About() {
                             The Story of GraveyardJokes Studios
                         </motion.h2>
                         <motion.div
-                            className="m-8 w-full max-w-3xl  border-2 border-gray-600 bg-[#1C1C1C] p-8 shadow-md text-left text-gray-300"
+                            className="m-8 w-full max-w-3xl  border-2 border-[var(--accent)] bg-[var(--card)] p-8 shadow-md text-left text-white"
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             transition={{ delay: 0.8, duration: 0.6 }}
@@ -192,7 +191,7 @@ export default function About() {
                             <p className="mb-4 leading-relaxed">
                                 What started as a late-night idea and a domain
                                 name —{" "}
-                                <span className="text-green-400">
+                                <span className="text-[--primary] font-semibold">
                                     GraveyardJokes.com
                                 </span>{" "}
                                 — evolved into a brand focused on creative web
@@ -203,7 +202,7 @@ export default function About() {
                                 shaped it into a studio where humor meets
                                 function. From interfaces to full-stack
                                 applications,{" "}
-                                <span className="font-semibold text-green-400">
+                                <span className="font-semibold text-[--primary]">
                                     GraveyardJokes Studios
                                 </span>{" "}
                                 reflects both grit and creative spark.

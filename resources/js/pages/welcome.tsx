@@ -65,7 +65,7 @@ export default function Home(): JSX.Element {
                             Studios
                         </motion.h1>
 
-                        <div className="block lg:flex lg:items-center lg:justify-center lg:space-x-6">
+                        <div className="block md:flex md:items-center md:justify-center md:space-x-6">
                             <motion.p
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
