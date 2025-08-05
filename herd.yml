@@ -1,0 +1,5 @@
+integrations:
+  forge:
+    graveyardjokes.com:
+      site-id: 2665987
+      server-id: 901820
