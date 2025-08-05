@@ -75,7 +75,7 @@ export default function MobileMenu() {
                                 </li>
                                 <li className="mb-4 bg-[var(--primary)]">
                                     <Link
-                                        href="#portfolio"
+                                        href="/portfolio"
                                         className="text-black hover:underline"
                                         onClick={() => setIsOpen(false)}
                                     >
@@ -83,13 +83,13 @@ export default function MobileMenu() {
                                     </Link>
                                 </li>
                                 <li className="mb-4 bg-[var(--primary)]">
-                                    <Link
-                                        href="#studio"
+                                    <a
+                                        href="https://studio.graveyardjokes.com"
                                         className="text-black hover:underline"
                                         onClick={() => setIsOpen(false)}
                                     >
                                         Studio
-                                    </Link>
+                                    </a>
                                 </li>
                             </ul>
                         </div>
