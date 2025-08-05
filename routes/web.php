@@ -33,6 +33,7 @@ Route::get('/generate-sitemap', function () {
         ->add(Url::create('/'))
         ->add(Url::create('/about'))
         ->add(Url::create('/contact'))
+        ->add(Url::create('/portfolio'))
         ->writeToFile(public_path('sitemap.xml'));
 
     return 'Sitemap generated!';

@@ -18,25 +18,25 @@ const carouselSlides: Slide[] = [
         image: '/images/AdobeStock_348397404.webp',
         title: 'Lunar Blood',
         description: 'This project features an elegant layout made for a modern metal band.',
-        link: '#',
+        link: 'https://lunarblood.graveyardjokes.com',
     },
     {
         image: '/images/AdobeStock_621659086.webp',
         title: 'Synth Veil',
         description: 'An immersive experience built with modern web technologies.',
-        link: '#',
+        link: 'https://synthveil.graveyardjokes.com',
     },
     {
         image: '#',
         title: 'Velvet Radio',
         description: 'A tribute to The Velvet Pulse, blending nostalgia with contemporary design.',
-        link: '#',
+        link: 'https://velvetradio.graveyardjokes.com',
     },
     {
         image: '#',
         title: 'Hollow Press',
         description: 'A vibrant showcase of creativity and innovation in web design.',
-        link: '#',
+        link: 'https://hollowpress.graveyardjokes.com',
     },
 ];
 
