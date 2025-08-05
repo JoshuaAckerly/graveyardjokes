@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Contact; // Assuming you have a Contact model for storing contact messages
 
 class ContactController extends Controller
 {
@@ -27,7 +28,26 @@ class ContactController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Validate request data
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+            'message' => 'required|string|max:5000',
+        ]);
+
+        // Store the data in the database
+        $contact = Contact::create([
+            'name'    => $validatedData['name'],
+            'email'   => $validatedData['email'],
+            'message' => $validatedData['message'],
+        ]);
+
+        // Optional: return a JSON or redirect response
+        return response()->json([
+            'success' => true,
+            'message' => 'Your message has been received!',
+            'data'    => $contact
+        ], 201);
     }
 
     /**
