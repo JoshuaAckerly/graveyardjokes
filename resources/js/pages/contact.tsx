@@ -31,7 +31,11 @@ const PricingCardDevelop = ({
     features: string[];
     buttonText: string;
 }) => (
-    <div className="flex flex-col items-center w-full p-6 transition-transform duration-300 bg-[var(--card)] shadow-lg  hover:scale-105">
+    <motion.div className="flex flex-col items-center w-full p-6 transition-transform duration-300 bg-[var(--card)] shadow-lg  hover:scale-105"
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: 1, scale: 1 }}
+        whileHover={{ scale: 1.05 }}
+    >
         <h2 className="mb-4 text-2xl font-semibold text-white">{name}</h2>
         <p className="mb-4 text-4xl font-bold text-[var(--accent)]">{price}</p>
         <p className="mb-4 text-lg text-white">Delivery Time: {deliveryTime}</p>
@@ -46,12 +50,12 @@ const PricingCardDevelop = ({
             href="https://www.fiverr.com/s/0bNavNk"
             target="_blank"
             rel="noopener noreferrer"
-            className="w-full px-6 py-3 text-lg font-medium text-white transition  bg-[--primary] hover:bg-[--accent] focus:ring-2 focus:ring-indigo-600 focus:ring-offset-2 focus:"
+            className="w-full px-6 py-3 text-lg font-medium text-white tansition bg-[--color-background] hover:bg-[--color-foreground] shadow-md"
             aria-label={`Purchase ${buttonText} package`}
         >
             {buttonText}
         </a>
-    </div>
+    </motion.div>
 );
 
 const PricingCardDesign = ({
@@ -67,14 +71,13 @@ const PricingCardDesign = ({
     features: string[];
     buttonText: string;
 }) => (
-    <div className="flex flex-col items-center w-full p-6 transition-transform duration-300 bg-[#1c1c1c] shadow-lg  hover:scale-105">
+    <div className="flex flex-col items-center w-full p-6 transition-transform duration-300 bg-[var(--card)] shadow-lg  hover:scale-105">
         <h2 className="mb-4 text-2xl font-semibold text-white">{name}</h2>
-        <p className="mb-4 text-4xl font-bold text-customGreen">{price}</p>
+        <p className="mb-4 text-4xl font-bold text-[var(--accent)]">{price}</p>
         <p className="mb-4 text-lg text-white">Delivery Time: {deliveryTime}</p>
         <ul className="mb-6 space-y-2">
             {features.map((feature, idx) => (
                 <li key={idx} className="text-white">
-                    <span className="mr-2 text-customGreen">✔</span>
                     {feature}
                 </li>
             ))}
@@ -83,7 +86,7 @@ const PricingCardDesign = ({
             href="https://www.fiverr.com/graveyardjokes/create-a-website-design"
             target="_blank"
             rel="noopener noreferrer"
-            className="w-full px-6 py-3 text font-medium text-white transition  bg-customGreen"
+            className="w-full px-6 py-3 text font-medium text-white transition shadow-md"
             aria-label={`Purchase ${buttonText} package`}
         >
             {buttonText}
@@ -324,7 +327,7 @@ export default function ContactPricing() {
                                 animate={{ opacity: 1, scale: 1 }}
                                 transition={{ duration: 0.8, delay: 1 }}
                                 whileHover={{ scale: 1.1 }}
-                                className="relative z-20 flex px-8 py-6 mx-auto text-sm font-semibold text-white transition duration-300 ease-in-out shadow-md bottom-2  bg-customGreen sm:px-12 sm:py-6 sm:text-lg"
+                                className="relative z-20 flex px-8 py-6 mx-auto text-sm font-semibold text-white transition duration-300 ease-in-out shadow-md bottom-2  bg-[var(--accent)] sm:px-12 sm:py-6 sm:text-lg"
                                 aria-label="Contact Us"
                                 onClick={handleContactScroll}
                             >
@@ -337,7 +340,7 @@ export default function ContactPricing() {
                 {/* Contact Section */}
                 <div
                     id="contact-section"
-                    className="relative z-0 max-w-full overflow-hidden  bg-[#3E403D] text-center"
+                    className="relative z-0 max-w-full overflow-hidden  bg-[var(--color-foreground)] text-center"
                 >
 
                     <div className="relative z-10 flex px-6 py-12 text-3xl text-white underline sm:px-12">
@@ -496,7 +499,7 @@ export default function ContactPricing() {
                             alt="Overlay Image"
                             className="object-cover w-full h-auto pointer-events-none  opacity-80"
                         />
-                        <div className="absolute inset-0 bg-gradient-to-b from-[#3E403D] to-transparent"></div>
+                        <div className="absolute inset-0 bg-gradient-to-b from-[var(--color-foreground)] to-transparent"></div>
                     </div>
                 </div>
             </MainLayout>
