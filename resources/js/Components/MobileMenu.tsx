@@ -82,6 +82,15 @@ export default function MobileMenu() {
                                         Portfolio
                                     </Link>
                                 </li>
+                                <li className="mb-4 bg-[var(--primary)]">
+                                    <Link
+                                        href="#studio"
+                                        className="text-black hover:underline"
+                                        onClick={() => setIsOpen(false)}
+                                    >
+                                        Studio
+                                    </Link>
+                                </li>
                             </ul>
                         </div>
                     </div>
