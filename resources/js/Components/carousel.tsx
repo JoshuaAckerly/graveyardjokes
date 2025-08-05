@@ -26,6 +26,18 @@ const carouselSlides: Slide[] = [
         description: 'An immersive experience built with modern web technologies.',
         link: '#',
     },
+    {
+        image: '#',
+        title: 'Velvet Radio',
+        description: 'A tribute to The Velvet Pulse, blending nostalgia with contemporary design.',
+        link: '#',
+    },
+    {
+        image: '#',
+        title: 'Hollow Press',
+        description: 'A vibrant showcase of creativity and innovation in web design.',
+        link: '#',
+    },
 ];
 
 const Carousel: React.FC = () => {
@@ -61,7 +73,7 @@ const Carousel: React.FC = () => {
                                 {/* Slide title and description */}
                                 <div className='bg-[var(--primary)] p-4 shadow-lg'>
                                     <h3 className="text-xl font-bold text-white">{slide.title}</h3>
-                                    <p className="hidden text-gray-300 sm:block">{slide.description}</p>
+                                    <p className="hidden text-white sm:block">{slide.description}</p>
                                     {slide.link && (
                                         <a href={slide.link} target="_blank" rel="noopener noreferrer" className="inline-block text-white">
                                             View Project
