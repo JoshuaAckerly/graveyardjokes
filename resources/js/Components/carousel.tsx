@@ -58,13 +58,16 @@ const Carousel: React.FC = () => {
                         {/* Overlay content */}
                         <div className="absolute inset-0 flex flex-col bg-black/40">
                             <div className='flex flex-col items-center justify-center h-full p-4 text-center'>
-                                <h3 className="text-xl font-bold text-white">{slide.title}</h3>
-                                <p className="hidden text-gray-300 sm:block">{slide.description}</p>
-                                {slide.link && (
-                                    <a href={slide.link} target="_blank" rel="noopener noreferrer" className="inline-block text-white">
-                                        View Project
-                                    </a>
-                                )}
+                                {/* Slide title and description */}
+                                <div className='bg-[var(--primary)] p-4 shadow-lg'>
+                                    <h3 className="text-xl font-bold text-white">{slide.title}</h3>
+                                    <p className="hidden text-gray-300 sm:block">{slide.description}</p>
+                                    {slide.link && (
+                                        <a href={slide.link} target="_blank" rel="noopener noreferrer" className="inline-block text-white">
+                                            View Project
+                                        </a>
+                                    )}
+                                </div>
                             </div>
                         </div>
                     </div>
