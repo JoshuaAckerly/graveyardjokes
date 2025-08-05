@@ -104,7 +104,7 @@ export default function Home(): JSX.Element {
                             animate={{ opacity: 1, scale: 1 }}
                             transition={{ duration: 0.8, delay: 1 }}
                             whileHover={{ scale: 1.1 }}
-                            className="relative z-20 mx-auto flex bg-[var(--primary)] px-20 py-12 mb-12 text-2xl lg:px-36 lg:py-24 lg:text-5xl font-semibold text-white shadow-md transition duration-300 ease-in-out hover:bg-[var(--accent)] focus:ring-2 focus:ring-indigo-600 focus:ring-offset-2 focus:outline-none sm:px-12 sm:py-6 sm:text-lg"
+                            className="relative z-20 mx-auto flex bg-[var(--card)] px-20 py-12 mb-12 text-2xl lg:px-36 lg:py-24 lg:text-5xl font-semibold text-white shadow-md transition duration-300 ease-in-out hover:bg-[var(--accent)] focus:ring-2 focus:ring-indigo-600 focus:ring-offset-2 focus:outline-none sm:px-12 sm:py-6 sm:text-lg"
                             aria-label="Contact Us"
                             onClick={handleClick}
                         >
