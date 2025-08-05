@@ -20,6 +20,10 @@ Route::get('/contact', function () {
 
 Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
 
+Route::get('/portfolio', function () {
+    return Inertia::render('portfolio');
+})->name('portfolio');
+
 Route::get('/terms', fn () => Inertia::render('legal/terms'))->name('terms');
 Route::get('/privacy', fn () => Inertia::render('legal/privacy'))->name('privacy');
 Route::get('/cookies', fn () => Inertia::render('legal/cookies'))->name('cookies');
