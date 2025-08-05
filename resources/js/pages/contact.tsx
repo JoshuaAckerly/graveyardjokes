@@ -31,7 +31,7 @@ const PricingCardDevelop = ({
     features: string[];
     buttonText: string;
 }) => (
-    <div className="flex flex-col items-center w-full p-6 transition-transform duration-300 bg-[#1c1c1c] shadow-lg rounded-2xl hover:scale-105">
+    <div className="flex flex-col items-center w-full p-6 transition-transform duration-300 bg-[#1c1c1c] shadow-lg  hover:scale-105">
         <h2 className="mb-4 text-2xl font-semibold text-white">{name}</h2>
         <p className="mb-4 text-4xl font-bold text-customGreen">{price}</p>
         <p className="mb-4 text-lg text-white">Delivery Time: {deliveryTime}</p>
@@ -47,7 +47,7 @@ const PricingCardDevelop = ({
             href="https://www.fiverr.com/s/0bNavNk"
             target="_blank"
             rel="noopener noreferrer"
-            className="w-full px-6 py-3 text-lg font-medium text-white transition rounded-lg bg-customGreen"
+            className="w-full px-6 py-3 text-lg font-medium text-white transition  bg-customGreen"
             aria-label={`Purchase ${buttonText} package`}
         >
             {buttonText}
@@ -68,7 +68,7 @@ const PricingCardDesign = ({
     features: string[];
     buttonText: string;
 }) => (
-    <div className="flex flex-col items-center w-full p-6 transition-transform duration-300 bg-[#1c1c1c] shadow-lg rounded-2xl hover:scale-105">
+    <div className="flex flex-col items-center w-full p-6 transition-transform duration-300 bg-[#1c1c1c] shadow-lg  hover:scale-105">
         <h2 className="mb-4 text-2xl font-semibold text-white">{name}</h2>
         <p className="mb-4 text-4xl font-bold text-customGreen">{price}</p>
         <p className="mb-4 text-lg text-white">Delivery Time: {deliveryTime}</p>
@@ -84,7 +84,7 @@ const PricingCardDesign = ({
             href="https://www.fiverr.com/graveyardjokes/create-a-website-design"
             target="_blank"
             rel="noopener noreferrer"
-            className="w-full px-6 py-3 text-lg font-medium text-white transition rounded-lg bg-customGreen"
+            className="w-full px-6 py-3 text font-medium text-white transition  bg-customGreen"
             aria-label={`Purchase ${buttonText} package`}
         >
             {buttonText}
@@ -300,7 +300,7 @@ export default function ContactPricing() {
             </Head>
             <MainLayout>
                 {/* Pricing Section */}
-                <div className="relative max-w-full space-y-20 overflow-hidden rounded-2xl bg-[#3E403D] text-center mb-20">
+                <div className="relative max-w-full space-y-20 overflow-hidden  bg-[#3E403D] text-center mb-20">
                     {/* Background Image */}
                     <div className="absolute inset-0 z-0 max-h-96">
                         <img
@@ -339,7 +339,7 @@ export default function ContactPricing() {
                     </div>
 
                     <section className="py-16">
-                        <section className="relative z-10 max-w-5xl p-12 mx-auto mt-16 bg-[#1c1c1c] shadow-2xl rounded-3xl">
+                        <section className="relative z-10 max-w-5xl p-12 mx-auto mt-16 bg-[#1c1c1c] shadow-2xl -3xl">
                             <h2 className="mb-4 text-4xl font-extrabold text-center text-white drop-shadow-sm">
                                 What I’ll Need From You
                             </h2>
@@ -394,7 +394,7 @@ export default function ContactPricing() {
                                     ].map(({ title, items }) => (
                                         <div
                                             key={title}
-                                            className="space-y-2 duration-300 cursor-default rounded-xl"
+                                            className="space-y-2 duration-300 cursor-default -xl"
                                         >
                                             <h3 className="mb-4 text-2xl font-semibold text-customGreen">
                                                 {title}
@@ -403,7 +403,7 @@ export default function ContactPricing() {
                                                 {items.map((item, i) => (
                                                     <li
                                                         key={i}
-                                                        className="px-3 py-1 list-none transition-colors duration-200 rounded-lg"
+                                                        className="px-3 py-1 list-none transition-colors duration-200 "
                                                     >
                                                         <span className="mr-2 text-customGreen">
                                                             ✔
@@ -422,7 +422,7 @@ export default function ContactPricing() {
                                 animate={{ opacity: 1, scale: 1 }}
                                 transition={{ duration: 0.8, delay: 1 }}
                                 whileHover={{ scale: 1.1 }}
-                                className="relative z-20 flex px-8 py-6 mx-auto text-sm font-semibold text-white transition duration-300 ease-in-out shadow-md bottom-2 rounded-2xl bg-customGreen sm:px-12 sm:py-6 sm:text-lg"
+                                className="relative z-20 flex px-8 py-6 mx-auto text-sm font-semibold text-white transition duration-300 ease-in-out shadow-md bottom-2  bg-customGreen sm:px-12 sm:py-6 sm:text-lg"
                                 aria-label="Contact Us"
                                 onClick={handleContactScroll}
                             >
@@ -435,14 +435,14 @@ export default function ContactPricing() {
                 {/* Contact Section */}
                 <div
                     id="contact-section"
-                    className="relative z-0 max-w-full overflow-hidden rounded-2xl bg-[#3E403D] text-center"
+                    className="relative z-0 max-w-full overflow-hidden  bg-[#3E403D] text-center"
                 >
 
                     <div className="relative z-10 flex px-6 py-12 text-3xl text-white underline sm:px-12">
                         <h1>Contact</h1>
                     </div>
 
-                    <div className="relative z-10 px-6 py-24 sm:py-32 lg:px-8 lg:w-1/2 lg:mx-auto rounded-2xl">
+                    <div className="relative z-10 px-6 py-24 sm:py-32 lg:px-8 lg:w-1/2 lg:mx-auto ">
                         <p className="mb-6 text-center text-[custom-green] text-lg">
                             Interested in getting a custom website built for
                             your brand or project? Reach out using the form
@@ -452,7 +452,7 @@ export default function ContactPricing() {
 
                         <form
                             onSubmit={handleSubmit}
-                            className="mx-auto max-w-xl rounded-xl bg-white p-8 shadow-lg"
+                            className="mx-auto max-w-xl -xl bg-white p-8 shadow-lg"
                         >
                             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
                                 {[
@@ -470,7 +470,7 @@ export default function ContactPricing() {
                                             id={id}
                                             value={values[id as keyof FormValues]}
                                             onChange={handleChange}
-                                            className={`block w-full rounded-lg px-3.5 py-2 border ${
+                                            className={`block w-full  px-3.5 py-2 border ${
                                                 errors[id as keyof FormValues]
                                                     ? "border-red-500"
                                                     : "border-gray-300"
@@ -494,7 +494,7 @@ export default function ContactPricing() {
                                         id="email"
                                         value={values.email}
                                         onChange={handleChange}
-                                        className={`block w-full rounded-lg px-3.5 py-2 border ${
+                                        className={`block w-full  px-3.5 py-2 border ${
                                             errors.email
                                                 ? "border-red-500"
                                                 : "border-gray-300"
@@ -518,7 +518,7 @@ export default function ContactPricing() {
                                         rows={4}
                                         value={values.message}
                                         onChange={handleChange}
-                                        className={`block w-full rounded-lg px-3.5 py-2 border ${
+                                        className={`block w-full  px-3.5 py-2 border ${
                                             errors.message
                                                 ? "border-red-500"
                                                 : "border-gray-300"
@@ -532,7 +532,7 @@ export default function ContactPricing() {
                                 </div>
                                 <button
                                     type="submit"
-                                    className="w-full rounded-lg bg-indigo-600 py-2 text-white transition hover:bg-indigo-500"
+                                    className="w-full  bg-indigo-600 py-2 text-white transition hover:bg-indigo-500"
                                 >
                                     Submit
                                 </button>
@@ -571,7 +571,7 @@ export default function ContactPricing() {
 
                         {showPopup && (
                             <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-                                <div className="relative w-full max-w-sm rounded-lg bg-white p-6 shadow-xl">
+                                <div className="relative w-full max-w-sm  bg-white p-6 shadow-xl">
                                     <button
                                         className="absolute right-3 top-3 text-gray-600 hover:text-gray-900"
                                         onClick={() => setShowPopup(false)}
@@ -581,7 +581,7 @@ export default function ContactPricing() {
                                     <img
                                         src={`${cdn}/images/snapcode.webp`}
                                         alt="Snapchat Code"
-                                        className="w-full rounded-md"
+                                        className="w-full -md"
                                     />
                                 </div>
                             </div>

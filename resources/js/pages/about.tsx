@@ -43,7 +43,7 @@ export default function About() {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ duration: 0.4 }}
-                    className="relative z-0 max-w-full overflow-hidden rounded-2xl bg-[#3E403D] text-center shadow-lg"
+                    className="relative z-0 max-w-full overflow-hidden  bg-[#3E403D] text-center shadow-lg"
                 >
                     {/* Hero Banner */}
                     <div className="absolute inset-0 max-h-96">
@@ -88,7 +88,7 @@ export default function About() {
 
                         {/* Bio Section (Mobile + Desktop) */}
                         <motion.div
-                            className="mt-8 rounded-2xl border-2 border-gray-500 bg-[#1C1C1C] p-6 shadow-md text-gray-300 max-w-xl text-left"
+                            className="mt-8  border-2 border-gray-500 bg-[#1C1C1C] p-6 shadow-md text-gray-300 max-w-xl text-left"
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             transition={{ delay: 0.5, duration: 0.6 }}
@@ -139,7 +139,7 @@ export default function About() {
                         >
                             Skills
                         </motion.h2>
-                        <div className="m-8 mx-auto max-w-4xl grid grid-cols-1 sm:grid-cols-2 gap-6 rounded-2xl border-2 border-gray-600 bg-[#1C1C1C] p-8 shadow-md">
+                        <div className="m-8 mx-auto max-w-4xl grid grid-cols-1 sm:grid-cols-2 gap-6  border-2 border-gray-600 bg-[#1C1C1C] p-8 shadow-md">
                             {skills.map((skill) => (
                                 <motion.div
                                     key={skill.name}
@@ -184,7 +184,7 @@ export default function About() {
                             The Story of GraveyardJokes Studios
                         </motion.h2>
                         <motion.div
-                            className="m-8 w-full max-w-3xl rounded-2xl border-2 border-gray-600 bg-[#1C1C1C] p-8 shadow-md text-left text-gray-300"
+                            className="m-8 w-full max-w-3xl  border-2 border-gray-600 bg-[#1C1C1C] p-8 shadow-md text-left text-gray-300"
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             transition={{ delay: 0.8, duration: 0.6 }}
