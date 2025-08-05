@@ -2,10 +2,10 @@ import React from 'react';
 
 const Portfolio: React.FC = () => {
     return (
-        <iframe
-            src="https://thevelvetpulse.graveyardjokes.com/"
-            style={{ width: '100%', height: '800px', border: 'none' }}>
-        </iframe>
+        <div>
+            <h1>Portfolio</h1>
+            <p>This is the portfolio page.</p>
+        </div>
 
     );
 };
