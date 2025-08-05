@@ -7,18 +7,6 @@ interface MainLayoutProps {
 }
 
 const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
-    const [loading, setLoading] = useState<boolean>(true);
-
-    useEffect(() => {
-        const timer = setTimeout(() => {
-            setLoading(false);
-        }, 2000);
-
-        return () => clearTimeout(timer);
-    }, []);
-
-    const cdn = import.meta.env.VITE_ASSET_URL as string;
-
     return (
         <div
             id="app"
