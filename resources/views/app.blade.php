@@ -46,6 +46,8 @@
 
     <title inertia>{{ config('app.name', 'Laravel') }}</title>
 
+    <link rel="canonical" href="https://graveyardjokes.com{{ request()->getRequestUri() }}">
+
     <link rel="icon" href="/favicon.ico" sizes="any">
 
     <link rel="preconnect" href="https://fonts.bunny.net">

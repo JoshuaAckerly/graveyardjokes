@@ -36,7 +36,7 @@ export default function Menu() {
             </li>
             <li className="text-[var(--color-text)]">
                 <Link
-                    href="#portfolio"
+                    href="/portfolio"
                     className="hover:underline"
 
                 >
@@ -44,13 +44,13 @@ export default function Menu() {
                 </Link>
             </li>
             <li className="text-[var(--color-text)]">
-                <Link
-                    href="#studio"
+                <a
+                    href="https://studio.graveyardjokes.com"
                     className="hover:underline"
 
                 >
                     Studio
-                </Link>
+                </a>
             </li>
         </ul>
     );
