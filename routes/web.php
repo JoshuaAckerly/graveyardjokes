@@ -24,9 +24,9 @@ Route::get('/portfolio', function () {
     return Inertia::render('portfolio');
 })->name('portfolio');
 
-Route::get('/terms', fn () => Inertia::render('legal/terms'))->name('terms');
-Route::get('/privacy', fn () => Inertia::render('legal/privacy'))->name('privacy');
-Route::get('/cookies', fn () => Inertia::render('legal/cookies'))->name('cookies');
+Route::get('/terms', fn() => Inertia::render('legal/terms'))->name('terms');
+Route::get('/privacy', fn() => Inertia::render('legal/privacy'))->name('privacy');
+Route::get('/cookies', fn() => Inertia::render('legal/cookies'))->name('cookies');
 
 Route::get('/generate-sitemap', function () {
     Sitemap::create()
@@ -39,10 +39,14 @@ Route::get('/generate-sitemap', function () {
     return 'Sitemap generated!';
 });
 
+Route::redirect('/services', '/#services', 301);
+Route::redirect('/WBG410/home.php', '/', 301);
+
+
 Route::fallback(function () {
     abort(404);
 });
 
 
-require __DIR__.'/settings.php';
-require __DIR__.'/auth.php';
+require __DIR__ . '/settings.php';
+require __DIR__ . '/auth.php';
