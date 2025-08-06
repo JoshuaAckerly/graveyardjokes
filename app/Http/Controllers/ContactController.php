@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Contact; // Assuming you have a Contact model for storing contact messages
+use Illuminate\Support\Facades\Mail;
+use App\Mail\ContactMessage;
 
 class ContactController extends Controller
 {
@@ -41,13 +43,9 @@ class ContactController extends Controller
             'email'   => $validatedData['email'],
             'message' => $validatedData['message'],
         ]);
-
-        // Optional: return a JSON or redirect response
-        return response()->json([
-            'success' => true,
-            'message' => 'Your message has been received!',
-            'data'    => $contact
-        ], 201);
+        // Optionally, you can send a notification or email here
+        Mail::to('admin@graveyardjokes.com')->send(new ContactMessage($contact));
+        return redirect()->back()->with('success', 'Your message has been sent successfully!');
     }
 
     /**
