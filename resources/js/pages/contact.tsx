@@ -375,11 +375,10 @@ export default function ContactPricing() {
                                             id={id}
                                             value={values[id as keyof FormValues]}
                                             onChange={handleChange}
-                                            className={`block w-full  px-3.5 py-2 border ${
-                                                errors[id as keyof FormValues]
-                                                    ? "border-red-500"
-                                                    : "border-gray-300"
-                                            } focus:border-indigo-600 focus:ring focus:ring-indigo-200`}
+                                            className={`block w-full  px-3.5 py-2 border ${errors[id as keyof FormValues]
+                                                ? "border-red-500"
+                                                : "border-gray-300"
+                                                } focus:border-indigo-600 focus:ring focus:ring-indigo-200`}
                                         />
                                         {errors[id as keyof FormValues] && (
                                             <p className="text-sm text-red-600">
@@ -399,11 +398,10 @@ export default function ContactPricing() {
                                         id="email"
                                         value={values.email}
                                         onChange={handleChange}
-                                        className={`block w-full  px-3.5 py-2 border ${
-                                            errors.email
-                                                ? "border-red-500"
-                                                : "border-gray-300"
-                                        } focus:border-indigo-600 focus:ring focus:ring-indigo-200`}
+                                        className={`block w-full  px-3.5 py-2 border ${errors.email
+                                            ? "border-red-500"
+                                            : "border-gray-300"
+                                            } focus:border-indigo-600 focus:ring focus:ring-indigo-200`}
                                     />
                                     {errors.email && (
                                         <p className="text-sm text-red-600">
@@ -423,11 +421,10 @@ export default function ContactPricing() {
                                         rows={4}
                                         value={values.message}
                                         onChange={handleChange}
-                                        className={`block w-full  px-3.5 py-2 border ${
-                                            errors.message
-                                                ? "border-red-500"
-                                                : "border-gray-300"
-                                        } focus:border-indigo-600 focus:ring focus:ring-indigo-200`}
+                                        className={`block w-full  px-3.5 py-2 border ${errors.message
+                                            ? "border-red-500"
+                                            : "border-gray-300"
+                                            } focus:border-indigo-600 focus:ring focus:ring-indigo-200`}
                                     ></textarea>
                                     {errors.message && (
                                         <p className="text-sm text-red-600">
