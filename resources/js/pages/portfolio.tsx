@@ -1,9 +1,25 @@
 import MainLayout from '@/Layouts/MainLayout';
+import { Head } from '@inertiajs/react';
 import React from 'react';
 
 const Portfolio: React.FC = () => {
     return (
         <MainLayout>
+            <>
+            <Head>
+                <title>Portfolio | Graveyard Jokes Studios</title>
+                <meta
+                    name="description"
+                    content="Explore the portfolio of Graveyard Jokes Studios, showcasing custom websites for musicians, artists, and creatives."
+                />
+                <meta
+                    name="keywords"
+                    content="portfolio, custom websites, musicians, artists, creatives, web design, web development"
+                />
+                <meta name="viewport" content="width=device-width, initial-scale=1" />
+                <link rel="canonical" href="https://graveyardjokes.com/portfolio" />
+            </Head>
+            </>
             <section className="flex flex-col gap-4 justify-center items-center text-white p-4 bg-[var(--color-foreground)] rounded-lg shadow-lg">
                 <h1 className='text-5xl text-[var(--card)]'>Portfolio</h1>
                 <p className='p-10 underline w-sm text-center'>Welcome to my portfolio page! Here you can find a collection of my work and projects that showcase my skills and experience.</p>
