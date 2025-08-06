@@ -26,7 +26,7 @@ const carouselSlides: Slide[] = [
         description: 'An immersive experience built with modern web technologies.',
         link: 'https://synthveil.graveyardjokes.com',
     },
-    {
+  /*   {
         image: '#',
         title: 'Velvet Radio',
         description: 'A tribute to The Velvet Pulse, blending nostalgia with contemporary design.',
@@ -37,7 +37,7 @@ const carouselSlides: Slide[] = [
         title: 'Hollow Press',
         description: 'A vibrant showcase of creativity and innovation in web design.',
         link: 'https://hollowpress.graveyardjokes.com',
-    },
+    }, */
 ];
 
 const Carousel: React.FC = () => {
