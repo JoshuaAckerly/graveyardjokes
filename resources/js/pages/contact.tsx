@@ -357,6 +357,7 @@ export default function ContactPricing() {
 
                         <form
                             onSubmit={handleSubmit}
+
                             className="mx-auto max-w-xl -xl bg-white p-8 shadow-lg"
                         >
                             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
