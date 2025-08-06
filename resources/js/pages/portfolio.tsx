@@ -22,8 +22,8 @@ const Portfolio: React.FC = () => {
             </>
             <section className="flex flex-col gap-4 justify-center items-center text-white p-4 bg-[var(--color-foreground)] rounded-lg shadow-lg">
                 <h1 className='text-5xl text-[var(--card)]'>Portfolio</h1>
-                <p className='p-10 underline w-sm text-center'>Welcome to my portfolio page! Here you can find a collection of my work and projects that showcase my skills and experience.</p>
-                <ul className="flex flex-col gap-4 text-center justify-center items-center w-sm">
+                <p className='p-10 underline md:w-sm text-center'>Welcome to my portfolio page! Here you can find a collection of my work and projects that showcase my skills and experience.</p>
+                <ul className="flex flex-col gap-4 text-center justify-center items-center md:w-sm">
                     <li>
                         <h3 className='text-[var(--card)]'>The Velvet Pulse</h3>
                         <a className="hover:underline" href="https://thevelvetpulse.graveyardjokes.com" target="_blank" rel="noopener noreferrer">
@@ -55,7 +55,7 @@ const Portfolio: React.FC = () => {
                         </a>
                     </li>
                 </ul>
-                <p className='p-10'>Feel free to explore these projects and reach out if you have any questions or would like to collaborate!</p>
+                <p className='p-10 md:w-sm'>Feel free to explore these projects and reach out if you have any questions or would like to collaborate!</p>
             </section>
         </MainLayout>
 
