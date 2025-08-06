@@ -1,11 +1,11 @@
 <x-mail::message>
-# Introduction
+# New Contact Form Submission
 
-The body of your message.
+**Name:** {{ $first_name }} {{ $last_name }}
+**Email:** {{ $email }}
 
-<x-mail::button :url="''">
-Button Text
-</x-mail::button>
+**Message:**
+{{ $message }}
 
 Thanks,<br>
 {{ config('app.name') }}
