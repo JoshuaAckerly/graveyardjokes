@@ -31,12 +31,30 @@ const Terms: React.FC = () => {
                     All content, code, graphics, and music on this site is the property of Joshua Ackerly unless otherwise stated. You may not copy, reproduce, or use materials without permission.
                 </p>
 
-                <h2 className="text-xl font-semibold">4. External Links</h2>
+
+                <h2 className="text-xl font-semibold">4. Cookies, Sessions, and Technical Data</h2>
+                <p>
+                    By using this site, you acknowledge and agree that we use session cookies (e.g., <code>graveyard_jokes_studio_session</code>) to manage your login state and other session data. Session data is stored securely in our database and is not accessible to third parties. Session cookies are set with the following technical attributes:
+                </p>
+                <ul className="list-disc list-inside ml-6">
+                    <li><strong>Path:</strong> <code>/</code> (cookie is valid for the entire site)</li>
+                    <li><strong>Domain:</strong> Default (cookie is valid for the main domain)</li>
+                    <li><strong>Secure:</strong> Only sent over HTTPS if enabled</li>
+                    <li><strong>HTTPOnly:</strong> Not accessible via JavaScript</li>
+                    <li><strong>SameSite:</strong> <code>lax</code> (helps protect against CSRF attacks)</li>
+                    <li><strong>Partitioned:</strong> Not enabled by default</li>
+                    <li><strong>Encryption:</strong> Session data is not encrypted in the cookie itself, but is protected in our database</li>
+                </ul>
+                <p>
+                    If enabled, we may use third-party analytics (such as Google Analytics) to track site usage. These cookies are subject to their own privacy policies. For more information, see our <a href="/legal/cookies" className="text-blue-600 underline">Cookie Policy</a> and <a href="/legal/privacy" className="text-blue-600 underline">Privacy Policy</a>.
+                </p>
+
+                <h2 className="text-xl font-semibold">5. External Links</h2>
                 <p>
                     This site may link to third-party services including Fiverr, YouTube, Instagram, and others. We are not responsible for the content or privacy practices of those sites.
                 </p>
 
-                <h2 className="text-xl font-semibold">5. Refund Policy (For Contract Work)</h2>
+                <h2 className="text-xl font-semibold">6. Refund Policy (For Contract Work)</h2>
                 <p>Refunds are handled through Fiverr. However, our general refund policy is:</p>
                 <ul className="list-disc list-inside">
                     <li>Full refund if no work has begun</li>
@@ -46,7 +64,7 @@ const Terms: React.FC = () => {
                 </ul>
                 <p>We aim to resolve concerns through revisions or support before refunds are discussed.</p>
 
-                <h2 className="text-xl font-semibold">6. Modifications</h2>
+                <h2 className="text-xl font-semibold">7. Modifications</h2>
                 <p>
                     We may update these Terms at any time. Continued use of the site after changes means you accept the new Terms.
                 </p>

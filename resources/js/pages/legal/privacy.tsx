@@ -22,24 +22,31 @@ const Privacy: React.FC = () => {
                     <li>Email address</li>
                     <li>IP address</li>
                 </ul>
-                <h2 className="text-xl font-semibold">
-                    2. Cookies and Analytics
-                </h2>
+                <h2 className="text-xl font-semibold">2. Cookies, Sessions, and Analytics</h2>
                 <p>
-                    We use Google Analytics to understand user behavior. Cookies
-                    may be used to store session data. By using the site, you
-                    consent to this.
+                    <strong>Session Cookies:</strong> We use a session cookie (named based on our app name, e.g., <code>graveyard_jokes_studio_session</code>) to manage your login state and other session data. Session data is stored securely in our database and is not accessible to third parties. The session cookie is set with the following technical attributes:
                 </p>
-                <h2 className="text-xl font-semibold">3. Data Use</h2>
-                <p>Your information is used to:</p>
-                <ul className="list-disc list-inside">
-                    <li>Manage your account (if applicable)</li>
-                    <li>Respond to inquiries</li>
-                    <li>Analyze site performance</li>
+                <ul className="list-disc list-inside ml-6">
+                    <li><strong>Path:</strong> <code>/</code> (cookie is valid for the entire site)</li>
+                    <li><strong>Domain:</strong> Default (cookie is valid for the main domain)</li>
+                    <li><strong>Secure:</strong> Only sent over HTTPS if enabled</li>
+                    <li><strong>HTTPOnly:</strong> Not accessible via JavaScript</li>
+                    <li><strong>SameSite:</strong> <code>lax</code> (helps protect against CSRF attacks)</li>
+                    <li><strong>Partitioned:</strong> Not enabled by default</li>
+                    <li><strong>Encryption:</strong> Session data is not encrypted in the cookie itself, but is protected in our database</li>
                 </ul>
                 <p>
-                    We do not share your data with third parties except as
-                    required by law.
+                    <strong>Analytics Cookies:</strong> If enabled, we may use third-party analytics (such as Google Analytics) to track site usage. These cookies are subject to their own privacy policies.
+                </p>
+                <h2 className="text-xl font-semibold">3. Data Use and Security</h2>
+                <p>Your information is used to:</p>
+                <ul className="list-disc list-inside">
+                    <li>Manage your account and session (if applicable)</li>
+                    <li>Respond to inquiries</li>
+                    <li>Analyze site performance and usage</li>
+                </ul>
+                <p>
+                    We do not share your data with third parties except as required by law. Session data is stored in our secure database and is not accessible to unauthorized parties. Cookies are set with security attributes to help protect your privacy and prevent unauthorized access.
                 </p>
                 <h2 className="text-xl font-semibold">4. Communications</h2>
                 <p>

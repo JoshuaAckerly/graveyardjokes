@@ -43,7 +43,7 @@ export default function About() {
                     content="Meet Joshua Ackerly — the developer behind Graveyard Jokes Studios. Discover his journey, skills, and story behind the brand."
                 />
                 <meta name="twitter:image" content={`${cdn}/images/aboutBanner.webp`} />
-              </Head>
+            </Head>
 
             <MainLayout>
                 <motion.main
