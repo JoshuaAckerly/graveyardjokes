@@ -348,7 +348,7 @@ export default function ContactPricing() {
                     </div>
 
                     <div className="relative z-10 px-6 py-24 sm:py-32 lg:px-8 lg:w-1/2 lg:mx-auto ">
-                        <p className="mb-6 text-center text-[custom-green] text-lg">
+                        <p className="mb-6 text-center text-[var(--primary)] text-lg">
                             Interested in getting a custom website built for
                             your brand or project? Reach out using the form
                             below and our site administrator will get back to
