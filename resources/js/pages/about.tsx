@@ -121,13 +121,13 @@ export default function About() {
 
                     {/* Resume + CTA */}
                     <div className="mt-8 flex flex-col items-center gap-4">
-                        {/* <a
-                            href={`${cdn}/documents/Joshua_Ackerly_Resume.pdf`}
+                        <a
+                            href={`${cdn}/documents/Joshua.pdf`}
                             download
                             className="text-[var(--primary)] underline hover:text-[var(--accent-foreground)] transition"
                         >
                             Download My Resume
-                        </a> */}
+                        </a>
                         <a
                             href="/contact"
                             className="rounded-lg bg-[var(--card)] px-6 py-3 font-semibold text-white shadow hover:bg-[var(--accent)] transition"
