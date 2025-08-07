@@ -41,6 +41,8 @@ Route::get('/generate-sitemap', function () {
 
 Route::redirect('/services', '/#services', 301);
 Route::redirect('/WBG410/home.php', '/', 301);
+Route::redirect('/cryptescape', '/', 301);
+
 
 
 Route::fallback(function () {
