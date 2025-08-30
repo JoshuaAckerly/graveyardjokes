@@ -119,21 +119,6 @@ export default function Home(): JSX.Element {
                         >
                             Let's talk
                         </motion.button>
-
-                        <div className="mx-auto items-center p-4 lg:w-sm">
-                            <motion.div
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ duration: 0.8, delay: 0.4 }}
-                            >
-                                <p className="relative flex bg-[var(--card)] p-4 text-lg text-black shadow-lg hover:bg-green-900 md:m-auto md:max-w-screen-md">
-                                    Custom websites for musicians, artists, and creatives who want
-                                    to stand out online — whether you're promoting your latest
-                                    album, launching a brand, or building a personal portfolio to
-                                    showcase your skills and story.
-                                </p>
-                            </motion.div>
-                        </div>
                     </div>
                     {/* Carousel */}
                     <motion.div
