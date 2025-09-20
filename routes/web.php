@@ -39,10 +39,15 @@ Route::get('/generate-sitemap', function () {
     return 'Sitemap generated!';
 });
 
-Route::redirect('/services', '/#services', 301);
-Route::redirect('/WBG410/home.php', '/', 301);
-Route::redirect('/cryptescape', '/', 301);
+// Redirect old pages to homepage or anchors
+Route::redirect('/services', '/#services', 301);          // Anchor section on homepage
+Route::redirect('/WBG410/home.php', '/', 301);           // Old PHP page → homepage
 
+// Handle /cryptescape properly for SEO
+Route::get('/cryptescape', function () {
+    // Page is gone permanently
+    abort(410);  // Sends HTTP 410 Gone to Google & browsers
+});
 
 
 Route::fallback(function () {

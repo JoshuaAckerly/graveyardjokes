@@ -17,8 +17,7 @@ export default function Home(): JSX.Element {
       <>
         <Head>
           <title>
-            Graveyard Jokes Studios | Custom Websites for Musicians, Artists,
-            and Creatives
+            Graveyard Jokes Studios | Custom Websites for Musicians, Artists, and Creatives
           </title>
           <meta
             name="description"
@@ -29,7 +28,53 @@ export default function Home(): JSX.Element {
             content="custom websites, musicians, artists, creatives, web design, web development, portfolio, online presence"
           />
           <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+          {/* Canonical */}
+          <link rel="canonical" href="https://graveyardjokes.com/" />
+
+          {/* Open Graph */}
+          <meta
+            property="og:title"
+            content="Graveyard Jokes Studios | Custom Websites for Musicians, Artists, and Creatives"
+          />
+          <meta
+            property="og:description"
+            content="Graveyard Jokes Studios builds custom websites for musicians, artists, and creatives — stand out online with tailored design and tech."
+          />
+          <meta property="og:image" content={`${cdn}/images/AdobeStock_327183052.webp`} />
+          <meta property="og:type" content="website" />
+          <meta property="og:url" content="https://graveyardjokes.com/" />
+
+          {/* Twitter */}
+          <meta name="twitter:card" content="summary_large_image" />
+          <meta
+            name="twitter:title"
+            content="Graveyard Jokes Studios | Custom Websites for Musicians, Artists, and Creatives"
+          />
+          <meta
+            name="twitter:description"
+            content="Graveyard Jokes Studios builds custom websites for musicians, artists, and creatives — stand out online with tailored design and tech."
+          />
+          <meta name="twitter:image" content={`${cdn}/images/AdobeStock_327183052.webp`} />
+
+          {/* Structured Data (JSON-LD) */}
+          <script type="application/ld+json">
+            {`
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Graveyard Jokes Studios",
+      "url": "https://graveyardjokes.com",
+      "logo": "${cdn}/images/logo.webp",
+      "sameAs": [
+        "https://www.linkedin.com/in/joshua-ackerly",
+        "https://github.com/joshua-ackerly"
+      ]
+    }
+    `}
+          </script>
         </Head>
+
 
         <a href="/" className="sr-only">
           Home Page
