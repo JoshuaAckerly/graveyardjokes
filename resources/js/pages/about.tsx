@@ -28,10 +28,12 @@ export default function About() {
           name="keywords"
           content="Joshua Ackerly, Graveyard Jokes Studios, web developer, web designer, portfolio, skills, Laravel, React, Tailwind CSS"
         />
-        <meta
-          property="og:title"
-          content="About Joshua Ackerly | Graveyard Jokes Studios"
-        />
+
+        {/* Canonical */}
+        <link rel="canonical" href="https://graveyardjokes.com/about" />
+
+        {/* Open Graph */}
+        <meta property="og:title" content="About Joshua Ackerly | Graveyard Jokes Studios" />
         <meta
           property="og:description"
           content="Meet Joshua Ackerly — the developer behind Graveyard Jokes Studios. Discover his journey, skills, and story behind the brand."
@@ -39,17 +41,38 @@ export default function About() {
         <meta property="og:image" content={`${cdn}/images/aboutBanner.webp`} />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://graveyardjokes.com/about" />
+
+        {/* Twitter */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta
-          name="twitter:title"
-          content="About Joshua Ackerly | Graveyard Jokes Studios"
-        />
+        <meta name="twitter:title" content="About Joshua Ackerly | Graveyard Jokes Studios" />
         <meta
           name="twitter:description"
           content="Meet Joshua Ackerly — the developer behind Graveyard Jokes Studios. Discover his journey, skills, and story behind the brand."
         />
         <meta name="twitter:image" content={`${cdn}/images/aboutBanner.webp`} />
+
+        {/* Structured Data (JSON-LD) */}
+        <script type="application/ld+json">
+          {`
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Joshua Ackerly",
+  "url": "https://graveyardjokes.com",
+  "sameAs": [
+    "https://www.linkedin.com/in/joshua-ackerly",
+    "https://github.com/joshua-ackerly"
+  ],
+  "jobTitle": "Web Developer",
+  "worksFor": {
+    "@type": "Organization",
+    "name": "Graveyard Jokes Studios"
+  }
+}
+    `}
+        </script>
       </Head>
+
 
       <MainLayout>
         <motion.main

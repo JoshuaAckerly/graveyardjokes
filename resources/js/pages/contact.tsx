@@ -273,7 +273,48 @@ export default function ContactPricing() {
           content="contact, pricing, custom websites, web design, web development, musicians, artists, creatives, small business websites"
         />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+        {/* Canonical */}
+        <link rel="canonical" href="https://graveyardjokes.com/contact" />
+
+        {/* Open Graph */}
+        <meta property="og:title" content="Contact & Pricing | Graveyard Jokes Studios" />
+        <meta
+          property="og:description"
+          content="Contact Graveyard Jokes Studios for custom websites and explore affordable pricing packages for creatives, musicians, and small businesses."
+        />
+        <meta property="og:image" content={`${cdn}/images/ContactBanner.webp`} />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://graveyardjokes.com/contact" />
+
+        {/* Twitter */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Contact & Pricing | Graveyard Jokes Studios" />
+        <meta
+          name="twitter:description"
+          content="Contact Graveyard Jokes Studios for custom websites and explore affordable pricing packages for creatives, musicians, and small businesses."
+        />
+        <meta name="twitter:image" content={`${cdn}/images/ContactBanner.webp`} />
+
+        {/* Structured Data (JSON-LD) */}
+        <script type="application/ld+json">
+          {`
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Graveyard Jokes Studios",
+      "url": "https://graveyardjokes.com",
+      "logo": "${cdn}/images/logo.webp",
+      "sameAs": [
+        "https://www.linkedin.com/in/graveyardjokes/",
+        "https://github.com/joshua-ackerly",
+        "https://www.instagram.com/graveyardjokesofficial/"
+      ]
+    }
+    `}
+        </script>
       </Head>
+
       <MainLayout>
         {/* Pricing Section */}
         <div className="relative mb-20 max-w-full space-y-20 overflow-hidden bg-[var(--color-foreground)] text-center">
@@ -371,11 +412,10 @@ export default function ContactPricing() {
                       id={id}
                       value={values[id as keyof FormValues]}
                       onChange={handleChange}
-                      className={`block w-full border px-3.5 py-2 ${
-                        errors[id as keyof FormValues]
+                      className={`block w-full border px-3.5 py-2 ${errors[id as keyof FormValues]
                           ? "border-red-500"
                           : "border-gray-300"
-                      } focus:border-indigo-600 focus:ring focus:ring-indigo-200`}
+                        } focus:border-indigo-600 focus:ring focus:ring-indigo-200`}
                     />
                     {errors[id as keyof FormValues] && (
                       <p className="text-sm text-red-600">
@@ -395,9 +435,8 @@ export default function ContactPricing() {
                     id="email"
                     value={values.email}
                     onChange={handleChange}
-                    className={`block w-full border px-3.5 py-2 ${
-                      errors.email ? "border-red-500" : "border-gray-300"
-                    } focus:border-indigo-600 focus:ring focus:ring-indigo-200`}
+                    className={`block w-full border px-3.5 py-2 ${errors.email ? "border-red-500" : "border-gray-300"
+                      } focus:border-indigo-600 focus:ring focus:ring-indigo-200`}
                   />
                   {errors.email && (
                     <p className="text-sm text-red-600">{errors.email}</p>
@@ -415,9 +454,8 @@ export default function ContactPricing() {
                     rows={4}
                     value={values.message}
                     onChange={handleChange}
-                    className={`block w-full border px-3.5 py-2 ${
-                      errors.message ? "border-red-500" : "border-gray-300"
-                    } focus:border-indigo-600 focus:ring focus:ring-indigo-200`}
+                    className={`block w-full border px-3.5 py-2 ${errors.message ? "border-red-500" : "border-gray-300"
+                      } focus:border-indigo-600 focus:ring focus:ring-indigo-200`}
                   ></textarea>
                   {errors.message && (
                     <p className="text-sm text-red-600">{errors.message}</p>
