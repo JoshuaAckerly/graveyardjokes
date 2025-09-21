@@ -42,6 +42,9 @@ Route::get('/generate-sitemap', function () {
 // Redirect old pages to homepage or anchors
 Route::redirect('/services', '/#services', 301);          // Anchor section on homepage
 Route::redirect('/WBG410/home.php', '/', 301);           // Old PHP page → homepage
+Route::redirect('/legal/terms', '/terms', 301);     // Old terms URL
+Route::redirect('/legal/privacy', '/privacy', 301); // Old privacy URL
+Route::redirect('/legal/cookies', '/cookies', 301); // Old cookies URL
 
 // Handle /cryptescape properly for SEO
 Route::get('/cryptescape', function () {
