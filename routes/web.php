@@ -45,12 +45,13 @@ Route::redirect('/WBG410/home.php', '/', 301);           // Old PHP page → hom
 Route::redirect('/legal/terms', '/terms', 301);     // Old terms URL
 Route::redirect('/legal/privacy', '/privacy', 301); // Old privacy URL
 Route::redirect('/legal/cookies', '/cookies', 301); // Old cookies URL
-Route::redirect('/login', '/', 301);                  // Old login page → homepage
-Route::redirect('/register', '/', 301);               // Old register page → homepage
-Route::redirect('/dashboard', '/', 301);              // Old dashboard page → homepage
-Route::redirect('/home', '/', 301);                   // Old home page → homepage
-Route::redirect('/forgot-password', '/', 301);        // Old forgot-password page → homepage
-Route::redirect('/reset-password', '/', 301);         // Old reset-password page → homepage
+Route::redirect('/login', '/', 301);
+Route::redirect('/register', '/', 301);
+Route::redirect('/reset-password', '/', 301);
+Route::redirect('/forgot-password', '/', 301);
+Route::redirect('/reset-password/{token}', '/', 301);
+Route::redirect('/verify-email', '/', 301);
+Route::redirect('/confirm-password', '/', 301);
 
 // Handle /cryptescape properly for SEO
 Route::get('/cryptescape', function () {
