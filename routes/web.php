@@ -40,21 +40,31 @@ Route::get('/generate-sitemap', function () {
 });
 
 // Redirect old pages to homepage or anchors
-Route::redirect('/services', '/contact', 301);          // Anchor section on homepage
-Route::redirect('/WBG410/home.php', '/', 301);           // Old PHP page → homepage
-Route::redirect('/legal/terms', '/terms', 301);     // Old terms URL
-Route::redirect('/legal/privacy', '/privacy', 301); // Old privacy URL
-Route::redirect('/legal/cookies', '/cookies', 301); // Old cookies URL
-Route::redirect('/login', '/', 301);
-Route::redirect('/register', '/', 301);
-Route::redirect('/reset-password', '/', 301);
-Route::redirect('/forgot-password', '/', 301);
-Route::redirect('/reset-password/{token}', '/', 301);
-Route::redirect('/verify-email', '/', 301);
-Route::redirect('/confirm-password', '/', 301);
+Route::redirect('/services', '/contact', 301);
+Route::redirect('/WBG410/home.php', '/portfolio', 301);
+Route::redirect('/legal/terms', '/terms', 301);
+Route::redirect('/legal/privacy', '/privacy', 301);
+Route::redirect('/legal/cookies', '/cookies', 301);
+Route::redirect('/login', '/about', 301);
+Route::redirect('/register', '/about', 301);
+Route::redirect('/reset-password', '/about', 301);
+Route::redirect('/forgot-password', '/about', 301);
+Route::redirect('/reset-password/{token}', '/about', 301);
+Route::redirect('/verify-email', '/about', 301);
+Route::redirect('/confirm-password', '/about', 301);
+
+// Redirects for missing pages
+Route::redirect('/illustrations', '/contact', 301);
+Route::redirect('/pricing', '/plans');
+
+
 
 // Handle /cryptescape properly for SEO
 Route::get('/cryptescape', function () {
+    // Page is gone permanently
+    abort(410);  // Sends HTTP 410 Gone to Google & browsers
+});
+Route::get('/demo', function () {
     // Page is gone permanently
     abort(410);  // Sends HTTP 410 Gone to Google & browsers
 });
