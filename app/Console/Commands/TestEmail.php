@@ -29,12 +29,18 @@ class TestEmail extends Command
     {
         $this->info('Testing visitor notification email...');
         
+        // Use a real IP to test geolocation (Google's public DNS)
+        $visitorController = new \App\Http\Controllers\VisitorController();
+        $testLocation = $visitorController->getLocationFromIP('8.8.8.8');
+        
         $testVisitorData = [
-            'ip' => '192.168.1.100',
-            'city' => 'Test City',
-            'country' => 'Test Country',
+            'ip' => $testLocation['ip'],
+            'city' => $testLocation['city'],
+            'country' => $testLocation['country'],
+            'region' => $testLocation['region'] ?? null,
+            'timezone' => $testLocation['timezone'] ?? null,
             'timestamp' => now()->toDateTimeString(),
-            'user_agent' => 'Test Browser'
+            'user_agent' => 'Test Browser - Geolocation Test'
         ];
         
         try {

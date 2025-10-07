@@ -61,8 +61,15 @@
             
             <div class="info-row">
                 <span class="label">📍 Location:</span>
-                {{ $visitor['city'] }}, {{ $visitor['country'] }}
+                {{ $visitor['city'] }}, {{ $visitor['region'] ?? '' }}{{ isset($visitor['region']) ? ', ' : '' }}{{ $visitor['country'] }}
             </div>
+            
+            @if(isset($visitor['timezone']))
+            <div class="info-row">
+                <span class="label">⏰ Timezone:</span>
+                {{ $visitor['timezone'] }}
+            </div>
+            @endif
             
             <div class="info-row">
                 <span class="label">🌐 IP Address:</span>

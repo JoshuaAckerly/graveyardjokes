@@ -6,11 +6,11 @@ const Terms: React.FC = () => {
       <div className="mx-auto max-w-4xl space-y-4 bg-gray-900 p-6 text-white">
         <h1 className="text-2xl font-bold">Terms of Service</h1>
         <p>
-          <strong>Effective Date:</strong> July 24, 2025
+          <strong>Effective Date:</strong> October 7, 2025
         </p>
 
         <p>
-          Welcome to GraveYardJokes Studios ("we", "us", or "our"). By accessing
+          Welcome to Graveyard Jokes ("we", "us", or "our"). By accessing
           or using our website at{" "}
           <a
             href="https://graveyardjokes.com"
@@ -23,11 +23,11 @@ const Terms: React.FC = () => {
 
         <h2 className="text-xl font-semibold">1. Use of the Site</h2>
         <p>
-          This site is a creative portfolio showcasing the work of Joshua
-          Ackerly in web development, game design, music, and visual art. You
-          may browse the site without an account. Some features, such as account
-          creation, may become available. You must be at least 18 years of age
-          to inquire about services.
+          This site is a personal portfolio showcasing the work of Joshua
+          Ackerly in web development and creative projects. The site is publicly
+          accessible for viewing and does not require user registration or accounts.
+          By using this site, you acknowledge that we may track basic visitor
+          analytics for site improvement purposes.
         </p>
 
         <h2 className="text-xl font-semibold">2. Prohibited Conduct</h2>
@@ -54,52 +54,32 @@ const Terms: React.FC = () => {
         </p>
 
         <h2 className="text-xl font-semibold">
-          4. Cookies, Sessions, and Technical Data
+          4. Visitor Tracking and Analytics
         </h2>
         <p>
-          By using this site, you acknowledge and agree that we use session
-          cookies (e.g., <code>graveyard_jokes_studio_session</code>) to manage
-          your login state and other session data. Session data is stored
-          securely in our database and is not accessible to third parties.
-          Session cookies are set with the following technical attributes:
+          By using this site, you acknowledge that we collect basic visitor
+          information for analytics and site improvement purposes, including:
         </p>
         <ul className="ml-6 list-inside list-disc">
-          <li>
-            <strong>Path:</strong> <code>/</code> (cookie is valid for the
-            entire site)
-          </li>
-          <li>
-            <strong>Domain:</strong> Default (cookie is valid for the main
-            domain)
-          </li>
-          <li>
-            <strong>Secure:</strong> Only sent over HTTPS if enabled
-          </li>
-          <li>
-            <strong>HTTPOnly:</strong> Not accessible via JavaScript
-          </li>
-          <li>
-            <strong>SameSite:</strong> <code>lax</code> (helps protect against
-            CSRF attacks)
-          </li>
-          <li>
-            <strong>Partitioned:</strong> Not enabled by default
-          </li>
-          <li>
-            <strong>Encryption:</strong> Session data is not encrypted in the
-            cookie itself, but is protected in our database
-          </li>
+          <li>IP address and approximate geographic location</li>
+          <li>Browser information and user agent</li>
+          <li>Visit timestamps and page views</li>
+          <li>Referrer information</li>
         </ul>
         <p>
-          If enabled, we may use third-party analytics (such as Google
-          Analytics) to track site usage. These cookies are subject to their own
-          privacy policies. For more information, see our{" "}
-          <a href="/legal/cookies" className="text-blue-600 underline">
-            Cookie Policy
+          We use Google Analytics and may use geolocation services (such as IPInfo.io)
+          to understand our site traffic. We also use session cookies for basic site
+          functionality. This data helps us improve the site experience and understand
+          our audience.
+        </p>
+        <p>
+          For more information about our data practices, see our{" "}
+          <a href="/privacy" className="text-blue-600 underline">
+            Privacy Policy
           </a>{" "}
           and{" "}
-          <a href="/legal/privacy" className="text-blue-600 underline">
-            Privacy Policy
+          <a href="/cookies" className="text-blue-600 underline">
+            Cookie Policy
           </a>
           .
         </p>
@@ -111,24 +91,11 @@ const Terms: React.FC = () => {
           privacy practices of those sites.
         </p>
 
-        <h2 className="text-xl font-semibold">
-          6. Refund Policy (For Contract Work)
-        </h2>
+        <h2 className="text-xl font-semibold">6. Contact and Services</h2>
         <p>
-          Refunds are handled through Fiverr. However, our general refund policy
-          is:
-        </p>
-        <ul className="list-inside list-disc">
-          <li>Full refund if no work has begun</li>
-          <li>Partial refund based on work completed</li>
-          <li>No refund for completed or approved work</li>
-          <li>
-            Deposits are non-refundable unless otherwise agreed in writing
-          </li>
-        </ul>
-        <p>
-          We aim to resolve concerns through revisions or support before refunds
-          are discussed.
+          This site serves as a portfolio and contact point. Any business inquiries
+          or service discussions should be made through the contact form or email.
+          Terms for any contracted work would be agreed upon separately.
         </p>
 
         <h2 className="text-xl font-semibold">7. Modifications</h2>
