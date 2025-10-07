@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\NewVisitorNotification;
+use GuzzleHttp\Client;
+use Illuminate\Support\Facades\Cache;
 
 class VisitorController extends Controller
 {
@@ -54,14 +56,52 @@ class VisitorController extends Controller
         }
     }
 
-    // Dummy implementation for geolocation lookup
-    private function getLocationFromIP($ip)
+    // Get location from IP using IPInfo.io
+    public function getLocationFromIP($ip)
     {
-        // In a real application, integrate with a geolocation API here.
-        return [
-            'ip' => $ip,
-            'country' => 'Unknown',
-            'city' => 'Unknown'
-        ];
+        // Skip localhost IPs
+        if (in_array($ip, ['127.0.0.1', '::1', 'localhost'])) {
+            return [
+                'ip' => $ip,
+                'country' => 'Local Development',
+                'city' => 'Localhost'
+            ];
+        }
+
+        // Cache the result for 1 hour to avoid repeated API calls for same IP
+        $cacheKey = "geo_location_{$ip}";
+        
+        return Cache::remember($cacheKey, 3600, function () use ($ip) {
+            try {
+                $client = new Client();
+                
+                // Using IPInfo.io free API (no key required for basic usage)
+                $response = $client->get("http://ipinfo.io/{$ip}/json", [
+                    'timeout' => 5,
+                    'headers' => [
+                        'Accept' => 'application/json'
+                    ]
+                ]);
+                
+                $data = json_decode($response->getBody(), true);
+                
+                return [
+                    'ip' => $ip,
+                    'city' => $data['city'] ?? 'Unknown',
+                    'country' => $data['country'] ?? 'Unknown',
+                    'region' => $data['region'] ?? 'Unknown',
+                    'timezone' => $data['timezone'] ?? 'Unknown'
+                ];
+                
+            } catch (\Exception $e) {
+                Log::warning('Failed to get geolocation for IP: ' . $ip . ' - ' . $e->getMessage());
+                
+                return [
+                    'ip' => $ip,
+                    'country' => 'Unknown',
+                    'city' => 'Unknown'
+                ];
+            }
+        });
     }
 }
