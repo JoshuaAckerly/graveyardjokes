@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\VisitorController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Spatie\Sitemap\Sitemap;
@@ -27,6 +28,8 @@ Route::get('/portfolio', function () {
 Route::get('/terms', fn() => Inertia::render('legal/terms'))->name('terms');
 Route::get('/privacy', fn() => Inertia::render('legal/privacy'))->name('privacy');
 Route::get('/cookies', fn() => Inertia::render('legal/cookies'))->name('cookies');
+
+Route::post('/track-visit', [VisitorController::class, 'track']);
 
 Route::get('/generate-sitemap', function () {
     Sitemap::create()

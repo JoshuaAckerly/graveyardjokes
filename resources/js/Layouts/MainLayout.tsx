@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import React, { ReactNode, useEffect } from "react";
 import MobileMenu from "@/Components/MobileMenu";
 import Menu from "@/Components/Menu";
 
@@ -7,6 +7,24 @@ interface MainLayoutProps {
 }
 
 const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
+  useEffect(() => {
+    // Track visitor on layout mount (every page visit)
+    const trackVisit = async () => {
+      try {
+        await fetch('/track-visit', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || ''
+          }
+        });
+      } catch (error) {
+        console.error('Failed to track visit:', error);
+      }
+    };
+
+    trackVisit();
+  }, []); // Empty dependency array means it runs once per component mount
   return (
     <div id="app" className="min-h-screen bg-[var(--color-background)]">
       <header className="flex items-center justify-between p-4">
