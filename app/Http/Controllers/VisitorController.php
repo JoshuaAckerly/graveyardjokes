@@ -19,18 +19,21 @@ class VisitorController extends Controller
         $location = $this->getLocationFromIP($ip);
         
         // Store visit and send email
-        $this->sendVisitorEmail($location);
+        $this->sendVisitorEmail($location, $request);
         
-        // Return a JSON response so frontend knows it worked
+        // Return a JSON response with CORS headers for subdomain support
         return response()->json([
             'success' => true,
             'message' => 'Visit tracked successfully',
             'data' => $location
-        ]);
+        ])->header('Access-Control-Allow-Origin', '*.graveyardjokes.com')
+          ->header('Access-Control-Allow-Credentials', 'true')
+          ->header('Access-Control-Allow-Methods', 'POST, GET, OPTIONS')
+          ->header('Access-Control-Allow-Headers', 'Content-Type, X-CSRF-TOKEN, Authorization');
     }
 
     // Send visitor email notification
-    private function sendVisitorEmail($location)
+    private function sendVisitorEmail($location, $request = null)
     {
         // Prepare visitor data with all details
         $visitorData = [
@@ -38,7 +41,9 @@ class VisitorController extends Controller
             'city' => $location['city'],
             'country' => $location['country'],
             'timestamp' => now()->toDateTimeString(),
-            'user_agent' => request()->userAgent()
+            'user_agent' => request()->userAgent(),
+            'referrer' => $request ? $request->input('referrer') : request()->header('referer'),
+            'subdomain' => $request ? $request->input('subdomain') : request()->getHost()
         ];
         
         // Log the visitor info

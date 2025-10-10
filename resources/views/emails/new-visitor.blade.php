@@ -81,6 +81,20 @@
                 {{ $visitor['timestamp'] }}
             </div>
             
+            @if(isset($visitor['subdomain']))
+            <div class="info-row">
+                <span class="label">🌐 Subdomain:</span>
+                {{ $visitor['subdomain'] }}
+            </div>
+            @endif
+            
+            @if(isset($visitor['referrer']))
+            <div class="info-row">
+                <span class="label">🔗 Referrer:</span>
+                {{ $visitor['referrer'] }}
+            </div>
+            @endif
+            
             <div class="info-row">
                 <span class="label">💻 Browser:</span>
                 {{ $visitor['user_agent'] }}
