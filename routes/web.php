@@ -31,6 +31,11 @@ Route::get('/cookies', fn() => Inertia::render('legal/cookies'))->name('cookies'
 
 Route::match(['post', 'options'], '/track-visit', [VisitorController::class, 'track']);
 
+// Test route for subdomain tracking
+Route::get('/tracking-test', function () {
+    return view('tracking-test');
+});
+
 Route::get('/generate-sitemap', function () {
     Sitemap::create()
         ->add(Url::create('/'))

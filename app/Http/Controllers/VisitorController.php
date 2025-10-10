@@ -13,6 +13,11 @@ class VisitorController extends Controller
 {
     public function track(Request $request)
     {
+        // Handle OPTIONS request (CORS preflight)
+        if ($request->getMethod() === 'OPTIONS') {
+            return response('', 200);
+        }
+
         $ip = $request->ip();
         
         // Use a geolocation service (MaxMind, IPInfo, etc.)
@@ -21,15 +26,12 @@ class VisitorController extends Controller
         // Store visit and send email
         $this->sendVisitorEmail($location, $request);
         
-        // Return a JSON response with CORS headers for subdomain support
+        // Return a JSON response
         return response()->json([
             'success' => true,
             'message' => 'Visit tracked successfully',
             'data' => $location
-        ])->header('Access-Control-Allow-Origin', '*.graveyardjokes.com')
-          ->header('Access-Control-Allow-Credentials', 'true')
-          ->header('Access-Control-Allow-Methods', 'POST, GET, OPTIONS')
-          ->header('Access-Control-Allow-Headers', 'Content-Type, X-CSRF-TOKEN, Authorization');
+        ]);
     }
 
     // Send visitor email notification
