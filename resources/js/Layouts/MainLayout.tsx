@@ -11,12 +11,20 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
     // Track visitor on layout mount (every page visit)
     const trackVisit = async () => {
       try {
-        await fetch('/track-visit', {
+        // Get the main domain for tracking
+        const mainDomain = 'https://graveyardjokes.com';
+        
+        await fetch(`${mainDomain}/track-visit`, {
           method: 'POST',
+          credentials: 'include', // Include cookies for cross-origin requests
           headers: {
             'Content-Type': 'application/json',
             'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || ''
-          }
+          },
+          body: JSON.stringify({
+            referrer: window.location.href,
+            subdomain: window.location.hostname
+          })
         });
       } catch (error) {
         console.error('Failed to track visit:', error);

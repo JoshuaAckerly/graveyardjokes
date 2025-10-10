@@ -30,7 +30,10 @@
         }
         gtag('js', new Date());
 
-        gtag('config', 'G-1GXR54HSYZ');
+        gtag('config', 'G-1GXR54HSYZ', {
+            cookie_domain: '.graveyardjokes.com',
+            cookie_flags: 'SameSite=None;Secure'
+        });
     </script>
 
     {{-- Inline style to set the HTML background color based on our theme in app.css --}}

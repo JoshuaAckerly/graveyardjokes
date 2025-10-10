@@ -29,7 +29,7 @@ Route::get('/terms', fn() => Inertia::render('legal/terms'))->name('terms');
 Route::get('/privacy', fn() => Inertia::render('legal/privacy'))->name('privacy');
 Route::get('/cookies', fn() => Inertia::render('legal/cookies'))->name('cookies');
 
-Route::post('/track-visit', [VisitorController::class, 'track']);
+Route::match(['post', 'options'], '/track-visit', [VisitorController::class, 'track']);
 
 Route::get('/generate-sitemap', function () {
     Sitemap::create()
