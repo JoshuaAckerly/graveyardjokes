@@ -11,12 +11,19 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
     // Track visitor on layout mount (every page visit)
     const trackVisit = async () => {
       try {
-        // Get the main domain for tracking
-        const mainDomain = 'https://graveyardjokes.com';
+        // Determine if we're on the main domain or a subdomain
+        const currentHost = window.location.hostname;
+        const isLocalDev = currentHost.includes('.test') || currentHost === 'localhost' || currentHost === '127.0.0.1';
         
-        await fetch(`${mainDomain}/track-visit`, {
+        // For local development, use current origin; for production, use main domain
+        const trackingUrl = isLocalDev 
+          ? '/track-visit'  // Same origin request
+          : currentHost === 'graveyardjokes.com' 
+            ? '/track-visit'  // Same origin request on main domain
+            : 'https://graveyardjokes.com/track-visit'; // Cross-origin request from subdomain
+        
+        const fetchOptions: RequestInit = {
           method: 'POST',
-          credentials: 'include', // Include cookies for cross-origin requests
           headers: {
             'Content-Type': 'application/json',
             'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || ''
@@ -25,7 +32,14 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
             referrer: window.location.href,
             subdomain: window.location.hostname
           })
-        });
+        };
+
+        // Add credentials for cross-origin requests
+        if (trackingUrl.startsWith('https://')) {
+          fetchOptions.credentials = 'include';
+        }
+
+        await fetch(trackingUrl, fetchOptions);
       } catch (error) {
         console.error('Failed to track visit:', error);
       }
