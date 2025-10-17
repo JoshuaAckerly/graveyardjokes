@@ -17,6 +17,8 @@ class VisitorController extends BaseController
 
         $location = $visitorService->track($request);
 
+        // $location is expected to be an array-like structure from the service
+
         return response()->json([
             'success' => true,
             'message' => 'Visit tracked successfully',
