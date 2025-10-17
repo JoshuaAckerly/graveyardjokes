@@ -41,11 +41,15 @@ Route::get('/tracking-test', function () {
 });
 
 Route::get('/generate-sitemap', function () {
+    // Use the configured app URL as the base so generated sitemap contains
+    // absolute URLs that match the production host (avoids .test entries).
+    $base = rtrim(config('app.url'), '/');
+
     Sitemap::create()
-        ->add(Url::create('/'))
-        ->add(Url::create('/about'))
-        ->add(Url::create('/contact'))
-        ->add(Url::create('/portfolio'))
+        ->add(Url::create($base . '/'))
+        ->add(Url::create($base . '/about'))
+        ->add(Url::create($base . '/contact'))
+        ->add(Url::create($base . '/portfolio'))
         ->writeToFile(public_path('sitemap.xml'));
 
     return 'Sitemap generated!';
@@ -57,13 +61,8 @@ Route::redirect('/WBG410/home.php', '/portfolio', 301);
 Route::redirect('/legal/terms', '/terms', 301);
 Route::redirect('/legal/privacy', '/privacy', 301);
 Route::redirect('/legal/cookies', '/cookies', 301);
-Route::redirect('/login', '/about', 301);
-Route::redirect('/register', '/about', 301);
-Route::redirect('/reset-password', '/about', 301);
-Route::redirect('/forgot-password', '/about', 301);
-Route::redirect('/reset-password/{token}', '/about', 301);
-Route::redirect('/verify-email', '/about', 301);
-Route::redirect('/confirm-password', '/about', 301);
+// Auth routes are defined in routes/auth.php. Do not override them with blanket redirects
+// which can cause crawlers and validation tools to see unexpected 301 responses.
 
 // Redirects for missing pages
 Route::redirect('/illustrations', '/contact', 301);
@@ -80,6 +79,24 @@ Route::get('/demo', function () {
     // Page is gone permanently
     abort(410);  // Sends HTTP 410 Gone to Google & browsers
 });
+
+// Explicitly mark auth-related endpoints as permanently removed (410 Gone)
+// so crawlers get a clear signal instead of a redirect or soft-404.
+$goneRoutes = [
+    '/login',
+    '/register',
+    '/forgot-password',
+    '/reset-password',
+    '/reset-password/{token}',
+    '/verify-email',
+    '/confirm-password',
+];
+
+foreach ($goneRoutes as $route) {
+    Route::match(['get', 'post'], $route, function () {
+        abort(410);
+    });
+}
 
 
 Route::fallback(function () {
