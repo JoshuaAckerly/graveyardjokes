@@ -57,7 +57,14 @@ class VisitorService implements VisitorServiceInterface
                     'headers' => ['Accept' => 'application/json']
                 ]);
 
-                $data = json_decode($response->getBody(), true);
+                $raw = (string) $response->getBody();
+                $data = json_decode($raw, true);
+
+                if (!is_array($data)) {
+                    // Defensive fallback when the external API returns unexpected content
+                    Log::warning('ipinfo returned non-array payload', ['ip' => $ip, 'body' => substr($raw, 0, 1000)]);
+                    $data = [];
+                }
 
                 return [
                     'ip' => $ip,
@@ -96,7 +103,8 @@ class VisitorService implements VisitorServiceInterface
         $keyHash = substr(sha1(($visitorData['ip'] ?? '') . '|' . $ua), 0, 20);
         $cacheKey = "visitor_notification_sent_{$keyHash}";
 
-        $ttl = env('TRACK_VISITOR_EMAIL_TTL', 86400);
+    // Prefer a named config with an integer TTL; fall back to env and cast to int.
+    $ttl = (int) config('tracking.visitor_ttl', env('TRACK_VISITOR_EMAIL_TTL', 86400));
 
         if (Cache::has($cacheKey)) {
             Log::info('Visitor notification skipped (recently notified).', ['cache_key' => $cacheKey]);
