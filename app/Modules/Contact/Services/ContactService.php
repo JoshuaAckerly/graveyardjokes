@@ -4,7 +4,7 @@ namespace App\Modules\Contact\Services;
 
 use App\Contracts\ContactServiceInterface;
 use App\Models\Contact;
-use App\Mail\ContactMessage;
+use App\Modules\Contact\Mail\ContactMessage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Log;
