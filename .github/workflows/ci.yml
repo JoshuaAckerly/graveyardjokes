@@ -34,6 +34,10 @@ jobs:
           find . -name '*.php' -not -path './vendor/*' -print0 | xargs -0 -n1 php -l || true
       - name: Run PHPUnit
         run: vendor/bin/phpunit --colors=always
+      - name: Run PHPStan (static analysis)
+        run: |
+          set -e
+          vendor/bin/phpstan analyse -c phpstan.neon --memory-limit=2G --error-format=github
 
   node:
     name: Node checks
