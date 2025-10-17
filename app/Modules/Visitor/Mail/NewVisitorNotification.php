@@ -27,8 +27,12 @@ class NewVisitorNotification extends Mailable
 
     public function envelope(): Envelope
     {
-        $city = (string) ($this->visitorData['city'] ?? 'Unknown');
-        $country = (string) ($this->visitorData['country'] ?? 'Unknown');
+        $cityVal = $this->visitorData['city'] ?? null;
+        $city = is_scalar($cityVal) ? (string) $cityVal : 'Unknown';
+
+        $countryVal = $this->visitorData['country'] ?? null;
+        $country = is_scalar($countryVal) ? (string) $countryVal : 'Unknown';
+
         return new Envelope(subject: 'New visitor from ' . $city . ', ' . $country);
     }
 
