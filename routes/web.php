@@ -1,7 +1,7 @@
 <?php
 
-use App\Http\Controllers\ContactController;
-use App\Http\Controllers\VisitorController;
+use App\Modules\Contact\Controllers\ContactController;
+use App\Modules\Visitor\Controllers\VisitorController;
 use App\Http\Controllers\JokeController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
