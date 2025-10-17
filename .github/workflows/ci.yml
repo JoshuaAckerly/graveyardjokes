@@ -12,11 +12,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Setup PHP
-        uses: shivammathur/setup-php@v3
-        with:
-          php-version: '8.2'
-          extensions: mbstring, xml, bcmath
+      # Use system PHP on the runner image instead of a setup action which may not be available.
+      - name: Check PHP version
+        run: php -v
       - name: Get composer cache
         uses: actions/cache@v4
         with:
