@@ -63,7 +63,7 @@ export default function Home(): JSX.Element {
     {
       "@context": "https://schema.org",
       "@type": "Organization",
-      "name": "Graveyard Jokes Studios",
+  "name": "GraveYard Jokes Studios Inc.",
       "url": "https://graveyardjokes.com",
       "logo": "${cdn}/images/logo.webp",
       "sameAs": [

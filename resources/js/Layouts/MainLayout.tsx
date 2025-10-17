@@ -75,7 +75,7 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
           </a>
         </div>
         <div className="mt-2 text-black">
-          &copy; {new Date().getFullYear()} Joshua Ackerly
+          &copy; {new Date().getFullYear()} GraveYard Jokes Studios Inc. — <a href="mailto:info@graveyardjokes.com" className="text-blue-900 hover:underline">info@graveyardjokes.com</a>
         </div>
       </footer>
     </div>

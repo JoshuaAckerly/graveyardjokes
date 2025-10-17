@@ -1,6 +1,9 @@
 <?php
 // app/Services/GoogleAnalyticsService.php
-class GoogleAnalyticsService 
+
+namespace App\Services;
+
+class GoogleAnalyticsService
 {
     public function getRealTimeVisitors()
     {
