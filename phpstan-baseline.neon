@@ -181,81 +181,15 @@ parameters:
 			path: app/Modules/Contact/Controllers/ContactController.php
 
 		-
-			message: '#^Method App\\Modules\\Contact\\Mail\\ContactMessage\:\:__construct\(\) has parameter \$email with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: app/Modules/Contact/Mail/ContactMessage.php
-
-		-
-			message: '#^Method App\\Modules\\Contact\\Mail\\ContactMessage\:\:__construct\(\) has parameter \$first_name with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: app/Modules/Contact/Mail/ContactMessage.php
-
-		-
-			message: '#^Method App\\Modules\\Contact\\Mail\\ContactMessage\:\:__construct\(\) has parameter \$last_name with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: app/Modules/Contact/Mail/ContactMessage.php
-
-		-
-			message: '#^Method App\\Modules\\Contact\\Mail\\ContactMessage\:\:__construct\(\) has parameter \$message with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: app/Modules/Contact/Mail/ContactMessage.php
-
-		-
 			message: '#^Method App\\Modules\\Contact\\Mail\\ContactMessage\:\:attachments\(\) return type has no value type specified in iterable type array\.$#'
 			identifier: missingType.iterableValue
 			count: 1
 			path: app/Modules/Contact/Mail/ContactMessage.php
 
 		-
-			message: '#^Property App\\Modules\\Contact\\Mail\\ContactMessage\:\:\$email has no type specified\.$#'
-			identifier: missingType.property
-			count: 1
-			path: app/Modules/Contact/Mail/ContactMessage.php
-
-		-
-			message: '#^Property App\\Modules\\Contact\\Mail\\ContactMessage\:\:\$first_name has no type specified\.$#'
-			identifier: missingType.property
-			count: 1
-			path: app/Modules/Contact/Mail/ContactMessage.php
-
-		-
-			message: '#^Property App\\Modules\\Contact\\Mail\\ContactMessage\:\:\$last_name has no type specified\.$#'
-			identifier: missingType.property
-			count: 1
-			path: app/Modules/Contact/Mail/ContactMessage.php
-
-		-
-			message: '#^Property App\\Modules\\Contact\\Mail\\ContactMessage\:\:\$message has no type specified\.$#'
-			identifier: missingType.property
-			count: 1
-			path: app/Modules/Contact/Mail/ContactMessage.php
-
-		-
-			message: '#^Cannot access offset ''email'' on mixed\.$#'
-			identifier: offsetAccess.nonOffsetAccessible
-			count: 1
-			path: app/Modules/Contact/Services/ContactService.php
-
-		-
-			message: '#^Cannot access offset ''first_name'' on mixed\.$#'
-			identifier: offsetAccess.nonOffsetAccessible
-			count: 1
-			path: app/Modules/Contact/Services/ContactService.php
-
-		-
-			message: '#^Cannot access offset ''last_name'' on mixed\.$#'
-			identifier: offsetAccess.nonOffsetAccessible
-			count: 1
-			path: app/Modules/Contact/Services/ContactService.php
-
-		-
-			message: '#^Cannot access offset ''message'' on mixed\.$#'
-			identifier: offsetAccess.nonOffsetAccessible
-			count: 1
+			message: '#^Cannot cast mixed to string\.$#'
+			identifier: cast.string
+			count: 4
 			path: app/Modules/Contact/Services/ContactService.php
 
 		-
@@ -263,18 +197,6 @@ parameters:
 			identifier: return.type
 			count: 1
 			path: app/Modules/Contact/Services/ContactService.php
-
-		-
-			message: '#^Parameter \#1 \$attributes of static method Illuminate\\Database\\Eloquent\\Builder\<App\\Models\\Contact\>\:\:create\(\) expects array\<string, mixed\>, mixed given\.$#'
-			identifier: argument.type
-			count: 1
-			path: app/Modules/Contact/Services/ContactService.php
-
-		-
-			message: '#^Method App\\Modules\\Visitor\\Mail\\NewVisitorNotification\:\:__construct\(\) has parameter \$visitorData with no value type specified in iterable type array\.$#'
-			identifier: missingType.iterableValue
-			count: 1
-			path: app/Modules/Visitor/Mail/NewVisitorNotification.php
 
 		-
 			message: '#^Method App\\Modules\\Visitor\\Mail\\NewVisitorNotification\:\:attachments\(\) return type has no value type specified in iterable type array\.$#'
@@ -291,12 +213,6 @@ parameters:
 		-
 			message: '#^Part \$country \(mixed\) of encapsed string cannot be cast to string\.$#'
 			identifier: encapsedStringPart.nonString
-			count: 1
-			path: app/Modules/Visitor/Mail/NewVisitorNotification.php
-
-		-
-			message: '#^Property App\\Modules\\Visitor\\Mail\\NewVisitorNotification\:\:\$visitorData type has no value type specified in iterable type array\.$#'
-			identifier: missingType.iterableValue
 			count: 1
 			path: app/Modules/Visitor/Mail/NewVisitorNotification.php
 
@@ -365,3 +281,45 @@ parameters:
 			identifier: argument.type
 			count: 1
 			path: app/Modules/Visitor/Services/VisitorService.php
+
+		-
+			message: '#^Cannot call method bootstrap\(\) on mixed\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: tests/TestCase.php
+
+		-
+			message: '#^Cannot call method make\(\) on mixed\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: tests/TestCase.php
+
+		-
+			message: '#^Method Tests\\TestCase\:\:createApplication\(\) should return Illuminate\\Foundation\\Application but returns mixed\.$#'
+			identifier: return.type
+			count: 1
+			path: tests/TestCase.php
+
+		-
+			message: '#^Call to method PHPUnit\\Framework\\Assert\:\:assertTrue\(\) with true will always evaluate to true\.$#'
+			identifier: method.alreadyNarrowedType
+			count: 1
+			path: tests/Unit/ExampleTest.php
+
+		-
+			message: '#^Call to function method_exists\(\) with ''\\\\App\\\\Services…'' and ''getRealTimeVisitors'' will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: tests/Unit/GoogleAnalyticsServiceTest.php
+
+		-
+			message: '#^Parameter \#3 \$body of class GuzzleHttp\\Psr7\\Response constructor expects Psr\\Http\\Message\\StreamInterface\|resource\|string\|null, string\|false given\.$#'
+			identifier: argument.type
+			count: 1
+			path: tests/Unit/VisitorServiceGuzzleTest.php
+
+		-
+			message: '#^Call to method PHPUnit\\Framework\\Assert\:\:assertIsArray\(\) with array\<string, mixed\> will always evaluate to true\.$#'
+			identifier: method.alreadyNarrowedType
+			count: 1
+			path: tests/Unit/VisitorServiceTest.php
