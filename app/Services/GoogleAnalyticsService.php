@@ -2,13 +2,14 @@
 // app/Services/GoogleAnalyticsService.php
 
 namespace App\Services;
+use App\Contracts\AnalyticsInterface;
 
-class GoogleAnalyticsService
+class GoogleAnalyticsService implements AnalyticsInterface
 {
-    public function getRealTimeVisitors()
+    public function getRealTimeVisitors(): array
     {
-        // Use GA4 Real-time Reporting API
-        // Filter by city dimension
-        // Return visitor data with location
+        // Minimal implementation for now; concrete GA4 calls can be added later.
+        // Return an empty array when no data is available to keep contract simple.
+        return [];
     }
 }
