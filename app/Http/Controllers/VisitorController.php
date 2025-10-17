@@ -50,14 +50,29 @@ class VisitorController extends Controller
         
         // Log the visitor info
         Log::info('New visitor tracked!', $visitorData);
-        
+        // Prevent sending more than one email per visitor (by IP + user agent) within a TTL
+        $ua = $visitorData['user_agent'] ?? '';
+        $keyHash = substr(sha1($visitorData['ip'] . '|' . $ua), 0, 20);
+        $cacheKey = "visitor_notification_sent_{$keyHash}";
+
+        // TTL in seconds - configurable via .env (default: 86400 = 1 day)
+        $ttl = env('TRACK_VISITOR_EMAIL_TTL', 86400);
+
+        if (Cache::has($cacheKey)) {
+            Log::info('Visitor notification skipped (recently notified).', ['cache_key' => $cacheKey]);
+            return;
+        }
+
         try {
             // Send email notification
             Mail::to('admin@graveyardjokes.com')->send(
                 new NewVisitorNotification($visitorData)
             );
-            
-            Log::info('Visitor notification email sent successfully');
+
+            // Mark as notified in cache
+            Cache::put($cacheKey, true, $ttl);
+
+            Log::info('Visitor notification email sent successfully', ['cache_key' => $cacheKey]);
         } catch (\Exception $e) {
             Log::error('Failed to send visitor notification email: ' . $e->getMessage());
         }
