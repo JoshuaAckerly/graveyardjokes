@@ -35,6 +35,9 @@ class ContactMessage extends Mailable
         return new Content(markdown: 'emails.contact.message');
     }
 
+    /**
+     * @return array<int, mixed>
+     */
     public function attachments(): array
     {
         return [];
