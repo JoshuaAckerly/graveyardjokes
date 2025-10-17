@@ -1,0 +1,50 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  php:
+    name: PHP checks
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v4
+        with:
+          php-version: '8.2'
+          extensions: mbstring, xml, bcmath
+      - name: Get composer cache
+        uses: actions/cache@v4
+        with:
+          path: ~/.composer/cache
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+      - name: Install composer deps
+        run: composer install --no-progress --no-suggest --prefer-dist --no-interaction
+      - name: Composer validate
+        run: composer validate --no-check-publish --strict || true
+      - name: Syntax check (php -l)
+        run: |
+          set -e
+          php -v
+          # quick syntax check across PHP files
+          find . -name '*.php' -not -path './vendor/*' -print0 | xargs -0 -n1 php -l || true
+      - name: Run PHPUnit
+        run: vendor/bin/phpunit --colors=always
+
+  node:
+    name: Node checks
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+      - name: Install dependencies
+        run: npm ci
+      - name: Run ESLint
+        run: npm run lint
