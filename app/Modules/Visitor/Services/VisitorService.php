@@ -57,7 +57,14 @@ class VisitorService implements VisitorServiceInterface
                     'headers' => ['Accept' => 'application/json']
                 ]);
 
-                $data = json_decode($response->getBody(), true);
+                $raw = (string) $response->getBody();
+                $data = json_decode($raw, true);
+
+                if (!is_array($data)) {
+                    // Defensive fallback when the external API returns unexpected content
+                    Log::warning('ipinfo returned non-array payload', ['ip' => $ip, 'body' => substr($raw, 0, 1000)]);
+                    $data = [];
+                }
 
                 return [
                     'ip' => $ip,
@@ -96,7 +103,25 @@ class VisitorService implements VisitorServiceInterface
         $keyHash = substr(sha1(($visitorData['ip'] ?? '') . '|' . $ua), 0, 20);
         $cacheKey = "visitor_notification_sent_{$keyHash}";
 
-        $ttl = env('TRACK_VISITOR_EMAIL_TTL', 86400);
+        // Prefer a named config with an integer TTL; fall back to env and cast to int.
+        $configured = config('tracking.visitor_ttl', null);
+        $defaultTtl = 86400;
+
+        if (!is_null($configured)) {
+            // Accept integer values or numeric strings; otherwise fall back to default
+            if (is_int($configured) || (is_string($configured) && is_numeric($configured))) {
+                $ttl = (int) $configured;
+            } else {
+                $ttl = $defaultTtl;
+            }
+        } else {
+            $envVal = env('TRACK_VISITOR_EMAIL_TTL', $defaultTtl);
+            if (is_int($envVal) || (is_string($envVal) && is_numeric($envVal))) {
+                $ttl = (int) $envVal;
+            } else {
+                $ttl = $defaultTtl;
+            }
+        }
 
         if (Cache::has($cacheKey)) {
             Log::info('Visitor notification skipped (recently notified).', ['cache_key' => $cacheKey]);
