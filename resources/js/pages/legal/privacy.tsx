@@ -10,7 +10,7 @@ const Privacy: React.FC = () => {
         </p>
         <p>
           This Privacy Policy explains how we collect, use, and protect information
-          when you visit Graveyard Jokes (graveyardjokes.com).
+          when you visit GraveYard Jokes Studios Inc. (graveyardjokes.com).
         </p>
         <h2 className="text-xl font-semibold">1. Information We Collect</h2>
         <p>We automatically collect certain information when you visit our site:</p>
@@ -72,13 +72,7 @@ const Privacy: React.FC = () => {
           You can disable cookies in your browser, though this may affect site functionality.
           If you have questions about your data or wish to request information about data
           we may have collected, contact us at{" "}
-          <a
-            href="mailto:admin@graveyardjokes.com"
-            className="text-blue-600 underline"
-          >
-            admin@graveyardjokes.com
-          </a>
-          .
+          <a href="mailto:info@graveyardjokes.com" className="text-blue-600 underline">info@graveyardjokes.com</a>.
         </p>
         <h2 className="text-xl font-semibold">6. Updates to This Policy</h2>
         <p>

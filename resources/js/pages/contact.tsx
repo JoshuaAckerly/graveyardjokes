@@ -301,8 +301,8 @@ export default function ContactPricing() {
           {`
     {
       "@context": "https://schema.org",
-      "@type": "Organization",
-      "name": "Graveyard Jokes Studios",
+  "@type": "Organization",
+  "name": "GraveYard Jokes Studios Inc.",
       "url": "https://graveyardjokes.com",
       "logo": "${cdn}/images/logo.webp",
       "sameAs": [

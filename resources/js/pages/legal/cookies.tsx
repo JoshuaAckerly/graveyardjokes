@@ -10,7 +10,7 @@ const Cookies = () => {
         </p>
 
         <p>
-          This Cookie Policy explains how Graveyard Jokes uses cookies
+          This Cookie Policy explains how GraveYard Jokes Studios Inc. uses cookies
           and similar technologies when you visit <strong>graveyardjokes.com</strong>.
         </p>
 

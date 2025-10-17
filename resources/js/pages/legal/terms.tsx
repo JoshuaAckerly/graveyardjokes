@@ -10,7 +10,7 @@ const Terms: React.FC = () => {
         </p>
 
         <p>
-          Welcome to Graveyard Jokes ("we", "us", or "our"). By accessing
+          Welcome to GraveYard Jokes Studios Inc. ("we", "us", or "our"). By accessing
           or using our website at{" "}
           <a
             href="https://graveyardjokes.com"

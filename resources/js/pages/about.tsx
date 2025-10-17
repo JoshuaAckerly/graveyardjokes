@@ -66,7 +66,7 @@ export default function About() {
   "jobTitle": "Web Developer",
   "worksFor": {
     "@type": "Organization",
-    "name": "Graveyard Jokes Studios"
+    "name": "GraveYard Jokes Studios Inc."
   }
 }
     `}
