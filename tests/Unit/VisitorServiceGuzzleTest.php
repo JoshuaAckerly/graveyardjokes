@@ -12,7 +12,7 @@ use GuzzleHttp\Client as GuzzleClient;
 
 class VisitorServiceGuzzleTest extends TestCase
 {
-    public function test_external_api_parsed_correctly()
+    public function test_external_api_parsed_correctly(): void
     {
         // Mocked response from ipinfo
         $body = json_encode([

@@ -12,12 +12,12 @@ class ContactMessage extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $first_name;
-    public $last_name;
-    public $email;
-    public $message;
+    public string $first_name;
+    public string $last_name;
+    public string $email;
+    public string $message;
 
-    public function __construct($first_name, $last_name, $email, $message)
+    public function __construct(string $first_name, string $last_name, string $email, string $message)
     {
         $this->first_name = $first_name;
         $this->last_name = $last_name;
@@ -35,6 +35,9 @@ class ContactMessage extends Mailable
         return new Content(markdown: 'emails.contact.message');
     }
 
+    /**
+     * @return array<int, mixed>
+     */
     public function attachments(): array
     {
         return [];

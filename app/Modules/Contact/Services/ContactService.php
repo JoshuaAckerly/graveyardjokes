@@ -19,6 +19,7 @@ class ContactService implements ContactServiceInterface
      */
     public function store(Request $request): array
     {
+        /** @var array<string,mixed> $validatedData */
         $validatedData = $request->validate([
             'first_name' => 'required|string|max:255',
             'last_name'  => 'required|string|max:255',
@@ -29,13 +30,14 @@ class ContactService implements ContactServiceInterface
         $contact = Contact::create($validatedData);
 
         try {
+            // Extract validated values into typed local variables so phpstan sees concrete types
+            $firstName = (string) ($validatedData['first_name'] ?? '');
+            $lastName = (string) ($validatedData['last_name'] ?? '');
+            $email = (string) ($validatedData['email'] ?? '');
+            $message = (string) ($validatedData['message'] ?? '');
+
             Mail::to('admin@graveyardjokes.com')->send(
-                new ContactMessage(
-                    $validatedData['first_name'],
-                    $validatedData['last_name'],
-                    $validatedData['email'],
-                    $validatedData['message']
-                )
+                new ContactMessage($firstName, $lastName, $email, $message)
             );
         } catch (\Exception $e) {
             Log::error('Contact email failed: ' . $e->getMessage());
