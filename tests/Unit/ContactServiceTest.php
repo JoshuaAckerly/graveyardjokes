@@ -6,7 +6,7 @@ use Tests\TestCase;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use App\Mail\ContactMessage;
+use App\Modules\Contact\Mail\ContactMessage;
 
 class ContactServiceTest extends TestCase
 {
