@@ -30,13 +30,14 @@ class ContactService implements ContactServiceInterface
         $contact = Contact::create($validatedData);
 
         try {
+            // Extract validated values into typed local variables so phpstan sees concrete types
+            $firstName = (string) ($validatedData['first_name'] ?? '');
+            $lastName = (string) ($validatedData['last_name'] ?? '');
+            $email = (string) ($validatedData['email'] ?? '');
+            $message = (string) ($validatedData['message'] ?? '');
+
             Mail::to('admin@graveyardjokes.com')->send(
-                new ContactMessage(
-                    (string) ($validatedData['first_name'] ?? ''),
-                    (string) ($validatedData['last_name'] ?? ''),
-                    (string) ($validatedData['email'] ?? ''),
-                    (string) ($validatedData['message'] ?? '')
-                )
+                new ContactMessage($firstName, $lastName, $email, $message)
             );
         } catch (\Exception $e) {
             Log::error('Contact email failed: ' . $e->getMessage());
