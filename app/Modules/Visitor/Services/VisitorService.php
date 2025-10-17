@@ -19,6 +19,12 @@ class VisitorService implements VisitorServiceInterface
     {
         $this->client = $client ?? new Client(['timeout' => 5]);
     }
+    /**
+     * Track a visitor and return location data.
+     *
+     * @param Request $request
+     * @return array<string,mixed>
+     */
     public function track(Request $request): array
     {
         $ip = $request->ip();
@@ -32,9 +38,10 @@ class VisitorService implements VisitorServiceInterface
         return $location;
     }
 
-    public function getLocationFromIP(string $ip): array
+    public function getLocationFromIP(?string $ip): array
     {
-        if (in_array($ip, ['127.0.0.1', '::1', 'localhost'])) {
+        // Treat null or local addresses as local development
+        if (is_null($ip) || in_array($ip, ['127.0.0.1', '::1', 'localhost'])) {
             return [
                 'ip' => $ip,
                 'country' => 'Local Development',

@@ -11,6 +11,12 @@ use Illuminate\Support\Facades\Log;
 
 class ContactService implements ContactServiceInterface
 {
+    /**
+     * Store the contact and return its array representation.
+     *
+     * @param Request $request
+     * @return array<string,mixed>
+     */
     public function store(Request $request): array
     {
         $validatedData = $request->validate([

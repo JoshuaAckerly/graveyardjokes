@@ -7,7 +7,7 @@ interface AnalyticsInterface
     /**
      * Return an array of real-time visitor data grouped by location.
      *
-     * @return array
+     * @return array<int, array<string,mixed>>
      */
     public function getRealTimeVisitors(): array;
 }

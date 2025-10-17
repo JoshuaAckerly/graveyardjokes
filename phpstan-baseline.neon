@@ -49,24 +49,6 @@ parameters:
 			path: app/Console/Commands/TestEmail.php
 
 		-
-			message: '#^Method App\\Contracts\\AnalyticsInterface\:\:getRealTimeVisitors\(\) return type has no value type specified in iterable type array\.$#'
-			identifier: missingType.iterableValue
-			count: 1
-			path: app/Contracts/AnalyticsInterface.php
-
-		-
-			message: '#^Method App\\Contracts\\ContactServiceInterface\:\:store\(\) return type has no value type specified in iterable type array\.$#'
-			identifier: missingType.iterableValue
-			count: 1
-			path: app/Contracts/ContactServiceInterface.php
-
-		-
-			message: '#^Method App\\Contracts\\VisitorServiceInterface\:\:track\(\) return type has no value type specified in iterable type array\.$#'
-			identifier: missingType.iterableValue
-			count: 1
-			path: app/Contracts/VisitorServiceInterface.php
-
-		-
 			message: '#^Cannot access property \$email on App\\Models\\User\|null\.$#'
 			identifier: property.nonObject
 			count: 1
@@ -277,8 +259,8 @@ parameters:
 			path: app/Modules/Contact/Services/ContactService.php
 
 		-
-			message: '#^Method App\\Modules\\Contact\\Services\\ContactService\:\:store\(\) return type has no value type specified in iterable type array\.$#'
-			identifier: missingType.iterableValue
+			message: '#^Method App\\Modules\\Contact\\Services\\ContactService\:\:store\(\) should return array\<string, mixed\> but returns array\<mixed\>\.$#'
+			identifier: return.type
 			count: 1
 			path: app/Modules/Contact/Services/ContactService.php
 
@@ -287,12 +269,6 @@ parameters:
 			identifier: argument.type
 			count: 1
 			path: app/Modules/Contact/Services/ContactService.php
-
-		-
-			message: '#^Method App\\Modules\\Visitor\\Controllers\\VisitorController\:\:track\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: app/Modules/Visitor/Controllers/VisitorController.php
 
 		-
 			message: '#^Method App\\Modules\\Visitor\\Mail\\NewVisitorNotification\:\:__construct\(\) has parameter \$visitorData with no value type specified in iterable type array\.$#'
@@ -379,14 +355,8 @@ parameters:
 			path: app/Modules/Visitor/Services/VisitorService.php
 
 		-
-			message: '#^Method App\\Modules\\Visitor\\Services\\VisitorService\:\:track\(\) return type has no value type specified in iterable type array\.$#'
-			identifier: missingType.iterableValue
-			count: 1
-			path: app/Modules/Visitor/Services/VisitorService.php
-
-		-
-			message: '#^Parameter \#1 \$ip of method App\\Modules\\Visitor\\Services\\VisitorService\:\:getLocationFromIP\(\) expects string, string\|null given\.$#'
-			identifier: argument.type
+			message: '#^Method App\\Modules\\Visitor\\Services\\VisitorService\:\:track\(\) should return array\<string, mixed\> but returns array\.$#'
+			identifier: return.type
 			count: 1
 			path: app/Modules/Visitor/Services/VisitorService.php
 
@@ -395,111 +365,3 @@ parameters:
 			identifier: argument.type
 			count: 1
 			path: app/Modules/Visitor/Services/VisitorService.php
-
-		-
-			message: '#^Method App\\Services\\GoogleAnalyticsService\:\:getRealTimeVisitors\(\) return type has no value type specified in iterable type array\.$#'
-			identifier: missingType.iterableValue
-			count: 1
-			path: app/Services/GoogleAnalyticsService.php
-
-		-
-			message: '#^Method Tests\\Feature\\ContactPageTest\:\:contact_page_loads_and_displays_contact_heading\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: tests/Feature/ContactPageTest.php
-
-		-
-			message: '#^Parameter \#1 \$source of method DOMDocument\:\:loadHTML\(\) expects string, string\|false given\.$#'
-			identifier: argument.type
-			count: 1
-			path: tests/Feature/ContactPageTest.php
-
-		-
-			message: '#^Method Tests\\Feature\\ExampleTest\:\:it_loads_the_homepage\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: tests/Feature/ExampleTest.php
-
-		-
-			message: '#^Method Tests\\Feature\\RandomJokeTest\:\:test_random_joke_endpoint_returns_json\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: tests/Feature/RandomJokeTest.php
-
-		-
-			message: '#^Cannot call method bootstrap\(\) on mixed\.$#'
-			identifier: method.nonObject
-			count: 1
-			path: tests/TestCase.php
-
-		-
-			message: '#^Cannot call method make\(\) on mixed\.$#'
-			identifier: method.nonObject
-			count: 1
-			path: tests/TestCase.php
-
-		-
-			message: '#^Method Tests\\TestCase\:\:createApplication\(\) should return Illuminate\\Foundation\\Application but returns mixed\.$#'
-			identifier: return.type
-			count: 1
-			path: tests/TestCase.php
-
-		-
-			message: '#^Method Tests\\Unit\\ContactServiceTest\:\:test_store_creates_contact_and_sends_email\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: tests/Unit/ContactServiceTest.php
-
-		-
-			message: '#^Method Tests\\Unit\\ContactServiceValidationTest\:\:test_store_throws_validation_exception_on_invalid_input\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: tests/Unit/ContactServiceValidationTest.php
-
-		-
-			message: '#^Call to method PHPUnit\\Framework\\Assert\:\:assertTrue\(\) with true will always evaluate to true\.$#'
-			identifier: method.alreadyNarrowedType
-			count: 1
-			path: tests/Unit/ExampleTest.php
-
-		-
-			message: '#^Method Tests\\Unit\\ExampleTest\:\:it_checks_that_true_is_true\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: tests/Unit/ExampleTest.php
-
-		-
-			message: '#^Call to function method_exists\(\) with ''\\\\App\\\\Services…'' and ''getRealTimeVisitors'' will always evaluate to true\.$#'
-			identifier: function.alreadyNarrowedType
-			count: 1
-			path: tests/Unit/GoogleAnalyticsServiceTest.php
-
-		-
-			message: '#^Method Tests\\Unit\\GoogleAnalyticsServiceTest\:\:it_has_get_real_time_visitors_method\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: tests/Unit/GoogleAnalyticsServiceTest.php
-
-		-
-			message: '#^Method Tests\\Unit\\VisitorServiceGuzzleTest\:\:test_external_api_parsed_correctly\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: tests/Unit/VisitorServiceGuzzleTest.php
-
-		-
-			message: '#^Parameter \#3 \$body of class GuzzleHttp\\Psr7\\Response constructor expects Psr\\Http\\Message\\StreamInterface\|resource\|string\|null, string\|false given\.$#'
-			identifier: argument.type
-			count: 1
-			path: tests/Unit/VisitorServiceGuzzleTest.php
-
-		-
-			message: '#^Call to method PHPUnit\\Framework\\Assert\:\:assertIsArray\(\) with array will always evaluate to true\.$#'
-			identifier: method.alreadyNarrowedType
-			count: 1
-			path: tests/Unit/VisitorServiceTest.php
-
-		-
-			message: '#^Method Tests\\Unit\\VisitorServiceTest\:\:test_localhost_returns_local_development_location\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: tests/Unit/VisitorServiceTest.php
