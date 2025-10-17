@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Cache;
-use App\Mail\NewVisitorNotification;
+use App\Modules\Visitor\Mail\NewVisitorNotification;
 
 class VisitorService implements VisitorServiceInterface
 {
