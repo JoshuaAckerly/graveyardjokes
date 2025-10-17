@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\VisitorController;
+use App\Http\Controllers\JokeController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Spatie\Sitemap\Sitemap;
@@ -30,6 +31,9 @@ Route::get('/privacy', fn() => Inertia::render('legal/privacy'))->name('privacy'
 Route::get('/cookies', fn() => Inertia::render('legal/cookies'))->name('cookies');
 
 Route::match(['post', 'options'], '/track-visit', [VisitorController::class, 'track']);
+
+// Random joke endpoint (returns JSON)
+Route::get('/api/random-joke', [JokeController::class, 'random'])->name('api.random-joke');
 
 // Test route for subdomain tracking
 Route::get('/tracking-test', function () {

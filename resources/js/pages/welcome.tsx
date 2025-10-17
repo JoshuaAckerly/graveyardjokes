@@ -4,6 +4,7 @@ import MainLayout from "@/Layouts/MainLayout";
 import { Head, router } from "@inertiajs/react";
 import { motion } from "framer-motion";
 import { JSX } from "react";
+import { useEffect, useState } from "react";
 
 export default function Home(): JSX.Element {
   const cdn = import.meta.env.VITE_ASSET_URL;
@@ -11,6 +12,28 @@ export default function Home(): JSX.Element {
   const handleClick = (): void => {
     router.visit("/contact");
   };
+
+  const [joke, setJoke] = useState<{ id?: number; body?: string; author?: string } | null>(null);
+  const [loadingJoke, setLoadingJoke] = useState(false);
+
+  const fetchJoke = async () => {
+    try {
+      setLoadingJoke(true);
+      const base = typeof window !== 'undefined' ? window.location.origin : '';
+      const res = await fetch(`${base}/api/random-joke`);
+      if (!res.ok) throw new Error('Failed to fetch joke');
+      const data = await res.json();
+      setJoke(data);
+    } catch (e) {
+      console.error(e);
+    } finally {
+      setLoadingJoke(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchJoke();
+  }, []);
 
   return (
     <MainLayout>
@@ -138,6 +161,26 @@ export default function Home(): JSX.Element {
                   containerClasses="m-6"
                 />
               </motion.div>
+            </div>
+
+            {/* Random Joke Section */}
+            <div className="mx-auto my-6 max-w-2xl text-center">
+              <div className="rounded-md bg-white/10 p-6 text-white">
+                <p className="text-lg sm:text-xl">
+                  {loadingJoke && "Loading joke..."}
+                  {!loadingJoke && joke?.body}
+                </p>
+                <p className="mt-3 text-sm opacity-70">{joke?.author}</p>
+                <div className="mt-4">
+                  <button
+                    onClick={fetchJoke}
+                    className="inline-flex items-center rounded bg-[var(--card)] px-4 py-2 text-white hover:bg-[var(--accent)]"
+                    aria-label="Another joke"
+                  >
+                    Another joke
+                  </button>
+                </div>
+              </div>
             </div>
           </motion.div>
 
