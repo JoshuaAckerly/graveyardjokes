@@ -48,13 +48,11 @@ const PricingCardDevelop = ({
       ))}
     </ul>
     <a
-      href="https://www.fiverr.com/s/0bNavNk"
-      target="_blank"
-      rel="noopener noreferrer"
+      href="#contact-section"
       className="tansition w-full bg-[--color-background] px-6 py-3 text-lg font-medium text-white shadow-md hover:bg-[--color-foreground]"
-      aria-label={`Purchase ${buttonText} package`}
+      aria-label={`Request ${buttonText} package`}
     >
-      {buttonText}
+      Request
     </a>
   </motion.div>
 );
@@ -84,11 +82,32 @@ const PricingCardDesign = ({
       ))}
     </ul>
     <a
-      href="https://www.fiverr.com/graveyardjokes/create-a-website-design"
-      target="_blank"
-      rel="noopener noreferrer"
+      href="#contact-section"
       className="text w-full px-6 py-3 font-medium text-white shadow-md transition"
-      aria-label={`Purchase ${buttonText} package`}
+      aria-label={`Request ${buttonText} package`}
+    >
+      Request
+    </a>
+  </div>
+);
+
+const SubscriptionCard = ({
+  price,
+  description,
+  buttonText,
+}: {
+  price: string;
+  description: string;
+  buttonText: string;
+}) => (
+  <div className="m-auto w-full max-w-md rounded-md bg-[var(--card)] p-6 shadow-lg text-left">
+    <h3 className="mb-2 text-2xl font-semibold text-white">Maintenance & Hosting</h3>
+    <p className="mb-4 text-3xl font-bold text-[var(--accent)]">{price}</p>
+    <p className="mb-6 text-white">{description}</p>
+    <a
+      href="#contact-section"
+      className="inline-block rounded bg-[var(--accent)] px-5 py-3 font-medium text-white shadow hover:opacity-95"
+      aria-label="Request maintenance subscription"
     >
       {buttonText}
     </a>
@@ -172,21 +191,20 @@ export default function ContactPricing() {
   const pricingPlansDevelop = [
     {
       name: "Basic Package",
-      price: "$80",
+      price: "Starting at $800",
       features: [
         "1-page",
         "Functional website",
         "Responsive design",
         "Social Media icons",
         "Deployment via Forge on AWS",
-        "Ongoing hosting & infrastructure: $19/month (includes AWS, Forge, and Studio)",
       ],
       buttonText: "Basic",
       deliveryTime: "1 week",
     },
     {
       name: "Standard Package",
-      price: "$200",
+      price: "Starting at $1800",
       features: [
         "3 pages",
         "Functional website",
@@ -194,14 +212,13 @@ export default function ContactPricing() {
         "Content upload",
         "Social Media icons",
         "Deployment via Forge on AWS",
-        "Ongoing hosting & infrastructure: $19/month (includes AWS, Forge, and Studio)",
       ],
       buttonText: "Pro",
       deliveryTime: "2 weeks",
     },
     {
       name: "Premium Package",
-      price: "$400",
+      price: "Starting at $3500",
       features: [
         "5 pages",
         "Functional website",
@@ -209,7 +226,6 @@ export default function ContactPricing() {
         "Content upload",
         "Social Media icons",
         "Deployment via Forge on AWS",
-        "Ongoing hosting & infrastructure: $19/month (includes AWS, Forge, and Studio)",
       ],
       buttonText: "Premium",
       deliveryTime: "3 weeks",
@@ -219,7 +235,7 @@ export default function ContactPricing() {
   const pricingPlansDesign = [
     {
       name: "Basic Package",
-      price: "$80",
+      price: "Starting at $400",
       deliveryTime: "1 week",
       features: [
         "1 page",
@@ -231,7 +247,7 @@ export default function ContactPricing() {
     },
     {
       name: "Standard Package",
-      price: "$200",
+      price: "Starting at $900",
       deliveryTime: "2 weeks",
       features: [
         "3 pages",
@@ -243,7 +259,7 @@ export default function ContactPricing() {
     },
     {
       name: "Premium Package",
-      price: "$400",
+      price: "Starting at $1800",
       deliveryTime: "3 weeks",
       features: [
         "5 pages",
@@ -334,19 +350,30 @@ export default function ContactPricing() {
             <h1 className="mb-4 text-5xl font-extrabold text-white">
               Develop a Website
             </h1>
+            <p className="mb-4 max-w-2xl mx-auto text-lg text-white">Prices listed are starting points — final cost depends on scope, integrations, and revisions. For accurate quotes and flexible options, request a custom estimate below.</p>
 
             <div className="m-auto grid gap-6 md:grid-cols-3">
               {pricingPlansDevelop.map((plan, index) => (
                 <PricingCardDevelop key={index} {...plan} />
               ))}
             </div>
-          </div>
+            </div>
 
-          {/* Pricing Section */}
-          <div className="relative z-10 flex flex-col justify-center space-y-6 p-6">
+            {/* Subscription Box (single) */}
+            <div className="relative z-10 flex justify-center p-6">
+              <SubscriptionCard
+                price="$29/month"
+                description="Maintenance, security updates, backups, and hosting. Billed monthly — cancellable anytime. Add-ons and priority support available."
+                buttonText="Subscribe / Request"
+              />
+            </div>
+
+            {/* Pricing Section */}
+            <div className="relative z-10 flex flex-col justify-center space-y-6 p-6">
             <h1 className="mb-4 text-5xl font-extrabold text-white">
               Design a Website
             </h1>
+            <p className="mb-4 max-w-2xl mx-auto text-lg text-white">These design packages are starting points. If you need additional pages, brand assets, or expedited delivery, contact us for a tailored quote.</p>
 
             <div className="m-auto grid gap-6 md:grid-cols-3">
               {pricingPlansDesign.map((plan, index) => (
