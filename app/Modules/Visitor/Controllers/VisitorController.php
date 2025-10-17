@@ -8,11 +8,11 @@ use Illuminate\Routing\Controller as BaseController;
 
 class VisitorController extends BaseController
 {
-    public function track(Request $request, VisitorServiceInterface $visitorService)
+    public function track(Request $request, VisitorServiceInterface $visitorService): \Illuminate\Http\JsonResponse
     {
         // Handle OPTIONS request (CORS preflight)
         if ($request->getMethod() === 'OPTIONS') {
-            return response('', 200);
+            return response()->json([], 200);
         }
 
         $location = $visitorService->track($request);

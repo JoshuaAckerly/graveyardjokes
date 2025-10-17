@@ -12,6 +12,7 @@ parameters:
     - resources
     - tests
   inferPrivatePropertyTypeFromConstructor: true
+  reportUnmatchedIgnoredErrors: false
 
 rules:
   # You can add or disable rules here
