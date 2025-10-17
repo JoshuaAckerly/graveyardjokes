@@ -12,7 +12,7 @@ class ContactServiceTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_store_creates_contact_and_sends_email()
+    public function test_store_creates_contact_and_sends_email(): void
     {
         Mail::fake();
 

@@ -19,6 +19,7 @@ class ContactService implements ContactServiceInterface
      */
     public function store(Request $request): array
     {
+        /** @var array<string,mixed> $validatedData */
         $validatedData = $request->validate([
             'first_name' => 'required|string|max:255',
             'last_name'  => 'required|string|max:255',
@@ -31,10 +32,10 @@ class ContactService implements ContactServiceInterface
         try {
             Mail::to('admin@graveyardjokes.com')->send(
                 new ContactMessage(
-                    $validatedData['first_name'],
-                    $validatedData['last_name'],
-                    $validatedData['email'],
-                    $validatedData['message']
+                    (string) ($validatedData['first_name'] ?? ''),
+                    (string) ($validatedData['last_name'] ?? ''),
+                    (string) ($validatedData['email'] ?? ''),
+                    (string) ($validatedData['message'] ?? '')
                 )
             );
         } catch (\Exception $e) {

@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 class VisitorServiceTest extends TestCase
 {
-    public function test_localhost_returns_local_development_location()
+    public function test_localhost_returns_local_development_location(): void
     {
         $service = $this->app->make(\App\Contracts\VisitorServiceInterface::class);
 

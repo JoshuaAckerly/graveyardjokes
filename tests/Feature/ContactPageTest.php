@@ -9,18 +9,19 @@ class ContactPageTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
-    public function contact_page_loads_and_displays_contact_heading()
+    public function contact_page_loads_and_displays_contact_heading(): void
     {
         $response = $this->get('/contact');
 
         $response->assertStatus(200);
         // The page is rendered via Inertia; extract the JSON from the data-page attribute
-        $html = $response->getContent();
+    $html = (string) $response->getContent();
 
         // Load into DOM and find the #app div
         $dom = new \DOMDocument();
         // Suppress warnings from invalid HTML fragments
-        @$dom->loadHTML($html);
+    // Suppress warnings and cast result to bool to satisfy phpstan
+    @(bool) $dom->loadHTML($html);
         $app = $dom->getElementById('app');
         $this->assertNotNull($app, 'Could not find #app element in response HTML');
 

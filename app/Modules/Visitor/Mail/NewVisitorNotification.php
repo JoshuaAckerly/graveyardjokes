@@ -12,8 +12,14 @@ class NewVisitorNotification extends Mailable
 {
     use Queueable, SerializesModels;
 
+    /**
+     * @var array<string,mixed>
+     */
     public array $visitorData;
 
+    /**
+     * @param array<string,mixed> $visitorData
+     */
     public function __construct(array $visitorData)
     {
         $this->visitorData = $visitorData;
