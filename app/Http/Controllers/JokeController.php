@@ -7,7 +7,7 @@ use Illuminate\Routing\Controller as BaseController;
 
 class JokeController extends BaseController
 {
-    public function random(Request $request)
+    public function random(Request $request): \Illuminate\Http\JsonResponse
     {
         $path = storage_path('jokes.json');
 
@@ -23,7 +23,11 @@ class JokeController extends BaseController
         }
 
         $index = array_rand($jokes);
-        $joke = $jokes[$index];
+        $joke = $jokes[$index] ?? null;
+
+        if ($joke === null || !is_array($joke)) {
+            return response()->json(['error' => 'No jokes available'], 500);
+        }
 
         return response()->json($joke);
     }
