@@ -13,9 +13,18 @@ jobs:
   automerge:
     runs-on: ubuntu-latest
     if: always()
-    env:
-      MERGE_TOKEN: ${{ secrets.AUTOMERGE_PAT != '' && secrets.AUTOMERGE_PAT || secrets.GITHUB_TOKEN }}
+    # MERGE_TOKEN is configured at runtime in the first step to avoid static analysis warnings
     steps:
+      - name: Set MERGE_TOKEN
+        id: set-token
+        run: |
+          # Prefer a configured PAT when available, otherwise fall back to GITHUB_TOKEN
+          if [ -n "${{ secrets.AUTOMERGE_PAT }}" ]; then
+            echo "MERGE_TOKEN=${{ secrets.AUTOMERGE_PAT }}" >> $GITHUB_ENV
+          else
+            echo "MERGE_TOKEN=${{ secrets.GITHUB_TOKEN }}" >> $GITHUB_ENV
+          fi
+
       - name: Prepare merge decision
         id: prepare
         uses: actions/github-script@v6
@@ -138,7 +147,7 @@ jobs:
           ref: main
           persist-credentials: true
 
-      - name: Optional: Push post-merge commit to main
+      - name: "Optional: Push post-merge commit to main"
         if: ${{ secrets.AUTOMERGE_PUSH_TO_MAIN == 'true' && steps.prepare.outputs.should_merge == 'true' }}
         run: |
           echo "Preparing post-merge commit..."
