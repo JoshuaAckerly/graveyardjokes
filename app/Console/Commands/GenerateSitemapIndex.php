@@ -23,15 +23,16 @@ class GenerateSitemapIndex extends Command
      */
     protected $description = 'Generate sitemap_index.xml referencing configured subdomain sitemaps';
 
-    public function handle(Filesystem $files)
+    public function handle(Filesystem $files): int
     {
         $this->info('Generating sitemap_index.xml...');
 
-        $subdomains = config('sitemaps.subdomains', []);
-        $base = rtrim(config('app.url'), '/');
-        $host = parse_url($base, PHP_URL_HOST) ?: preg_replace('#https?://#', '', $base);
+        // Ensure we have the expected types for static analysis
+        $subdomains = (array) config('sitemaps.subdomains', []);
+        $base = rtrim((string) config('app.url', ''), '/');
+        $host = parse_url($base, PHP_URL_HOST) ?: preg_replace('#https?://#', '', (string) $base);
 
-        $validate = $this->option('validate');
+        $validate = (bool) $this->option('validate');
 
         $candidates = [];
 
@@ -55,9 +56,9 @@ class GenerateSitemapIndex extends Command
                     $resp = Http::timeout(5)->withHeaders(['User-Agent' => 'graveyardjokes-sitemap-validator/1.0'])->head($loc);
 
                     if ($resp->successful()) {
-                        $entries[] = $loc;
+                        $entries[] = (string) $loc;
                         $this->info('OK: ' . $loc);
-                        $summaryLines[] = sprintf('- %s — OK (%s)', $loc, $resp->status());
+                        $summaryLines[] = sprintf('- %s — OK (%d)', $loc, (int) $resp->status());
                         $passed++;
                         continue;
                     }
@@ -65,24 +66,24 @@ class GenerateSitemapIndex extends Command
                     // Some servers don't respond to HEAD properly; try GET
                     $resp = Http::timeout(5)->get($loc);
                     if ($resp->successful()) {
-                        $entries[] = $loc;
+                        $entries[] = (string) $loc;
                         $this->info('OK (GET): ' . $loc);
-                        $summaryLines[] = sprintf('- %s — OK (GET %s)', $loc, $resp->status());
+                        $summaryLines[] = sprintf('- %s — OK (GET %d)', $loc, (int) $resp->status());
                         $passed++;
                         continue;
                     }
 
                     $this->warn('Skipping (non-200): ' . $loc . ' [' . $resp->status() . ']');
-                    $summaryLines[] = sprintf('- %s — Skipped (non-200: %s)', $loc, $resp->status());
+                    $summaryLines[] = sprintf('- %s — Skipped (non-200: %d)', $loc, (int) $resp->status());
                     $skipped++;
                 } catch (\Exception $e) {
                     $this->warn('Skipping (error): ' . $loc . ' - ' . $e->getMessage());
-                    $summaryLines[] = sprintf('- %s — Skipped (error: %s)', $loc, $e->getMessage());
+                    $summaryLines[] = sprintf('- %s — Skipped (error: %s)', $loc, (string) $e->getMessage());
                     $skipped++;
                 }
             } else {
-                $entries[] = $loc;
-                $summaryLines[] = sprintf('- %s — Included (no validation)', $loc);
+                $entries[] = (string) $loc;
+                $summaryLines[] = sprintf('- %s — Included (no validation)', (string) $loc);
             }
         }
 
@@ -91,7 +92,7 @@ class GenerateSitemapIndex extends Command
             $entries = [$base . '/sitemap.xml'];
         }
 
-        $xml = $this->buildIndexXml($entries);
+    $xml = $this->buildIndexXml($entries);
 
         $path = public_path('sitemap_index.xml');
 
@@ -132,6 +133,11 @@ class GenerateSitemapIndex extends Command
         return 0;
     }
 
+    /**
+     * Build a sitemap index XML document.
+     *
+     * @param string[] $entries
+     */
     protected function buildIndexXml(array $entries): string
     {
         $doc = new \DOMDocument('1.0', 'UTF-8');
@@ -142,13 +148,14 @@ class GenerateSitemapIndex extends Command
 
         foreach ($entries as $loc) {
             $s = $doc->createElement('sitemap');
-            $l = $doc->createElement('loc', htmlspecialchars($loc, ENT_XML1 | ENT_COMPAT, 'UTF-8'));
+            $l = $doc->createElement('loc', htmlspecialchars((string) $loc, ENT_XML1 | ENT_COMPAT, 'UTF-8'));
             $s->appendChild($l);
             $root->appendChild($s);
         }
 
         $doc->appendChild($root);
 
-        return $doc->saveXML();
+        $xml = $doc->saveXML();
+        return $xml === false ? '' : $xml;
     }
 }
