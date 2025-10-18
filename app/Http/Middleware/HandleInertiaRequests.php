@@ -43,8 +43,9 @@ class HandleInertiaRequests extends Middleware
     }
     /** @var string $rawQuote */
     $parts = explode('-', $rawQuote, 2);
-    $message = $parts[0];
-    $author = $parts[1] ?? '';
+    /** @var array<int, string> $parts */
+    $message = isset($parts[0]) ? (string) $parts[0] : '';
+    $author = isset($parts[1]) ? (string) $parts[1] : '';
 
     return [
             ...parent::share($request),
