@@ -42,12 +42,10 @@ jobs:
               cp .env.example .env
             else
               echo ".env.example not found, creating minimal .env"
-              cat > .env <<'EOF'
-# Minimal .env for CI
-APP_KEY=
-APP_ENV=testing
-APP_DEBUG=false
-EOF
+                echo "# Minimal .env for CI" > .env
+                echo "APP_KEY=" >> .env
+                echo "APP_ENV=testing" >> .env
+                echo "APP_DEBUG=false" >> .env
             fi
           fi
           # Generate application key for encryption to satisfy tests
