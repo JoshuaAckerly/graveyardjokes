@@ -40,7 +40,7 @@ class GenerateSitemapIndex extends Command
         $candidates[] = $base . '/sitemap.xml';
 
         foreach ($subdomains as $sub) {
-            $candidates[] = sprintf('https://%s.%s/sitemap.xml', $sub, $host);
+            $candidates[] = sprintf('https://%s.%s/sitemap.xml', (string) $sub, (string) $host);
         }
 
         $entries = [];
