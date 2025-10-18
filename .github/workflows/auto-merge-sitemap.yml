@@ -1,0 +1,153 @@
+name: Auto-merge sitemap PRs
+
+on:
+  pull_request_target:
+    types: [opened, synchronize, labeled, ready_for_review]
+
+jobs:
+  automerge:
+    runs-on: ubuntu-latest
+    if: always()
+    env:
+      MERGE_TOKEN: ${{ secrets.AUTOMERGE_PAT != '' && secrets.AUTOMERGE_PAT || secrets.GITHUB_TOKEN }}
+    steps:
+      - name: Prepare merge decision
+        id: prepare
+        uses: actions/github-script@v6
+        with:
+          github-token: ${{ env.MERGE_TOKEN }}
+          script: |
+            const pr = context.payload.pull_request;
+            if (!pr) return core.setFailed('No pull_request in context');
+
+            const headRef = pr.head.ref || '';
+            const prNumber = pr.number;
+
+            const okBranch = headRef.startsWith('sitemap-index-update-');
+            const labels = pr.labels || [];
+            const hasAuto = labels.some(l => String(l.name).toLowerCase() === 'automerge');
+
+            const headSha = pr.head.sha;
+
+            // Get combined status and checks
+            const combined = await github.rest.repos.getCombinedStatusForRef({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              ref: headSha,
+            }).then(r => r.data).catch(() => null);
+
+            const checks = await github.rest.checks.listForRef({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              ref: headSha,
+            }).then(r => r.data).catch(() => null);
+
+            const statusesOk = combined ? combined.state === 'success' : false;
+            let checksOk = false;
+            if (checks && checks.total_count > 0) {
+              checksOk = checks.check_runs.every(c => c.conclusion === 'success');
+            }
+            const ok = statusesOk || checksOk;
+
+            const shouldMerge = okBranch && hasAuto && ok;
+
+            core.setOutput('should_merge', shouldMerge ? 'true' : 'false');
+            core.setOutput('prNumber', prNumber);
+            core.info(`should_merge=${shouldMerge} statusesOk=${statusesOk} checksOk=${checksOk}`);
+
+      - name: Check combined status and checks for HEAD
+        id: status
+        uses: actions/github-script@v6
+        with:
+          github-token: ${{ env.MERGE_TOKEN }}
+          script: |
+            const pr = context.payload.pull_request;
+            if (!pr) return core.setFailed('No pull_request in context');
+            const headSha = pr.head.sha;
+
+            // Get combined status
+            const combined = await github.rest.repos.getCombinedStatusForRef({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              ref: headSha,
+            }).then(r => r.data).catch(() => null);
+
+            // Get check runs
+            const checks = await github.rest.checks.listForRef({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              ref: headSha,
+            }).then(r => r.data).catch(() => null);
+
+            const statusesOk = combined ? combined.state === 'success' : false;
+            let checksOk = false;
+            if (checks && checks.total_count > 0) {
+              checksOk = checks.check_runs.every(c => c.conclusion === 'success');
+            }
+
+            // If there are no check runs but combined indicates success, accept it
+            const ok = statusesOk || checksOk;
+
+            core.setOutput('statusesOk', statusesOk);
+            core.setOutput('checksOk', checksOk);
+            core.setOutput('ok', ok);
+            core.info(`statusesOk=${statusesOk} checksOk=${checksOk} ok=${ok}`);
+
+      - name: Merge PR when labeled and checks pass
+        if: ${{ steps.prepare.outputs.should_merge == 'true' }}
+        uses: actions/github-script@v6
+        with:
+          github-token: ${{ env.MERGE_TOKEN }}
+          script: |
+            const pr = context.payload.pull_request;
+            const prNumber = pr.number;
+            core.info(`Merging PR #${prNumber}`);
+            await github.rest.pulls.merge({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: prNumber,
+              merge_method: 'merge'
+            });
+            core.info('Merged.');
+
+      - name: Delete source branch
+        if: ${{ steps.prepare.outputs.should_merge == 'true' }}
+        uses: actions/github-script@v6
+        with:
+          github-token: ${{ env.MERGE_TOKEN }}
+          script: |
+            const pr = context.payload.pull_request;
+            const headRef = pr.head.ref;
+            if (!headRef) return core.info('No head ref to delete');
+            core.info(`Deleting branch ${headRef}`);
+            await github.rest.git.deleteRef({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              ref: `heads/${headRef}`
+            }).catch(err => core.info('Failed to delete branch: ' + err.message));
+
+      - name: Checkout main for optional push
+        if: ${{ secrets.AUTOMERGE_PUSH_TO_MAIN == 'true' && steps.prepare.outputs.should_merge == 'true' }}
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          persist-credentials: true
+
+      - name: Optional: Push post-merge commit to main
+        if: ${{ secrets.AUTOMERGE_PUSH_TO_MAIN == 'true' && steps.prepare.outputs.should_merge == 'true' }}
+        run: |
+          echo "Preparing post-merge commit..."
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git fetch origin main
+          git checkout main
+          # Make an example no-op commit to trigger any downstream workflow or timestamp files
+          date > .sitemap_index_last_updated
+          git add .sitemap_index_last_updated
+          git commit -m "chore: update sitemap timestamp [skip ci]" || echo "No changes to commit"
+          git push origin main
+
+      - name: Skip message
+        if: ${{ steps.prepare.outputs.should_merge != 'true' }}
+        run: |
+          echo "Auto-merge conditions not met (branch/label/checks)." 
