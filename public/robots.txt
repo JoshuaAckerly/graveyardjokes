@@ -1,2 +1,8 @@
 User-agent: *
 Disallow:
+
+# Point crawlers to the sitemap index which references this site's sitemap plus subdomain sitemaps.
+Sitemap: https://graveyardjokes.com/sitemap_index.xml
+
+# Keep a direct pointer to the primary sitemap for backwards compatibility.
+Sitemap: https://graveyardjokes.com/sitemap.xml

@@ -1,0 +1,52 @@
+name: Generate sitemap index
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch: {}
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v4
+        with:
+          php-version: '8.2'
+          extensions: mbstring, xml, curl
+
+      - name: Install Composer dependencies
+        run: |
+          composer install --no-progress --no-suggest --prefer-dist --no-interaction
+
+      - name: Copy example env
+        run: |
+          if [ -f .env.example ]; then cp .env.example .env; fi
+
+      - name: Generate APP_KEY if missing
+        run: |
+          php -r "if (!file_exists('.env')) exit;"
+
+      - name: Run migrations (no-op if not configured)
+        run: |
+          php artisan migrate --no-interaction || true
+
+      - name: Generate sitemap index with validation
+        run: |
+          php artisan app:generate-sitemap-index --validate
+
+      - name: Commit sitemap_index.xml if changed
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: "chore: update sitemap_index.xml [skip ci]"
+          file_patterns: |
+            public/sitemap_index.xml
+          branch: main
+          author_name: github-actions[bot]
+          author_email: 41898282+github-actions[bot]@users.noreply.github.com
