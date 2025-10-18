@@ -28,9 +28,24 @@ class GenerateSitemapIndex extends Command
         $this->info('Generating sitemap_index.xml...');
 
         // Ensure we have the expected types for static analysis
-        $subdomains = (array) config('sitemaps.subdomains', []);
-        $base = rtrim((string) config('app.url', ''), '/');
-        $host = parse_url($base, PHP_URL_HOST) ?: preg_replace('#https?://#', '', (string) $base);
+        $rawSubdomains = config('sitemaps.subdomains', []);
+        if (!is_array($rawSubdomains)) {
+            $rawSubdomains = [];
+        }
+        /** @var array<int, string> $subdomains */
+        $subdomains = $rawSubdomains;
+
+        $rawBase = config('app.url', '');
+        if (!is_string($rawBase)) {
+            $rawBase = '';
+        }
+        $base = rtrim($rawBase, '/');
+
+        $hostRaw = parse_url($base, PHP_URL_HOST) ?: preg_replace('#https?://#', '', $base);
+        if (!is_string($hostRaw)) {
+            $hostRaw = (string) $hostRaw;
+        }
+        $host = $hostRaw;
 
         $validate = (bool) $this->option('validate');
 

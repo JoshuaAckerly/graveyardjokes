@@ -39,7 +39,11 @@ class HandleInertiaRequests extends Middleware
     {
     [$message, $author] = str(Inspiring::quotes()->random())->explode('-');
 
-        return [
+    // Ensure strings for static analysis
+    $message = is_string($message) ? $message : (string) $message;
+    $author = is_string($author) ? $author : (string) $author;
+
+    return [
             ...parent::share($request),
             'name' => config('app.name'),
             'quote' => ['message' => trim((string) $message), 'author' => trim((string) $author)],
