@@ -30,8 +30,6 @@ jobs:
           php -v
           # quick syntax check across PHP files
           find . -name '*.php' -not -path './vendor/*' -print0 | xargs -0 -n1 php -l || true
-      - name: Run PHPUnit
-        run: vendor/bin/phpunit --colors=always
       - name: Prepare .env and app key
         run: |
           set -e
@@ -50,6 +48,8 @@ jobs:
           fi
           # Generate application key for encryption to satisfy tests
           php artisan key:generate --ansi --no-interaction || true
+      - name: Run PHPUnit
+        run: vendor/bin/phpunit --colors=always
       - name: Run PHPStan (static analysis)
         run: |
           set -e
