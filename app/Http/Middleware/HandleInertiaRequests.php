@@ -41,6 +41,7 @@ class HandleInertiaRequests extends Middleware
     if (!is_string($rawQuote)) {
         $rawQuote = (string) $rawQuote;
     }
+    /** @var string $rawQuote */
     $parts = explode('-', $rawQuote, 2);
     $message = $parts[0];
     $author = $parts[1] ?? '';
