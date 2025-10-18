@@ -43,7 +43,7 @@ Route::get('/tracking-test', function () {
 Route::get('/generate-sitemap', function () {
     // Use the configured app URL as the base so generated sitemap contains
     // absolute URLs that match the production host (avoids .test entries).
-    $base = rtrim(config('app.url'), '/');
+    $base = rtrim((string) config('app.url', ''), '/');
 
     Sitemap::create()
         ->add(Url::create($base . '/'))

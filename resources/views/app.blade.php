@@ -56,7 +56,7 @@
         // Build an absolute canonical URL without query strings.
         // Use the actual request host (scheme + host) so subdomains generate
         // canonicals for themselves rather than being forced to the APP_URL.
-        $host = rtrim(request()->getSchemeAndHttpHost(), '/');
+    $host = rtrim((string) request()->getSchemeAndHttpHost(), '/');
         $path = request()->path();
         $canonical = $host . ($path === '/' || $path === '' ? '/' : '/' . ltrim($path, '/'));
     @endphp
