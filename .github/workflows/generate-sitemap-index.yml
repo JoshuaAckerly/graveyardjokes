@@ -8,6 +8,8 @@ on:
 jobs:
   generate:
     runs-on: ubuntu-latest
+    env:
+      APP_URL: https://graveyardjokes.com
 
     steps:
       - name: Checkout
@@ -39,14 +41,31 @@ jobs:
 
       - name: Generate sitemap index with validation
         run: |
-          php artisan app:generate-sitemap-index --validate
+          APP_URL=${{ env.APP_URL }} php artisan app:generate-sitemap-index --validate
 
-      - name: Commit sitemap_index.xml if changed
-        uses: stefanzweifel/git-auto-commit-action@v4
+      - name: Checkout main (to commit generated files)
+        uses: actions/checkout@v4
         with:
-          commit_message: "chore: update sitemap_index.xml [skip ci]"
-          file_patterns: |
-            public/sitemap_index.xml
-          branch: main
-          author_name: github-actions[bot]
-          author_email: 41898282+github-actions[bot]@users.noreply.github.com
+          ref: main
+          persist-credentials: true
+
+      - name: Commit and push generated sitemap if changed
+        env:
+          AUTOMERGE_PAT: ${{ secrets.AUTOMERGE_PAT }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git fetch origin main
+          git checkout main
+          # If a PAT is provided, set the origin URL to use it so branch-protection won't block the push
+          if [ -n "$AUTOMERGE_PAT" ]; then
+            git remote set-url origin "https://x-access-token:$AUTOMERGE_PAT@github.com/${{ github.repository }}"
+          fi
+          # Only commit if files changed
+          if git status --porcelain | grep -q "public/sitemap_index.xml\|public/sitemap_validation_summary.md"; then
+            git add public/sitemap_index.xml public/sitemap_validation_summary.md || true
+            git commit -m "chore: update sitemap_index.xml [skip ci]" || echo "No changes to commit"
+            git push origin main
+          else
+            echo "No changes to sitemap files; skipping commit"
+          fi

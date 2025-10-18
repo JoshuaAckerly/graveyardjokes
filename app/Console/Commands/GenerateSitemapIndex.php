@@ -43,6 +43,9 @@ class GenerateSitemapIndex extends Command
         }
 
         $entries = [];
+        $summaryLines = [];
+        $passed = 0;
+        $skipped = 0;
 
         foreach ($candidates as $loc) {
             if ($validate) {
@@ -54,6 +57,8 @@ class GenerateSitemapIndex extends Command
                     if ($resp->successful()) {
                         $entries[] = $loc;
                         $this->info('OK: ' . $loc);
+                        $summaryLines[] = sprintf('- %s — OK (%s)', $loc, $resp->status());
+                        $passed++;
                         continue;
                     }
 
@@ -62,15 +67,22 @@ class GenerateSitemapIndex extends Command
                     if ($resp->successful()) {
                         $entries[] = $loc;
                         $this->info('OK (GET): ' . $loc);
+                        $summaryLines[] = sprintf('- %s — OK (GET %s)', $loc, $resp->status());
+                        $passed++;
                         continue;
                     }
 
                     $this->warn('Skipping (non-200): ' . $loc . ' [' . $resp->status() . ']');
+                    $summaryLines[] = sprintf('- %s — Skipped (non-200: %s)', $loc, $resp->status());
+                    $skipped++;
                 } catch (\Exception $e) {
                     $this->warn('Skipping (error): ' . $loc . ' - ' . $e->getMessage());
+                    $summaryLines[] = sprintf('- %s — Skipped (error: %s)', $loc, $e->getMessage());
+                    $skipped++;
                 }
             } else {
                 $entries[] = $loc;
+                $summaryLines[] = sprintf('- %s — Included (no validation)', $loc);
             }
         }
 
@@ -89,6 +101,32 @@ class GenerateSitemapIndex extends Command
         } catch (\Exception $e) {
             $this->error('Failed to write sitemap_index.xml: ' . $e->getMessage());
             return 1;
+        }
+
+        // Write a human-readable summary into public/ so the workflow can include it in the PR body
+        $summaryPath = public_path('sitemap_validation_summary.md');
+        $summary = [];
+        $summary[] = '# Sitemap validation summary';
+        $summary[] = '';
+        $summary[] = 'Generated: ' . now()->toIso8601String();
+        $summary[] = '';
+        $summary[] = 'Validation flag: ' . ($validate ? 'enabled' : 'disabled');
+        $summary[] = '';
+        $summary[] = "Results:";
+        $summary[] = '';
+        $summary = array_merge($summary, $summaryLines);
+        $summary[] = '';
+        $summary[] = sprintf('Passed: %d', $passed);
+        $summary[] = sprintf('Skipped: %d', $skipped);
+        $summary[] = '';
+        $summary[] = '---';
+        $summary[] = 'This file was generated automatically by `php artisan app:generate-sitemap-index`.';
+
+        try {
+            $files->put($summaryPath, implode("\n", $summary));
+            $this->info('✅ sitemap validation summary written to ' . $summaryPath);
+        } catch (\Exception $e) {
+            $this->warn('Failed to write summary file: ' . $e->getMessage());
         }
 
         return 0;
