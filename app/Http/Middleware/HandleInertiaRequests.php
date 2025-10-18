@@ -38,8 +38,10 @@ class HandleInertiaRequests extends Middleware
     public function share(Request $request): array
     {
     $rawQuote = Inspiring::quotes()->random();
-    if (!is_string($rawQuote)) {
-        $rawQuote = (string) $rawQuote;
+    if ($rawQuote instanceof \Stringable) {
+        $rawQuote = $rawQuote->__toString();
+    } elseif (!is_string($rawQuote)) {
+        $rawQuote = '';
     }
     /** @var string $rawQuote */
     $parts = explode('-', $rawQuote, 2);
