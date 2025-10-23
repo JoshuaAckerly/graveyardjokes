@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Spatie\Sitemap\Sitemap;
 use Spatie\Sitemap\Tags\Url;
+use App\Http\Controllers\OgImageController;
 
 Route::get('/', function () {
     return Inertia::render('welcome');
@@ -25,6 +26,9 @@ Route::post('/contact', [ContactController::class, 'store'])->name('contact.stor
 Route::get('/portfolio', function () {
     return Inertia::render('portfolio');
 })->name('portfolio');
+
+// API endpoint to fetch and cache Open Graph images for external sites
+Route::get('/api/fetch-og-image', [OgImageController::class, 'fetch'])->name('api.fetch-og-image');
 
 Route::get('/terms', fn() => Inertia::render('legal/terms'))->name('terms');
 Route::get('/privacy', fn() => Inertia::render('legal/privacy'))->name('privacy');

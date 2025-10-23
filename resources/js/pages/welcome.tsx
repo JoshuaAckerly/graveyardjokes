@@ -1,10 +1,12 @@
 import ApplicationLogo from "@/Components/applicationLogo";
 import Carousel from "@/Components/carousel";
+import ProjectCard from "@/Components/ProjectCard";
 import MainLayout from "@/Layouts/MainLayout";
 import { Head, router } from "@inertiajs/react";
 import { motion } from "framer-motion";
 import { JSX } from "react";
 import { useEffect, useState } from "react";
+import portfolioItems from "@/data/portfolioItems";
 
 export default function Home(): JSX.Element {
   const cdn = import.meta.env.VITE_ASSET_URL;
@@ -103,7 +105,7 @@ export default function Home(): JSX.Element {
           Home Page
         </a>
 
-        <div className="relative z-0 max-w-full space-y-10 overflow-hidden bg-[var(--color-foreground)] text-center">
+  <div className="relative z-0 max-w-full space-y-10 bg-[var(--color-foreground)] text-center">
           {/* Background Image and Gradient */}
           <div className="absolute inset-0 max-h-96">
             <img
@@ -216,6 +218,57 @@ export default function Home(): JSX.Element {
           >
             <Carousel />
           </motion.div>
+
+          {/* Noteleks Promo + Portfolio Showcase */}
+          <div className="relative z-10 mx-auto w-full max-w-6xl space-y-10 px-6 pb-24 sm:px-12">
+            {/* Noteleks Promo */}
+            <section className="mx-auto max-w-3xl rounded-md bg-white/5 p-6 text-left text-white shadow-lg">
+              <div className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
+                <div>
+                  <h2 className="text-2xl font-semibold">Noteleks · Studio Promo</h2>
+                  <p className="mt-2 text-sm opacity-80">
+                    I teamed up with Noteleks Studio to craft fast, beautiful sites
+                    for artists and musicians. Need a promo landing page, EP release
+                    kit, or merch store? We build it — fast and on-brand.
+                  </p>
+                  <p className="mt-3 text-sm opacity-70">Special offer: free initial consultation.</p>
+                </div>
+
+                <div className="mt-4 flex items-center gap-4 sm:mt-0">
+                  <a
+                    href="/portfolio#noteleks"
+                    className="inline-flex items-center rounded bg-[var(--card)] px-4 py-2 text-sm font-medium text-white hover:bg-[var(--accent)]"
+                    aria-label="See Noteleks work"
+                  >
+                    See Noteleks Work
+                  </a>
+                  <a
+                    href="https://noteleks.example.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center rounded border border-white/10 bg-transparent px-4 py-2 text-sm text-white/90 hover:bg-white/5"
+                  >
+                    Visit Studio
+                  </a>
+                </div>
+              </div>
+            </section>
+
+            {/* Portfolio Showcase */}
+            <section id="portfolio-showcase" className="mx-auto w-full">
+              <h3 className="mb-6 text-left text-2xl font-semibold text-white">Selected Projects</h3>
+              <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                {portfolioItems.map((p) => (
+                  <ProjectCard key={p.url} title={p.title} description={p.description} url={p.url} cdn={cdn} />
+                ))}
+              </div>
+              <div className="mt-6 text-left">
+                <a href="/portfolio" className="inline-flex items-center rounded bg-[var(--card)] px-4 py-2 text-white hover:bg-[var(--accent)]">
+                  View full portfolio
+                </a>
+              </div>
+            </section>
+          </div>
 
           {/* Footer Image */}
           <div className="absolute bottom-0 z-5 max-h-96 w-full">

@@ -117,6 +117,10 @@ const SubscriptionCard = ({
 export default function ContactPricing() {
   const cdn = import.meta.env.VITE_ASSET_URL;
 
+  // Allow overriding Snapchat images via env for easy changes without editing source
+    const snapchatImg = import.meta.env.VITE_SNAPCHAT_IMAGE_URL ?? `https://cdn.simpleicons.org/snapchat/000000`;
+  const snapcodeImg = import.meta.env.VITE_SNAPCODE_IMAGE_URL ?? `${cdn}/images/snapcode.webp`;
+
   // Contact form state
   const [values, setValues] = useState<FormValues>({
     first_name: "",
@@ -143,6 +147,11 @@ export default function ContactPricing() {
     {
       name: "linkedin",
       url: "https://www.linkedin.com/in/graveyardjokes/",
+    },
+    {
+      name: "discord",
+      // Replace this with your real Discord invite link
+      url: "https://discord.gg/K3rAmsr8je",
     },
   ]);
 
@@ -501,24 +510,56 @@ export default function ContactPricing() {
             </form>
 
             <div className="mt-8 flex flex-wrap justify-center gap-4 p-4">
-              {platforms.map((platform) => (
-                <a
-                  key={platform.name}
-                  href={platform.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <img
-                    src={`${cdn}/images/${platform.name}.webp`}
-                    alt={platform.name}
-                    className="w-16 transition-transform hover:scale-110"
-                  />
-                </a>
-              ))}
+              {platforms.map((platform) => {
+                // Map platform name to a simpleicons slug where necessary
+                const slugMap: Record<string, string> = {
+                  instagram: "instagram",
+                  facebook: "facebook",
+                  youtube: "youtube",
+                  pinterest: "pinterest",
+                  tiktok: "tiktok",
+                  linkedin: "linkedin",
+                  discord: "discord",
+                };
+                const slug = slugMap[platform.name] ?? platform.name;
+                // Use simpleicons CDN color: white for LinkedIn (visible on dark bg), black for others
+                const color = platform.name === 'linkedin' ? 'ffffff' : '000000';
+                const iconUrl = `https://cdn.simpleicons.org/${slug}/${color}`;
 
+                return (
+                  <a
+                    key={platform.name}
+                    href={platform.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={platform.name}
+                    className="flex items-center justify-center rounded bg-[var(--card)] p-2 shadow hover:scale-110 transition"
+                  >
+                    <img
+                      src={iconUrl}
+                      alt={platform.name}
+                      className="w-10 h-10"
+                      // Try CDN first; if it fails, fall back to local asset, then a data-URI SVG with initial
+                      onError={(e) => {
+                        const img = e.currentTarget as HTMLImageElement;
+                        // prevent infinite loop
+                        if (!img.dataset.fallback) {
+                          img.dataset.fallback = "1";
+                          img.src = `${cdn}/images/${platform.name}.webp`;
+                          return;
+                        }
+                        // final fallback: small SVG with the platform initial
+                        const initial = (platform.name && platform.name.charAt(0).toUpperCase()) || "?";
+                        const svg = `<svg xmlns='http://www.w3.org/2000/svg' width='64' height='64'><rect width='100%' height='100%' fill='%23000000'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' font-size='28' fill='%23ffffff' font-family='Arial,Helvetica,sans-serif'>${initial}</text></svg>`;
+                        img.src = 'data:image/svg+xml;utf8,' + encodeURIComponent(svg);
+                      }}
+                    />
+                  </a>
+                );
+              })}
               <button onClick={() => setShowPopup(true)}>
                 <img
-                  src={`${cdn}/images/snapchat.webp`}
+                  src={snapchatImg}
                   alt="Snapchat"
                   className="w-16 transition-transform hover:scale-110"
                 />
@@ -535,7 +576,7 @@ export default function ContactPricing() {
                     ✖
                   </button>
                   <img
-                    src={`${cdn}/images/snapcode.webp`}
+                    src={snapcodeImg}
                     alt="Snapchat Code"
                     className="-md w-full"
                   />
