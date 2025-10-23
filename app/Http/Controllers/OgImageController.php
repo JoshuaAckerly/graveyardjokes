@@ -55,17 +55,23 @@ class OgImageController
             // Look for <meta property="og:image" content="...">
             $meta = $xpath->query("//meta[@property='og:image' or @name='og:image']");
             if ($meta->length > 0) {
-                $ogImage = $meta->item(0)->getAttribute('content');
+                $node = $meta->item(0);
+                if ($node instanceof \DOMElement) {
+                    $ogImage = $node->getAttribute('content');
+                }
             }
 
             // Fallback: find candidate <img> tags and pick the first reasonably-sized src
             if (!$ogImage) {
                 $imgs = $xpath->query('//img[@src]');
                 for ($i = 0; $i < $imgs->length; $i++) {
-                    $src = $imgs->item($i)->getAttribute('src');
-                    if ($src && !Str::startsWith($src, 'data:')) {
-                        $ogImage = $src;
-                        break;
+                    $node = $imgs->item($i);
+                    if ($node instanceof \DOMElement) {
+                        $src = $node->getAttribute('src');
+                        if ($src && !Str::startsWith($src, 'data:')) {
+                            $ogImage = $src;
+                            break;
+                        }
                     }
                 }
             }
@@ -101,7 +107,7 @@ class OgImageController
 
             Storage::disk('public')->put($filename, $body);
 
-            $publicUrl = Storage::disk('public')->url($filename);
+            $publicUrl = Storage::url($filename);
 
             return response()->json(['url' => $publicUrl]);
         } catch (\Exception $e) {
