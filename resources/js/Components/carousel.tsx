@@ -10,23 +10,23 @@ interface Slide {
 const carouselSlides: Slide[] = [
   {
     image: "/images/AdobeStock_283463385.webp",
-    title: "The Velvet Pulse",
+    title: "Follow us on Instagram",
     description:
-      "A visually stunning site currently in development — designed to engage and impress.",
-    link: "https://thevelvetpulse.graveyardjokes.com",
+      "Stay in the loop — behind-the-scenes, new launches, and quick tips. Follow @graveyardjokes.",
+    link: "https://instagram.com/graveyardjokes",
   },
   {
     image: "/images/AdobeStock_348397404.webp",
-    title: "Lunar Blood",
+    title: "Let's build your site",
     description:
-      "This project features an elegant layout made for a modern metal band.",
-    link: "https://lunarblood.graveyardjokes.com",
+      "Ready to start? Reach out for a free consultation and we'll craft a site that'll make you proud.",
+    link: "/contact",
   },
   {
     image: "/images/AdobeStock_621659086.webp",
-    title: "Synth Veil",
-    description: "An immersive experience built with modern web technologies.",
-    link: "https://synthveil.graveyardjokes.com",
+    title: "Fast launches available",
+    description: "Need a simple promo page or EP launch? Ask about our 48-hour quick-launch option.",
+    link: "/portfolio",
   },
   /*   {
         image: '#',

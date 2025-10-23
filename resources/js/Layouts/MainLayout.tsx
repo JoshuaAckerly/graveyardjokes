@@ -59,23 +59,23 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
         {/*  <Message /> */}
       </header>
       <main className="min-w-full p-4">{children}</main>
-      <footer className="mt-8 p-4 text-center text-sm">
+      <footer className="mt-8 p-4 text-center text-sm relative z-30">
         <div className="flex flex-col items-center justify-center gap-4 md:flex-row">
-          <a href="/terms" className="text-blue-900 hover:underline">
+          <a href="/terms" className="text-white hover:underline">
             Terms of Service
           </a>
-          <a href="/privacy" className="text-blue-900 hover:underline">
+          <a href="/privacy" className="text-white hover:underline">
             Privacy Policy
           </a>
-          <a href="/cookies" className="text-blue-900 hover:underline">
+          <a href="/cookies" className="text-white hover:underline">
             Cookie Policy
           </a>
-          <a href="/contact" className="text-blue-900 hover:underline">
+          <a href="/contact" className="text-white hover:underline">
             Contact
           </a>
         </div>
-        <div className="mt-2 text-black">
-          &copy; {new Date().getFullYear()} GraveYard Jokes Studios Inc. — <a href="mailto:info@graveyardjokes.com" className="text-blue-900 hover:underline">info@graveyardjokes.com</a>
+        <div className="mt-2 text-white/80">
+          &copy; {new Date().getFullYear()} GraveYard Jokes Studios Inc. — <a href="mailto:info@graveyardjokes.com" className="text-white hover:underline">info@graveyardjokes.com</a>
         </div>
       </footer>
     </div>

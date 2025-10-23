@@ -1,6 +1,8 @@
 import MainLayout from "@/Layouts/MainLayout";
 import { Head } from "@inertiajs/react";
 import React from "react";
+import ProjectCard from "@/Components/ProjectCard";
+import portfolioItems from "@/data/portfolioItems";
 
 const Portfolio: React.FC = () => {
   const cdn = import.meta.env.VITE_ASSET_URL;
@@ -49,44 +51,9 @@ const Portfolio: React.FC = () => {
         </p>
 
         <ul className="grid w-full grid-cols-1 gap-6 text-center md:grid-cols-2 lg:grid-cols-3">
-          {[
-            {
-              title: "The Velvet Pulse",
-              description: "A band site that features music, tour dates, and merchandise.",
-              url: "https://thevelvetpulse.graveyardjokes.com",
-            },
-            {
-              title: "Hollow Press",
-              description: "A blog site covering technology, lifestyle, and more.",
-              url: "https://hollowpress.graveyardjokes.com",
-            },
-            {
-              title: "Lunar Blood",
-              description: "A heavy metal band site sharing music, merchandise, and updates.",
-              url: "https://lunarblood.graveyardjokes.com",
-            },
-            {
-              title: "Velvet Radio",
-              description: "A music streaming platform with a vast library of songs and playlists.",
-              url: "https://velvetradio.graveyardjokes.com",
-            },
-            {
-              title: "Synth Veil",
-              description: "A portfolio website showcasing design and development skills.",
-              url: "https://synthveil.graveyardjokes.com",
-            },
-          ].map((project) => (
-            <li key={project.title} className="flex flex-col items-center justify-center gap-2 rounded-lg bg-[var(--card)] p-6 shadow-md transition-transform hover:scale-105">
-              <h3 className="text-2xl font-semibold text-white">{project.title}</h3>
-              <a
-                href={project.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-lg text-[var(--accent)] hover:underline"
-                aria-label={`View ${project.title}`}
-              >
-                {project.description}
-              </a>
+          {portfolioItems.map((project) => (
+            <li key={project.title} className="flex flex-col items-center justify-center gap-2 rounded-lg p-0">
+              <ProjectCard title={project.title} description={project.description} url={project.url} cdn={cdn} />
             </li>
           ))}
         </ul>
