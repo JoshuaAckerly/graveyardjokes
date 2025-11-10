@@ -19,9 +19,9 @@ return [
 
     'allowed_methods' => ['*'],
 
-    'allowed_origins' => ['*.graveyardjokes.com'],
+    'allowed_origins' => ['https://graveyardjokes.test', 'https://graveyardjokes.com'],
 
-    'allowed_origins_patterns' => ['*\.graveyardjokes\.com'],
+    'allowed_origins_patterns' => ['/^https:\/\/.*\.graveyardjokes\.(com|test)$/'],
 
     'allowed_headers' => ['*'],
 
