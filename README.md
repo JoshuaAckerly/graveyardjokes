@@ -78,5 +78,25 @@ Local setup
 - For small fixes, open a branch named `feat/<topic>` or `fix/<topic>` and create a PR.
 - Keep PRs small and well-scoped. Use the PR checklist in `.github/` for required checks.
 
+## API Documentation
+
+The project includes comprehensive API documentation:
+
+- **Interactive Documentation**: Visit `/api/docs` for Swagger UI interface
+- **OpenAPI Specification**: Available at `/openapi.yaml`
+- **Markdown Documentation**: See `API_DOCUMENTATION.md` for detailed endpoint descriptions
+
+### Available API Endpoints
+- `GET /api/random-joke` - Retrieve a random joke
+- `GET /api/fetch-og-image` - Fetch and cache Open Graph images
+- `POST /contact` - Submit contact form
+- `POST /track-visit` - Track visitor analytics
+
+### API Testing
+Run API tests with:
+```bash
+./vendor/bin/phpunit tests/Feature/ApiTest.php
+```
+
 ## Contact
 If you need help running anything locally or want me to monitor CI runs or open follow-up PRs, tell me which task to take next.
