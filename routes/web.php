@@ -39,6 +39,17 @@ Route::match(['post', 'options'], '/track-visit', [VisitorController::class, 'tr
 // Random joke endpoint (returns JSON)
 Route::get('/api/random-joke', [JokeController::class, 'random'])->name('api.random-joke');
 
+// API Documentation
+Route::get('/openapi.yaml', function () {
+    return response()->file(base_path('openapi.yaml'), [
+        'Content-Type' => 'application/x-yaml'
+    ]);
+})->name('api.openapi');
+
+Route::get('/api/docs', function () {
+    return response()->file(public_path('api-docs.html'));
+})->name('api.docs');
+
 // Test route for subdomain tracking
 Route::get('/tracking-test', function () {
     return view('tracking-test');
