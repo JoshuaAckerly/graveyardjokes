@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use Illuminate\Http\JsonResponse;
 
@@ -18,19 +20,24 @@ class OgImageController
      */
     public function fetch(Request $request): JsonResponse
     {
+        $request->validate([
+            'url' => 'required|string|max:2048|url'
+        ]);
+        
         $target = $request->query('url');
-        if (!is_string($target) || empty($target)) {
-            return response()->json(['error' => 'Missing url parameter'], 422);
+        
+        // SSRF protection - block private/local addresses
+        $host = parse_url($target, PHP_URL_HOST);
+        if (!$host || $this->isPrivateAddress($host)) {
+            return response()->json(['error' => 'Invalid target host'], 422);
         }
-
-        // Normalize
-        if (!Str::startsWith($target, ['http://', 'https://'])) {
-            $target = 'https://' . $target;
+        
+        // Rate limiting check
+        $cacheKey = 'og_fetch_' . md5($target);
+        if (Cache::has($cacheKey)) {
+            return response()->json(['error' => 'Rate limited - try again later'], 429);
         }
-
-        if (!filter_var($target, FILTER_VALIDATE_URL)) {
-            return response()->json(['error' => 'Invalid url parameter'], 422);
-        }
+        Cache::put($cacheKey, true, 300); // 5 minute rate limit
 
         try {
             // Fetch page HTML
@@ -111,8 +118,15 @@ class OgImageController
 
             return response()->json(['url' => $publicUrl]);
         } catch (\Exception $e) {
-            return response()->json(['error' => 'Unexpected error', 'message' => $e->getMessage()], 500);
+            Log::error('OG image fetch failed: ' . $e->getMessage(), ['url' => $target ?? 'unknown']);
+            return response()->json(['error' => 'Failed to fetch image'], 500);
         }
+    }
+    
+    private function isPrivateAddress(string $host): bool
+    {
+        $ip = gethostbyname($host);
+        return !filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE);
     }
 
     /**

@@ -51,6 +51,7 @@ Local setup
 - Test notes:
   - The current test suite is small (9 tests). CI runs phpunit on `main` and PRs.
   - PHPUnit deprecations may appear; they should be addressed in follow-up cleanup PRs.
+  - TODO: Add more unit tests
 
 ## CI (GitHub Actions)
 - Workflows live in `.github/workflows/`:

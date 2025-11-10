@@ -5,6 +5,7 @@ namespace App\Modules\Visitor\Controllers;
 use Illuminate\Http\Request;
 use App\Contracts\VisitorServiceInterface;
 use Illuminate\Routing\Controller as BaseController;
+use Illuminate\Support\Facades\Log;
 
 class VisitorController extends BaseController
 {
@@ -15,14 +16,20 @@ class VisitorController extends BaseController
             return response()->json([], 200);
         }
 
-        $location = $visitorService->track($request);
+        try {
+            $location = $visitorService->track($request);
 
-        // $location is expected to be an array-like structure from the service
-
-        return response()->json([
-            'success' => true,
-            'message' => 'Visit tracked successfully',
-            'data' => $location
-        ]);
+            return response()->json([
+                'success' => true,
+                'message' => 'Visit tracked successfully',
+                'data' => $location
+            ]);
+        } catch (\Exception $e) {
+            Log::error('Visitor tracking failed: ' . $e->getMessage());
+            return response()->json([
+                'success' => false,
+                'message' => 'Tracking failed'
+            ], 500);
+        }
     }
 }

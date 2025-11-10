@@ -18,77 +18,57 @@ type Platform = {
   url: string;
 };
 
-const PricingCardDevelop = ({
+const PricingCard = ({
   name,
   price,
   deliveryTime,
   features,
   buttonText,
+  isPopular = false,
 }: {
   name: string;
   price: string;
   deliveryTime: string;
   features: string[];
   buttonText: string;
+  isPopular?: boolean;
 }) => (
   <motion.div
-    className="flex w-full flex-col items-center bg-[var(--card)] p-6 shadow-lg transition-transform duration-300 hover:scale-105"
+    className={`flex w-full flex-col items-center bg-[var(--card)] p-6 shadow-lg transition-transform duration-300 hover:scale-105 relative ${
+      isPopular ? 'ring-2 ring-[var(--accent)]' : ''
+    }`}
     initial={{ opacity: 0, scale: 0.8 }}
     animate={{ opacity: 1, scale: 1 }}
     whileHover={{ scale: 1.05 }}
   >
+    {isPopular && (
+      <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-[var(--accent)] text-white px-4 py-1 text-sm font-semibold rounded-full">
+        Most Popular
+      </div>
+    )}
     <h2 className="mb-4 text-2xl font-semibold text-white">{name}</h2>
     <p className="mb-4 text-4xl font-bold text-[var(--accent)]">{price}</p>
     <p className="mb-4 text-lg text-white">Delivery Time: {deliveryTime}</p>
     <ul className="mb-6 space-y-2">
       {features.map((feature, idx) => (
-        <li key={idx} className="text-white">
+        <li key={idx} className="text-white flex items-center">
+          <span className="text-[var(--accent)] mr-2">✓</span>
           {feature}
         </li>
       ))}
     </ul>
     <a
       href="#contact-section"
-      className="tansition w-full bg-[--color-background] px-6 py-3 text-lg font-medium text-white shadow-md hover:bg-[--color-foreground]"
+      className={`w-full px-6 py-3 text-lg font-medium text-white shadow-md transition text-center block ${
+        isPopular 
+          ? 'bg-[var(--accent)] hover:opacity-90' 
+          : 'bg-[var(--color-background)] hover:bg-[var(--color-foreground)]'
+      }`}
       aria-label={`Request ${buttonText} package`}
     >
-      Request
+      Get Started
     </a>
   </motion.div>
-);
-
-const PricingCardDesign = ({
-  name,
-  price,
-  deliveryTime,
-  features,
-  buttonText,
-}: {
-  name: string;
-  price: string;
-  deliveryTime: string;
-  features: string[];
-  buttonText: string;
-}) => (
-  <div className="flex w-full flex-col items-center bg-[var(--card)] p-6 shadow-lg transition-transform duration-300 hover:scale-105">
-    <h2 className="mb-4 text-2xl font-semibold text-white">{name}</h2>
-    <p className="mb-4 text-4xl font-bold text-[var(--accent)]">{price}</p>
-    <p className="mb-4 text-lg text-white">Delivery Time: {deliveryTime}</p>
-    <ul className="mb-6 space-y-2">
-      {features.map((feature, idx) => (
-        <li key={idx} className="text-white">
-          {feature}
-        </li>
-      ))}
-    </ul>
-    <a
-      href="#contact-section"
-      className="text w-full px-6 py-3 font-medium text-white shadow-md transition"
-      aria-label={`Request ${buttonText} package`}
-    >
-      Request
-    </a>
-  </div>
 );
 
 const SubscriptionCard = ({
@@ -196,87 +176,58 @@ export default function ContactPricing() {
     });
   }
 
-  // Pricing data
-  const pricingPlansDevelop = [
+  // Unified pricing data
+  const pricingPlans = [
     {
-      name: "Basic Package",
-      price: "Starting at $800",
+      name: "Starter",
+      price: "$1,200",
       features: [
-        "1-page",
-        "Functional website",
-        "Responsive design",
-        "Social Media icons",
-        "Deployment via Forge on AWS",
+        "1-3 pages",
+        "Custom design & development",
+        "Mobile responsive",
+        "Basic SEO setup",
+        "Social media integration",
+        "1 round of revisions",
+        "AWS deployment",
       ],
-      buttonText: "Basic",
-      deliveryTime: "1 week",
+      buttonText: "Starter",
+      deliveryTime: "1-2 weeks",
+      isPopular: false,
     },
     {
-      name: "Standard Package",
-      price: "Starting at $1800",
+      name: "Professional",
+      price: "$2,500",
       features: [
-        "3 pages",
-        "Functional website",
-        "Responsive design",
-        "Content upload",
-        "Social Media icons",
-        "Deployment via Forge on AWS",
+        "3-5 pages",
+        "Custom design & development",
+        "Mobile responsive",
+        "Advanced SEO optimization",
+        "Contact forms & integrations",
+        "Content management system",
+        "2 rounds of revisions",
+        "AWS deployment & SSL",
       ],
-      buttonText: "Pro",
-      deliveryTime: "2 weeks",
+      buttonText: "Professional",
+      deliveryTime: "2-3 weeks",
+      isPopular: true,
     },
     {
-      name: "Premium Package",
-      price: "Starting at $3500",
+      name: "Enterprise",
+      price: "$4,500",
       features: [
-        "5 pages",
-        "Functional website",
-        "Responsive design",
-        "Content upload",
-        "Social Media icons",
-        "Deployment via Forge on AWS",
+        "5+ pages",
+        "Custom design & development",
+        "Mobile responsive",
+        "Advanced SEO & analytics",
+        "E-commerce capabilities",
+        "Custom functionality",
+        "Unlimited revisions",
+        "Priority support",
+        "AWS deployment & SSL",
       ],
-      buttonText: "Premium",
-      deliveryTime: "3 weeks",
-    },
-  ];
-
-  const pricingPlansDesign = [
-    {
-      name: "Basic Package",
-      price: "Starting at $400",
-      deliveryTime: "1 week",
-      features: [
-        "1 page",
-        "Responsive design",
-        "Social Media icons",
-        "Photoshop mockup",
-      ],
-      buttonText: "Basic",
-    },
-    {
-      name: "Standard Package",
-      price: "Starting at $900",
-      deliveryTime: "2 weeks",
-      features: [
-        "3 pages",
-        "Responsive design",
-        "Social Media icons",
-        "Photoshop mockup",
-      ],
-      buttonText: "Pro",
-    },
-    {
-      name: "Premium Package",
-      price: "Starting at $1800",
-      deliveryTime: "3 weeks",
-      features: [
-        "5 pages",
-        "Responsive design",
-        "Social Media icons",
-        "Photoshop mockup",
-      ],
-      buttonText: "Premium",
+      buttonText: "Enterprise",
+      deliveryTime: "3-4 weeks",
+      isPopular: false,
     },
   ];
 
@@ -357,38 +308,36 @@ export default function ContactPricing() {
           {/* Pricing Section */}
           <div className="relative z-10 flex flex-col justify-center space-y-6 p-6">
             <h1 className="mb-4 text-5xl font-extrabold text-white">
-              Develop a Website
+              Website Design & Development
             </h1>
-            <p className="mb-4 max-w-2xl mx-auto text-lg text-white">Prices listed are starting points — final cost depends on scope, integrations, and revisions. For accurate quotes and flexible options, request a custom estimate below.</p>
+            <p className="mb-4 max-w-3xl mx-auto text-lg text-white">
+              Complete website solutions combining custom design and development. 
+              All packages include both design mockups and fully functional websites.
+            </p>
+            
+            {/* AI Notice */}
+            <div className="mx-auto max-w-2xl mb-8 p-4 bg-[var(--card)] rounded-lg border border-[var(--accent)]">
+              <p className="text-white text-sm flex items-center justify-center">
+                <span className="text-[var(--accent)] mr-2">🤖</span>
+                <strong>AI-Enhanced Development:</strong> We leverage cutting-edge AI tools to accelerate development, 
+                improve code quality, and deliver exceptional results faster.
+              </p>
+            </div>
 
-            <div className="m-auto grid gap-6 md:grid-cols-3">
-              {pricingPlansDevelop.map((plan, index) => (
-                <PricingCardDevelop key={index} {...plan} />
+            <div className="m-auto grid gap-6 md:grid-cols-3 max-w-6xl">
+              {pricingPlans.map((plan, index) => (
+                <PricingCard key={index} {...plan} />
               ))}
             </div>
-            </div>
+          </div>
 
-            {/* Subscription Box (single) */}
-            <div className="relative z-10 flex justify-center p-6">
-              <SubscriptionCard
-                price="$29/month"
-                description="Maintenance, security updates, backups, and hosting. Billed monthly — cancellable anytime. Add-ons and priority support available."
-                buttonText="Subscribe / Request"
-              />
-            </div>
-
-            {/* Pricing Section */}
-            <div className="relative z-10 flex flex-col justify-center space-y-6 p-6">
-            <h1 className="mb-4 text-5xl font-extrabold text-white">
-              Design a Website
-            </h1>
-            <p className="mb-4 max-w-2xl mx-auto text-lg text-white">These design packages are starting points. If you need additional pages, brand assets, or expedited delivery, contact us for a tailored quote.</p>
-
-            <div className="m-auto grid gap-6 md:grid-cols-3">
-              {pricingPlansDesign.map((plan, index) => (
-                <PricingCardDesign key={index} {...plan} />
-              ))}
-            </div>
+          {/* Subscription Box (single) */}
+          <div className="relative z-10 flex justify-center p-6">
+            <SubscriptionCard
+              price="$29/month"
+              description="Maintenance, security updates, backups, and hosting. Billed monthly — cancellable anytime. Add-ons and priority support available."
+              buttonText="Subscribe / Request"
+            />
           </div>
 
           <section className="py-16">
@@ -426,9 +375,9 @@ export default function ContactPricing() {
 
           <div className="relative z-10 px-6 py-24 sm:py-32 lg:mx-auto lg:w-1/2 lg:px-8">
             <p className="mb-6 text-center text-lg text-[var(--primary)]">
-              Interested in getting a custom website built for your brand or
-              project? Reach out using the form below and our site administrator
-              will get back to you within 24 hours.
+              Ready to bring your vision to life? Our AI-enhanced development process 
+              ensures faster delivery without compromising quality. Contact us below 
+              and we'll get back to you within 24 hours.
             </p>
 
             <form
@@ -522,8 +471,8 @@ export default function ContactPricing() {
                   discord: "discord",
                 };
                 const slug = slugMap[platform.name] ?? platform.name;
-                // Use simpleicons CDN color: white for LinkedIn (visible on dark bg), black for others
-                const color = platform.name === 'linkedin' ? 'ffffff' : '000000';
+                // Use simpleicons CDN color: black for all icons
+                const color = '000000';
                 const iconUrl = `https://cdn.simpleicons.org/${slug}/${color}`;
 
                 return (
