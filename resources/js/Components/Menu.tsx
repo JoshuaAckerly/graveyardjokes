@@ -4,7 +4,7 @@ export default function Menu() {
   return (
     <ul className="center-items mx-auto flex space-x-4">
       <li className="text-[var(--color-text)]">
-        <Link href={route("home")} className="hover:underline">
+        <Link href="/" className="hover:underline">
           Home
         </Link>
       </li>
