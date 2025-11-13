@@ -47,7 +47,11 @@ fi
 # Laravel optimizations
 echo "🔧 Optimizing Laravel..."
 if [ -f artisan ]; then
-    php artisan migrate --force
+    # Wipe and rebuild database
+    echo "🗄️ Wiping and rebuilding database..."
+    php artisan migrate:fresh --force --seed
+    
+    # Cache optimizations
     php artisan config:cache
     php artisan route:cache
     php artisan view:cache
