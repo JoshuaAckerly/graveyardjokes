@@ -1,3 +1,7 @@
 resources/js/components/ui/*
 resources/js/ziggy.js
-resources/views/mail/*
+resources/views/**/*.blade.php
+vendor/
+node_modules/
+public/build/
+bootstrap/ssr/
