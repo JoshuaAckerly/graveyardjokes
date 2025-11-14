@@ -11,7 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        //
+        // Drop the table if it exists to avoid conflicts
+        Schema::dropIfExists('contacts');
+        
         Schema::create('contacts', function (Blueprint $table) {
             $table->id();
             $table->string('first_name');

@@ -47,8 +47,9 @@ fi
 # Laravel optimizations
 echo "🔧 Optimizing Laravel..."
 if [ -f artisan ]; then
-    # Wipe and rebuild database
+    # Wipe and rebuild database with better error handling
     echo "🗄️ Wiping and rebuilding database..."
+    php artisan db:wipe --force || echo "⚠️ DB wipe had issues, continuing..."
     php artisan migrate:fresh --force --seed
     
     # Cache optimizations
