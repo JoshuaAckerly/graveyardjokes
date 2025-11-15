@@ -47,10 +47,18 @@ fi
 # Laravel optimizations
 echo "🔧 Optimizing Laravel..."
 if [ -f artisan ]; then
-    # Wipe and rebuild database with better error handling
-    echo "🗄️ Wiping and rebuilding database..."
-    php artisan db:wipe --force || echo "⚠️ DB wipe had issues, continuing..."
-    php artisan migrate:fresh --force --seed
+    # Run database migrations (preserves existing data)
+    echo "🗄️ Running database migrations..."
+    php artisan migrate --force
+    
+    # Only seed if database is empty
+    USER_COUNT=$(php artisan tinker --execute="echo App\\Models\\User::count();" 2>/dev/null | grep -o '[0-9]*' | head -n1)
+    if [ "$USER_COUNT" = "0" ] || [ -z "$USER_COUNT" ]; then
+        echo "🌱 Database appears empty, running seeders..."
+        php artisan db:seed --force
+    else
+        echo "📊 Database has existing data, skipping seeders"
+    fi
     
     # Cache optimizations
     php artisan config:cache
