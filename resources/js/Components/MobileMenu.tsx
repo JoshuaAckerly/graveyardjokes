@@ -33,7 +33,7 @@ export default function MobileMenu() {
                         <div className="w-96 rounded-lg p-8 text-white">
                             <ul className="flex flex-col space-y-4 text-center">
                                 <li className="mb-4 bg-[var(--primary)]">
-                                    <Link href={route('home')} className="text-black hover:underline" onClick={() => setIsOpen(false)}>
+                                    <Link href="/" className="text-black hover:underline" onClick={() => setIsOpen(false)}>
                                         Home
                                     </Link>
                                 </li>
