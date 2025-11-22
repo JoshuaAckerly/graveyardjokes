@@ -38,6 +38,10 @@ class VisitorService implements VisitorServiceInterface
         return $location;
     }
 
+    /**
+     * @param string|null $ip
+     * @return array<string, mixed>
+     */
     public function getLocationFromIP(?string $ip): array
     {
         // Treat null or local addresses as local development
@@ -51,7 +55,8 @@ class VisitorService implements VisitorServiceInterface
 
         $cacheKey = "geo_location_{$ip}";
 
-        return Cache::remember($cacheKey, 3600, function () use ($ip) {
+        /** @var array<string, mixed> $result */
+        $result = Cache::remember($cacheKey, 3600, function () use ($ip): array {
             try {
                 $response = $this->client->get("http://ipinfo.io/{$ip}/json", [
                     'headers' => ['Accept' => 'application/json']
@@ -83,8 +88,15 @@ class VisitorService implements VisitorServiceInterface
                 ];
             }
         });
+        
+        return $result;
     }
 
+    /**
+     * @param array<string, mixed> $location
+     * @param Request|null $request
+     * @return void
+     */
     private function sendVisitorEmail(array $location, ?Request $request = null): void
     {
         $visitorData = [
@@ -100,11 +112,12 @@ class VisitorService implements VisitorServiceInterface
         Log::info('New visitor tracked!', $visitorData);
 
         $ua = $visitorData['user_agent'] ?? '';
-        $keyHash = substr(sha1(($visitorData['ip'] ?? '') . '|' . $ua), 0, 20);
+        $ip = (string)($visitorData['ip'] ?? '');
+        $keyHash = substr(sha1($ip . '|' . $ua), 0, 20);
         $cacheKey = "visitor_notification_sent_{$keyHash}";
 
-        // Get TTL from config or env, with fallback to 24 hours
-        $ttl = (int) (config('tracking.visitor_ttl') ?? env('TRACK_VISITOR_EMAIL_TTL', 86400));
+        // Get TTL from config, with fallback to 24 hours
+        $ttl = (int) (config('tracking.visitor_ttl') ?? 86400);
 
         if (Cache::has($cacheKey)) {
             Log::info('Visitor notification skipped (recently notified).', ['cache_key' => $cacheKey]);

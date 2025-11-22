@@ -25,7 +25,7 @@ class TestEmail extends Command
     /**
      * Execute the console command.
      */
-    public function handle()
+    public function handle(): int
     {
         $this->info('Testing visitor notification email...');
         
@@ -33,10 +33,11 @@ class TestEmail extends Command
         $visitorController = new \App\Http\Controllers\VisitorController();
         $testLocation = $visitorController->getLocationFromIP('8.8.8.8');
         
+        /** @var array<string, mixed> $testVisitorData */
         $testVisitorData = [
-            'ip' => $testLocation['ip'],
-            'city' => $testLocation['city'],
-            'country' => $testLocation['country'],
+            'ip' => $testLocation['ip'] ?? '8.8.8.8',
+            'city' => $testLocation['city'] ?? 'Unknown',
+            'country' => $testLocation['country'] ?? 'Unknown',
             'region' => $testLocation['region'] ?? null,
             'timezone' => $testLocation['timezone'] ?? null,
             'timestamp' => now()->toDateTimeString(),
@@ -50,9 +51,11 @@ class TestEmail extends Command
             
             $this->info('✅ Test email sent successfully!');
             $this->info('Check your inbox for the visitor notification.');
+            return self::SUCCESS;
         } catch (\Exception $e) {
             $this->error('❌ Failed to send test email: ' . $e->getMessage());
             $this->error('Please check your email configuration in .env file');
+            return self::FAILURE;
         }
     }
 }

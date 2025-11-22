@@ -293,18 +293,199 @@ MAIL_PASSWORD=your-password
 ### Test Data Location
 - Jokes data: `storage/jokes.json`
 
+## Quick Start
+
+### Example: Fetching a Random Joke
+```javascript
+// Using fetch API
+fetch('https://graveyardjokes.com/api/random-joke')
+  .then(response => response.json())
+  .then(joke => {
+    console.log(`${joke.setup} - ${joke.punchline}`);
+  })
+  .catch(error => console.error('Error:', error));
+```
+
+```bash
+# Using cURL
+curl https://graveyardjokes.com/api/random-joke
+```
+
+### Example: Submitting Contact Form
+```javascript
+// Using fetch API
+fetch('https://graveyardjokes.com/contact', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+    'X-Requested-With': 'XMLHttpRequest'
+  },
+  body: JSON.stringify({
+    first_name: 'John',
+    last_name: 'Doe',
+    email: 'john.doe@example.com',
+    message: 'Hello, I would like to inquire about your services.'
+  })
+})
+.then(response => response.json())
+.then(data => console.log(data))
+.catch(error => console.error('Error:', error));
+```
+
+### Example: Tracking a Visit
+```javascript
+// Using fetch API
+fetch('https://graveyardjokes.com/track-visit', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify({
+    referrer: document.referrer,
+    subdomain: window.location.hostname.split('.')[0]
+  })
+})
+.then(response => response.json())
+.then(data => console.log('Visit tracked:', data))
+.catch(error => console.error('Error:', error));
+```
+
+## API Clients
+
+### JavaScript/TypeScript
+The API can be consumed using standard fetch API, axios, or any HTTP client.
+
+### PHP
+```php
+use Illuminate\Support\Facades\Http;
+
+// Fetch random joke
+$response = Http::get('https://graveyardjokes.com/api/random-joke');
+$joke = $response->json();
+```
+
+### Python
+```python
+import requests
+
+# Fetch random joke
+response = requests.get('https://graveyardjokes.com/api/random-joke')
+joke = response.json()
+print(f"{joke['setup']} - {joke['punchline']}")
+```
+
+## Best Practices
+
+### Error Handling
+Always implement proper error handling for API calls:
+```javascript
+async function fetchJoke() {
+  try {
+    const response = await fetch('/api/random-joke');
+    
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    
+    const joke = await response.json();
+    return joke;
+  } catch (error) {
+    console.error('Failed to fetch joke:', error);
+    // Implement fallback behavior
+    return null;
+  }
+}
+```
+
+### Caching Responses
+Consider caching API responses on the client side to reduce server load:
+```javascript
+const CACHE_DURATION = 5 * 60 * 1000; // 5 minutes
+
+function getCachedJoke() {
+  const cached = localStorage.getItem('cached_joke');
+  if (cached) {
+    const { joke, timestamp } = JSON.parse(cached);
+    if (Date.now() - timestamp < CACHE_DURATION) {
+      return joke;
+    }
+  }
+  return null;
+}
+
+function cacheJoke(joke) {
+  localStorage.setItem('cached_joke', JSON.stringify({
+    joke,
+    timestamp: Date.now()
+  }));
+}
+```
+
+### Rate Limit Handling
+Implement exponential backoff for rate-limited requests:
+```javascript
+async function fetchWithRetry(url, options = {}, maxRetries = 3) {
+  for (let i = 0; i < maxRetries; i++) {
+    try {
+      const response = await fetch(url, options);
+      
+      if (response.status === 429) {
+        const retryAfter = response.headers.get('Retry-After') || Math.pow(2, i);
+        await new Promise(resolve => setTimeout(resolve, retryAfter * 1000));
+        continue;
+      }
+      
+      return response;
+    } catch (error) {
+      if (i === maxRetries - 1) throw error;
+    }
+  }
+}
+```
+
+## Interactive Documentation
+
+### Swagger UI
+Access the interactive API documentation with try-it-out functionality:
+- **URL**: [https://graveyardjokes.com/api/docs](https://graveyardjokes.com/api/docs)
+- **OpenAPI Spec**: [https://graveyardjokes.com/openapi.yaml](https://graveyardjokes.com/openapi.yaml)
+
+### Postman Collection
+Import the OpenAPI specification into Postman for testing:
+1. Open Postman
+2. Click "Import"
+3. Enter URL: `https://graveyardjokes.com/openapi.yaml`
+4. Start testing endpoints
+
+## Support
+
+### Getting Help
+- **GitHub Issues**: [https://github.com/JoshuaAckerly/graveyardjokes.com/issues](https://github.com/JoshuaAckerly/graveyardjokes.com/issues)
+- **Email**: admin@graveyardjokes.com
+- **Website**: [https://graveyardjokes.com/contact](https://graveyardjokes.com/contact)
+
+### Reporting Bugs
+When reporting bugs, please include:
+- API endpoint being called
+- Request parameters/body
+- Expected vs actual response
+- Error messages or status codes
+- Browser/client information
+
 ## Changelog
 
-### Version 1.0.0
+### Version 1.0.0 (November 2025)
 - Initial API implementation
-- Random joke endpoint
-- Contact form submission
-- Visitor tracking with geolocation
-- Open Graph image fetching
-- CORS support
-- Rate limiting
-- Email notifications
+- Random joke endpoint with JSON response
+- Contact form submission with validation
+- Visitor tracking with geolocation (IPInfo.io integration)
+- Open Graph image fetching with SSRF protection
+- CORS support for cross-origin requests
+- Rate limiting on Open Graph fetching
+- Email notifications for contacts and new visitors
+- Swagger UI documentation
+- OpenAPI 3.0 specification
 
 ---
 
-*Last updated: January 2025*
+*Last updated: November 22, 2025*

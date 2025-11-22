@@ -12,7 +12,8 @@ class JokeController extends BaseController
     public function random(Request $request): \Illuminate\Http\JsonResponse
     {
         try {
-            $jokes = Cache::remember('jokes_data', 3600, function () {
+            /** @var array<int, array<string, mixed>>|null $jokes */
+            $jokes = Cache::remember('jokes_data', 3600, function (): ?array {
                 $path = storage_path('jokes.json');
                 
                 if (!file_exists($path) || !is_readable($path)) {
@@ -28,11 +29,12 @@ class JokeController extends BaseController
                 return is_array($data) ? $data : null;
             });
             
-            if (!$jokes || count($jokes) === 0) {
+            if ($jokes === null || count($jokes) === 0) {
                 return response()->json(['error' => 'No jokes available'], 503);
             }
             
-            $joke = $jokes[array_rand($jokes)];
+            $randomKey = array_rand($jokes);
+            $joke = $jokes[$randomKey];
             
             if (!is_array($joke)) {
                 return response()->json(['error' => 'Invalid joke data'], 500);

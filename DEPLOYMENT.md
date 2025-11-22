@@ -12,6 +12,9 @@ This guide covers deploying the Graveyard Jokes application to production enviro
 - [Environment Configuration](#environment-configuration)
 - [SSL/HTTPS Setup](#sslhttps-setup)
 - [Post-Deployment](#post-deployment)
+- [CI/CD Integration](#cicd-integration)
+- [Zero-Downtime Deployment](#zero-downtime-deployment)
+- [Rollback Procedures](#rollback-procedures)
 - [Monitoring & Maintenance](#monitoring--maintenance)
 - [Troubleshooting](#troubleshooting)
 
@@ -529,6 +532,293 @@ sudo tail -f /var/log/nginx/error.log
 sudo tail -f /var/log/php8.4-fpm.log
 ```
 
+## 🔄 CI/CD Integration
+
+### GitHub Actions
+
+Create `.github/workflows/deploy.yml`:
+
+```yaml
+name: Deploy to Production
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          extensions: mbstring, xml, curl, zip, bcmath, pdo_mysql, redis
+
+      - name: Install Composer dependencies
+        run: composer install --no-dev --optimize-autoloader --no-interaction
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      - name: Install NPM dependencies
+        run: npm ci
+
+      - name: Build assets
+        run: npm run build
+
+      - name: Run tests
+        run: |
+          cp .env.example .env
+          php artisan key:generate
+          php artisan test
+
+      - name: Deploy to Forge
+        if: success()
+        uses: jbrooksuk/laravel-forge-action@v1
+        with:
+          forge_token: ${{ secrets.FORGE_API_TOKEN }}
+          servers: ${{ secrets.FORGE_SERVER_ID }}
+          sites: ${{ secrets.FORGE_SITE_ID }}
+```
+
+### Forge API Secrets
+
+Add to GitHub repository secrets:
+- `FORGE_API_TOKEN`: Your Laravel Forge API token
+- `FORGE_SERVER_ID`: Your Forge server ID
+- `FORGE_SITE_ID`: Your Forge site ID
+
+### Deployment Branches
+
+**Production**: `main` → graveyardjokes.com
+**Staging**: `staging` → staging.graveyardjokes.com
+
+Create staging environment:
+
+```bash
+# On Forge, create new site for staging
+# Configure separate deployment script
+# Use staging database credentials
+```
+
+## ⚡ Zero-Downtime Deployment
+
+### Using Envoy
+
+Install Envoy:
+
+```bash
+composer global require laravel/envoy
+```
+
+Create `Envoy.blade.php`:
+
+```php
+@servers(['production' => 'forge@your-server.com'])
+
+@setup
+    $repository = 'git@github.com:JoshuaAckerly/graveyardjokes.git';
+    $releases_dir = '/home/forge/graveyardjokes.com/releases';
+    $app_dir = '/home/forge/graveyardjokes.com';
+    $release = date('YmdHis');
+    $new_release_dir = $releases_dir .'/'. $release;
+@endsetup
+
+@story('deploy')
+    clone_repository
+    run_composer
+    run_npm
+    update_symlinks
+    migrate_database
+    optimize_app
+    restart_services
+@endstory
+
+@task('clone_repository')
+    echo "Cloning repository"
+    [ -d {{ $releases_dir }} ] || mkdir {{ $releases_dir }}
+    git clone --depth 1 {{ $repository }} {{ $new_release_dir }}
+    cd {{ $new_release_dir }}
+    git reset --hard {{ $commit }}
+@endtask
+
+@task('run_composer')
+    echo "Installing composer dependencies"
+    cd {{ $new_release_dir }}
+    composer install --prefer-dist --no-dev --optimize-autoloader --no-interaction
+@endtask
+
+@task('run_npm')
+    echo "Building assets"
+    cd {{ $new_release_dir }}
+    npm ci
+    npm run build
+@endtask
+
+@task('update_symlinks')
+    echo "Linking storage and .env"
+    ln -nfs {{ $app_dir }}/storage {{ $new_release_dir }}/storage
+    ln -nfs {{ $app_dir }}/.env {{ $new_release_dir }}/.env
+    ln -nfs {{ $new_release_dir }} {{ $app_dir }}/current
+@endtask
+
+@task('migrate_database')
+    echo "Running migrations"
+    cd {{ $new_release_dir }}
+    php artisan migrate --force
+@endtask
+
+@task('optimize_app')
+    echo "Optimizing application"
+    cd {{ $new_release_dir }}
+    php artisan config:cache
+    php artisan route:cache
+    php artisan view:cache
+@endtask
+
+@task('restart_services')
+    echo "Restarting services"
+    php artisan queue:restart
+    sudo service php8.4-fpm reload
+@endtask
+```
+
+Deploy with:
+
+```bash
+envoy run deploy --commit=main
+```
+
+### Blue-Green Deployment
+
+For critical updates with instant rollback:
+
+```bash
+# Prepare blue environment (current)
+cd /var/www/blue
+git pull
+composer install
+npm run build
+
+# Test blue environment
+curl http://localhost:8001/health
+
+# Prepare green environment (new)
+cd /var/www/green
+git pull
+composer install
+npm run build
+
+# Switch Nginx to green
+sudo ln -sf /etc/nginx/sites-available/graveyardjokes-green /etc/nginx/sites-enabled/graveyardjokes
+sudo nginx -t && sudo nginx -s reload
+
+# If issues, switch back to blue
+sudo ln -sf /etc/nginx/sites-available/graveyardjokes-blue /etc/nginx/sites-enabled/graveyardjokes
+sudo nginx -s reload
+```
+
+## 🔙 Rollback Procedures
+
+### Quick Rollback (Forge)
+
+1. Go to Forge site
+2. Click "Deployment History"
+3. Find last working deployment
+4. Click "Deploy This Commit"
+
+### Manual Rollback
+
+#### Using Git
+
+```bash
+cd /var/www/graveyardjokes
+
+# Find commit to rollback to
+git log --oneline -10
+
+# Rollback
+git reset --hard <commit-hash>
+
+# Reinstall dependencies
+composer install --no-dev
+npm ci && npm run build
+
+# Run migrations down if needed
+php artisan migrate:rollback --step=1
+
+# Clear cache
+php artisan cache:clear
+php artisan config:clear
+php artisan view:clear
+
+# Restart services
+php artisan queue:restart
+sudo systemctl reload php8.4-fpm
+```
+
+#### Database Rollback
+
+```bash
+# Rollback last migration
+php artisan migrate:rollback --step=1
+
+# Rollback multiple migrations
+php artisan migrate:rollback --step=3
+
+# Rollback all migrations (DANGEROUS)
+php artisan migrate:reset
+```
+
+#### Using Database Backup
+
+```bash
+# Restore from backup
+mysql -u root -p graveyardjokes < backup_20250115.sql
+
+# Verify restoration
+mysql -u root -p graveyardjokes -e "SELECT COUNT(*) FROM contacts;"
+```
+
+### Rollback Checklist
+
+- [ ] Identify the issue (check logs)
+- [ ] Determine safe rollback point
+- [ ] Notify team/users if needed
+- [ ] Perform rollback
+- [ ] Verify application works
+- [ ] Check database integrity
+- [ ] Monitor for issues
+- [ ] Document incident
+
+### Emergency Maintenance Mode
+
+If you need to take site offline:
+
+```bash
+# Enable maintenance mode
+php artisan down --refresh=15 --secret="emergency-token"
+
+# Access via: https://graveyardjokes.com/emergency-token
+
+# Perform fixes
+git pull
+composer install
+php artisan migrate
+
+# Disable maintenance mode
+php artisan up
+```
+
 ## 📊 Monitoring & Maintenance
 
 ### Health Checks
@@ -717,6 +1007,128 @@ location ~* \.(jpg|jpeg|png|gif|ico|css|js|svg|woff|woff2)$ {
 }
 ```
 
+### Deployment Security Best Practices
+
+#### 1. Use Deploy Keys
+
+Generate SSH deploy key:
+
+```bash
+ssh-keygen -t ed25519 -C "deploy@graveyardjokes.com" -f ~/.ssh/graveyardjokes_deploy
+```
+
+Add public key to GitHub as read-only deploy key.
+
+#### 2. Restrict File Permissions
+
+```bash
+# Application files (read-only for web server)
+sudo chown -R forge:www-data /var/www/graveyardjokes
+sudo chmod -R 755 /var/www/graveyardjokes
+
+# Writable directories only
+sudo chmod -R 775 storage bootstrap/cache
+
+# Protect .env
+chmod 600 .env
+```
+
+#### 3. Firewall Configuration
+
+```bash
+# UFW configuration
+sudo ufw default deny incoming
+sudo ufw default allow outgoing
+sudo ufw allow ssh
+sudo ufw allow http
+sudo ufw allow https
+sudo ufw enable
+```
+
+#### 4. Secure Environment Variables
+
+Never commit `.env` to version control:
+
+```bash
+# Verify .env is gitignored
+git check-ignore .env
+
+# Use Laravel secrets for sensitive data
+php artisan env:encrypt --key=base64:your-encryption-key
+```
+
+#### 5. Database Security
+
+```bash
+# Use strong passwords
+# Limit database user privileges
+GRANT SELECT, INSERT, UPDATE, DELETE ON graveyardjokes.* TO 'app_user'@'localhost';
+
+# Regular backups with encryption
+mysqldump graveyardjokes | gzip | openssl enc -aes-256-cbc -salt -out backup.sql.gz.enc
+```
+
+### Deployment Monitoring Checklist
+
+After each deployment, verify:
+
+- [ ] Site loads properly (https://graveyardjokes.com)
+- [ ] SSL certificate is valid
+- [ ] API endpoints respond correctly
+- [ ] Database migrations completed
+- [ ] Assets are served correctly (no 404s)
+- [ ] Queue workers are running
+- [ ] Cron jobs are scheduled
+- [ ] Error rate is normal
+- [ ] Response times are acceptable
+- [ ] No critical errors in logs
+
+### Multi-Environment Configuration
+
+#### Staging Environment
+
+```env
+# .env.staging
+APP_ENV=staging
+APP_DEBUG=false
+APP_URL=https://staging.graveyardjokes.com
+
+DB_DATABASE=graveyardjokes_staging
+MAIL_MAILER=log  # Don't send real emails
+```
+
+#### Production Environment
+
+```env
+# .env.production
+APP_ENV=production
+APP_DEBUG=false
+APP_URL=https://graveyardjokes.com
+
+DB_DATABASE=graveyardjokes
+MAIL_MAILER=smtp
+```
+
+### CDN Integration
+
+If using a CDN (Cloudflare, AWS CloudFront):
+
+```env
+# .env
+ASSET_URL=https://cdn.graveyardjokes.com
+VITE_ASSET_URL=https://cdn.graveyardjokes.com
+```
+
+Update Nginx to serve static assets with long cache headers:
+
+```nginx
+location ~* \.(jpg|jpeg|png|gif|ico|css|js|svg|woff|woff2)$ {
+    expires 1y;
+    add_header Cache-Control "public, immutable";
+    add_header X-Content-Type-Options "nosniff";
+}
+```
+
 ## 📞 Support
 
 For deployment issues:
@@ -726,6 +1138,15 @@ For deployment issues:
 3. Check [GitHub Issues](https://github.com/JoshuaAckerly/graveyardjokes/issues)
 4. Contact: admin@graveyardjokes.com
 
+### Deployment Emergency Contacts
+
+- **Primary**: admin@graveyardjokes.com
+- **GitHub**: @JoshuaAckerly
+- **Laravel Forge**: [forge.laravel.com](https://forge.laravel.com)
+- **Server Provider**: Check your hosting dashboard
+
 ---
 
 **Deploy with Confidence! 🚀**
+
+*Last updated: November 22, 2025*

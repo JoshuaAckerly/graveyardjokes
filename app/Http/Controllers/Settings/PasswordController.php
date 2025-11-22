@@ -30,9 +30,17 @@ class PasswordController extends Controller
             'password' => ['required', Password::defaults(), 'confirmed'],
         ]);
 
-        $request->user()->update([
-            'password' => Hash::make($validated['password']),
-        ]);
+        $password = $validated['password'] ?? '';
+        if (!is_string($password)) {
+            throw new \InvalidArgumentException('Password must be a string');
+        }
+
+        $user = $request->user();
+        if ($user) {
+            $user->update([
+                'password' => Hash::make($password),
+            ]);
+        }
 
         return back();
     }

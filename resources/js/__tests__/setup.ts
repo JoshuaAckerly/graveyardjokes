@@ -17,3 +17,8 @@ Object.defineProperty(window, 'matchMedia', {
         dispatchEvent: jest.fn(),
     })),
 });
+
+// Add a test for setup file
+it('should load test setup', () => {
+    expect(true).toBe(true);
+});

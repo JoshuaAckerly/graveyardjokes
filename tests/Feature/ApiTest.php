@@ -145,7 +145,11 @@ class ApiTest extends TestCase
                 ->assertJsonStructure(['url']);
         
         $url = $response->json('url');
-        $this->assertStringContainsString('/storage/og-cache/', $url);
+        if (is_string($url)) {
+            $this->assertStringContainsString('/storage/og-cache/', $url);
+        } else {
+            $this->fail('Expected URL to be a string');
+        }
     }
 
     // Contact Form API Tests
