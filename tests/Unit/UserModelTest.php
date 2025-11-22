@@ -7,7 +7,7 @@ use PHPUnit\Framework\TestCase;
 
 class UserModelTest extends TestCase
 {
-    public function test_fillable_attributes()
+    public function test_fillable_attributes(): void
     {
         $user = new User();
         $expected = ['name', 'email', 'password'];
@@ -15,7 +15,7 @@ class UserModelTest extends TestCase
         $this->assertEquals($expected, $user->getFillable());
     }
 
-    public function test_hidden_attributes()
+    public function test_hidden_attributes(): void
     {
         $user = new User();
         $expected = ['password', 'remember_token'];
@@ -23,7 +23,7 @@ class UserModelTest extends TestCase
         $this->assertEquals($expected, $user->getHidden());
     }
 
-    public function test_casts_configuration()
+    public function test_casts_configuration(): void
     {
         $user = new User();
         $casts = $user->getCasts();

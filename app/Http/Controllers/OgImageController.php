@@ -61,7 +61,7 @@ class OgImageController
 
             // Look for <meta property="og:image" content="...">
             $meta = $xpath->query("//meta[@property='og:image' or @name='og:image']");
-            if ($meta->length > 0) {
+            if ($meta !== false && $meta->length > 0) {
                 $node = $meta->item(0);
                 if ($node instanceof \DOMElement) {
                     $ogImage = $node->getAttribute('content');
@@ -71,7 +71,8 @@ class OgImageController
             // Fallback: find candidate <img> tags and pick the first reasonably-sized src
             if (!$ogImage) {
                 $imgs = $xpath->query('//img[@src]');
-                for ($i = 0; $i < $imgs->length; $i++) {
+                if ($imgs !== false) {
+                    for ($i = 0; $i < $imgs->length; $i++) {
                     $node = $imgs->item($i);
                     if ($node instanceof \DOMElement) {
                         $src = $node->getAttribute('src');
@@ -80,6 +81,7 @@ class OgImageController
                             break;
                         }
                     }
+                }
                 }
             }
 
@@ -96,7 +98,7 @@ class OgImageController
                 return response()->json(['error' => 'Failed to download image', 'status' => $imgResp->status()], 502);
             }
 
-            $contentType = $imgResp->header('Content-Type', 'image/jpeg');
+            $contentType = (string) ($imgResp->header('Content-Type') ?? 'image/jpeg');
             if (!Str::startsWith($contentType, 'image/')) {
                 return response()->json(['error' => 'Downloaded resource is not an image', 'content-type' => $contentType], 422);
             }
@@ -108,7 +110,9 @@ class OgImageController
             }
 
             // Determine extension
-            $ext = $this->extensionFromContentType($contentType) ?: pathinfo(parse_url($imgUrl, PHP_URL_PATH) ?? '', PATHINFO_EXTENSION) ?: 'jpg';
+            $urlPath = parse_url($imgUrl, PHP_URL_PATH);
+            $pathExtension = is_string($urlPath) && $urlPath !== '' ? pathinfo($urlPath, PATHINFO_EXTENSION) : '';
+            $ext = $this->extensionFromContentType($contentType) ?: ($pathExtension ?: 'jpg');
             $hash = substr(md5($imgUrl), 0, 16);
             $filename = "og-cache/{$hash}.{$ext}";
 
@@ -160,10 +164,15 @@ class OgImageController
 
         // Otherwise remove filename from base path
         $dir = preg_replace('#/[^/]*$#', '/', $path);
-        $joined = "{$scheme}://{$host}{$port}" . rtrim($dir, '/') . '/' . ltrim($maybeRelative, '/');
+        $dirStr = is_string($dir) ? $dir : '/';
+        $joined = "{$scheme}://{$host}{$port}" . rtrim($dirStr, '/') . '/' . ltrim($maybeRelative, '/');
         return $joined;
     }
 
+    /**
+     * @param string $ct
+     * @return string|null
+     */
     protected function extensionFromContentType(string $ct): ?string
     {
         $map = [

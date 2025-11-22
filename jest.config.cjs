@@ -18,5 +18,19 @@ module.exports = {
     '!resources/js/**/*.d.ts',
     '!resources/js/ssr.tsx',
     '!resources/js/app.tsx'
-  ]
+  ],
+  globals: {
+    'ts-jest': {
+      tsconfig: {
+        jsx: 'react',
+        esModuleInterop: true,
+        allowSyntheticDefaultImports: true,
+      },
+    },
+    'import.meta': {
+      env: {
+        VITE_ASSET_URL: 'https://cdn.example.com',
+      },
+    },
+  },
 };

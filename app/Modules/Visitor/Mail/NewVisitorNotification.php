@@ -41,6 +41,9 @@ class NewVisitorNotification extends Mailable
         return new Content(view: 'emails.new-visitor', with: ['visitor' => $this->visitorData]);
     }
 
+    /**
+     * @return array<int, \Illuminate\Mail\Mailables\Attachment>
+     */
     public function attachments(): array
     {
         return [];

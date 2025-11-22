@@ -17,12 +17,7 @@ class JokeControllerTest extends TestCase
         $this->controller = new JokeController();
     }
 
-    public function test_random_method_exists()
-    {
-        $this->assertTrue(method_exists($this->controller, 'random'));
-    }
-
-    public function test_random_returns_json_response()
+    public function test_random_returns_json_response(): void
     {
         $request = new Request();
         $response = $this->controller->random($request);
