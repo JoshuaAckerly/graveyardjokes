@@ -1,6 +1,7 @@
 import MainLayout from '@/Layouts/MainLayout';
 import { Head } from '@inertiajs/react';
 import { motion } from 'framer-motion';
+import PayPalDonateButton from '@/Components/PayPalDonateButton';
 
 export default function About() {
     const cdn = import.meta.env.VITE_ASSET_URL || '';
@@ -217,6 +218,11 @@ export default function About() {
                             </p>
                             <p className="leading-relaxed">Today, it's a playground for merging tech with style, function with fun.</p>
                         </motion.div>
+                    </div>
+
+                    {/* Support Section */}
+                    <div className="mt-16 px-4 pb-20">
+                        <PayPalDonateButton />
                     </div>
                 </motion.main>
             </MainLayout>
