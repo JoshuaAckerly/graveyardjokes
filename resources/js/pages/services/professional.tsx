@@ -10,15 +10,25 @@ export default function ProfessionalPackage() {
     const [isPayPalReady, setIsPayPalReady] = useState(false);
 
     useEffect(() => {
+        // Check if PayPal script is already loaded
+        if (window.paypal) {
+            setIsPayPalReady(true);
+            return;
+        }
+
+        // Check if script is already being loaded
+        const existingScript = document.querySelector('script[src*="paypal.com/sdk"]');
+        if (existingScript) {
+            existingScript.addEventListener('load', () => setIsPayPalReady(true));
+            return;
+        }
+
+        // Load the script
         const script = document.createElement('script');
         script.src = 'https://www.paypal.com/sdk/js?client-id=BAAEThXfkghKIa87QQOlnsIur64eOCnBLuAxJeYWYDW5o366RczxK2o9F8DtrXnte6SY65yJRFso_mMA2o&components=hosted-buttons&enable-funding=venmo,paylater&disable-funding=card,credit&currency=USD';
         script.async = true;
         script.onload = () => setIsPayPalReady(true);
         document.body.appendChild(script);
-
-        return () => {
-            document.body.removeChild(script);
-        };
     }, []);
 
     useEffect(() => {
