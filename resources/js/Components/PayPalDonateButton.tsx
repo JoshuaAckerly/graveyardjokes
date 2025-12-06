@@ -68,7 +68,7 @@ export default function PayPalDonateButton({ variant = 'default', className = ''
     // Default variant - full card with PayPal SDK integration
     return (
         <motion.div
-            className={`mx-auto max-w-md rounded-lg border-2 border-(--accent) bg-(--card) p-6 text-center shadow-lg ${className}`}
+            className={`relative z-10 mx-auto max-w-md rounded-lg border-2 border-(--accent) bg-(--card) p-6 text-center shadow-lg ${className}`}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
@@ -82,7 +82,7 @@ export default function PayPalDonateButton({ variant = 'default', className = ''
             </p>
 
             {/* PayPal SDK Button Container - only shows if hostedButtonId is provided */}
-            {hostedButtonId && <div ref={paypalContainerRef} className="mb-3"></div>}
+            {hostedButtonId && <div ref={paypalContainerRef} className="relative z-0 mb-3"></div>}
 
             {/* Main donation button */}
             <motion.button

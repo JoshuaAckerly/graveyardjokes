@@ -27,6 +27,10 @@ Route::get('/portfolio', function () {
     return Inertia::render('portfolio');
 })->name('portfolio');
 
+Route::get('/services', function () {
+    return Inertia::render('services');
+})->name('services');
+
 // API endpoint to fetch and cache Open Graph images for external sites
 Route::get('/api/fetch-og-image', [OgImageController::class, 'fetch'])->name('api.fetch-og-image');
 
@@ -69,13 +73,13 @@ Route::get('/generate-sitemap', function () {
         ->add(Url::create($base . '/about'))
         ->add(Url::create($base . '/contact'))
         ->add(Url::create($base . '/portfolio'))
+        ->add(Url::create($base . '/services'))
         ->writeToFile(public_path('sitemap.xml'));
 
     return 'Sitemap generated!';
 });
 
 // Redirect old pages to homepage or anchors
-Route::redirect('/services', '/contact', 301);
 Route::redirect('/WBG410/home.php', '/portfolio', 301);
 Route::redirect('/legal/terms', '/terms', 301);
 Route::redirect('/legal/privacy', '/privacy', 301);
