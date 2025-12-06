@@ -50,7 +50,7 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
     }, []); // Empty dependency array means it runs once per component mount
     return (
         <div id="app" className="min-h-screen bg-[var(--color-background)]">
-            <header className="flex items-center justify-between p-4">
+            <header className="relative z-50 flex items-center justify-between p-4">
                 <div className="md:hidden">
                     <MobileMenu />
                 </div>

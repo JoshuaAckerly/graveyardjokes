@@ -17,72 +17,6 @@ type Platform = {
     url: string;
 };
 
-const PricingCard = ({
-    name,
-    price,
-    deliveryTime,
-    features,
-    buttonText,
-    isPopular = false,
-}: {
-    name: string;
-    price: string;
-    deliveryTime: string;
-    features: string[];
-    buttonText: string;
-    isPopular?: boolean;
-}) => (
-    <motion.div
-        className={`relative flex w-full flex-col items-center bg-[var(--card)] p-6 shadow-lg transition-transform duration-300 hover:scale-105 ${
-            isPopular ? 'ring-2 ring-[var(--accent)]' : ''
-        }`}
-        initial={{ opacity: 0, scale: 0.8 }}
-        animate={{ opacity: 1, scale: 1 }}
-        whileHover={{ scale: 1.05 }}
-    >
-        {isPopular && (
-            <div className="absolute -top-3 left-1/2 -translate-x-1/2 transform rounded-full bg-[var(--accent)] px-4 py-1 text-sm font-semibold text-white">
-                Most Popular
-            </div>
-        )}
-        <h2 className="mb-4 text-2xl font-semibold text-white">{name}</h2>
-        <p className="mb-4 text-4xl font-bold text-[var(--accent)]">{price}</p>
-        <p className="mb-4 text-lg text-white">Delivery Time: {deliveryTime}</p>
-        <ul className="mb-6 space-y-2">
-            {features.map((feature, idx) => (
-                <li key={idx} className="flex items-center text-white">
-                    <span className="mr-2 text-[var(--accent)]">✓</span>
-                    {feature}
-                </li>
-            ))}
-        </ul>
-        <a
-            href="#contact-section"
-            className={`block w-full px-6 py-3 text-center text-lg font-medium text-white shadow-md transition ${
-                isPopular ? 'bg-[var(--accent)] hover:opacity-90' : 'bg-[var(--color-background)] hover:bg-[var(--color-foreground)]'
-            }`}
-            aria-label={`Request ${buttonText} package`}
-        >
-            Get Started
-        </a>
-    </motion.div>
-);
-
-const SubscriptionCard = ({ price, description, buttonText }: { price: string; description: string; buttonText: string }) => (
-    <div className="m-auto w-full max-w-md rounded-md bg-[var(--card)] p-6 text-left shadow-lg">
-        <h3 className="mb-2 text-2xl font-semibold text-white">Maintenance & Hosting</h3>
-        <p className="mb-4 text-3xl font-bold text-[var(--accent)]">{price}</p>
-        <p className="mb-6 text-white">{description}</p>
-        <a
-            href="#contact-section"
-            className="inline-block rounded bg-[var(--accent)] px-5 py-3 font-medium text-white shadow hover:opacity-95"
-            aria-label="Request maintenance subscription"
-        >
-            {buttonText}
-        </a>
-    </div>
-);
-
 export default function ContactPricing() {
     const cdn = import.meta.env.VITE_ASSET_URL;
 
@@ -157,77 +91,17 @@ export default function ContactPricing() {
         });
     }
 
-    // Unified pricing data
-    const pricingPlans = [
-        {
-            name: 'Starter',
-            price: '$1,200',
-            features: [
-                '1-3 pages',
-                'Custom design & development',
-                'Mobile responsive',
-                'Basic SEO setup',
-                'Social media integration',
-                '1 round of revisions',
-                'AWS deployment',
-            ],
-            buttonText: 'Starter',
-            deliveryTime: '1-2 weeks',
-            isPopular: false,
-        },
-        {
-            name: 'Professional',
-            price: '$2,500',
-            features: [
-                '3-5 pages',
-                'Custom design & development',
-                'Mobile responsive',
-                'Advanced SEO optimization',
-                'Contact forms & integrations',
-                'Content management system',
-                '2 rounds of revisions',
-                'AWS deployment & SSL',
-            ],
-            buttonText: 'Professional',
-            deliveryTime: '2-3 weeks',
-            isPopular: true,
-        },
-        {
-            name: 'Enterprise',
-            price: '$4,500',
-            features: [
-                '5+ pages',
-                'Custom design & development',
-                'Mobile responsive',
-                'Advanced SEO & analytics',
-                'E-commerce capabilities',
-                'Custom functionality',
-                'Unlimited revisions',
-                'Priority support',
-                'AWS deployment & SSL',
-            ],
-            buttonText: 'Enterprise',
-            deliveryTime: '3-4 weeks',
-            isPopular: false,
-        },
-    ];
-
-    const handleContactScroll = () => {
-        const el = document.getElementById('contact-section');
-        if (el) el.scrollIntoView({ behavior: 'smooth' });
-    };
-
     return (
         <>
             <Head>
-                <title>Contact & Pricing | Graveyard Jokes Studios</title>
+                <title>Contact | Graveyard Jokes Studios</title>
                 <meta
                     name="description"
-                    content="Contact Graveyard Jokes Studios for custom websites and explore affordable pricing packages for creatives, musicians, and small businesses."
+                    content="Contact Graveyard Jokes Studios for custom websites. Get in touch to discuss your project."
                 />
                 <meta
                     name="keywords"
-                    content="contact, pricing, custom websites, web design, web development, musicians, artists, creatives, small business websites"
+                    content="contact, custom websites, web design, web development, musicians, artists, creatives"
                 />
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
 
@@ -235,10 +109,10 @@ export default function ContactPricing() {
                 <link rel="canonical" href="https://graveyardjokes.com/contact" />
 
                 {/* Open Graph */}
-                <meta property="og:title" content="Contact & Pricing | Graveyard Jokes Studios" />
+                <meta property="og:title" content="Contact | Graveyard Jokes Studios" />
                 <meta
                     property="og:description"
-                    content="Contact Graveyard Jokes Studios for custom websites and explore affordable pricing packages for creatives, musicians, and small businesses."
+                    content="Contact Graveyard Jokes Studios for custom websites. Get in touch to discuss your project."
                 />
                 <meta property="og:image" content={`${cdn}/images/ContactBanner.webp`} />
                 <meta property="og:type" content="website" />
@@ -246,10 +120,10 @@ export default function ContactPricing() {
 
                 {/* Twitter */}
                 <meta name="twitter:card" content="summary_large_image" />
-                <meta name="twitter:title" content="Contact & Pricing | Graveyard Jokes Studios" />
+                <meta name="twitter:title" content="Contact | Graveyard Jokes Studios" />
                 <meta
                     name="twitter:description"
-                    content="Contact Graveyard Jokes Studios for custom websites and explore affordable pricing packages for creatives, musicians, and small businesses."
+                    content="Contact Graveyard Jokes Studios for custom websites. Get in touch to discuss your project."
                 />
                 <meta name="twitter:image" content={`${cdn}/images/ContactBanner.webp`} />
 
@@ -273,72 +147,6 @@ export default function ContactPricing() {
             </Head>
 
             <MainLayout>
-                {/* Pricing Section */}
-                <div className="relative mb-20 max-w-full space-y-20 overflow-hidden bg-[var(--color-foreground)] text-center">
-                    {/* Background Image */}
-                    <div className="absolute inset-0 z-0 max-h-96">
-                        <img
-                            src={`${cdn}/images/AdobeStock_949366383.webp`}
-                            loading="lazy"
-                            alt="Pricing background"
-                            className="h-full w-full object-cover opacity-60"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-foreground)] to-transparent"></div>
-                    </div>
-
-                    {/* Pricing Section */}
-                    <div className="relative z-10 flex flex-col justify-center space-y-6 p-6">
-                        <h1 className="mb-4 text-5xl font-extrabold text-white">Website Design & Development</h1>
-                        <p className="mx-auto mb-4 max-w-3xl text-lg text-white">
-                            Complete website solutions combining custom design and development. All packages include both design mockups and fully
-                            functional websites.
-                        </p>
-
-                        {/* AI Notice */}
-                        <div className="mx-auto mb-8 max-w-2xl rounded-lg border border-[var(--accent)] bg-[var(--card)] p-4">
-                            <p className="flex items-center justify-center text-sm text-white">
-                                <span className="mr-2 text-[var(--accent)]">🤖</span>
-                                <strong>AI-Enhanced Development:</strong> We leverage cutting-edge AI tools to accelerate development, improve code
-                                quality, and deliver exceptional results faster.
-                            </p>
-                        </div>
-
-                        <div className="m-auto grid max-w-6xl gap-6 md:grid-cols-3">
-                            {pricingPlans.map((plan, index) => (
-                                <PricingCard key={index} {...plan} />
-                            ))}
-                        </div>
-                    </div>
-
-                    {/* Subscription Box (single) */}
-                    <div className="relative z-10 flex justify-center p-6">
-                        <SubscriptionCard
-                            price="$29/month"
-                            description="Maintenance, security updates, backups, and hosting. Billed monthly — cancellable anytime. Add-ons and priority support available."
-                            buttonText="Subscribe / Request"
-                        />
-                    </div>
-
-                    <section className="py-16">
-                        <section className="-3xl relative z-10 mx-auto mt-16 max-w-5xl bg-[var(--card)] p-12 shadow-2xl">
-                            <h2 className="mb-6 text-center text-3xl font-semibold text-white">Interested in a custom website?</h2>
-                            <p className="mb-6 text-center text-lg text-white">Contact us to discuss your project and get a personalized quote.</p>
-                            <motion.button
-                                type="button"
-                                initial={{ opacity: 0, scale: 0.8 }}
-                                animate={{ opacity: 1, scale: 1 }}
-                                transition={{ duration: 0.8, delay: 1 }}
-                                whileHover={{ scale: 1.1 }}
-                                className="relative bottom-2 z-20 mx-auto flex bg-[var(--accent)] px-8 py-6 text-sm font-semibold text-white shadow-md transition duration-300 ease-in-out sm:px-12 sm:py-6 sm:text-lg"
-                                aria-label="Contact Us"
-                                onClick={handleContactScroll}
-                            >
-                                Let's talk
-                            </motion.button>
-                        </section>
-                    </section>
-                </div>
-
                 {/* Contact Section */}
                 <div id="contact-section" className="relative z-0 max-w-full overflow-hidden bg-[var(--color-foreground)] text-center">
                     <div className="relative z-10 flex px-6 py-12 text-3xl text-white underline sm:px-12">
@@ -347,8 +155,7 @@ export default function ContactPricing() {
 
                     <div className="relative z-10 px-6 py-24 sm:py-32 lg:mx-auto lg:w-1/2 lg:px-8">
                         <p className="mb-6 text-center text-lg text-[var(--primary)]">
-                            Ready to bring your vision to life? Our AI-enhanced development process ensures faster delivery without compromising
-                            quality. Contact us below and we'll get back to you within 24 hours.
+                            Ready to bring your vision to life? Let's discuss your project and create something amazing together. Contact us below and we'll get back to you within 24 hours.
                         </p>
 
                         <form onSubmit={handleSubmit} className="-xl mx-auto max-w-xl bg-white p-8 shadow-lg">
