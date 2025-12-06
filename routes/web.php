@@ -31,6 +31,18 @@ Route::get('/services', function () {
     return Inertia::render('services');
 })->name('services');
 
+Route::get('/services/starter', function () {
+    return Inertia::render('services/starter');
+})->name('services.starter');
+
+Route::get('/services/professional', function () {
+    return Inertia::render('services/professional');
+})->name('services.professional');
+
+Route::get('/services/premium', function () {
+    return Inertia::render('services/premium');
+})->name('services.premium');
+
 // API endpoint to fetch and cache Open Graph images for external sites
 Route::get('/api/fetch-og-image', [OgImageController::class, 'fetch'])->name('api.fetch-og-image');
 

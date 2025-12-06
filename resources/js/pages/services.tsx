@@ -1,7 +1,7 @@
-import ServicePackageCard from '@/Components/ServicePackageCard';
 import MainLayout from '@/Layouts/MainLayout';
-import { Head } from '@inertiajs/react';
+import { Head, Link } from '@inertiajs/react';
 import { motion } from 'framer-motion';
+import { Check } from 'lucide-react';
 
 export default function Services() {
     const cdn = import.meta.env.VITE_ASSET_URL || '';
@@ -19,7 +19,7 @@ export default function Services() {
                 'Basic SEO setup',
                 '1 month of support',
             ],
-            hostedButtonId: '3C9XAYVTPYJM6', // Your actual button ID
+            link: '/services/starter',
             popular: false,
         },
         {
@@ -36,7 +36,7 @@ export default function Services() {
                 '3 months of support',
                 'Social media integration',
             ],
-            hostedButtonId: '74UP3VVZZCYRQ', // Replace with actual button ID
+            link: '/services/professional',
             popular: true,
         },
         {
@@ -53,7 +53,7 @@ export default function Services() {
                 '6 months of support',
                 'Priority updates',
             ],
-            hostedButtonId: 'CZQNCK3FUPTN2', // Replace with actual button ID
+            link: '/services/premium',
             popular: false,
         },
     ];
@@ -123,18 +123,52 @@ export default function Services() {
                     </div>
 
                     {/* Packages Grid */}
-                    <div className="relative mx-auto mt-6 max-w-7xl px-3 pb-20 sm:mt-8 sm:px-4 sm:pb-32">
-                        <div className="grid grid-cols-1 gap-6 sm:gap-8 md:grid-cols-2 lg:grid-cols-3">
+                    <div className="relative mx-auto mt-6 max-w-7xl px-3 pb-20 sm:mt-8 sm:px-4 sm:pb-32" style={{ maxWidth: '100vw' }}>
+                        <div className="grid grid-cols-1 gap-6 sm:gap-8 md:grid-cols-2 lg:grid-cols-3" style={{ maxWidth: '100%' }}>
                             {packages.map((pkg) => (
-                                <ServicePackageCard
+                                <motion.div
                                     key={pkg.title}
-                                    title={pkg.title}
-                                    price={pkg.price}
-                                    description={pkg.description}
-                                    features={pkg.features}
-                                    hostedButtonId={pkg.hostedButtonId}
-                                    popular={pkg.popular}
-                                />
+                                    className={`relative z-0 flex flex-col rounded-lg border-2 p-4 shadow-lg transition sm:p-6 ${
+                                        pkg.popular
+                                            ? 'border-(--primary) bg-(--card) shadow-xl shadow-(--primary)/20'
+                                            : 'border-(--accent) bg-(--card)'
+                                    }`}
+                                    initial={{ opacity: 0, y: 20 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ duration: 0.5 }}
+                                    whileHover={{ scale: 1.02 }}
+                                >
+                                    {pkg.popular && (
+                                        <div className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-(--primary) px-4 py-1 text-xs font-bold text-white">
+                                            MOST POPULAR
+                                        </div>
+                                    )}
+
+                                    <div className="mb-3 text-center sm:mb-4">
+                                        <h3 className="text-xl font-bold text-white sm:text-2xl">{pkg.title}</h3>
+                                        <div className="mt-2 flex items-baseline justify-center gap-1">
+                                            <span className="text-3xl font-bold text-(--primary) sm:text-4xl">{pkg.price}</span>
+                                        </div>
+                                        <p className="mt-2 text-xs text-gray-300 sm:text-sm">{pkg.description}</p>
+                                    </div>
+
+                                    <ul className="mb-6 flex-1 space-y-3">
+                                        {pkg.features.map((feature, index) => (
+                                            <li key={index} className="flex items-start gap-2 text-sm text-gray-200">
+                                                <Check className="mt-0.5 h-5 w-5 shrink-0 text-(--primary)" />
+                                                <span>{feature}</span>
+                                            </li>
+                                        ))}
+                                    </ul>
+
+                                    <Link
+                                        href={pkg.link}
+                                        className="mt-auto block w-full rounded-lg bg-(--primary) px-6 py-3 text-center font-semibold text-white transition hover:bg-(--accent)"
+                                    >
+                                        View Details & Purchase
+                                    </Link>
+                                </motion.div>
                             ))}
                         </div>
                     </div>

@@ -12,7 +12,7 @@ export default function MobileMenu() {
     return (
         <div className="relative">
             {/* Hamburger Button */}
-            <div className="fixed top-6 right-6 z-100">
+            <div className="fixed top-6 right-6 z-[9999]">
                 <button onClick={toggleMenu} aria-label="Toggle Menu" aria-expanded={isOpen} className="text-white focus:outline-none">
                     <div className="space-y-2">
                         <span className={`block h-1 w-8 bg-[var(--primary)] transition-transform ${isOpen ? 'translate-y-3 rotate-45' : ''}`} />
@@ -26,10 +26,10 @@ export default function MobileMenu() {
             {isOpen && (
                 <>
                     {/* Backdrop */}
-                    <div className="fixed inset-0 z-20 bg-[var(--color-background)] opacity-80 backdrop-blur-md" onClick={() => setIsOpen(false)} />
+                    <div className="fixed inset-0 z-[9990] bg-[var(--color-background)] opacity-80 backdrop-blur-md" onClick={() => setIsOpen(false)} />
 
                     {/* Menu */}
-                    <div className="fixed inset-0 z-40 flex items-center justify-center">
+                    <div className="fixed inset-0 z-[9995] flex items-center justify-center">
                         <div className="w-96 rounded-lg p-8 text-white">
                             <ul className="flex flex-col space-y-4 text-center">
                                 <li className="mb-4 bg-[var(--primary)]">
