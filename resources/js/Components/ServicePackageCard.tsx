@@ -96,7 +96,7 @@ export default function ServicePackageCard({
 
     return (
         <motion.div
-            className={`relative z-10 flex flex-col rounded-lg border-2 p-4 shadow-lg transition sm:p-6 ${
+            className={`relative z-0 flex flex-col rounded-lg border-2 p-4 shadow-lg transition sm:p-6 ${
                 popular
                     ? 'border-(--primary) bg-(--card) shadow-xl shadow-(--primary)/20'
                     : 'border-(--accent) bg-(--card)'
@@ -131,14 +131,12 @@ export default function ServicePackageCard({
             </ul>
 
             {/* PayPal Button Container */}
-            <div className="relative mt-auto w-full overflow-visible pb-6" style={{ minHeight: '90px' }}>
+            <div className="mt-auto w-full pb-6" style={{ minHeight: '90px' }}>
                 {showPayPal ? (
                     <div 
                         ref={paypalContainerRef}
                         className="w-full"
                         style={{ 
-                            position: 'relative',
-                            zIndex: 1000,
                             minHeight: '45px',
                             display: 'block'
                         }}
