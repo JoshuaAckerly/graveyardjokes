@@ -22,3 +22,9 @@ yarn-error.log
 /.nova
 /.vscode
 /.zed
+
+# Generated files
+.rnd
+s3-organization-report.json
+s3-uncategorized-files.json
+sitemap_index.xml
