@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom';
 
 // Mock Inertia
-global.route = jest.fn(() => '/');
+(global as any).route = jest.fn(() => '/');
 
 // Mock window.matchMedia
 Object.defineProperty(window, 'matchMedia', {
