@@ -1,5 +1,6 @@
 import Menu from '@/Components/Menu';
 import MobileMenu from '@/Components/MobileMenu';
+import PayPalDonateButton from '@/Components/PayPalDonateButton';
 import React, { ReactNode, useEffect } from 'react';
 
 interface MainLayoutProps {
@@ -49,7 +50,7 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
     }, []); // Empty dependency array means it runs once per component mount
     return (
         <div id="app" className="min-h-screen bg-[var(--color-background)]">
-            <header className="flex items-center justify-between p-4">
+            <header className="relative z-50 flex items-center justify-between p-4">
                 <div className="md:hidden">
                     <MobileMenu />
                 </div>
@@ -60,6 +61,9 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
             </header>
             <main className="min-w-full p-4">{children}</main>
             <footer className="relative z-30 mt-8 p-4 text-center text-sm">
+                <div className="mb-4 flex justify-center">
+                    <PayPalDonateButton variant="footer" />
+                </div>
                 <div className="flex flex-col items-center justify-center gap-4 md:flex-row">
                     <a href="/terms" className="text-white hover:underline">
                         Terms of Service
