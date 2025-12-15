@@ -1,6 +1,31 @@
 # TODO
 
-All major tasks completed! 🎉
+## Maintenance Tasks
+
+### Infrastructure
+- [ ] Update Forge deployment script to use `git reset --hard` for force-push compatibility
+- [ ] Verify automatic sitemap generation workflow is running correctly
+- [ ] Monitor server logs for errors after deployment
+- [ ] Set up automated backups verification
+
+### Dependencies
+- [ ] Monitor for security updates in npm packages
+- [ ] Monitor for security updates in Composer packages
+- [ ] Review and update Laravel to latest patch version when available
+- [ ] Keep PHP version updated on server (currently 8.3.26)
+
+### Performance
+- [ ] Review and optimize slow database queries
+- [ ] Monitor API response times
+- [ ] Optimize images and assets loading
+- [ ] Review and update caching strategies
+
+### Code Quality
+- [ ] Continue reducing PHPStan baseline errors (currently 36)
+- [ ] Add more test coverage for edge cases
+- [ ] Review and update documentation as features evolve
+
+---
 
 ## Completed Items
 
