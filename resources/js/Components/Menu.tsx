@@ -24,6 +24,11 @@ export default function Menu() {
                 </Link>
             </li>
             <li className="text-[var(--color-text)]">
+                <Link href="/services" className="hover:underline">
+                    Services
+                </Link>
+            </li>
+            <li className="text-[var(--color-text)]">
                 <a href="https://studio.graveyardjokes.com" className="hover:underline">
                     Studio
                 </a>
