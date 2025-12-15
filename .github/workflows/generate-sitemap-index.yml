@@ -8,6 +8,8 @@ on:
 jobs:
   generate:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     env:
       APP_URL: https://graveyardjokes.com
 
@@ -27,9 +29,10 @@ jobs:
         run: |
           composer install --no-progress --no-suggest --prefer-dist --no-interaction
 
-      - name: Copy example env
+      - name: Setup env file
         run: |
-          if [ -f .env.example ]; then cp .env.example .env; fi
+          cp .env.example .env
+          sed -i 's|APP_URL=.*|APP_URL=${{ env.APP_URL }}|' .env
 
       - name: Generate APP_KEY if missing
         run: |
@@ -39,32 +42,23 @@ jobs:
         run: |
           php artisan migrate --no-interaction || true
 
+      - name: Generate main sitemap
+        run: |
+          APP_URL=${{ env.APP_URL }} php artisan app:generate-sitemap
+      
       - name: Generate sitemap index with validation
         run: |
           APP_URL=${{ env.APP_URL }} php artisan app:generate-sitemap-index --validate
 
-      - name: Checkout main (to commit generated files)
-        uses: actions/checkout@v4
-        with:
-          ref: main
-          persist-credentials: true
-
       - name: Commit and push generated sitemap if changed
-        env:
-          AUTOMERGE_PAT: ${{ secrets.AUTOMERGE_PAT }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git fetch origin main
-          git checkout main
-          # If a PAT is provided, set the origin URL to use it so branch-protection won't block the push
-          if [ -n "$AUTOMERGE_PAT" ]; then
-            git remote set-url origin "https://x-access-token:$AUTOMERGE_PAT@github.com/${{ github.repository }}"
-          fi
+          git remote set-url origin "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}"
           # Only commit if files changed
-          if git status --porcelain | grep -q "public/sitemap_index.xml\|public/sitemap_validation_summary.md"; then
-            git add public/sitemap_index.xml public/sitemap_validation_summary.md || true
-            git commit -m "chore: update sitemap_index.xml [skip ci]" || echo "No changes to commit"
+          if git status --porcelain | grep -q "public/sitemap.xml\|public/sitemap_index.xml\|public/sitemap_validation_summary.md"; then
+            git add public/sitemap.xml public/sitemap_index.xml public/sitemap_validation_summary.md || true
+            git commit -m "chore: update sitemaps [skip ci]" || echo "No changes to commit"
             git push origin main
           else
             echo "No changes to sitemap files; skipping commit"

@@ -37,7 +37,7 @@ describe('Carousel', () => {
 
         const images = screen.getAllByRole('img');
         expect(images).toHaveLength(3);
-        
+
         expect(images[0]).toHaveAttribute('alt', 'Follow us on Instagram');
         expect(images[0]).toHaveAttribute('src', 'https://cdn.example.com/images/AdobeStock_283463385.webp');
     });
@@ -46,28 +46,24 @@ describe('Carousel', () => {
         render(<Carousel />);
 
         const buttons = screen.getAllByRole('button');
-        const navButtons = buttons.filter(btn => btn.textContent === '❮' || btn.textContent === '❯');
-        
+        const navButtons = buttons.filter((btn) => btn.textContent === '❮' || btn.textContent === '❯');
+
         expect(navButtons).toHaveLength(2);
     });
 
     it('renders slide indicators', () => {
         render(<Carousel />);
 
-        const indicators = screen.getAllByRole('button').filter(btn => 
-            btn.className.includes('h-3 w-3 rounded-full')
-        );
-        
+        const indicators = screen.getAllByRole('button').filter((btn) => btn.className.includes('h-3 w-3 rounded-full'));
+
         expect(indicators).toHaveLength(3);
     });
 
     it('shows first slide initially', () => {
         render(<Carousel />);
 
-        const indicators = screen.getAllByRole('button').filter(btn => 
-            btn.className.includes('h-3 w-3 rounded-full')
-        );
-        
+        const indicators = screen.getAllByRole('button').filter((btn) => btn.className.includes('h-3 w-3 rounded-full'));
+
         expect(indicators[0]).toHaveClass('bg-white');
         expect(indicators[1]).toHaveClass('bg-gray-600');
         expect(indicators[2]).toHaveClass('bg-gray-600');
@@ -77,13 +73,11 @@ describe('Carousel', () => {
         const user = userEvent.setup({ delay: null });
         render(<Carousel />);
 
-        const nextButton = screen.getAllByRole('button').find(btn => btn.textContent === '❯');
+        const nextButton = screen.getAllByRole('button').find((btn) => btn.textContent === '❯');
         await user.click(nextButton!);
 
-        const indicators = screen.getAllByRole('button').filter(btn => 
-            btn.className.includes('h-3 w-3 rounded-full')
-        );
-        
+        const indicators = screen.getAllByRole('button').filter((btn) => btn.className.includes('h-3 w-3 rounded-full'));
+
         expect(indicators[0]).toHaveClass('bg-gray-600');
         expect(indicators[1]).toHaveClass('bg-white');
     });
@@ -92,14 +86,12 @@ describe('Carousel', () => {
         const user = userEvent.setup({ delay: null });
         render(<Carousel />);
 
-        const prevButton = screen.getAllByRole('button').find(btn => btn.textContent === '❮');
+        const prevButton = screen.getAllByRole('button').find((btn) => btn.textContent === '❮');
         await user.click(prevButton!);
 
         // Should wrap around to last slide
-        const indicators = screen.getAllByRole('button').filter(btn => 
-            btn.className.includes('h-3 w-3 rounded-full')
-        );
-        
+        const indicators = screen.getAllByRole('button').filter((btn) => btn.className.includes('h-3 w-3 rounded-full'));
+
         expect(indicators[2]).toHaveClass('bg-white');
     });
 
@@ -107,12 +99,10 @@ describe('Carousel', () => {
         const user = userEvent.setup({ delay: null });
         render(<Carousel />);
 
-        const indicators = screen.getAllByRole('button').filter(btn => 
-            btn.className.includes('h-3 w-3 rounded-full')
-        );
-        
+        const indicators = screen.getAllByRole('button').filter((btn) => btn.className.includes('h-3 w-3 rounded-full'));
+
         await user.click(indicators[2]);
-        
+
         expect(indicators[2]).toHaveClass('bg-white');
         expect(indicators[0]).toHaveClass('bg-gray-600');
     });
@@ -120,10 +110,8 @@ describe('Carousel', () => {
     it('auto-advances slides every 5 seconds', async () => {
         render(<Carousel />);
 
-        const indicators = screen.getAllByRole('button').filter(btn => 
-            btn.className.includes('h-3 w-3 rounded-full')
-        );
-        
+        const indicators = screen.getAllByRole('button').filter((btn) => btn.className.includes('h-3 w-3 rounded-full'));
+
         // Initially on first slide
         expect(indicators[0]).toHaveClass('bg-white');
 
@@ -131,9 +119,7 @@ describe('Carousel', () => {
         jest.advanceTimersByTime(5000);
 
         await waitFor(() => {
-            const updatedIndicators = screen.getAllByRole('button').filter(btn => 
-                btn.className.includes('h-3 w-3 rounded-full')
-            );
+            const updatedIndicators = screen.getAllByRole('button').filter((btn) => btn.className.includes('h-3 w-3 rounded-full'));
             expect(updatedIndicators[1]).toHaveClass('bg-white');
         });
     });
@@ -147,9 +133,7 @@ describe('Carousel', () => {
         jest.advanceTimersByTime(5000); // Back to slide 1
 
         await waitFor(() => {
-            const indicators = screen.getAllByRole('button').filter(btn => 
-                btn.className.includes('h-3 w-3 rounded-full')
-            );
+            const indicators = screen.getAllByRole('button').filter((btn) => btn.className.includes('h-3 w-3 rounded-full'));
             expect(indicators[0]).toHaveClass('bg-white');
         });
     });
@@ -159,7 +143,7 @@ describe('Carousel', () => {
 
         const links = screen.getAllByText('View Project');
         expect(links).toHaveLength(3);
-        
+
         expect(links[0].closest('a')).toHaveAttribute('href', 'https://instagram.com/graveyardjokes');
         expect(links[1].closest('a')).toHaveAttribute('href', '/contact');
         expect(links[2].closest('a')).toHaveAttribute('href', '/portfolio');
@@ -184,7 +168,7 @@ describe('Carousel', () => {
         render(<Carousel />);
 
         const images = screen.getAllByRole('img');
-        images.forEach(img => {
+        images.forEach((img) => {
             expect(img).toHaveAttribute('loading', 'lazy');
         });
     });
@@ -199,13 +183,13 @@ describe('Carousel', () => {
 
     it('cleans up interval on unmount', () => {
         const { unmount } = render(<Carousel />);
-        
+
         const clearIntervalSpy = jest.spyOn(global, 'clearInterval');
-        
+
         unmount();
-        
+
         expect(clearIntervalSpy).toHaveBeenCalled();
-        
+
         clearIntervalSpy.mockRestore();
     });
 });

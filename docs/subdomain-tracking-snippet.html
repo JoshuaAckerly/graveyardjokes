@@ -1,0 +1,31 @@
+<!-- Add this to the <head> section of each subdomain -->
+<script>
+// Subdomain tracking script for graveyardjokes.com
+(function() {
+    // Track visitor on page load
+    const trackVisit = async () => {
+        try {
+            await fetch('https://graveyardjokes.com/track-visit', {
+                method: 'POST',
+                credentials: 'include',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    referrer: window.location.href,
+                    subdomain: window.location.hostname
+                })
+            });
+        } catch (error) {
+            console.error('Failed to track visit:', error);
+        }
+    };
+
+    // Track when page loads
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', trackVisit);
+    } else {
+        trackVisit();
+    }
+})();
+</script>
