@@ -27,6 +27,22 @@ Route::get('/portfolio', function () {
     return Inertia::render('portfolio');
 })->name('portfolio');
 
+Route::get('/services', function () {
+    return Inertia::render('services');
+})->name('services');
+
+Route::get('/services/starter', function () {
+    return Inertia::render('services/starter');
+})->name('services.starter');
+
+Route::get('/services/professional', function () {
+    return Inertia::render('services/professional');
+})->name('services.professional');
+
+Route::get('/services/premium', function () {
+    return Inertia::render('services/premium');
+})->name('services.premium');
+
 // API endpoint to fetch and cache Open Graph images for external sites
 Route::get('/api/fetch-og-image', [OgImageController::class, 'fetch'])->name('api.fetch-og-image');
 
@@ -69,13 +85,19 @@ Route::get('/generate-sitemap', function () {
         ->add(Url::create($base . '/about'))
         ->add(Url::create($base . '/contact'))
         ->add(Url::create($base . '/portfolio'))
+        ->add(Url::create($base . '/services'))
+        ->add(Url::create($base . '/services/starter'))
+        ->add(Url::create($base . '/services/professional'))
+        ->add(Url::create($base . '/services/premium'))
+        ->add(Url::create($base . '/terms'))
+        ->add(Url::create($base . '/privacy'))
+        ->add(Url::create($base . '/cookies'))
         ->writeToFile(public_path('sitemap.xml'));
 
     return 'Sitemap generated!';
 });
 
 // Redirect old pages to homepage or anchors
-Route::redirect('/services', '/contact', 301);
 Route::redirect('/WBG410/home.php', '/portfolio', 301);
 Route::redirect('/legal/terms', '/terms', 301);
 Route::redirect('/legal/privacy', '/privacy', 301);
@@ -85,7 +107,14 @@ Route::redirect('/legal/cookies', '/cookies', 301);
 
 // Redirects for missing pages
 Route::redirect('/illustrations', '/contact', 301);
-Route::redirect('/pricing', '/plans');
+Route::redirect('/pricing', '/services', 301);
+Route::redirect('/demo', '/', 301);
+Route::redirect('/cryptescape', '/', 301);
+
+// Auth pages - redirect to main site (no auth on this site)
+Route::redirect('/login', '/', 301);
+Route::redirect('/register', '/', 301);
+Route::redirect('/forgot-password', '/', 301);
 
 
 
