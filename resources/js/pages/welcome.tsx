@@ -96,6 +96,29 @@ export default function Home(): JSX.Element {
                 </a>
 
                 <div className="relative z-0 max-w-full space-y-10 bg-[var(--color-foreground)] text-center">
+                    {/* Pay Over Time Section */}
+                    <motion.section
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true, amount: 0.2 }}
+                        transition={{ duration: 0.8 }}
+                        className="relative z-20 mx-auto my-8 max-w-2xl rounded-lg border-2 border-(--primary) bg-black/80 p-8 text-white shadow-xl"
+                    >
+                        <div className="flex flex-col items-center gap-3">
+                            <span className="text-4xl">💀💸</span>
+                            <h2 className="text-2xl font-bold">Pay Over Time with PayPal</h2>
+                            <p className="mt-2 text-lg text-white/80">
+                                Want a killer website but your wallet's feeling a little... lifeless? <br />
+                                With PayPal's <span className="font-semibold text-(--primary)">Pay Over Time</span> options, you can break up your payments—no need to dig up your savings all at once!
+                            </p>
+                            <p className="mt-4 text-base text-white/60 italic">
+                                "Even the Grim Reaper appreciates flexible payments. He says, 'Why pay it all now when you can pay it... over time?'"
+                            </p>
+                            <div className="mt-4 rounded bg-white/10 px-4 py-2 text-sm text-white/80">
+                                Look for <span className="font-semibold text-(--primary)">Pay Later</span> at checkout!
+                            </div>
+                        </div>
+                    </motion.section>
                     {/* Background Image and Gradient */}
                     <div className="absolute inset-0 max-h-96">
                         <img

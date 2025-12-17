@@ -131,7 +131,23 @@ export default function ProfessionalPackage() {
             </Head>
 
             <MainLayout>
-                <div className="mx-auto max-w-4xl px-4 py-8">
+                {/* Pay Over Time Section */}
+                <div className="mx-auto mb-8 max-w-2xl rounded-lg border-2 border-(--primary) bg-black/80 p-8 text-white shadow-xl">
+                    <div className="flex flex-col items-center gap-3">
+                        <span className="text-4xl">💀💸</span>
+                        <h2 className="text-2xl font-bold">Pay Over Time with PayPal</h2>
+                        <p className="mt-2 text-lg text-white/80">
+                            Want a killer website but your wallet's feeling a little... lifeless? <br />
+                            With PayPal's <span className="font-semibold text-(--primary)">Pay Over Time</span> options, you can break up your payments—no need to dig up your savings all at once!
+                        </p>
+                        <p className="mt-4 text-base text-white/60 italic">
+                            "Even the Grim Reaper appreciates flexible payments. He says, 'Why pay it all now when you can pay it... over time?'"
+                        </p>
+                        <div className="mt-4 rounded bg-white/10 px-4 py-2 text-sm text-white/80">
+                            Look for <span className="font-semibold text-(--primary)">Pay Later</span> at checkout!
+                        </div>
+                    </div>
+                </div>
                     <Link href="/services" className="mb-6 inline-flex items-center gap-2 text-white transition hover:text-(--primary)">
                         <ArrowLeft className="h-5 w-5" />
                         Back to Services
