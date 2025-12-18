@@ -22,12 +22,21 @@ function loadPayPalScript(callback: () => void) {
     isPayPalScriptLoading = true;
 
     const script = document.createElement('script');
+<<<<<<< HEAD
     script.src = 'https://www.paypal.com/sdk/js?client-id=BAAEThXfkghKIa87QQOlnsIur64eOCnBLuAxJeYWYDW5o366RczxK2o9F8DtrXnte6SY65yJRFso_mMA2o&components=hosted-buttons&enable-funding=venmo,paylater&disable-funding=card,credit&currency=USD';
+=======
+    script.src =
+        'https://www.paypal.com/sdk/js?client-id=BAAEThXfkghKIa87QQOlnsIur64eOCnBLuAxJeYWYDW5o366RczxK2o9F8DtrXnte6SY65yJRFso_mMA2o&components=hosted-buttons&enable-funding=venmo,paylater&disable-funding=card,credit&currency=USD';
+>>>>>>> 3af94ce9a36ea4fab79cd3b986493cecd56f508a
     script.async = true;
     script.onload = () => {
         isPayPalScriptLoaded = true;
         isPayPalScriptLoading = false;
+<<<<<<< HEAD
         paypalLoadCallbacks.forEach(cb => cb());
+=======
+        paypalLoadCallbacks.forEach((cb) => cb());
+>>>>>>> 3af94ce9a36ea4fab79cd3b986493cecd56f508a
         paypalLoadCallbacks.length = 0;
     };
     script.onerror = () => {
@@ -46,6 +55,7 @@ interface ServicePackageCardProps {
     popular?: boolean;
 }
 
+<<<<<<< HEAD
 export default function ServicePackageCard({
     title,
     price,
@@ -54,6 +64,9 @@ export default function ServicePackageCard({
     hostedButtonId,
     popular = false,
 }: ServicePackageCardProps) {
+=======
+export default function ServicePackageCard({ title, price, description, features, hostedButtonId, popular = false }: ServicePackageCardProps) {
+>>>>>>> 3af94ce9a36ea4fab79cd3b986493cecd56f508a
     const paypalContainerRef = useRef<HTMLDivElement>(null);
     const [isPayPalReady, setIsPayPalReady] = useState(false);
     const [showPayPal, setShowPayPal] = useState(false);
@@ -83,7 +96,11 @@ export default function ServicePackageCard({
 
         try {
             paypalContainerRef.current.innerHTML = '';
+<<<<<<< HEAD
             
+=======
+
+>>>>>>> 3af94ce9a36ea4fab79cd3b986493cecd56f508a
             window.paypal
                 .HostedButtons({
                     hostedButtonId: hostedButtonId,
@@ -97,9 +114,13 @@ export default function ServicePackageCard({
     return (
         <motion.div
             className={`relative z-0 flex flex-col rounded-lg border-2 p-4 shadow-lg transition sm:p-6 ${
+<<<<<<< HEAD
                 popular
                     ? 'border-(--primary) bg-(--card) shadow-xl shadow-(--primary)/20'
                     : 'border-(--accent) bg-(--card)'
+=======
+                popular ? 'border-(--primary) bg-(--card) shadow-(--primary)/20 shadow-xl' : 'border-(--accent) bg-(--card)'
+>>>>>>> 3af94ce9a36ea4fab79cd3b986493cecd56f508a
             }`}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -133,6 +154,7 @@ export default function ServicePackageCard({
             {/* PayPal Button Container */}
             <div className="mt-auto w-full pb-6" style={{ minHeight: '90px' }}>
                 {showPayPal ? (
+<<<<<<< HEAD
                     <div 
                         ref={paypalContainerRef}
                         className="w-full"
@@ -146,6 +168,18 @@ export default function ServicePackageCard({
                         disabled
                         className="w-full rounded-lg bg-gray-400 px-6 py-3 font-semibold text-white"
                     >
+=======
+                    <div
+                        ref={paypalContainerRef}
+                        className="w-full"
+                        style={{
+                            minHeight: '45px',
+                            display: 'block',
+                        }}
+                    />
+                ) : (
+                    <button disabled className="w-full rounded-lg bg-gray-400 px-6 py-3 font-semibold text-white">
+>>>>>>> 3af94ce9a36ea4fab79cd3b986493cecd56f508a
                         Loading PayPal...
                     </button>
                 )}

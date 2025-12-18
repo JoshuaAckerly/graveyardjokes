@@ -45,11 +45,11 @@ describe('MobileMenu', () => {
         render(<MobileMenu />);
 
         const button = screen.getByLabelText('Toggle Menu');
-        
+
         // Open menu
         await user.click(button);
         expect(screen.getByText('Home')).toBeInTheDocument();
-        
+
         // Close menu
         await user.click(button);
         expect(screen.queryByText('Home')).not.toBeInTheDocument();
@@ -91,14 +91,14 @@ describe('MobileMenu', () => {
         render(<MobileMenu />);
 
         const button = screen.getByLabelText('Toggle Menu');
-        
+
         // Initially closed
         expect(button).toHaveAttribute('aria-expanded', 'false');
-        
+
         // After opening
         await user.click(button);
         expect(button).toHaveAttribute('aria-expanded', 'true');
-        
+
         // After closing
         await user.click(button);
         expect(button).toHaveAttribute('aria-expanded', 'false');
@@ -109,14 +109,14 @@ describe('MobileMenu', () => {
         render(<MobileMenu />);
 
         const button = screen.getByLabelText('Toggle Menu');
-        
+
         // Check initial state (closed)
         const spans = button.querySelectorAll('span');
         expect(spans).toHaveLength(3);
-        
+
         // Open menu
         await user.click(button);
-        
+
         // Check transformed state
         expect(spans[0]).toHaveClass('translate-y-3', 'rotate-45');
         expect(spans[1]).toHaveClass('opacity-0');

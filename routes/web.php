@@ -86,6 +86,15 @@ Route::get('/generate-sitemap', function () {
         ->add(Url::create($base . '/contact'))
         ->add(Url::create($base . '/portfolio'))
         ->add(Url::create($base . '/services'))
+<<<<<<< HEAD
+=======
+        ->add(Url::create($base . '/services/starter'))
+        ->add(Url::create($base . '/services/professional'))
+        ->add(Url::create($base . '/services/premium'))
+        ->add(Url::create($base . '/terms'))
+        ->add(Url::create($base . '/privacy'))
+        ->add(Url::create($base . '/cookies'))
+>>>>>>> 3af94ce9a36ea4fab79cd3b986493cecd56f508a
         ->writeToFile(public_path('sitemap.xml'));
 
     return 'Sitemap generated!';
@@ -101,7 +110,14 @@ Route::redirect('/legal/cookies', '/cookies', 301);
 
 // Redirects for missing pages
 Route::redirect('/illustrations', '/contact', 301);
-Route::redirect('/pricing', '/plans');
+Route::redirect('/pricing', '/services', 301);
+Route::redirect('/demo', '/', 301);
+Route::redirect('/cryptescape', '/', 301);
+
+// Auth pages - redirect to main site (no auth on this site)
+Route::redirect('/login', '/', 301);
+Route::redirect('/register', '/', 301);
+Route::redirect('/forgot-password', '/', 301);
 
 
 
@@ -138,6 +154,9 @@ Route::fallback(function () {
     abort(404);
 });
 
+Route::get('/test-csrf', function (){
+    dd(csrf_token());
+});
 
 require __DIR__ . '/settings.php';
 require __DIR__ . '/auth.php';
