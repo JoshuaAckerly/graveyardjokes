@@ -148,11 +148,11 @@ export default function PremiumPackage() {
                         </div>
                     </div>
                 </div>
+                <div className="mx-auto max-w-4xl px-4 py-8">
                     <Link href="/services" className="mb-6 inline-flex items-center gap-2 text-white transition hover:text-(--primary)">
                         <ArrowLeft className="h-5 w-5" />
                         Back to Services
                     </Link>
-
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
@@ -164,7 +164,6 @@ export default function PremiumPackage() {
                             <span className="text-5xl font-bold text-(--primary)">$3,000+</span>
                         </div>
                         <p className="mb-8 text-lg text-gray-300">Full-featured solution for serious professionals</p>
-
                         <h2 className="mb-4 text-2xl font-bold text-white">What's Included:</h2>
                         <ul className="mb-8 space-y-3">
                             {features.map((feature, index) => (
@@ -174,18 +173,15 @@ export default function PremiumPackage() {
                                 </li>
                             ))}
                         </ul>
-
                         <div className="border-t border-gray-700 pt-8">
                             <h2 className="mb-4 text-2xl font-bold text-white">Ready to Get Started?</h2>
                             <p className="mb-6 text-gray-300">
                                 Click the button below to proceed with payment. After payment, we'll contact you within 24 hours to discuss your
                                 project requirements.
                             </p>
-
                             <div className="mb-6" style={{ minHeight: '45px' }}>
                                 <div ref={paypalContainerRef} />
                             </div>
-
                             <p className="text-sm text-gray-400">
                                 Have questions?{' '}
                                 <Link href="/contact" className="text-(--primary) hover:underline">
