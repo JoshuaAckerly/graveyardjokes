@@ -151,6 +151,9 @@ Route::fallback(function () {
     abort(404);
 });
 
+Route::get('/test-csrf', function (){
+    dd(csrf_token());
+});
 
 require __DIR__ . '/settings.php';
 require __DIR__ . '/auth.php';
