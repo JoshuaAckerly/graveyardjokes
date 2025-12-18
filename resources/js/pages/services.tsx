@@ -90,7 +90,7 @@ export default function Services() {
             </Head>
 
             <MainLayout>
-                <div className="relative max-w-full bg-[var(--color-foreground)] text-center shadow-lg">
+                <div className="relative max-w-full bg-foreground text-center shadow-lg">
                     {/* Hero Banner */}
                     <div className="absolute inset-0 max-h-96">
                         <img
@@ -99,7 +99,7 @@ export default function Services() {
                             alt="Services hero banner"
                             className="pointer-events-none h-full w-full object-cover opacity-80"
                         />
-                        <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-foreground)] to-transparent" />
+                        <div className="absolute inset-0 bg-linear-to-t from-foreground to-transparent" />
                     </div>
 
                     {/* Header Section */}
@@ -130,7 +130,7 @@ export default function Services() {
                                     key={pkg.title}
                                     className={`relative z-0 flex flex-col rounded-lg border-2 p-4 shadow-lg transition sm:p-6 ${
                                         pkg.popular
-                                            ? 'border-(--primary) bg-(--card) shadow-xl shadow-(--primary)/20'
+                                            ? 'border-(--primary) bg-(--card) shadow-(--primary)/20 shadow-xl'
                                             : 'border-(--accent) bg-(--card)'
                                     }`}
                                     initial={{ opacity: 0, y: 20 }}

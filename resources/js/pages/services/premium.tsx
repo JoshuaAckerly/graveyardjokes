@@ -1,7 +1,11 @@
 import MainLayout from '@/Layouts/MainLayout';
 import { Head, Link } from '@inertiajs/react';
 import { motion } from 'framer-motion';
+<<<<<<< HEAD
 import { Check, ArrowLeft } from 'lucide-react';
+=======
+import { ArrowLeft, Check } from 'lucide-react';
+>>>>>>> 3af94ce9a36ea4fab79cd3b986493cecd56f508a
 import { useEffect, useRef, useState } from 'react';
 
 export default function PremiumPackage() {
@@ -25,7 +29,12 @@ export default function PremiumPackage() {
 
         // Load the script
         const script = document.createElement('script');
+<<<<<<< HEAD
         script.src = 'https://www.paypal.com/sdk/js?client-id=BAAEThXfkghKIa87QQOlnsIur64eOCnBLuAxJeYWYDW5o366RczxK2o9F8DtrXnte6SY65yJRFso_mMA2o&components=hosted-buttons&enable-funding=venmo,paylater&disable-funding=card,credit&currency=USD';
+=======
+        script.src =
+            'https://www.paypal.com/sdk/js?client-id=BAAEThXfkghKIa87QQOlnsIur64eOCnBLuAxJeYWYDW5o366RczxK2o9F8DtrXnte6SY65yJRFso_mMA2o&components=hosted-buttons&enable-funding=venmo,paylater&disable-funding=card,credit&currency=USD';
+>>>>>>> 3af94ce9a36ea4fab79cd3b986493cecd56f508a
         script.async = true;
         script.onload = () => setIsPayPalReady(true);
         document.body.appendChild(script);
@@ -63,6 +72,7 @@ export default function PremiumPackage() {
         <>
             <Head>
                 <title>Premium Package - $3,000+ | Graveyard Jokes Studios</title>
+<<<<<<< HEAD
                 <meta name="description" content="Full-featured solution for serious professionals. E-commerce, streaming, custom integrations, and premium support." />
             </Head>
 
@@ -73,12 +83,104 @@ export default function PremiumPackage() {
                         Back to Services
                     </Link>
 
+=======
+                <meta
+                    name="description"
+                    content="Full-featured solution for serious professionals. E-commerce, streaming, custom integrations, and premium support."
+                />
+                <meta
+                    name="keywords"
+                    content="premium package, e-commerce, merch store, streaming, custom website, API integration, priority support, full-stack development"
+                />
+                <link rel="canonical" href="https://graveyardjokes.com/services/premium" />
+                {/* Open Graph */}
+                <meta property="og:title" content="Premium Package - $3,000+ | Graveyard Jokes Studios" />
+                <meta
+                    property="og:description"
+                    content="Full-featured solution for serious professionals. E-commerce, streaming, custom integrations, and premium support."
+                />
+                <meta property="og:image" content={`${cdn}/images/aboutBanner.webp`} />
+                <meta property="og:type" content="website" />
+                <meta property="og:url" content="https://graveyardjokes.com/services/premium" />
+                {/* Twitter */}
+                <meta name="twitter:card" content="summary_large_image" />
+                <meta name="twitter:title" content="Premium Package - $3,000+ | Graveyard Jokes Studios" />
+                <meta
+                    name="twitter:description"
+                    content="Full-featured solution for serious professionals. E-commerce, streaming, custom integrations, and premium support."
+                />
+                <meta name="twitter:image" content={`${cdn}/images/aboutBanner.webp`} />
+                {/* Structured Data (JSON-LD) */}
+                <script type="application/ld+json">
+                    {`
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "serviceType": "Web Design",
+  "name": "Premium Package",
+  "description": "Full-featured solution for serious professionals. E-commerce, streaming, custom integrations, and premium support.",
+  "provider": {
+    "@type": "Organization",
+    "name": "GraveYard Jokes Studios Inc.",
+    "url": "https://graveyardjokes.com"
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "3000",
+    "priceCurrency": "USD",
+    "availability": "https://schema.org/InStock"
+  },
+  "areaServed": "US",
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Premium Package Features",
+    "itemListElement": [
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Everything in Professional" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "E-commerce/merch store" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Event calendar & ticketing" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Music/video streaming" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Custom animations & effects" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "API integrations" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "6 months of support" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Priority updates" } }
+    ]
+  }
+}
+`}
+                </script>
+            </Head>
+
+            <MainLayout>
+                {/* Pay Over Time Section */}
+                <div className="mx-auto mb-8 max-w-2xl rounded-lg border-2 border-(--primary) bg-black/80 p-8 text-white shadow-xl">
+                    <div className="flex flex-col items-center gap-3">
+                        <span className="text-4xl">💀💸</span>
+                        <h2 className="text-2xl font-bold">Pay Over Time with PayPal</h2>
+                        <p className="mt-2 text-lg text-white/80">
+                            Want a killer website but your wallet's feeling a little... lifeless? <br />
+                            With PayPal's <span className="font-semibold text-(--primary)">Pay Over Time</span> options, you can break up your payments—no need to dig up your savings all at once!
+                        </p>
+                        <p className="mt-4 text-base text-white/60 italic">
+                            "Even the Grim Reaper appreciates flexible payments. He says, 'Why pay it all now when you can pay it... over time?'"
+                        </p>
+                        <div className="mt-4 rounded bg-white/10 px-4 py-2 text-sm text-white/80">
+                            Look for <span className="font-semibold text-(--primary)">Pay Later</span> at checkout!
+                        </div>
+                    </div>
+                </div>
+                <div className="mx-auto max-w-4xl px-4 py-8">
+                    <Link href="/services" className="mb-6 inline-flex items-center gap-2 text-white transition hover:text-(--primary)">
+                        <ArrowLeft className="h-5 w-5" />
+                        Back to Services
+                    </Link>
+>>>>>>> 3af94ce9a36ea4fab79cd3b986493cecd56f508a
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.5 }}
                         className="rounded-lg border-2 border-(--accent) bg-(--card) p-8"
                     >
+<<<<<<< HEAD
                         <h1 className="text-4xl font-bold text-white mb-4">Premium Package</h1>
                         <div className="mb-6">
                             <span className="text-5xl font-bold text-(--primary)">$3,000+</span>
@@ -88,6 +190,14 @@ export default function PremiumPackage() {
                         </p>
 
                         <h2 className="text-2xl font-bold text-white mb-4">What's Included:</h2>
+=======
+                        <h1 className="mb-4 text-4xl font-bold text-white">Premium Package</h1>
+                        <div className="mb-6">
+                            <span className="text-5xl font-bold text-(--primary)">$3,000+</span>
+                        </div>
+                        <p className="mb-8 text-lg text-gray-300">Full-featured solution for serious professionals</p>
+                        <h2 className="mb-4 text-2xl font-bold text-white">What's Included:</h2>
+>>>>>>> 3af94ce9a36ea4fab79cd3b986493cecd56f508a
                         <ul className="mb-8 space-y-3">
                             {features.map((feature, index) => (
                                 <li key={index} className="flex items-start gap-3 text-gray-200">
@@ -96,6 +206,7 @@ export default function PremiumPackage() {
                                 </li>
                             ))}
                         </ul>
+<<<<<<< HEAD
 
                         <div className="border-t border-gray-700 pt-8">
                             <h2 className="text-2xl font-bold text-white mb-4">Ready to Get Started?</h2>
@@ -109,6 +220,22 @@ export default function PremiumPackage() {
 
                             <p className="text-sm text-gray-400">
                                 Have questions? <Link href="/contact" className="text-(--primary) hover:underline">Contact us</Link>
+=======
+                        <div className="border-t border-gray-700 pt-8">
+                            <h2 className="mb-4 text-2xl font-bold text-white">Ready to Get Started?</h2>
+                            <p className="mb-6 text-gray-300">
+                                Click the button below to proceed with payment. After payment, we'll contact you within 24 hours to discuss your
+                                project requirements.
+                            </p>
+                            <div className="mb-6" style={{ minHeight: '45px' }}>
+                                <div ref={paypalContainerRef} />
+                            </div>
+                            <p className="text-sm text-gray-400">
+                                Have questions?{' '}
+                                <Link href="/contact" className="text-(--primary) hover:underline">
+                                    Contact us
+                                </Link>
+>>>>>>> 3af94ce9a36ea4fab79cd3b986493cecd56f508a
                             </p>
                         </div>
                     </motion.div>

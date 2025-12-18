@@ -1,6 +1,5 @@
 import MainLayout from '@/Layouts/MainLayout';
 import { Head, router } from '@inertiajs/react';
-import { motion } from 'framer-motion';
 import { ChangeEvent, FormEvent, useState } from 'react';
 
 type FormValues = {
@@ -95,6 +94,7 @@ export default function ContactPricing() {
         <>
             <Head>
                 <title>Contact | Graveyard Jokes Studios</title>
+<<<<<<< HEAD
                 <meta
                     name="description"
                     content="Contact Graveyard Jokes Studios for custom websites. Get in touch to discuss your project."
@@ -103,6 +103,10 @@ export default function ContactPricing() {
                     name="keywords"
                     content="contact, custom websites, web design, web development, musicians, artists, creatives"
                 />
+=======
+                <meta name="description" content="Contact Graveyard Jokes Studios for custom websites. Get in touch to discuss your project." />
+                <meta name="keywords" content="contact, custom websites, web design, web development, musicians, artists, creatives" />
+>>>>>>> 3af94ce9a36ea4fab79cd3b986493cecd56f508a
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
 
                 {/* Canonical */}
@@ -155,7 +159,12 @@ export default function ContactPricing() {
 
                     <div className="relative z-10 px-6 py-24 sm:py-32 lg:mx-auto lg:w-1/2 lg:px-8">
                         <p className="mb-6 text-center text-lg text-[var(--primary)]">
+<<<<<<< HEAD
                             Ready to bring your vision to life? Let's discuss your project and create something amazing together. Contact us below and we'll get back to you within 24 hours.
+=======
+                            Ready to bring your vision to life? Let's discuss your project and create something amazing together. Contact us below and
+                            we'll get back to you within 24 hours.
+>>>>>>> 3af94ce9a36ea4fab79cd3b986493cecd56f508a
                         </p>
 
                         <form onSubmit={handleSubmit} className="-xl mx-auto max-w-xl bg-white p-8 shadow-lg">

@@ -96,6 +96,29 @@ export default function Home(): JSX.Element {
                 </a>
 
                 <div className="relative z-0 max-w-full space-y-10 bg-[var(--color-foreground)] text-center">
+                    {/* Pay Over Time Section */}
+                    <motion.section
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true, amount: 0.2 }}
+                        transition={{ duration: 0.8 }}
+                        className="relative z-20 mx-auto my-8 max-w-2xl rounded-lg border-2 border-(--primary) bg-black/80 p-8 text-white shadow-xl"
+                    >
+                        <div className="flex flex-col items-center gap-3">
+                            <span className="text-4xl">💀💸</span>
+                            <h2 className="text-2xl font-bold">Pay Over Time with PayPal</h2>
+                            <p className="mt-2 text-lg text-white/80">
+                                Want a killer website but your wallet's feeling a little... lifeless? <br />
+                                With PayPal's <span className="font-semibold text-(--primary)">Pay Over Time</span> options, you can break up your payments—no need to dig up your savings all at once!
+                            </p>
+                            <p className="mt-4 text-base text-white/60 italic">
+                                "Even the Grim Reaper appreciates flexible payments. He says, 'Why pay it all now when you can pay it... over time?'"
+                            </p>
+                            <div className="mt-4 rounded bg-white/10 px-4 py-2 text-sm text-white/80">
+                                Look for <span className="font-semibold text-(--primary)">Pay Later</span> at checkout!
+                            </div>
+                        </div>
+                    </motion.section>
                     {/* Background Image and Gradient */}
                     <div className="absolute inset-0 max-h-96">
                         <img
@@ -170,7 +193,123 @@ export default function Home(): JSX.Element {
                             </div>
                         </div>
                     </motion.div>
+                    {/* Services Section */}
+                    <motion.section
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true, amount: 0.2 }}
+                        transition={{ duration: 0.8 }}
+                        className="relative z-10 mx-auto w-full max-w-6xl space-y-8 px-6 py-16 sm:px-12"
+                    >
+                        <div className="text-center">
+                            <h2 className="text-3xl font-bold text-white sm:text-4xl">What I Offer</h2>
+                            <p className="mt-4 text-lg text-white/70">Full-stack web development services tailored to your creative vision</p>
+                        </div>
 
+                        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+                            {/* Service Card 1 */}
+                            <motion.div
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true, amount: 0.2 }}
+                                transition={{ duration: 0.6, delay: 0.1 }}
+                                className="rounded-lg bg-white/5 p-6 text-left shadow-lg transition-all hover:bg-white/10"
+                            >
+                                <div className="mb-4 text-3xl">🎨</div>
+                                <h3 className="mb-2 text-xl font-semibold text-white">Custom Website Development</h3>
+                                <p className="text-sm text-white/70">
+                                    Fully custom websites built from scratch using modern technologies like Laravel, React, and TypeScript. Your
+                                    unique vision, perfectly realized.
+                                </p>
+                            </motion.div>
+
+                            {/* Service Card 2 */}
+                            <motion.div
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true, amount: 0.2 }}
+                                transition={{ duration: 0.6, delay: 0.2 }}
+                                className="rounded-lg bg-white/5 p-6 text-left shadow-lg transition-all hover:bg-white/10"
+                            >
+                                <div className="mb-4 text-3xl">🎭</div>
+                                <h3 className="mb-2 text-xl font-semibold text-white">Portfolio & Showcase Sites</h3>
+                                <p className="text-sm text-white/70">
+                                    Beautiful, responsive portfolios that highlight your work. Perfect for artists, musicians, photographers, and
+                                    creatives who need to make an impact.
+                                </p>
+                            </motion.div>
+
+                            {/* Service Card 3 */}
+                            <motion.div
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true, amount: 0.2 }}
+                                transition={{ duration: 0.6, delay: 0.3 }}
+                                className="rounded-lg bg-white/5 p-6 text-left shadow-lg transition-all hover:bg-white/10"
+                            >
+                                <div className="mb-4 text-3xl">🛒</div>
+                                <h3 className="mb-2 text-xl font-semibold text-white">E-commerce & Merch Stores</h3>
+                                <p className="text-sm text-white/70">
+                                    Sell your music, art, or merchandise online with a custom e-commerce solution. Integrated payments, inventory
+                                    management, and seamless checkout.
+                                </p>
+                            </motion.div>
+
+                            {/* Service Card 4 */}
+                            <motion.div
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true, amount: 0.2 }}
+                                transition={{ duration: 0.6, delay: 0.4 }}
+                                className="rounded-lg bg-white/5 p-6 text-left shadow-lg transition-all hover:bg-white/10"
+                            >
+                                <div className="mb-4 text-3xl">🚀</div>
+                                <h3 className="mb-2 text-xl font-semibold text-white">Landing Pages & Promo Sites</h3>
+                                <p className="text-sm text-white/70">
+                                    High-converting landing pages for album releases, tours, events, or product launches. Fast, focused, and optimized
+                                    to drive action.
+                                </p>
+                            </motion.div>
+
+                            {/* Service Card 5 */}
+                            <motion.div
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true, amount: 0.2 }}
+                                transition={{ duration: 0.6, delay: 0.5 }}
+                                className="rounded-lg bg-white/5 p-6 text-left shadow-lg transition-all hover:bg-white/10"
+                            >
+                                <div className="mb-4 text-3xl">⚙️</div>
+                                <h3 className="mb-2 text-xl font-semibold text-white">API Development & Integrations</h3>
+                                <p className="text-sm text-white/70">
+                                    Custom APIs and third-party integrations. Connect your site to Spotify, Shopify, payment processors, analytics,
+                                    and more.
+                                </p>
+                            </motion.div>
+
+                            {/* Service Card 6 */}
+                            <motion.div
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true, amount: 0.2 }}
+                                transition={{ duration: 0.6, delay: 0.6 }}
+                                className="rounded-lg bg-white/5 p-6 text-left shadow-lg transition-all hover:bg-white/10"
+                            >
+                                <div className="mb-4 text-3xl">🔧</div>
+                                <h3 className="mb-2 text-xl font-semibold text-white">Maintenance & Support</h3>
+                                <p className="text-sm text-white/70">
+                                    Keep your site running smoothly with ongoing maintenance, updates, security patches, and technical support. You
+                                    create, I maintain.
+                                </p>
+                            </motion.div>
+                        </div>
+
+                        <div className="pt-8 text-center">
+                            <p className="text-lg text-white/80">
+                                All services include mobile-responsive design, SEO optimization, and lightning-fast performance.
+                            </p>
+                        </div>
+                    </motion.section>
                     <div className="block md:flex md:items-center md:justify-center md:space-x-6">
                         <motion.p
                             initial={{ opacity: 0, y: 20 }}
@@ -205,12 +344,12 @@ export default function Home(): JSX.Element {
                         <section className="mx-auto max-w-3xl rounded-md bg-white/5 p-6 text-left text-white shadow-lg">
                             <div className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
                                 <div>
-                                    <h2 className="text-2xl font-semibold">Noteleks · Studio Promo</h2>
+                                    <h2 className="text-2xl font-semibold">Noteleks: Heroes Beyond Light</h2>
                                     <p className="mt-2 text-sm opacity-80">
-                                        I teamed up with Noteleks Studio to craft fast, beautiful sites for artists and musicians. Need a promo
-                                        landing page, EP release kit, or merch store? We build it — fast and on-brand.
+                                        My game created with Graveyard Jokes Studios — an immersive experience that showcases what's possible with
+                                        custom web development and interactive design.
                                     </p>
-                                    <p className="mt-3 text-sm opacity-70">Special offer: free initial consultation.</p>
+                                    <p className="mt-3 text-sm opacity-70">Explore the game and see the studio's capabilities in action.</p>
                                 </div>
 
                                 <div className="mt-4 flex items-center gap-4 sm:mt-0">

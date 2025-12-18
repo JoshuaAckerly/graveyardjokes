@@ -1,9 +1,20 @@
+import { Head } from '@inertiajs/react';
 import React from 'react';
 
 const Privacy: React.FC = () => {
     return (
-        <div title="Privacy Policy">
-            <div className="mx-auto max-w-4xl space-y-4 bg-gray-900 p-6 text-white">
+        <>
+            <Head>
+                <title>Privacy Policy | Graveyard Jokes Studios</title>
+                <meta
+                    name="description"
+                    content="Privacy Policy for GraveYard Jokes Studios Inc. Learn how we collect, use, and protect visitor information, analytics data, and contact form submissions."
+                />
+                <meta name="keywords" content="privacy policy, data protection, GDPR, visitor tracking, analytics, privacy" />
+                <link rel="canonical" href="https://graveyardjokes.com/privacy" />
+                <meta name="robots" content="noindex, follow" />
+            </Head>
+            <div title="Privacy Policy" className="mx-auto max-w-4xl space-y-4 bg-gray-900 p-6 text-white">
                 <h1 className="text-2xl font-bold">Privacy Policy</h1>
                 <p>
                     <strong>Effective Date:</strong> October 7, 2025
@@ -80,7 +91,7 @@ const Privacy: React.FC = () => {
                 <h2 className="text-xl font-semibold">6. Updates to This Policy</h2>
                 <p>We may update this Privacy Policy from time to time. Changes will be posted on this page with an updated effective date.</p>
             </div>
-        </div>
+        </>
     );
 };
 
