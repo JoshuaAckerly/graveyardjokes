@@ -1,4 +1,6 @@
 *
 !private/
 !public/
+!public/og-cache/
+!public/og-cache/*
 !.gitignore
