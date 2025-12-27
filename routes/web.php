@@ -86,15 +86,12 @@ Route::get('/generate-sitemap', function () {
         ->add(Url::create($base . '/contact'))
         ->add(Url::create($base . '/portfolio'))
         ->add(Url::create($base . '/services'))
-<<<<<<< HEAD
-=======
         ->add(Url::create($base . '/services/starter'))
         ->add(Url::create($base . '/services/professional'))
         ->add(Url::create($base . '/services/premium'))
         ->add(Url::create($base . '/terms'))
         ->add(Url::create($base . '/privacy'))
         ->add(Url::create($base . '/cookies'))
->>>>>>> 3af94ce9a36ea4fab79cd3b986493cecd56f508a
         ->writeToFile(public_path('sitemap.xml'));
 
     return 'Sitemap generated!';

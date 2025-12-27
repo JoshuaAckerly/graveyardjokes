@@ -1,11 +1,7 @@
 import MainLayout from '@/Layouts/MainLayout';
 import { Head, Link } from '@inertiajs/react';
 import { motion } from 'framer-motion';
-<<<<<<< HEAD
-import { Check, ArrowLeft } from 'lucide-react';
-=======
 import { ArrowLeft, Check } from 'lucide-react';
->>>>>>> 3af94ce9a36ea4fab79cd3b986493cecd56f508a
 import { useEffect, useRef, useState } from 'react';
 
 export default function PremiumPackage() {
@@ -29,12 +25,8 @@ export default function PremiumPackage() {
 
         // Load the script
         const script = document.createElement('script');
-<<<<<<< HEAD
-        script.src = 'https://www.paypal.com/sdk/js?client-id=BAAEThXfkghKIa87QQOlnsIur64eOCnBLuAxJeYWYDW5o366RczxK2o9F8DtrXnte6SY65yJRFso_mMA2o&components=hosted-buttons&enable-funding=venmo,paylater&disable-funding=card,credit&currency=USD';
-=======
         script.src =
             'https://www.paypal.com/sdk/js?client-id=BAAEThXfkghKIa87QQOlnsIur64eOCnBLuAxJeYWYDW5o366RczxK2o9F8DtrXnte6SY65yJRFso_mMA2o&components=hosted-buttons&enable-funding=venmo,paylater&disable-funding=card,credit&currency=USD';
->>>>>>> 3af94ce9a36ea4fab79cd3b986493cecd56f508a
         script.async = true;
         script.onload = () => setIsPayPalReady(true);
         document.body.appendChild(script);
@@ -72,18 +64,6 @@ export default function PremiumPackage() {
         <>
             <Head>
                 <title>Premium Package - $3,000+ | Graveyard Jokes Studios</title>
-<<<<<<< HEAD
-                <meta name="description" content="Full-featured solution for serious professionals. E-commerce, streaming, custom integrations, and premium support." />
-            </Head>
-
-            <MainLayout>
-                <div className="mx-auto max-w-4xl px-4 py-8">
-                    <Link href="/services" className="inline-flex items-center gap-2 text-white hover:text-(--primary) transition mb-6">
-                        <ArrowLeft className="h-5 w-5" />
-                        Back to Services
-                    </Link>
-
-=======
                 <meta
                     name="description"
                     content="Full-featured solution for serious professionals. E-commerce, streaming, custom integrations, and premium support."
@@ -173,70 +153,60 @@ export default function PremiumPackage() {
                         <ArrowLeft className="h-5 w-5" />
                         Back to Services
                     </Link>
->>>>>>> 3af94ce9a36ea4fab79cd3b986493cecd56f508a
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.5 }}
                         className="rounded-lg border-2 border-(--accent) bg-(--card) p-8"
                     >
-<<<<<<< HEAD
-                        <h1 className="text-4xl font-bold text-white mb-4">Premium Package</h1>
-                        <div className="mb-6">
-                            <span className="text-5xl font-bold text-(--primary)">$3,000+</span>
-                        </div>
-                        <p className="text-lg text-gray-300 mb-8">
-                            Full-featured solution for serious professionals
-                        </p>
-
-                        <h2 className="text-2xl font-bold text-white mb-4">What's Included:</h2>
-=======
                         <h1 className="mb-4 text-4xl font-bold text-white">Premium Package</h1>
                         <div className="mb-6">
                             <span className="text-5xl font-bold text-(--primary)">$3,000+</span>
+                            <p className="mt-2 text-lg text-white/80">
+                                Full-featured solution for serious professionals. E-commerce, streaming, custom integrations, and premium support.
+                            </p>
                         </div>
-                        <p className="mb-8 text-lg text-gray-300">Full-featured solution for serious professionals</p>
-                        <h2 className="mb-4 text-2xl font-bold text-white">What's Included:</h2>
->>>>>>> 3af94ce9a36ea4fab79cd3b986493cecd56f508a
-                        <ul className="mb-8 space-y-3">
-                            {features.map((feature, index) => (
-                                <li key={index} className="flex items-start gap-3 text-gray-200">
-                                    <Check className="mt-1 h-6 w-6 shrink-0 text-(--primary)" />
-                                    <span className="text-lg">{feature}</span>
-                                </li>
-                            ))}
-                        </ul>
-<<<<<<< HEAD
 
-                        <div className="border-t border-gray-700 pt-8">
-                            <h2 className="text-2xl font-bold text-white mb-4">Ready to Get Started?</h2>
-                            <p className="text-gray-300 mb-6">
-                                Click the button below to proceed with payment. After payment, we'll contact you within 24 hours to discuss your project requirements.
-                            </p>
-                            
-                            <div className="mb-6" style={{ minHeight: '45px' }}>
-                                <div ref={paypalContainerRef} />
-                            </div>
+                        <div className="mb-8">
+                            <h2 className="mb-4 text-2xl font-semibold text-white">What's Included:</h2>
+                            <ul className="space-y-3">
+                                {features.map((feature, index) => (
+                                    <motion.li
+                                        key={index}
+                                        initial={{ opacity: 0, x: -20 }}
+                                        animate={{ opacity: 1, x: 0 }}
+                                        transition={{ delay: index * 0.1 }}
+                                        className="flex items-center gap-3"
+                                    >
+                                        <Check className="h-5 w-5 text-(--primary)" />
+                                        <span className="text-white">{feature}</span>
+                                    </motion.li>
+                                ))}
+                            </ul>
+                        </div>
 
-                            <p className="text-sm text-gray-400">
-                                Have questions? <Link href="/contact" className="text-(--primary) hover:underline">Contact us</Link>
-=======
-                        <div className="border-t border-gray-700 pt-8">
-                            <h2 className="mb-4 text-2xl font-bold text-white">Ready to Get Started?</h2>
-                            <p className="mb-6 text-gray-300">
-                                Click the button below to proceed with payment. After payment, we'll contact you within 24 hours to discuss your
-                                project requirements.
+                        <div className="mb-8">
+                            <h3 className="mb-4 text-xl font-semibold text-white">Perfect For:</h3>
+                            <ul className="space-y-2 text-white/80">
+                                <li>• Established businesses needing comprehensive solutions</li>
+                                <li>• E-commerce stores with complex requirements</li>
+                                <li>• Content creators with streaming needs</li>
+                                <li>• Organizations requiring custom integrations</li>
+                            </ul>
+                        </div>
+
+                        <div className="rounded-lg bg-black/50 p-6">
+                            <h3 className="mb-4 text-xl font-semibold text-white">Ready to Get Started?</h3>
+                            <p className="mb-6 text-white/80">
+                                This premium package includes everything you need for a professional online presence with advanced features and ongoing support.
                             </p>
-                            <div className="mb-6" style={{ minHeight: '45px' }}>
-                                <div ref={paypalContainerRef} />
+                            <div ref={paypalContainerRef} className="min-h-[50px]">
+                                {!isPayPalReady && (
+                                    <div className="flex items-center justify-center py-4">
+                                        <div className="text-white/60">Loading PayPal...</div>
+                                    </div>
+                                )}
                             </div>
-                            <p className="text-sm text-gray-400">
-                                Have questions?{' '}
-                                <Link href="/contact" className="text-(--primary) hover:underline">
-                                    Contact us
-                                </Link>
->>>>>>> 3af94ce9a36ea4fab79cd3b986493cecd56f508a
-                            </p>
                         </div>
                     </motion.div>
                 </div>

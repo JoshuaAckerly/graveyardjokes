@@ -77,13 +77,7 @@ export default function PayPalDonateButton({ variant = 'default', className = ''
                 <Heart className="h-12 w-12 text-(--primary)" fill="currentColor" />
             </div>
             <h3 className="mb-2 text-2xl font-bold text-white">Support Our Studio</h3>
-<<<<<<< HEAD
-            <p className="mb-4 text-sm text-gray-300">
-                Help fund GraveYard Jokes Studios and support the creation of more creative projects!
-            </p>
-=======
             <p className="mb-4 text-sm text-gray-300">Help fund GraveYard Jokes Studios and support the creation of more creative projects!</p>
->>>>>>> 3af94ce9a36ea4fab79cd3b986493cecd56f508a
 
             {/* PayPal SDK Button Container - only shows if hostedButtonId is provided */}
             {hostedButtonId && <div ref={paypalContainerRef} className="relative z-0 mb-3"></div>}
