@@ -1,11 +1,7 @@
 import MainLayout from '@/Layouts/MainLayout';
 import { Head, Link } from '@inertiajs/react';
 import { motion } from 'framer-motion';
-<<<<<<< HEAD
-import { Check, ArrowLeft } from 'lucide-react';
-=======
 import { ArrowLeft, Check } from 'lucide-react';
->>>>>>> 3af94ce9a36ea4fab79cd3b986493cecd56f508a
 import { useEffect, useRef, useState } from 'react';
 
 export default function StarterPackage() {
@@ -29,12 +25,8 @@ export default function StarterPackage() {
 
         // Load the script
         const script = document.createElement('script');
-<<<<<<< HEAD
-        script.src = 'https://www.paypal.com/sdk/js?client-id=BAAEThXfkghKIa87QQOlnsIur64eOCnBLuAxJeYWYDW5o366RczxK2o9F8DtrXnte6SY65yJRFso_mMA2o&components=hosted-buttons&enable-funding=venmo,paylater&disable-funding=card,credit&currency=USD';
-=======
         script.src =
             'https://www.paypal.com/sdk/js?client-id=BAAEThXfkghKIa87QQOlnsIur64eOCnBLuAxJeYWYDW5o366RczxK2o9F8DtrXnte6SY65yJRFso_mMA2o&components=hosted-buttons&enable-funding=venmo,paylater&disable-funding=card,credit&currency=USD';
->>>>>>> 3af94ce9a36ea4fab79cd3b986493cecd56f508a
         script.async = true;
         script.onload = () => setIsPayPalReady(true);
         document.body.appendChild(script);
@@ -70,18 +62,6 @@ export default function StarterPackage() {
         <>
             <Head>
                 <title>Starter Package - $600 | Graveyard Jokes Studios</title>
-<<<<<<< HEAD
-                <meta name="description" content="Perfect for artists and musicians starting their online presence. Single-page responsive website with contact form and social media integration." />
-            </Head>
-
-            <MainLayout>
-                <div className="mx-auto max-w-4xl px-4 py-8">
-                    <Link href="/services" className="inline-flex items-center gap-2 text-white hover:text-(--primary) transition mb-6">
-                        <ArrowLeft className="h-5 w-5" />
-                        Back to Services
-                    </Link>
-
-=======
                 <meta
                     name="description"
                     content="Perfect for artists and musicians starting their online presence. Single-page responsive website with contact form and social media integration."
@@ -169,31 +149,18 @@ export default function StarterPackage() {
                         <ArrowLeft className="h-5 w-5" />
                         Back to Services
                     </Link>
->>>>>>> 3af94ce9a36ea4fab79cd3b986493cecd56f508a
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.5 }}
                         className="rounded-lg border-2 border-(--accent) bg-(--card) p-8"
                     >
-<<<<<<< HEAD
-                        <h1 className="text-4xl font-bold text-white mb-4">Starter Package</h1>
-                        <div className="mb-6">
-                            <span className="text-5xl font-bold text-(--primary)">$600</span>
-                        </div>
-                        <p className="text-lg text-gray-300 mb-8">
-                            Perfect for artists and musicians starting their online presence
-                        </p>
-
-                        <h2 className="text-2xl font-bold text-white mb-4">What's Included:</h2>
-=======
                         <h1 className="mb-4 text-4xl font-bold text-white">Starter Package</h1>
                         <div className="mb-6">
                             <span className="text-5xl font-bold text-(--primary)">$600</span>
                         </div>
                         <p className="mb-8 text-lg text-gray-300">Perfect for artists and musicians starting their online presence</p>
                         <h2 className="mb-4 text-2xl font-bold text-white">What's Included:</h2>
->>>>>>> 3af94ce9a36ea4fab79cd3b986493cecd56f508a
                         <ul className="mb-8 space-y-3">
                             {features.map((feature, index) => (
                                 <li key={index} className="flex items-start gap-3 text-gray-200">
@@ -202,21 +169,6 @@ export default function StarterPackage() {
                                 </li>
                             ))}
                         </ul>
-<<<<<<< HEAD
-
-                        <div className="border-t border-gray-700 pt-8">
-                            <h2 className="text-2xl font-bold text-white mb-4">Ready to Get Started?</h2>
-                            <p className="text-gray-300 mb-6">
-                                Click the button below to proceed with payment. After payment, we'll contact you within 24 hours to discuss your project requirements.
-                            </p>
-                            
-                            <div className="mb-6" style={{ minHeight: '45px' }}>
-                                <div ref={paypalContainerRef} />
-                            </div>
-
-                            <p className="text-sm text-gray-400">
-                                Have questions? <Link href="/contact" className="text-(--primary) hover:underline">Contact us</Link>
-=======
                         <div className="border-t border-gray-700 pt-8">
                             <h2 className="mb-4 text-2xl font-bold text-white">Ready to Get Started?</h2>
                             <p className="mb-6 text-gray-300">
@@ -231,7 +183,6 @@ export default function StarterPackage() {
                                 <Link href="/contact" className="text-(--primary) hover:underline">
                                     Contact us
                                 </Link>
->>>>>>> 3af94ce9a36ea4fab79cd3b986493cecd56f508a
                             </p>
                         </div>
                     </motion.div>

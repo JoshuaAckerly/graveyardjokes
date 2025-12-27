@@ -26,14 +26,10 @@ export default function MobileMenu() {
             {isOpen && (
                 <>
                     {/* Backdrop */}
-<<<<<<< HEAD
-                    <div className="fixed inset-0 z-[9990] bg-[var(--color-background)] opacity-80 backdrop-blur-md" onClick={() => setIsOpen(false)} />
-=======
                     <div
                         className="fixed inset-0 z-[9990] bg-[var(--color-background)] opacity-80 backdrop-blur-md"
                         onClick={() => setIsOpen(false)}
                     />
->>>>>>> 3af94ce9a36ea4fab79cd3b986493cecd56f508a
 
                     {/* Menu */}
                     <div className="fixed inset-0 z-[9995] flex items-center justify-center">

@@ -1,4 +1,4 @@
-import PayPalDonateButton from '@/Components/PayPalDonateButton';
+// ...existing code...
 import MainLayout from '@/Layouts/MainLayout';
 import { Head } from '@inertiajs/react';
 import { motion } from 'framer-motion';
