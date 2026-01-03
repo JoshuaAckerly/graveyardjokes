@@ -27,3 +27,21 @@ yarn-error.log
 s3-organization-report.json
 s3-uncategorized-files.json
 sitemap_index.xml
+/public/sitemap.xml
+/public/sitemap_index.xml
+/public/sitemap_validation_summary.md
+
+# Development files (not needed on server)
+herd.yml
+dev.bat
+deploy-forge.sh
+
+# OS files
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# OG Image cache (generated dynamically)
+/public/storage/og-cache/*.png
