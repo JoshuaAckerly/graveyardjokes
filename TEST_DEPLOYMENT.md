@@ -92,9 +92,7 @@ The project has been cleaned and prepared with:
 
 1. **Updated .gitignore** - Excludes:
    - Generated files (sitemaps, OG cache)
-   - Development tools (herd.yml, dev.bat)
    - OS-specific files (.DS_Store, Thumbs.db)
-   - Forge-specific files (deploy-forge.sh)
 
 2. **Removed Generated Files**:
    - Sitemap XML files (regenerated on server)

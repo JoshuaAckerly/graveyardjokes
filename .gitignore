@@ -31,11 +31,6 @@ sitemap_index.xml
 /public/sitemap_index.xml
 /public/sitemap_validation_summary.md
 
-# Development files (not needed on server)
-herd.yml
-dev.bat
-deploy-forge.sh
-
 # OS files
 .DS_Store
 Thumbs.db
