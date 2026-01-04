@@ -134,7 +134,8 @@ export default function StarterPackage() {
                         <h2 className="text-2xl font-bold">Pay Over Time with PayPal</h2>
                         <p className="mt-2 text-lg text-white/80">
                             Want a killer website but your wallet's feeling a little... lifeless? <br />
-                            With PayPal's <span className="font-semibold text-(--primary)">Pay Over Time</span> options, you can break up your payments—no need to dig up your savings all at once!
+                            With PayPal's <span className="font-semibold text-(--primary)">Pay Over Time</span> options, you can break up your
+                            payments—no need to dig up your savings all at once!
                         </p>
                         <p className="mt-4 text-base text-white/60 italic">
                             "Even the Grim Reaper appreciates flexible payments. He says, 'Why pay it all now when you can pay it... over time?'"

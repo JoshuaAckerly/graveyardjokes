@@ -1,7 +1,7 @@
 import MainLayout from '@/Layouts/MainLayout';
 import { Head, Link } from '@inertiajs/react';
 import { motion } from 'framer-motion';
-import { Check, ArrowLeft } from 'lucide-react';
+import { ArrowLeft, Check } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 
 export default function ProfessionalPackage() {
@@ -9,16 +9,16 @@ export default function ProfessionalPackage() {
     const [isPayPalReady, setIsPayPalReady] = useState(false);
 
     const features = [
-        "Custom, mobile-friendly website design",
-        "Up to 10 pages (Home, About, Portfolio, Shop, etc.)",
-        "Integrated e-commerce (Shopify, WooCommerce, or Stripe)",
-        "Blog setup & artist news section",
-        "Mailing list integration (Mailchimp, ConvertKit, etc.)",
-        "Social media & music platform links",
-        "Contact & booking forms",
-        "Basic SEO optimization",
-        "Performance optimization",
-        "1 year of free hosting & support"
+        'Custom, mobile-friendly website design',
+        'Up to 10 pages (Home, About, Portfolio, Shop, etc.)',
+        'Integrated e-commerce (Shopify, WooCommerce, or Stripe)',
+        'Blog setup & artist news section',
+        'Mailing list integration (Mailchimp, ConvertKit, etc.)',
+        'Social media & music platform links',
+        'Contact & booking forms',
+        'Basic SEO optimization',
+        'Performance optimization',
+        '1 year of free hosting & support',
     ];
 
     useEffect(() => {
@@ -37,7 +37,8 @@ export default function ProfessionalPackage() {
 
         // Load the script
         const script = document.createElement('script');
-        script.src = 'https://www.paypal.com/sdk/js?client-id=BAAEThXfkghKIa87QQOlnsIur64eOCnBLuAxJeYWYDW5o366RczxK2o9F8DtrXnte6SY65yJRFso_mMA2o&components=hosted-buttons&enable-funding=venmo,paylater&disable-funding=card,credit&currency=USD';
+        script.src =
+            'https://www.paypal.com/sdk/js?client-id=BAAEThXfkghKIa87QQOlnsIur64eOCnBLuAxJeYWYDW5o366RczxK2o9F8DtrXnte6SY65yJRFso_mMA2o&components=hosted-buttons&enable-funding=venmo,paylater&disable-funding=card,credit&currency=USD';
         script.async = true;
         script.onload = () => setIsPayPalReady(true);
         document.body.appendChild(script);
@@ -70,7 +71,8 @@ export default function ProfessionalPackage() {
                         <h2 className="text-2xl font-bold">Pay Over Time with PayPal</h2>
                         <p className="mt-2 text-lg text-white/80">
                             Want a killer website but your wallet's feeling a little... lifeless? <br />
-                            With PayPal's <span className="font-semibold text-(--primary)">Pay Over Time</span> options, you can break up your payments—no need to dig up your savings all at once!
+                            With PayPal's <span className="font-semibold text-(--primary)">Pay Over Time</span> options, you can break up your
+                            payments—no need to dig up your savings all at once!
                         </p>
                         <p className="mt-4 text-base text-white/60 italic">
                             "Even the Grim Reaper appreciates flexible payments. He says, 'Why pay it all now when you can pay it... over time?'"
@@ -91,18 +93,14 @@ export default function ProfessionalPackage() {
                         transition={{ duration: 0.5 }}
                         className="rounded-lg border-2 border-(--primary) bg-(--card) p-8 shadow-xl"
                     >
-                        <div className="mb-4 inline-block rounded-full bg-(--primary) px-4 py-1 text-xs font-bold text-white">
-                            MOST POPULAR
-                        </div>
-                        <h1 className="text-4xl font-bold text-white mb-4">Professional Package</h1>
+                        <div className="mb-4 inline-block rounded-full bg-(--primary) px-4 py-1 text-xs font-bold text-white">MOST POPULAR</div>
+                        <h1 className="mb-4 text-4xl font-bold text-white">Professional Package</h1>
                         <div className="mb-6">
                             <span className="text-5xl font-bold text-(--primary)">$1,500</span>
                         </div>
-                        <p className="text-lg text-gray-300 mb-8">
-                            Ideal for established artists with growing audiences
-                        </p>
+                        <p className="mb-8 text-lg text-gray-300">Ideal for established artists with growing audiences</p>
 
-                        <h2 className="text-2xl font-bold text-white mb-4">What's Included:</h2>
+                        <h2 className="mb-4 text-2xl font-bold text-white">What's Included:</h2>
                         <ul className="mb-8 space-y-3">
                             {features.map((feature, index) => (
                                 <li key={index} className="flex items-start gap-3 text-gray-200">

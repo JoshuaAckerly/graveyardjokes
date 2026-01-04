@@ -1,8 +1,8 @@
 // ...existing code...
+import PayPalDonateButton from '@/Components/PayPalDonateButton';
 import MainLayout from '@/Layouts/MainLayout';
 import { Head } from '@inertiajs/react';
 import { motion } from 'framer-motion';
-import PayPalDonateButton from '@/Components/PayPalDonateButton';
 
 export default function About() {
     const cdn = import.meta.env.VITE_ASSET_URL || '';

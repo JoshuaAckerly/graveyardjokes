@@ -47,14 +47,7 @@ interface ServicePackageCardProps {
     popular?: boolean;
 }
 
-export default function ServicePackageCard({
-    title,
-    price,
-    description,
-    features,
-    hostedButtonId,
-    popular = false,
-}: ServicePackageCardProps) {
+export default function ServicePackageCard({ title, price, description, features, hostedButtonId, popular = false }: ServicePackageCardProps) {
     const paypalContainerRef = useRef<HTMLDivElement>(null);
     const [isPayPalReady, setIsPayPalReady] = useState(false);
     const [showPayPal, setShowPayPal] = useState(false);
@@ -98,9 +91,7 @@ export default function ServicePackageCard({
     return (
         <motion.div
             className={`relative z-0 flex flex-col rounded-lg border-2 p-4 shadow-lg transition sm:p-6 ${
-                popular
-                    ? 'border-(--primary) bg-(--card) shadow-xl shadow-(--primary)/20'
-                    : 'border-(--accent) bg-(--card)'
+                popular ? 'border-(--primary) bg-(--card) shadow-(--primary)/20 shadow-xl' : 'border-(--accent) bg-(--card)'
             }`}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -143,10 +134,7 @@ export default function ServicePackageCard({
                         }}
                     />
                 ) : (
-                    <button
-                        disabled
-                        className="w-full rounded-lg bg-gray-400 px-6 py-3 font-semibold text-white"
-                    >
+                    <button disabled className="w-full rounded-lg bg-gray-400 px-6 py-3 font-semibold text-white">
                         Loading PayPal...
                     </button>
                 )}
