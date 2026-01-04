@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
+use Illuminate\Http\Client\Response;
 use Illuminate\Support\Facades\Http;
 
 class GenerateSitemapIndex extends Command
@@ -68,6 +69,7 @@ class GenerateSitemapIndex extends Command
                 try {
                     $this->line('Checking '.$loc.' ...');
                     // Use HEAD first to save bandwidth; fall back to GET if not allowed
+                    /** @var Response $resp */
                     $resp = Http::timeout(5)->withHeaders(['User-Agent' => 'graveyardjokes-sitemap-validator/1.0'])->head($loc);
 
                     if ($resp->successful()) {
@@ -80,6 +82,7 @@ class GenerateSitemapIndex extends Command
                     }
 
                     // Some servers don't respond to HEAD properly; try GET
+                    /** @var Response $resp */
                     $resp = Http::timeout(5)->get($loc);
                     if ($resp->successful()) {
                         $entries[] = (string) $loc;

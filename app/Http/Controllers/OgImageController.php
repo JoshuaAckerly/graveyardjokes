@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Client\Response;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
@@ -41,6 +42,7 @@ class OgImageController
 
         try {
             // Fetch page HTML
+            /** @var Response $resp */
             $resp = Http::withHeaders([
                 'User-Agent' => 'GraveyardJokesBot/1.0',
             ])->timeout(6)->get($target);
@@ -93,6 +95,7 @@ class OgImageController
             $imgUrl = $this->resolveUrl($ogImage, $target);
 
             // Fetch image
+            /** @var Response $imgResp */
             $imgResp = Http::withHeaders(['User-Agent' => 'GraveyardJokesBot/1.0'])->timeout(10)->get($imgUrl);
             if (! $imgResp->successful()) {
                 return response()->json(['error' => 'Failed to download image', 'status' => $imgResp->status()], 502);
