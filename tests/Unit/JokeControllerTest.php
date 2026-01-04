@@ -3,9 +3,9 @@
 namespace Tests\Unit;
 
 use App\Http\Controllers\JokeController;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Tests\TestCase;
-use Illuminate\Http\JsonResponse;
 
 class JokeControllerTest extends TestCase
 {
@@ -14,14 +14,14 @@ class JokeControllerTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        $this->controller = new JokeController();
+        $this->controller = new JokeController;
     }
 
     public function test_random_returns_json_response(): void
     {
-        $request = new Request();
+        $request = new Request;
         $response = $this->controller->random($request);
-        
+
         $this->assertInstanceOf(JsonResponse::class, $response);
     }
 }

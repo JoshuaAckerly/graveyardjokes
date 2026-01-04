@@ -48,10 +48,10 @@ class NewPasswordController extends Controller
             $request->only('email', 'password', 'password_confirmation', 'token'),
             function (User $user) use ($request) {
                 $password = $request->input('password');
-                if (!is_string($password)) {
+                if (! is_string($password)) {
                     throw new \InvalidArgumentException('Password must be a string');
                 }
-                
+
                 $user->forceFill([
                     'password' => Hash::make($password),
                     'remember_token' => Str::random(60),

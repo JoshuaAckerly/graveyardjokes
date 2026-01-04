@@ -2,15 +2,17 @@
 
 namespace Tests\Unit;
 
-use App\Modules\Contact\Controllers\ContactController;
 use App\Contracts\ContactServiceInterface;
+use App\Modules\Contact\Controllers\ContactController;
 use Illuminate\Http\Request;
-use Tests\TestCase;
 use Mockery;
 use Mockery\MockInterface;
+use Tests\TestCase;
+
 class ModuleContactControllerTest extends TestCase
 {
     private ContactController $controller;
+
     /** @var ContactServiceInterface&MockInterface */
     private $contactService;
 
@@ -18,7 +20,7 @@ class ModuleContactControllerTest extends TestCase
     {
         parent::setUp();
         $this->contactService = Mockery::mock(ContactServiceInterface::class);
-        $this->controller = new ContactController();
+        $this->controller = new ContactController;
     }
 
     protected function tearDown(): void
@@ -29,9 +31,9 @@ class ModuleContactControllerTest extends TestCase
 
     public function test_store_returns_success_when_contact_created(): void
     {
-        $request = new Request();
+        $request = new Request;
         $contactData = ['id' => 1, 'email' => 'test@example.com'];
-        
+
         $this->contactService
             ->shouldReceive('store')
             ->with($request)
@@ -39,14 +41,14 @@ class ModuleContactControllerTest extends TestCase
             ->andReturn($contactData);
 
         $response = $this->controller->store($request, $this->contactService);
-        
+
         $this->assertEquals(302, $response->getStatusCode());
     }
 
     public function test_store_returns_error_when_contact_creation_fails(): void
     {
-        $request = new Request();
-        
+        $request = new Request;
+
         $this->contactService
             ->shouldReceive('store')
             ->with($request)
@@ -54,7 +56,7 @@ class ModuleContactControllerTest extends TestCase
             ->andReturn([]);
 
         $response = $this->controller->store($request, $this->contactService);
-        
+
         $this->assertEquals(302, $response->getStatusCode());
     }
 }

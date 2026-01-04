@@ -2,8 +2,8 @@
 
 namespace App\Modules\Contact\Controllers;
 
-use Illuminate\Http\Request;
 use App\Contracts\ContactServiceInterface;
+use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as BaseController;
 
 class ContactController extends BaseController

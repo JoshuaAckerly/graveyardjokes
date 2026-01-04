@@ -9,9 +9,9 @@ class ContactModelTest extends TestCase
 {
     public function test_fillable_attributes(): void
     {
-        $contact = new Contact();
+        $contact = new Contact;
         $expected = ['first_name', 'last_name', 'email', 'message'];
-        
+
         $this->assertEquals($expected, $contact->getFillable());
     }
 
@@ -21,7 +21,7 @@ class ContactModelTest extends TestCase
             'first_name' => 'John',
             'last_name' => 'Doe',
             'email' => 'john@example.com',
-            'message' => 'Test message'
+            'message' => 'Test message',
         ];
 
         $contact = new Contact($data);

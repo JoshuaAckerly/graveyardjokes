@@ -4,9 +4,9 @@ namespace Tests\Feature;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 
 /**
@@ -38,13 +38,13 @@ class ApiEndpointsTest extends TestCase
     public function test_random_joke_handles_missing_required_fields(): void
     {
         Cache::put('jokes_data', [
-            ['id' => 'incomplete']  // Missing setup, punchline
+            ['id' => 'incomplete'],  // Missing setup, punchline
         ]);
 
         $response = $this->get('/api/random-joke');
 
         $response->assertStatus(200)
-                ->assertJsonStructure(['id']);
+            ->assertJsonStructure(['id']);
     }
 
     public function test_random_joke_handles_large_dataset(): void
@@ -55,7 +55,7 @@ class ApiEndpointsTest extends TestCase
                 'id' => "joke_{$i}",
                 'setup' => "Setup {$i}",
                 'punchline' => "Punchline {$i}",
-                'category' => 'test'
+                'category' => 'test',
             ];
         }
         Cache::put('jokes_data', $jokes);
@@ -63,7 +63,7 @@ class ApiEndpointsTest extends TestCase
         $response = $this->get('/api/random-joke');
 
         $response->assertStatus(200)
-                ->assertJsonStructure(['id', 'setup', 'punchline', 'category']);
+            ->assertJsonStructure(['id', 'setup', 'punchline', 'category']);
     }
 
     public function test_random_joke_returns_valid_json_structure(): void
@@ -75,31 +75,31 @@ class ApiEndpointsTest extends TestCase
                 'punchline' => 'To get to the other side!',
                 'category' => 'classic',
                 'tags' => ['animals', 'classic'],
-                'rating' => 4.5
-            ]
+                'rating' => 4.5,
+            ],
         ]);
 
         $response = $this->getJson('/api/random-joke');
 
         $response->assertStatus(200)
-                ->assertJsonStructure([
-                    'id',
-                    'setup',
-                    'punchline',
-                    'category'
-                ]);
+            ->assertJsonStructure([
+                'id',
+                'setup',
+                'punchline',
+                'category',
+            ]);
     }
 
     public function test_random_joke_accepts_json_requests(): void
     {
         Cache::put('jokes_data', [
-            ['id' => 'test', 'setup' => 'Setup', 'punchline' => 'Punchline', 'category' => 'test']
+            ['id' => 'test', 'setup' => 'Setup', 'punchline' => 'Punchline', 'category' => 'test'],
         ]);
 
         $response = $this->json('GET', '/api/random-joke');
 
         $response->assertStatus(200)
-                ->assertHeader('Content-Type', 'application/json');
+            ->assertHeader('Content-Type', 'application/json');
     }
 
     // ===== OG Image API - Comprehensive Tests =====
@@ -107,13 +107,13 @@ class ApiEndpointsTest extends TestCase
     public function test_fetch_og_image_handles_no_images_found(): void
     {
         Http::fake([
-            'example.com' => Http::response('<html><body>No images here</body></html>', 200)
+            'example.com' => Http::response('<html><body>No images here</body></html>', 200),
         ]);
 
         $response = $this->get('/api/fetch-og-image?url=https://example.com');
 
         $response->assertStatus(404)
-                ->assertJson(['error' => 'No image found on target page']);
+            ->assertJson(['error' => 'No image found on target page']);
     }
 
     public function test_fetch_og_image_handles_relative_urls(): void
@@ -123,13 +123,13 @@ class ApiEndpointsTest extends TestCase
 
         Http::fake([
             'example.com' => Http::response($html, 200),
-            'example.com/images/logo.png' => Http::response($imageData, 200, ['Content-Type' => 'image/png'])
+            'example.com/images/logo.png' => Http::response($imageData, 200, ['Content-Type' => 'image/png']),
         ]);
 
         $response = $this->get('/api/fetch-og-image?url=https://example.com');
 
         $response->assertStatus(200)
-                ->assertJsonStructure(['url']);
+            ->assertJsonStructure(['url']);
     }
 
     public function test_fetch_og_image_handles_protocol_relative_urls(): void
@@ -139,13 +139,13 @@ class ApiEndpointsTest extends TestCase
 
         Http::fake([
             'example.com' => Http::response($html, 200),
-            'cdn.example.com/image.jpg' => Http::response($imageData, 200, ['Content-Type' => 'image/jpeg'])
+            'cdn.example.com/image.jpg' => Http::response($imageData, 200, ['Content-Type' => 'image/jpeg']),
         ]);
 
         $response = $this->get('/api/fetch-og-image?url=https://example.com');
 
         $response->assertStatus(200)
-                ->assertJsonStructure(['url']);
+            ->assertJsonStructure(['url']);
     }
 
     public function test_fetch_og_image_handles_non_image_content_type(): void
@@ -154,13 +154,13 @@ class ApiEndpointsTest extends TestCase
 
         Http::fake([
             'example.com' => Http::response($html, 200),
-            'example.com/file.pdf' => Http::response('PDF content', 200, ['Content-Type' => 'application/pdf'])
+            'example.com/file.pdf' => Http::response('PDF content', 200, ['Content-Type' => 'application/pdf']),
         ]);
 
         $response = $this->get('/api/fetch-og-image?url=https://example.com');
 
         $response->assertStatus(422)
-                ->assertJsonFragment(['error' => 'Downloaded resource is not an image']);
+            ->assertJsonFragment(['error' => 'Downloaded resource is not an image']);
     }
 
     public function test_fetch_og_image_handles_different_image_formats(): void
@@ -169,7 +169,7 @@ class ApiEndpointsTest extends TestCase
             'image/png' => 'png',
             'image/webp' => 'webp',
             'image/gif' => 'gif',
-            'image/svg+xml' => 'svg'
+            'image/svg+xml' => 'svg',
         ];
 
         foreach ($formats as $contentType => $extension) {
@@ -178,13 +178,13 @@ class ApiEndpointsTest extends TestCase
 
             Http::fake([
                 'example.com' => Http::response($html, 200),
-                "example.com/image.{$extension}" => Http::response($imageData, 200, ['Content-Type' => $contentType])
+                "example.com/image.{$extension}" => Http::response($imageData, 200, ['Content-Type' => $contentType]),
             ]);
 
             $response = $this->get('/api/fetch-og-image?url=https://example.com');
 
             $response->assertStatus(200)
-                    ->assertJsonStructure(['url']);
+                ->assertJsonStructure(['url']);
 
             Cache::flush();
         }
@@ -197,13 +197,13 @@ class ApiEndpointsTest extends TestCase
 
         Http::fake([
             'example.com' => Http::response($html, 200),
-            'example.com/fallback.jpg' => Http::response($imageData, 200, ['Content-Type' => 'image/jpeg'])
+            'example.com/fallback.jpg' => Http::response($imageData, 200, ['Content-Type' => 'image/jpeg']),
         ]);
 
         $response = $this->get('/api/fetch-og-image?url=https://example.com');
 
         $response->assertStatus(200)
-                ->assertJsonStructure(['url']);
+            ->assertJsonStructure(['url']);
     }
 
     public function test_fetch_og_image_ignores_data_uris(): void
@@ -213,7 +213,7 @@ class ApiEndpointsTest extends TestCase
 
         Http::fake([
             'example.com' => Http::response($html, 200),
-            'example.com/real.jpg' => Http::response($imageData, 200, ['Content-Type' => 'image/jpeg'])
+            'example.com/real.jpg' => Http::response($imageData, 200, ['Content-Type' => 'image/jpeg']),
         ]);
 
         $response = $this->get('/api/fetch-og-image?url=https://example.com');
@@ -230,14 +230,14 @@ class ApiEndpointsTest extends TestCase
         $response = $this->get('/api/fetch-og-image?url=https://example.com');
 
         $response->assertStatus(500)
-                ->assertJson(['error' => 'Failed to fetch image']);
+            ->assertJson(['error' => 'Failed to fetch image']);
     }
 
     public function test_fetch_og_image_validates_url_length(): void
     {
-        $longUrl = 'https://example.com/' . str_repeat('a', 3000);
+        $longUrl = 'https://example.com/'.str_repeat('a', 3000);
 
-        $response = $this->get('/api/fetch-og-image?url=' . urlencode($longUrl));
+        $response = $this->get('/api/fetch-og-image?url='.urlencode($longUrl));
 
         $response->assertStatus(302); // Validation redirect
     }
@@ -256,62 +256,62 @@ class ApiEndpointsTest extends TestCase
     {
         $response = $this->postJson('/track-visit', [
             'referrer' => 'https://google.com',
-            'subdomain' => 'www'
+            'subdomain' => 'www',
         ]);
 
         $response->assertStatus(200)
-                ->assertJsonStructure([
-                    'success',
-                    'message',
-                    'data' => [
-                        'ip',
-                        'city',
-                        'country'
-                    ]
-                ]);
+            ->assertJsonStructure([
+                'success',
+                'message',
+                'data' => [
+                    'ip',
+                    'city',
+                    'country',
+                ],
+            ]);
     }
 
     public function test_visitor_tracking_handles_localhost_ip(): void
     {
         $response = $this->postJson('/track-visit', [], [
-            'REMOTE_ADDR' => '127.0.0.1'
+            'REMOTE_ADDR' => '127.0.0.1',
         ]);
 
         $response->assertStatus(200)
-                ->assertJson([
-                    'success' => true,
-                    'data' => [
-                        'country' => 'Local Development',
-                        'city' => 'Localhost'
-                    ]
-                ]);
+            ->assertJson([
+                'success' => true,
+                'data' => [
+                    'country' => 'Local Development',
+                    'city' => 'Localhost',
+                ],
+            ]);
     }
 
     public function test_visitor_tracking_handles_ipv6(): void
     {
         $response = $this->postJson('/track-visit', [], [
-            'REMOTE_ADDR' => '::1'
+            'REMOTE_ADDR' => '::1',
         ]);
 
         $response->assertStatus(200)
-                ->assertJsonStructure(['success', 'message', 'data']);
+            ->assertJsonStructure(['success', 'message', 'data']);
     }
 
     public function test_visitor_tracking_handles_missing_referrer(): void
     {
         $response = $this->postJson('/track-visit', [
-            'subdomain' => 'www'
+            'subdomain' => 'www',
         ]);
 
         $response->assertStatus(200)
-                ->assertJson(['success' => true]);
+            ->assertJson(['success' => true]);
     }
 
     public function test_visitor_tracking_handles_long_referrer(): void
     {
         $response = $this->postJson('/track-visit', [
-            'referrer' => 'https://example.com/' . str_repeat('a', 1000),
-            'subdomain' => 'www'
+            'referrer' => 'https://example.com/'.str_repeat('a', 1000),
+            'subdomain' => 'www',
         ]);
 
         $response->assertStatus(200);
@@ -320,7 +320,7 @@ class ApiEndpointsTest extends TestCase
     public function test_visitor_tracking_cors_headers(): void
     {
         $response = $this->options('/track-visit', [
-            'Origin' => 'https://graveyardjokes.com'
+            'Origin' => 'https://graveyardjokes.com',
         ]);
 
         $response->assertStatus(200);
@@ -334,11 +334,11 @@ class ApiEndpointsTest extends TestCase
             'first_name' => "O'Brien",
             'last_name' => 'Müller',
             'email' => 'test@example.com',
-            'message' => 'Test with émojis 🎃'
+            'message' => 'Test with émojis 🎃',
         ]);
 
         $response->assertStatus(302)
-                ->assertSessionHas('success');
+            ->assertSessionHas('success');
     }
 
     public function test_contact_form_handles_html_in_message(): void
@@ -347,14 +347,14 @@ class ApiEndpointsTest extends TestCase
             'first_name' => 'John',
             'last_name' => 'Doe',
             'email' => 'test@example.com',
-            'message' => '<strong>Bold message</strong> with <em>HTML</em>'
+            'message' => '<strong>Bold message</strong> with <em>HTML</em>',
         ]);
 
         $response->assertStatus(302)
-                ->assertSessionHas('success');
+            ->assertSessionHas('success');
 
         $this->assertDatabaseHas('contacts', [
-            'email' => 'test@example.com'
+            'email' => 'test@example.com',
         ]);
     }
 
@@ -364,7 +364,7 @@ class ApiEndpointsTest extends TestCase
             'first_name' => '  John  ',
             'last_name' => '  Doe  ',
             'email' => '  test@example.com  ',
-            'message' => '  Test message  '
+            'message' => '  Test message  ',
         ]);
 
         $response->assertStatus(302);
@@ -376,14 +376,14 @@ class ApiEndpointsTest extends TestCase
             'first_name' => 'John',
             'last_name' => 'Doe',
             'email' => 'john@example.com',
-            'message' => 'Test message'
+            'message' => 'Test message',
         ];
 
         $this->post('/contact', $contactData);
         $response = $this->post('/contact', $contactData);
 
         $response->assertStatus(302)
-                ->assertSessionHas('success');
+            ->assertSessionHas('success');
 
         $this->assertDatabaseCount('contacts', 2);
     }
@@ -394,7 +394,7 @@ class ApiEndpointsTest extends TestCase
             'notanemail',
             '@example.com',
             'test@',
-            'test..double@example.com'
+            'test..double@example.com',
         ];
 
         foreach ($invalidEmails as $email) {
@@ -402,11 +402,11 @@ class ApiEndpointsTest extends TestCase
                 'first_name' => 'Test',
                 'last_name' => 'User',
                 'email' => $email,
-                'message' => 'Test'
+                'message' => 'Test',
             ]);
 
             $response->assertStatus(302)
-                    ->assertSessionHasErrors('email');
+                ->assertSessionHasErrors('email');
         }
     }
 
@@ -417,7 +417,7 @@ class ApiEndpointsTest extends TestCase
         $response = $this->get('/api/docs');
 
         $response->assertStatus(200)
-                ->assertHeader('Content-Type', 'text/html; charset=UTF-8');
+            ->assertHeader('Content-Type', 'text/html; charset=UTF-8');
     }
 
     public function test_openapi_yaml_returns_file(): void
@@ -425,7 +425,7 @@ class ApiEndpointsTest extends TestCase
         $response = $this->get('/openapi.yaml');
 
         $response->assertStatus(200)
-                ->assertHeader('Content-Type', 'application/x-yaml');
+            ->assertHeader('Content-Type', 'application/x-yaml');
     }
 
     // ===== Error Handling and Edge Cases =====
@@ -445,7 +445,7 @@ class ApiEndpointsTest extends TestCase
     public function test_api_handles_concurrent_requests(): void
     {
         Cache::put('jokes_data', [
-            ['id' => 'test', 'setup' => 'Setup', 'punchline' => 'Punchline', 'category' => 'test']
+            ['id' => 'test', 'setup' => 'Setup', 'punchline' => 'Punchline', 'category' => 'test'],
         ]);
 
         $responses = [];
@@ -484,7 +484,7 @@ class ApiEndpointsTest extends TestCase
             'first_name' => "'; DROP TABLE contacts; --",
             'last_name' => 'Test',
             'email' => 'test@example.com',
-            'message' => 'Test'
+            'message' => 'Test',
         ]);
 
         $response->assertStatus(302);
@@ -497,7 +497,7 @@ class ApiEndpointsTest extends TestCase
         for ($i = 0; $i < 5; $i++) {
             $response = $this->postJson('/track-visit', [
                 'referrer' => 'https://test.com',
-                'subdomain' => 'www'
+                'subdomain' => 'www',
             ]);
 
             $response->assertStatus(200);

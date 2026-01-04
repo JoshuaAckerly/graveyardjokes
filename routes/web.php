@@ -1,13 +1,13 @@
 <?php
 
+use App\Http\Controllers\JokeController;
+use App\Http\Controllers\OgImageController;
 use App\Modules\Contact\Controllers\ContactController;
 use App\Modules\Visitor\Controllers\VisitorController;
-use App\Http\Controllers\JokeController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Spatie\Sitemap\Sitemap;
 use Spatie\Sitemap\Tags\Url;
-use App\Http\Controllers\OgImageController;
 
 Route::get('/', function () {
     return Inertia::render('welcome');
@@ -46,9 +46,9 @@ Route::get('/services/premium', function () {
 // API endpoint to fetch and cache Open Graph images for external sites
 Route::get('/api/fetch-og-image', [OgImageController::class, 'fetch'])->name('api.fetch-og-image');
 
-Route::get('/terms', fn() => Inertia::render('legal/terms'))->name('terms');
-Route::get('/privacy', fn() => Inertia::render('legal/privacy'))->name('privacy');
-Route::get('/cookies', fn() => Inertia::render('legal/cookies'))->name('cookies');
+Route::get('/terms', fn () => Inertia::render('legal/terms'))->name('terms');
+Route::get('/privacy', fn () => Inertia::render('legal/privacy'))->name('privacy');
+Route::get('/cookies', fn () => Inertia::render('legal/cookies'))->name('cookies');
 
 Route::match(['post', 'options'], '/track-visit', [VisitorController::class, 'track']);
 
@@ -58,7 +58,7 @@ Route::get('/api/random-joke', [JokeController::class, 'random'])->name('api.ran
 // API Documentation
 Route::get('/openapi.yaml', function () {
     return response()->file(base_path('openapi.yaml'), [
-        'Content-Type' => 'application/x-yaml'
+        'Content-Type' => 'application/x-yaml',
     ]);
 })->name('api.openapi');
 
@@ -75,23 +75,23 @@ Route::get('/generate-sitemap', function () {
     // Use the configured app URL as the base so generated sitemap contains
     // absolute URLs that match the production host (avoids .test entries).
     $rawBase = config('app.url', '');
-    if (!is_string($rawBase)) {
+    if (! is_string($rawBase)) {
         $rawBase = '';
     }
     $base = rtrim($rawBase, '/');
 
     Sitemap::create()
-        ->add(Url::create($base . '/'))
-        ->add(Url::create($base . '/about'))
-        ->add(Url::create($base . '/contact'))
-        ->add(Url::create($base . '/portfolio'))
-        ->add(Url::create($base . '/services'))
-        ->add(Url::create($base . '/services/starter'))
-        ->add(Url::create($base . '/services/professional'))
-        ->add(Url::create($base . '/services/premium'))
-        ->add(Url::create($base . '/terms'))
-        ->add(Url::create($base . '/privacy'))
-        ->add(Url::create($base . '/cookies'))
+        ->add(Url::create($base.'/'))
+        ->add(Url::create($base.'/about'))
+        ->add(Url::create($base.'/contact'))
+        ->add(Url::create($base.'/portfolio'))
+        ->add(Url::create($base.'/services'))
+        ->add(Url::create($base.'/services/starter'))
+        ->add(Url::create($base.'/services/professional'))
+        ->add(Url::create($base.'/services/premium'))
+        ->add(Url::create($base.'/terms'))
+        ->add(Url::create($base.'/privacy'))
+        ->add(Url::create($base.'/cookies'))
         ->writeToFile(public_path('sitemap.xml'));
 
     return 'Sitemap generated!';
@@ -115,8 +115,6 @@ Route::redirect('/cryptescape', '/', 301);
 Route::redirect('/login', '/', 301);
 Route::redirect('/register', '/', 301);
 Route::redirect('/forgot-password', '/', 301);
-
-
 
 // Handle /cryptescape properly for SEO
 Route::get('/cryptescape', function () {
@@ -146,14 +144,13 @@ foreach ($goneRoutes as $route) {
     });
 }
 
-
 Route::fallback(function () {
     abort(404);
 });
 
-Route::get('/test-csrf', function (){
+Route::get('/test-csrf', function () {
     dd(csrf_token());
 });
 
-require __DIR__ . '/settings.php';
-require __DIR__ . '/auth.php';
+require __DIR__.'/settings.php';
+require __DIR__.'/auth.php';

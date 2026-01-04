@@ -29,20 +29,20 @@ class GenerateSitemapIndex extends Command
 
         // Ensure we have the expected types for static analysis
         $rawSubdomains = config('sitemaps.subdomains', []);
-        if (!is_array($rawSubdomains)) {
+        if (! is_array($rawSubdomains)) {
             $rawSubdomains = [];
         }
         /** @var array<int, string> $subdomains */
         $subdomains = $rawSubdomains;
 
         $rawBase = config('app.url', '');
-        if (!is_string($rawBase)) {
+        if (! is_string($rawBase)) {
             $rawBase = '';
         }
         $base = rtrim($rawBase, '/');
 
         $hostRaw = parse_url($base, PHP_URL_HOST) ?: preg_replace('#https?://#', '', $base);
-        if (!is_string($hostRaw)) {
+        if (! is_string($hostRaw)) {
             $hostRaw = (string) $hostRaw;
         }
         $host = $hostRaw;
@@ -52,7 +52,7 @@ class GenerateSitemapIndex extends Command
         $candidates = [];
 
         // Always include the primary sitemap candidate
-        $candidates[] = $base . '/sitemap.xml';
+        $candidates[] = $base.'/sitemap.xml';
 
         foreach ($subdomains as $sub) {
             $candidates[] = sprintf('https://%s.%s/sitemap.xml', (string) $sub, (string) $host);
@@ -66,15 +66,16 @@ class GenerateSitemapIndex extends Command
         foreach ($candidates as $loc) {
             if ($validate) {
                 try {
-                    $this->line('Checking ' . $loc . ' ...');
+                    $this->line('Checking '.$loc.' ...');
                     // Use HEAD first to save bandwidth; fall back to GET if not allowed
                     $resp = Http::timeout(5)->withHeaders(['User-Agent' => 'graveyardjokes-sitemap-validator/1.0'])->head($loc);
 
                     if ($resp->successful()) {
                         $entries[] = (string) $loc;
-                        $this->info('OK: ' . $loc);
+                        $this->info('OK: '.$loc);
                         $summaryLines[] = sprintf('- %s — OK (%d)', $loc, (int) $resp->status());
                         $passed++;
+
                         continue;
                     }
 
@@ -82,17 +83,18 @@ class GenerateSitemapIndex extends Command
                     $resp = Http::timeout(5)->get($loc);
                     if ($resp->successful()) {
                         $entries[] = (string) $loc;
-                        $this->info('OK (GET): ' . $loc);
+                        $this->info('OK (GET): '.$loc);
                         $summaryLines[] = sprintf('- %s — OK (GET %d)', $loc, (int) $resp->status());
                         $passed++;
+
                         continue;
                     }
 
-                    $this->warn('Skipping (non-200): ' . $loc . ' [' . $resp->status() . ']');
+                    $this->warn('Skipping (non-200): '.$loc.' ['.$resp->status().']');
                     $summaryLines[] = sprintf('- %s — Skipped (non-200: %d)', $loc, (int) $resp->status());
                     $skipped++;
                 } catch (\Exception $e) {
-                    $this->warn('Skipping (error): ' . $loc . ' - ' . $e->getMessage());
+                    $this->warn('Skipping (error): '.$loc.' - '.$e->getMessage());
                     $summaryLines[] = sprintf('- %s — Skipped (error: %s)', $loc, (string) $e->getMessage());
                     $skipped++;
                 }
@@ -104,18 +106,19 @@ class GenerateSitemapIndex extends Command
 
         if (empty($entries)) {
             $this->warn('No sitemap URLs passed validation; writing empty sitemap_index with primary sitemap candidate.');
-            $entries = [$base . '/sitemap.xml'];
+            $entries = [$base.'/sitemap.xml'];
         }
 
-    $xml = $this->buildIndexXml($entries);
+        $xml = $this->buildIndexXml($entries);
 
         $path = public_path('sitemap_index.xml');
 
         try {
             $files->put($path, $xml);
-            $this->info('✅ sitemap_index.xml written to ' . $path);
+            $this->info('✅ sitemap_index.xml written to '.$path);
         } catch (\Exception $e) {
-            $this->error('Failed to write sitemap_index.xml: ' . $e->getMessage());
+            $this->error('Failed to write sitemap_index.xml: '.$e->getMessage());
+
             return 1;
         }
 
@@ -124,11 +127,11 @@ class GenerateSitemapIndex extends Command
         $summary = [];
         $summary[] = '# Sitemap validation summary';
         $summary[] = '';
-        $summary[] = 'Generated: ' . now()->toIso8601String();
+        $summary[] = 'Generated: '.now()->toIso8601String();
         $summary[] = '';
-        $summary[] = 'Validation flag: ' . ($validate ? 'enabled' : 'disabled');
+        $summary[] = 'Validation flag: '.($validate ? 'enabled' : 'disabled');
         $summary[] = '';
-        $summary[] = "Results:";
+        $summary[] = 'Results:';
         $summary[] = '';
         $summary = array_merge($summary, $summaryLines);
         $summary[] = '';
@@ -140,9 +143,9 @@ class GenerateSitemapIndex extends Command
 
         try {
             $files->put($summaryPath, implode("\n", $summary));
-            $this->info('✅ sitemap validation summary written to ' . $summaryPath);
+            $this->info('✅ sitemap validation summary written to '.$summaryPath);
         } catch (\Exception $e) {
-            $this->warn('Failed to write summary file: ' . $e->getMessage());
+            $this->warn('Failed to write summary file: '.$e->getMessage());
         }
 
         return 0;
@@ -151,7 +154,7 @@ class GenerateSitemapIndex extends Command
     /**
      * Build a sitemap index XML document.
      *
-     * @param string[] $entries
+     * @param  string[]  $entries
      */
     protected function buildIndexXml(array $entries): string
     {
@@ -171,6 +174,7 @@ class GenerateSitemapIndex extends Command
         $doc->appendChild($root);
 
         $xml = $doc->saveXML();
+
         return $xml === false ? '' : $xml;
     }
 }

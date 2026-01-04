@@ -31,7 +31,7 @@ class PasswordController extends Controller
         ]);
 
         $password = $validated['password'] ?? '';
-        if (!is_string($password)) {
+        if (! is_string($password)) {
             throw new \InvalidArgumentException('Password must be a string');
         }
 

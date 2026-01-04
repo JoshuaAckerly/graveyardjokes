@@ -1,9 +1,10 @@
 <?php
+
 namespace Tests\Feature;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Tests\TestCase;
 use PHPUnit\Framework\Attributes\Test;
+use Tests\TestCase;
 
 class ContactPageTest extends TestCase
 {
@@ -16,13 +17,13 @@ class ContactPageTest extends TestCase
 
         $response->assertStatus(200);
         // The page is rendered via Inertia; extract the JSON from the data-page attribute
-    $html = (string) $response->getContent();
+        $html = (string) $response->getContent();
 
         // Load into DOM and find the #app div
-        $dom = new \DOMDocument();
+        $dom = new \DOMDocument;
         // Suppress warnings from invalid HTML fragments
-    // Suppress warnings and cast result to bool to satisfy phpstan
-    @(bool) $dom->loadHTML($html);
+        // Suppress warnings and cast result to bool to satisfy phpstan
+        @(bool) $dom->loadHTML($html);
         $app = $dom->getElementById('app');
         $this->assertNotNull($app, 'Could not find #app element in response HTML');
 

@@ -2,8 +2,8 @@
 
 namespace App\Modules\Visitor\Controllers;
 
-use Illuminate\Http\Request;
 use App\Contracts\VisitorServiceInterface;
+use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Support\Facades\Log;
 
@@ -22,13 +22,14 @@ class VisitorController extends BaseController
             return response()->json([
                 'success' => true,
                 'message' => 'Visit tracked successfully',
-                'data' => $location
+                'data' => $location,
             ]);
         } catch (\Exception $e) {
-            Log::error('Visitor tracking failed: ' . $e->getMessage());
+            Log::error('Visitor tracking failed: '.$e->getMessage());
+
             return response()->json([
                 'success' => false,
-                'message' => 'Tracking failed'
+                'message' => 'Tracking failed',
             ], 500);
         }
     }

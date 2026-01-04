@@ -3,13 +3,12 @@
 namespace App\Modules\Visitor\Services;
 
 use App\Contracts\VisitorServiceInterface;
+use App\Modules\Visitor\Mail\NewVisitorNotification;
 use GuzzleHttp\Client;
-use GuzzleHttp\ClientInterface;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\Cache;
-use App\Modules\Visitor\Mail\NewVisitorNotification;
 
 class VisitorService implements VisitorServiceInterface
 {
@@ -19,10 +18,10 @@ class VisitorService implements VisitorServiceInterface
     {
         $this->client = $client ?? new Client(['timeout' => 5]);
     }
+
     /**
      * Track a visitor and return location data.
      *
-     * @param Request $request
      * @return array<string,mixed>
      */
     public function track(Request $request): array
@@ -39,7 +38,6 @@ class VisitorService implements VisitorServiceInterface
     }
 
     /**
-     * @param string|null $ip
      * @return array<string, mixed>
      */
     public function getLocationFromIP(?string $ip): array
@@ -49,7 +47,7 @@ class VisitorService implements VisitorServiceInterface
             return [
                 'ip' => $ip,
                 'country' => 'Local Development',
-                'city' => 'Localhost'
+                'city' => 'Localhost',
             ];
         }
 
@@ -59,13 +57,13 @@ class VisitorService implements VisitorServiceInterface
         $result = Cache::remember($cacheKey, 3600, function () use ($ip): array {
             try {
                 $response = $this->client->get("http://ipinfo.io/{$ip}/json", [
-                    'headers' => ['Accept' => 'application/json']
+                    'headers' => ['Accept' => 'application/json'],
                 ]);
 
                 $raw = (string) $response->getBody();
                 $data = json_decode($raw, true);
 
-                if (!is_array($data)) {
+                if (! is_array($data)) {
                     // Defensive fallback when the external API returns unexpected content
                     Log::warning('ipinfo returned non-array payload', ['ip' => $ip, 'body' => substr($raw, 0, 1000)]);
                     $data = [];
@@ -76,26 +74,24 @@ class VisitorService implements VisitorServiceInterface
                     'city' => $data['city'] ?? 'Unknown',
                     'country' => $data['country'] ?? 'Unknown',
                     'region' => $data['region'] ?? 'Unknown',
-                    'timezone' => $data['timezone'] ?? 'Unknown'
+                    'timezone' => $data['timezone'] ?? 'Unknown',
                 ];
             } catch (\Exception $e) {
-                Log::warning('Failed to get geolocation for IP: ' . $ip . ' - ' . $e->getMessage());
+                Log::warning('Failed to get geolocation for IP: '.$ip.' - '.$e->getMessage());
 
                 return [
                     'ip' => $ip,
                     'country' => 'Unknown',
-                    'city' => 'Unknown'
+                    'city' => 'Unknown',
                 ];
             }
         });
-        
+
         return $result;
     }
 
     /**
-     * @param array<string, mixed> $location
-     * @param Request|null $request
-     * @return void
+     * @param  array<string, mixed>  $location
      */
     private function sendVisitorEmail(array $location, ?Request $request = null): void
     {
@@ -106,14 +102,14 @@ class VisitorService implements VisitorServiceInterface
             'timestamp' => now()->toDateTimeString(),
             'user_agent' => $request ? $request->userAgent() : request()->userAgent(),
             'referrer' => $request ? $request->input('referrer') : request()->header('referer'),
-            'subdomain' => $request ? $request->input('subdomain') : request()->getHost()
+            'subdomain' => $request ? $request->input('subdomain') : request()->getHost(),
         ];
 
         Log::info('New visitor tracked!', $visitorData);
 
         $ua = $visitorData['user_agent'] ?? '';
-        $ip = (string)($visitorData['ip'] ?? '');
-        $keyHash = substr(sha1($ip . '|' . $ua), 0, 20);
+        $ip = (string) ($visitorData['ip'] ?? '');
+        $keyHash = substr(sha1($ip.'|'.$ua), 0, 20);
         $cacheKey = "visitor_notification_sent_{$keyHash}";
 
         // Get TTL from config, with fallback to 24 hours
@@ -121,6 +117,7 @@ class VisitorService implements VisitorServiceInterface
 
         if (Cache::has($cacheKey)) {
             Log::info('Visitor notification skipped (recently notified).', ['cache_key' => $cacheKey]);
+
             return;
         }
 
@@ -129,7 +126,7 @@ class VisitorService implements VisitorServiceInterface
             Cache::put($cacheKey, true, $ttl);
             Log::info('Visitor notification email sent successfully', ['cache_key' => $cacheKey]);
         } catch (\Exception $e) {
-            Log::error('Failed to send visitor notification email: ' . $e->getMessage());
+            Log::error('Failed to send visitor notification email: '.$e->getMessage());
         }
     }
 }

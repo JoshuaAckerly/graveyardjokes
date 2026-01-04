@@ -18,7 +18,7 @@ class NewVisitorNotification extends Mailable
     public array $visitorData;
 
     /**
-     * @param array<string,mixed> $visitorData
+     * @param  array<string,mixed>  $visitorData
      */
     public function __construct(array $visitorData)
     {
@@ -33,7 +33,7 @@ class NewVisitorNotification extends Mailable
         $countryVal = $this->visitorData['country'] ?? null;
         $country = is_scalar($countryVal) ? (string) $countryVal : 'Unknown';
 
-        return new Envelope(subject: 'New visitor from ' . $city . ', ' . $country);
+        return new Envelope(subject: 'New visitor from '.$city.', '.$country);
     }
 
     public function content(): Content

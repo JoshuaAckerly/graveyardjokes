@@ -2,8 +2,8 @@
 
 namespace Tests\Unit;
 
-use Tests\TestCase;
 use Illuminate\Http\Request;
+use Tests\TestCase;
 
 class VisitorServiceTest extends TestCase
 {

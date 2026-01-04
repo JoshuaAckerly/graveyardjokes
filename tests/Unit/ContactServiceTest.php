@@ -2,11 +2,11 @@
 
 namespace Tests\Unit;
 
-use Tests\TestCase;
-use Illuminate\Support\Facades\Mail;
-use Illuminate\Http\Request;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use App\Modules\Contact\Mail\ContactMessage;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
+use Tests\TestCase;
 
 class ContactServiceTest extends TestCase
 {

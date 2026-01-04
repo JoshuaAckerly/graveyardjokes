@@ -1,10 +1,11 @@
 <?php
+
 namespace Tests\Unit;
 
-use App\Services\GoogleAnalyticsService;
 use App\Contracts\AnalyticsInterface;
-use PHPUnit\Framework\TestCase;
+use App\Services\GoogleAnalyticsService;
 use PHPUnit\Framework\Attributes\Test;
+use PHPUnit\Framework\TestCase;
 
 class GoogleAnalyticsServiceTest extends TestCase
 {
@@ -13,7 +14,7 @@ class GoogleAnalyticsServiceTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        $this->service = new GoogleAnalyticsService();
+        $this->service = new GoogleAnalyticsService;
     }
 
     #[Test]
@@ -26,7 +27,7 @@ class GoogleAnalyticsServiceTest extends TestCase
     public function it_returns_array_from_get_real_time_visitors(): void
     {
         $result = $this->service->getRealTimeVisitors();
-        
+
         $this->assertIsArray($result);
     }
 
@@ -34,7 +35,7 @@ class GoogleAnalyticsServiceTest extends TestCase
     public function it_returns_empty_array_by_default(): void
     {
         $result = $this->service->getRealTimeVisitors();
-        
+
         $this->assertEmpty($result);
     }
 }

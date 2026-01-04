@@ -2,14 +2,12 @@
 
 namespace Tests\Unit;
 
-use Tests\TestCase;
-use GuzzleHttp\Client;
-use GuzzleHttp\Psr7\Response;
-use GuzzleHttp\Psr7\Utils;
-use Psr\Http\Message\ResponseInterface;
+use GuzzleHttp\Client as GuzzleClient;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;
-use GuzzleHttp\Client as GuzzleClient;
+use GuzzleHttp\Psr7\Response;
+use GuzzleHttp\Psr7\Utils;
+use Tests\TestCase;
 
 class VisitorServiceGuzzleTest extends TestCase
 {
@@ -21,11 +19,11 @@ class VisitorServiceGuzzleTest extends TestCase
             'city' => 'TestCity',
             'country' => 'TC',
             'region' => 'TestRegion',
-            'timezone' => 'UTC'
+            'timezone' => 'UTC',
         ]);
 
         $mock = new MockHandler([
-            new Response(200, ['Content-Type' => 'application/json'], Utils::streamFor($body))
+            new Response(200, ['Content-Type' => 'application/json'], Utils::streamFor($body)),
         ]);
 
         $handlerStack = HandlerStack::create($mock);
@@ -35,7 +33,7 @@ class VisitorServiceGuzzleTest extends TestCase
 
         $result = $service->getLocationFromIP('1.2.3.4');
 
-    $this->assertSame('TestCity', $result['city']);
-    $this->assertSame('TC', $result['country']);
+        $this->assertSame('TestCity', $result['city']);
+        $this->assertSame('TC', $result['country']);
     }
 }

@@ -1,7 +1,9 @@
 <?php
+
 // app/Services/GoogleAnalyticsService.php
 
 namespace App\Services;
+
 use App\Contracts\AnalyticsInterface;
 
 class GoogleAnalyticsService implements AnalyticsInterface

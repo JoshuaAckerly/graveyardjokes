@@ -17,10 +17,10 @@ class CorsMiddleware
     {
         // Get the origin from the request
         $origin = $request->headers->get('Origin');
-        
+
         // Check if origin is from a graveyardjokes subdomain or local development
         $isAllowedOrigin = $origin && (
-            str_contains($origin, '.graveyardjokes.com') || 
+            str_contains($origin, '.graveyardjokes.com') ||
             $origin === 'https://graveyardjokes.com' ||
             str_contains($origin, '.test') || // Allow local development
             str_contains($origin, 'localhost') ||
@@ -28,13 +28,14 @@ class CorsMiddleware
         );
 
         // Handle preflight OPTIONS request
-        if ($request->getMethod() === "OPTIONS" && $isAllowedOrigin) {
+        if ($request->getMethod() === 'OPTIONS' && $isAllowedOrigin) {
             $response = response('', 200);
             $response->headers->set('Access-Control-Allow-Origin', $origin);
             $response->headers->set('Access-Control-Allow-Credentials', 'true');
             $response->headers->set('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
             $response->headers->set('Access-Control-Allow-Headers', 'Content-Type, X-CSRF-TOKEN, Authorization, X-Requested-With');
             $response->headers->set('Access-Control-Max-Age', '86400');
+
             return $response;
         }
 

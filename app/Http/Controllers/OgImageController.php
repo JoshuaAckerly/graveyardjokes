@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\Http;
-use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Str;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class OgImageController
 {
@@ -21,19 +21,19 @@ class OgImageController
     public function fetch(Request $request): JsonResponse
     {
         $request->validate([
-            'url' => 'required|string|max:2048|url'
+            'url' => 'required|string|max:2048|url',
         ]);
-        
+
         $target = $request->query('url');
-        
+
         // SSRF protection - block private/local addresses
         $host = parse_url($target, PHP_URL_HOST);
-        if (!$host || $this->isPrivateAddress($host)) {
+        if (! $host || $this->isPrivateAddress($host)) {
             return response()->json(['error' => 'Invalid target host'], 422);
         }
-        
+
         // Rate limiting check
-        $cacheKey = 'og_fetch_' . md5($target);
+        $cacheKey = 'og_fetch_'.md5($target);
         if (Cache::has($cacheKey)) {
             return response()->json(['error' => 'Rate limited - try again later'], 429);
         }
@@ -45,7 +45,7 @@ class OgImageController
                 'User-Agent' => 'GraveyardJokesBot/1.0',
             ])->timeout(6)->get($target);
 
-            if (!$resp->successful()) {
+            if (! $resp->successful()) {
                 return response()->json(['error' => 'Failed to fetch target page', 'status' => $resp->status()], 502);
             }
 
@@ -53,7 +53,7 @@ class OgImageController
 
             // Parse for og:image using DOMDocument
             libxml_use_internal_errors(true);
-            $doc = new \DOMDocument();
+            $doc = new \DOMDocument;
             $doc->loadHTML($html);
             $xpath = new \DOMXPath($doc);
 
@@ -69,23 +69,23 @@ class OgImageController
             }
 
             // Fallback: find candidate <img> tags and pick the first reasonably-sized src
-            if (!$ogImage) {
+            if (! $ogImage) {
                 $imgs = $xpath->query('//img[@src]');
                 if ($imgs !== false) {
                     for ($i = 0; $i < $imgs->length; $i++) {
-                    $node = $imgs->item($i);
-                    if ($node instanceof \DOMElement) {
-                        $src = $node->getAttribute('src');
-                        if ($src && !Str::startsWith($src, 'data:')) {
-                            $ogImage = $src;
-                            break;
+                        $node = $imgs->item($i);
+                        if ($node instanceof \DOMElement) {
+                            $src = $node->getAttribute('src');
+                            if ($src && ! Str::startsWith($src, 'data:')) {
+                                $ogImage = $src;
+                                break;
+                            }
                         }
                     }
                 }
-                }
             }
 
-            if (!$ogImage) {
+            if (! $ogImage) {
                 return response()->json(['error' => 'No image found on target page'], 404);
             }
 
@@ -94,12 +94,12 @@ class OgImageController
 
             // Fetch image
             $imgResp = Http::withHeaders(['User-Agent' => 'GraveyardJokesBot/1.0'])->timeout(10)->get($imgUrl);
-            if (!$imgResp->successful()) {
+            if (! $imgResp->successful()) {
                 return response()->json(['error' => 'Failed to download image', 'status' => $imgResp->status()], 502);
             }
 
             $contentType = (string) ($imgResp->header('Content-Type') ?? 'image/jpeg');
-            if (!Str::startsWith($contentType, 'image/')) {
+            if (! Str::startsWith($contentType, 'image/')) {
                 return response()->json(['error' => 'Downloaded resource is not an image', 'content-type' => $contentType], 422);
             }
 
@@ -122,15 +122,17 @@ class OgImageController
 
             return response()->json(['url' => $publicUrl]);
         } catch (\Exception $e) {
-            Log::error('OG image fetch failed: ' . $e->getMessage(), ['url' => $target ?? 'unknown']);
+            Log::error('OG image fetch failed: '.$e->getMessage(), ['url' => $target ?? 'unknown']);
+
             return response()->json(['error' => 'Failed to fetch image'], 500);
         }
     }
-    
+
     private function isPrivateAddress(string $host): bool
     {
         $ip = gethostbyname($host);
-        return !filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE);
+
+        return ! filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE);
     }
 
     /**
@@ -146,7 +148,8 @@ class OgImageController
         // If protocol-relative
         if (Str::startsWith($maybeRelative, '//')) {
             $scheme = parse_url($base, PHP_URL_SCHEME) ?: 'https';
-            return $scheme . ':' . $maybeRelative;
+
+            return $scheme.':'.$maybeRelative;
         }
 
         // Otherwise join
@@ -158,21 +161,19 @@ class OgImageController
 
         // If relative path starts with /, use root
         if (Str::startsWith($maybeRelative, '/')) {
-            $joined = "{$scheme}://{$host}{$port}" . $maybeRelative;
+            $joined = "{$scheme}://{$host}{$port}".$maybeRelative;
+
             return $joined;
         }
 
         // Otherwise remove filename from base path
         $dir = preg_replace('#/[^/]*$#', '/', $path);
         $dirStr = is_string($dir) ? $dir : '/';
-        $joined = "{$scheme}://{$host}{$port}" . rtrim($dirStr, '/') . '/' . ltrim($maybeRelative, '/');
+        $joined = "{$scheme}://{$host}{$port}".rtrim($dirStr, '/').'/'.ltrim($maybeRelative, '/');
+
         return $joined;
     }
 
-    /**
-     * @param string $ct
-     * @return string|null
-     */
     protected function extensionFromContentType(string $ct): ?string
     {
         $map = [
