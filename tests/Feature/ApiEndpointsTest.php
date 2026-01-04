@@ -417,7 +417,7 @@ class ApiEndpointsTest extends TestCase
         $response = $this->get('/api/docs');
 
         $response->assertStatus(200)
-            ->assertHeader('Content-Type', 'text/html; charset=UTF-8');
+            ->assertHeader('Content-Type', 'text/html; charset=utf-8');
     }
 
     public function test_openapi_yaml_returns_file(): void
