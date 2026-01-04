@@ -15,6 +15,8 @@ jobs:
   php-checks:
     name: PHP Checks
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -49,8 +51,14 @@ jobs:
       - name: Build frontend assets
         run: npm run build
 
-      - name: Run Laravel Pint
-        run: vendor/bin/pint --test
+      - name: Run Laravel Pint (auto-fix)
+        run: vendor/bin/pint
+
+      - name: Commit Pint fixes
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: 'style: auto-fix code style with Laravel Pint'
+          commit_options: '--no-verify'
 
       - name: PHP Syntax Check
         run: |
@@ -91,8 +99,14 @@ jobs:
       - name: Run ESLint
         run: npm run lint
 
-      - name: Check formatting
-        run: npm run format -- --check
+      - name: Format frontend code
+        run: npm run format
+
+      - name: Commit format fixes
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: 'style: auto-format frontend code'
+          commit_options: '--no-verify'
 
       - name: NPM audit
         run: npm audit --audit-level=moderate || true
