@@ -40,3 +40,7 @@ Thumbs.db
 
 # OG Image cache (generated dynamically)
 /public/storage/og-cache/*.png
+/storage/app/public/og-cache/*
+
+# Storage symlink
+/public/storage
