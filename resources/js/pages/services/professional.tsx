@@ -5,7 +5,6 @@ import { Check, ArrowLeft } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 
 export default function ProfessionalPackage() {
-    const cdn = import.meta.env.VITE_ASSET_URL || '';
     const paypalContainerRef = useRef<HTMLDivElement>(null);
     const [isPayPalReady, setIsPayPalReady] = useState(false);
 
