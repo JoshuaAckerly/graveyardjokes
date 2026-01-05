@@ -75,10 +75,10 @@ Graveyard Jokes is a full-stack web application built with Laravel 12 and React 
 ### DevOps & Tools
 - **Package Managers**: Composer, npm
 - **Static Analysis**: PHPStan (Larastan), TypeScript
-- **Code Formatting**: Laravel Pint, Prettier
+- **Code Formatting**: Laravel Pint, Prettier (auto-fix in CI)
 - **Linting**: ESLint
 - **Testing**: PHPUnit, Jest, Playwright
-- **CI/CD**: GitHub Actions
+- **CI/CD**: GitHub Actions (automated testing, code style fixes, security audits)
 - **Version Control**: Git
 
 ## 🚀 Getting Started
@@ -241,20 +241,7 @@ graveyardjokes/
    composer test         # Run tests
    ```
 
-3. **Format and lint code**
-   ```bash
-   vendor/bin/pint       # Format PHP
-   npm run format        # Format JS/TS
-   npm run lint          # Lint frontend
-   ```
-
-4. **Run static analysis**
-   ```bash
-   ./vendor/bin/phpstan analyse -c phpstan.neon
-   npm run types         # Check TypeScript
-   ```
-
-5. **Commit and push**
+3. **Commit and push**
    ```bash
    git add .
    git commit -m "feat: add new feature"
@@ -274,25 +261,48 @@ See [CONTRIBUTING.md](./CONTRIBUTING.md) for detailed guidelines.
 ./vendor/bin/phpunit
 
 # Run specific test suite
-./vendor/bin/phpunit tests/Feature
+4. **Open a Pull Request**
+   - CI will automatically run tests and checks
+   - Code style issues will be auto-fixed and committed
+   - Review the auto-fixed changes if any
+
+> **Note**: Code formatting and style issues are automatically fixed by CI. No need to manually run Pint, Prettier, or ESLint before committing!/Feature
 ./vendor/bin/phpunit tests/Unit
+
+# Run with coverage
+./vendor/bin/phpunit --coverage-html coverage --coverage-text
 
 # Run frontend tests
 npm test
 npm run test:watch
-
-# Run with coverage
-./vendor/bin/phpunit --coverage-html coverage
 ```
+
+### Continuous Integration
+
+Our CI/CD pipeline automatically runs on every push and pull request:
+
+✅ **PHP Checks**
+- Laravel Pint (auto-fixes code style)
+- PHPStan static analysis (level 8)
+- PHPUnit test suite (75 tests)
+- Composer security audit
+
+✅ **Frontend Checks**
+- ESLint (auto-fixes formatting)
+- Prettier formatting
+- TypeScript type checking
+- NPM security audit
+
+All code style issues are automatically fixed and committed by the CI pipeline.
 
 ### Test Coverage
 
-Current test coverage includes:
-- ✅ Feature tests (9 tests)
-- ✅ API endpoint tests
-- ✅ Contact form validation
-- ✅ Visitor tracking
-- ⚠️ Unit tests (expanding)
+Current test coverage:
+- **Tests**: 75 passing
+- **Assertions**: 215
+- **Classes**: 21.88% coverage
+- **Methods**: 29.69% coverage
+- **Lines**: 40.67% coverage
 
 See [TESTING.md](./TESTING.md) for comprehensive testing documentation.
 
@@ -387,7 +397,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - React Team
 - Inertia.js Team
 - All contributors and maintainers
-
 ## 📞 Support
 
 - **Issues**: [GitHub Issues](https://github.com/JoshuaAckerly/graveyardjokes/issues)
