@@ -44,3 +44,6 @@ Thumbs.db
 
 # Storage symlink
 /public/storage
+
+# Entire storage folder (generated files)
+/storage
