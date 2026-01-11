@@ -1,6 +1,0 @@
-*
-!private/
-!public/
-!public/og-cache/
-!public/og-cache/.gitkeep
-!.gitignore
