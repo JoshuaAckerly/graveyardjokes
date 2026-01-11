@@ -18,7 +18,7 @@ cd "$DEPLOY_PATH"
 
 # Pull latest code from Git
 echo "📦 Pulling latest code from Git..."
-git pull origin main
+git pull origin testing
 
 # Install/Update PHP dependencies
 echo "🐘 Installing PHP dependencies..."
