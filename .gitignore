@@ -47,3 +47,10 @@ Thumbs.db
 
 # Entire storage folder (generated files)
 /storage
+
+# ACME challenge files
+/public/.well-known/
+
+# Modified files to ignore
+database/factories/UserFactory.php
+resources/js/data/portfolioItems.json
