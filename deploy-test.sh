@@ -67,7 +67,7 @@ php artisan view:cache
 
 # Generate sitemap
 echo "🗺️ Generating sitemap..."
-php artisan sitemap:generate || true
+php artisan app:generate-sitemap --url=https://graveyardjokes.com || true
 
 # Fix permissions
 echo "🔐 Setting permissions..."

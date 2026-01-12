@@ -323,7 +323,7 @@ php artisan view:cache
 php artisan migrate --force
 
 # Generate sitemap
-php artisan sitemap:generate
+php artisan app:generate-sitemap --url=https://graveyardjokes.com
 ```
 
 ### Server Requirements

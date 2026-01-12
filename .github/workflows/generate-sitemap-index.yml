@@ -44,11 +44,11 @@ jobs:
 
       - name: Generate main sitemap
         run: |
-          APP_URL=${{ env.APP_URL }} php artisan app:generate-sitemap
+          php artisan app:generate-sitemap --url=${{ env.APP_URL }}
       
       - name: Generate sitemap index with validation
         run: |
-          APP_URL=${{ env.APP_URL }} php artisan app:generate-sitemap-index --validate
+          php artisan app:generate-sitemap-index --url=${{ env.APP_URL }} --validate
 
       - name: Commit and push generated sitemap if changed
         run: |

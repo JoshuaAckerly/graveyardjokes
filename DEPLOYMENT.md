@@ -172,7 +172,7 @@ if [ -f artisan ]; then
     $FORGE_PHP artisan config:cache
     $FORGE_PHP artisan route:cache
     $FORGE_PHP artisan view:cache
-    $FORGE_PHP artisan sitemap:generate
+    $FORGE_PHP artisan app:generate-sitemap --url=https://graveyardjokes.com
 fi
 
 # Build frontend assets
@@ -309,7 +309,7 @@ php artisan migrate --force
 php artisan config:cache
 php artisan route:cache
 php artisan view:cache
-php artisan sitemap:generate
+php artisan app:generate-sitemap --url=https://graveyardjokes.com
 ```
 
 ### 9. Configure Nginx
@@ -507,7 +507,7 @@ php artisan queue:work --once
 ### 2. Generate Sitemap
 
 ```bash
-php artisan sitemap:generate
+php artisan app:generate-sitemap --url=https://graveyardjokes.com
 ```
 
 ### 3. Warm Up Cache

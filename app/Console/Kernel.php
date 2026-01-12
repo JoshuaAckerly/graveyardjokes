@@ -22,7 +22,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule): void
     {
         // Regenerate sitemap index daily at 02:00
-        $schedule->command('app:generate-sitemap-index')->dailyAt('02:00');
+        $schedule->command('app:generate-sitemap-index --url=https://graveyardjokes.com')->dailyAt('02:00');
     }
 
     /**

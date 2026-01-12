@@ -15,7 +15,7 @@ class GenerateSitemapIndex extends Command
      * @var string
      */
     // Add optional --validate flag to verify each sitemap URL responds with 200
-    protected $signature = 'app:generate-sitemap-index {--validate : Validate each sitemap URL via HTTP before including it}';
+    protected $signature = 'app:generate-sitemap-index {--validate : Validate each sitemap URL via HTTP before including it} {--url= : The base URL to use for the sitemap index}';
 
     /**
      * The console command description.
@@ -36,7 +36,7 @@ class GenerateSitemapIndex extends Command
         /** @var array<int, string> $subdomains */
         $subdomains = $rawSubdomains;
 
-        $rawBase = config('app.url', '');
+        $rawBase = $this->option('url') ?: config('app.url', '');
         if (! is_string($rawBase)) {
             $rawBase = '';
         }

@@ -8,7 +8,7 @@ use Spatie\Sitemap\Tags\Url;
 
 class GenerateSitemap extends Command
 {
-    protected $signature = 'app:generate-sitemap';
+    protected $signature = 'app:generate-sitemap {--url= : The base URL to use for the sitemap}';
 
     protected $description = 'Generate sitemap.xml for the main site';
 
@@ -16,11 +16,11 @@ class GenerateSitemap extends Command
     {
         $this->info('Generating sitemap.xml...');
 
-        $rawBase = config('app.url', '');
-        if (! is_string($rawBase)) {
-            $rawBase = '';
+        $baseUrl = $this->option('url') ?: config('app.url', '');
+        if (! is_string($baseUrl)) {
+            $baseUrl = '';
         }
-        $base = rtrim($rawBase, '/');
+        $base = rtrim($baseUrl, '/');
 
         Sitemap::create()
             ->add(Url::create($base.'/'))

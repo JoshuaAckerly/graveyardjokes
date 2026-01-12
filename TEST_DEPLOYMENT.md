@@ -129,7 +129,7 @@ php artisan migrate --force
 
 # Clear and cache
 php artisan optimize
-php artisan sitemap:generate
+php artisan app:generate-sitemap --url=https://graveyardjokes.com
 
 # Fix permissions
 sudo chown -R www-data:www-data storage bootstrap/cache
