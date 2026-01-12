@@ -11,6 +11,6 @@ class RandomJokeTest extends TestCase
         $response = $this->getJson('/api/random-joke');
 
         $response->assertStatus(200);
-        $response->assertJsonStructure(['id', 'body', 'author']);
+        $response->assertJsonStructure(['id', 'setup', 'punchline', 'category']);
     }
 }

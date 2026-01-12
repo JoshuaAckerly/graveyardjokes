@@ -1,0 +1,20 @@
+[
+    {
+        "id": "joke_001",
+        "setup": "Why don't skeletons fight each other?",
+        "punchline": "They don't have the guts!",
+        "category": "graveyard"
+    },
+    {
+        "id": "joke_002",
+        "setup": "Why did the skeleton go to the party alone?",
+        "punchline": "Because he had no body to go with!",
+        "category": "skeleton"
+    },
+    {
+        "id": "joke_003",
+        "setup": "What do you call a skeleton who won't work?",
+        "punchline": "Lazy bones!",
+        "category": "pun"
+    }
+]
