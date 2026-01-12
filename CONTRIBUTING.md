@@ -85,7 +85,7 @@ When reporting bugs, include:
 
 ## Environment
 - PHP Version: 8.4
-- OS: Windows 11
+- OS: Linux
 - Browser: Chrome 120
 - Node Version: 22.x
 
