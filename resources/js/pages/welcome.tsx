@@ -14,7 +14,7 @@ export default function Home(): JSX.Element {
         router.visit('/contact');
     };
 
-    const [joke, setJoke] = useState<{ id?: number; body?: string; author?: string } | null>(null);
+    const [joke, setJoke] = useState<{ id?: string; setup?: string; punchline?: string; category?: string } | null>(null);
     const [loadingJoke, setLoadingJoke] = useState(false);
 
     const fetchJoke = async () => {
@@ -179,9 +179,9 @@ export default function Home(): JSX.Element {
                             <div className="rounded-md bg-white/10 p-6 text-white">
                                 <p className="text-lg sm:text-xl">
                                     {loadingJoke && 'Loading joke...'}
-                                    {!loadingJoke && joke?.body}
+                                    {!loadingJoke && joke?.setup}
                                 </p>
-                                <p className="mt-3 text-sm opacity-70">{joke?.author}</p>
+                                <p className="mt-3 text-sm opacity-70">{joke?.punchline}</p>
                                 <div className="mt-4">
                                     <button
                                         onClick={fetchJoke}
