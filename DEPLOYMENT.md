@@ -1,13 +1,15 @@
 # Deployment Guide
 
-This guide covers deploying the Graveyard Jokes application to production environments, with specific focus on Laravel Forge deployment.
+This guide covers deploying the Graveyard Jokes application using Hypervisor, our custom deployment system with separate development and test server environments.
 
 ## 📋 Table of Contents
 
 - [Prerequisites](#prerequisites)
 - [Server Requirements](#server-requirements)
-- [Laravel Forge Deployment](#laravel-forge-deployment)
-- [Manual Deployment](#manual-deployment)
+- [Hypervisor Deployment](#hypervisor-deployment)
+- [Development Server](#development-server)
+- [Test Server](#test-server)
+- [Production Deployment](#production-deployment)
 - [Server Configuration](#server-configuration)
 - [Environment Configuration](#environment-configuration)
 - [SSL/HTTPS Setup](#sslhttps-setup)
@@ -22,13 +24,15 @@ This guide covers deploying the Graveyard Jokes application to production enviro
 
 Before deploying, ensure you have:
 
-- [ ] Server with root or sudo access
-- [ ] Domain name configured
-- [ ] SSL certificate (Let's Encrypt recommended)
-- [ ] Database server (MySQL 8.0+ or PostgreSQL 13+)
-- [ ] Redis server (optional but recommended)
+- [ ] Development server with root or sudo access
+- [ ] Test server with root or sudo access
+- [ ] Production server (AWS EC2 recommended)
+- [ ] Domain names configured
+- [ ] SSL certificates (Let's Encrypt recommended)
+- [ ] Database servers (MySQL 8.0+ or PostgreSQL 13+)
+- [ ] Redis servers (optional but recommended)
 - [ ] Git repository access
-- [ ] Deployment credentials configured
+- [ ] SSH access to all servers
 
 ## 🖥️ Server Requirements
 
@@ -76,154 +80,391 @@ sudo apt-get install supervisor
 curl -fsSL https://deb.nodesource.com/setup_22.x | sudo -E bash -
 sudo apt-get install -y nodejs
 
+# PM2 (for SSR server management)
+sudo npm install -g pm2
+
 # Composer
 curl -sS https://getcomposer.org/installer | php
 sudo mv composer.phar /usr/local/bin/composer
 ```
 
-## 🚀 Laravel Forge Deployment
+## 🚀 Hypervisor Deployment
 
-Laravel Forge provides simplified deployment for Laravel applications.
+Hypervisor is our custom deployment system that manages deployments across development, test, and production environments using automated scripts.
 
-### 1. Create Server on Forge
+### Environment Overview
 
-1. Log in to [Laravel Forge](https://forge.laravel.com)
-2. Click "Create Server"
-3. Choose provider (DigitalOcean, AWS, Linode, etc.)
-4. Select server size (minimum 1GB RAM)
-5. Choose PHP version (8.4)
-6. Enable database (MySQL/PostgreSQL)
-7. Enable Redis (recommended)
-8. Create server
+- **Development Server**: Local development environment with hot reloading
+- **Test Server**: Staging environment for testing and QA
+- **Production Server**: Live environment (AWS EC2)
 
-### 2. Create Site
+### Deployment Scripts
 
-1. Go to your server in Forge
-2. Click "New Site"
-3. Enter domain: `graveyardjokes.com`
-4. Select project type: "General PHP / Laravel"
-5. Create site
+The project includes automated deployment scripts:
 
-### 3. Configure Git Repository
+- `deploy-production.sh` - Production deployment to AWS EC2
+- `deploy-test.sh` - Test server deployment to Ubuntu VM
+- `setup-test-server.sh` - Initial test server setup
 
-1. Go to site settings
-2. Click "Git Repository"
-3. Select provider: GitHub
-4. Enter repository: `JoshuaAckerly/graveyardjokes`
-5. Branch: `main`
-6. Click "Install Repository"
+### 1. Initial Server Setup
 
-### 4. Set Environment Variables
+For each environment, run the appropriate setup:
 
-1. Go to "Environment"
-2. Update `.env` values:
+**Test Server:**
+```bash
+# Copy setup script to test server
+scp setup-test-server.sh user@YOUR_TEST_SERVER:~/
 
+# Run setup on test server
+ssh user@YOUR_TEST_SERVER
+chmod +x setup-test-server.sh
+./setup-test-server.sh
+```
+
+**Production Server:**
+Manual setup required (see server configuration section).
+
+### 2. Configure Environment Variables
+
+Update `.env` files for each environment:
+
+**Development (.env):**
 ```env
 ***REMOVED***
+***REMOVED***
+***REMOVED***
+
+***REMOVED***
+***REMOVED***
+DB_DATABASE=graveyardjokes_dev
+
+# ... other dev settings
+```
+
+**Test (.env):**
+```env
+APP_ENV=testing
+APP_DEBUG=false
+APP_URL=https://test.graveyardjokes.com
+
+***REMOVED***
+***REMOVED***
+***REMOVED***
+
+# ... other test settings
+```
+
+**Production (.env):**
+```env
 APP_ENV=production
 APP_DEBUG=false
 APP_URL=https://graveyardjokes.com
 
 ***REMOVED***
 ***REMOVED***
-***REMOVED***
-DB_DATABASE=forge
-DB_USERNAME=forge
-DB_PASSWORD=your_database_password
+DB_DATABASE=graveyardjokes_prod
 
-CACHE_STORE=redis
-QUEUE_CONNECTION=redis
-SESSION_DRIVER=redis
-
-***REMOVED***
-***REMOVED***
-***REMOVED***
-
-***REMOVED***
-MAIL_HOST=your_smtp_host
-MAIL_PORT=587
-MAIL_USERNAME=your_username
-MAIL_PASSWORD=your_password
-MAIL_ENCRYPTION=tls
-MAIL_FROM_ADDRESS="noreply@graveyardjokes.com"
-***REMOVED***
-
-TRACK_VISITOR_EMAIL_TTL=86400
+# ... other production settings
 ```
 
-3. Click "Save"
+### 3. Deploy to Environments
 
-### 5. Configure Deployment Script
+**Development:**
+```bash
+# Local deployment
+composer install
+npm install
+npm run build
+php artisan migrate
+```
 
-The project includes a `deploy-forge.sh` script. Update Forge's deployment script:
+**Test Server:**
+```bash
+# From your local machine
+rsync -avz --delete \
+  --exclude 'node_modules' \
+  --exclude 'vendor' \
+  --exclude '.git' \
+  --exclude 'storage/logs/*' \
+  --exclude '.env' \
+  /path/to/graveyardjokes/ \
+  user@TEST_SERVER:/var/www/graveyardjokes/
+
+# SSH and deploy
+ssh user@TEST_SERVER
+cd /var/www/graveyardjokes
+./deploy-test.sh
+```
+
+**Production:**
+```bash
+# Copy to production server
+scp deploy-production.sh user@PRODUCTION_SERVER:~/
+
+# SSH and deploy
+ssh user@PRODUCTION_SERVER
+cd /var/www/graveyardjokes
+./deploy-production.sh
+```
+
+## 💻 Development Server
+
+### Local Development Setup
+
+1. **Clone repository**
+   ```bash
+   git clone https://github.com/JoshuaAckerly/graveyardjokes.git
+   cd graveyardjokes
+   ```
+
+2. **Install dependencies**
+   ```bash
+   composer install
+   npm install
+   ```
+
+3. **Configure environment**
+   ```bash
+   cp .env.example .env
+   php artisan key:generate
+   ```
+
+4. **Database setup**
+   ```bash
+   # Update .env with local database credentials
+   php artisan migrate
+   ```
+
+5. **Start development servers**
+   ```bash
+   # Terminal 1: Laravel
+   php artisan serve --port=8000
+   
+   # Terminal 2: Vite
+   npm run dev
+   
+   # Terminal 3: SSR
+   php artisan inertia:start-ssr --port=13714
+   ```
+
+### Development URLs
+
+- Application: http://localhost:8000
+- Vite HMR: http://localhost:5173
+- SSR Server: http://localhost:13714
+
+## 🧪 Test Server
+
+### Test Environment Setup
+
+The test server runs on Ubuntu VM with automated deployment.
+
+### Deployment Process
+
+1. **Push code to testing branch**
+   ```bash
+   git checkout testing
+   git add .
+   git commit -m "Deploy to test"
+   git push origin testing
+   ```
+
+2. **Deploy using script**
+   ```bash
+   ssh user@TEST_SERVER
+   cd /var/www/graveyardjokes
+   ./deploy-test.sh
+   ```
+
+### Test Server Features
+
+- Automated database migrations
+- SSR server management
+- Log rotation
+- Queue worker management
+- Nginx configuration
+
+### Monitoring Test Deployments
 
 ```bash
-cd /home/forge/graveyardjokes.com
+# Check deployment logs
+tail -f /var/www/graveyardjokes/storage/logs/laravel.log
 
-git pull origin main
+# Check SSR logs
+tail -f /var/www/graveyardjokes/storage/logs/ssr.log
 
-$FORGE_COMPOSER install --no-interaction --prefer-dist --optimize-autoloader --no-dev
-
-( flock -w 10 9 || exit 1
-    echo 'Restarting FPM...'; sudo -S service php8.4-fpm reload ) 9>/tmp/fpmlock
-
-if [ -f artisan ]; then
-    $FORGE_PHP artisan migrate --force
-    $FORGE_PHP artisan config:cache
-    $FORGE_PHP artisan route:cache
-    $FORGE_PHP artisan view:cache
-    $FORGE_PHP artisan app:generate-sitemap --url=https://graveyardjokes.com
-fi
-
-# Build frontend assets
-npm ci
-npm run build
-
-# Restart queue workers
-$FORGE_PHP artisan queue:restart
+# Check Nginx status
+sudo systemctl status nginx
 ```
 
-### 6. Enable Quick Deploy
+## 🏭 Production Deployment
 
-1. Go to "Apps"
-2. Enable "Quick Deploy"
-3. Now pushes to `main` branch will auto-deploy
+### Production Server Setup
 
-### 7. Configure SSL
+Production runs on AWS EC2 with high availability.
 
-1. Go to "SSL"
-2. Select "LetsEncrypt"
-3. Enter domains: `graveyardjokes.com,www.graveyardjokes.com`
-4. Click "Obtain Certificate"
-5. Forge will automatically configure SSL
+### Deployment Process
 
-### 8. Set Up Queue Worker
-
-1. Go to "Daemons"
-2. Click "New Daemon"
-3. Configuration:
-   - Command: `php artisan queue:work redis --sleep=3 --tries=3 --timeout=90`
-   - User: `forge`
-   - Directory: `/home/forge/graveyardjokes.com`
-4. Click "Create Daemon"
-
-### 9. Configure Scheduler
-
-1. Go to "Scheduler"
-2. Verify cron entry exists:
-   ```
-   * * * * * php /home/forge/graveyardjokes.com/artisan schedule:run >> /dev/null 2>&1
+1. **Push to main branch**
+   ```bash
+   git checkout main
+   git add .
+   git commit -m "Deploy to production"
+   git push origin main
    ```
 
-### 10. Deploy!
+2. **Deploy using production script**
+   ```bash
+   ssh user@PRODUCTION_SERVER
+   cd /var/www/graveyardjokes
+   ./deploy-production.sh
+   ```
 
-1. Click "Deploy Now"
-2. Monitor deployment log
-3. Visit your site at `https://graveyardjokes.com`
+### Production Features
 
-## 🔧 Manual Deployment
+- PM2 for SSR server management
+- Automated asset optimization
+- Database migration with --force
+- Cache clearing and rebuilding
+- Queue worker restart
 
-If not using Forge, follow these steps:
+### Production Monitoring
+
+```bash
+# Check PM2 processes
+pm2 list
+
+# Check SSR server
+pm2 logs graveyardjokes-ssr
+
+# Check PHP-FPM
+sudo systemctl status php8.4-fpm
+```
+
+## 🔧 Server Configuration
+
+### Nginx Configuration
+
+Create `/etc/nginx/sites-available/graveyardjokes`:
+
+```nginx
+server {
+    listen 80;
+    server_name graveyardjokes.com www.graveyardjokes.com;
+    root /var/www/graveyardjokes/public;
+
+    add_header X-Frame-Options "SAMEORIGIN" always;
+    add_header X-XSS-Protection "1; mode=block" always;
+    add_header X-Content-Type-Options "nosniff" always;
+    add_header Referrer-Policy "no-referrer-when-downgrade" always;
+    add_header Content-Security-Policy "default-src 'self' http: https: data: blob: 'unsafe-inline'" always;
+
+    index index.php index.html index.htm;
+
+    charset utf-8;
+
+    location / {
+        try_files $uri $uri/ /index.php?$query_string;
+    }
+
+    location = /favicon.ico { access_log off; log_not_found off; }
+    location = /robots.txt  { access_log off; log_not_found off; }
+
+    error_page 404 /index.php;
+
+    location ~ \.php$ {
+        fastcgi_pass unix:/var/run/php/php8.4-fpm.sock;
+        fastcgi_index index.php;
+        fastcgi_param SCRIPT_FILENAME $realpath_root$fastcgi_script_name;
+        include fastcgi_params;
+    }
+
+    location ~ /\.(?!well-known).* {
+        deny all;
+    }
+
+    # SSR proxy
+    location /ssr {
+        proxy_pass http://127.0.0.1:13714;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_cache_bypass $http_upgrade;
+    }
+}
+```
+
+Enable the site:
+```bash
+sudo ln -s /etc/nginx/sites-available/graveyardjokes /etc/nginx/sites-enabled/
+sudo nginx -t
+sudo systemctl reload nginx
+```
+
+### MySQL Setup
+
+```bash
+# Secure MySQL installation
+sudo mysql_secure_installation
+
+# Create database and user
+sudo mysql -u root -p
+
+CREATE DATABASE graveyardjokes_prod;
+CREATE USER 'graveyardjokes'@'localhost' IDENTIFIED BY 'your_secure_password';
+GRANT ALL PRIVILEGES ON graveyardjokes_prod.* TO 'graveyardjokes'@'localhost';
+FLUSH PRIVILEGES;
+EXIT;
+```
+
+### Redis Setup
+
+```bash
+# Install and configure Redis
+sudo apt-get install redis-server
+sudo systemctl enable redis-server
+sudo systemctl start redis-server
+```
+
+### Supervisor Configuration
+
+Create `/etc/supervisor/conf.d/graveyardjokes-worker.conf`:
+
+```ini
+[program:graveyardjokes-worker]
+process_name=%(program_name)s_%(process_num)02d
+command=php /var/www/graveyardjokes/artisan queue:work redis --sleep=3 --tries=3 --timeout=90
+directory=/var/www/graveyardjokes
+user=www-data
+numprocs=2
+priority=999
+autostart=true
+autorestart=true
+startretries=3
+redirect_stderr=true
+stdout_logfile=/var/www/graveyardjokes/storage/logs/worker.log
+```
+
+Update supervisor:
+```bash
+sudo supervisorctl reread
+sudo supervisorctl update
+sudo supervisorctl start graveyardjokes-worker:*
+```
+
+### Cron Jobs
+
+Add to crontab:
+```bash
+sudo crontab -e
+
+# Add this line:
+* * * * * php /var/www/graveyardjokes/artisan schedule:run >> /dev/null 2>&1
+```
 
 ### 1. Set Up Server
 
@@ -581,81 +822,135 @@ jobs:
           php artisan key:generate
           php artisan test
 
-      - name: Deploy to Forge
-        if: success()
-        uses: jbrooksuk/laravel-forge-action@v1
+## 🔄 CI/CD Integration
+
+### GitHub Actions Workflow
+
+The project includes automated CI/CD with GitHub Actions:
+
+```yaml
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main, testing ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup PHP
+        uses: actions/setup-php@v4
         with:
-          forge_token: ${{ secrets.FORGE_API_TOKEN }}
-          servers: ${{ secrets.FORGE_SERVER_ID }}
-          sites: ${{ secrets.FORGE_SITE_ID }}
+          php-version: '8.4'
+          extensions: mbstring, xml, curl, zip, bcmath, pdo_mysql, redis
+
+      - name: Install Composer dependencies
+        run: composer install --no-dev --optimize-autoloader --no-interaction
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      - name: Install NPM dependencies
+        run: npm ci
+
+      - name: Build assets
+        run: npm run build
+
+      - name: Run tests
+        run: |
+          cp .env.example .env
+          php artisan key:generate
+          php artisan test
+
+  deploy-test:
+    if: github.ref == 'refs/heads/testing' && github.event_name == 'push'
+    needs: test
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Deploy to Test Server
+        run: |
+          echo "Deploying to test server using Hypervisor"
+          # Add your test server deployment commands here
+          # Example: rsync, SSH commands, or webhook calls
+
+  deploy-production:
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    needs: test
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Deploy to Production
+        run: |
+          echo "Deploying to production using Hypervisor"
+          # Add your production deployment commands here
 ```
 
-### Forge API Secrets
+### Deployment Secrets
 
 Add to GitHub repository secrets:
-- `FORGE_API_TOKEN`: Your Laravel Forge API token
-- `FORGE_SERVER_ID`: Your Forge server ID
-- `FORGE_SITE_ID`: Your Forge site ID
+- `TEST_SERVER_HOST`: Test server hostname/IP
+- `TEST_SERVER_USER`: SSH user for test server
+- `PRODUCTION_SERVER_HOST`: Production server hostname/IP
+- `PRODUCTION_SERVER_USER`: SSH user for production server
+- `SSH_PRIVATE_KEY`: Private SSH key for server access
 
 ### Deployment Branches
 
-**Production**: `main` → graveyardjokes.com
-**Staging**: `staging` → staging.graveyardjokes.com
-
-Create staging environment:
-
-```bash
-# On Forge, create new site for staging
-# Configure separate deployment script
-# Use staging database credentials
-```
+**Production**: `main` → graveyardjokes.com (AWS EC2)
+**Test**: `testing` → test.graveyardjokes.com (Ubuntu VM)
+**Development**: `develop` → localhost:8000
 
 ## ⚡ Zero-Downtime Deployment
 
-### Using Envoy
+### Using Hypervisor Scripts
 
-Install Envoy:
+The deployment scripts ensure zero-downtime by:
 
+1. **Staged Deployment**: Code is deployed to a staging area first
+2. **Asset Building**: Frontend assets are built before switching
+3. **Service Restart**: Services are restarted gracefully
+4. **Health Checks**: Basic health checks ensure deployment success
+
+### Rollback Procedures
+
+**Test Server Rollback:**
 ```bash
-composer global require laravel/envoy
+# SSH to test server
+ssh user@test-server
+cd /var/www/graveyardjokes
+git reset --hard HEAD~1
+./deploy-test.sh
 ```
 
-Create `Envoy.blade.php`:
+**Production Rollback:**
+```bash
+# SSH to production server
+ssh user@production-server
+cd /var/www/graveyardjokes
+git reset --hard HEAD~1
+./deploy-production.sh
+```
 
-```php
-@servers(['production' => 'forge@your-server.com'])
+### Monitoring Deployments
 
-@setup
-    $repository = 'git@github.com:JoshuaAckerly/graveyardjokes.git';
-    $releases_dir = '/home/forge/graveyardjokes.com/releases';
-    $app_dir = '/home/forge/graveyardjokes.com';
-    $release = date('YmdHis');
-    $new_release_dir = $releases_dir .'/'. $release;
-@endsetup
+**Check deployment status:**
+```bash
+# Test server
+ssh user@test-server 'tail -f /var/www/graveyardjokes/storage/logs/laravel.log'
 
-@story('deploy')
-    clone_repository
-    run_composer
-    run_npm
-    update_symlinks
-    migrate_database
-    optimize_app
-    restart_services
-@endstory
-
-@task('clone_repository')
-    echo "Cloning repository"
-    [ -d {{ $releases_dir }} ] || mkdir {{ $releases_dir }}
-    git clone --depth 1 {{ $repository }} {{ $new_release_dir }}
-    cd {{ $new_release_dir }}
-    git reset --hard {{ $commit }}
-@endtask
-
-@task('run_composer')
-    echo "Installing composer dependencies"
-    cd {{ $new_release_dir }}
-    composer install --prefer-dist --no-dev --optimize-autoloader --no-interaction
-@endtask
+# Production server
+ssh user@production-server 'pm2 logs graveyardjokes-ssr'
+```
 
 @task('run_npm')
     echo "Building assets"
@@ -729,12 +1024,12 @@ sudo nginx -s reload
 
 ## 🔙 Rollback Procedures
 
-### Quick Rollback (Forge)
+### Quick Rollback (Hypervisor)
 
-1. Go to Forge site
-2. Click "Deployment History"
-3. Find last working deployment
-4. Click "Deploy This Commit"
+1. SSH to the affected server
+2. Navigate to project directory
+3. Reset to previous commit: `git reset --hard HEAD~1`
+4. Run deployment script: `./deploy-production.sh` or `./deploy-test.sh`
 
 ### Manual Rollback
 
@@ -1023,7 +1318,7 @@ Add public key to GitHub as read-only deploy key.
 
 ```bash
 # Application files (read-only for web server)
-sudo chown -R forge:www-data /var/www/graveyardjokes
+sudo chown -R www-data:www-data /var/www/graveyardjokes
 sudo chmod -R 755 /var/www/graveyardjokes
 
 # Writable directories only
@@ -1142,11 +1437,11 @@ For deployment issues:
 
 - **Primary**: admin@graveyardjokes.com
 - **GitHub**: @JoshuaAckerly
-- **Laravel Forge**: [forge.laravel.com](https://forge.laravel.com)
+- **AWS Console**: For production server issues
 - **Server Provider**: Check your hosting dashboard
 
 ---
 
 **Deploy with Confidence! 🚀**
 
-*Last updated: November 22, 2025*
+*Last updated: January 17, 2026*

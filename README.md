@@ -335,9 +335,13 @@ php artisan app:generate-sitemap --url=https://graveyardjokes.com
 - Redis (recommended for cache/queue)
 - SSL certificate (for HTTPS)
 
-### Laravel Forge Deployment
+### Hypervisor Deployment
 
-Automated deployment script is available in `deploy-forge.sh`.
+Automated deployment scripts are available for development, test, and production environments:
+
+- `deploy-production.sh` - Production deployment to AWS EC2
+- `deploy-test.sh` - Test server deployment to Ubuntu VM
+- `setup-test-server.sh` - Initial test server setup
 
 See [DEPLOYMENT.md](./DEPLOYMENT.md) for detailed deployment instructions.
 

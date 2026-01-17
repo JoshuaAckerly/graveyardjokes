@@ -165,7 +165,7 @@ resources/js/
 | **Web Server** | Nginx | HTTP server & reverse proxy |
 | **Process Manager** | Supervisor | Queue worker management |
 | **SSL** | Let's Encrypt | Free SSL certificates |
-| **Deployment** | Laravel Forge | Server management & deployment |
+| **Deployment** | Hypervisor (Custom Scripts) | Server management & deployment |
 | **CI/CD** | GitHub Actions | Automated testing & deployment |
 
 ## 📚 Application Layers

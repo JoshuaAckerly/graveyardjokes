@@ -3,7 +3,6 @@
 ## Maintenance Tasks
 
 ### Infrastructure
-- [ ] Update Forge deployment script to use `git reset --hard` for force-push compatibility
 - [ ] Verify automatic sitemap generation workflow is running correctly
 - [ ] Monitor server logs for errors after deployment
 - [ ] Set up automated backups verification
