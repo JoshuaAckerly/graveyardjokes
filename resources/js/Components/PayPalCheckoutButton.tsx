@@ -1,10 +1,14 @@
+
 import { useEffect, useRef } from 'react';
 import axios from 'axios';
+
+// Import PayPal types (global augmentation)
+/// <reference path="../types/paypal.d.ts" />
 
 interface PayPalCheckoutButtonProps {
   amount: number;
   item: string;
-  onSuccess?: (details: any) => void;
+  onSuccess?: (details: Record<string, unknown>) => void;
 }
 
 export default function PayPalCheckoutButton({ amount, item, onSuccess }: PayPalCheckoutButtonProps) {
@@ -14,7 +18,7 @@ export default function PayPalCheckoutButton({ amount, item, onSuccess }: PayPal
     if (!window.paypal || !paypalRef.current) return;
 
     window.paypal.Buttons({
-      createOrder: (data: any, actions: any) => {
+      createOrder: (_data, actions) => {
         return actions.order.create({
           purchase_units: [
             {
@@ -24,7 +28,7 @@ export default function PayPalCheckoutButton({ amount, item, onSuccess }: PayPal
           ],
         });
       },
-      onApprove: async (data: any, actions: any) => {
+      onApprove: async (_data, actions) => {
         const details = await actions.order.capture();
         // Send payment details to auth-system
         await axios.post(
@@ -32,14 +36,14 @@ export default function PayPalCheckoutButton({ amount, item, onSuccess }: PayPal
           {
             item,
             amount,
-            paypal_transaction_id: details.id,
+            paypal_transaction_id: (details as Record<string, unknown>).id,
           },
           { withCredentials: true }
         );
-        if (onSuccess) onSuccess(details);
+        if (onSuccess) onSuccess(details as Record<string, unknown>);
         alert('Payment successful!');
       },
-      onError: (err: any) => {
+      onError: (err) => {
         alert('PayPal error: ' + err);
       },
     }).render(paypalRef.current);
