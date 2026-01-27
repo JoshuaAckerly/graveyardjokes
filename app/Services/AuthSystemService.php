@@ -6,14 +6,14 @@ use Illuminate\Support\Facades\Http;
 
 class AuthSystemService
 {
-    protected $baseUrl;
+    protected string $baseUrl;
 
     public function __construct()
     {
-        $this->baseUrl = env('AUTH_SYSTEM_URL', 'http://auth-system.local/api');
+        $this->baseUrl = config('services.auth_system.url', 'http://auth-system.local/api');
     }
 
-    public function login($email, $password)
+    public function login(string $email, string $password): ?string
     {
         $response = Http::post($this->baseUrl.'/login', [
             'email' => $email,
@@ -26,14 +26,14 @@ class AuthSystemService
         return null;
     }
 
-    public function getUser($token)
+    public function getUser(string $token): ?array
     {
         $response = Http::withToken($token)->get($this->baseUrl.'/user');
 
         return $response->json();
     }
 
-    public function getPurchases($token)
+    public function getPurchases(string $token): ?array
     {
         $response = Http::withToken($token)->get($this->baseUrl.'/purchases');
 

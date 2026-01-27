@@ -4,18 +4,19 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Services\AuthSystemService;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class UserProxyController extends Controller
 {
-    protected $authSystem;
+    protected AuthSystemService $authSystem;
 
     public function __construct(AuthSystemService $authSystem)
     {
         $this->authSystem = $authSystem;
     }
 
-    public function user(Request $request)
+    public function user(Request $request): JsonResponse
     {
         $token = $request->bearerToken();
         $user = $this->authSystem->getUser($token);
@@ -23,7 +24,7 @@ class UserProxyController extends Controller
         return response()->json($user);
     }
 
-    public function purchases(Request $request)
+    public function purchases(Request $request): JsonResponse
     {
         $token = $request->bearerToken();
         $purchases = $this->authSystem->getPurchases($token);

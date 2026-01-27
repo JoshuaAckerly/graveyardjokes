@@ -9,7 +9,7 @@ class Kernel extends HttpKernel
     /**
      * The application's global HTTP middleware stack.
      *
-     * @var array
+     * @var array<int, string>
      */
     protected $middleware = [
         // ...existing middleware...
@@ -18,7 +18,7 @@ class Kernel extends HttpKernel
     /**
      * The application's route middleware groups.
      *
-     * @var array
+     * @var array<string, array<int, string>>
      */
     protected $middlewareGroups = [
         'web' => [
@@ -33,7 +33,7 @@ class Kernel extends HttpKernel
     /**
      * The application's route middleware.
      *
-     * @var array
+     * @var array<string, string>
      */
     protected $routeMiddleware = [
         'auth-system' => \App\Http\Middleware\RequireAuthSystemToken::class,
