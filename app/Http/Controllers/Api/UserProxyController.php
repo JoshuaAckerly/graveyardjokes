@@ -19,16 +19,20 @@ class UserProxyController extends Controller
     public function user(Request $request): JsonResponse
     {
         $token = $request->bearerToken();
+        if (!is_string($token)) {
+            return response()->json(['error' => 'Unauthorized'], 401);
+        }
         $user = $this->authSystem->getUser($token);
-
         return response()->json($user);
     }
 
     public function purchases(Request $request): JsonResponse
     {
         $token = $request->bearerToken();
+        if (!is_string($token)) {
+            return response()->json(['error' => 'Unauthorized'], 401);
+        }
         $purchases = $this->authSystem->getPurchases($token);
-
         return response()->json($purchases);
     }
 }

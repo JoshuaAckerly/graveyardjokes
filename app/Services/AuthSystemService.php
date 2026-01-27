@@ -10,7 +10,8 @@ class AuthSystemService
 
     public function __construct()
     {
-        $this->baseUrl = config('services.auth_system.url', 'http://auth-system.local/api');
+        $url = config('services.auth_system.url', 'http://auth-system.local/api');
+        $this->baseUrl = is_string($url) ? $url : 'http://auth-system.local/api';
     }
 
     public function login(string $email, string $password): ?string
@@ -19,24 +20,48 @@ class AuthSystemService
             'email' => $email,
             'password' => $password,
         ]);
-        if ($response->successful()) {
-            return $response->json('token');
+        if ($response instanceof \Illuminate\Http\Client\Response && $response->successful()) {
+            $token = $response->json('token');
+            return is_string($token) ? $token : null;
         }
-
         return null;
     }
 
+    /**
+     * @return array<string, mixed>|null
+     */
     public function getUser(string $token): ?array
     {
         $response = Http::withToken($token)->get($this->baseUrl.'/user');
-
-        return $response->json();
+        if ($response instanceof \Illuminate\Http\Client\Response) {
+            $data = $response->json();
+            if (is_array($data)) {
+                // Filter to ensure string keys
+                return array_filter($data, 'is_string', ARRAY_FILTER_USE_KEY) ?: null;
+            }
+        }
+        return null;
     }
 
+    /**
+     * @return array<int, array<string, mixed>>|null
+     */
     public function getPurchases(string $token): ?array
     {
         $response = Http::withToken($token)->get($this->baseUrl.'/purchases');
-
-        return $response->json();
+        if ($response instanceof \Illuminate\Http\Client\Response) {
+            $data = $response->json();
+            if (is_array($data)) {
+                // Ensure each item is an array with string keys
+                $result = [];
+                foreach ($data as $item) {
+                    if (is_array($item)) {
+                        $result[] = array_filter($item, 'is_string', ARRAY_FILTER_USE_KEY);
+                    }
+                }
+                return $result ?: null;
+            }
+        }
+        return null;
     }
 }
