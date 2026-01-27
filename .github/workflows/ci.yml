@@ -79,8 +79,8 @@ jobs:
       - name: Run PHPStan
         run: vendor/bin/phpstan analyse -c phpstan.neon --memory-limit=2G --error-format=github
 
-      - name: Copy environment file
-        run: cp .env.example .env
+      - name: Copy CI environment file
+        run: cp .env.ci .env
 
       - name: Generate application key
         run: php artisan key:generate
