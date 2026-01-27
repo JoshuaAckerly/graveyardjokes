@@ -1,7 +1,18 @@
 <?php
+use App\Http\Controllers\JokeController;
+use App\Modules\Visitor\Controllers\VisitorController;
+
+// API endpoint to fetch and cache Open Graph images for external sites (if needed, move here)
+
+// Visitor tracking (POST/OPTIONS) with rate limiting
+Route::middleware(['throttle:60,1'])->group(function () {
+    Route::post('/track-visit', [VisitorController::class, 'track']);
+    Route::options('/track-visit', [VisitorController::class, 'track']);
+});
+// Random joke endpoint (returns JSON)
+Route::get('/random-joke', [JokeController::class, 'random'])->name('api.random-joke');
 
 use App\Http\Controllers\Api\UserProxyController;
-use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth-system')->group(function () {
     Route::get('/user', [UserProxyController::class, 'user']);

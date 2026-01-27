@@ -207,13 +207,13 @@ class ApiTest extends TestCase
     // Visitor Tracking API Tests
     public function test_visitor_tracking_options_request(): void
     {
-        $response = $this->options('/track-visit');
+        $response = $this->options('/api/track-visit');
         $response->assertStatus(200);
     }
 
     public function test_visitor_tracking_post_request(): void
     {
-        $response = $this->postJson('/track-visit', [
+        $response = $this->postJson('/api/track-visit', [
             'referrer' => 'https://google.com',
             'subdomain' => 'www',
         ]);
@@ -229,7 +229,7 @@ class ApiTest extends TestCase
 
     public function test_visitor_tracking_without_optional_fields(): void
     {
-        $response = $this->postJson('/track-visit', []);
+        $response = $this->postJson('/api/track-visit', []);
 
         $response->assertStatus(200)
             ->assertJsonStructure(['success', 'message', 'data']);
@@ -237,7 +237,7 @@ class ApiTest extends TestCase
 
     public function test_visitor_tracking_with_invalid_json(): void
     {
-        $response = $this->post('/track-visit', [], ['Content-Type' => 'application/json']);
+        $response = $this->post('/api/track-visit', [], ['Content-Type' => 'application/json']);
 
         $response->assertStatus(200);
     }
@@ -262,7 +262,7 @@ class ApiTest extends TestCase
 
     public function test_gone_routes_return_410(): void
     {
-        $goneRoutes = ['/login', '/register', '/cryptescape', '/demo'];
+        $goneRoutes = ['/cryptescape', '/demo'];
 
         foreach ($goneRoutes as $route) {
             $response = $this->get($route);

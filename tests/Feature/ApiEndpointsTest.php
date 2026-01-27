@@ -254,7 +254,7 @@ class ApiEndpointsTest extends TestCase
 
     public function test_visitor_tracking_returns_correct_json_structure(): void
     {
-        $response = $this->postJson('/track-visit', [
+        $response = $this->postJson('/api/track-visit', [
             'referrer' => 'https://google.com',
             'subdomain' => 'www',
         ]);
@@ -273,7 +273,7 @@ class ApiEndpointsTest extends TestCase
 
     public function test_visitor_tracking_handles_localhost_ip(): void
     {
-        $response = $this->postJson('/track-visit', [], [
+        $response = $this->postJson('/api/track-visit', [], [
             'REMOTE_ADDR' => '127.0.0.1',
         ]);
 
@@ -289,7 +289,7 @@ class ApiEndpointsTest extends TestCase
 
     public function test_visitor_tracking_handles_ipv6(): void
     {
-        $response = $this->postJson('/track-visit', [], [
+        $response = $this->postJson('/api/track-visit', [], [
             'REMOTE_ADDR' => '::1',
         ]);
 
@@ -299,7 +299,7 @@ class ApiEndpointsTest extends TestCase
 
     public function test_visitor_tracking_handles_missing_referrer(): void
     {
-        $response = $this->postJson('/track-visit', [
+        $response = $this->postJson('/api/track-visit', [
             'subdomain' => 'www',
         ]);
 
@@ -309,7 +309,7 @@ class ApiEndpointsTest extends TestCase
 
     public function test_visitor_tracking_handles_long_referrer(): void
     {
-        $response = $this->postJson('/track-visit', [
+        $response = $this->postJson('/api/track-visit', [
             'referrer' => 'https://example.com/'.str_repeat('a', 1000),
             'subdomain' => 'www',
         ]);
@@ -437,7 +437,7 @@ class ApiEndpointsTest extends TestCase
             $largeArray["key_{$i}"] = str_repeat('x', 100);
         }
 
-        $response = $this->postJson('/track-visit', $largeArray);
+        $response = $this->postJson('/api/track-visit', $largeArray);
 
         $response->assertStatus(200);
     }
@@ -495,7 +495,7 @@ class ApiEndpointsTest extends TestCase
     {
         // Make multiple rapid requests
         for ($i = 0; $i < 5; $i++) {
-            $response = $this->postJson('/track-visit', [
+            $response = $this->postJson('/api/track-visit', [
                 'referrer' => 'https://test.com',
                 'subdomain' => 'www',
             ]);
@@ -506,7 +506,7 @@ class ApiEndpointsTest extends TestCase
 
     public function test_api_endpoints_return_proper_cors_headers(): void
     {
-        $response = $this->options('/track-visit');
+        $response = $this->options('/api/track-visit');
 
         $response->assertStatus(200);
     }

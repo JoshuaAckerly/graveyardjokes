@@ -54,10 +54,7 @@ Route::get('/terms', fn () => Inertia::render('legal/terms'))->name('terms');
 Route::get('/privacy', fn () => Inertia::render('legal/privacy'))->name('privacy');
 Route::get('/cookies', fn () => Inertia::render('legal/cookies'))->name('cookies');
 
-Route::match(['post', 'options'], '/track-visit', [VisitorController::class, 'track']);
 
-// Random joke endpoint (returns JSON)
-Route::get('/api/random-joke', [JokeController::class, 'random'])->name('api.random-joke');
 
 // API Documentation
 Route::get('/openapi.yaml', function () {
@@ -101,6 +98,14 @@ Route::get('/generate-sitemap', function () {
     return 'Sitemap generated!';
 });
 
+// Handle /cryptescape and /demo as 410 Gone before any redirects
+Route::get('/cryptescape', function () {
+    abort(410);  // Sends HTTP 410 Gone to Google & browsers
+});
+Route::get('/demo', function () {
+    abort(410);  // Sends HTTP 410 Gone to Google & browsers
+});
+
 // Redirect old pages to homepage or anchors
 Route::redirect('/WBG410/home.php', '/portfolio', 301);
 Route::redirect('/legal/terms', '/terms', 301);
@@ -112,20 +117,6 @@ Route::redirect('/legal/cookies', '/cookies', 301);
 // Redirects for missing pages
 Route::redirect('/illustrations', '/contact', 301);
 Route::redirect('/pricing', '/services', 301);
-Route::redirect('/demo', '/', 301);
-Route::redirect('/cryptescape', '/', 301);
-
-// Auth pages - login, register, forgot-password now enabled
-
-// Handle /cryptescape properly for SEO
-Route::get('/cryptescape', function () {
-    // Page is gone permanently
-    abort(410);  // Sends HTTP 410 Gone to Google & browsers
-});
-Route::get('/demo', function () {
-    // Page is gone permanently
-    abort(410);  // Sends HTTP 410 Gone to Google & browsers
-});
 
 // Explicitly mark auth-related endpoints as permanently removed (410 Gone)
 // so crawlers get a clear signal instead of a redirect or soft-404.
