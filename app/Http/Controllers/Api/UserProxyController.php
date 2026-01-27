@@ -19,6 +19,7 @@ class UserProxyController extends Controller
     {
         $token = $request->bearerToken();
         $user = $this->authSystem->getUser($token);
+
         return response()->json($user);
     }
 
@@ -26,6 +27,7 @@ class UserProxyController extends Controller
     {
         $token = $request->bearerToken();
         $purchases = $this->authSystem->getPurchases($token);
+
         return response()->json($purchases);
     }
 }

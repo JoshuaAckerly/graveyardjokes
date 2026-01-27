@@ -15,25 +15,28 @@ class AuthSystemService
 
     public function login($email, $password)
     {
-        $response = Http::post($this->baseUrl . '/login', [
+        $response = Http::post($this->baseUrl.'/login', [
             'email' => $email,
             'password' => $password,
         ]);
         if ($response->successful()) {
             return $response->json('token');
         }
+
         return null;
     }
 
     public function getUser($token)
     {
-        $response = Http::withToken($token)->get($this->baseUrl . '/user');
+        $response = Http::withToken($token)->get($this->baseUrl.'/user');
+
         return $response->json();
     }
 
     public function getPurchases($token)
     {
-        $response = Http::withToken($token)->get($this->baseUrl . '/purchases');
+        $response = Http::withToken($token)->get($this->baseUrl.'/purchases');
+
         return $response->json();
     }
 }
