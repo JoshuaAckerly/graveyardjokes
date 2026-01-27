@@ -1,4 +1,5 @@
 <?php
+
 use App\Http\Controllers\JokeController;
 use App\Modules\Visitor\Controllers\VisitorController;
 

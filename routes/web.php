@@ -4,10 +4,8 @@ Route::get('/auth/login', function () {
 });
 <?php
 
-use App\Http\Controllers\JokeController;
 use App\Http\Controllers\OgImageController;
 use App\Modules\Contact\Controllers\ContactController;
-use App\Modules\Visitor\Controllers\VisitorController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Spatie\Sitemap\Sitemap;
@@ -53,8 +51,6 @@ Route::get('/api/fetch-og-image', [OgImageController::class, 'fetch'])->name('ap
 Route::get('/terms', fn () => Inertia::render('legal/terms'))->name('terms');
 Route::get('/privacy', fn () => Inertia::render('legal/privacy'))->name('privacy');
 Route::get('/cookies', fn () => Inertia::render('legal/cookies'))->name('cookies');
-
-
 
 // API Documentation
 Route::get('/openapi.yaml', function () {
