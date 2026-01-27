@@ -22,8 +22,10 @@ class AuthSystemService
         ]);
         if ($response instanceof \Illuminate\Http\Client\Response && $response->successful()) {
             $token = $response->json('token');
+
             return is_string($token) ? $token : null;
         }
+
         return null;
     }
 
@@ -40,6 +42,7 @@ class AuthSystemService
                 return array_filter($data, 'is_string', ARRAY_FILTER_USE_KEY) ?: null;
             }
         }
+
         return null;
     }
 
@@ -59,9 +62,11 @@ class AuthSystemService
                         $result[] = array_filter($item, 'is_string', ARRAY_FILTER_USE_KEY);
                     }
                 }
+
                 return $result ?: null;
             }
         }
+
         return null;
     }
 }
