@@ -1,7 +1,3 @@
-// Redirect /auth/login to auth-system login page
-Route::get('/auth/login', function () {
-    return redirect()->away('http://localhost:8007/login');
-});
 <?php
 
 use App\Http\Controllers\OgImageController;
