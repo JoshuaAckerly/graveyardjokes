@@ -409,5 +409,34 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 
-**Made with ❤️ by Graveyard Jokes Studios**
-# CI/CD optimized Sun Jan  4 10:54:58 AM EST 2026
+## Integration with Auth System
+
+This project uses a centralized auth-system (see polyrepo) for all authentication and user management.
+
+### Features
+- Login and registration are handled by the shared auth-system
+- Purchases (e.g., PayPal payments) are POSTed to the auth-system `/api/purchases` endpoint
+- User purchases are visible on the dashboard in the auth-system
+- Secure, scalable, and ready for multi-project SSO
+
+### Purchase Flow
+- After a successful payment, this project sends purchase details (item, amount, PayPal transaction ID) to the auth-system
+- Purchases are linked to the authenticated user and visible in their dashboard
+
+### Integration Steps
+1. Ensure this project is configured to use the auth-system for login/registration (via API or Inertia)
+2. On payment success, POST purchase details to the auth-system `/api/purchases` endpoint
+3. Purchases will appear on the user's dashboard in the auth-system
+
+---
+
+## Test Server Setup
+
+For unified test server deployment, see [../TEST_DEPLOYMENT.md](../TEST_DEPLOYMENT.md) for a complete guide.
+
+**Quick summary:**
+- Prepare Ubuntu VM, configure DNS for all subdomains
+- Use `setup-all-test-servers.sh` to install dependencies, clone repos, set up .env, run migrations, build assets, and configure Nginx/SSL
+- Visit each subdomain to verify
+
+For full details and troubleshooting, always refer to the main TEST_DEPLOYMENT.md.

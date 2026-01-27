@@ -1,4 +1,5 @@
 import MainLayout from '@/Layouts/MainLayout';
+import PayPalCheckoutButton from '@/Components/PayPalCheckoutButton';
 import { Head, Link } from '@inertiajs/react';
 import { motion } from 'framer-motion';
 import { Check } from 'lucide-react';
@@ -9,7 +10,7 @@ export default function Services() {
     const packages = [
         {
             title: 'Starter Package',
-            price: '$600',
+            price: 600,
             description: 'Perfect for artists and musicians starting their online presence',
             features: [
                 'Single-page responsive website',
@@ -24,7 +25,7 @@ export default function Services() {
         },
         {
             title: 'Professional Package',
-            price: '$1,500',
+            price: 1500,
             description: 'Ideal for established artists with growing audiences',
             features: [
                 'Multi-page custom website',
@@ -41,7 +42,7 @@ export default function Services() {
         },
         {
             title: 'Premium Package',
-            price: '$3,000+',
+            price: 3000,
             description: 'Full-featured solution for serious professionals',
             features: [
                 'Everything in Professional',
@@ -162,12 +163,15 @@ export default function Services() {
                                         ))}
                                     </ul>
 
-                                    <Link
-                                        href={pkg.link}
-                                        className="mt-auto block w-full rounded-lg bg-(--primary) px-6 py-3 text-center font-semibold text-white transition hover:bg-(--accent)"
-                                    >
-                                        View Details & Purchase
-                                    </Link>
+                                    <div className="mt-auto flex flex-col gap-2">
+                                        <Link
+                                            href={pkg.link}
+                                            className="block w-full rounded-lg bg-(--primary) px-6 py-3 text-center font-semibold text-white transition hover:bg-(--accent)"
+                                        >
+                                            View Details
+                                        </Link>
+                                        <PayPalCheckoutButton amount={pkg.price} item={pkg.title} />
+                                    </div>
                                 </motion.div>
                             ))}
                         </div>

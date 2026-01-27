@@ -2,52 +2,11 @@ import MainLayout from '@/Layouts/MainLayout';
 import { Head, Link } from '@inertiajs/react';
 import { motion } from 'framer-motion';
 import { ArrowLeft, Check } from 'lucide-react';
-import { useEffect, useRef, useState } from 'react';
+import PayPalCheckoutButton from '@/Components/PayPalCheckoutButton';
 
 export default function StarterPackage() {
     const cdn = import.meta.env.VITE_ASSET_URL || '';
-    const paypalContainerRef = useRef<HTMLDivElement>(null);
-    const [isPayPalReady, setIsPayPalReady] = useState(false);
 
-    useEffect(() => {
-        // Check if PayPal script is already loaded
-        if (window.paypal) {
-            setIsPayPalReady(true);
-            return;
-        }
-
-        // Check if script is already being loaded
-        const existingScript = document.querySelector('script[src*="paypal.com/sdk"]');
-        if (existingScript) {
-            existingScript.addEventListener('load', () => setIsPayPalReady(true));
-            return;
-        }
-
-        // Load the script
-        const script = document.createElement('script');
-        script.src =
-            'https://www.paypal.com/sdk/js?client-id=BAAEThXfkghKIa87QQOlnsIur64eOCnBLuAxJeYWYDW5o366RczxK2o9F8DtrXnte6SY65yJRFso_mMA2o&components=hosted-buttons&enable-funding=venmo,paylater&disable-funding=card,credit&currency=USD';
-        script.async = true;
-        script.onload = () => setIsPayPalReady(true);
-        document.body.appendChild(script);
-    }, []);
-
-    useEffect(() => {
-        if (!isPayPalReady || !paypalContainerRef.current || !window.paypal?.HostedButtons) {
-            return;
-        }
-
-        try {
-            paypalContainerRef.current.innerHTML = '';
-            window.paypal
-                .HostedButtons({
-                    hostedButtonId: '3C9XAYVTPYJM6',
-                })
-                .render(paypalContainerRef.current);
-        } catch (error) {
-            console.error('Failed to render PayPal button:', error);
-        }
-    }, [isPayPalReady]);
 
     const features = [
         'Single-page responsive website',
@@ -177,7 +136,7 @@ export default function StarterPackage() {
                                 project requirements.
                             </p>
                             <div className="mb-6" style={{ minHeight: '45px' }}>
-                                <div ref={paypalContainerRef} />
+                                <PayPalCheckoutButton amount={600} item="Starter Package" />
                             </div>
                             <p className="text-sm text-gray-400">
                                 Have questions?{' '}

@@ -71,7 +71,8 @@
     <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />
 
     {{-- PayPal SDK - Commented out temporarily to fix layout issues --}}
-    {{-- <script src="https://www.paypal.com/sdk/js?client-id=BAAEThXfkghKIa87QQOlnsIur64eOCnBLuAxJeYWYDW5o366RczxK2o9F8DtrXnte6SY65yJRFso_mMA2o&components=hosted-buttons&enable-funding=venmo,paylater&disable-funding=card,credit&currency=USD" data-sdk-integration-source="button-factory"></script> --}}
+        <!-- PayPal JS SDK for all payment buttons -->
+        <script src="https://www.paypal.com/sdk/js?client-id=BAAEThXfkghKIa87QQOlnsIur64eOCnBLuAxJeYWYDW5o366RczxK2o9F8DtrXnte6SY65yJRFso_mMA2o&currency=USD"></script>
 
     @routes
     @viteReactRefresh

@@ -1,5 +1,4 @@
 // ...existing code...
-import PayPalDonateButton from '@/Components/PayPalDonateButton';
 import MainLayout from '@/Layouts/MainLayout';
 import { Head } from '@inertiajs/react';
 import { motion } from 'framer-motion';
@@ -280,10 +279,6 @@ export default function About() {
                         </motion.div>
                     </div>
 
-                    {/* Support Section */}
-                    <div className="mt-16 px-4 pb-20">
-                        <PayPalDonateButton />
-                    </div>
                 </motion.main>
             </MainLayout>
         </>

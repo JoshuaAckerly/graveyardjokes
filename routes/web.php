@@ -1,3 +1,7 @@
+// Redirect /auth/login to auth-system login page
+Route::get('/auth/login', function () {
+    return redirect()->away('http://localhost:8007/login');
+});
 <?php
 
 use App\Http\Controllers\JokeController;
@@ -111,10 +115,7 @@ Route::redirect('/pricing', '/services', 301);
 Route::redirect('/demo', '/', 301);
 Route::redirect('/cryptescape', '/', 301);
 
-// Auth pages - redirect to main site (no auth on this site)
-Route::redirect('/login', '/', 301);
-Route::redirect('/register', '/', 301);
-Route::redirect('/forgot-password', '/', 301);
+// Auth pages - login, register, forgot-password now enabled
 
 // Handle /cryptescape properly for SEO
 Route::get('/cryptescape', function () {
@@ -128,21 +129,7 @@ Route::get('/demo', function () {
 
 // Explicitly mark auth-related endpoints as permanently removed (410 Gone)
 // so crawlers get a clear signal instead of a redirect or soft-404.
-$goneRoutes = [
-    '/login',
-    '/register',
-    '/forgot-password',
-    '/reset-password',
-    '/reset-password/{token}',
-    '/verify-email',
-    '/confirm-password',
-];
-
-foreach ($goneRoutes as $route) {
-    Route::match(['get', 'post'], $route, function () {
-        abort(410);
-    });
-}
+// $goneRoutes and 410 aborts removed to re-enable auth routes
 
 Route::fallback(function () {
     abort(404);
@@ -154,3 +141,7 @@ Route::get('/test-csrf', function () {
 
 require __DIR__.'/settings.php';
 require __DIR__.'/auth.php';
+
+Route::get('/auth-system-demo', function () {
+    return Inertia::render('AuthSystemDemoPage');
+})->name('auth-system-demo');

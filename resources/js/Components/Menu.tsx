@@ -33,6 +33,11 @@ export default function Menu() {
                     Studio
                 </a>
             </li>
+            <li className="text-[var(--color-text)]">
+                <a href="http://localhost:8007/login" className="hover:underline">
+                    Login
+                </a>
+            </li>
         </ul>
     );
 }
