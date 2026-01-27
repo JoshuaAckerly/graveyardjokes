@@ -18,7 +18,7 @@ Add your AWS credentials to [.env](.env):
 AWS_ACCESS_KEY_ID=your_access_key_here
 AWS_SECRET_ACCESS_KEY=your_secret_key_here
 AWS_DEFAULT_REGION=us-east-1
-***REMOVED***
+AWS_BUCKET=graveyardjokes-cdn
 ```
 
 ### 3. Configure Project Mappings

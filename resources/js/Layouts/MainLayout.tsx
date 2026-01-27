@@ -19,8 +19,8 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
                 const trackingUrl = isLocalDev
                     ? '/api/track-visit'
                     : currentHost === 'graveyardjokes.com'
-                        ? '/api/track-visit'
-                        : 'https://graveyardjokes.com/api/track-visit';
+                      ? '/api/track-visit'
+                      : 'https://graveyardjokes.com/api/track-visit';
 
                 const fetchOptions: RequestInit = {
                     method: 'POST',

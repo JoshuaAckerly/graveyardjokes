@@ -273,7 +273,7 @@ TRACK_VISITOR_EMAIL_TTL=86400
 APP_URL=https://graveyardjokes.com
 
 # Mail configuration
-***REMOVED***
+MAIL_MAILER=smtp
 MAIL_HOST=your-smtp-host
 MAIL_PORT=587
 MAIL_USERNAME=your-username

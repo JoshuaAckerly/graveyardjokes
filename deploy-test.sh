@@ -44,9 +44,9 @@ if ! grep -q "INERTIA_SSR_PORT=$SSR_PORT" .env; then
     echo "INERTIA_SSR_PORT=$SSR_PORT" >> .env
 fi
 
-if ! grep -q "***REMOVED***" .env; then
+if ! grep -q "INERTIA_SSR_ENABLED=true" .env; then
     echo "⚙️ Enabling SSR in .env..."
-    echo "***REMOVED***" >> .env
+    echo "INERTIA_SSR_ENABLED=true" >> .env
 fi
 
 # Run database migrations

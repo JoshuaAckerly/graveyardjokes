@@ -121,9 +121,9 @@ Ensure you have the following installed:
 
 5. **Configure your database** (edit `.env`)
    ```env
-   ***REMOVED***
-   ***REMOVED***
-   ***REMOVED***
+   DB_CONNECTION=mysql
+   DB_HOST=127.0.0.1
+   DB_PORT=3306
    DB_DATABASE=graveyardjokes
    DB_USERNAME=your_username
    DB_PASSWORD=your_password

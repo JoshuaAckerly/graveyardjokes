@@ -27,10 +27,10 @@ This project is part of a polyrepo development environment with SSR enabled.
 3. **Database Setup**
    ```bash
    # Update .env with your database credentials
-   ***REMOVED***
+   DB_CONNECTION=mysql
    DB_DATABASE=graveyardjokes
-   ***REMOVED***
-   ***REMOVED***
+   DB_USERNAME=graveyardjokes
+   DB_PASSWORD=password
    
    # Run migrations
    php artisan migrate
@@ -80,19 +80,19 @@ This project uses the following ports:
 ### Required Configuration
 
 ```env
-***REMOVED***
+APP_URL=http://localhost:8000
 
 # Database
-***REMOVED***
-***REMOVED***
-***REMOVED***
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
 DB_DATABASE=graveyardjokes
-***REMOVED***
-***REMOVED***
+DB_USERNAME=graveyardjokes
+DB_PASSWORD=password
 
 # Inertia SSR
-***REMOVED***
-***REMOVED***
+INERTIA_SSR_ENABLED=true
+INERTIA_SSR_URL=http://127.0.0.1:13714
 ```
 
 ## Development Workflow
@@ -162,7 +162,7 @@ npm run build -- --ssr
 
 ### SSR Not Working
 
-1. Verify `.env` has `***REMOVED***`
+1. Verify `.env` has `INERTIA_SSR_ENABLED=true`
 2. Check SSR server is running on port 13714
 3. Rebuild SSR assets: `npm run build -- --ssr`
 

@@ -62,7 +62,7 @@ else
 fi
 
 # Restart queue workers if configured
-if grep -q "QUEUE_CONNECTION=redis\|***REMOVED***" .env; then
+if grep -q "QUEUE_CONNECTION=redis\|QUEUE_CONNECTION=database" .env; then
     echo "🔄 Restarting queue workers..."
     php artisan queue:restart
 fi

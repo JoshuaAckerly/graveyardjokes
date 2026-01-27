@@ -87,14 +87,14 @@ if [ ! -f ".env" ]; then
     cp .env.example .env
     
     # Update .env with test configuration
-    sed -i 's/***REMOVED***/APP_ENV=staging/' .env
-    sed -i 's/***REMOVED***/***REMOVED***/' .env
+    sed -i 's/APP_ENV=local/APP_ENV=staging/' .env
+    sed -i 's/APP_DEBUG=true/APP_DEBUG=true/' .env
     sed -i 's/APP_URL=http:\/\/localhost/APP_URL=http:\/\/YOUR_VM_IP/' .env
-    sed -i 's/DB_CONNECTION=sqlite/***REMOVED***/' .env
-    sed -i 's/# ***REMOVED***/***REMOVED***/' .env
-    sed -i 's/# ***REMOVED***/***REMOVED***/' .env
+    sed -i 's/DB_CONNECTION=sqlite/DB_CONNECTION=mysql/' .env
+    sed -i 's/# DB_HOST=127.0.0.1/DB_HOST=127.0.0.1/' .env
+    sed -i 's/# DB_PORT=3306/DB_PORT=3306/' .env
     sed -i 's/# DB_DATABASE=laravel/DB_DATABASE=graveyardjokes/' .env
-    sed -i 's/# DB_USERNAME=root/***REMOVED***/' .env
+    sed -i 's/# DB_USERNAME=root/DB_USERNAME=graveyardjokes/' .env
     sed -i 's/# DB_PASSWORD=/DB_PASSWORD=test123password/' .env
     
     echo "✅ .env file created and configured"

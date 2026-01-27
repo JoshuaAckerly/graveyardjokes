@@ -130,12 +130,12 @@ Update `.env` files for each environment:
 
 **Development (.env):**
 ```env
-***REMOVED***
-***REMOVED***
-***REMOVED***
+APP_ENV=local
+APP_DEBUG=true
+APP_URL=http://localhost:8000
 
-***REMOVED***
-***REMOVED***
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
 DB_DATABASE=graveyardjokes_dev
 
 # ... other dev settings
@@ -147,9 +147,9 @@ APP_ENV=testing
 APP_DEBUG=false
 APP_URL=https://test.graveyardjokes.com
 
-***REMOVED***
-***REMOVED***
-***REMOVED***
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_DATABASE=graveyardjokes_test
 
 # ... other test settings
 ```
@@ -160,8 +160,8 @@ APP_ENV=production
 APP_DEBUG=false
 APP_URL=https://graveyardjokes.com
 
-***REMOVED***
-***REMOVED***
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
 DB_DATABASE=graveyardjokes_prod
 
 # ... other production settings
@@ -665,33 +665,33 @@ Certbot will automatically:
 
 ```env
 # Application
-***REMOVED***
+APP_NAME="Graveyard Jokes"
 APP_ENV=production
 APP_DEBUG=false
 APP_URL=https://graveyardjokes.com
 APP_KEY=base64:your_key_here
 
 # Database
-***REMOVED***
-***REMOVED***
-***REMOVED***
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
 DB_DATABASE=graveyardjokes
-***REMOVED***
+DB_USERNAME=graveyardjokes
 DB_PASSWORD=secure_password
 
 # Cache & Sessions
 CACHE_STORE=redis
 QUEUE_CONNECTION=redis
 SESSION_DRIVER=redis
-***REMOVED***
+SESSION_LIFETIME=120
 
 # Redis
-***REMOVED***
-***REMOVED***
-***REMOVED***
+REDIS_HOST=127.0.0.1
+REDIS_PASSWORD=null
+REDIS_PORT=6379
 
 # Mail
-***REMOVED***
+MAIL_MAILER=smtp
 MAIL_HOST=smtp.sendgrid.net
 MAIL_PORT=587
 MAIL_USERNAME=apikey
@@ -708,7 +708,7 @@ IPINFO_TOKEN=your_ipinfo_token
 TRACK_VISITOR_EMAIL_TTL=86400
 
 # Logging
-***REMOVED***
+LOG_CHANNEL=stack
 LOG_LEVEL=error
 ```
 
@@ -1401,7 +1401,7 @@ APP_DEBUG=false
 APP_URL=https://graveyardjokes.com
 
 DB_DATABASE=graveyardjokes
-***REMOVED***
+MAIL_MAILER=smtp
 ```
 
 ### CDN Integration
