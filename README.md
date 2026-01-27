@@ -1,3 +1,4 @@
+# Trivial change to trigger CI/CD pipeline (2026-01-27)
 # Graveyard Jokes
 
 > A modern, full-stack web application for sharing jokes with visitor tracking, analytics, and dynamic content delivery.
