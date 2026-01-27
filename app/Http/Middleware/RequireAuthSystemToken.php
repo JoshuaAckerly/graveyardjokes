@@ -7,11 +7,6 @@ use Illuminate\Http\Request;
 
 class RequireAuthSystemToken
 {
-    /**
-     * @param Request $request
-     * @param Closure $next
-     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Response
-     */
     public function handle(Request $request, Closure $next): \Illuminate\Http\JsonResponse|\Illuminate\Http\Response
     {
         $token = $request->bearerToken();
