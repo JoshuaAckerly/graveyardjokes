@@ -15,12 +15,12 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
                 const currentHost = window.location.hostname;
                 const isLocalDev = currentHost.includes('.test') || currentHost === 'localhost' || currentHost === '127.0.0.1';
 
-                // For local development, use current origin; for production, use main domain
+                // Use /api/track-visit for local and main domain, full URL for subdomains
                 const trackingUrl = isLocalDev
-                    ? '/track-visit' // Same origin request
+                    ? '/api/track-visit'
                     : currentHost === 'graveyardjokes.com'
-                      ? '/track-visit' // Same origin request on main domain
-                      : 'https://graveyardjokes.com/track-visit'; // Cross-origin request from subdomain
+                        ? '/api/track-visit'
+                        : 'https://graveyardjokes.com/api/track-visit';
 
                 const fetchOptions: RequestInit = {
                     method: 'POST',
