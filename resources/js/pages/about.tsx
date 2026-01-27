@@ -278,7 +278,6 @@ export default function About() {
                             </div>
                         </motion.div>
                     </div>
-
                 </motion.main>
             </MainLayout>
         </>

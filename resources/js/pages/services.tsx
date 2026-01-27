@@ -1,5 +1,5 @@
-import MainLayout from '@/Layouts/MainLayout';
 import PayPalCheckoutButton from '@/Components/PayPalCheckoutButton';
+import MainLayout from '@/Layouts/MainLayout';
 import { Head, Link } from '@inertiajs/react';
 import { motion } from 'framer-motion';
 import { Check } from 'lucide-react';

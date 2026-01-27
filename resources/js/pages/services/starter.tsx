@@ -1,12 +1,11 @@
+import PayPalCheckoutButton from '@/Components/PayPalCheckoutButton';
 import MainLayout from '@/Layouts/MainLayout';
 import { Head, Link } from '@inertiajs/react';
 import { motion } from 'framer-motion';
 import { ArrowLeft, Check } from 'lucide-react';
-import PayPalCheckoutButton from '@/Components/PayPalCheckoutButton';
 
 export default function StarterPackage() {
     const cdn = import.meta.env.VITE_ASSET_URL || '';
-
 
     const features = [
         'Single-page responsive website',

@@ -1,11 +1,10 @@
+import PayPalCheckoutButton from '@/Components/PayPalCheckoutButton';
 import MainLayout from '@/Layouts/MainLayout';
 import { Head, Link } from '@inertiajs/react';
 import { motion } from 'framer-motion';
 import { ArrowLeft, Check } from 'lucide-react';
-import PayPalCheckoutButton from '@/Components/PayPalCheckoutButton';
 
 export default function ProfessionalPackage() {
-
     const features = [
         'Custom, mobile-friendly website design',
         'Up to 10 pages (Home, About, Portfolio, Shop, etc.)',
@@ -18,7 +17,6 @@ export default function ProfessionalPackage() {
         'Performance optimization',
         '1 year of free hosting & support',
     ];
-
 
     return (
         <>
