@@ -2,7 +2,7 @@
 
 export default function Login() {
     if (typeof window !== 'undefined') {
-        window.location.replace('http://localhost:8007/login');
+        window.location.replace('http://auth-system.test/login');
         return null;
     }
     return <div>Redirecting to login...</div>;
