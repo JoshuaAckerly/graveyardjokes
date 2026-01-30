@@ -1,12 +1,12 @@
 import ApplicationLogo from '@/Components/applicationLogo';
 import Carousel from '@/Components/carousel';
 import ProjectCard from '@/Components/ProjectCard';
-import { getProjectUrl } from '../env';
 import portfolioItems from '@/data/portfolioItems';
 import MainLayout from '@/Layouts/MainLayout';
 import { Head, router } from '@inertiajs/react';
 import { motion } from 'framer-motion';
 import { JSX, useEffect, useState } from 'react';
+import { getProjectUrl } from '../env';
 
 export default function Home(): JSX.Element {
     const cdn = import.meta.env.VITE_ASSET_URL;

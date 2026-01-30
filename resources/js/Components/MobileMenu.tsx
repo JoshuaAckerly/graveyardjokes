@@ -1,6 +1,6 @@
 import { Link } from '@inertiajs/react';
-import { getProjectUrl } from '../env';
 import { MouseEvent, useState } from 'react';
+import { getProjectUrl } from '../env';
 
 export default function MobileMenu() {
     const [isOpen, setIsOpen] = useState(false);
@@ -62,11 +62,7 @@ export default function MobileMenu() {
                                     </Link>
                                 </li>
                                 <li className="mb-4 bg-[var(--primary)]">
-                                    <a
-                                        href={getProjectUrl('studio')}
-                                        className="text-black hover:underline"
-                                        onClick={() => setIsOpen(false)}
-                                    >
+                                    <a href={getProjectUrl('studio')} className="text-black hover:underline" onClick={() => setIsOpen(false)}>
                                         Studio
                                     </a>
                                 </li>

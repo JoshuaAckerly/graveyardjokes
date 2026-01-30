@@ -1,4 +1,3 @@
-
 import { getProjectUrl } from '../env';
 
 const portfolioItems = [

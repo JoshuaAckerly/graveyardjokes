@@ -1,5 +1,5 @@
 import { Link } from '@inertiajs/react';
-import { getProjectUrl, getLoginUrl } from '../env';
+import { getLoginUrl, getProjectUrl } from '../env';
 
 export default function Menu() {
     return (
