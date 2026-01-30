@@ -3,6 +3,7 @@ import MainLayout from '@/Layouts/MainLayout';
 import { Head, Link } from '@inertiajs/react';
 import { motion } from 'framer-motion';
 import { Check } from 'lucide-react';
+import { getProjectUrl } from '../env';
 
 export default function Services() {
     const cdn = import.meta.env.VITE_ASSET_URL || '';
@@ -59,6 +60,7 @@ export default function Services() {
         },
     ];
 
+    const projectUrl = getProjectUrl('graveyardjokes');
     return (
         <>
             <Head>
@@ -68,7 +70,7 @@ export default function Services() {
                     content="Explore our web design and development packages. Custom solutions for musicians, artists, and creatives."
                 />
                 <meta name="keywords" content="web design packages, pricing, custom websites, musicians, artists, web development services" />
-                <link rel="canonical" href="https://graveyardjokes.com/services" />
+                <link rel="canonical" href={`${projectUrl}services`} />
 
                 {/* Open Graph */}
                 <meta property="og:title" content="Services & Pricing | Graveyard Jokes Studios" />
@@ -78,7 +80,7 @@ export default function Services() {
                 />
                 <meta property="og:image" content={`${cdn}/images/aboutBanner.webp`} />
                 <meta property="og:type" content="website" />
-                <meta property="og:url" content="https://graveyardjokes.com/services" />
+                <meta property="og:url" content={`${projectUrl}services`} />
 
                 {/* Twitter */}
                 <meta name="twitter:card" content="summary_large_image" />

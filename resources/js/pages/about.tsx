@@ -2,6 +2,7 @@
 import MainLayout from '@/Layouts/MainLayout';
 import { Head } from '@inertiajs/react';
 import { motion } from 'framer-motion';
+import { getProjectUrl } from '../env';
 
 export default function About() {
     const cdn = import.meta.env.VITE_ASSET_URL || '';
@@ -17,6 +18,7 @@ export default function About() {
         { name: 'Laravel', percentage: 90, color: 'bg-green-500' },
     ];
 
+    const projectUrl = getProjectUrl('graveyardjokes');
     return (
         <>
             <Head>
@@ -31,7 +33,7 @@ export default function About() {
                 />
 
                 {/* Canonical */}
-                <link rel="canonical" href="https://graveyardjokes.com/about" />
+                <link rel="canonical" href={`${projectUrl}about`} />
 
                 {/* Open Graph */}
                 <meta property="og:title" content="About Joshua Ackerly | Graveyard Jokes Studios" />
@@ -41,7 +43,7 @@ export default function About() {
                 />
                 <meta property="og:image" content={`${cdn}/images/aboutBanner.webp`} />
                 <meta property="og:type" content="website" />
-                <meta property="og:url" content="https://graveyardjokes.com/about" />
+                <meta property="og:url" content={`${projectUrl}about`} />
 
                 {/* Twitter */}
                 <meta name="twitter:card" content="summary_large_image" />

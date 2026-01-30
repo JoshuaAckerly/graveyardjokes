@@ -1,6 +1,7 @@
 import ApplicationLogo from '@/Components/applicationLogo';
 import Carousel from '@/Components/carousel';
 import ProjectCard from '@/Components/ProjectCard';
+import { getProjectUrl } from '../env';
 import portfolioItems from '@/data/portfolioItems';
 import MainLayout from '@/Layouts/MainLayout';
 import { Head, router } from '@inertiajs/react';
@@ -11,7 +12,7 @@ export default function Home(): JSX.Element {
     const cdn = import.meta.env.VITE_ASSET_URL;
 
     const handleClick = (): void => {
-        router.visit('/contact');
+        router.visit(getProjectUrl('graveyardjokes'));
     };
 
     const [joke, setJoke] = useState<{ id?: string; setup?: string; punchline?: string; category?: string } | null>(null);
@@ -36,6 +37,7 @@ export default function Home(): JSX.Element {
         fetchJoke();
     }, []);
 
+    const projectUrl = getProjectUrl('graveyardjokes');
     return (
         <MainLayout>
             <>
@@ -52,7 +54,7 @@ export default function Home(): JSX.Element {
                     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
                     {/* Canonical */}
-                    <link rel="canonical" href="https://graveyardjokes.com/" />
+                    <link rel="canonical" href={projectUrl} />
 
                     {/* Open Graph */}
                     <meta property="og:title" content="Graveyard Jokes Studios | Custom Websites for Musicians, Artists, and Creatives" />
@@ -62,7 +64,7 @@ export default function Home(): JSX.Element {
                     />
                     <meta property="og:image" content={`${cdn}/images/AdobeStock_327183052.webp`} />
                     <meta property="og:type" content="website" />
-                    <meta property="og:url" content="https://graveyardjokes.com/" />
+                    <meta property="og:url" content={projectUrl} />
 
                     {/* Twitter */}
                     <meta name="twitter:card" content="summary_large_image" />
@@ -79,8 +81,8 @@ export default function Home(): JSX.Element {
     {
       "@context": "https://schema.org",
       "@type": "Organization",
-  "name": "GraveYard Jokes Studios Inc.",
-      "url": "https://graveyardjokes.com",
+      "name": "GraveYard Jokes Studios Inc.",
+      "url": "${projectUrl}",
       "logo": "${cdn}/images/logo.webp",
       "sameAs": [
         "https://www.linkedin.com/in/joshua-ackerly",
@@ -355,14 +357,14 @@ export default function Home(): JSX.Element {
 
                                 <div className="mt-4 flex items-center gap-4 sm:mt-0">
                                     <a
-                                        href="https://studio.graveyardjokes.com/noteleks"
+                                        href={getProjectUrl('studio') + '/noteleks'}
                                         className="inline-flex items-center rounded bg-[var(--card)] px-4 py-2 text-sm font-medium text-white hover:bg-[var(--accent)]"
                                         aria-label="See Noteleks work"
                                     >
                                         See The Noteleks Game
                                     </a>
                                     <a
-                                        href="https://studio.graveyardjokes.com"
+                                        href={getProjectUrl('studio')}
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         className="inline-flex items-center rounded border border-white/10 bg-transparent px-4 py-2 text-sm text-white/90 hover:bg-white/5"

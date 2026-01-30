@@ -1,4 +1,5 @@
 import { Link } from '@inertiajs/react';
+import { getProjectUrl, getLoginUrl } from '../env';
 
 export default function Menu() {
     return (
@@ -29,12 +30,12 @@ export default function Menu() {
                 </Link>
             </li>
             <li className="text-[var(--color-text)]">
-                <a href="https://studio.graveyardjokes.com" className="hover:underline">
+                <a href={getProjectUrl('studio')} className="hover:underline">
                     Studio
                 </a>
             </li>
             <li className="text-[var(--color-text)]">
-                <a href="http://auth-system.test/login" className="hover:underline">
+                <a href={getLoginUrl('graveyardjokes')} className="hover:underline">
                     Login
                 </a>
             </li>

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { getProjectUrl } from '../env';
 
 interface Slide {
     image: string;
@@ -24,20 +25,8 @@ const carouselSlides: Slide[] = [
         image: '/images/AdobeStock_621659086.webp',
         title: 'Fast launches available',
         description: 'Need a simple promo page or EP launch? Ask about our 48-hour quick-launch option.',
-        link: '/portfolio',
+        link: getProjectUrl('portfolio'),
     },
-    /*   {
-        image: '#',
-        title: 'Velvet Radio',
-        description: 'A tribute to The Velvet Pulse, blending nostalgia with contemporary design.',
-        link: 'https://velvetradio.graveyardjokes.com',
-    },
-    {
-        image: '#',
-        title: 'Hollow Press',
-        description: 'A vibrant showcase of creativity and innovation in web design.',
-        link: 'https://hollowpress.graveyardjokes.com',
-    }, */
 ];
 
 const Carousel: React.FC = () => {
