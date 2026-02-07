@@ -1,15 +1,18 @@
 <?php
 
 use App\Http\Controllers\JokeController;
+use App\Http\Controllers\OgImageController;
 use App\Modules\Visitor\Controllers\VisitorController;
 
-// API endpoint to fetch and cache Open Graph images for external sites (if needed, move here)
+// API endpoint to fetch and cache Open Graph images for external sites
+Route::get('/fetch-og-image', [OgImageController::class, 'fetch'])->name('api.fetch-og-image');
 
 // Visitor tracking (POST/OPTIONS) with rate limiting
 Route::middleware(['throttle:60,1'])->group(function () {
     Route::post('/track-visit', [VisitorController::class, 'track']);
     Route::options('/track-visit', [VisitorController::class, 'track']);
 });
+
 // Random joke endpoint (returns JSON)
 Route::get('/random-joke', [JokeController::class, 'random'])->name('api.random-joke');
 

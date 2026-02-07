@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { getScreenshotPath } from '@/utils/urlMapper';
 
 type Props = {
     title: string;
@@ -22,8 +23,7 @@ const ProjectCard: React.FC<Props> = ({ title, description, url, cdn }) => {
         (async () => {
             try {
                 // Prefer a pre-captured screenshot saved by the capture script
-                const safeName = url.replace(/^https?:\/\//, '').replace(/[\\/:*?"<>|]/g, '_');
-                const storagePath = `/storage/og-cache/${safeName}.png`;
+                const storagePath = getScreenshotPath(url);
 
                 // Check if the static file exists by trying to fetch the HEAD
                 const head = await fetch(storagePath, { method: 'HEAD' });

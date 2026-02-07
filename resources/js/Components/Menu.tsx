@@ -1,7 +1,10 @@
-import { Link } from '@inertiajs/react';
-import { getLoginUrl, getProjectUrl } from '../env';
+import { Link, usePage } from '@inertiajs/react';
+import { getLoginUrl, getProjectUrl, getAuthSystemUrl } from '../env';
 
 export default function Menu() {
+    const { auth } = usePage().props as { auth?: { user?: { id: number; name: string; email: string } } };
+    const isAuthenticated = !!auth?.user;
+
     return (
         <ul className="center-items mx-auto flex space-x-4">
             <li className="text-[var(--color-text)]">
@@ -35,9 +38,20 @@ export default function Menu() {
                 </a>
             </li>
             <li className="text-[var(--color-text)]">
-                <a href={getLoginUrl('graveyardjokes')} className="hover:underline">
-                    Login
-                </a>
+                {isAuthenticated ? (
+                    <Link 
+                        href={`${getAuthSystemUrl()}/logout`} 
+                        method="post"
+                        as="button"
+                        className="hover:underline cursor-pointer bg-transparent border-none p-0 font-inherit"
+                    >
+                        Log Out
+                    </Link>
+                ) : (
+                    <a href={getLoginUrl('graveyardjokes')} className="hover:underline">
+                        Login
+                    </a>
+                )}
             </li>
         </ul>
     );

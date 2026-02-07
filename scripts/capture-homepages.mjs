@@ -1,9 +1,21 @@
+#!/usr/bin/env node
 import fs from 'fs';
 import path from 'path';
 import { chromium } from 'playwright';
 
-const dataPath = path.resolve('resources/js/data/portfolioItems.json');
-const outDir = path.resolve('storage/app/public/og-cache');
+const dataPath = path.resolve('../resources/js/data/portfolioItems.json');
+const outDir = path.resolve('../storage/app/public/og-cache');
+
+// Get environment from command line args or default to 'production'
+const env = process.argv[2] || 'production';
+
+const getEnvironmentUrl = (url, environment) => {
+  if (environment === 'local') {
+    return url.replace(/\.com/g, '.local');
+  }
+  // Add other environments as needed
+  return url;
+};
 
 if (!fs.existsSync(outDir)) fs.mkdirSync(outDir, { recursive: true });
 
@@ -15,17 +27,17 @@ async function run() {
   for (const item of items) {
     try {
       const page = await context.newPage();
-      const url = item.url;
+      const url = getEnvironmentUrl(item.url, env);
       console.log('Capturing', url);
       await page.goto(url, { waitUntil: 'networkidle', timeout: 20000 });
 
       // Attempt to click away cookie banners or overlays by pressing Escape
       await page.keyboard.press('Escape').catch(() => {});
 
-      const safeName = item.url.replace(/https?:\/\//, '').replace(/[\\/:*?"<>|]/g, '_');
-  const outFile = path.join(outDir, `${safeName}.png`);
+      const safeName = url.replace(/https?:\/\//, '').replace(/[\\/:*?"<>|]/g, '_');
+      const outFile = path.join(outDir, `${safeName}.png`);
 
-  await page.screenshot({ path: outFile, type: 'png', fullPage: false });
+      await page.screenshot({ path: outFile, type: 'png', fullPage: false });
       console.log('Saved', outFile);
       await page.close();
     } catch (e) {
