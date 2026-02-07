@@ -1,5 +1,5 @@
 import { Link, usePage } from '@inertiajs/react';
-import { getLoginUrl, getProjectUrl, getAuthSystemUrl } from '../env';
+import { getAuthSystemUrl, getLoginUrl, getProjectUrl } from '../env';
 
 export default function Menu() {
     const { auth } = usePage().props as { auth?: { user?: { id: number; name: string; email: string } } };
@@ -39,11 +39,11 @@ export default function Menu() {
             </li>
             <li className="text-[var(--color-text)]">
                 {isAuthenticated ? (
-                    <Link 
-                        href={`${getAuthSystemUrl()}/logout`} 
+                    <Link
+                        href={`${getAuthSystemUrl()}/logout`}
                         method="post"
                         as="button"
-                        className="hover:underline cursor-pointer bg-transparent border-none p-0 font-inherit"
+                        className="font-inherit cursor-pointer border-none bg-transparent p-0 hover:underline"
                     >
                         Log Out
                     </Link>

@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
 import { getScreenshotPath } from '@/utils/urlMapper';
+import React, { useEffect, useState } from 'react';
 
 type Props = {
     title: string;
