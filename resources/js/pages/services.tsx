@@ -121,7 +121,8 @@ export default function Services() {
                             animate={{ opacity: 1 }}
                             transition={{ delay: 0.2, duration: 0.6 }}
                         >
-                            Choose the package that fits your needs. All packages include responsive design, modern tech stack, and ongoing support tailored for startups.
+                            Choose the package that fits your needs. All packages include responsive design, modern tech stack, and ongoing support
+                            tailored for startups.
                         </motion.p>
                     </div>
 
