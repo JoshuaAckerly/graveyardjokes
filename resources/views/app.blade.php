@@ -70,9 +70,15 @@
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />
 
-    {{-- PayPal SDK - Commented out temporarily to fix layout issues --}}
+    {{-- PayPal SDK --}}
+        @php
+            $paypalEnv = env('VITE_PAYPAL_ENVIRONMENT', 'production');
+            $clientId = $paypalEnv === 'production' 
+                ? env('VITE_PAYPAL_CLIENT_ID', 'BAAEThXfkghKIa87QQOlnsIur64eOCnBLuAxJeYWYDW5o366RczxK2o9F8DtrXnte6SY65yJRFso_mMA2o')
+                : env('VITE_PAYPAL_SANDBOX_CLIENT_ID', 'YOUR_SANDBOX_CLIENT_ID_HERE');
+        @endphp
         <!-- PayPal JS SDK for all payment buttons -->
-        <script src="https://www.paypal.com/sdk/js?client-id=BAAEThXfkghKIa87QQOlnsIur64eOCnBLuAxJeYWYDW5o366RczxK2o9F8DtrXnte6SY65yJRFso_mMA2o&currency=USD"></script>
+        <script src="https://www.paypal.com/sdk/js?client-id={{ $clientId }}&currency=USD"></script>
 
     @routes
     @viteReactRefresh

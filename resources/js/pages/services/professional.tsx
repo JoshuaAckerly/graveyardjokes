@@ -20,7 +20,7 @@ export default function ProfessionalPackage() {
 
     return (
         <>
-            <Head title="Professional Website Package | GraveYard Jokes Studios" />
+            <Head title="Professional Website Package - $349 | GraveYard Jokes Studios" />
             <MainLayout>
                 {/* Pay Over Time Section */}
                 <div className="mx-auto mb-8 max-w-2xl rounded-lg border-2 border-(--primary) bg-black/80 p-8 text-white shadow-xl">
@@ -54,9 +54,9 @@ export default function ProfessionalPackage() {
                         <div className="mb-4 inline-block rounded-full bg-(--primary) px-4 py-1 text-xs font-bold text-white">MOST POPULAR</div>
                         <h1 className="mb-4 text-4xl font-bold text-white">Professional Package</h1>
                         <div className="mb-6">
-                            <span className="text-5xl font-bold text-(--primary)">$1,500</span>
+                            <span className="text-5xl font-bold text-(--primary)">$349</span>
                         </div>
-                        <p className="mb-8 text-lg text-gray-300">Ideal for established artists with growing audiences</p>
+                        <p className="mb-8 text-lg text-gray-300">Ideal for growing startups needing more features</p>
 
                         <h2 className="mb-4 text-2xl font-bold text-white">What's Included:</h2>
                         <ul className="mb-8 space-y-3">
@@ -74,7 +74,7 @@ export default function ProfessionalPackage() {
                                 project requirements.
                             </p>
                             <div className="mb-6" style={{ minHeight: '45px' }}>
-                                <PayPalCheckoutButton amount={1500} item="Professional Package" />
+                                <PayPalCheckoutButton amount={349} item="Professional Package" />
                             </div>
                             <p className="text-sm text-gray-400">
                                 Have questions?{' '}

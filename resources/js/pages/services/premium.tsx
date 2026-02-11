@@ -21,10 +21,10 @@ export default function PremiumPackage() {
     return (
         <>
             <Head>
-                <title>Premium Package - $3,000+ | Graveyard Jokes Studios</title>
+                <title>Premium Package - $499 | Graveyard Jokes Studios</title>
                 <meta
                     name="description"
-                    content="Full-featured solution for serious professionals. E-commerce, streaming, custom integrations, and premium support."
+                    content="Full-featured solution for established startups. E-commerce, streaming, custom integrations, and premium support."
                 />
                 <meta
                     name="keywords"
@@ -32,20 +32,20 @@ export default function PremiumPackage() {
                 />
                 <link rel="canonical" href="https://graveyardjokes.com/services/premium" />
                 {/* Open Graph */}
-                <meta property="og:title" content="Premium Package - $3,000+ | Graveyard Jokes Studios" />
+                <meta property="og:title" content="Premium Package - $499 | Graveyard Jokes Studios" />
                 <meta
-                    property="og:description"
-                    content="Full-featured solution for serious professionals. E-commerce, streaming, custom integrations, and premium support."
+                    name="og:description"
+                    content="Full-featured solution for established startups. E-commerce, streaming, custom integrations, and premium support."
                 />
                 <meta property="og:image" content={`${cdn}/images/aboutBanner.webp`} />
                 <meta property="og:type" content="website" />
                 <meta property="og:url" content="https://graveyardjokes.com/services/premium" />
                 {/* Twitter */}
                 <meta name="twitter:card" content="summary_large_image" />
-                <meta name="twitter:title" content="Premium Package - $3,000+ | Graveyard Jokes Studios" />
+                <meta name="twitter:title" content="Premium Package - $499 | Graveyard Jokes Studios" />
                 <meta
                     name="twitter:description"
-                    content="Full-featured solution for serious professionals. E-commerce, streaming, custom integrations, and premium support."
+                    content="Full-featured solution for established startups. E-commerce, streaming, custom integrations, and premium support."
                 />
                 <meta name="twitter:image" content={`${cdn}/images/aboutBanner.webp`} />
                 {/* Structured Data (JSON-LD) */}
@@ -120,9 +120,9 @@ export default function PremiumPackage() {
                     >
                         <h1 className="mb-4 text-4xl font-bold text-white">Premium Package</h1>
                         <div className="mb-6">
-                            <span className="text-5xl font-bold text-(--primary)">$3,000+</span>
+                            <span className="text-5xl font-bold text-(--primary)">$499</span>
                             <p className="mt-2 text-lg text-white/80">
-                                Full-featured solution for serious professionals. E-commerce, streaming, custom integrations, and premium support.
+                                Full-featured solution for established startups. E-commerce, streaming, custom integrations, and premium support.
                             </p>
                         </div>
 
@@ -161,7 +161,7 @@ export default function PremiumPackage() {
                                 ongoing support.
                             </p>
                             <div className="min-h-[50px]">
-                                <PayPalCheckoutButton amount={3000} item="Premium Package" />
+                                <PayPalCheckoutButton amount={499} item="Premium Package" />
                             </div>
                         </div>
                     </motion.div>

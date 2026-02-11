@@ -1,16 +1,75 @@
-# PayPal Donation Button Setup
+# PayPal Setup Guide
 
-A PayPal donation button with SDK integration has been added to your site in two locations:
-1. **About Page** - Full donation card with PayPal SDK button and description
-2. **Footer** - Compact "Support Us" button on every page
+## For Local Development (Sandbox)
 
-## ✅ Already Configured
+The 403 "not authorized" error occurs because your PayPal app is configured for production domains only. For local testing, you need to use PayPal's sandbox environment.
 
-The PayPal SDK is already integrated with your client ID:
-- SDK script added to `resources/views/app.blade.php`
-- Client ID: `BAAEThXfkghKIa87QQOlnsIur64eOCnBLuAxJeYWYDW5o366RczxK2o9F8DtrXnte6SY65yJRFso_mMA2o`
-- Venmo funding enabled
-- Currency: USD
+### Step 1: Create a PayPal Sandbox App
+
+1. Go to [PayPal Developer Dashboard](https://developer.paypal.com/)
+2. Log in with your PayPal business account
+3. Click "Apps & Credentials" in the left sidebar
+4. Click "Create App" under "Sandbox"
+5. Choose "Merchant" as the app type
+6. Name your app (e.g., "Graveyard Jokes Local Development")
+7. Click "Create App"
+
+### Step 2: Get Your Sandbox Client ID
+
+1. After creating the app, you'll see your **Client ID** in the "Sandbox API Credentials" section
+2. Copy this Client ID (it will start with "AZ...")
+
+### Step 3: Configure Environment Variables
+
+Update your `.env` file with the sandbox credentials:
+
+```env
+# PayPal Configuration
+VITE_PAYPAL_CLIENT_ID=BAAEThXfkghKIa87QQOlnsIur64eOCnBLuAxJeYWYDW5o366RczxK2o9F8DtrXnte6SY65yJRFso_mMA2o
+VITE_PAYPAL_SANDBOX_CLIENT_ID=AZXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+VITE_PAYPAL_ENVIRONMENT=sandbox
+```
+
+**Important**: Change `VITE_PAYPAL_ENVIRONMENT` from `production` to `sandbox` for local development.
+
+### Step 4: Test the Integration
+
+1. Restart your development server: `npm run dev`
+2. Visit your services page
+3. Click a PayPal button
+4. You should now be able to test payments using sandbox PayPal accounts
+
+### Step 5: Switch Back to Production
+
+When deploying to production, change the environment back:
+
+```env
+VITE_PAYPAL_ENVIRONMENT=production
+```
+
+## Current Production Setup
+
+The PayPal SDK is already integrated with your production client ID:
+- **Client ID**: `BAAEThXfkghKIa87QQOlnsIur64eOCnBLuAxJeYWYDW5o366RczxK2o9F8DtrXnte6SY65yJRFso_mMA2o`
+- **Environment**: Production
+- **Features**: Venmo enabled, Pay Later enabled, Cards/Credit disabled
+
+## Troubleshooting
+
+**Still getting 403 errors?**
+- Make sure `VITE_PAYPAL_ENVIRONMENT=sandbox` in your `.env`
+- Verify your sandbox client ID is correct
+- Check that your PayPal developer account is active
+
+**Buttons not showing?**
+- Clear your browser cache
+- Check browser console for JavaScript errors
+- Ensure the PayPal SDK script is loading
+
+**Payments not processing?**
+- Sandbox payments use fake money
+- Use test PayPal accounts from your developer dashboard
+- Check the auth-system logs for payment confirmations
 
 ## How It Works
 

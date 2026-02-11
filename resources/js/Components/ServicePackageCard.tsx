@@ -21,9 +21,14 @@ function loadPayPalScript(callback: () => void) {
 
     isPayPalScriptLoading = true;
 
+    const isProduction = import.meta.env.VITE_PAYPAL_ENVIRONMENT === 'production';
+    const clientId = isProduction 
+        ? import.meta.env.VITE_PAYPAL_CLIENT_ID 
+        : import.meta.env.VITE_PAYPAL_SANDBOX_CLIENT_ID;
+
     const script = document.createElement('script');
     script.src =
-        'https://www.paypal.com/sdk/js?client-id=BAAEThXfkghKIa87QQOlnsIur64eOCnBLuAxJeYWYDW5o366RczxK2o9F8DtrXnte6SY65yJRFso_mMA2o&components=hosted-buttons&enable-funding=venmo,paylater&disable-funding=card,credit&currency=USD';
+        `https://www.paypal.com/sdk/js?client-id=${clientId}&components=hosted-buttons&enable-funding=venmo,paylater&disable-funding=card,credit&currency=USD`;
     script.async = true;
     script.onload = () => {
         isPayPalScriptLoaded = true;

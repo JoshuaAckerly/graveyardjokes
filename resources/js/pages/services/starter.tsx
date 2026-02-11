@@ -19,31 +19,31 @@ export default function StarterPackage() {
     return (
         <>
             <Head>
-                <title>Starter Package - $600 | Graveyard Jokes Studios</title>
+                <title>Starter Package - $199 | Graveyard Jokes Studios</title>
                 <meta
                     name="description"
-                    content="Perfect for artists and musicians starting their online presence. Single-page responsive website with contact form and social media integration."
+                    content="Perfect for startups launching their first website. Single-page responsive website with contact form and social media integration."
                 />
                 <meta
                     name="keywords"
-                    content="starter package, web design, single page website, artist website, musician website, affordable web design, basic SEO"
+                    content="starter package, web design, single page website, startup website, small business website, affordable web design, basic SEO"
                 />
                 <link rel="canonical" href="https://graveyardjokes.com/services/starter" />
                 {/* Open Graph */}
-                <meta property="og:title" content="Starter Package - $600 | Graveyard Jokes Studios" />
+                <meta property="og:title" content="Starter Package - $199 | Graveyard Jokes Studios" />
                 <meta
-                    property="og:description"
-                    content="Perfect for artists and musicians starting their online presence. Single-page responsive website with contact form and social media integration."
+                    name="og:description"
+                    content="Perfect for startups launching their first website. Single-page responsive website with contact form and social media integration."
                 />
                 <meta property="og:image" content={`${cdn}/images/aboutBanner.webp`} />
                 <meta property="og:type" content="website" />
                 <meta property="og:url" content="https://graveyardjokes.com/services/starter" />
                 {/* Twitter */}
                 <meta name="twitter:card" content="summary_large_image" />
-                <meta name="twitter:title" content="Starter Package - $600 | Graveyard Jokes Studios" />
+                <meta name="twitter:title" content="Starter Package - $199 | Graveyard Jokes Studios" />
                 <meta
                     name="twitter:description"
-                    content="Perfect for artists and musicians starting their online presence. Single-page responsive website with contact form and social media integration."
+                    content="Perfect for startups launching their first website. Single-page responsive website with contact form and social media integration."
                 />
                 <meta name="twitter:image" content={`${cdn}/images/aboutBanner.webp`} />
                 {/* Structured Data (JSON-LD) */}
@@ -116,9 +116,9 @@ export default function StarterPackage() {
                     >
                         <h1 className="mb-4 text-4xl font-bold text-white">Starter Package</h1>
                         <div className="mb-6">
-                            <span className="text-5xl font-bold text-(--primary)">$600</span>
+                            <span className="text-5xl font-bold text-(--primary)">$199</span>
                         </div>
-                        <p className="mb-8 text-lg text-gray-300">Perfect for artists and musicians starting their online presence</p>
+                        <p className="mb-8 text-lg text-gray-300">Perfect for startups launching their first website</p>
                         <h2 className="mb-4 text-2xl font-bold text-white">What's Included:</h2>
                         <ul className="mb-8 space-y-3">
                             {features.map((feature, index) => (
@@ -135,7 +135,7 @@ export default function StarterPackage() {
                                 project requirements.
                             </p>
                             <div className="mb-6" style={{ minHeight: '45px' }}>
-                                <PayPalCheckoutButton amount={600} item="Starter Package" />
+                                <PayPalCheckoutButton amount={199} item="Starter Package" />
                             </div>
                             <p className="text-sm text-gray-400">
                                 Have questions?{' '}

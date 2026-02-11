@@ -11,8 +11,8 @@ export default function Services() {
     const packages = [
         {
             title: 'Starter Package',
-            price: 600,
-            description: 'Perfect for artists and musicians starting their online presence',
+            price: 199,
+            description: 'Perfect for startups launching their first website',
             features: [
                 'Single-page responsive website',
                 'Contact form integration',
@@ -26,8 +26,8 @@ export default function Services() {
         },
         {
             title: 'Professional Package',
-            price: 1500,
-            description: 'Ideal for established artists with growing audiences',
+            price: 349,
+            description: 'Ideal for growing startups needing more features',
             features: [
                 'Multi-page custom website',
                 'Blog or news section',
@@ -43,8 +43,8 @@ export default function Services() {
         },
         {
             title: 'Premium Package',
-            price: 3000,
-            description: 'Full-featured solution for serious professionals',
+            price: 499,
+            description: 'Full-featured solution for established startups',
             features: [
                 'Everything in Professional',
                 'E-commerce/merch store',
@@ -67,16 +67,16 @@ export default function Services() {
                 <title>Services & Pricing | Graveyard Jokes Studios</title>
                 <meta
                     name="description"
-                    content="Explore our web design and development packages. Custom solutions for musicians, artists, and creatives."
+                    content="Explore our web design and development packages. Custom solutions for startups and small businesses."
                 />
-                <meta name="keywords" content="web design packages, pricing, custom websites, musicians, artists, web development services" />
+                <meta name="keywords" content="web design packages, pricing, custom websites, startups, small businesses, web development services" />
                 <link rel="canonical" href={`${projectUrl}services`} />
 
                 {/* Open Graph */}
                 <meta property="og:title" content="Services & Pricing | Graveyard Jokes Studios" />
                 <meta
-                    property="og:description"
-                    content="Explore our web design and development packages. Custom solutions for musicians, artists, and creatives."
+                    name="og:description"
+                    content="Explore our web design and development packages. Custom solutions for startups and small businesses."
                 />
                 <meta property="og:image" content={`${cdn}/images/aboutBanner.webp`} />
                 <meta property="og:type" content="website" />
@@ -87,7 +87,7 @@ export default function Services() {
                 <meta name="twitter:title" content="Services & Pricing | Graveyard Jokes Studios" />
                 <meta
                     name="twitter:description"
-                    content="Explore our web design and development packages. Custom solutions for musicians, artists, and creatives."
+                    content="Explore our web design and development packages. Custom solutions for startups and small businesses."
                 />
                 <meta name="twitter:image" content={`${cdn}/images/aboutBanner.webp`} />
             </Head>
@@ -121,7 +121,7 @@ export default function Services() {
                             animate={{ opacity: 1 }}
                             transition={{ delay: 0.2, duration: 0.6 }}
                         >
-                            Choose the package that fits your needs. All packages include responsive design, modern tech stack, and ongoing support.
+                            Choose the package that fits your needs. All packages include responsive design, modern tech stack, and ongoing support tailored for startups.
                         </motion.p>
                     </div>
 
