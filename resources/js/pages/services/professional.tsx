@@ -74,7 +74,7 @@ export default function ProfessionalPackage() {
                                 project requirements.
                             </p>
                             <div className="mb-6" style={{ minHeight: '45px' }}>
-                                <PayPalCheckoutButton amount={349} item="Professional Package" />
+                                {/* <PayPalCheckoutButton amount={349} item="Professional Package" /> */}
                             </div>
                             <p className="text-sm text-gray-400">
                                 Have questions?{' '}
