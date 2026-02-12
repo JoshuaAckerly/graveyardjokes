@@ -35,4 +35,10 @@ return [
         ],
     ],
 
+    'paypal' => [
+        'environment' => env('PAYPAL_ENVIRONMENT', 'sandbox'),
+        'client_id' => env('PAYPAL_CLIENT_ID'),
+        'sandbox_client_id' => env('PAYPAL_SANDBOX_CLIENT_ID'),
+    ],
+
 ];

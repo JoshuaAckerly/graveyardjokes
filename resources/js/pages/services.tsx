@@ -173,7 +173,7 @@ export default function Services() {
                                         >
                                             View Details
                                         </Link>
-                                        {/* <PayPalCheckoutButton amount={pkg.price} item={pkg.title} /> */}
+                                        <PayPalCheckoutButton amount={pkg.price} item={pkg.title} />
                                     </div>
                                 </motion.div>
                             ))}
