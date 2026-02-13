@@ -43,6 +43,9 @@ Route::get('/services/premium', function () {
 
 // API endpoint to fetch and cache Open Graph images for external sites
 Route::get('/api/fetch-og-image', [OgImageController::class, 'fetch'])->name('api.fetch-og-image');
+Route::get('/api/og-cache/{filename}', [OgImageController::class, 'cached'])
+    ->where('filename', '[A-Za-z0-9._-]+')
+    ->name('api.og-cache.show');
 
 Route::get('/terms', fn () => Inertia::render('legal/terms'))->name('terms');
 Route::get('/privacy', fn () => Inertia::render('legal/privacy'))->name('privacy');

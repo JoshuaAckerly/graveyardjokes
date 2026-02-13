@@ -10,7 +10,7 @@ type Props = {
 
 const ProjectCard: React.FC<Props> = ({ title, description, url, cdn }) => {
     const [imgSrc, setImgSrc] = useState<string | null>(null);
-    const storageKey = `og:${url}`;
+    const storageKey = `og:v2:${url}`;
 
     useEffect(() => {
         const cached = localStorage.getItem(storageKey);

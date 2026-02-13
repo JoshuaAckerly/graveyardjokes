@@ -6,6 +6,12 @@ export const getEnvironmentUrl = (url: string): string => {
         return url.replace(/\.com/g, '.local');
     }
 
+    // On test environments we currently reuse production-captured screenshots.
+    // This maps incoming project URLs to the .com cache naming convention.
+    if (currentHost.includes('.test')) {
+        return url.replace(/graveyardjokes\.(com|local|test)/g, 'graveyardjokes.com');
+    }
+
     // For staging/testing environments, you could add similar logic
     // if (currentHost.includes('staging')) {
     //     return url.replace(/\.com/g, '.staging.com');
@@ -18,5 +24,5 @@ export const getEnvironmentUrl = (url: string): string => {
 export const getScreenshotPath = (url: string): string => {
     const envUrl = getEnvironmentUrl(url);
     const safeName = envUrl.replace(/^https?:\/\//, '').replace(/[\\/:*?"<>|]/g, '_');
-    return `/storage/og-cache/${safeName}.png`;
+    return `/api/og-cache/${safeName}.png`;
 };

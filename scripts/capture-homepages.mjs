@@ -1,25 +1,55 @@
 #!/usr/bin/env node
 import fs from 'fs';
 import path from 'path';
+import { fileURLToPath } from 'url';
 import { chromium } from 'playwright';
 
-const dataPath = path.resolve('../resources/js/data/portfolioItems.json');
-const outDir = path.resolve('../storage/app/public/og-cache');
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const jsonDataPath = path.resolve(__dirname, '../resources/js/data/portfolioItems.json');
+const tsDataPath = path.resolve(__dirname, '../resources/js/data/portfolioItems.ts');
+const outDir = path.resolve(__dirname, '../storage/app/public/og-cache');
 
 // Get environment from command line args or default to 'production'
 const env = process.argv[2] || 'production';
 
+const getBaseDomain = (environment) => {
+  if (environment === 'local') return 'graveyardjokes.local';
+  if (environment === 'test' || environment === 'testing') return 'graveyardjokes.test';
+  return 'graveyardjokes.com';
+};
+
 const getEnvironmentUrl = (url, environment) => {
-  if (environment === 'local') {
-    return url.replace(/\.com/g, '.local');
+  const baseDomainPattern = /graveyardjokes\.(com|local|test)/g;
+  return url.replace(baseDomainPattern, getBaseDomain(environment));
+};
+
+const loadItems = () => {
+  if (fs.existsSync(jsonDataPath)) {
+    return JSON.parse(fs.readFileSync(jsonDataPath, 'utf8'));
   }
-  // Add other environments as needed
-  return url;
+
+  if (fs.existsSync(tsDataPath)) {
+    const tsContent = fs.readFileSync(tsDataPath, 'utf8');
+    const subdomains = [...tsContent.matchAll(/getProjectUrl\('([^']+)'\)/g)].map((m) => m[1]);
+
+    if (!subdomains.length) {
+      throw new Error(`No project URLs found in ${tsDataPath}`);
+    }
+
+    return subdomains.map((subdomain) => ({
+      title: subdomain,
+      url: `http://${subdomain}.${getBaseDomain(env)}`,
+    }));
+  }
+
+  throw new Error(`Could not find portfolio data file at ${jsonDataPath} or ${tsDataPath}`);
 };
 
 if (!fs.existsSync(outDir)) fs.mkdirSync(outDir, { recursive: true });
 
-const items = JSON.parse(fs.readFileSync(dataPath, 'utf8'));
+const items = loadItems();
 
 async function run() {
   const browser = await chromium.launch({ headless: true });

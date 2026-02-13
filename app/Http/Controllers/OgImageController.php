@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 class OgImageController
 {
@@ -121,7 +122,7 @@ class OgImageController
 
             Storage::disk('public')->put($filename, $body);
 
-            $publicUrl = Storage::url($filename);
+            $publicUrl = route('api.og-cache.show', ['filename' => basename($filename)]);
 
             return response()->json(['url' => $publicUrl]);
         } catch (\Exception $e) {
@@ -131,10 +132,49 @@ class OgImageController
         }
     }
 
+        public function cached(string $filename): BinaryFileResponse|\Illuminate\Http\Response
+    {
+        if (! preg_match('/^[A-Za-z0-9._-]+$/', $filename)) {
+            abort(404);
+        }
+
+        $storagePath = "og-cache/{$filename}";
+        if (! Storage::disk('public')->exists($storagePath)) {
+                        $label = pathinfo($filename, PATHINFO_FILENAME);
+                        $safeLabel = preg_replace('/[^A-Za-z0-9.-]/', ' ', (string) $label) ?: 'Project Preview';
+                        $svg = <<<SVG
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720" role="img" aria-label="{$safeLabel}">
+    <defs>
+        <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+            <stop offset="0%" stop-color="#0f172a"/>
+            <stop offset="100%" stop-color="#1e293b"/>
+        </linearGradient>
+    </defs>
+    <rect width="1280" height="720" fill="url(#bg)"/>
+    <g fill="#94a3b8" font-family="Inter,system-ui,-apple-system,Segoe UI,Roboto,sans-serif" text-anchor="middle">
+        <text x="640" y="342" font-size="40" font-weight="600">Preview Unavailable</text>
+        <text x="640" y="392" font-size="26">{$safeLabel}</text>
+    </g>
+</svg>
+SVG;
+
+                        return response($svg, 200, [
+                                'Content-Type' => 'image/svg+xml; charset=UTF-8',
+                                'Cache-Control' => 'public, max-age=3600',
+                        ]);
+        }
+
+        $absolutePath = Storage::disk('public')->path($storagePath);
+
+        return response()->file($absolutePath, [
+            'Cache-Control' => 'public, max-age=86400',
+        ]);
+    }
+
     private function isPrivateAddress(string $host): bool
     {
         // Allow local development domains
-        if (str_ends_with($host, '.local') || str_ends_with($host, '.localhost')) {
+        if (str_ends_with($host, '.local') || str_ends_with($host, '.localhost') || str_ends_with($host, '.test')) {
             return false;
         }
 
