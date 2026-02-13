@@ -36,17 +36,19 @@ npm run build:ssr
 echo "🗄️ Running database migrations..."
 php artisan migrate --force
 
-# Clear and cache config
-echo "⚡ Optimizing Laravel..."
-php artisan config:cache
-php artisan route:cache
-php artisan view:cache
-php artisan event:cache
-
-# Set permissions
+# Ensure writable directories and permissions
 echo "🔒 Setting permissions..."
-chown -R www-data:www-data storage bootstrap/cache
-chmod -R 775 storage bootstrap/cache
+sudo mkdir -p storage/framework/{cache,sessions,views} bootstrap/cache
+sudo chown -R www-data:www-data storage bootstrap/cache
+sudo find storage bootstrap/cache -type d -exec chmod 775 {} \;
+sudo find storage bootstrap/cache -type f -exec chmod 664 {} \;
+
+# Cache Laravel artifacts as the web server user
+echo "⚡ Optimizing Laravel..."
+sudo -u www-data php artisan config:cache
+sudo -u www-data php artisan route:cache
+sudo -u www-data php artisan view:cache
+sudo -u www-data php artisan event:cache
 
 # Restart PHP-FPM
 echo "🔄 Restarting PHP-FPM..."

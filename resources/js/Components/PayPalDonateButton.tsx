@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { Heart } from 'lucide-react';
 import { useEffect, useRef } from 'react';
+import { loadPayPalSdk } from '../lib/paypalSdk';
 
 interface PayPalDonateButtonProps {
     variant?: 'default' | 'compact' | 'footer';
@@ -13,21 +14,36 @@ export default function PayPalDonateButton({ variant = 'default', className = ''
     const customButtonRef = useRef<HTMLButtonElement>(null);
 
     useEffect(() => {
-        // Only render PayPal button for default variant if hosted button ID is provided
-        if (variant === 'default' && hostedButtonId && paypalContainerRef.current && window.paypal?.HostedButtons) {
-            // Clear any existing buttons
-            paypalContainerRef.current.innerHTML = '';
+        let isMounted = true;
 
-            try {
-                window.paypal
-                    .HostedButtons({
-                        hostedButtonId: hostedButtonId,
-                    })
-                    .render(paypalContainerRef.current);
-            } catch (error) {
-                console.error('Failed to render PayPal button:', error);
-            }
+        // Only render PayPal button for default variant if hosted button ID is provided
+        if (variant === 'default' && hostedButtonId && paypalContainerRef.current) {
+            loadPayPalSdk({ components: ['hosted-buttons'] })
+                .then(() => {
+                    if (!isMounted || !paypalContainerRef.current || !window.paypal?.HostedButtons) {
+                        return;
+                    }
+
+                    paypalContainerRef.current.innerHTML = '';
+
+                    try {
+                        window.paypal
+                            .HostedButtons({
+                                hostedButtonId: hostedButtonId,
+                            })
+                            .render(paypalContainerRef.current);
+                    } catch (error) {
+                        console.error('Failed to render PayPal button:', error);
+                    }
+                })
+                .catch((error) => {
+                    console.error(error instanceof Error ? error.message : 'Failed to load PayPal SDK');
+                });
         }
+
+        return () => {
+            isMounted = false;
+        };
     }, [variant, hostedButtonId]);
 
     const handleDonate = () => {

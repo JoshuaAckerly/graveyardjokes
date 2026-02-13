@@ -161,7 +161,7 @@ export default function PremiumPackage() {
                                 ongoing support.
                             </p>
                             <div className="min-h-[50px]">
-                                {/* <PayPalCheckoutButton amount={499} item="Premium Package" /> */}
+                                <PayPalCheckoutButton amount={499} item="Premium Package" />
                             </div>
                         </div>
                     </motion.div>

@@ -1199,15 +1199,18 @@ sudo systemctl reload php8.4-fpm
 # Check logs
 tail -f storage/logs/laravel.log
 
-# Check permissions
-sudo chown -R www-data:www-data /var/www/graveyardjokes
-sudo chmod -R 775 storage bootstrap/cache
+# Fix writable paths (recommended)
+sudo chown -R www-data:www-data storage bootstrap/cache
+sudo find storage bootstrap/cache -type d -exec chmod 775 {} \;
+sudo find storage bootstrap/cache -type f -exec chmod 664 {} \;
 
-# Clear cache
-php artisan cache:clear
-php artisan config:clear
-php artisan view:clear
+# Rebuild caches as web user
+sudo -u www-data php artisan optimize:clear
+sudo -u www-data php artisan optimize
 ```
+
+If you see `file_put_contents(...storage/framework/views/...): Permission denied`,
+clear compiled views and reapply the commands above.
 
 #### 2. Queue Not Processing
 

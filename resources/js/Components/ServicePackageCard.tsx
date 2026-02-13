@@ -1,44 +1,7 @@
 import { motion } from 'framer-motion';
 import { Check } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
-
-// Global flag to track if PayPal SDK is loading or loaded
-let isPayPalScriptLoading = false;
-let isPayPalScriptLoaded = false;
-const paypalLoadCallbacks: Array<() => void> = [];
-
-function loadPayPalScript(callback: () => void) {
-    if (isPayPalScriptLoaded && window.paypal) {
-        callback();
-        return;
-    }
-
-    paypalLoadCallbacks.push(callback);
-
-    if (isPayPalScriptLoading) {
-        return; // Already loading, just wait for callback
-    }
-
-    isPayPalScriptLoading = true;
-
-    const isProduction = import.meta.env.VITE_PAYPAL_ENVIRONMENT === 'production';
-    const clientId = isProduction ? import.meta.env.VITE_PAYPAL_CLIENT_ID : import.meta.env.VITE_PAYPAL_SANDBOX_CLIENT_ID;
-
-    const script = document.createElement('script');
-    script.src = `https://www.paypal.com/sdk/js?client-id=${clientId}&components=hosted-buttons&enable-funding=venmo,paylater&disable-funding=card,credit&currency=USD`;
-    script.async = true;
-    script.onload = () => {
-        isPayPalScriptLoaded = true;
-        isPayPalScriptLoading = false;
-        paypalLoadCallbacks.forEach((cb) => cb());
-        paypalLoadCallbacks.length = 0;
-    };
-    script.onerror = () => {
-        isPayPalScriptLoading = false;
-        console.error('Failed to load PayPal SDK');
-    };
-    document.body.appendChild(script);
-}
+import { loadPayPalSdk } from '../lib/paypalSdk';
 
 interface ServicePackageCardProps {
     title: string;
@@ -66,10 +29,21 @@ export default function ServicePackageCard({ title, price, description, features
     useEffect(() => {
         if (!showPayPal) return;
 
-        // Load PayPal SDK (shared across all instances)
-        loadPayPalScript(() => {
-            setIsPayPalReady(true);
-        });
+        let isMounted = true;
+
+        loadPayPalSdk({ components: ['hosted-buttons'] })
+            .then(() => {
+                if (isMounted) {
+                    setIsPayPalReady(true);
+                }
+            })
+            .catch((error) => {
+                console.error(error instanceof Error ? error.message : 'Failed to load PayPal SDK');
+            });
+
+        return () => {
+            isMounted = false;
+        };
     }, [showPayPal]);
 
     useEffect(() => {

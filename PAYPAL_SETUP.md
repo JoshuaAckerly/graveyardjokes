@@ -2,7 +2,7 @@
 
 ## For Local Development (Sandbox)
 
-The 403 "not authorized" error occurs because your PayPal app is configured for production domains only. For local testing, you need to use PayPal's sandbox environment.
+The 403 `NOT_AUTHORIZED` error usually means your Checkout button is using the wrong client ID (for example a Hosted Buttons ID) or the wrong environment. For local testing, use PayPal sandbox credentials.
 
 ### Step 1: Create a PayPal Sandbox App
 
@@ -25,12 +25,16 @@ Update your `.env` file with the sandbox credentials:
 
 ```env
 # PayPal Configuration
-VITE_PAYPAL_CLIENT_ID=BAAEThXfkghKIa87QQOlnsIur64eOCnBLuAxJeYWYDW5o366RczxK2o9F8DtrXnte6SY65yJRFso_mMA2o
+VITE_PAYPAL_CLIENT_ID=YOUR_PAYPAL_LIVE_CLIENT_ID_HERE
+VITE_PAYPAL_CHECKOUT_CLIENT_ID=YOUR_PAYPAL_CHECKOUT_LIVE_CLIENT_ID_HERE
 VITE_PAYPAL_SANDBOX_CLIENT_ID=AZXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 VITE_PAYPAL_ENVIRONMENT=sandbox
 ```
 
-**Important**: Change `VITE_PAYPAL_ENVIRONMENT` from `production` to `sandbox` for local development.
+**Important:**
+- `VITE_PAYPAL_CHECKOUT_CLIENT_ID` must be a REST app client ID from PayPal Developer Dashboard (`Apps & Credentials`) for `window.paypal.Buttons` checkout orders.
+- Do not use a Hosted Buttons-specific ID for checkout orders.
+- Use `VITE_PAYPAL_ENVIRONMENT=sandbox` for local development.
 
 ### Step 4: Test the Integration
 
@@ -49,10 +53,10 @@ VITE_PAYPAL_ENVIRONMENT=production
 
 ## Current Production Setup
 
-The PayPal SDK is already integrated with your production client ID:
-- **Client ID**: `BAAEThXfkghKIa87QQOlnsIur64eOCnBLuAxJeYWYDW5o366RczxK2o9F8DtrXnte6SY65yJRFso_mMA2o`
-- **Environment**: Production
-- **Features**: Venmo enabled, Pay Later enabled, Cards/Credit disabled
+PayPal SDK configuration is loaded by `resources/js/lib/paypalSdk.ts` and uses:
+- `VITE_PAYPAL_CHECKOUT_CLIENT_ID` (preferred for checkout buttons)
+- fallback: `VITE_PAYPAL_CLIENT_ID`
+- `VITE_PAYPAL_ENVIRONMENT`
 
 ## Troubleshooting
 
@@ -60,6 +64,8 @@ The PayPal SDK is already integrated with your production client ID:
 - Make sure `VITE_PAYPAL_ENVIRONMENT=sandbox` in your `.env`
 - Verify your sandbox client ID is correct
 - Check that your PayPal developer account is active
+- Confirm `VITE_PAYPAL_CHECKOUT_CLIENT_ID` is a REST app client ID from PayPal Developer Dashboard
+- Share the PayPal Correlation ID (`Corr ID`) with PayPal support for account-level permission issues
 
 **Buttons not showing?**
 - Clear your browser cache
@@ -109,10 +115,7 @@ const paypalUrl = 'https://www.paypal.com/donate/?business=admin@graveyardjokes.
 
 ### SDK Configuration
 
-The SDK is loaded in `resources/views/app.blade.php`:
-```html
-<script src="https://www.paypal.com/sdk/js?client-id=YOUR_CLIENT_ID&components=hosted-buttons&enable-funding=venmo&currency=USD"></script>
-```
+The SDK is loaded dynamically by `resources/js/lib/paypalSdk.ts`.
 
 Options you can modify:
 - `enable-funding`: Add payment methods (venmo, paylater, etc.)

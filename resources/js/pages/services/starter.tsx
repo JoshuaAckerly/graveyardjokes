@@ -135,7 +135,7 @@ export default function StarterPackage() {
                                 project requirements.
                             </p>
                             <div className="mb-6" style={{ minHeight: '45px' }}>
-                                {/* <PayPalCheckoutButton amount={199} item="Starter Package" /> */}
+                                <PayPalCheckoutButton amount={199} item="Starter Package" />
                             </div>
                             <p className="text-sm text-gray-400">
                                 Have questions?{' '}

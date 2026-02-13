@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { useEffect, useRef } from 'react';
+import { loadPayPalSdk } from '../lib/paypalSdk';
 
 // Import PayPal types (global augmentation)
 /// <reference path="../types/paypal.d.ts" />
@@ -10,12 +11,35 @@ interface PayPalCheckoutButtonProps {
     onSuccess?: (details: Record<string, unknown>) => void;
 }
 
+function getPayPalErrorText(error: unknown): string {
+    if (!error) {
+        return 'Unknown PayPal error.';
+    }
+
+    if (typeof error === 'string') {
+        return error;
+    }
+
+    if (error instanceof Error) {
+        return error.message;
+    }
+
+    return JSON.stringify(error);
+}
+
+function extractCorrelationId(errorMessage: string): string | null {
+    const match = errorMessage.match(/Corr ID:\s*([a-zA-Z0-9]+)/i);
+    return match?.[1] ?? null;
+}
+
 export default function PayPalCheckoutButton({ amount, item, onSuccess }: PayPalCheckoutButtonProps) {
     const paypalRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
+        let isMounted = true;
+
         const renderPayPalButton = () => {
-            if (!window.paypal || !paypalRef.current) return;
+            if (!isMounted || !window.paypal || !paypalRef.current) return;
 
             // Clear any existing content
             paypalRef.current.innerHTML = '';
@@ -49,30 +73,41 @@ export default function PayPalCheckoutButton({ amount, item, onSuccess }: PayPal
                     },
                     onError: (err) => {
                         console.error('PayPal error:', err);
-                        alert('PayPal error: ' + err);
+
+                        const errorMessage = getPayPalErrorText(err);
+
+                        if (errorMessage.includes('NOT_AUTHORIZED') || errorMessage.includes('insufficient permissions')) {
+                            const correlationId = extractCorrelationId(errorMessage);
+                            alert(
+                                `PayPal checkout is not authorized for the current client ID. Update VITE_PAYPAL_CHECKOUT_CLIENT_ID to a PayPal REST app client ID with Checkout permissions.${
+                                    correlationId ? ` Correlation ID: ${correlationId}` : ''
+                                }`,
+                            );
+                            return;
+                        }
+
+                        alert('PayPal error: ' + errorMessage);
                     },
                 })
                 .render(paypalRef.current);
         };
 
-        // If PayPal SDK is already loaded, render immediately
-        if (window.paypal) {
-            renderPayPalButton();
-        } else {
-            // Wait for PayPal SDK to load
-            const checkPayPal = setInterval(() => {
-                if (window.paypal) {
-                    clearInterval(checkPayPal);
-                    renderPayPalButton();
-                }
-            }, 100);
+        loadPayPalSdk({ components: ['buttons'] })
+            .then(() => {
+                renderPayPalButton();
+            })
+            .catch((error) => {
+                const message = error instanceof Error ? error.message : 'Failed to load PayPal SDK';
+                console.error(message);
 
-            // Timeout after 10 seconds
-            setTimeout(() => {
-                clearInterval(checkPayPal);
-                console.error('PayPal SDK failed to load within 10 seconds');
-            }, 10000);
-        }
+                if (message.includes('Checkout Orders requires a REST app client ID')) {
+                    alert('PayPal checkout is misconfigured. Please set VITE_PAYPAL_CHECKOUT_CLIENT_ID to your PayPal REST app client ID.');
+                }
+            });
+
+        return () => {
+            isMounted = false;
+        };
     }, [amount, item, onSuccess]);
 
     return <div ref={paypalRef} className="paypal-button-container mt-4"></div>;

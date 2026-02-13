@@ -70,15 +70,6 @@
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />
 
-    {{-- PayPal SDK --}}
-    @php
-        $paypalEnv = config('services.paypal.environment', 'sandbox');
-        $clientId = $paypalEnv === 'production'
-            ? config('services.paypal.client_id')
-            : config('services.paypal.sandbox_client_id');
-    @endphp
-    <script src="https://www.paypal.com/sdk/js?client-id={{ $clientId }}&currency=USD"></script>
-
     @routes
     @viteReactRefresh
     @vite(['resources/js/app.tsx', "resources/js/pages/{$page['component']}.tsx"])
