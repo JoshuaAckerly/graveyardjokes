@@ -132,7 +132,7 @@ class OgImageController
         }
     }
 
-        public function cached(string $filename): BinaryFileResponse|\Illuminate\Http\Response
+    public function cached(string $filename): BinaryFileResponse|\Illuminate\Http\Response
     {
         if (! preg_match('/^[A-Za-z0-9._-]+$/', $filename)) {
             abort(404);
@@ -140,9 +140,9 @@ class OgImageController
 
         $storagePath = "og-cache/{$filename}";
         if (! Storage::disk('public')->exists($storagePath)) {
-                        $label = pathinfo($filename, PATHINFO_FILENAME);
-                        $safeLabel = preg_replace('/[^A-Za-z0-9.-]/', ' ', (string) $label) ?: 'Project Preview';
-                        $svg = <<<SVG
+            $label = pathinfo($filename, PATHINFO_FILENAME);
+            $safeLabel = preg_replace('/[^A-Za-z0-9.-]/', ' ', (string) $label) ?: 'Project Preview';
+            $svg = <<<SVG
 <svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720" role="img" aria-label="{$safeLabel}">
     <defs>
         <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
@@ -158,10 +158,10 @@ class OgImageController
 </svg>
 SVG;
 
-                        return response($svg, 200, [
-                                'Content-Type' => 'image/svg+xml; charset=UTF-8',
-                                'Cache-Control' => 'public, max-age=3600',
-                        ]);
+            return response($svg, 200, [
+                'Content-Type' => 'image/svg+xml; charset=UTF-8',
+                'Cache-Control' => 'public, max-age=3600',
+            ]);
         }
 
         $absolutePath = Storage::disk('public')->path($storagePath);
