@@ -151,6 +151,9 @@ export default function ContactPricing() {
                             Ready to bring your vision to life? Let's discuss your project and create something amazing together. Contact us below and
                             we'll get back to you within 24 hours.
                         </p>
+                        <p className="mb-6 text-center text-xl font-semibold text-[var(--primary)]">
+                            Call us: <a href="tel:7163415425" className="hover:underline">(716) 341-5425</a>
+                        </p>
 
                         <form onSubmit={handleSubmit} className="-xl mx-auto max-w-xl bg-white p-8 shadow-lg">
                             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
