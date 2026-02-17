@@ -2,10 +2,25 @@
 
 use App\Http\Controllers\OgImageController;
 use App\Modules\Contact\Controllers\ContactController;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Spatie\Sitemap\Sitemap;
 use Spatie\Sitemap\Tags\Url;
+
+Route::domain('www.graveyardjokes.com')->group(function () {
+    Route::any('/{any?}', function (Request $request, ?string $any = null) {
+        $path = ltrim((string) ($any ?? ''), '/');
+        $target = 'https://graveyardjokes.com'.($path !== '' ? '/'.$path : '/');
+        $query = $request->getQueryString();
+
+        if (is_string($query) && $query !== '') {
+            $target .= '?'.$query;
+        }
+
+        return redirect()->to($target, 301);
+    })->where('any', '.*');
+});
 
 Route::get('/', function () {
     return Inertia::render('welcome');
