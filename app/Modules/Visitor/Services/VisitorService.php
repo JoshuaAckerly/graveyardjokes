@@ -103,17 +103,21 @@ class VisitorService implements VisitorServiceInterface
             'user_agent' => $request ? $request->userAgent() : request()->userAgent(),
             'referrer' => $request ? $request->input('referrer') : request()->header('referer'),
             'subdomain' => $request ? $request->input('subdomain') : request()->getHost(),
+            'page_path' => $request ? $request->input('page_path') : request()->path(),
+            'page_url' => $request ? $request->input('page_url') : request()->fullUrl(),
         ];
 
         Log::info('New visitor tracked!', $visitorData);
 
         $ua = $visitorData['user_agent'] ?? '';
         $ip = (string) ($visitorData['ip'] ?? '');
-        $keyHash = substr(sha1($ip.'|'.$ua), 0, 20);
+        $subdomain = (string) ($visitorData['subdomain'] ?? 'unknown-host');
+        $pagePath = (string) ($visitorData['page_path'] ?? '/');
+        $keyHash = substr(sha1($ip.'|'.$ua.'|'.$subdomain.'|'.$pagePath), 0, 20);
         $cacheKey = "visitor_notification_sent_{$keyHash}";
 
-        // Get TTL from config, with fallback to 24 hours
-        $ttl = (int) (config('tracking.visitor_ttl') ?? 86400);
+        // Get TTL from config, with fallback to 5 minutes
+        $ttl = (int) (config('services.visitor_tracking.notification_ttl') ?? 300);
 
         if (Cache::has($cacheKey)) {
             Log::info('Visitor notification skipped (recently notified).', ['cache_key' => $cacheKey]);

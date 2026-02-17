@@ -87,6 +87,20 @@
                 {{ $visitor['subdomain'] }}
             </div>
             @endif
+
+            @if(isset($visitor['page_path']))
+            <div class="info-row">
+                <span class="label">📄 Page Path:</span>
+                {{ $visitor['page_path'] }}
+            </div>
+            @endif
+
+            @if(isset($visitor['page_url']))
+            <div class="info-row">
+                <span class="label">🔍 Page URL:</span>
+                {{ $visitor['page_url'] }}
+            </div>
+            @endif
             
             @if(isset($visitor['referrer']))
             <div class="info-row">

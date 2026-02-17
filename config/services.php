@@ -41,4 +41,12 @@ return [
         'sandbox_client_id' => env('PAYPAL_SANDBOX_CLIENT_ID'),
     ],
 
+    'google_analytics' => [
+        'tracking_id' => env('GOOGLE_ANALYTICS_TRACKING_ID'),
+    ],
+
+    'visitor_tracking' => [
+        'notification_ttl' => (int) env('VISITOR_NOTIFICATION_TTL', 300),
+    ],
+
 ];

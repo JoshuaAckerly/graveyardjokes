@@ -19,9 +19,13 @@ return [
 
     'allowed_methods' => ['*'],
 
-    'allowed_origins' => ['https://graveyardjokes.test', 'https://graveyardjokes.com'],
+    'allowed_origins' => [
+        'https://graveyardjokes.test',
+        'https://graveyardjokes.com',
+        'http://graveyardjokes.local',
+    ],
 
-    'allowed_origins_patterns' => ['/^https:\/\/.*\.graveyardjokes\.(com|test)$/'],
+    'allowed_origins_patterns' => ['/^https?:\/\/.*\.graveyardjokes\.(com|test|local)$/'],
 
     'allowed_headers' => ['*'],
 
