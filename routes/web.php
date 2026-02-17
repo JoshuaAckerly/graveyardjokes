@@ -128,6 +128,29 @@ Route::redirect('/legal/cookies', '/cookies', 301);
 Route::redirect('/illustrations', '/contact', 301);
 Route::redirect('/pricing', '/services', 301);
 
+Route::get('/login', function () {
+    return redirect()->away('https://auth-system.graveyardjokes.com/login', 302);
+});
+
+Route::get('/register', function () {
+    return redirect()->away('https://auth-system.graveyardjokes.com/register', 302);
+});
+
+Route::get('/forgot-password', function () {
+    return redirect()->away('https://auth-system.graveyardjokes.com/forgot-password', 302);
+});
+
+Route::get('/reset-password/{token}', function (Request $request, string $token) {
+    $target = 'https://auth-system.graveyardjokes.com/reset-password/'.$token;
+    $query = $request->getQueryString();
+
+    if (is_string($query) && $query !== '') {
+        $target .= '?'.$query;
+    }
+
+    return redirect()->away($target, 302);
+})->where('token', '.*');
+
 // Explicitly mark auth-related endpoints as permanently removed (410 Gone)
 // so crawlers get a clear signal instead of a redirect or soft-404.
 // $goneRoutes and 410 aborts removed to re-enable auth routes
