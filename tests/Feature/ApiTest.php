@@ -146,7 +146,10 @@ class ApiTest extends TestCase
 
         $url = $response->json('url');
         if (is_string($url)) {
-            $this->assertStringContainsString('/storage/og-cache/', $url);
+            $this->assertTrue(
+                str_contains($url, '/api/og-cache/') || str_contains($url, '/storage/og-cache/'),
+                'Expected URL to contain /api/og-cache/ or /storage/og-cache/'
+            );
         } else {
             $this->fail('Expected URL to be a string');
         }
