@@ -4,8 +4,10 @@ use App\Http\Controllers\OgImageController;
 use App\Modules\Contact\Controllers\ContactController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 use Spatie\Sitemap\Sitemap;
+use Spatie\Sitemap\SitemapIndex;
 use Spatie\Sitemap\Tags\Url;
 
 Route::domain('www.graveyardjokes.com')->group(function () {
@@ -91,7 +93,7 @@ Route::get('/generate-sitemap', function () {
     }
     $base = rtrim($rawBase, '/');
 
-    Sitemap::create()
+    $sitemap = Sitemap::create()
         ->add(Url::create($base.'/'))
         ->add(Url::create($base.'/about'))
         ->add(Url::create($base.'/contact'))
@@ -102,11 +104,64 @@ Route::get('/generate-sitemap', function () {
         ->add(Url::create($base.'/services/premium'))
         ->add(Url::create($base.'/terms'))
         ->add(Url::create($base.'/privacy'))
-        ->add(Url::create($base.'/cookies'))
-        ->writeToFile(public_path('sitemap.xml'));
+        ->add(Url::create($base.'/cookies'));
+
+    Storage::disk('public')->put('sitemap.xml', $sitemap->render());
+
+    $index = SitemapIndex::create()->add($base.'/sitemap.xml');
+    $subdomains = config('sitemaps.subdomains', []);
+
+    if (is_array($subdomains)) {
+        foreach ($subdomains as $subdomain) {
+            if (is_string($subdomain) && $subdomain !== '') {
+                $index->add('https://'.$subdomain.'.graveyardjokes.com/sitemap.xml');
+            }
+        }
+    }
+
+    Storage::disk('public')->put('sitemap_index.xml', $index->render());
 
     return 'Sitemap generated!';
 });
+
+Route::get('/sitemap.xml', function () {
+    if (! Storage::disk('public')->exists('sitemap.xml')) {
+        abort(404);
+    }
+
+    return response(Storage::disk('public')->get('sitemap.xml'), 200, [
+        'Content-Type' => 'application/xml; charset=UTF-8',
+    ]);
+})->name('sitemap.xml');
+
+Route::get('/sitemap_index.xml', function () {
+    if (Storage::disk('public')->exists('sitemap_index.xml')) {
+        return response(Storage::disk('public')->get('sitemap_index.xml'), 200, [
+            'Content-Type' => 'application/xml; charset=UTF-8',
+        ]);
+    }
+
+    $rawBase = config('app.url', '');
+    if (! is_string($rawBase)) {
+        $rawBase = '';
+    }
+    $base = rtrim($rawBase, '/');
+
+    $index = SitemapIndex::create()->add($base.'/sitemap.xml');
+    $subdomains = config('sitemaps.subdomains', []);
+
+    if (is_array($subdomains)) {
+        foreach ($subdomains as $subdomain) {
+            if (is_string($subdomain) && $subdomain !== '') {
+                $index->add('https://'.$subdomain.'.graveyardjokes.com/sitemap.xml');
+            }
+        }
+    }
+
+    return response($index->render(), 200, [
+        'Content-Type' => 'application/xml; charset=UTF-8',
+    ]);
+})->name('sitemap.index');
 
 // Handle /cryptescape and /demo as 410 Gone before any redirects
 Route::get('/cryptescape', function () {
