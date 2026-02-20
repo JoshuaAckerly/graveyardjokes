@@ -18,7 +18,11 @@ cd "$DEPLOY_PATH"
 
 # Pull latest code from Git
 echo "📦 Pulling latest code from Git..."
-git pull origin testing
+DEPLOY_BRANCH="testing"
+if ! git ls-remote --exit-code --heads origin "$DEPLOY_BRANCH" >/dev/null 2>&1; then
+    DEPLOY_BRANCH="main"
+fi
+git pull origin "$DEPLOY_BRANCH"
 
 # Install/Update PHP dependencies
 echo "🐘 Installing PHP dependencies..."
@@ -32,11 +36,13 @@ npm ci
 echo "🎨 Building frontend assets and SSR bundle..."
 npm run build:ssr
 
-# Stop existing SSR process
-echo "🛑 Stopping existing SSR process..."
-lsof -ti:$SSR_PORT | xargs kill -TERM 2>/dev/null || true
-sleep 2
-lsof -ti:$SSR_PORT | xargs kill -9 2>/dev/null || true
+# Stop existing SSR process (fallback path when PM2 is unavailable)
+if ! command -v pm2 &> /dev/null; then
+    echo "🛑 Stopping existing SSR process..."
+    lsof -ti:$SSR_PORT | xargs kill -TERM 2>/dev/null || true
+    sleep 2
+    lsof -ti:$SSR_PORT | xargs kill -9 2>/dev/null || true
+fi
 
 # Update environment configuration
 if ! grep -q "INERTIA_SSR_PORT=$SSR_PORT" .env; then
@@ -80,11 +86,24 @@ if command -v supervisorctl &> /dev/null; then
     sudo supervisorctl restart graveyardjokes-worker:* 2>/dev/null || echo "No queue workers configured yet"
 fi
 
-# Start SSR server in background
-echo "🌟 Starting SSR server on port $SSR_PORT..."
-nohup node bootstrap/ssr/ssr.mjs > storage/logs/ssr.log 2>&1 &
-SSR_PID=$!
-echo "SSR server started with PID: $SSR_PID"
+# Manage SSR server
+if command -v pm2 &> /dev/null; then
+    echo "🌟 Managing SSR server with PM2..."
+    if pm2 list | grep -q "$PROJECT_NAME-ssr"; then
+        pm2 restart "$PROJECT_NAME-ssr" --update-env || {
+            pm2 delete "$PROJECT_NAME-ssr" >/dev/null 2>&1 || true
+            pm2 start bootstrap/ssr/ssr.mjs --name "$PROJECT_NAME-ssr" -- --port=$SSR_PORT
+        }
+    else
+        pm2 start bootstrap/ssr/ssr.mjs --name "$PROJECT_NAME-ssr" -- --port=$SSR_PORT
+    fi
+    pm2 save
+else
+    echo "🌟 Starting SSR server on port $SSR_PORT..."
+    nohup node bootstrap/ssr/ssr.mjs > storage/logs/ssr.log 2>&1 &
+    SSR_PID=$!
+    echo "SSR server started with PID: $SSR_PID"
+fi
 
 # Restart PHP-FPM
 echo "🔄 Restarting PHP-FPM..."
