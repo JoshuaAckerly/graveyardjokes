@@ -13,8 +13,8 @@
     "format:check": "prettier --check resources/",
     "lint": "eslint . --fix",
     "types": "tsc --noEmit",
-    "test": "node --experimental-vm-modules ./node_modules/jest/bin/jest.js",
-    "test:watch": "node --experimental-vm-modules ./node_modules/jest/bin/jest.js --watch"
+    "test": "npx jest --config jest.config.json",
+    "test:watch": "jest --watch"
   },
   "devDependencies": {
     "@eslint/js": "^9.19.0",
@@ -23,10 +23,10 @@
     "@testing-library/user-event": "^14.5.2",
     "@types/jest": "^30.0.0",
     "@types/node": "^22.13.5",
-    "eslint": "^10.0.1",
+    "eslint": "^9.39.3",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-prettier": "^5.5.4",
-    "eslint-plugin-react": "^7.22.0",
+    "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^5.1.0",
     "jest": "^19.0.2",
     "jest-environment-jsdom": "^29.7.0",
