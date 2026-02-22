@@ -1,5 +1,5 @@
-import { render, screen, waitFor } from '@testing-library/react';
 import { jest } from '@jest/globals';
+import { render, screen, waitFor } from '@testing-library/react';
 import Home from '../welcome';
 
 jest.mock('@/Components/ProjectCard', () => {

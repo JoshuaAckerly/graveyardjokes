@@ -1,6 +1,6 @@
+import { jest } from '@jest/globals';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { jest } from '@jest/globals';
 
 let ContactPricing: (typeof import('../contact'))['default'];
 
@@ -52,6 +52,4 @@ describe('ContactPricing', () => {
         expect(screen.getByText('A valid email is required')).toBeInTheDocument();
         expect(screen.getByText('Message is required')).toBeInTheDocument();
     });
-
-}
-);
+});

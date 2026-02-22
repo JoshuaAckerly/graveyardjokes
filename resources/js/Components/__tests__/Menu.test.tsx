@@ -1,7 +1,7 @@
-import { render, screen } from '@testing-library/react';
-import { jest } from '@jest/globals';
-import Menu from '../Menu';
 import { getProjectUrl } from '@/env';
+import { jest } from '@jest/globals';
+import { render, screen } from '@testing-library/react';
+import Menu from '../Menu';
 
 // Mock Inertia Link
 jest.mock('@inertiajs/react', () => ({

@@ -1,5 +1,5 @@
-import { render, screen, waitFor } from '@testing-library/react';
 import { jest } from '@jest/globals';
+import { render, screen, waitFor } from '@testing-library/react';
 import ProjectCard from '../ProjectCard';
 
 const fetchMock = jest.fn() as jest.MockedFunction<typeof fetch>;

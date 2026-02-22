@@ -1,5 +1,5 @@
-import '@testing-library/jest-dom';
 import { jest } from '@jest/globals';
+import '@testing-library/jest-dom';
 
 // Mock Inertia
 (global as any).route = jest.fn(() => '/');

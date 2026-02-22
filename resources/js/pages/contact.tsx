@@ -154,7 +154,10 @@ export default function ContactPricing() {
                             we'll get back to you within 24 hours.
                         </p>
                         <p className="mb-6 text-center text-xl font-semibold text-[var(--primary)]">
-                            Call us: <a href="tel:7163415425" className="hover:underline">(716) 341-5425</a>
+                            Call us:{' '}
+                            <a href="tel:7163415425" className="hover:underline">
+                                (716) 341-5425
+                            </a>
                         </p>
 
                         <form onSubmit={handleSubmit} className="-xl mx-auto max-w-xl bg-white p-8 shadow-lg">

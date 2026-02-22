@@ -1,7 +1,7 @@
+import { getProjectUrl } from '@/env';
+import { jest } from '@jest/globals';
 import { act, render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { jest } from '@jest/globals';
-import { getProjectUrl } from '@/env';
 import Carousel from '../carousel';
 
 // Mock import.meta.env
