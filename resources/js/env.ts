@@ -1,9 +1,31 @@
 // env.ts
 // Utility to get environment-based URLs for login/auth system
 
-// Use VITE_SERVER_ENV from .env, fallback to import.meta.env.MODE
+type RuntimeEnv = Record<string, string | undefined>;
+
+const getRuntimeEnv = (): RuntimeEnv => {
+    const mockedEnv = (globalThis as { import?: { meta?: { env?: RuntimeEnv } } }).import?.meta?.env;
+    if (mockedEnv) {
+        return mockedEnv;
+    }
+
+    const viteEnv = (import.meta as ImportMeta).env as RuntimeEnv | undefined;
+    if (viteEnv) {
+        return viteEnv;
+    }
+
+    if (typeof process !== 'undefined') {
+        return process.env as RuntimeEnv;
+    }
+
+    return {};
+};
+
+export const getEnvVar = (key: string, fallback = ''): string => getRuntimeEnv()[key] ?? fallback;
+
+// Use VITE_SERVER_ENV from .env, fallback to MODE
 const getBaseDomain = () => {
-    const env = import.meta.env.VITE_SERVER_ENV || import.meta.env.MODE;
+    const env = getEnvVar('VITE_SERVER_ENV') || getEnvVar('MODE');
     if (env === 'production') {
         return 'graveyardjokes.com';
     }

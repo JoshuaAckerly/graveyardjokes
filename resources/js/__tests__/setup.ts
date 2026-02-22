@@ -1,4 +1,5 @@
 import '@testing-library/jest-dom';
+import { jest } from '@jest/globals';
 
 // Mock Inertia
 (global as any).route = jest.fn(() => '/');
@@ -15,6 +16,25 @@ Object.defineProperty(window, 'matchMedia', {
         addEventListener: jest.fn(),
         removeEventListener: jest.fn(),
         dispatchEvent: jest.fn(),
+    })),
+});
+
+Object.defineProperty(globalThis, 'IntersectionObserver', {
+    writable: true,
+    value: jest.fn().mockImplementation(() => ({
+        observe: jest.fn(),
+        unobserve: jest.fn(),
+        disconnect: jest.fn(),
+        takeRecords: jest.fn(() => []),
+    })),
+});
+
+Object.defineProperty(globalThis, 'ResizeObserver', {
+    writable: true,
+    value: jest.fn().mockImplementation(() => ({
+        observe: jest.fn(),
+        unobserve: jest.fn(),
+        disconnect: jest.fn(),
     })),
 });
 

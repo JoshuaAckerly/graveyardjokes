@@ -1,16 +1,17 @@
+import InertiaHead from '@/Components/InertiaHead';
 import ProjectCard from '@/Components/ProjectCard';
 import portfolioItems from '@/data/portfolioItems';
 import MainLayout from '@/Layouts/MainLayout';
-import { Head } from '@inertiajs/react';
 import React from 'react';
+import { getEnvVar } from '../env';
 
 const Portfolio: React.FC = () => {
-    const cdn = import.meta.env.VITE_ASSET_URL;
+    const cdn = getEnvVar('VITE_ASSET_URL');
 
     return (
         <MainLayout>
             <>
-                <Head>
+                <InertiaHead>
                     <title>Portfolio | Graveyard Jokes Studios</title>
                     <meta
                         name="description"
@@ -38,7 +39,7 @@ const Portfolio: React.FC = () => {
                         content="Explore the portfolio of Graveyard Jokes Studios, showcasing custom websites for musicians, artists, and creatives."
                     />
                     <meta name="twitter:image" content={`${cdn}/images/PortfolioBanner.webp`} />
-                </Head>
+                </InertiaHead>
             </>
 
             <section className="relative z-0 flex flex-col items-center justify-center gap-8 rounded-lg bg-[var(--color-foreground)] p-6 text-white shadow-lg">

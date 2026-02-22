@@ -1,5 +1,6 @@
 module.exports = {
   testEnvironment: 'jsdom',
+  injectGlobals: true,
   setupFilesAfterEnv: ['<rootDir>/resources/js/__tests__/setup.ts'],
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/resources/js/$1',
@@ -8,9 +9,15 @@ module.exports = {
     '<rootDir>/resources/js/**/__tests__/**/*.{js,jsx,ts,tsx}',
     '<rootDir>/resources/js/**/*.{test,spec}.{js,jsx,ts,tsx}'
   ],
-  preset: 'ts-jest',
+  preset: 'ts-jest/presets/default-esm',
+  extensionsToTreatAsEsm: ['.ts', '.tsx'],
   transform: {
-    '^.+\\.(ts|tsx)$': 'ts-jest',
+    '^.+\\.(ts|tsx)$': ['ts-jest', {
+      useESM: true,
+      tsconfig: {
+        jsx: 'react-jsx',
+      },
+    }],
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
   collectCoverageFrom: [
@@ -19,18 +26,4 @@ module.exports = {
     '!resources/js/ssr.tsx',
     '!resources/js/app.tsx'
   ],
-  globals: {
-    'ts-jest': {
-      tsconfig: {
-        jsx: 'react',
-        esModuleInterop: true,
-        allowSyntheticDefaultImports: true,
-      },
-    },
-    'import.meta': {
-      env: {
-        VITE_ASSET_URL: 'https://cdn.example.com',
-      },
-    },
-  },
 };

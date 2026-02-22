@@ -1,5 +1,7 @@
-import { render, screen, waitFor } from '@testing-library/react';
+import { act, render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { jest } from '@jest/globals';
+import { getProjectUrl } from '@/env';
 import Carousel from '../carousel';
 
 // Mock import.meta.env
@@ -20,7 +22,9 @@ describe('Carousel', () => {
     });
 
     afterEach(() => {
-        jest.runOnlyPendingTimers();
+        act(() => {
+            jest.runOnlyPendingTimers();
+        });
         jest.useRealTimers();
     });
 
@@ -116,7 +120,9 @@ describe('Carousel', () => {
         expect(indicators[0]).toHaveClass('bg-white');
 
         // Advance 5 seconds
-        jest.advanceTimersByTime(5000);
+        act(() => {
+            jest.advanceTimersByTime(5000);
+        });
 
         await waitFor(() => {
             const updatedIndicators = screen.getAllByRole('button').filter((btn) => btn.className.includes('h-3 w-3 rounded-full'));
@@ -128,9 +134,11 @@ describe('Carousel', () => {
         render(<Carousel />);
 
         // Advance through all slides
-        jest.advanceTimersByTime(5000); // Slide 2
-        jest.advanceTimersByTime(5000); // Slide 3
-        jest.advanceTimersByTime(5000); // Back to slide 1
+        act(() => {
+            jest.advanceTimersByTime(5000); // Slide 2
+            jest.advanceTimersByTime(5000); // Slide 3
+            jest.advanceTimersByTime(5000); // Back to slide 1
+        });
 
         await waitFor(() => {
             const indicators = screen.getAllByRole('button').filter((btn) => btn.className.includes('h-3 w-3 rounded-full'));
@@ -146,7 +154,7 @@ describe('Carousel', () => {
 
         expect(links[0].closest('a')).toHaveAttribute('href', 'https://instagram.com/graveyardjokes');
         expect(links[1].closest('a')).toHaveAttribute('href', '/contact');
-        expect(links[2].closest('a')).toHaveAttribute('href', '/portfolio');
+        expect(links[2].closest('a')).toHaveAttribute('href', getProjectUrl('portfolio'));
     });
 
     it('opens external links in new tab', () => {

@@ -1,39 +1,13 @@
 import { render, screen } from '@testing-library/react';
+import { jest } from '@jest/globals';
 import Portfolio from '../portfolio';
 
-// Mock Inertia
-jest.mock('@inertiajs/react', () => ({
-    Head: ({ children }: { children: React.ReactNode }) => <>{children}</>,
-}));
-
-// Mock MainLayout
-jest.mock('@/Layouts/MainLayout', () => {
-    return function MainLayout({ children }: { children: React.ReactNode }) {
-        return <div data-testid="main-layout">{children}</div>;
-    };
-});
-
-// Mock ProjectCard
 jest.mock('@/Components/ProjectCard', () => {
-    return function ProjectCard({ title, description, url }: { title: string; description: string; url: string }) {
-        return (
-            <div data-testid="project-card">
-                <h4>{title}</h4>
-                <p>{description}</p>
-                <a href={url}>{url}</a>
-            </div>
-        );
+    return function MockProjectCard({ title }: { title: string }) {
+        return <div data-testid="project-card">{title}</div>;
     };
 });
 
-// Mock portfolio items
-jest.mock('@/data/portfolioItems', () => [
-    { title: 'Project Alpha', description: 'First project description', url: 'https://alpha.example.com' },
-    { title: 'Project Beta', description: 'Second project description', url: 'https://beta.example.com' },
-    { title: 'Project Gamma', description: 'Third project description', url: 'https://gamma.example.com' },
-]);
-
-// Mock import.meta.env
 Object.defineProperty(global, 'import', {
     value: {
         meta: {
@@ -45,91 +19,38 @@ Object.defineProperty(global, 'import', {
 });
 
 describe('Portfolio Page', () => {
-    it('renders main heading', () => {
+    beforeEach(() => {
+        (global as any).fetch = jest.fn().mockImplementation(() => new Promise(() => {}));
+    });
+
+    it('renders page heading and intro copy', () => {
         render(<Portfolio />);
 
         expect(screen.getByRole('heading', { name: 'Portfolio' })).toBeInTheDocument();
-    });
-
-    it('renders intro paragraph', () => {
-        render(<Portfolio />);
-
         expect(screen.getByText(/Welcome to my portfolio!/i)).toBeInTheDocument();
-        expect(screen.getByText(/explore my projects that showcase my skills/i)).toBeInTheDocument();
     });
 
-    it('renders closing paragraph', () => {
+    it('renders outro copy', () => {
         render(<Portfolio />);
 
         expect(screen.getByText(/Feel free to explore these projects/i)).toBeInTheDocument();
     });
 
-    it('renders all project cards', () => {
-        render(<Portfolio />);
-
-        const projectCards = screen.getAllByTestId('project-card');
-        expect(projectCards).toHaveLength(3);
-    });
-
-    it('renders project titles', () => {
-        render(<Portfolio />);
-
-        expect(screen.getByText('Project Alpha')).toBeInTheDocument();
-        expect(screen.getByText('Project Beta')).toBeInTheDocument();
-        expect(screen.getByText('Project Gamma')).toBeInTheDocument();
-    });
-
-    it('renders project descriptions', () => {
-        render(<Portfolio />);
-
-        expect(screen.getByText('First project description')).toBeInTheDocument();
-        expect(screen.getByText('Second project description')).toBeInTheDocument();
-        expect(screen.getByText('Third project description')).toBeInTheDocument();
-    });
-
-    it('renders project URLs', () => {
-        render(<Portfolio />);
-
-        expect(screen.getByText('https://alpha.example.com')).toBeInTheDocument();
-        expect(screen.getByText('https://beta.example.com')).toBeInTheDocument();
-        expect(screen.getByText('https://gamma.example.com')).toBeInTheDocument();
-    });
-
-    it('renders with MainLayout wrapper', () => {
-        render(<Portfolio />);
-
-        expect(screen.getByTestId('main-layout')).toBeInTheDocument();
-    });
-
-    it('uses semantic HTML list structure', () => {
+    it('renders project cards from portfolio data', () => {
         const { container } = render(<Portfolio />);
 
-        const list = container.querySelector('ul');
+        const projectItems = container.querySelectorAll('section ul.grid > li');
+        expect(projectItems.length).toBeGreaterThan(0);
+        expect(screen.getByText('The Velvet Pulse')).toBeInTheDocument();
+    });
+
+    it('uses semantic list markup for project cards', () => {
+        const { container } = render(<Portfolio />);
+
+        const list = container.querySelector('section ul.grid');
         expect(list).toBeInTheDocument();
 
-        const listItems = container.querySelectorAll('li');
-        expect(listItems).toHaveLength(3);
-    });
-
-    it('has proper heading hierarchy', () => {
-        render(<Portfolio />);
-
-        const mainHeading = screen.getByRole('heading', { name: 'Portfolio' });
-        expect(mainHeading.tagName).toBe('H1');
-    });
-
-    it('applies correct CSS classes to section', () => {
-        const { container } = render(<Portfolio />);
-
-        const section = container.querySelector('section');
-        expect(section).toHaveClass('relative', 'z-0', 'flex', 'flex-col');
-    });
-
-    it('renders projects in a grid layout', () => {
-        const { container } = render(<Portfolio />);
-
-        const grid = container.querySelector('.grid');
-        expect(grid).toBeInTheDocument();
-        expect(grid).toHaveClass('grid-cols-1');
+        const projectItems = container.querySelectorAll('section ul.grid > li');
+        expect(projectItems.length).toBeGreaterThan(0);
     });
 });

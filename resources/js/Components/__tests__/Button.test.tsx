@@ -1,5 +1,6 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import React from 'react';
+import { jest } from '@jest/globals';
 
 // Simple Button component for testing
 interface ButtonProps {

@@ -2,7 +2,15 @@ import { Link, usePage } from '@inertiajs/react';
 import { getAuthSystemUrl, getLoginUrl, getProjectUrl } from '../env';
 
 export default function Menu() {
-    const { auth } = usePage().props as { auth?: { user?: { id: number; name: string; email: string } } };
+    let auth: { user?: { id: number; name: string; email: string } } | undefined;
+
+    try {
+        const page = usePage().props as { auth?: { user?: { id: number; name: string; email: string } } };
+        auth = page.auth;
+    } catch {
+        auth = undefined;
+    }
+
     const isAuthenticated = !!auth?.user;
 
     return (

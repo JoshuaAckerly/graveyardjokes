@@ -1,6 +1,8 @@
+import InertiaHead from '@/Components/InertiaHead';
 import MainLayout from '@/Layouts/MainLayout';
-import { Head, router } from '@inertiajs/react';
+import { router } from '@inertiajs/react';
 import { ChangeEvent, FormEvent, useState } from 'react';
+import { getEnvVar } from '../env';
 
 type FormValues = {
     first_name: string;
@@ -17,11 +19,11 @@ type Platform = {
 };
 
 export default function ContactPricing() {
-    const cdn = import.meta.env.VITE_ASSET_URL;
+    const cdn = getEnvVar('VITE_ASSET_URL');
 
     // Allow overriding Snapchat images via env for easy changes without editing source
-    const snapchatImg = import.meta.env.VITE_SNAPCHAT_IMAGE_URL ?? `https://cdn.simpleicons.org/snapchat/000000`;
-    const snapcodeImg = import.meta.env.VITE_SNAPCODE_IMAGE_URL ?? `${cdn}/images/snapcode.webp`;
+    const snapchatImg = getEnvVar('VITE_SNAPCHAT_IMAGE_URL', `https://cdn.simpleicons.org/snapchat/000000`);
+    const snapcodeImg = getEnvVar('VITE_SNAPCODE_IMAGE_URL', `${cdn}/images/snapcode.webp`);
 
     // Contact form state
     const [values, setValues] = useState<FormValues>({
@@ -92,7 +94,7 @@ export default function ContactPricing() {
 
     return (
         <>
-            <Head>
+            <InertiaHead>
                 <title>Contact | Graveyard Jokes Studios</title>
                 <meta name="description" content="Contact Graveyard Jokes Studios for custom websites. Get in touch to discuss your project." />
                 <meta name="keywords" content="contact, custom websites, web design, web development, musicians, artists, creatives" />
@@ -137,7 +139,7 @@ export default function ContactPricing() {
     }
     `}
                 </script>
-            </Head>
+            </InertiaHead>
 
             <MainLayout>
                 {/* Contact Section */}

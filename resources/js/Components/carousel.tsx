@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { getProjectUrl } from '../env';
+import { getEnvVar, getProjectUrl } from '../env';
 
 interface Slide {
     image: string;
@@ -30,7 +30,7 @@ const carouselSlides: Slide[] = [
 ];
 
 const Carousel: React.FC = () => {
-    const cdn: string = import.meta.env.VITE_ASSET_URL as string;
+    const cdn: string = getEnvVar('VITE_ASSET_URL');
 
     const [currentIndex, setCurrentIndex] = useState<number>(0);
     const totalSlides = carouselSlides.length;

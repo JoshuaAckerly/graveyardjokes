@@ -1,4 +1,5 @@
 import React from 'react';
+import { getEnvVar } from '../env';
 
 interface ApplicationLogoProps {
     logoSize?: string;
@@ -6,7 +7,7 @@ interface ApplicationLogoProps {
 }
 
 const ApplicationLogo: React.FC<ApplicationLogoProps> = ({ logoSize = 'h-24 w-24', containerClasses = '' }) => {
-    const cdn = import.meta.env.VITE_ASSET_URL as string;
+    const cdn = getEnvVar('VITE_ASSET_URL');
 
     return (
         <div className={`flex ${containerClasses}`}>

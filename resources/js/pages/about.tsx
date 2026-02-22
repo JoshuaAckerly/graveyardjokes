@@ -1,11 +1,11 @@
 // ...existing code...
+import InertiaHead from '@/Components/InertiaHead';
 import MainLayout from '@/Layouts/MainLayout';
-import { Head } from '@inertiajs/react';
 import { motion } from 'framer-motion';
-import { getProjectUrl } from '../env';
+import { getEnvVar, getProjectUrl } from '../env';
 
 export default function About() {
-    const cdn = import.meta.env.VITE_ASSET_URL || '';
+    const cdn = getEnvVar('VITE_ASSET_URL');
 
     const skills = [
         { name: 'PHP', percentage: 90, color: 'bg-green-500' },
@@ -21,7 +21,7 @@ export default function About() {
     const projectUrl = getProjectUrl('graveyardjokes');
     return (
         <>
-            <Head>
+            <InertiaHead>
                 <title>About Joshua Ackerly | Graveyard Jokes Studios</title>
                 <meta
                     name="description"
@@ -74,7 +74,7 @@ export default function About() {
 }
     `}
                 </script>
-            </Head>
+            </InertiaHead>
 
             <MainLayout>
                 <motion.main

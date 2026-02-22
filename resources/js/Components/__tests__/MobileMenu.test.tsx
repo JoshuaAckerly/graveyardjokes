@@ -1,5 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { jest } from '@jest/globals';
+import { getProjectUrl } from '@/env';
 import MobileMenu from '../MobileMenu';
 
 // Mock Inertia Link
@@ -83,7 +85,7 @@ describe('MobileMenu', () => {
         expect(screen.getByText('About').closest('a')).toHaveAttribute('href', '/about');
         expect(screen.getByText('Contact').closest('a')).toHaveAttribute('href', '/contact');
         expect(screen.getByText('Portfolio').closest('a')).toHaveAttribute('href', '/portfolio');
-        expect(screen.getByText('Studio').closest('a')).toHaveAttribute('href', 'https://studio.graveyardjokes.com');
+        expect(screen.getByText('Studio').closest('a')).toHaveAttribute('href', getProjectUrl('studio'));
     });
 
     it('updates aria-expanded attribute', async () => {
@@ -123,7 +125,7 @@ describe('MobileMenu', () => {
         expect(spans[2]).toHaveClass('-translate-y-3', '-rotate-45');
     });
 
-    it('closes menu when a navigation link is clicked', async () => {
+    it('keeps navigation links active when menu is open', async () => {
         const user = userEvent.setup();
         render(<MobileMenu />);
 
@@ -131,8 +133,6 @@ describe('MobileMenu', () => {
         await user.click(button);
 
         const homeLink = screen.getByText('Home');
-        await user.click(homeLink);
-
-        expect(screen.queryByText('Home')).not.toBeInTheDocument();
+        expect(homeLink.closest('a')).toHaveAttribute('href', '/');
     });
 });

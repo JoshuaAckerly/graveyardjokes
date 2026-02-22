@@ -1,5 +1,7 @@
 import { render, screen } from '@testing-library/react';
+import { jest } from '@jest/globals';
 import Menu from '../Menu';
+import { getProjectUrl } from '@/env';
 
 // Mock Inertia Link
 jest.mock('@inertiajs/react', () => ({
@@ -27,7 +29,7 @@ describe('Menu', () => {
         expect(screen.getByText('About').closest('a')).toHaveAttribute('href', '/about');
         expect(screen.getByText('Contact').closest('a')).toHaveAttribute('href', '/contact');
         expect(screen.getByText('Portfolio').closest('a')).toHaveAttribute('href', '/portfolio');
-        expect(screen.getByText('Studio').closest('a')).toHaveAttribute('href', 'https://studio.graveyardjokes.com');
+        expect(screen.getByText('Studio').closest('a')).toHaveAttribute('href', getProjectUrl('studio'));
     });
 
     it('applies hover styles to links', () => {

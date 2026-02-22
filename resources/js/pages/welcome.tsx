@@ -1,15 +1,16 @@
 import ApplicationLogo from '@/Components/applicationLogo';
 import Carousel from '@/Components/carousel';
+import InertiaHead from '@/Components/InertiaHead';
 import ProjectCard from '@/Components/ProjectCard';
 import portfolioItems from '@/data/portfolioItems';
 import MainLayout from '@/Layouts/MainLayout';
-import { Head, router } from '@inertiajs/react';
+import { router } from '@inertiajs/react';
 import { motion } from 'framer-motion';
 import { JSX, useEffect, useState } from 'react';
-import { getProjectUrl } from '../env';
+import { getEnvVar, getProjectUrl } from '../env';
 
 export default function Home(): JSX.Element {
-    const cdn = import.meta.env.VITE_ASSET_URL;
+    const cdn = getEnvVar('VITE_ASSET_URL');
 
     const handleClick = (): void => {
         router.visit(getProjectUrl('graveyardjokes'));
@@ -41,7 +42,7 @@ export default function Home(): JSX.Element {
     return (
         <MainLayout>
             <>
-                <Head>
+                <InertiaHead>
                     <title>Graveyard Jokes Studios | Custom Websites for Musicians, Artists, and Creatives</title>
                     <meta
                         name="description"
@@ -91,7 +92,7 @@ export default function Home(): JSX.Element {
     }
     `}
                     </script>
-                </Head>
+                </InertiaHead>
 
                 <a href="/" className="sr-only">
                     Home Page

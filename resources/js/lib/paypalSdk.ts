@@ -78,7 +78,9 @@ export function loadPayPalSdk(options: LoadPayPalSdkOptions = {}): Promise<PayPa
     }
 
     paypalSdkPromise = new Promise<PayPalSDK>((resolve, reject) => {
-        let timeoutId: number | undefined;
+        const timeoutId = window.setTimeout(() => {
+            finishWithError(new Error(`PayPal SDK failed to load within ${timeoutMs / 1000} seconds`));
+        }, timeoutMs);
 
         const finishWithError = (error: Error) => {
             if (timeoutId) {
@@ -100,10 +102,6 @@ export function loadPayPalSdk(options: LoadPayPalSdkOptions = {}): Promise<PayPa
 
             resolve(window.paypal);
         };
-
-        timeoutId = window.setTimeout(() => {
-            finishWithError(new Error(`PayPal SDK failed to load within ${timeoutMs / 1000} seconds`));
-        }, timeoutMs);
 
         const existingScript = document.querySelector<HTMLScriptElement>('script[data-paypal-sdk="true"]');
 
