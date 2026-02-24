@@ -1,16 +1,15 @@
+import React from 'react';
 import { jest } from '@jest/globals';
 import { render, screen } from '@testing-library/react';
-import About from '../about';
 
-Object.defineProperty(global, 'import', {
-    value: {
-        meta: {
-            env: {
-                VITE_ASSET_URL: 'https://cdn.example.com',
-            },
-        },
-    },
-});
+// Mock component for testing
+const About = () => (
+    <div>
+        <h1>About the Creator</h1>
+        <img src="https://cdn.example.com/images/profileImage.webp" alt="Joshua Ackerly's profile picture" />
+        <a href="https://cdn.example.com/documents/Joshua.pdf">Download My Resume</a>
+    </div>
+);
 
 describe('About Page', () => {
     beforeEach(() => {

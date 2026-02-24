@@ -1,16 +1,19 @@
 {
   "testEnvironment": "jsdom",
-  "setupFilesAfterEnv": ["<rootDir>/resources/js/__tests__/setup.ts"],
+  "injectGlobals": true,
+  "setupFilesAfterEnv": ["<rootDir>/resources/js/__tests__/setup.tsx"],
   "moduleNameMapper": {
     "^@/(.*)$": "<rootDir>/resources/js/$1"
   },
-  "testMatch": [
-    "<rootDir>/resources/js/**/__tests__/**/*.{js,jsx,ts,tsx}",
-    "<rootDir>/resources/js/**/*.{test,spec}.{js,jsx,ts,tsx}"
-  ],
+  "preset": "ts-jest/presets/default-esm",
   "extensionsToTreatAsEsm": [".ts", ".tsx"],
-  "transform": {
-    "^.+\\.(ts|tsx)$": "ts-jest"
-  },
-  "moduleFileExtensions": ["ts", "tsx", "js", "jsx"]
+  "moduleFileExtensions": ["ts", "tsx", "js", "jsx"],
+  "transformIgnorePatterns": [
+    "node_modules/(?!(@inertiajs/react|@inertiajs/core)/)"
+  ],
+  "globals": {
+    "ts-jest": {
+      "useESM": true
+    }
+  }
 }

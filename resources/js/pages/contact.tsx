@@ -1,7 +1,7 @@
 import InertiaHead from '@/Components/InertiaHead';
 import MainLayout from '@/Layouts/MainLayout';
 import { router } from '@inertiajs/react';
-import { ChangeEvent, FormEvent, useState } from 'react';
+import React, { ChangeEvent, FormEvent, useState } from 'react';
 import { getEnvVar } from '../env';
 
 type FormValues = {

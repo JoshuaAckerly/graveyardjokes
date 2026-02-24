@@ -1,5 +1,19 @@
 import { jest } from '@jest/globals';
+import React from 'react';
 import '@testing-library/jest-dom';
+
+// Mock env
+jest.mock('../env', () => ({
+    getEnvVar: jest.fn((key: string, defaultValue?: string) => {
+        const env = {
+            VITE_ASSET_URL: 'https://cdn.example.com',
+            VITE_SNAPCHAT_IMAGE_URL: 'https://example.com/snapchat.png',
+            VITE_SNAPCODE_IMAGE_URL: 'https://example.com/snapcode.png',
+        };
+        return env[key as keyof typeof env] || defaultValue || '';
+    }),
+    getProjectUrl: jest.fn(() => 'https://example.com'),
+}));
 
 // Mock Inertia
 (global as any).route = jest.fn(() => '/');
@@ -26,6 +40,18 @@ jest.mock('@/Layouts/MainLayout', () => ({
 
 jest.mock('@/Components/InertiaHead', () => ({
     default: ({ children }: { children: any }) => children,
+}));
+
+jest.mock('framer-motion', () => ({
+    motion: {
+        div: ({ children, ...props }: any) => <div {...props}>{children}</div>,
+    },
+}));
+
+jest.mock('lucide-react', () => ({
+    Mail: () => <div>Mail</div>,
+    Phone: () => <div>Phone</div>,
+    MapPin: () => <div>MapPin</div>,
 }));
 Object.defineProperty(window, 'matchMedia', {
     writable: true,
@@ -58,4 +84,14 @@ Object.defineProperty(globalThis, 'ResizeObserver', {
         unobserve: jest.fn(),
         disconnect: jest.fn(),
     })),
+});
+
+Object.defineProperty(global, 'import', {
+    value: {
+        meta: {
+            env: {
+                VITE_ASSET_URL: 'https://cdn.example.com',
+            },
+        },
+    },
 });
