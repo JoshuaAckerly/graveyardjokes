@@ -60,9 +60,9 @@ If running all projects together from the polyrepo root:
 
 ```bash
 # From /home/joshua/Documents
-./manage-all-projects.sh start    # Start all projects
-./manage-all-projects.sh status   # Check status
-./manage-all-projects.sh stop     # Stop all projects
+./scripts/manage-all-projects.sh start    # Start all projects
+./scripts/manage-all-projects.sh status   # Check status
+./scripts/manage-all-projects.sh stop     # Stop all projects
 ```
 
 ## Port Configuration

@@ -206,7 +206,7 @@ This is a **TEST ENVIRONMENT**. For production:
 - `.gitignore` - Updated with deployment exclusions
 - `deploy-test.sh` - Deployment script (on server)
 - `setup-test-server.sh` - Initial server setup
-- `TEST_DEPLOYMENT.md` - This guide
+- `docs/standards/TEST_DEPLOYMENT.md` - This guide
 
 ## 🎯 Next Steps
 

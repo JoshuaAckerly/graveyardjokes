@@ -433,11 +433,11 @@ This project uses a centralized auth-system (see polyrepo) for all authenticatio
 
 ## Test Server Setup
 
-For unified test server deployment, see [../TEST_DEPLOYMENT.md](../TEST_DEPLOYMENT.md) for a complete guide.
+For unified test server deployment, see [../docs/standards/TEST_DEPLOYMENT.md](../docs/standards/TEST_DEPLOYMENT.md) for a complete guide.
 
 **Quick summary:**
 - Prepare Ubuntu VM, configure DNS for all subdomains
 - Use `setup-all-test-servers.sh` to install dependencies, clone repos, set up .env, run migrations, build assets, and configure Nginx/SSL
 - Visit each subdomain to verify
 
-For full details and troubleshooting, always refer to the main TEST_DEPLOYMENT.md.
+For full details and troubleshooting, always refer to the main ../docs/standards/TEST_DEPLOYMENT.md.
