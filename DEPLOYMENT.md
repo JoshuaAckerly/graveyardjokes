@@ -10,6 +10,7 @@ This guide covers deploying the Graveyard Jokes application using Hypervisor, ou
 - [Development Server](#development-server)
 - [Test Server](#test-server)
 - [Production Deployment](#production-deployment)
+- [Portfolio Batched Deployment](#portfolio-batched-deployment)
 - [Server Configuration](#server-configuration)
 - [Environment Configuration](#environment-configuration)
 - [SSL/HTTPS Setup](#sslhttps-setup)
@@ -105,6 +106,7 @@ The project includes automated deployment scripts:
 - `deploy-production.sh` - Production deployment to AWS EC2
 - `deploy-test.sh` - Test server deployment to Ubuntu VM
 - `setup-test-server.sh` - Initial test server setup
+- `scripts/deploy-all-batched.sh` - Portfolio-wide production batched deployment with post-deploy verification hook
 
 ### 1. Initial Server Setup
 
@@ -319,6 +321,29 @@ Production runs on AWS EC2 with high availability.
    cd /var/www/graveyardjokes
    ./deploy-production.sh
    ```
+
+## 📦 Portfolio Batched Deployment
+
+Use this from the polyrepo root when deploying all portfolio sites in controlled batches:
+
+```bash
+cd /var/www
+bash scripts/deploy-all-batched.sh
+```
+
+By default, this runs a post-deploy verification hook on the production server:
+
+- `bash scripts/manage-all-projects.sh update`
+- Sequence: `git-pull` → `build` → `prod-health`
+
+For emergency deploys where you must bypass verification:
+
+```bash
+cd /var/www
+bash scripts/deploy-all-batched.sh --skip-verify
+```
+
+Only use `--skip-verify` intentionally and follow up with a manual health check immediately.
 
 ### Production Features
 
