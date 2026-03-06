@@ -28,6 +28,12 @@ export interface SharedData {
     auth: Auth;
     ziggy: Config & { location: string };
     sidebarOpen: boolean;
+    websiteIntake?: {
+        completed: boolean;
+        submissionId: number | null;
+        selectedPackage: string | null;
+        submittedAt: string | null;
+    };
     [key: string]: unknown;
 }
 

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\OgImageController;
+use App\Http\Controllers\WebsiteIntakeController;
 use App\Modules\Contact\Controllers\ContactController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -57,6 +58,9 @@ Route::get('/services/professional', function () {
 Route::get('/services/premium', function () {
     return Inertia::render('services/premium');
 })->name('services.premium');
+
+Route::get('/services/intake', [WebsiteIntakeController::class, 'create'])->name('services.intake.create');
+Route::post('/services/intake', [WebsiteIntakeController::class, 'store'])->name('services.intake.store');
 
 // API endpoint to fetch and cache Open Graph images for external sites
 Route::get('/api/fetch-og-image', [OgImageController::class, 'fetch'])->name('api.fetch-og-image');

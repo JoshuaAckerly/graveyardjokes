@@ -1,4 +1,4 @@
-import PayPalCheckoutButton from '@/Components/PayPalCheckoutButton';
+import PackagePaymentGate from '@/Components/PackagePaymentGate';
 import MainLayout from '@/Layouts/MainLayout';
 import { Head, Link } from '@inertiajs/react';
 import { motion } from 'framer-motion';
@@ -52,11 +52,10 @@ export default function ProfessionalPackage() {
                         <div className="border-t border-gray-700 pt-8">
                             <h2 className="mb-4 text-2xl font-bold text-white">Ready to Get Started?</h2>
                             <p className="mb-6 text-gray-300">
-                                Click the button below to proceed with payment. After payment, we'll contact you within 24 hours to discuss your
-                                project requirements.
+                                Complete the short project questionnaire first. Once submitted, payment unlocks instantly for this package.
                             </p>
                             <div className="mb-6" style={{ minHeight: '45px' }}>
-                                <PayPalCheckoutButton amount={349} item="Professional Package" />
+                                <PackagePaymentGate amount={349} item="Professional Package" packageSlug="professional" />
                             </div>
                             <p className="text-sm text-gray-400">
                                 Have questions?{' '}

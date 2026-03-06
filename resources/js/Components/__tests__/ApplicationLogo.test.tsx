@@ -1,17 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import ApplicationLogo from '../applicationLogo';
 
-// Mock import.meta.env
-Object.defineProperty(global, 'import', {
-    value: {
-        meta: {
-            env: {
-                VITE_ASSET_URL: 'https://cdn.example.com',
-            },
-        },
-    },
-});
-
 describe('ApplicationLogo', () => {
     it('renders logo image with correct src', () => {
         render(<ApplicationLogo />);

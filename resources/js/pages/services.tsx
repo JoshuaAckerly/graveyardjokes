@@ -1,4 +1,4 @@
-import PayPalCheckoutButton from '@/Components/PayPalCheckoutButton';
+import PackagePaymentGate, { type PackageSlug } from '@/Components/PackagePaymentGate';
 import MainLayout from '@/Layouts/MainLayout';
 import { Head, Link } from '@inertiajs/react';
 import { motion } from 'framer-motion';
@@ -8,8 +8,17 @@ import { getProjectUrl } from '../env';
 export default function Services() {
     const cdn = import.meta.env.VITE_ASSET_URL || '';
 
-    const packages = [
+    const packages: Array<{
+        slug: PackageSlug;
+        title: string;
+        price: number;
+        description: string;
+        features: string[];
+        link: string;
+        popular: boolean;
+    }> = [
         {
+            slug: 'starter',
             title: 'Starter Package',
             price: 199,
             description: 'Perfect for startups launching their first website',
@@ -25,6 +34,7 @@ export default function Services() {
             popular: false,
         },
         {
+            slug: 'professional',
             title: 'Professional Package',
             price: 349,
             description: 'Ideal for growing startups needing more features',
@@ -42,6 +52,7 @@ export default function Services() {
             popular: true,
         },
         {
+            slug: 'premium',
             title: 'Premium Package',
             price: 499,
             description: 'Full-featured solution for established startups',
@@ -124,6 +135,14 @@ export default function Services() {
                             Choose the package that fits your needs. All packages include responsive design, modern tech stack, and ongoing support
                             tailored for startups.
                         </motion.p>
+                        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3, duration: 0.6 }}>
+                            <Link
+                                href="/services/intake"
+                                className="mt-4 inline-flex rounded-md border border-(--primary) bg-black/40 px-4 py-2 text-sm font-semibold text-white transition hover:bg-(--primary)"
+                            >
+                                Start Project Questionnaire First
+                            </Link>
+                        </motion.div>
                     </div>
 
                     {/* Packages Grid */}
@@ -173,7 +192,7 @@ export default function Services() {
                                         >
                                             View Details
                                         </Link>
-                                        <PayPalCheckoutButton amount={pkg.price} item={pkg.title} />
+                                        <PackagePaymentGate amount={pkg.price} item={pkg.title} packageSlug={pkg.slug} />
                                     </div>
                                 </motion.div>
                             ))}

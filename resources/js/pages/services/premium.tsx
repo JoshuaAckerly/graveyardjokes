@@ -1,4 +1,4 @@
-import PayPalCheckoutButton from '@/Components/PayPalCheckoutButton';
+import PackagePaymentGate from '@/Components/PackagePaymentGate';
 import MainLayout from '@/Layouts/MainLayout';
 import { Head, Link } from '@inertiajs/react';
 import { motion } from 'framer-motion';
@@ -139,11 +139,10 @@ export default function PremiumPackage() {
                         <div className="rounded-lg bg-black/50 p-6">
                             <h3 className="mb-4 text-xl font-semibold text-white">Ready to Get Started?</h3>
                             <p className="mb-6 text-white/80">
-                                This premium package includes everything you need for a professional online presence with advanced features and
-                                ongoing support.
+                                Complete the short project questionnaire first. Once submitted, payment unlocks instantly for this package.
                             </p>
                             <div className="min-h-[50px]">
-                                <PayPalCheckoutButton amount={499} item="Premium Package" />
+                                <PackagePaymentGate amount={499} item="Premium Package" packageSlug="premium" />
                             </div>
                         </div>
                     </motion.div>

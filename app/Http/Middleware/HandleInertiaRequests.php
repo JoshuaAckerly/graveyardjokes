@@ -49,6 +49,26 @@ class HandleInertiaRequests extends Middleware
         $message = isset($parts[0]) ? (string) $parts[0] : '';
         $author = isset($parts[1]) ? (string) $parts[1] : '';
 
+        $intakeSession = $request->session()->get('website_intake', []);
+        if (! is_array($intakeSession)) {
+            $intakeSession = [];
+        }
+
+        $selectedPackage = $intakeSession['selected_package'] ?? null;
+        if (! is_string($selectedPackage) || $selectedPackage === '') {
+            $selectedPackage = null;
+        }
+
+        $submittedAt = $intakeSession['submitted_at'] ?? null;
+        if (! is_string($submittedAt) || $submittedAt === '') {
+            $submittedAt = null;
+        }
+
+        $submissionId = $intakeSession['submission_id'] ?? null;
+        if (! is_int($submissionId) && ! (is_string($submissionId) && ctype_digit($submissionId))) {
+            $submissionId = null;
+        }
+
         return [
             ...parent::share($request),
             'name' => config('app.name'),
@@ -61,6 +81,12 @@ class HandleInertiaRequests extends Middleware
                 'location' => $request->url(),
             ],
             'sidebarOpen' => ! $request->hasCookie('sidebar_state') || $request->cookie('sidebar_state') === 'true',
+            'websiteIntake' => [
+                'completed' => (bool) ($intakeSession['completed'] ?? false),
+                'submissionId' => $submissionId !== null ? (int) $submissionId : null,
+                'selectedPackage' => $selectedPackage,
+                'submittedAt' => $submittedAt,
+            ],
         ];
     }
 }

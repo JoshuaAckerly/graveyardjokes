@@ -13,6 +13,8 @@ jest.mock('../env', () => ({
         return env[key as keyof typeof env] || defaultValue || '';
     }),
     getProjectUrl: jest.fn(() => 'https://example.com'),
+    getAuthSystemUrl: jest.fn(() => 'https://auth-system.example.com'),
+    getLoginUrl: jest.fn((subdomain: string) => `https://auth-system.example.com/login?return_url=https://${subdomain}.example.com`),
 }));
 
 // Mock Inertia
@@ -48,11 +50,26 @@ jest.mock('framer-motion', () => ({
     },
 }));
 
-jest.mock('lucide-react', () => ({
-    Mail: () => <div>Mail</div>,
-    Phone: () => <div>Phone</div>,
-    MapPin: () => <div>MapPin</div>,
-}));
+jest.mock('lucide-react', () => {
+    const MockIcon = ({ children, ...props }: any) => (
+        <svg data-testid="lucide-icon" {...props}>
+            {children}
+        </svg>
+    );
+
+    return new Proxy(
+        { __esModule: true },
+        {
+            get: (_target, property: string) => {
+                if (property === '__esModule') {
+                    return true;
+                }
+
+                return MockIcon;
+            },
+        },
+    );
+});
 Object.defineProperty(window, 'matchMedia', {
     writable: true,
     value: jest.fn().mockImplementation((query) => ({
@@ -87,6 +104,8 @@ Object.defineProperty(globalThis, 'ResizeObserver', {
 });
 
 Object.defineProperty(global, 'import', {
+    configurable: true,
+    writable: true,
     value: {
         meta: {
             env: {

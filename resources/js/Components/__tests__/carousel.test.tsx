@@ -4,18 +4,6 @@ import { act, render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import Carousel from '../carousel';
 
-// Mock import.meta.env
-Object.defineProperty(global, 'import', {
-    value: {
-        meta: {
-            env: {
-                VITE_ASSET_URL: 'https://cdn.example.com',
-            },
-        },
-    },
-    writable: true,
-});
-
 describe('Carousel', () => {
     beforeEach(() => {
         jest.useFakeTimers();

@@ -54,3 +54,6 @@ Thumbs.db
 # Modified files to ignore
 database/factories/UserFactory.php
 resources/js/data/portfolioItems.json
+
+# Test coverage output
+/coverage
