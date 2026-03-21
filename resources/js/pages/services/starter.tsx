@@ -22,7 +22,7 @@ export default function StarterPackage() {
                 <title>Starter Package - $199 | Graveyard Jokes Studios</title>
                 <meta
                     name="description"
-                    content="Perfect for startups launching their first website. Single-page responsive website with contact form and social media integration."
+                    content="Starter plan for new businesses: responsive web design, core development features, and a clean, launch-ready website at an affordable monthly cost."
                 />
                 <meta
                     name="keywords"
@@ -32,8 +32,8 @@ export default function StarterPackage() {
                 {/* Open Graph */}
                 <meta property="og:title" content="Starter Package - $199 | Graveyard Jokes Studios" />
                 <meta
-                    name="og:description"
-                    content="Perfect for startups launching their first website. Single-page responsive website with contact form and social media integration."
+                    property="og:description"
+                    content="Starter plan for new businesses: responsive web design, core development features, and a clean, launch-ready website at an affordable monthly cost."
                 />
                 <meta property="og:image" content={`${cdn}/images/aboutBanner.webp`} />
                 <meta property="og:type" content="website" />
@@ -43,7 +43,7 @@ export default function StarterPackage() {
                 <meta name="twitter:title" content="Starter Package - $199 | Graveyard Jokes Studios" />
                 <meta
                     name="twitter:description"
-                    content="Perfect for startups launching their first website. Single-page responsive website with contact form and social media integration."
+                    content="Starter plan for new businesses: responsive web design, core development features, and a clean, launch-ready website at an affordable monthly cost."
                 />
                 <meta name="twitter:image" content={`${cdn}/images/aboutBanner.webp`} />
                 {/* Structured Data (JSON-LD) */}

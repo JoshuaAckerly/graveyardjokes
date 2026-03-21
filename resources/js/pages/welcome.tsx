@@ -46,7 +46,7 @@ export default function Home(): JSX.Element {
                     <title>Graveyard Jokes Studios | Custom Websites for Musicians, Artists, and Creatives</title>
                     <meta
                         name="description"
-                        content="Graveyard Jokes Studios builds custom websites for musicians, artists, and creatives — stand out online with tailored design and tech."
+                        content="GraveyardJokes is a web design and development company creating fast, modern websites that help businesses generate leads and grow online."
                     />
                     <meta
                         name="keywords"
@@ -61,7 +61,7 @@ export default function Home(): JSX.Element {
                     <meta property="og:title" content="Graveyard Jokes Studios | Custom Websites for Musicians, Artists, and Creatives" />
                     <meta
                         property="og:description"
-                        content="Graveyard Jokes Studios builds custom websites for musicians, artists, and creatives — stand out online with tailored design and tech."
+                        content="GraveyardJokes is a web design and development company creating fast, modern websites that help businesses generate leads and grow online."
                     />
                     <meta property="og:image" content={`${cdn}/images/AdobeStock_327183052.webp`} />
                     <meta property="og:type" content="website" />
@@ -72,7 +72,7 @@ export default function Home(): JSX.Element {
                     <meta name="twitter:title" content="Graveyard Jokes Studios | Custom Websites for Musicians, Artists, and Creatives" />
                     <meta
                         name="twitter:description"
-                        content="Graveyard Jokes Studios builds custom websites for musicians, artists, and creatives — stand out online with tailored design and tech."
+                        content="GraveyardJokes is a web design and development company creating fast, modern websites that help businesses generate leads and grow online."
                     />
                     <meta name="twitter:image" content={`${cdn}/images/AdobeStock_327183052.webp`} />
 

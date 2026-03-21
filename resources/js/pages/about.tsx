@@ -185,7 +185,7 @@ export default function About() {
                 <title>About Joshua Ackerly | Graveyard Jokes Studios</title>
                 <meta
                     name="description"
-                    content="Meet Joshua Ackerly, full-stack developer and founder of Graveyard Jokes Studios. Explore his story, skills, process, and platform ecosystem."
+                    content="Meet GraveyardJokes, a web design and development team focused on clean UX, reliable code, and websites built to convert visitors into customers."
                 />
                 <meta
                     name="keywords"
@@ -197,7 +197,7 @@ export default function About() {
                 <meta property="og:title" content="About Joshua Ackerly | Graveyard Jokes Studios" />
                 <meta
                     property="og:description"
-                    content="A deeper look at the founder, workflow, skills, and projects behind Graveyard Jokes Studios."
+                    content="Meet GraveyardJokes, a web design and development team focused on clean UX, reliable code, and websites built to convert visitors into customers."
                 />
                 <meta property="og:image" content={`${cdn}/images/aboutBanner.webp`} />
                 <meta property="og:type" content="website" />
@@ -207,7 +207,7 @@ export default function About() {
                 <meta name="twitter:title" content="About Joshua Ackerly | Graveyard Jokes Studios" />
                 <meta
                     name="twitter:description"
-                    content="A deeper look at the founder, workflow, skills, and projects behind Graveyard Jokes Studios."
+                    content="Meet GraveyardJokes, a web design and development team focused on clean UX, reliable code, and websites built to convert visitors into customers."
                 />
                 <meta name="twitter:image" content={`${cdn}/images/aboutBanner.webp`} />
 

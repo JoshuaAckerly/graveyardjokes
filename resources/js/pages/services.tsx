@@ -78,7 +78,7 @@ export default function Services() {
                 <title>Services & Pricing | Graveyard Jokes Studios</title>
                 <meta
                     name="description"
-                    content="Explore our web design and development packages. Custom solutions for startups and small businesses."
+                    content="Explore GraveyardJokes web design and development services, from custom websites and redesigns to SEO foundations, performance tuning, and support."
                 />
                 <meta name="keywords" content="web design packages, pricing, custom websites, startups, small businesses, web development services" />
                 <link rel="canonical" href={`${projectUrl}services`} />
@@ -87,7 +87,7 @@ export default function Services() {
                 <meta property="og:title" content="Services & Pricing | Graveyard Jokes Studios" />
                 <meta
                     name="og:description"
-                    content="Explore our web design and development packages. Custom solutions for startups and small businesses."
+                    content="Explore GraveyardJokes web design and development services, from custom websites and redesigns to SEO foundations, performance tuning, and support."
                 />
                 <meta property="og:image" content={`${cdn}/images/aboutBanner.webp`} />
                 <meta property="og:type" content="website" />
@@ -98,7 +98,7 @@ export default function Services() {
                 <meta name="twitter:title" content="Services & Pricing | Graveyard Jokes Studios" />
                 <meta
                     name="twitter:description"
-                    content="Explore our web design and development packages. Custom solutions for startups and small businesses."
+                    content="Explore GraveyardJokes web design and development services, from custom websites and redesigns to SEO foundations, performance tuning, and support."
                 />
                 <meta name="twitter:image" content={`${cdn}/images/aboutBanner.webp`} />
             </Head>

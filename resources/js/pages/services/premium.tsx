@@ -20,11 +20,12 @@ export default function PremiumPackage() {
 
     return (
         <>
+            // ...existing code...
             <Head>
                 <title>Premium Package - $499 | Graveyard Jokes Studios</title>
                 <meta
                     name="description"
-                    content="Full-featured solution for established startups. E-commerce, streaming, custom integrations, and premium support."
+                    content="Premium plan for established teams: full-service web design and development, priority support, advanced integrations, and ongoing strategic guidance."
                 />
                 <meta
                     name="keywords"
@@ -35,7 +36,7 @@ export default function PremiumPackage() {
                 <meta property="og:title" content="Premium Package - $499 | Graveyard Jokes Studios" />
                 <meta
                     name="og:description"
-                    content="Full-featured solution for established startups. E-commerce, streaming, custom integrations, and premium support."
+                    content="Premium plan for established teams: full-service web design and development, priority support, advanced integrations, and ongoing strategic guidance."
                 />
                 <meta property="og:image" content={`${cdn}/images/aboutBanner.webp`} />
                 <meta property="og:type" content="website" />
@@ -45,10 +46,10 @@ export default function PremiumPackage() {
                 <meta name="twitter:title" content="Premium Package - $499 | Graveyard Jokes Studios" />
                 <meta
                     name="twitter:description"
-                    content="Full-featured solution for established startups. E-commerce, streaming, custom integrations, and premium support."
+                    content="Premium plan for established teams: full-service web design and development, priority support, advanced integrations, and ongoing strategic guidance."
                 />
                 <meta name="twitter:image" content={`${cdn}/images/aboutBanner.webp`} />
-                {/* Structured Data (JSON-LD) */}
+
                 <script type="application/ld+json">
                     {`
 {
