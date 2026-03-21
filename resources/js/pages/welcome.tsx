@@ -357,7 +357,7 @@ export default function Home(): JSX.Element {
                             <h3 className="mb-6 text-left text-2xl font-semibold text-white">Selected Projects</h3>
                             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
                                 {portfolioItems.map((p) => (
-                                    <ProjectCard key={p.url} title={p.title} description={p.description} url={p.url} cdn={cdn} />
+                                    <ProjectCard key={p.url} title={p.title} description={p.description} url={p.url} cdn={cdn} featured={p.featured} />
                                 ))}
                             </div>
                             <div className="mt-6 text-left">

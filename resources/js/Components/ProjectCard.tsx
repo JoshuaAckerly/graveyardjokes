@@ -6,9 +6,10 @@ type Props = {
     description: string;
     url: string;
     cdn?: string | undefined;
+    featured?: boolean;
 };
 
-const ProjectCard: React.FC<Props> = ({ title, description, url, cdn }) => {
+const ProjectCard: React.FC<Props> = ({ title, description, url, cdn, featured }) => {
     const [imgSrc, setImgSrc] = useState<string | null>(null);
     const storageKey = `og:v2:${url}`;
 
@@ -61,8 +62,18 @@ const ProjectCard: React.FC<Props> = ({ title, description, url, cdn }) => {
             href={url}
             target="_blank"
             rel="noopener noreferrer"
-            className="group relative block overflow-hidden rounded-md bg-white/5 p-4 transition hover:scale-[1.01]"
+            className={`group relative block overflow-hidden rounded-md p-4 transition hover:scale-[1.01] ${
+                featured
+                    ? 'bg-white/5 ring-2 ring-[var(--color-accent)] shadow-[0_0_16px_rgba(var(--accent-rgb,168,85,247),0.25)]'
+                    : 'bg-white/5'
+            }`}
         >
+            {featured && (
+                <span className="absolute top-3 right-3 z-10 rounded-full bg-[var(--color-accent)] px-3 py-1 text-xs font-bold text-white shadow-md">
+                    ★ Most Active
+                </span>
+            )}
+
             <div className="aspect-video w-full overflow-hidden rounded-md bg-gray-800">
                 <img
                     src={imgSrc ?? (cdn ? `${cdn}/images/portfolio-placeholder.webp` : '/images/AdobeStock_471779082.webp')}

@@ -1,20 +1,29 @@
 import { getProjectUrl } from '../env';
 
-const portfolioItems = [
-    {
-        title: 'The Velvet Pulse',
-        description: 'A band site that features music, tour dates, and merchandise.',
-        url: getProjectUrl('thevelvetpulse'),
-    },
+export type PortfolioItem = {
+    title: string;
+    description: string;
+    url: string;
+    featured?: boolean;
+};
+
+const portfolioItems: PortfolioItem[] = [
     {
         title: 'Hollow Press',
         description: 'A blog site covering technology, lifestyle, and more.',
         url: getProjectUrl('hollowpress'),
+        featured: true,
     },
     {
         title: 'Lunar Blood',
         description: 'A heavy metal band site sharing music, merchandise, and updates.',
         url: getProjectUrl('lunarblood'),
+        featured: true,
+    },
+    {
+        title: 'The Velvet Pulse',
+        description: 'A band site that features music, tour dates, and merchandise.',
+        url: getProjectUrl('thevelvetpulse'),
     },
     {
         title: 'Velvet Radio',
