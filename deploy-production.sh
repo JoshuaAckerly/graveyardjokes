@@ -16,6 +16,16 @@ echo "===================================================="
 # Navigate to project directory
 cd "$DEPLOY_PATH"
 
+# Commit and push any local changes before pulling
+echo "📝 Checking for local changes..."
+git add -A
+git reset HEAD .env .env.* .env.backup 2>/dev/null || true
+if ! git diff --staged --quiet; then
+    git commit -m "Auto-commit before deploy [$(date '+%Y-%m-%d %H:%M')]"
+    echo "🚀 Pushing local commits..."
+    git push origin main
+fi
+
 # Pull latest code from Git
 echo "📦 Pulling latest code from Git..."
 git pull origin main
