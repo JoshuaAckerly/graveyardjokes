@@ -1,9 +1,20 @@
-import { Link } from '@inertiajs/react';
+import { Link, usePage } from '@inertiajs/react';
 import { MouseEvent, useState } from 'react';
-import { getProjectUrl } from '../env';
+import { getAuthSystemUrl, getLoginUrl, getProjectUrl } from '../env';
 
 export default function MobileMenu() {
     const [isOpen, setIsOpen] = useState(false);
+
+    let auth: { user?: { id: number; name: string; email: string } } | undefined;
+
+    try {
+        const page = usePage().props as { auth?: { user?: { id: number; name: string; email: string } } };
+        auth = page.auth;
+    } catch {
+        auth = undefined;
+    }
+
+    const isAuthenticated = !!auth?.user;
 
     const toggleMenu = (e: MouseEvent<HTMLButtonElement>): void => {
         e.preventDefault();
@@ -65,6 +76,23 @@ export default function MobileMenu() {
                                     <a href={getProjectUrl('studio')} className="text-black hover:underline" onClick={() => setIsOpen(false)}>
                                         Studio
                                     </a>
+                                </li>
+                                <li className="mb-4 bg-[var(--primary)]">
+                                    {isAuthenticated ? (
+                                        <Link
+                                            href={`${getAuthSystemUrl()}/logout`}
+                                            method="post"
+                                            as="button"
+                                            className="font-inherit cursor-pointer border-none bg-transparent p-0 text-black hover:underline"
+                                            onClick={() => setIsOpen(false)}
+                                        >
+                                            Log Out
+                                        </Link>
+                                    ) : (
+                                        <a href={getLoginUrl('graveyardjokes')} className="text-black hover:underline" onClick={() => setIsOpen(false)}>
+                                            Login
+                                        </a>
+                                    )}
                                 </li>
                             </ul>
                         </div>
