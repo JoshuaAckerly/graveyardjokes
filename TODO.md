@@ -11,7 +11,7 @@
 - [ ] Monitor for security updates in npm packages
 - [ ] Monitor for security updates in Composer packages
 - [ ] Review and update Laravel to latest patch version when available
-- [ ] Keep PHP version updated on server (currently 8.3.26)
+- [ ] Keep PHP version updated on server (currently 8.4 — see ARCHITECTURE.md)
 
 ### Performance
 - [ ] Review and optimize slow database queries

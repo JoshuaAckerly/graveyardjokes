@@ -115,7 +115,7 @@ Redirects back with error message: "There was a problem submitting your message.
 
 Tracks visitor information and location data.
 
-**Endpoint**: `POST /track-visit` or `OPTIONS /track-visit`
+**Endpoint**: `POST /api/track-visit` or `OPTIONS /api/track-visit`
 
 **Content-Type**: `application/json`
 
@@ -158,6 +158,50 @@ Tracks visitor information and location data.
 - Uses IPInfo.io for geolocation
 - Caches results for 1 hour
 - Handles local development IPs gracefully
+
+### 5. User Profile (Authenticated)
+
+Returns the authenticated user's profile from the central auth system.
+
+**Endpoint**: `GET /api/user`
+
+**Authentication**: Required (`auth-system` middleware)
+
+**Success Response** (200):
+```json
+{
+  "id": 1,
+  "name": "string",
+  "email": "string"
+}
+```
+
+### 6. User Purchases (Authenticated)
+
+Returns purchase data for the authenticated user.
+
+**Endpoint**: `GET /api/purchases`
+
+**Authentication**: Required (`auth-system` middleware)
+
+**Success Response** (200):
+Returns purchase data from the central auth system.
+
+### 7. OG Image Cache
+
+Retrieves a previously cached Open Graph image by filename.
+
+**Endpoint**: `GET /api/og-cache/{filename}`
+
+**Parameters**:
+- `filename` (required): The cached image filename
+
+**Success Response** (200): Returns the cached image file
+
+**Error Response**:
+- `404 Not Found`: Cached image does not exist
+
+---
 
 ## Error Handling
 
@@ -335,7 +379,7 @@ fetch('https://graveyardjokes.com/contact', {
 ### Example: Tracking a Visit
 ```javascript
 // Using fetch API
-fetch('https://graveyardjokes.com/track-visit', {
+fetch('https://graveyardjokes.com/api/track-visit', {
   method: 'POST',
   headers: {
     'Content-Type': 'application/json'
@@ -474,6 +518,12 @@ When reporting bugs, please include:
 
 ## Changelog
 
+### Version 1.1.0 (March 2026)
+- Added authenticated user profile endpoint (`GET /api/user`)
+- Added authenticated purchases endpoint (`GET /api/purchases`)
+- Added OG image cache retrieval endpoint (`GET /api/og-cache/{filename}`)
+- Fixed documentation: visitor tracking endpoints use `/api/track-visit` prefix
+
 ### Version 1.0.0 (November 2025)
 - Initial API implementation
 - Random joke endpoint with JSON response
@@ -488,4 +538,4 @@ When reporting bugs, please include:
 
 ---
 
-*Last updated: November 22, 2025*
+*Last updated: March 21, 2026*
