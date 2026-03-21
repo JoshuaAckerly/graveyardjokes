@@ -3,6 +3,7 @@
 # Run this on your AWS EC2 instance
 
 set -e
+export PATH="$HOME/.npm-global/bin:$PATH"
 
 # Configuration
 SSR_PORT=13714
