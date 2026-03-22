@@ -4,8 +4,9 @@ import InertiaHead from '@/Components/InertiaHead';
 import ProjectCard from '@/Components/ProjectCard';
 import portfolioItems from '@/data/portfolioItems';
 import MainLayout from '@/Layouts/MainLayout';
-import { router } from '@inertiajs/react';
+import { Link, router } from '@inertiajs/react';
 import { motion } from 'framer-motion';
+import { Check } from 'lucide-react';
 import { JSX, useEffect, useState } from 'react';
 import { getEnvVar, getProjectUrl } from '../env';
 
@@ -173,6 +174,122 @@ export default function Home(): JSX.Element {
                             </div>
                         </div>
                     </motion.div>
+
+                    {/* Starter Package Promo */}
+                    <motion.section
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true, amount: 0.2 }}
+                        transition={{ duration: 0.8 }}
+                        className="relative z-10 mx-auto w-full max-w-6xl space-y-8 px-6 py-16 sm:px-12"
+                    >
+                        <div className="text-center">
+                            <span className="inline-block rounded-full bg-[var(--primary)] px-4 py-1 text-xs font-bold tracking-wide text-white uppercase">
+                                Limited Time — First 5 Clients Only
+                            </span>
+                            <h2 className="mt-4 text-2xl font-bold text-white sm:text-3xl">
+                                Your business deserves a website that doesn't look like it crawled out of the grave.
+                            </h2>
+                        </div>
+
+                        <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+                            {/* Main Package Card */}
+                            <motion.div
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true, amount: 0.2 }}
+                                transition={{ duration: 0.6, delay: 0.1 }}
+                                className="rounded-lg bg-white/5 p-6 text-left shadow-lg"
+                            >
+                                <div className="mb-4 text-3xl">💀</div>
+                                <h3 className="text-xl font-semibold text-white">Full Website Build</h3>
+                                <div className="mt-2 flex items-baseline gap-2">
+                                    <span className="text-lg text-white/40 line-through">$199</span>
+                                    <span className="text-3xl font-bold text-[var(--primary)] sm:text-4xl">$150</span>
+                                </div>
+                                <p className="mt-1 text-xs text-white/50">Up to 5 pages</p>
+                                <ul className="mt-4 space-y-2">
+                                    {[
+                                        'Clean, modern design',
+                                        'Mobile-optimized',
+                                        'Fast load speeds',
+                                        'Basic SEO',
+                                        'Contact form + call-to-action setup',
+                                        'Domain + hosting assistance',
+                                    ].map((feature) => (
+                                        <li key={feature} className="flex items-start gap-2 text-sm text-gray-200">
+                                            <Check className="mt-0.5 h-4 w-4 shrink-0 text-[var(--primary)]" />
+                                            <span>{feature}</span>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </motion.div>
+
+                            {/* Support + Add-Ons Column */}
+                            <div className="flex flex-col gap-6">
+                                {/* Free Support Card */}
+                                <motion.div
+                                    initial={{ opacity: 0, y: 20 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true, amount: 0.2 }}
+                                    transition={{ duration: 0.6, delay: 0.2 }}
+                                    className="rounded-lg bg-white/5 p-6 text-left shadow-lg"
+                                >
+                                    <div className="mb-3 text-3xl">🧟</div>
+                                    <h3 className="text-xl font-semibold text-white">1 Month of Free Support</h3>
+                                    <ul className="mt-3 space-y-2">
+                                        {['Content updates', 'Fixes', 'Tweaks', 'Priority responses'].map((item) => (
+                                            <li key={item} className="flex items-start gap-2 text-sm text-gray-200">
+                                                <Check className="mt-0.5 h-4 w-4 shrink-0 text-[var(--primary)]" />
+                                                <span>{item}</span>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </motion.div>
+
+                                {/* Optional Add-Ons Card */}
+                                <motion.div
+                                    initial={{ opacity: 0, y: 20 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true, amount: 0.2 }}
+                                    transition={{ duration: 0.6, delay: 0.3 }}
+                                    className="rounded-lg bg-white/5 p-6 text-left shadow-lg"
+                                >
+                                    <div className="mb-3 text-3xl">🛒</div>
+                                    <h3 className="text-lg font-semibold text-white">Optional Add-Ons</h3>
+                                    <ul className="mt-3 space-y-1 text-sm text-white/70">
+                                        <li>E-commerce setup — starting at $150</li>
+                                        <li>Logo design</li>
+                                        <li>SEO packages</li>
+                                        <li>Monthly maintenance</li>
+                                    </ul>
+                                </motion.div>
+                            </div>
+                        </div>
+
+                        {/* CTA */}
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true, amount: 0.2 }}
+                            transition={{ duration: 0.6, delay: 0.4 }}
+                            className="text-center"
+                        >
+                            <p className="text-lg text-white/80">
+                                No hidden fees. No gimmicks. Just a fast, modern site at a price that won't haunt your wallet.
+                            </p>
+                            <p className="mt-2 text-sm font-semibold text-white/60">Only 5 spots. Once they're gone, they're gone.</p>
+                            <motion.div whileHover={{ scale: 1.05 }} className="mt-6 inline-block">
+                                <Link
+                                    href="/contact"
+                                    className="inline-flex rounded-lg bg-[var(--primary)] px-8 py-4 text-lg font-semibold text-white shadow-lg transition hover:bg-[var(--accent)]"
+                                >
+                                    Grab Your Spot
+                                </Link>
+                            </motion.div>
+                        </motion.div>
+                    </motion.section>
+
                     {/* Services Section */}
                     <motion.section
                         initial={{ opacity: 0, y: 20 }}
