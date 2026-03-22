@@ -189,16 +189,19 @@ Route::redirect('/pricing', '/services', 301);
 
 Route::get('/login', function () {
     $base = rtrim(config('services.auth_system.url'), '/api');
+
     return redirect()->away("{$base}/login", 302);
 });
 
 Route::get('/register', function () {
     $base = rtrim(config('services.auth_system.url'), '/api');
+
     return redirect()->away("{$base}/register", 302);
 });
 
 Route::get('/forgot-password', function () {
     $base = rtrim(config('services.auth_system.url'), '/api');
+
     return redirect()->away("{$base}/forgot-password", 302);
 });
 

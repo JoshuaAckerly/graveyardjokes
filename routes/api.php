@@ -16,9 +16,8 @@ Route::middleware(['throttle:60,1'])->group(function () {
 // Random joke endpoint (returns JSON)
 Route::get('/random-joke', [JokeController::class, 'random'])->name('api.random-joke');
 
-use App\Http\Controllers\Api\UserProxyController;
-
 use App\Http\Controllers\Api\MessageProxyController;
+use App\Http\Controllers\Api\UserProxyController;
 
 Route::middleware('auth-system')->group(function () {
     Route::get('/user', [UserProxyController::class, 'user']);
