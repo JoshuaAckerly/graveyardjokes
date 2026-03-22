@@ -188,15 +188,18 @@ Route::redirect('/illustrations', '/contact', 301);
 Route::redirect('/pricing', '/services', 301);
 
 Route::get('/login', function () {
-    return redirect()->away('https://auth-system.graveyardjokes.com/login', 302);
+    $base = rtrim(config('services.auth_system.url'), '/api');
+    return redirect()->away("{$base}/login", 302);
 });
 
 Route::get('/register', function () {
-    return redirect()->away('https://auth-system.graveyardjokes.com/register', 302);
+    $base = rtrim(config('services.auth_system.url'), '/api');
+    return redirect()->away("{$base}/register", 302);
 });
 
 Route::get('/forgot-password', function () {
-    return redirect()->away('https://auth-system.graveyardjokes.com/forgot-password', 302);
+    $base = rtrim(config('services.auth_system.url'), '/api');
+    return redirect()->away("{$base}/forgot-password", 302);
 });
 
 Route::get('/reset-password/{token}', function (Request $request, string $token) {

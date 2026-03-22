@@ -89,7 +89,7 @@ export default function MobileMenu() {
                                             Log Out
                                         </Link>
                                     ) : (
-                                        <a href={getLoginUrl('graveyardjokes')} className="text-black hover:underline" onClick={() => setIsOpen(false)}>
+                                        <a href={getLoginUrl('')} className="text-black hover:underline" onClick={() => setIsOpen(false)}>
                                             Login
                                         </a>
                                     )}

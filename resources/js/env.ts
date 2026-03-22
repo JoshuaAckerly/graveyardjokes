@@ -39,7 +39,8 @@ const getBaseDomain = () => {
 const getProtocol = () => (getBaseDomain() === 'graveyardjokes.local' ? 'http' : 'https');
 
 export const getAuthSystemUrl = () => `${getProtocol()}://auth-system.${getBaseDomain()}`;
-export const getProjectUrl = (subdomain: string) => `${getProtocol()}://${subdomain}.${getBaseDomain()}`;
+export const getProjectUrl = (subdomain: string) =>
+    subdomain ? `${getProtocol()}://${subdomain}.${getBaseDomain()}` : `${getProtocol()}://${getBaseDomain()}`;
 
 export const getLoginUrl = (subdomain: string) => {
     const authUrl = getAuthSystemUrl();

@@ -1,5 +1,6 @@
 import Menu from '@/Components/Menu';
 import MobileMenu from '@/Components/MobileMenu';
+import NotificationBell from '@/Components/NotificationBell';
 import React, { ReactNode, useEffect } from 'react';
 
 interface MainLayoutProps {
@@ -55,6 +56,7 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
                 </div>
                 <div className="hidden w-full items-center justify-between md:flex">
                     <Menu />
+                    <NotificationBell />
                 </div>
                 {/*  <Message /> */}
             </header>

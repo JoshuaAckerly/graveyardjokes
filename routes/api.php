@@ -18,7 +18,13 @@ Route::get('/random-joke', [JokeController::class, 'random'])->name('api.random-
 
 use App\Http\Controllers\Api\UserProxyController;
 
+use App\Http\Controllers\Api\MessageProxyController;
+
 Route::middleware('auth-system')->group(function () {
     Route::get('/user', [UserProxyController::class, 'user']);
     Route::get('/purchases', [UserProxyController::class, 'purchases']);
 });
+
+Route::get('/messages', [MessageProxyController::class, 'index']);
+Route::patch('/messages/read-all', [MessageProxyController::class, 'markAllRead']);
+Route::patch('/messages/{id}/read', [MessageProxyController::class, 'markRead']);

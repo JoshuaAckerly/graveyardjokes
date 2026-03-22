@@ -8,7 +8,7 @@ import { Link, router } from '@inertiajs/react';
 import { motion } from 'framer-motion';
 import { Check } from 'lucide-react';
 import { JSX, useEffect, useState } from 'react';
-import { getEnvVar, getProjectUrl } from '../env';
+import { getAuthSystemUrl, getEnvVar, getProjectUrl } from '../env';
 
 export default function Home(): JSX.Element {
     const cdn = getEnvVar('VITE_ASSET_URL');
@@ -407,6 +407,39 @@ export default function Home(): JSX.Element {
                             </p>
                         </div>
                     </motion.section>
+
+                    {/* Direct Messaging CTA */}
+                    <motion.section
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true, amount: 0.2 }}
+                        transition={{ duration: 0.8 }}
+                        className="relative z-10 mx-auto w-full max-w-3xl px-6 py-16 text-center sm:px-12"
+                    >
+                        <div className="rounded-lg border border-white/10 bg-white/5 p-8 shadow-lg sm:p-12">
+                            <div className="mb-4 text-4xl">💬</div>
+                            <h2 className="text-2xl font-bold text-white sm:text-3xl">Get Direct Feedback From Me</h2>
+                            <p className="mx-auto mt-4 max-w-xl text-base text-white/70">
+                                Create a free account and I can send you updates, project feedback, and announcements directly through the site.
+                                No spam, no email chains — just a quick notification when you log in.
+                            </p>
+                            <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
+                                <a
+                                    href={`${getAuthSystemUrl()}/register`}
+                                    className="inline-flex rounded-lg bg-[var(--primary)] px-8 py-3 text-lg font-semibold text-white shadow-lg transition hover:bg-[var(--accent)]"
+                                >
+                                    Create an Account
+                                </a>
+                                <a
+                                    href={`${getAuthSystemUrl()}/login`}
+                                    className="inline-flex rounded-lg border border-white/20 bg-transparent px-8 py-3 text-lg font-semibold text-white/90 transition hover:bg-white/5"
+                                >
+                                    Log In
+                                </a>
+                            </div>
+                        </div>
+                    </motion.section>
+
                     <div className="block md:flex md:items-center md:justify-center md:space-x-6">
                         <motion.p
                             initial={{ opacity: 0, y: 20 }}

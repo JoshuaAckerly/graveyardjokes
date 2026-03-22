@@ -49,4 +49,8 @@ return [
         'notification_ttl' => (int) env('VISITOR_NOTIFICATION_TTL', 300),
     ],
 
+    'auth_system' => [
+        'url' => env('AUTH_SYSTEM_URL', 'http://auth-system.local/api'),
+    ],
+
 ];

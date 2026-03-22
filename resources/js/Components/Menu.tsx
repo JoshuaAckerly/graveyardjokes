@@ -56,7 +56,7 @@ export default function Menu() {
                         Log Out
                     </Link>
                 ) : (
-                    <a href={getLoginUrl('graveyardjokes')} className="hover:underline">
+                    <a href={getLoginUrl('')} className="hover:underline">
                         Login
                     </a>
                 )}
