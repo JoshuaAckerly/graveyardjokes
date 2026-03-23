@@ -1,5 +1,4 @@
 import { jest } from '@jest/globals';
-import React from 'react';
 import '@testing-library/jest-dom';
 
 // Mock env

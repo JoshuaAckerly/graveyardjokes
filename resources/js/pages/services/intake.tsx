@@ -95,7 +95,7 @@ export default function ServicesIntake({
     legalPageOptions,
 }: IntakePageProps) {
     const hasPrefillPackage = packageOptions.some((option) => option.value === prefillPackage);
-    const defaultPackage = hasPrefillPackage ? prefillPackage : packageOptions[0]?.value ?? 'professional';
+    const defaultPackage = hasPrefillPackage ? prefillPackage : (packageOptions[0]?.value ?? 'professional');
 
     const { data, setData, post, processing, errors } = useForm<IntakeFormData>({
         selected_package: defaultPackage,
@@ -208,7 +208,9 @@ export default function ServicesIntake({
                                                 </option>
                                             ))}
                                         </select>
-                                        {getFieldError('selected_package') && <p className="mt-1 text-sm text-red-300">{getFieldError('selected_package')}</p>}
+                                        {getFieldError('selected_package') && (
+                                            <p className="mt-1 text-sm text-red-300">{getFieldError('selected_package')}</p>
+                                        )}
                                     </div>
 
                                     <div>
@@ -253,7 +255,9 @@ export default function ServicesIntake({
                                             onChange={(event) => setData('business_name', event.target.value)}
                                             className="w-full rounded-md border border-white/20 bg-black/30 px-3 py-2"
                                         />
-                                        {getFieldError('business_name') && <p className="mt-1 text-sm text-red-300">{getFieldError('business_name')}</p>}
+                                        {getFieldError('business_name') && (
+                                            <p className="mt-1 text-sm text-red-300">{getFieldError('business_name')}</p>
+                                        )}
                                     </div>
 
                                     <div>
@@ -301,14 +305,19 @@ export default function ServicesIntake({
                                         className="w-full rounded-md border border-white/20 bg-black/30 px-3 py-2"
                                         required
                                     />
-                                    {getFieldError('project_summary') && <p className="mt-1 text-sm text-red-300">{getFieldError('project_summary')}</p>}
+                                    {getFieldError('project_summary') && (
+                                        <p className="mt-1 text-sm text-red-300">{getFieldError('project_summary')}</p>
+                                    )}
                                 </div>
 
                                 <div>
                                     <p className="mb-2 text-sm font-medium">Top goals (choose at least one)</p>
                                     <div className="grid gap-2 sm:grid-cols-2">
                                         {goalOptions.map((option) => (
-                                            <label key={option.value} className="flex items-start gap-2 rounded border border-white/10 bg-black/20 p-2 text-sm">
+                                            <label
+                                                key={option.value}
+                                                className="flex items-start gap-2 rounded border border-white/10 bg-black/20 p-2 text-sm"
+                                            >
                                                 <input
                                                     type="checkbox"
                                                     checked={data.top_goals.includes(option.value)}
@@ -335,7 +344,9 @@ export default function ServicesIntake({
                                             className="w-full rounded-md border border-white/20 bg-black/30 px-3 py-2"
                                             required
                                         />
-                                        {getFieldError('target_audience') && <p className="mt-1 text-sm text-red-300">{getFieldError('target_audience')}</p>}
+                                        {getFieldError('target_audience') && (
+                                            <p className="mt-1 text-sm text-red-300">{getFieldError('target_audience')}</p>
+                                        )}
                                     </div>
 
                                     <div>
@@ -364,7 +375,10 @@ export default function ServicesIntake({
                                     <p className="mb-2 text-sm font-medium">Required pages</p>
                                     <div className="grid gap-2 sm:grid-cols-2">
                                         {pageOptions.map((option) => (
-                                            <label key={option.value} className="flex items-start gap-2 rounded border border-white/10 bg-black/20 p-2 text-sm">
+                                            <label
+                                                key={option.value}
+                                                className="flex items-start gap-2 rounded border border-white/10 bg-black/20 p-2 text-sm"
+                                            >
                                                 <input
                                                     type="checkbox"
                                                     checked={data.required_pages.includes(option.value)}
@@ -375,14 +389,19 @@ export default function ServicesIntake({
                                             </label>
                                         ))}
                                     </div>
-                                    {getFieldError('required_pages') && <p className="mt-1 text-sm text-red-300">{getFieldError('required_pages')}</p>}
+                                    {getFieldError('required_pages') && (
+                                        <p className="mt-1 text-sm text-red-300">{getFieldError('required_pages')}</p>
+                                    )}
                                 </div>
 
                                 <div>
                                     <p className="mb-2 text-sm font-medium">Must-have features</p>
                                     <div className="grid gap-2 sm:grid-cols-2">
                                         {featureOptions.map((option) => (
-                                            <label key={option.value} className="flex items-start gap-2 rounded border border-white/10 bg-black/20 p-2 text-sm">
+                                            <label
+                                                key={option.value}
+                                                className="flex items-start gap-2 rounded border border-white/10 bg-black/20 p-2 text-sm"
+                                            >
                                                 <input
                                                     type="checkbox"
                                                     checked={data.must_have_features.includes(option.value)}
@@ -410,14 +429,19 @@ export default function ServicesIntake({
                                         className="w-full rounded-md border border-white/20 bg-black/30 px-3 py-2"
                                         placeholder="Share websites you like and what you like about them."
                                     />
-                                    {getFieldError('design_references') && <p className="mt-1 text-sm text-red-300">{getFieldError('design_references')}</p>}
+                                    {getFieldError('design_references') && (
+                                        <p className="mt-1 text-sm text-red-300">{getFieldError('design_references')}</p>
+                                    )}
                                 </div>
 
                                 <div>
                                     <p className="mb-2 text-sm font-medium">Brand personality</p>
                                     <div className="grid gap-2 sm:grid-cols-2">
                                         {personalityOptions.map((option) => (
-                                            <label key={option.value} className="flex items-start gap-2 rounded border border-white/10 bg-black/20 p-2 text-sm">
+                                            <label
+                                                key={option.value}
+                                                className="flex items-start gap-2 rounded border border-white/10 bg-black/20 p-2 text-sm"
+                                            >
                                                 <input
                                                     type="checkbox"
                                                     checked={data.brand_personality.includes(option.value)}
@@ -428,7 +452,9 @@ export default function ServicesIntake({
                                             </label>
                                         ))}
                                     </div>
-                                    {getFieldError('brand_personality') && <p className="mt-1 text-sm text-red-300">{getFieldError('brand_personality')}</p>}
+                                    {getFieldError('brand_personality') && (
+                                        <p className="mt-1 text-sm text-red-300">{getFieldError('brand_personality')}</p>
+                                    )}
                                 </div>
 
                                 <div className="grid gap-4 sm:grid-cols-2">
@@ -488,7 +514,9 @@ export default function ServicesIntake({
                                                 </option>
                                             ))}
                                         </select>
-                                        {getFieldError('content_status') && <p className="mt-1 text-sm text-red-300">{getFieldError('content_status')}</p>}
+                                        {getFieldError('content_status') && (
+                                            <p className="mt-1 text-sm text-red-300">{getFieldError('content_status')}</p>
+                                        )}
                                     </div>
 
                                     <div>
@@ -507,7 +535,9 @@ export default function ServicesIntake({
                                                 </option>
                                             ))}
                                         </select>
-                                        {getFieldError('asset_status') && <p className="mt-1 text-sm text-red-300">{getFieldError('asset_status')}</p>}
+                                        {getFieldError('asset_status') && (
+                                            <p className="mt-1 text-sm text-red-300">{getFieldError('asset_status')}</p>
+                                        )}
                                     </div>
 
                                     <div>
@@ -523,7 +553,9 @@ export default function ServicesIntake({
                                             <option value="owned">Already owned</option>
                                             <option value="need_help">Need help setting it up</option>
                                         </select>
-                                        {getFieldError('domain_status') && <p className="mt-1 text-sm text-red-300">{getFieldError('domain_status')}</p>}
+                                        {getFieldError('domain_status') && (
+                                            <p className="mt-1 text-sm text-red-300">{getFieldError('domain_status')}</p>
+                                        )}
                                     </div>
 
                                     <div>
@@ -539,7 +571,9 @@ export default function ServicesIntake({
                                             <option value="owned">Already owned</option>
                                             <option value="need_help">Need help setting it up</option>
                                         </select>
-                                        {getFieldError('hosting_status') && <p className="mt-1 text-sm text-red-300">{getFieldError('hosting_status')}</p>}
+                                        {getFieldError('hosting_status') && (
+                                            <p className="mt-1 text-sm text-red-300">{getFieldError('hosting_status')}</p>
+                                        )}
                                     </div>
 
                                     <div>
@@ -606,7 +640,9 @@ export default function ServicesIntake({
                                                 </option>
                                             ))}
                                         </select>
-                                        {getFieldError('budget_range') && <p className="mt-1 text-sm text-red-300">{getFieldError('budget_range')}</p>}
+                                        {getFieldError('budget_range') && (
+                                            <p className="mt-1 text-sm text-red-300">{getFieldError('budget_range')}</p>
+                                        )}
                                     </div>
 
                                     <div>
@@ -622,7 +658,9 @@ export default function ServicesIntake({
                                             <option value="1">Yes</option>
                                             <option value="0">No</option>
                                         </select>
-                                        {getFieldError('hard_deadline') && <p className="mt-1 text-sm text-red-300">{getFieldError('hard_deadline')}</p>}
+                                        {getFieldError('hard_deadline') && (
+                                            <p className="mt-1 text-sm text-red-300">{getFieldError('hard_deadline')}</p>
+                                        )}
                                     </div>
 
                                     <div>
@@ -648,7 +686,10 @@ export default function ServicesIntake({
                                     <p className="mb-2 text-sm font-medium">Legal pages needed</p>
                                     <div className="grid gap-2 sm:grid-cols-2">
                                         {legalPageOptions.map((option) => (
-                                            <label key={option.value} className="flex items-start gap-2 rounded border border-white/10 bg-black/20 p-2 text-sm">
+                                            <label
+                                                key={option.value}
+                                                className="flex items-start gap-2 rounded border border-white/10 bg-black/20 p-2 text-sm"
+                                            >
                                                 <input
                                                     type="checkbox"
                                                     checked={data.legal_pages_needed.includes(option.value)}
@@ -708,7 +749,9 @@ export default function ServicesIntake({
                                         />
                                         <span>I will provide logo, copy, and media assets when requested.</span>
                                     </label>
-                                    {getFieldError('assets_commitment') && <p className="text-sm text-red-300">{getFieldError('assets_commitment')}</p>}
+                                    {getFieldError('assets_commitment') && (
+                                        <p className="text-sm text-red-300">{getFieldError('assets_commitment')}</p>
+                                    )}
 
                                     <label className="flex items-start gap-2 rounded border border-white/10 bg-black/20 p-3">
                                         <input
@@ -740,7 +783,9 @@ export default function ServicesIntake({
                                         />
                                         <span>I understand project scope and pricing can change if requirements change.</span>
                                     </label>
-                                    {getFieldError('scope_acknowledged') && <p className="text-sm text-red-300">{getFieldError('scope_acknowledged')}</p>}
+                                    {getFieldError('scope_acknowledged') && (
+                                        <p className="text-sm text-red-300">{getFieldError('scope_acknowledged')}</p>
+                                    )}
 
                                     <label className="flex items-start gap-2 rounded border border-white/10 bg-black/20 p-3">
                                         <input
@@ -766,7 +811,9 @@ export default function ServicesIntake({
                                         />
                                         <span>I confirm this intake information is accurate.</span>
                                     </label>
-                                    {getFieldError('accuracy_confirmed') && <p className="text-sm text-red-300">{getFieldError('accuracy_confirmed')}</p>}
+                                    {getFieldError('accuracy_confirmed') && (
+                                        <p className="text-sm text-red-300">{getFieldError('accuracy_confirmed')}</p>
+                                    )}
                                 </div>
 
                                 <div>
@@ -780,14 +827,14 @@ export default function ServicesIntake({
                                         onChange={(event) => setData('additional_notes', event.target.value)}
                                         className="w-full rounded-md border border-white/20 bg-black/30 px-3 py-2"
                                     />
-                                    {getFieldError('additional_notes') && <p className="mt-1 text-sm text-red-300">{getFieldError('additional_notes')}</p>}
+                                    {getFieldError('additional_notes') && (
+                                        <p className="mt-1 text-sm text-red-300">{getFieldError('additional_notes')}</p>
+                                    )}
                                 </div>
                             </section>
 
                             <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-                                <p className="text-sm text-white/70">
-                                    Submitting this form unlocks payment for your selected package.
-                                </p>
+                                <p className="text-sm text-white/70">Submitting this form unlocks payment for your selected package.</p>
                                 <button
                                     type="submit"
                                     disabled={processing}

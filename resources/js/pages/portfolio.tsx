@@ -51,7 +51,13 @@ const Portfolio: React.FC = () => {
                 <ul className="grid w-full grid-cols-1 gap-6 text-center md:grid-cols-2 lg:grid-cols-3">
                     {portfolioItems.map((project) => (
                         <li key={project.title} className="flex flex-col items-center justify-center gap-2 rounded-lg p-0">
-                            <ProjectCard title={project.title} description={project.description} url={project.url} cdn={cdn} featured={project.featured} />
+                            <ProjectCard
+                                title={project.title}
+                                description={project.description}
+                                url={project.url}
+                                cdn={cdn}
+                                featured={project.featured}
+                            />
                         </li>
                     ))}
                 </ul>

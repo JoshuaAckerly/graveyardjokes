@@ -420,8 +420,8 @@ export default function Home(): JSX.Element {
                             <div className="mb-4 text-4xl">💬</div>
                             <h2 className="text-2xl font-bold text-white sm:text-3xl">Get Direct Feedback From Me</h2>
                             <p className="mx-auto mt-4 max-w-xl text-base text-white/70">
-                                Create a free account and I can send you updates, project feedback, and announcements directly through the site.
-                                No spam, no email chains — just a quick notification when you log in.
+                                Create a free account and I can send you updates, project feedback, and announcements directly through the site. No
+                                spam, no email chains — just a quick notification when you log in.
                             </p>
                             <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
                                 <a
@@ -507,7 +507,14 @@ export default function Home(): JSX.Element {
                             <h3 className="mb-6 text-left text-2xl font-semibold text-white">Selected Projects</h3>
                             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
                                 {portfolioItems.map((p) => (
-                                    <ProjectCard key={p.url} title={p.title} description={p.description} url={p.url} cdn={cdn} featured={p.featured} />
+                                    <ProjectCard
+                                        key={p.url}
+                                        title={p.title}
+                                        description={p.description}
+                                        url={p.url}
+                                        cdn={cdn}
+                                        featured={p.featured}
+                                    />
                                 ))}
                             </div>
                             <div className="mt-6 text-left">

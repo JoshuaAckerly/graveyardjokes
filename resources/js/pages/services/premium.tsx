@@ -88,7 +88,6 @@ export default function PremiumPackage() {
 `}
                 </script>
             </Head>
-
             <MainLayout>
                 <div className="mx-auto max-w-4xl px-4 py-8">
                     <Link href="/services" className="mb-6 inline-flex items-center gap-2 text-white transition hover:text-(--primary)">

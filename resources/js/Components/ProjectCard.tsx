@@ -63,9 +63,7 @@ const ProjectCard: React.FC<Props> = ({ title, description, url, cdn, featured }
             target="_blank"
             rel="noopener noreferrer"
             className={`group relative block overflow-hidden rounded-md p-4 transition hover:scale-[1.01] ${
-                featured
-                    ? 'bg-white/5 ring-2 ring-[var(--color-accent)] shadow-[0_0_16px_rgba(var(--accent-rgb,168,85,247),0.25)]'
-                    : 'bg-white/5'
+                featured ? 'bg-white/5 shadow-[0_0_16px_rgba(var(--accent-rgb,168,85,247),0.25)] ring-2 ring-[var(--color-accent)]' : 'bg-white/5'
             }`}
         >
             {featured && (

@@ -1,5 +1,5 @@
-import { useState, useEffect, useRef } from 'react';
 import { Bell } from 'lucide-react';
+import { useEffect, useRef, useState } from 'react';
 
 interface Message {
     id: number;
@@ -89,8 +89,8 @@ export default function NotificationBell() {
                 headers: { Authorization: `Bearer ${token}` },
             });
             if (res.ok) {
-                setMessages(prev => prev.map(m => m.id === id ? { ...m, is_read: true } : m));
-                setUnreadCount(prev => Math.max(0, prev - 1));
+                setMessages((prev) => prev.map((m) => (m.id === id ? { ...m, is_read: true } : m)));
+                setUnreadCount((prev) => Math.max(0, prev - 1));
             }
         } catch {
             // Silently fail
@@ -106,7 +106,7 @@ export default function NotificationBell() {
                 headers: { Authorization: `Bearer ${token}` },
             });
             if (res.ok) {
-                setMessages(prev => prev.map(m => ({ ...m, is_read: true })));
+                setMessages((prev) => prev.map((m) => ({ ...m, is_read: true })));
                 setUnreadCount(0);
             }
         } catch {
@@ -156,10 +156,7 @@ export default function NotificationBell() {
                     <div className="flex items-center justify-between border-b border-gray-100 px-4 py-3">
                         <h3 className="text-sm font-semibold text-gray-900">Notifications</h3>
                         {unreadCount > 0 && (
-                            <button
-                                onClick={markAllRead}
-                                className="text-xs text-blue-600 hover:text-blue-800"
-                            >
+                            <button onClick={markAllRead} className="text-xs text-blue-600 hover:text-blue-800">
                                 Mark all read
                             </button>
                         )}
@@ -180,20 +177,16 @@ export default function NotificationBell() {
                                     <div className="flex items-start justify-between gap-2">
                                         <div className="min-w-0 flex-1">
                                             <div className="flex items-center gap-2">
-                                                {!message.is_read && (
-                                                    <span className="h-2 w-2 flex-shrink-0 rounded-full bg-blue-500" />
-                                                )}
-                                                <p className={`truncate text-sm ${!message.is_read ? 'font-semibold text-gray-900' : 'text-gray-700'}`}>
+                                                {!message.is_read && <span className="h-2 w-2 flex-shrink-0 rounded-full bg-blue-500" />}
+                                                <p
+                                                    className={`truncate text-sm ${!message.is_read ? 'font-semibold text-gray-900' : 'text-gray-700'}`}
+                                                >
                                                     {message.title}
                                                 </p>
                                             </div>
-                                            <p className="mt-0.5 line-clamp-2 text-xs text-gray-500">
-                                                {message.body}
-                                            </p>
+                                            <p className="mt-0.5 line-clamp-2 text-xs text-gray-500">{message.body}</p>
                                         </div>
-                                        <span className="flex-shrink-0 text-[10px] text-gray-400">
-                                            {formatDate(message.created_at)}
-                                        </span>
+                                        <span className="flex-shrink-0 text-[10px] text-gray-400">{formatDate(message.created_at)}</span>
                                     </div>
                                 </div>
                             ))
