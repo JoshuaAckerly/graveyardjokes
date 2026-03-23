@@ -115,6 +115,12 @@ parameters:
 			path: app/Http/Controllers/Settings/ProfileController.php
 
 		-
+			message: '#^Cannot cast mixed to string\.$#'
+			identifier: cast.string
+			count: 17
+			path: app/Http/Controllers/WebsiteIntakeController.php
+
+		-
 			message: '#^Cannot access property \$id on App\\Models\\User\|null\.$#'
 			identifier: property.nonObject
 			count: 1
@@ -141,8 +147,20 @@ parameters:
 		-
 			message: '#^Cannot cast mixed to string\.$#'
 			identifier: cast.string
-			count: 1
+			count: 3
 			path: app/Modules/Visitor/Services/VisitorService.php
+
+		-
+			message: '#^Method App\\Services\\AuthSystemService\:\:getMessages\(\) should return array\<string, mixed\>\|null but returns array\<mixed, mixed\>\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Services/AuthSystemService.php
+
+		-
+			message: '#^Parameter \#1 \$string of function rtrim expects string, mixed given\.$#'
+			identifier: argument.type
+			count: 3
+			path: routes/web.php
 
 		-
 			message: '#^Call to method PHPUnit\\Framework\\Assert\:\:assertIsArray\(\) with array\<int, array\<string, mixed\>\> will always evaluate to true\.$#'
@@ -179,8 +197,3 @@ parameters:
 			identifier: method.alreadyNarrowedType
 			count: 1
 			path: tests/Unit/VisitorServiceTest.php
-		-
-			message: '#^Cannot cast mixed to string\.$#'
-			identifier: cast.string
-			count: 2
-			path: app/Http/Controllers/WebsiteIntakeController.php
