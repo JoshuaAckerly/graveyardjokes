@@ -1,24 +1,27 @@
 name: Auto-merge sitemap PRs
 
-permissions:
-  contents: write
-  checks: read
-  pull-requests: write
-
 on:
   pull_request_target:
     types: [opened, synchronize, labeled, ready_for_review]
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
 jobs:
   automerge:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      checks: read
+      pull-requests: write
     if: always()
     # MERGE_TOKEN is configured at runtime in the first step to avoid static analysis warnings
     steps:
       - name: Set MERGE_TOKEN
         id: set-token
         env:
-          AUT0MERGE_PUSH_TO_MAIN: ${{ secrets.AUTOMERGE_PUSH_TO_MAIN }}
+          AUTOMERGE_PUSH_TO_MAIN: ${{ secrets.AUTOMERGE_PUSH_TO_MAIN }}
           AUTOMERGE_PAT: ${{ secrets.AUTOMERGE_PAT }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
@@ -28,12 +31,12 @@ jobs:
           else
             echo "MERGE_TOKEN=$GITHUB_TOKEN" >> $GITHUB_ENV
           fi
-          # Expose AUT0MERGE_PUSH_TO_MAIN as an env var for step-level conditionals
-          echo "AUTOMERGE_PUSH_TO_MAIN=$AUT0MERGE_PUSH_TO_MAIN" >> $GITHUB_ENV
+          # Expose AUTOMERGE_PUSH_TO_MAIN as an env var for step-level conditionals
+          echo "AUTOMERGE_PUSH_TO_MAIN=$AUTOMERGE_PUSH_TO_MAIN" >> $GITHUB_ENV
 
       - name: Prepare merge decision
         id: prepare
-        uses: actions/github-script@v6
+        uses: actions/github-script@v7
         with:
           github-token: ${{ env.MERGE_TOKEN }}
           script: |
@@ -105,44 +108,6 @@ jobs:
                 core.info('Failed to merge PR: ' + err.message);
               }
             }
-
-      - name: Check combined status and checks for HEAD
-        id: status
-        uses: actions/github-script@v6
-        with:
-          # github-script will default to the workflow token; MERGE_TOKEN is set at runtime
-          script: |
-            const pr = context.payload.pull_request;
-            if (!pr) return core.setFailed('No pull_request in context');
-            const headSha = pr.head.sha;
-
-            // Get combined status
-            const combined = await github.rest.repos.getCombinedStatusForRef({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              ref: headSha,
-            }).then(r => r.data).catch(() => null);
-
-            // Get check runs
-            const checks = await github.rest.checks.listForRef({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              ref: headSha,
-            }).then(r => r.data).catch(() => null);
-
-            const statusesOk = combined ? combined.state === 'success' : false;
-            let checksOk = false;
-            if (checks && checks.total_count > 0) {
-              checksOk = checks.check_runs.every(c => c.conclusion === 'success');
-            }
-
-            // If there are no check runs but combined indicates success, accept it
-            const ok = statusesOk || checksOk;
-
-            core.setOutput('statusesOk', statusesOk);
-            core.setOutput('checksOk', checksOk);
-            core.setOutput('ok', ok);
-            core.info(`statusesOk=${statusesOk} checksOk=${checksOk} ok=${ok}`);
 
       # Merge and branch deletion are handled inside the Prepare merge decision step to avoid
       # referencing step outputs in 'if' expressions (which the static linter flags).
