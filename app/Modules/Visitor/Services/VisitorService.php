@@ -3,12 +3,10 @@
 namespace App\Modules\Visitor\Services;
 
 use App\Contracts\VisitorServiceInterface;
-use App\Modules\Visitor\Mail\NewVisitorNotification;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Mail;
 
 class VisitorService implements VisitorServiceInterface
 {
@@ -30,9 +28,6 @@ class VisitorService implements VisitorServiceInterface
 
         // Use a geolocation service (IPInfo.io) but cache results to avoid repeated calls
         $location = $this->getLocationFromIP($ip);
-
-        // Attempt to send a notification email (throttled by cache)
-        $this->sendVisitorEmail($location, $request);
 
         return $location;
     }
@@ -90,47 +85,5 @@ class VisitorService implements VisitorServiceInterface
         return $result;
     }
 
-    /**
-     * @param  array<string, mixed>  $location
-     */
-    private function sendVisitorEmail(array $location, ?Request $request = null): void
-    {
-        $visitorData = [
-            'ip' => $location['ip'] ?? null,
-            'city' => $location['city'] ?? null,
-            'country' => $location['country'] ?? null,
-            'timestamp' => now()->toDateTimeString(),
-            'user_agent' => $request ? $request->userAgent() : request()->userAgent(),
-            'referrer' => $request ? $request->input('referrer') : request()->header('referer'),
-            'subdomain' => $request ? $request->input('subdomain') : request()->getHost(),
-            'page_path' => $request ? $request->input('page_path') : request()->path(),
-            'page_url' => $request ? $request->input('page_url') : request()->fullUrl(),
-        ];
 
-        Log::info('New visitor tracked!', $visitorData);
-
-        $ua = $visitorData['user_agent'] ?? '';
-        $ip = (string) ($visitorData['ip'] ?? '');
-        $subdomain = (string) ($visitorData['subdomain'] ?? 'unknown-host');
-        $pagePath = (string) ($visitorData['page_path'] ?? '/');
-        $keyHash = substr(sha1($ip.'|'.$ua.'|'.$subdomain.'|'.$pagePath), 0, 20);
-        $cacheKey = "visitor_notification_sent_{$keyHash}";
-
-        // Get TTL from config, with fallback to 5 minutes
-        $ttl = (int) (config('services.visitor_tracking.notification_ttl') ?? 300);
-
-        if (Cache::has($cacheKey)) {
-            Log::info('Visitor notification skipped (recently notified).', ['cache_key' => $cacheKey]);
-
-            return;
-        }
-
-        try {
-            Mail::to('admin@graveyardjokes.com')->send(new NewVisitorNotification($visitorData));
-            Cache::put($cacheKey, true, $ttl);
-            Log::info('Visitor notification email sent successfully', ['cache_key' => $cacheKey]);
-        } catch (\Exception $e) {
-            Log::error('Failed to send visitor notification email: '.$e->getMessage());
-        }
-    }
 }
