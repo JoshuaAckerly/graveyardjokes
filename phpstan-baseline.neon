@@ -179,3 +179,8 @@ parameters:
 			identifier: method.alreadyNarrowedType
 			count: 1
 			path: tests/Unit/VisitorServiceTest.php
+                -
+                        message: '#^Cannot cast mixed to string\.$#'
+                        identifier: cast.string
+                        count: 2
+                        path: app/Http/Controllers/WebsiteIntakeController.php

@@ -62,7 +62,7 @@ export default [
         },
     },
     {
-        ignores: ['vendor', 'node_modules', 'public', 'bootstrap/ssr', 'tailwind.config.js', 'resources/views/**/*.blade.php'],
+        ignores: ['vendor', 'node_modules', 'public', 'bootstrap/ssr', 'tailwind.config.js', 'resources/views/**/*.blade.php', 'test.js', 'coverage/**'],
     },
     prettier, // Turn off all rules that might conflict with Prettier
 ];
