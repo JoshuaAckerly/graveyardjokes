@@ -24,11 +24,11 @@ class TrackSiteVisit
 
         if ($this->shouldTrack($request)) {
             ReportVisitToAuthSystem::dispatch([
-                'host'       => $request->getHost(),
-                'path'       => '/' . ltrim($request->path(), '/'),
+                'host' => $request->getHost(),
+                'path' => '/'.ltrim($request->path(), '/'),
                 'ip_address' => $request->ip(),
                 'user_agent' => $request->userAgent(),
-                'referer'    => $request->headers->get('referer'),
+                'referer' => $request->headers->get('referer'),
             ]);
         }
 
@@ -41,7 +41,7 @@ class TrackSiteVisit
             return false;
         }
 
-        $path = '/' . ltrim($request->path(), '/');
+        $path = '/'.ltrim($request->path(), '/');
 
         foreach (self::SKIP_PREFIXES as $prefix) {
             if (str_starts_with($path, $prefix)) {

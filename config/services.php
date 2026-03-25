@@ -57,9 +57,8 @@ return [
         'url' => env('AUTH_SYSTEM_URL', 'http://auth-system.local/api'),
     ],
 
-
     'authsystem' => [
-        'track_url'   => env('AUTHSYSTEM_TRACK_URL'),
+        'track_url' => env('AUTHSYSTEM_TRACK_URL'),
         'track_token' => env('AUTHSYSTEM_TRACK_TOKEN'),
     ],
 
