@@ -17,7 +17,7 @@ const Terms: React.FC = () => {
             <div title="Terms of Service" className="mx-auto max-w-4xl space-y-4 bg-gray-900 p-6 text-white">
                 <h1 className="text-2xl font-bold">Terms of Service</h1>
                 <p>
-                    <strong>Effective Date:</strong> October 7, 2025
+                    <strong>Effective Date:</strong> March 25, 2026
                 </p>
 
                 <p>
@@ -89,7 +89,14 @@ const Terms: React.FC = () => {
                     contact form or email. Terms for any contracted work would be agreed upon separately.
                 </p>
 
-                <h2 className="text-xl font-semibold">7. Modifications</h2>
+                <h2 className="text-xl font-semibold">7. Messaging and Notifications</h2>
+                <p>
+                    Registered users may receive in-app notifications and messages delivered directly to their account inbox. By creating an
+                    account, you consent to receiving in-app messages from us. You may mark messages as read or dismiss them through the
+                    notification interface. You may not use any messaging feature to send unsolicited communications or to harass others.
+                </p>
+
+                <h2 className="text-xl font-semibold">8. Modifications</h2>
                 <p>We may update these Terms at any time. Continued use of the site after changes means you accept the new Terms.</p>
             </div>
         </>

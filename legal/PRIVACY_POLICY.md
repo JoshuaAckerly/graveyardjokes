@@ -1,6 +1,6 @@
 # Privacy Policy
 
-**Last Updated:** February 19, 2026
+**Last Updated:** March 25, 2026
 
 ## 1. Introduction
 
@@ -36,6 +36,14 @@ Cookies are files with small amounts of data which may include an anonymous uniq
 
 You can instruct your browser to refuse all cookies or to indicate when a cookie is being sent. However, if you do not accept cookies, you may not be able to use some portions of our Service.
 
+### 2.4 Messaging and Notification Data
+
+When you use messaging or contact features of the Service, we may collect:
+
+- Messages and notifications delivered to your account inbox
+- Message read/unread status and timestamps
+- Contact form submissions, including your name, email address, and message content
+
 ## 3. How We Use Your Information
 
 [Your Company Name] uses the collected data for various purposes:
@@ -48,6 +56,8 @@ You can instruct your browser to refuse all cookies or to indicate when a cookie
 - To monitor the usage of the Service
 - To detect, prevent and address technical issues
 - To provide you with news, special offers and general information about other goods, services and events
+- To deliver in-app notifications and messages to your account
+- To store and respond to contact form submissions and inquiries
 
 ## 4. Legal Basis for Processing (GDPR)
 

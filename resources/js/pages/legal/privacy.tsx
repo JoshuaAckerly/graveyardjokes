@@ -17,7 +17,7 @@ const Privacy: React.FC = () => {
             <div title="Privacy Policy" className="mx-auto max-w-4xl space-y-4 bg-gray-900 p-6 text-white">
                 <h1 className="text-2xl font-bold">Privacy Policy</h1>
                 <p>
-                    <strong>Effective Date:</strong> October 7, 2025
+                    <strong>Effective Date:</strong> March 25, 2026
                 </p>
                 <p>
                     This Privacy Policy explains how we collect, use, and protect information when you visit GraveYard Jokes Studios Inc.
@@ -36,6 +36,11 @@ const Privacy: React.FC = () => {
                     <li>Name</li>
                     <li>Email address</li>
                     <li>Message content</li>
+                </ul>
+                <p>If you have a registered account, we may also collect:</p>
+                <ul className="list-inside list-disc">
+                    <li>In-app messages and notifications delivered to your account inbox</li>
+                    <li>Message read/unread status and timestamps</li>
                 </ul>
                 <h2 className="text-xl font-semibold">2. How We Collect Information</h2>
                 <p>
@@ -58,6 +63,8 @@ const Privacy: React.FC = () => {
                     <li>Respond to contact form inquiries</li>
                     <li>Send email notifications about site visitors (for site administration)</li>
                     <li>Ensure site security and prevent abuse</li>
+                    <li>Deliver in-app notifications and messages to registered accounts</li>
+                    <li>Track message read/unread status to manage notification state</li>
                 </ul>
                 <h2 className="text-xl font-semibold">4. Data Sharing and Security</h2>
                 <p>

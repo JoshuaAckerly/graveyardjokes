@@ -1,6 +1,6 @@
 # Acceptable Use Policy
 
-**Last Updated:** February 19, 2026
+**Last Updated:** March 25, 2026
 
 ## 1. Purpose
 
@@ -36,6 +36,8 @@ You may not use the Service to:
 - Send unsolicited bulk messages or spam
 - Engage in phishing or other deceptive practices
 - Harvest or collect user information without consent
+- Use the in-app messaging system to send unsolicited, harassing, or spam messages
+- Attempt to forge, manipulate, or bypass message read status or notification metadata
 
 ### 2.5 Intellectual Property Violations
 

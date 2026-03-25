@@ -399,11 +399,28 @@ export default function Home(): JSX.Element {
                                     create, I maintain.
                                 </p>
                             </motion.div>
+
+                            {/* Service Card 7 — SEO */}
+                            <motion.div
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true, amount: 0.2 }}
+                                transition={{ duration: 0.6, delay: 0.7 }}
+                                className="rounded-lg bg-white/5 p-6 text-left shadow-lg transition-all hover:bg-white/10 md:col-span-2 lg:col-span-1"
+                            >
+                                <div className="mb-4 text-3xl">📈</div>
+                                <h3 className="mb-2 text-xl font-semibold text-white">SEO & Search Visibility</h3>
+                                <p className="text-sm text-white/70">
+                                    Every site ships with on-page SEO built in — clean semantic markup, fast load times, structured data, and
+                                    mobile-first indexing. Need more? Add a dedicated SEO package with keyword research, meta strategy, and monthly
+                                    reporting so your audience can actually find you.
+                                </p>
+                            </motion.div>
                         </div>
 
                         <div className="pt-8 text-center">
                             <p className="text-lg text-white/80">
-                                All services include mobile-responsive design, SEO optimization, and lightning-fast performance.
+                                All services include mobile-responsive design, on-page SEO, structured data markup, and lightning-fast performance — so you rank higher from day one.
                             </p>
                         </div>
                     </motion.section>

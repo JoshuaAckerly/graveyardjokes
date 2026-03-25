@@ -1,6 +1,6 @@
 # Terms of Service
 
-**Last Updated:** February 19, 2026
+**Last Updated:** March 25, 2026
 
 ## 1. Agreement to Terms
 
@@ -91,15 +91,33 @@ You agree to defend, indemnify, and hold harmless [Your Company Name] from and a
 
 Your use of the Service is also governed by our Privacy Policy. Please review our Privacy Policy, which also governs the Service.
 
-## 11. Changes to Terms
+## 11. Messaging and Notifications
+
+### 11.1 In-App Messages
+
+The Service includes an in-app messaging system that delivers notifications and updates directly to your account. By creating an account, you consent to receiving in-app messages from us.
+
+### 11.2 Message Data
+
+Messages delivered to your account are stored and associated with your user profile. The Service tracks the read and unread status of each message. You may mark individual messages or all messages as read through the notification interface.
+
+### 11.3 Contact Form
+
+The Service provides a contact form for submitting inquiries. By submitting the contact form, you consent to us storing your name, email address, and message content for the purpose of responding to your inquiry.
+
+### 11.4 Messaging Conduct
+
+You may not use any messaging or communication feature of the Service to send unsolicited communications, harass or threaten others, or engage in any activity prohibited by these Terms or our Acceptable Use Policy.
+
+## 12. Changes to Terms
 
 We reserve the right to modify or replace these Terms at any time. If a revision is material, we will try to provide at least 30 days' notice prior to any new terms taking effect.
 
-## 12. Governing Law
+## 13. Governing Law
 
 These Terms shall be governed by the laws of [Your Jurisdiction], without regard to its conflict of law provisions.
 
-## 13. Contact Us
+## 14. Contact Us
 
 If you have any questions about these Terms, please contact us at:
 
