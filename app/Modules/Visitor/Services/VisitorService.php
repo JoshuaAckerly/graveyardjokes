@@ -84,6 +84,4 @@ class VisitorService implements VisitorServiceInterface
 
         return $result;
     }
-
-
 }
