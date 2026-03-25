@@ -4,12 +4,16 @@ import React, { useEffect, useState } from 'react';
 type Props = {
     title: string;
     description: string;
+    longDescription?: string;
     url: string;
     cdn?: string | undefined;
     featured?: boolean;
+    tech?: string[];
+    category?: string;
+    year?: number;
 };
 
-const ProjectCard: React.FC<Props> = ({ title, description, url, cdn, featured }) => {
+const ProjectCard: React.FC<Props> = ({ title, description, longDescription, url, cdn, featured, tech, category, year }) => {
     const [imgSrc, setImgSrc] = useState<string | null>(null);
     const storageKey = `og:v2:${url}`;
 
@@ -62,8 +66,10 @@ const ProjectCard: React.FC<Props> = ({ title, description, url, cdn, featured }
             href={url}
             target="_blank"
             rel="noopener noreferrer"
-            className={`group relative block overflow-hidden rounded-md p-4 transition hover:scale-[1.01] ${
-                featured ? 'bg-white/5 shadow-[0_0_16px_rgba(var(--accent-rgb,168,85,247),0.25)] ring-2 ring-[var(--color-accent)]' : 'bg-white/5'
+            className={`group relative flex flex-col overflow-hidden rounded-lg transition hover:scale-[1.01] hover:shadow-xl ${
+                featured
+                    ? 'bg-white/5 shadow-[0_0_16px_rgba(var(--accent-rgb,168,85,247),0.25)] ring-2 ring-[var(--color-accent)]'
+                    : 'bg-white/5'
             }`}
         >
             {featured && (
@@ -72,18 +78,57 @@ const ProjectCard: React.FC<Props> = ({ title, description, url, cdn, featured }
                 </span>
             )}
 
-            <div className="aspect-video w-full overflow-hidden rounded-md bg-gray-800">
+            {/* Screenshot */}
+            <div className="aspect-video w-full overflow-hidden bg-gray-800">
                 <img
                     src={imgSrc ?? (cdn ? `${cdn}/images/portfolio-placeholder.webp` : '/images/AdobeStock_471779082.webp')}
                     alt={title}
                     loading="lazy"
-                    className="h-full w-full object-cover opacity-90 group-hover:opacity-100"
+                    className="h-full w-full object-cover opacity-90 transition group-hover:opacity-100 group-hover:scale-[1.03]"
                 />
             </div>
 
-            <div className="mt-3">
-                <h4 className="text-lg font-semibold text-white">{title}</h4>
-                <p className="mt-1 text-sm text-white/70">{description}</p>
+            {/* Content */}
+            <div className="flex flex-1 flex-col gap-3 p-5">
+                {/* Header row */}
+                <div className="flex items-start justify-between gap-2">
+                    <h4 className="text-lg font-bold text-white leading-tight">{title}</h4>
+                    {(category || year) && (
+                        <div className="flex flex-col items-end gap-1 shrink-0">
+                            {category && (
+                                <span className="rounded-full bg-white/10 px-2 py-0.5 text-[11px] text-white/60">{category}</span>
+                            )}
+                            {year && <span className="text-[11px] text-white/40">{year}</span>}
+                        </div>
+                    )}
+                </div>
+
+                {/* Short description always visible */}
+                <p className="text-sm text-white/70 leading-relaxed">{description}</p>
+
+                {/* Long description */}
+                {longDescription && (
+                    <p className="text-sm text-white/50 leading-relaxed border-t border-white/10 pt-3">{longDescription}</p>
+                )}
+
+                {/* Tech tags */}
+                {tech && tech.length > 0 && (
+                    <div className="mt-auto flex flex-wrap gap-1.5 pt-2">
+                        {tech.map((t) => (
+                            <span
+                                key={t}
+                                className="rounded-full bg-[var(--color-accent)]/15 px-2.5 py-0.5 text-[11px] font-medium text-[var(--color-accent)]"
+                            >
+                                {t}
+                            </span>
+                        ))}
+                    </div>
+                )}
+
+                {/* Visit link */}
+                <span className="mt-2 inline-flex items-center gap-1 text-xs font-semibold text-[var(--color-accent)] group-hover:underline">
+                    Visit site →
+                </span>
             </div>
         </a>
     );
