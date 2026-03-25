@@ -91,9 +91,9 @@ const Terms: React.FC = () => {
 
                 <h2 className="text-xl font-semibold">7. Messaging and Notifications</h2>
                 <p>
-                    Registered users may receive in-app notifications and messages delivered directly to their account inbox. By creating an
-                    account, you consent to receiving in-app messages from us. You may mark messages as read or dismiss them through the
-                    notification interface. You may not use any messaging feature to send unsolicited communications or to harass others.
+                    Registered users may receive in-app notifications and messages delivered directly to their account inbox. By creating an account,
+                    you consent to receiving in-app messages from us. You may mark messages as read or dismiss them through the notification
+                    interface. You may not use any messaging feature to send unsolicited communications or to harass others.
                 </p>
 
                 <h2 className="text-xl font-semibold">8. Modifications</h2>

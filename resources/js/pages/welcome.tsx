@@ -420,7 +420,8 @@ export default function Home(): JSX.Element {
 
                         <div className="pt-8 text-center">
                             <p className="text-lg text-white/80">
-                                All services include mobile-responsive design, on-page SEO, structured data markup, and lightning-fast performance — so you rank higher from day one.
+                                All services include mobile-responsive design, on-page SEO, structured data markup, and lightning-fast performance —
+                                so you rank higher from day one.
                             </p>
                         </div>
                     </motion.section>
