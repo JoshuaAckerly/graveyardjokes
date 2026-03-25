@@ -48,15 +48,11 @@ const Portfolio: React.FC = () => {
 
             <section className="relative z-0 flex flex-col items-center gap-12 rounded-lg bg-[var(--color-foreground)] p-6 text-white shadow-lg sm:p-10">
                 {/* Header */}
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6 }}
-                    className="text-center"
-                >
+                <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="text-center">
                     <h1 className="text-5xl font-extrabold text-[var(--accent)]">Portfolio</h1>
                     <p className="mt-4 max-w-2xl text-lg text-white/70">
-                        Every project here is a real, live website — designed from scratch, built with modern tech, and optimized for speed, SEO, and mobile. Take a look around.
+                        Every project here is a real, live website — designed from scratch, built with modern tech, and optimized for speed, SEO, and
+                        mobile. Take a look around.
                     </p>
                 </motion.div>
 

@@ -67,9 +67,7 @@ const ProjectCard: React.FC<Props> = ({ title, description, longDescription, url
             target="_blank"
             rel="noopener noreferrer"
             className={`group relative flex flex-col overflow-hidden rounded-lg transition hover:scale-[1.01] hover:shadow-xl ${
-                featured
-                    ? 'bg-white/5 shadow-[0_0_16px_rgba(var(--accent-rgb,168,85,247),0.25)] ring-2 ring-[var(--color-accent)]'
-                    : 'bg-white/5'
+                featured ? 'bg-white/5 shadow-[0_0_16px_rgba(var(--accent-rgb,168,85,247),0.25)] ring-2 ring-[var(--color-accent)]' : 'bg-white/5'
             }`}
         >
             {featured && (
@@ -84,7 +82,7 @@ const ProjectCard: React.FC<Props> = ({ title, description, longDescription, url
                     src={imgSrc ?? (cdn ? `${cdn}/images/portfolio-placeholder.webp` : '/images/AdobeStock_471779082.webp')}
                     alt={title}
                     loading="lazy"
-                    className="h-full w-full object-cover opacity-90 transition group-hover:opacity-100 group-hover:scale-[1.03]"
+                    className="h-full w-full object-cover opacity-90 transition group-hover:scale-[1.03] group-hover:opacity-100"
                 />
             </div>
 
@@ -92,24 +90,20 @@ const ProjectCard: React.FC<Props> = ({ title, description, longDescription, url
             <div className="flex flex-1 flex-col gap-3 p-5">
                 {/* Header row */}
                 <div className="flex items-start justify-between gap-2">
-                    <h4 className="text-lg font-bold text-white leading-tight">{title}</h4>
+                    <h4 className="text-lg leading-tight font-bold text-white">{title}</h4>
                     {(category || year) && (
-                        <div className="flex flex-col items-end gap-1 shrink-0">
-                            {category && (
-                                <span className="rounded-full bg-white/10 px-2 py-0.5 text-[11px] text-white/60">{category}</span>
-                            )}
+                        <div className="flex shrink-0 flex-col items-end gap-1">
+                            {category && <span className="rounded-full bg-white/10 px-2 py-0.5 text-[11px] text-white/60">{category}</span>}
                             {year && <span className="text-[11px] text-white/40">{year}</span>}
                         </div>
                     )}
                 </div>
 
                 {/* Short description always visible */}
-                <p className="text-sm text-white/70 leading-relaxed">{description}</p>
+                <p className="text-sm leading-relaxed text-white/70">{description}</p>
 
                 {/* Long description */}
-                {longDescription && (
-                    <p className="text-sm text-white/50 leading-relaxed border-t border-white/10 pt-3">{longDescription}</p>
-                )}
+                {longDescription && <p className="border-t border-white/10 pt-3 text-sm leading-relaxed text-white/50">{longDescription}</p>}
 
                 {/* Tech tags */}
                 {tech && tech.length > 0 && (
