@@ -14,7 +14,7 @@ export default function Home(): JSX.Element {
     const cdn = getEnvVar('VITE_ASSET_URL');
 
     const handleClick = (): void => {
-        router.visit(getProjectUrl('graveyardjokes'));
+        router.visit('/contact');
     };
 
     const [joke, setJoke] = useState<{ id?: string; setup?: string; punchline?: string; category?: string } | null>(null);
