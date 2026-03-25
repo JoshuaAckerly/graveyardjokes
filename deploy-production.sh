@@ -81,6 +81,7 @@ pm2 save
 if grep -q "QUEUE_CONNECTION=redis\|QUEUE_CONNECTION=database" .env; then
     echo "🔄 Restarting queue workers..."
     php artisan queue:restart
+    pm2 restart "$PROJECT_NAME-queue" --update-env 2>/dev/null || true
 fi
 
 echo ""
