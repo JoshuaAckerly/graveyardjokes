@@ -19,7 +19,7 @@ export default function StarterPackage() {
     return (
         <>
             <Head>
-                <title>Starter Package - $199 | Graveyard Jokes Studios</title>
+                <title>Starter Package - $150 Limited Offer | Graveyard Jokes Studios</title>
                 <meta
                     name="description"
                     content="Starter plan for new businesses: responsive web design, core development features, and a clean, launch-ready website at an affordable monthly cost."
@@ -96,10 +96,17 @@ export default function StarterPackage() {
                         transition={{ duration: 0.5 }}
                         className="rounded-lg border-2 border-(--accent) bg-(--card) p-8"
                     >
-                        <h1 className="mb-4 text-4xl font-bold text-white">Starter Package</h1>
-                        <div className="mb-6">
-                            <span className="text-5xl font-bold text-(--primary)">$199</span>
+                        <div className="mb-4 flex flex-wrap items-center gap-3">
+                            <h1 className="text-4xl font-bold text-white">Starter Package</h1>
+                            <span className="rounded-full bg-[var(--primary)] px-3 py-1 text-xs font-bold uppercase tracking-wide text-white">
+                                ⚡ Limited Time — First 5 Clients Only
+                            </span>
                         </div>
+                        <div className="mb-2 flex items-baseline gap-3">
+                            <span className="text-2xl text-white/40 line-through">$199</span>
+                            <span className="text-5xl font-bold text-(--primary)">$150</span>
+                        </div>
+                        <p className="mb-1 text-sm font-semibold text-[var(--primary)]">Only 5 spots at this price. Once they're gone, they're gone.</p>
                         <p className="mb-8 text-lg text-gray-300">Perfect for startups launching their first website</p>
                         <h2 className="mb-4 text-2xl font-bold text-white">What's Included:</h2>
                         <ul className="mb-8 space-y-3">
@@ -116,7 +123,7 @@ export default function StarterPackage() {
                                 Complete the short project questionnaire first. Once submitted, payment unlocks instantly for this package.
                             </p>
                             <div className="mb-6" style={{ minHeight: '45px' }}>
-                                <PackagePaymentGate amount={199} item="Starter Package" packageSlug="starter" />
+                                <PackagePaymentGate amount={150} item="Starter Package (Limited Time Promo)" packageSlug="starter" />
                             </div>
                             <p className="text-sm text-gray-400">
                                 Have questions?{' '}

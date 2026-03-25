@@ -281,7 +281,7 @@ export default function Home(): JSX.Element {
                             <p className="mt-2 text-sm font-semibold text-white/60">Only 5 spots. Once they're gone, they're gone.</p>
                             <motion.div whileHover={{ scale: 1.05 }} className="mt-6 inline-block">
                                 <Link
-                                    href="/contact"
+                                    href="/services/starter"
                                     className="inline-flex rounded-lg bg-[var(--primary)] px-8 py-4 text-lg font-semibold text-white shadow-lg transition hover:bg-[var(--accent)]"
                                 >
                                     Grab Your Spot
