@@ -436,9 +436,7 @@ export default function Home(): JSX.Element {
                     >
                         <div className="rounded-lg border border-white/10 bg-white/5 p-8 shadow-lg sm:p-12">
                             <div className="flex flex-col items-center gap-8 md:flex-row md:items-start md:text-left">
-                                <div className="flex h-28 w-28 shrink-0 items-center justify-center rounded-full bg-white/10 text-5xl">
-                                    👨‍💻
-                                </div>
+                                <div className="flex h-28 w-28 shrink-0 items-center justify-center rounded-full bg-white/10 text-5xl">👨‍💻</div>
                                 <div>
                                     <h2 className="text-2xl font-bold text-white sm:text-3xl">Hey, I'm Joshua</h2>
                                     <p className="mt-1 text-sm font-medium text-[var(--primary)]">Founder & Developer — Graveyard Jokes Studios</p>
