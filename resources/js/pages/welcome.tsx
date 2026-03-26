@@ -426,6 +426,64 @@ export default function Home(): JSX.Element {
                         </div>
                     </motion.section>
 
+                    {/* About Me */}
+                    <motion.section
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true, amount: 0.2 }}
+                        transition={{ duration: 0.8 }}
+                        className="relative z-10 mx-auto w-full max-w-4xl px-6 py-16 sm:px-12"
+                    >
+                        <div className="rounded-lg border border-white/10 bg-white/5 p-8 shadow-lg sm:p-12">
+                            <div className="flex flex-col items-center gap-8 md:flex-row md:items-start md:text-left">
+                                <div className="flex h-28 w-28 shrink-0 items-center justify-center rounded-full bg-white/10 text-5xl">
+                                    👨‍💻
+                                </div>
+                                <div>
+                                    <h2 className="text-2xl font-bold text-white sm:text-3xl">Hey, I'm Joshua</h2>
+                                    <p className="mt-1 text-sm font-medium text-[var(--primary)]">Founder & Developer — Graveyard Jokes Studios</p>
+                                    <p className="mt-4 text-base text-white/70">
+                                        I'm a full-stack developer based in Cheektowaga, New York, and I built Graveyard Jokes Studios to give
+                                        musicians, artists, and creatives access to professional-quality websites without the agency price tag.
+                                    </p>
+                                    <p className="mt-3 text-base text-white/70">
+                                        I handle everything — design, code, deployment, and ongoing support. No handoffs, no middlemen. You deal
+                                        directly with the person writing the code, which means faster communication and work that actually reflects
+                                        your vision.
+                                    </p>
+                                    <p className="mt-3 text-base text-white/70">
+                                        My stack of choice is Laravel, React, and TypeScript — built for speed, security, and scalability from day
+                                        one.
+                                    </p>
+                                    <div className="mt-6 flex flex-wrap gap-3">
+                                        <a
+                                            href="https://github.com/joshua-ackerly"
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="inline-flex items-center gap-2 rounded border border-white/20 bg-transparent px-4 py-2 text-sm text-white/90 transition hover:bg-white/10"
+                                        >
+                                            GitHub
+                                        </a>
+                                        <a
+                                            href="https://www.linkedin.com/in/joshua-ackerly"
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="inline-flex items-center gap-2 rounded border border-white/20 bg-transparent px-4 py-2 text-sm text-white/90 transition hover:bg-white/10"
+                                        >
+                                            LinkedIn
+                                        </a>
+                                        <Link
+                                            href="/contact"
+                                            className="inline-flex items-center gap-2 rounded bg-[var(--primary)] px-4 py-2 text-sm font-semibold text-white transition hover:bg-[var(--accent)]"
+                                        >
+                                            Work With Me
+                                        </Link>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </motion.section>
+
                     {/* Direct Messaging CTA */}
                     <motion.section
                         initial={{ opacity: 0, y: 20 }}
