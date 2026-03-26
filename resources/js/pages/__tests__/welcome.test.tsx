@@ -15,7 +15,7 @@ const Home = () => {
             const base = typeof window !== 'undefined' ? window.location.origin : '';
             const res = await fetch(`${base}/api/random-joke`);
             if (!res.ok) throw new Error('Failed to fetch joke');
-            const data = await res.json() as { setup?: string; punchline?: string };
+            const data = (await res.json()) as { setup?: string; punchline?: string };
             setJoke(data);
         } catch {
             // swallow
@@ -121,7 +121,7 @@ describe('Welcome Page (Home)', () => {
             expect(screen.getByText('Why did the skeleton go to the party?')).toBeInTheDocument();
         });
 
-        expect(screen.getByText("Because it had no body to go with!")).toBeInTheDocument();
+        expect(screen.getByText('Because it had no body to go with!')).toBeInTheDocument();
     });
 
     it('calls the joke API when the button is clicked', async () => {
@@ -129,19 +129,24 @@ describe('Welcome Page (Home)', () => {
 
         await userEvent.click(screen.getByRole('button', { name: /Another joke/i }));
 
-        expect((global as any).fetch).toHaveBeenCalledWith(
-            expect.stringContaining('/api/random-joke')
-        );
+        expect((global as any).fetch).toHaveBeenCalledWith(expect.stringContaining('/api/random-joke'));
     });
 
     it('shows loading state while fetching', async () => {
         // Delay the fetch resolution so we can observe the loading state
-        (global as any).fetch = jest.fn(() => new Promise(resolve =>
-            setTimeout(() => resolve({
-                ok: true,
-                json: async () => ({ setup: 'Setup', punchline: 'Punchline' }),
-            }), 100)
-        ));
+        (global as any).fetch = jest.fn(
+            () =>
+                new Promise((resolve) =>
+                    setTimeout(
+                        () =>
+                            resolve({
+                                ok: true,
+                                json: async () => ({ setup: 'Setup', punchline: 'Punchline' }),
+                            }),
+                        100,
+                    ),
+                ),
+        );
 
         render(<Home />);
 
@@ -157,9 +162,7 @@ describe('Welcome Page (Home)', () => {
     });
 
     it('handles fetch failure gracefully without crashing', async () => {
-        (global as any).fetch = jest.fn(() =>
-            Promise.resolve({ ok: false, json: async () => ({}) })
-        );
+        (global as any).fetch = jest.fn(() => Promise.resolve({ ok: false, json: async () => ({}) }));
 
         render(<Home />);
 
@@ -171,4 +174,3 @@ describe('Welcome Page (Home)', () => {
         expect(screen.getByRole('button', { name: /Another joke/i })).toBeInTheDocument();
     });
 });
-
