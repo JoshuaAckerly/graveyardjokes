@@ -75,7 +75,7 @@ export default defineConfig(({ mode }) => {
             },
         },
         ssr: {
-            noExternal: ['react', 'react-dom', '@inertiajs/react', '@inertiajs/core'],
+            noExternal: ['react', 'react-dom', '@inertiajs/react', '@inertiajs/core', 'framer-motion'],
         },
     };
 });
