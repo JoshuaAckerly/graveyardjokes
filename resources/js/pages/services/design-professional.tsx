@@ -27,10 +27,7 @@ export default function DesignProfessionalPackage() {
                     name="description"
                     content="Professional design package: comprehensive UI design system, interactive prototypes, and complete brand guidelines. Perfect for custom websites."
                 />
-                <meta
-                    name="keywords"
-                    content="professional web design, UI design system, brand guidelines, interactive prototypes, custom design"
-                />
+                <meta name="keywords" content="professional web design, UI design system, brand guidelines, interactive prototypes, custom design" />
                 <link rel="canonical" href="https://graveyardjokes.com/services/design-professional" />
                 {/* Open Graph */}
                 <meta property="og:title" content="Website Design - Professional Package - $349 | Graveyard Jokes Studios" />

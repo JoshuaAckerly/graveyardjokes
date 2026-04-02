@@ -131,7 +131,11 @@ export default function ModernizationProfessionalPackage() {
                                 Complete the short project questionnaire first. Once submitted, payment unlocks instantly for this package.
                             </p>
                             <div className="min-h-[50px]">
-                                <PackagePaymentGate amount={399} item="Website Modernization - Professional" packageSlug="modernization-professional" />
+                                <PackagePaymentGate
+                                    amount={399}
+                                    item="Website Modernization - Professional"
+                                    packageSlug="modernization-professional"
+                                />
                             </div>
                         </div>
                     </motion.div>

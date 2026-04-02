@@ -550,7 +550,8 @@ export default function Home(): JSX.Element {
                                 <div>
                                     <h2 className="text-2xl font-semibold">Graveyard Jokes Studios</h2>
                                     <p className="mt-2 text-sm opacity-80">
-                                        A showcase hub featuring vlogs, blogs, and an image gallery that captures our creative journey and behind-the-scenes content.
+                                        A showcase hub featuring vlogs, blogs, and an image gallery that captures our creative journey and
+                                        behind-the-scenes content.
                                     </p>
                                     <p className="mt-3 text-sm opacity-70">Explore the studio and connect with our creative community.</p>
                                 </div>

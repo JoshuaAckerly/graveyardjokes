@@ -26,10 +26,7 @@ export default function ModernizationStarterPackage() {
                     name="description"
                     content="Starter modernization: give your existing website a fresh look. Visual refresh, responsiveness updates, and performance optimization."
                 />
-                <meta
-                    name="keywords"
-                    content="website modernization, website redesign, responsive design, performance optimization, SEO update"
-                />
+                <meta name="keywords" content="website modernization, website redesign, responsive design, performance optimization, SEO update" />
                 <link rel="canonical" href="https://graveyardjokes.com/services/modernization-starter" />
                 {/* Open Graph */}
                 <meta property="og:title" content="Website Modernization - Starter Package - $249 | Graveyard Jokes Studios" />

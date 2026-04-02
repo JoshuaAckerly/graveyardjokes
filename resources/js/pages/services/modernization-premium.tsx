@@ -29,10 +29,7 @@ export default function ModernizationPremiumPackage() {
                     name="description"
                     content="Premium modernization: full tech stack migration, advanced security, analytics setup, and strategic consultation for complete digital transformation."
                 />
-                <meta
-                    name="keywords"
-                    content="website modernization, tech migration, security hardening, analytics setup, digital transformation"
-                />
+                <meta name="keywords" content="website modernization, tech migration, security hardening, analytics setup, digital transformation" />
                 <link rel="canonical" href="https://graveyardjokes.com/services/modernization-premium" />
                 {/* Open Graph */}
                 <meta property="og:title" content="Website Modernization - Premium Package - $599 | Graveyard Jokes Studios" />
@@ -94,7 +91,8 @@ export default function ModernizationPremiumPackage() {
                         <div className="mb-6">
                             <span className="text-5xl font-bold text-(--primary)">$599</span>
                             <p className="mt-2 text-lg text-white/80">
-                                Full tech stack migration, advanced security, analytics, and strategic consultation for complete digital transformation.
+                                Full tech stack migration, advanced security, analytics, and strategic consultation for complete digital
+                                transformation.
                             </p>
                         </div>
 

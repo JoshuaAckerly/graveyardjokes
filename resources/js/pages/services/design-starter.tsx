@@ -25,10 +25,7 @@ export default function DesignStarterPackage() {
                     name="description"
                     content="Starter design package: get professional wireframes and mockups for your website. Perfect for planning your visual direction before development."
                 />
-                <meta
-                    name="keywords"
-                    content="website design, starter design, wireframes, mockups, UI design, UX design, affordable design"
-                />
+                <meta name="keywords" content="website design, starter design, wireframes, mockups, UI design, UX design, affordable design" />
                 <link rel="canonical" href="https://graveyardjokes.com/services/design-starter" />
                 {/* Open Graph */}
                 <meta property="og:title" content="Website Design - Starter Package - $199 | Graveyard Jokes Studios" />

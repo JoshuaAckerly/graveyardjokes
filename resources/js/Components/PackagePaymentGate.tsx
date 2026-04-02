@@ -2,9 +2,9 @@ import PayPalCheckoutButton from '@/Components/PayPalCheckoutButton';
 import type { SharedData } from '@/types';
 import { Link, usePage } from '@inertiajs/react';
 
-export type PackageSlug = 
-    | 'starter' 
-    | 'professional' 
+export type PackageSlug =
+    | 'starter'
+    | 'professional'
     | 'premium'
     | 'design-starter'
     | 'design-professional'
