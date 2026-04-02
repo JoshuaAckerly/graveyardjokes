@@ -542,18 +542,17 @@ export default function Home(): JSX.Element {
                         <Carousel />
                     </motion.div>
 
-                    {/* Noteleks Promo + Portfolio Showcase */}
+                    {/* Studio Reference + Portfolio Showcase */}
                     <div className="relative z-10 mx-auto w-full max-w-6xl space-y-10 px-6 pb-24 sm:px-12">
-                        {/* Noteleks Promo */}
+                        {/* Studio Spotlight */}
                         <section className="mx-auto max-w-3xl rounded-md bg-white/5 p-6 text-left text-white shadow-lg">
                             <div className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
                                 <div>
-                                    <h2 className="text-2xl font-semibold">Noteleks: Heroes Beyond Light</h2>
+                                    <h2 className="text-2xl font-semibold">Graveyard Jokes Studios</h2>
                                     <p className="mt-2 text-sm opacity-80">
-                                        My game created with Graveyard Jokes Studios — an immersive experience that showcases what's possible with
-                                        custom web development and interactive design.
+                                        A showcase hub featuring vlogs, blogs, and an image gallery that captures our creative journey and behind-the-scenes content.
                                     </p>
-                                    <p className="mt-3 text-sm opacity-70">Explore the game and see the studio's capabilities in action.</p>
+                                    <p className="mt-3 text-sm opacity-70">Explore the studio and connect with our creative community.</p>
                                 </div>
 
                                 <div className="mt-4 flex items-center gap-4 sm:mt-0">

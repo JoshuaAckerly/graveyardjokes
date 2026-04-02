@@ -59,6 +59,32 @@ Route::get('/services/premium', function () {
     return Inertia::render('services/premium');
 })->name('services.premium');
 
+// Website Design Services
+Route::get('/services/design-starter', function () {
+    return Inertia::render('services/design-starter');
+})->name('services.design-starter');
+
+Route::get('/services/design-professional', function () {
+    return Inertia::render('services/design-professional');
+})->name('services.design-professional');
+
+Route::get('/services/design-premium', function () {
+    return Inertia::render('services/design-premium');
+})->name('services.design-premium');
+
+// Website Modernization Services
+Route::get('/services/modernization-starter', function () {
+    return Inertia::render('services/modernization-starter');
+})->name('services.modernization-starter');
+
+Route::get('/services/modernization-professional', function () {
+    return Inertia::render('services/modernization-professional');
+})->name('services.modernization-professional');
+
+Route::get('/services/modernization-premium', function () {
+    return Inertia::render('services/modernization-premium');
+})->name('services.modernization-premium');
+
 Route::get('/services/intake', [WebsiteIntakeController::class, 'create'])->name('services.intake.create');
 Route::post('/services/intake', [WebsiteIntakeController::class, 'store'])->name('services.intake.store');
 

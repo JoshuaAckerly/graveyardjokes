@@ -8,7 +8,7 @@ import { getProjectUrl } from '../env';
 export default function Services() {
     const cdn = import.meta.env.VITE_ASSET_URL || '';
 
-    const packages: Array<{
+    const websitePackages: Array<{
         slug: PackageSlug;
         title: string;
         price: number;
@@ -67,6 +67,135 @@ export default function Services() {
                 'Priority updates',
             ],
             link: '/services/premium',
+            popular: false,
+        },
+    ];
+
+    const designPackages: Array<{
+        slug: PackageSlug;
+        title: string;
+        price: number;
+        description: string;
+        features: string[];
+        link: string;
+        popular: boolean;
+    }> = [
+        {
+            slug: 'design-starter',
+            title: 'Design - Starter',
+            price: 199,
+            description: 'Wireframes and design mockups',
+            features: [
+                'Wireframes for 3-5 pages',
+                'Design mockups in Figma',
+                'Brand color palette',
+                'Mobile-first design',
+                'Icon set suggestions',
+                '2 rounds of revisions',
+                '1 month of support',
+            ],
+            link: '/services/design-starter',
+            popular: false,
+        },
+        {
+            slug: 'design-professional',
+            title: 'Design - Professional',
+            price: 349,
+            description: 'Complete UI design system & prototypes',
+            features: [
+                'Everything in Starter',
+                'Custom UI design system',
+                'Interactive prototypes',
+                'Design specifications',
+                'Full brand guidelines',
+                'Logo design or refinement',
+                '4 rounds of revisions',
+                '3 months of support',
+            ],
+            link: '/services/design-professional',
+            popular: true,
+        },
+        {
+            slug: 'design-premium',
+            title: 'Design - Premium',
+            price: 499,
+            description: 'Premium brand identity & ongoing consultation',
+            features: [
+                'Everything in Professional',
+                'Premium brand identity',
+                'Custom illustrations',
+                'Animation design specs',
+                'Accessibility audit',
+                'Design tokens & CSS system',
+                'Unlimited revisions',
+                '6 months of support',
+            ],
+            link: '/services/design-premium',
+            popular: false,
+        },
+    ];
+
+    const modernizationPackages: Array<{
+        slug: PackageSlug;
+        title: string;
+        price: number;
+        description: string;
+        features: string[];
+        link: string;
+        popular: boolean;
+    }> = [
+        {
+            slug: 'modernization-starter',
+            title: 'Modernization - Starter',
+            price: 249,
+            description: 'Visual refresh & performance updates',
+            features: [
+                'Visual design refresh',
+                'Navigation updates',
+                'Mobile responsiveness',
+                'Performance optimization',
+                'SEO recommendations',
+                'Security scan',
+                'Improvement roadmap',
+                '2 weeks of support',
+            ],
+            link: '/services/modernization-starter',
+            popular: false,
+        },
+        {
+            slug: 'modernization-professional',
+            title: 'Modernization - Professional',
+            price: 399,
+            description: 'Complete design & code refresh',
+            features: [
+                'Everything in Starter',
+                'Design & code refresh',
+                'Modern framework update',
+                'Accessibility compliance',
+                'Advanced SEO',
+                'Performance monitoring',
+                'Image optimization',
+                '1 month of support',
+            ],
+            link: '/services/modernization-professional',
+            popular: true,
+        },
+        {
+            slug: 'modernization-premium',
+            title: 'Modernization - Premium',
+            price: 599,
+            description: 'Full tech migration & strategic consultation',
+            features: [
+                'Everything in Professional',
+                'Full tech stack migration',
+                'Advanced security',
+                'Analytics & monitoring setup',
+                'CMS & automation setup',
+                'Backup & recovery setup',
+                'Quarterly reviews',
+                '3 months of support',
+            ],
+            link: '/services/modernization-premium',
             popular: false,
         },
     ];
@@ -147,55 +276,169 @@ export default function Services() {
 
                     {/* Packages Grid */}
                     <div className="relative mx-auto mt-6 max-w-7xl px-3 pb-20 sm:mt-8 sm:px-4 sm:pb-32" style={{ maxWidth: '100vw' }}>
-                        <div className="grid grid-cols-1 gap-6 sm:gap-8 md:grid-cols-2 lg:grid-cols-3" style={{ maxWidth: '100%' }}>
-                            {packages.map((pkg) => (
-                                <motion.div
-                                    key={pkg.title}
-                                    className={`relative z-0 flex flex-col rounded-lg border-2 p-4 shadow-lg transition sm:p-6 ${
-                                        pkg.popular
-                                            ? 'border-(--primary) bg-(--card) shadow-(--primary)/20 shadow-xl'
-                                            : 'border-(--accent) bg-(--card)'
-                                    }`}
-                                    initial={{ opacity: 0, y: 20 }}
-                                    whileInView={{ opacity: 1, y: 0 }}
-                                    viewport={{ once: true }}
-                                    transition={{ duration: 0.5 }}
-                                    whileHover={{ scale: 1.02 }}
-                                >
-                                    {pkg.popular && (
-                                        <div className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-(--primary) px-4 py-1 text-xs font-bold text-white">
-                                            MOST POPULAR
+                        {/* Website Development Section */}
+                        <div className="mb-16">
+                            <h2 className="mb-8 text-center text-2xl font-bold text-white sm:text-3xl">Website Development</h2>
+                            <div className="grid grid-cols-1 gap-6 sm:gap-8 md:grid-cols-2 lg:grid-cols-3" style={{ maxWidth: '100%' }}>
+                                {websitePackages.map((pkg) => (
+                                    <motion.div
+                                        key={pkg.title}
+                                        className={`relative z-0 flex flex-col rounded-lg border-2 p-4 shadow-lg transition sm:p-6 ${
+                                            pkg.popular
+                                                ? 'border-(--primary) bg-(--card) shadow-(--primary)/20 shadow-xl'
+                                                : 'border-(--accent) bg-(--card)'
+                                        }`}
+                                        initial={{ opacity: 0, y: 20 }}
+                                        whileInView={{ opacity: 1, y: 0 }}
+                                        viewport={{ once: true }}
+                                        transition={{ duration: 0.5 }}
+                                        whileHover={{ scale: 1.02 }}
+                                    >
+                                        {pkg.popular && (
+                                            <div className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-(--primary) px-4 py-1 text-xs font-bold text-white">
+                                                MOST POPULAR
+                                            </div>
+                                        )}
+
+                                        <div className="mb-3 text-center sm:mb-4">
+                                            <h3 className="text-xl font-bold text-white sm:text-2xl">{pkg.title}</h3>
+                                            <div className="mt-2 flex items-baseline justify-center gap-1">
+                                                <span className="text-3xl font-bold text-(--primary) sm:text-4xl">${pkg.price}</span>
+                                            </div>
+                                            <p className="mt-2 text-xs text-gray-300 sm:text-sm">{pkg.description}</p>
                                         </div>
-                                    )}
 
-                                    <div className="mb-3 text-center sm:mb-4">
-                                        <h3 className="text-xl font-bold text-white sm:text-2xl">{pkg.title}</h3>
-                                        <div className="mt-2 flex items-baseline justify-center gap-1">
-                                            <span className="text-3xl font-bold text-(--primary) sm:text-4xl">{pkg.price}</span>
+                                        <ul className="mb-6 flex-1 space-y-3">
+                                            {pkg.features.map((feature, index) => (
+                                                <li key={index} className="flex items-start gap-2 text-sm text-gray-200">
+                                                    <Check className="mt-0.5 h-5 w-5 shrink-0 text-(--primary)" />
+                                                    <span>{feature}</span>
+                                                </li>
+                                            ))}
+                                        </ul>
+
+                                        <div className="mt-auto flex flex-col gap-2">
+                                            <Link
+                                                href={pkg.link}
+                                                className="block w-full rounded-lg bg-(--primary) px-6 py-3 text-center font-semibold text-white transition hover:bg-(--accent)"
+                                            >
+                                                View Details
+                                            </Link>
+                                            <PackagePaymentGate amount={pkg.price} item={pkg.title} packageSlug={pkg.slug} />
                                         </div>
-                                        <p className="mt-2 text-xs text-gray-300 sm:text-sm">{pkg.description}</p>
-                                    </div>
+                                    </motion.div>
+                                ))}
+                            </div>
+                        </div>
 
-                                    <ul className="mb-6 flex-1 space-y-3">
-                                        {pkg.features.map((feature, index) => (
-                                            <li key={index} className="flex items-start gap-2 text-sm text-gray-200">
-                                                <Check className="mt-0.5 h-5 w-5 shrink-0 text-(--primary)" />
-                                                <span>{feature}</span>
-                                            </li>
-                                        ))}
-                                    </ul>
+                        {/* Website Design Section */}
+                        <div className="mb-16">
+                            <h2 className="mb-8 text-center text-2xl font-bold text-white sm:text-3xl">Website Design Services</h2>
+                            <div className="grid grid-cols-1 gap-6 sm:gap-8 md:grid-cols-2 lg:grid-cols-3" style={{ maxWidth: '100%' }}>
+                                {designPackages.map((pkg) => (
+                                    <motion.div
+                                        key={pkg.title}
+                                        className={`relative z-0 flex flex-col rounded-lg border-2 p-4 shadow-lg transition sm:p-6 ${
+                                            pkg.popular
+                                                ? 'border-(--primary) bg-(--card) shadow-(--primary)/20 shadow-xl'
+                                                : 'border-(--accent) bg-(--card)'
+                                        }`}
+                                        initial={{ opacity: 0, y: 20 }}
+                                        whileInView={{ opacity: 1, y: 0 }}
+                                        viewport={{ once: true }}
+                                        transition={{ duration: 0.5 }}
+                                        whileHover={{ scale: 1.02 }}
+                                    >
+                                        {pkg.popular && (
+                                            <div className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-(--primary) px-4 py-1 text-xs font-bold text-white">
+                                                MOST POPULAR
+                                            </div>
+                                        )}
 
-                                    <div className="mt-auto flex flex-col gap-2">
-                                        <Link
-                                            href={pkg.link}
-                                            className="block w-full rounded-lg bg-(--primary) px-6 py-3 text-center font-semibold text-white transition hover:bg-(--accent)"
-                                        >
-                                            View Details
-                                        </Link>
-                                        <PackagePaymentGate amount={pkg.price} item={pkg.title} packageSlug={pkg.slug} />
-                                    </div>
-                                </motion.div>
-                            ))}
+                                        <div className="mb-3 text-center sm:mb-4">
+                                            <h3 className="text-xl font-bold text-white sm:text-2xl">{pkg.title}</h3>
+                                            <div className="mt-2 flex items-baseline justify-center gap-1">
+                                                <span className="text-3xl font-bold text-(--primary) sm:text-4xl">${pkg.price}</span>
+                                            </div>
+                                            <p className="mt-2 text-xs text-gray-300 sm:text-sm">{pkg.description}</p>
+                                        </div>
+
+                                        <ul className="mb-6 flex-1 space-y-3">
+                                            {pkg.features.map((feature, index) => (
+                                                <li key={index} className="flex items-start gap-2 text-sm text-gray-200">
+                                                    <Check className="mt-0.5 h-5 w-5 shrink-0 text-(--primary)" />
+                                                    <span>{feature}</span>
+                                                </li>
+                                            ))}
+                                        </ul>
+
+                                        <div className="mt-auto flex flex-col gap-2">
+                                            <Link
+                                                href={pkg.link}
+                                                className="block w-full rounded-lg bg-(--primary) px-6 py-3 text-center font-semibold text-white transition hover:bg-(--accent)"
+                                            >
+                                                View Details
+                                            </Link>
+                                            <PackagePaymentGate amount={pkg.price} item={pkg.title} packageSlug={pkg.slug} />
+                                        </div>
+                                    </motion.div>
+                                ))}
+                            </div>
+                        </div>
+
+                        {/* Website Modernization Section */}
+                        <div>
+                            <h2 className="mb-8 text-center text-2xl font-bold text-white sm:text-3xl">Website Modernization Services</h2>
+                            <div className="grid grid-cols-1 gap-6 sm:gap-8 md:grid-cols-2 lg:grid-cols-3" style={{ maxWidth: '100%' }}>
+                                {modernizationPackages.map((pkg) => (
+                                    <motion.div
+                                        key={pkg.title}
+                                        className={`relative z-0 flex flex-col rounded-lg border-2 p-4 shadow-lg transition sm:p-6 ${
+                                            pkg.popular
+                                                ? 'border-(--primary) bg-(--card) shadow-(--primary)/20 shadow-xl'
+                                                : 'border-(--accent) bg-(--card)'
+                                        }`}
+                                        initial={{ opacity: 0, y: 20 }}
+                                        whileInView={{ opacity: 1, y: 0 }}
+                                        viewport={{ once: true }}
+                                        transition={{ duration: 0.5 }}
+                                        whileHover={{ scale: 1.02 }}
+                                    >
+                                        {pkg.popular && (
+                                            <div className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-(--primary) px-4 py-1 text-xs font-bold text-white">
+                                                MOST POPULAR
+                                            </div>
+                                        )}
+
+                                        <div className="mb-3 text-center sm:mb-4">
+                                            <h3 className="text-xl font-bold text-white sm:text-2xl">{pkg.title}</h3>
+                                            <div className="mt-2 flex items-baseline justify-center gap-1">
+                                                <span className="text-3xl font-bold text-(--primary) sm:text-4xl">${pkg.price}</span>
+                                            </div>
+                                            <p className="mt-2 text-xs text-gray-300 sm:text-sm">{pkg.description}</p>
+                                        </div>
+
+                                        <ul className="mb-6 flex-1 space-y-3">
+                                            {pkg.features.map((feature, index) => (
+                                                <li key={index} className="flex items-start gap-2 text-sm text-gray-200">
+                                                    <Check className="mt-0.5 h-5 w-5 shrink-0 text-(--primary)" />
+                                                    <span>{feature}</span>
+                                                </li>
+                                            ))}
+                                        </ul>
+
+                                        <div className="mt-auto flex flex-col gap-2">
+                                            <Link
+                                                href={pkg.link}
+                                                className="block w-full rounded-lg bg-(--primary) px-6 py-3 text-center font-semibold text-white transition hover:bg-(--accent)"
+                                            >
+                                                View Details
+                                            </Link>
+                                            <PackagePaymentGate amount={pkg.price} item={pkg.title} packageSlug={pkg.slug} />
+                                        </div>
+                                    </motion.div>
+                                ))}
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -13,9 +13,15 @@ use Inertia\Response;
 class WebsiteIntakeController extends Controller
 {
     private const PACKAGE_OPTIONS = [
-        'starter' => 'Starter Package',
-        'professional' => 'Professional Package',
-        'premium' => 'Premium Package',
+        'starter' => 'Starter Package - Website Development',
+        'professional' => 'Professional Package - Website Development',
+        'premium' => 'Premium Package - Website Development',
+        'design-starter' => 'Starter Package - Website Design',
+        'design-professional' => 'Professional Package - Website Design',
+        'design-premium' => 'Premium Package - Website Design',
+        'modernization-starter' => 'Starter Package - Website Modernization',
+        'modernization-professional' => 'Professional Package - Website Modernization',
+        'modernization-premium' => 'Premium Package - Website Modernization',
     ];
 
     private const GOAL_OPTIONS = [

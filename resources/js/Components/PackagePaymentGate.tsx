@@ -2,7 +2,16 @@ import PayPalCheckoutButton from '@/Components/PayPalCheckoutButton';
 import type { SharedData } from '@/types';
 import { Link, usePage } from '@inertiajs/react';
 
-export type PackageSlug = 'starter' | 'professional' | 'premium';
+export type PackageSlug = 
+    | 'starter' 
+    | 'professional' 
+    | 'premium'
+    | 'design-starter'
+    | 'design-professional'
+    | 'design-premium'
+    | 'modernization-starter'
+    | 'modernization-professional'
+    | 'modernization-premium';
 
 interface PackagePaymentGateProps {
     amount: number;
@@ -14,11 +23,17 @@ const packageLabelMap: Record<PackageSlug, string> = {
     starter: 'Starter Package',
     professional: 'Professional Package',
     premium: 'Premium Package',
+    'design-starter': 'Design - Starter Package',
+    'design-professional': 'Design - Professional Package',
+    'design-premium': 'Design - Premium Package',
+    'modernization-starter': 'Modernization - Starter Package',
+    'modernization-professional': 'Modernization - Professional Package',
+    'modernization-premium': 'Modernization - Premium Package',
 };
 
 function getPackageLabel(slug: string | null): string | null {
-    if (slug === 'starter' || slug === 'professional' || slug === 'premium') {
-        return packageLabelMap[slug];
+    if (slug && slug in packageLabelMap) {
+        return packageLabelMap[slug as PackageSlug];
     }
 
     return null;
