@@ -45,7 +45,7 @@ class TestEmail extends Command
         ];
 
         try {
-            Mail::to('dev@graveyardjokes.com')->send(
+            Mail::to('admin@graveyardjokes.com')->send(
                 new NewVisitorNotification($testVisitorData)
             );
 

@@ -405,7 +405,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 📞 Support
 
 - **Issues**: [GitHub Issues](https://github.com/JoshuaAckerly/graveyardjokes/issues)
-- **Email**: dev@graveyardjokes.com
+- **Email**: info@graveyardjokes.com
 - **Documentation**: See documentation files listed above
 
 ---

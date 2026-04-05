@@ -35,7 +35,7 @@ class ContactService implements ContactServiceInterface
             $email = (string) ($validatedData['email'] ?? '');
             $message = (string) ($validatedData['message'] ?? '');
 
-            Mail::to('dev@graveyardjokes.com')->send(
+            Mail::to('admin@graveyardjokes.com')->send(
                 new ContactMessage($firstName, $lastName, $email, $message)
             );
         } catch (\Exception $e) {
