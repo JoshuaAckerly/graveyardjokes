@@ -78,8 +78,8 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
                 </div>
                 <div className="mt-2 text-white/80">
                     &copy; {new Date().getFullYear()} GraveYard Jokes Studios Inc. —{' '}
-                    <a href="mailto:info@graveyardjokes.com" className="text-white hover:underline">
-                        info@graveyardjokes.com
+                    <a href="mailto:dev@graveyardjokes.com" className="text-white hover:underline">
+                        dev@graveyardjokes.com
                     </a>
                 </div>
             </footer>

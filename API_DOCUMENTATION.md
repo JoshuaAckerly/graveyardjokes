@@ -276,12 +276,12 @@ All API endpoints follow consistent error response patterns:
 ## Email Notifications
 
 ### Contact Form
-- **Recipient**: admin@graveyardjokes.com
+- **Recipient**: dev@graveyardjokes.com
 - **Template**: ContactMessage mailable
 - **Trigger**: Every contact form submission
 
 ### Visitor Tracking
-- **Recipient**: admin@graveyardjokes.com
+- **Recipient**: dev@graveyardjokes.com
 - **Template**: NewVisitorNotification mailable
 - **Trigger**: New unique visitors (throttled)
 - **Throttling**: Based on IP + User Agent hash
@@ -505,7 +505,7 @@ Import the OpenAPI specification into Postman for testing:
 
 ### Getting Help
 - **GitHub Issues**: [https://github.com/JoshuaAckerly/graveyardjokes.com/issues](https://github.com/JoshuaAckerly/graveyardjokes.com/issues)
-- **Email**: admin@graveyardjokes.com
+- **Email**: dev@graveyardjokes.com
 - **Website**: [https://graveyardjokes.com/contact](https://graveyardjokes.com/contact)
 
 ### Reporting Bugs

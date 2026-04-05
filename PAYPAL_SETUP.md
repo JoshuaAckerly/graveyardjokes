@@ -87,7 +87,7 @@ PayPal SDK configuration is loaded by `resources/js/lib/paypalSdk.ts` and uses:
 
 ### Compact/Footer Variants
 - Custom styled buttons that open PayPal in a new window
-- Uses your PayPal email: `admin@graveyardjokes.com`
+- Uses your PayPal email: `dev@graveyardjokes.com`
 - Maintains brand consistency with your theme
 
 ## Optional: Create a Hosted Button
@@ -110,7 +110,7 @@ Then use it in your component:
 
 Edit `resources/js/Components/PayPalDonateButton.tsx` line 40:
 ```typescript
-const paypalUrl = 'https://www.paypal.com/donate/?business=admin@graveyardjokes.com&currency_code=USD';
+const paypalUrl = 'https://www.paypal.com/donate/?business=dev@graveyardjokes.com&currency_code=USD';
 ```
 
 ### SDK Configuration
