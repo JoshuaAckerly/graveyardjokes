@@ -37,7 +37,7 @@ class ContactService implements ContactServiceInterface
 
             Log::info('Sending contact email', [
                 'to' => 'dev@graveyardjokes.com',
-                'from_name' => $firstName . ' ' . $lastName,
+                'from_name' => $firstName.' '.$lastName,
                 'from_email' => $email,
             ]);
 
