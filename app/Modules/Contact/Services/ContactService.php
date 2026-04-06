@@ -35,11 +35,24 @@ class ContactService implements ContactServiceInterface
             $email = (string) ($validatedData['email'] ?? '');
             $message = (string) ($validatedData['message'] ?? '');
 
-            Mail::to('admin@graveyardjokes.com')->send(
+            Log::info('Sending contact email', [
+                'to' => 'dev@graveyardjokes.com',
+                'from_name' => $firstName . ' ' . $lastName,
+                'from_email' => $email,
+            ]);
+
+            Mail::to('dev@graveyardjokes.com')->send(
                 new ContactMessage($firstName, $lastName, $email, $message)
             );
+
+            Log::info('Contact email sent successfully');
         } catch (\Exception $e) {
-            Log::error('Contact email failed: '.$e->getMessage());
+            Log::error('Contact email failed', [
+                'message' => $e->getMessage(),
+                'code' => $e->getCode(),
+                'file' => $e->getFile(),
+                'line' => $e->getLine(),
+            ]);
         }
 
         return $contact->toArray();

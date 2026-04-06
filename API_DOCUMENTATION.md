@@ -276,7 +276,7 @@ All API endpoints follow consistent error response patterns:
 ## Email Notifications
 
 ### Contact Form
-- **Recipient**: admin@graveyardjokes.com
+- **Recipient**: dev@graveyardjokes.com
 - **Template**: ContactMessage mailable
 - **Trigger**: Every contact form submission
 

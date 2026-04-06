@@ -141,7 +141,7 @@ class ContactFormIntegrationTest extends TestCase
         $response->assertRedirect();
         
         Mail::assertSent(ContactMessage::class, function ($mail) {
-            return $mail->hasTo('admin@graveyardjokes.com');
+            return $mail->hasTo('dev@graveyardjokes.com');
         });
     }
 }
@@ -410,7 +410,7 @@ public function test_contact_form_sends_email(): void
     ]);
 
     Mail::assertSent(ContactMessage::class, function ($mail) {
-        return $mail->hasTo('admin@graveyardjokes.com') &&
+        return $mail->hasTo('dev@graveyardjokes.com') &&
                $mail->hasSubject('New Contact Form Submission');
     });
 }
