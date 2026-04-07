@@ -1,4 +1,5 @@
 import MainLayout from '@/Layouts/MainLayout';
+import { trackFormSubmission, trackPackageSelection } from '@/hooks/use-google-analytics';
 import { Head, Link, useForm } from '@inertiajs/react';
 import { ArrowLeft } from 'lucide-react';
 import type { FormEvent } from 'react';
@@ -155,6 +156,12 @@ export default function ServicesIntake({
 
     const submit = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
+
+        // Track intake form submission and package selection
+        trackFormSubmission('intake_form', {
+            package: data.selected_package,
+        });
+        trackPackageSelection(data.selected_package);
 
         post('/services/intake', {
             preserveScroll: true,

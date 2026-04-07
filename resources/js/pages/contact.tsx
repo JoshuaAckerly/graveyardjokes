@@ -1,5 +1,6 @@
 import InertiaHead from '@/Components/InertiaHead';
 import MainLayout from '@/Layouts/MainLayout';
+import { trackFormSubmission } from '@/hooks/use-google-analytics';
 import { router } from '@inertiajs/react';
 import { ChangeEvent, FormEvent, useState } from 'react';
 import { getEnvVar } from '../env';
@@ -78,6 +79,9 @@ export default function ContactPricing() {
             setErrors(currentErrors);
             return;
         }
+
+        // Track form submission
+        trackFormSubmission('contact_form');
 
         router.post('/contact', values, {
             onSuccess: () => {

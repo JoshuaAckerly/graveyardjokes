@@ -4,8 +4,10 @@ namespace App\Providers;
 
 use App\Contracts\AnalyticsInterface;
 use App\Contracts\VisitorServiceInterface;
+use App\Models\Contact;
 use App\Modules\Contact\Services\ContactService as ModuleContactService;
 use App\Modules\Visitor\Services\VisitorService as ModuleVisitorService;
+use App\Observers\ContactObserver;
 use App\Services\GoogleAnalyticsService;
 use Illuminate\Support\ServiceProvider;
 
@@ -27,6 +29,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        Contact::observe(ContactObserver::class);
     }
 }
