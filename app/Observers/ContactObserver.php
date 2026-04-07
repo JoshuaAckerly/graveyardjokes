@@ -29,18 +29,19 @@ class ContactObserver
     private function updateTrackingFile(Contact $contact): void
     {
         $trackingPath = base_path('../CONTACTS_TRACKING.md');
-        
-        if (!file_exists($trackingPath)) {
+
+        if (! file_exists($trackingPath)) {
             Log::warning('Tracking file does not exist', ['path' => $trackingPath]);
+
             return;
         }
 
         $content = file_get_contents($trackingPath);
-        
+
         // Update last modified timestamp
         $content = preg_replace(
             '/\*\*Last Updated:\*\* .+/i',
-            '**Last Updated:** ' . now()->format('Y-m-d H:i:s'),
+            '**Last Updated:** '.now()->format('Y-m-d H:i:s'),
             $content,
             1
         );
@@ -70,14 +71,14 @@ class ContactObserver
         }
 
         // Insert new row in the table
-        $messagePreview = substr($contact->message, 0, 60) . (strlen($contact->message) > 60 ? '...' : '');
+        $messagePreview = substr($contact->message, 0, 60).(strlen($contact->message) > 60 ? '...' : '');
         $formattedDate = $contact->created_at->format('Y-m-d H:i');
         $newRow = "| {$contact->id} | {$formattedDate} | {$contact->first_name} | {$contact->last_name} | {$contact->email} | {$messagePreview} | NEW | | |\n";
-        
+
         // Insert after the table header
         $content = preg_replace(
             '/(^\|\-+\|.+?\n)/m',
-            "$1" . $newRow,
+            '$1'.$newRow,
             $content,
             1
         );
@@ -90,7 +91,7 @@ class ContactObserver
         $contactDetail .= "- **Source:** Website contact form\n";
         $contactDetail .= "- **Message:**\n";
         $contactDetail .= "  ```\n";
-        $contactDetail .= "  " . $contact->message . "\n";
+        $contactDetail .= '  '.$contact->message."\n";
         $contactDetail .= "  ```\n";
         $contactDetail .= "- **Status:** NEW\n";
         $contactDetail .= "- **Response Date:** \n";
@@ -99,7 +100,7 @@ class ContactObserver
 
         $content = preg_replace(
             '/(## Contact Details\n+)/m',
-            "$1" . $contactDetail,
+            '$1'.$contactDetail,
             $content,
             1
         );

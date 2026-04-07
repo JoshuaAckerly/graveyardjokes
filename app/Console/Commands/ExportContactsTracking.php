@@ -4,7 +4,6 @@ namespace App\Console\Commands;
 
 use App\Models\Contact;
 use Illuminate\Console\Command;
-use Carbon\Carbon;
 
 class ExportContactsTracking extends Command
 {
@@ -28,20 +27,20 @@ class ExportContactsTracking extends Command
     public function handle()
     {
         $contacts = Contact::orderBy('created_at', 'desc')->get();
-        
+
         $totalCount = $contacts->count();
-        
+
         // Build table rows
         $tableRows = '';
         $contactDetails = '';
-        
+
         $counter = 1;
         foreach ($contacts as $contact) {
-            $messagePreview = substr($contact->message, 0, 60) . (strlen($contact->message) > 60 ? '...' : '');
+            $messagePreview = substr($contact->message, 0, 60).(strlen($contact->message) > 60 ? '...' : '');
             $formattedDate = $contact->created_at->format('Y-m-d H:i');
-            
+
             $tableRows .= "| {$counter} | {$formattedDate} | {$contact->first_name} | {$contact->last_name} | {$contact->email} | {$messagePreview} | NEW | | |\n";
-            
+
             $contactDetails .= "### Contact #{$contact->id}\n";
             $contactDetails .= "- **Name:** {$contact->first_name} {$contact->last_name}\n";
             $contactDetails .= "- **Email:** {$contact->email}\n";
@@ -49,20 +48,20 @@ class ExportContactsTracking extends Command
             $contactDetails .= "- **Source:** Website contact form\n";
             $contactDetails .= "- **Message:**\n";
             $contactDetails .= "  ```\n";
-            $contactDetails .= "  " . $contact->message . "\n";
+            $contactDetails .= '  '.$contact->message."\n";
             $contactDetails .= "  ```\n";
             $contactDetails .= "- **Status:** NEW\n";
             $contactDetails .= "- **Response Date:** \n";
             $contactDetails .= "- **Response Note:** \n";
             $contactDetails .= "\n---\n\n";
-            
+
             $counter++;
         }
-        
+
         $newCount = $contacts->count();
-        
+
         $content = "# Graveyardjokes Contact Messages Tracking\n\n";
-        $content .= "**Last Updated:** " . now()->format('Y-m-d H:i:s') . "\n";
+        $content .= '**Last Updated:** '.now()->format('Y-m-d H:i:s')."\n";
         $content .= "**Total Contacts:** {$totalCount}\n";
         $content .= "**Status Breakdown:** {$newCount} New / 0 Responded / 0 Archived\n\n";
         $content .= "---\n\n";
@@ -82,10 +81,10 @@ class ExportContactsTracking extends Command
         $content .= "- [ ] Check emails for new unresponded contacts\n";
         $content .= "- [ ] Update tracking with latest contacts\n";
         $content .= "- [ ] Follow up on pending responses\n";
-        
+
         $trackingPath = base_path('../CONTACTS_TRACKING.md');
         file_put_contents($trackingPath, $content);
-        
+
         $this->info("✓ Contacts exported to CONTACTS_TRACKING.md ({$totalCount} contacts)");
     }
 }
