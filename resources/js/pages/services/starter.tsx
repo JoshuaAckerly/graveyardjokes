@@ -98,17 +98,12 @@ export default function StarterPackage() {
                     >
                         <div className="mb-4 flex flex-wrap items-center gap-3">
                             <h1 className="text-4xl font-bold text-white">Starter Package</h1>
-                            <span className="rounded-full bg-[var(--primary)] px-3 py-1 text-xs font-bold tracking-wide text-white uppercase">
-                                ⚡ Limited Time — First 5 Clients Only
-                            </span>
                         </div>
                         <div className="mb-2 flex items-baseline gap-3">
                             <span className="text-2xl text-white/40 line-through">$199</span>
                             <span className="text-5xl font-bold text-(--primary)">$150</span>
                         </div>
-                        <p className="mb-1 text-sm font-semibold text-[var(--primary)]">
-                            Only 5 spots at this price. Once they're gone, they're gone.
-                        </p>
+
                         <p className="mb-8 text-lg text-gray-300">Perfect for startups launching their first website</p>
                         <h2 className="mb-4 text-2xl font-bold text-white">What's Included:</h2>
                         <ul className="mb-8 space-y-3">

@@ -278,7 +278,6 @@ export default function Home(): JSX.Element {
                             <p className="text-lg text-white/80">
                                 No hidden fees. No gimmicks. Just a fast, modern site at a price that won't haunt your wallet.
                             </p>
-                            <p className="mt-2 text-sm font-semibold text-white/60">Only 5 spots. Once they're gone, they're gone.</p>
                             <motion.div whileHover={{ scale: 1.05 }} className="mt-6 inline-block">
                                 <Link
                                     href="/services/starter"
