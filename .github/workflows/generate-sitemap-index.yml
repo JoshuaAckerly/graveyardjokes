@@ -35,8 +35,7 @@ jobs:
           sed -i 's|APP_URL=.*|APP_URL=${{ env.APP_URL }}|' .env
 
       - name: Generate APP_KEY if missing
-        run: |
-          php -r "if (!file_exists('.env')) exit;"
+        run: php artisan key:generate --ansi
 
       - name: Run migrations (no-op if not configured)
         run: |
