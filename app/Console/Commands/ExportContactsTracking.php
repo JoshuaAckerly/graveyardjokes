@@ -24,7 +24,7 @@ class ExportContactsTracking extends Command
     /**
      * Execute the console command.
      */
-    public function handle()
+    public function handle(): int
     {
         $contacts = Contact::orderBy('created_at', 'desc')->get();
 
@@ -37,14 +37,14 @@ class ExportContactsTracking extends Command
         $counter = 1;
         foreach ($contacts as $contact) {
             $messagePreview = substr($contact->message, 0, 60).(strlen($contact->message) > 60 ? '...' : '');
-            $formattedDate = $contact->created_at->format('Y-m-d H:i');
+            $formattedDate = ($contact->created_at ?? now())->format('Y-m-d H:i');
 
             $tableRows .= "| {$counter} | {$formattedDate} | {$contact->first_name} | {$contact->last_name} | {$contact->email} | {$messagePreview} | NEW | | |\n";
 
             $contactDetails .= "### Contact #{$contact->id}\n";
             $contactDetails .= "- **Name:** {$contact->first_name} {$contact->last_name}\n";
             $contactDetails .= "- **Email:** {$contact->email}\n";
-            $contactDetails .= "- **Date Submitted:** {$contact->created_at->format('Y-m-d H:i:s')}\n";
+            $contactDetails .= '- **Date Submitted:** '.($contact->created_at ?? now())->format('Y-m-d H:i:s')."\n";
             $contactDetails .= "- **Source:** Website contact form\n";
             $contactDetails .= "- **Message:**\n";
             $contactDetails .= "  ```\n";
@@ -86,5 +86,7 @@ class ExportContactsTracking extends Command
         file_put_contents($trackingPath, $content);
 
         $this->info("✓ Contacts exported to CONTACTS_TRACKING.md ({$totalCount} contacts)");
+
+        return Command::SUCCESS;
     }
 }

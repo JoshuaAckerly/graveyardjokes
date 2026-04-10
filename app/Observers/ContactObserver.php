@@ -38,13 +38,19 @@ class ContactObserver
 
         $content = file_get_contents($trackingPath);
 
+        if ($content === false) {
+            Log::warning('Failed to read tracking file', ['path' => $trackingPath]);
+
+            return;
+        }
+
         // Update last modified timestamp
         $content = preg_replace(
             '/\*\*Last Updated:\*\* .+/i',
             '**Last Updated:** '.now()->format('Y-m-d H:i:s'),
             $content,
             1
-        );
+        ) ?? $content;
 
         // Extract current total count and increment
         if (preg_match('/\*\*Total Contacts:\*\* (\d+)/', $content, $matches)) {
@@ -55,7 +61,7 @@ class ContactObserver
                 "**Total Contacts:** {$newCount}",
                 $content,
                 1
-            );
+            ) ?? $content;
         }
 
         // Update new count in status breakdown
@@ -67,12 +73,12 @@ class ContactObserver
                 "**Status Breakdown:** {$newNewCount} New",
                 $content,
                 1
-            );
+            ) ?? $content;
         }
 
         // Insert new row in the table
         $messagePreview = substr($contact->message, 0, 60).(strlen($contact->message) > 60 ? '...' : '');
-        $formattedDate = $contact->created_at->format('Y-m-d H:i');
+        $formattedDate = ($contact->created_at ?? now())->format('Y-m-d H:i');
         $newRow = "| {$contact->id} | {$formattedDate} | {$contact->first_name} | {$contact->last_name} | {$contact->email} | {$messagePreview} | NEW | | |\n";
 
         // Insert after the table header
@@ -81,13 +87,13 @@ class ContactObserver
             '$1'.$newRow,
             $content,
             1
-        );
+        ) ?? $content;
 
         // Insert contact detail section before "## Status Summary"
         $contactDetail = "### Contact #{$contact->id}\n";
         $contactDetail .= "- **Name:** {$contact->first_name} {$contact->last_name}\n";
         $contactDetail .= "- **Email:** {$contact->email}\n";
-        $contactDetail .= "- **Date Submitted:** {$contact->created_at->format('Y-m-d H:i:s')}\n";
+        $contactDetail .= '- **Date Submitted:** '.($contact->created_at ?? now())->format('Y-m-d H:i:s')."\n";
         $contactDetail .= "- **Source:** Website contact form\n";
         $contactDetail .= "- **Message:**\n";
         $contactDetail .= "  ```\n";
@@ -103,7 +109,7 @@ class ContactObserver
             '$1'.$contactDetail,
             $content,
             1
-        );
+        ) ?? $content;
 
         // Update NEW count in status summary
         if (preg_match('/### NEW \(Unresponded\)\n\[Count: (\d+)\]/', $content, $matches)) {
@@ -114,7 +120,7 @@ class ContactObserver
                 "### NEW (Unresponded)\n[Count: {$newNewSummaryCount}]",
                 $content,
                 1
-            );
+            ) ?? $content;
         }
 
         file_put_contents($trackingPath, $content);

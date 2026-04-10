@@ -18,6 +18,7 @@ class ReportVisitToAuthSystem implements ShouldQueue
 
     public int $timeout = 10;
 
+    /** @param array<string, mixed> $visitData */
     public function __construct(private readonly array $visitData) {}
 
     public function handle(): void
@@ -25,7 +26,7 @@ class ReportVisitToAuthSystem implements ShouldQueue
         $url = config('services.authsystem.track_url');
         $token = config('services.authsystem.track_token');
 
-        if (! $url || ! $token) {
+        if (! is_string($url) || ! $url || ! is_string($token) || ! $token) {
             return;
         }
 
