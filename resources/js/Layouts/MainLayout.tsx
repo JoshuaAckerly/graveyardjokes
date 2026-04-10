@@ -75,6 +75,9 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
                     <a href="/contact" className="text-white hover:underline">
                         Contact
                     </a>
+                    <a href="/linkedin" className="text-white hover:underline">
+                        LinkedIn
+                    </a>
                 </div>
                 <div className="mt-2 text-white/80">
                     &copy; {new Date().getFullYear()} GraveYard Jokes Studios Inc. —{' '}

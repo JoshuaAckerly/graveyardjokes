@@ -94,6 +94,14 @@ Route::get('/api/og-cache/{filename}', [OgImageController::class, 'cached'])
     ->where('filename', '[A-Za-z0-9._-]+')
     ->name('api.og-cache.show');
 
+Route::get('/studio', function () {
+    return Inertia::render('studio');
+})->name('studio');
+
+Route::get('/linkedin', function () {
+    return Inertia::render('linkedin');
+})->name('linkedin');
+
 Route::get('/terms', fn () => Inertia::render('legal/terms'))->name('terms');
 Route::get('/privacy', fn () => Inertia::render('legal/privacy'))->name('privacy');
 Route::get('/cookies', fn () => Inertia::render('legal/cookies'))->name('cookies');
