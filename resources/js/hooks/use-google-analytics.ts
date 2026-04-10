@@ -4,7 +4,7 @@
 
 declare global {
     interface Window {
-        gtag?: Function;
+        gtag?: (...args: unknown[]) => void;
     }
 }
 
