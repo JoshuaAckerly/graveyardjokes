@@ -25,13 +25,7 @@ export default function LinkedIn() {
         },
     ];
 
-    const services = [
-        'eCommerce Development',
-        'Web Development',
-        'Web Design',
-        'SEO',
-        'Digital Marketing',
-    ];
+    const services = ['eCommerce Development', 'Web Development', 'Web Design', 'SEO', 'Digital Marketing'];
 
     return (
         <MainLayout>
@@ -62,7 +56,7 @@ export default function LinkedIn() {
                         transition={{ duration: 0.6 }}
                         className="max-w-2xl text-center"
                     >
-                        <p className="mb-2 text-sm font-semibold uppercase tracking-widest text-[var(--accent)]">Business Profile</p>
+                        <p className="mb-2 text-sm font-semibold tracking-widest text-[var(--accent)] uppercase">Business Profile</p>
                         <h1 className="text-5xl font-extrabold text-[var(--accent)]">LinkedIn</h1>
                         <p className="mt-4 text-lg text-white/70">
                             Follow Graveyard Jokes Studios on LinkedIn for company updates, project showcases, and industry insights.
@@ -90,7 +84,7 @@ export default function LinkedIn() {
                                 <li key={h.label} className="flex items-center gap-4">
                                     <span className="text-[var(--accent)]">{h.icon}</span>
                                     <div>
-                                        <p className="text-xs text-white/40 uppercase tracking-wider">{h.label}</p>
+                                        <p className="text-xs tracking-wider text-white/40 uppercase">{h.label}</p>
                                         <p className="text-sm font-medium text-white">{h.value}</p>
                                     </div>
                                 </li>
@@ -98,7 +92,7 @@ export default function LinkedIn() {
                         </ul>
 
                         <div className="border-t border-white/10 pt-6">
-                            <p className="mb-3 text-xs text-white/40 uppercase tracking-wider">Services</p>
+                            <p className="mb-3 text-xs tracking-wider text-white/40 uppercase">Services</p>
                             <div className="flex flex-wrap gap-2">
                                 {services.map((s) => (
                                     <span

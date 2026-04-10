@@ -76,7 +76,7 @@ export default function Studio() {
                         transition={{ duration: 0.6 }}
                         className="max-w-3xl text-center"
                     >
-                        <p className="mb-2 text-sm font-semibold uppercase tracking-widest text-[var(--accent)]">Creative Studio</p>
+                        <p className="mb-2 text-sm font-semibold tracking-widest text-[var(--accent)] uppercase">Creative Studio</p>
                         <h1 className="text-5xl font-extrabold text-[var(--accent)]">Graveyard Jokes Studios</h1>
                         <p className="mt-4 text-lg text-white/70">
                             A small creative web development studio building custom platforms for musicians, artists, and independent brands. Every
@@ -132,7 +132,7 @@ export default function Studio() {
                         className="w-full max-w-4xl"
                     >
                         <h2 className="mb-6 text-center text-2xl font-bold text-white">Live Platforms</h2>
-                        <ul className="divide-y divide-white/10 rounded-lg border border-white/10 bg-white/5 overflow-hidden">
+                        <ul className="divide-y divide-white/10 overflow-hidden rounded-lg border border-white/10 bg-white/5">
                             {platforms.map((p) => (
                                 <li key={p.slug}>
                                     <a
