@@ -25,15 +25,13 @@ class PasswordController extends Controller
      */
     public function update(Request $request): RedirectResponse
     {
+        /** @var array<string, mixed> $validated */
         $validated = $request->validate([
             'current_password' => ['required', 'current_password'],
             'password' => ['required', Password::defaults(), 'confirmed'],
         ]);
 
-        $password = $validated['password'] ?? '';
-        if (! is_string($password)) {
-            throw new \InvalidArgumentException('Password must be a string');
-        }
+        $password = is_string($validated['password']) ? $validated['password'] : '';
 
         $user = $request->user();
         if ($user) {

@@ -17,7 +17,7 @@ class VisitorServiceTest extends TestCase
 
         $result = $service->track($request);
 
-        $this->assertIsArray($result);
+        $this->assertNotEmpty($result);
         $this->assertEquals('Local Development', $result['country']);
         $this->assertEquals('Localhost', $result['city']);
     }

@@ -37,10 +37,6 @@ class JokeController extends BaseController
             $randomKey = array_rand($jokes);
             $joke = $jokes[$randomKey];
 
-            if (! is_array($joke)) {
-                return response()->json(['error' => 'Invalid joke data'], 500);
-            }
-
             return response()->json($joke);
         } catch (\Exception $e) {
             Log::error('Failed to fetch random joke: '.$e->getMessage());

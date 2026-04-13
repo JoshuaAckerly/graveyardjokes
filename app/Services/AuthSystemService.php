@@ -79,7 +79,10 @@ class AuthSystemService
         if ($response instanceof \Illuminate\Http\Client\Response && $response->successful()) {
             $data = $response->json();
             if (is_array($data)) {
-                return $data;
+                /** @var array<string, mixed> $typed */
+                $typed = $data;
+
+                return $typed;
             }
         }
 

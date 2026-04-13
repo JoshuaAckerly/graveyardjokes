@@ -30,8 +30,8 @@ class TestEmail extends Command
         $this->info('Testing visitor notification email...');
 
         // Use a real IP to test geolocation (Google's public DNS)
-        $visitorController = new \App\Http\Controllers\VisitorController;
-        $testLocation = $visitorController->getLocationFromIP('8.8.8.8');
+        $visitorService = new \App\Modules\Visitor\Services\VisitorService;
+        $testLocation = $visitorService->getLocationFromIP('8.8.8.8');
 
         /** @var array<string, mixed> $testVisitorData */
         $testVisitorData = [

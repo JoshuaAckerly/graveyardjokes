@@ -28,7 +28,7 @@ class GoogleAnalyticsServiceTest extends TestCase
     {
         $result = $this->service->getRealTimeVisitors();
 
-        $this->assertIsArray($result);
+        $this->assertCount(0, $result);
     }
 
     #[Test]

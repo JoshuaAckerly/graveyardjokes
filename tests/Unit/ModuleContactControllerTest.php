@@ -19,7 +19,9 @@ class ModuleContactControllerTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        $this->contactService = Mockery::mock(ContactServiceInterface::class);
+        /** @var ContactServiceInterface&MockInterface $mock */
+        $mock = Mockery::mock(ContactServiceInterface::class);
+        $this->contactService = $mock;
         $this->controller = new ContactController;
     }
 
@@ -34,9 +36,9 @@ class ModuleContactControllerTest extends TestCase
         $request = new Request;
         $contactData = ['id' => 1, 'email' => 'test@example.com'];
 
-        $this->contactService
-            ->shouldReceive('store')
-            ->with($request)
+        /** @var \Mockery\Expectation $expect */
+        $expect = $this->contactService->shouldReceive('store');
+        $expect->with($request)
             ->once()
             ->andReturn($contactData);
 
@@ -49,9 +51,9 @@ class ModuleContactControllerTest extends TestCase
     {
         $request = new Request;
 
-        $this->contactService
-            ->shouldReceive('store')
-            ->with($request)
+        /** @var \Mockery\Expectation $expect */
+        $expect = $this->contactService->shouldReceive('store');
+        $expect->with($request)
             ->once()
             ->andReturn([]);
 

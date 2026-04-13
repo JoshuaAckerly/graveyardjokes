@@ -56,13 +56,16 @@ class VisitorService implements VisitorServiceInterface
                 ]);
 
                 $raw = (string) $response->getBody();
-                $data = json_decode($raw, true);
+                $decoded = json_decode($raw, true);
 
-                if (! is_array($data)) {
+                if (! is_array($decoded)) {
                     // Defensive fallback when the external API returns unexpected content
                     Log::warning('ipinfo returned non-array payload', ['ip' => $ip, 'body' => substr($raw, 0, 1000)]);
-                    $data = [];
+                    $decoded = [];
                 }
+
+                /** @var array<string, mixed> $data */
+                $data = $decoded;
 
                 return [
                     'ip' => $ip,

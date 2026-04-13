@@ -102,7 +102,7 @@ class OgImageController
                 return response()->json(['error' => 'Failed to download image', 'status' => $imgResp->status()], 502);
             }
 
-            $contentType = (string) ($imgResp->header('Content-Type') ?? 'image/jpeg');
+            $contentType = (string) ($imgResp->header('Content-Type') ?: 'image/jpeg');
             if (! Str::startsWith($contentType, 'image/')) {
                 return response()->json(['error' => 'Downloaded resource is not an image', 'content-type' => $contentType], 422);
             }
