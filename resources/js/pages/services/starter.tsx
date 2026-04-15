@@ -19,7 +19,7 @@ export default function StarterPackage() {
     return (
         <>
             <Head>
-                <title>Starter Package - $150 Limited Offer | Graveyard Jokes Studios</title>
+                <title>Starter Package - $799 | Graveyard Jokes Studios</title>
                 <meta
                     name="description"
                     content="Starter plan for new businesses: responsive web design, core development features, and a clean, launch-ready website at an affordable monthly cost."
@@ -30,7 +30,7 @@ export default function StarterPackage() {
                 />
                 <link rel="canonical" href="https://graveyardjokes.com/services/starter" />
                 {/* Open Graph */}
-                <meta property="og:title" content="Starter Package - $199 | Graveyard Jokes Studios" />
+                <meta property="og:title" content="Starter Package - $799 | Graveyard Jokes Studios" />
                 <meta
                     property="og:description"
                     content="Starter plan for new businesses: responsive web design, core development features, and a clean, launch-ready website at an affordable monthly cost."
@@ -40,7 +40,7 @@ export default function StarterPackage() {
                 <meta property="og:url" content="https://graveyardjokes.com/services/starter" />
                 {/* Twitter */}
                 <meta name="twitter:card" content="summary_large_image" />
-                <meta name="twitter:title" content="Starter Package - $199 | Graveyard Jokes Studios" />
+                <meta name="twitter:title" content="Starter Package - $799 | Graveyard Jokes Studios" />
                 <meta
                     name="twitter:description"
                     content="Starter plan for new businesses: responsive web design, core development features, and a clean, launch-ready website at an affordable monthly cost."
@@ -62,7 +62,7 @@ export default function StarterPackage() {
   },
   "offers": {
     "@type": "Offer",
-    "price": "600",
+    "price": "799",
     "priceCurrency": "USD",
     "availability": "https://schema.org/InStock"
   },
@@ -100,8 +100,7 @@ export default function StarterPackage() {
                             <h1 className="text-4xl font-bold text-white">Starter Package</h1>
                         </div>
                         <div className="mb-2 flex items-baseline gap-3">
-                            <span className="text-2xl text-white/40 line-through">$199</span>
-                            <span className="text-5xl font-bold text-(--primary)">$150</span>
+                            <span className="text-5xl font-bold text-(--primary)">$799</span>
                         </div>
 
                         <p className="mb-8 text-lg text-gray-300">Perfect for startups launching their first website</p>
@@ -120,7 +119,7 @@ export default function StarterPackage() {
                                 Complete the short project questionnaire first. Once submitted, payment unlocks instantly for this package.
                             </p>
                             <div className="mb-6" style={{ minHeight: '45px' }}>
-                                <PackagePaymentGate amount={150} item="Starter Package (Limited Time Promo)" packageSlug="starter" />
+                                <PackagePaymentGate amount={799} item="Starter Package" packageSlug="starter" />
                             </div>
                             <p className="text-sm text-gray-400">
                                 Have questions?{' '}

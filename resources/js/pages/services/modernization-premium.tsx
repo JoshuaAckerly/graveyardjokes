@@ -24,7 +24,7 @@ export default function ModernizationPremiumPackage() {
     return (
         <>
             <Head>
-                <title>Website Modernization - Premium Package - $599 | Graveyard Jokes Studios</title>
+                <title>Website Modernization - Premium Package - $1,999 | Graveyard Jokes Studios</title>
                 <meta
                     name="description"
                     content="Premium modernization: full tech stack migration, advanced security, analytics setup, and strategic consultation for complete digital transformation."
@@ -32,7 +32,7 @@ export default function ModernizationPremiumPackage() {
                 <meta name="keywords" content="website modernization, tech migration, security hardening, analytics setup, digital transformation" />
                 <link rel="canonical" href="https://graveyardjokes.com/services/modernization-premium" />
                 {/* Open Graph */}
-                <meta property="og:title" content="Website Modernization - Premium Package - $599 | Graveyard Jokes Studios" />
+                <meta property="og:title" content="Website Modernization - Premium Package - $1,999 | Graveyard Jokes Studios" />
                 <meta
                     property="og:description"
                     content="Premium modernization: full tech stack migration, advanced security, analytics setup, and strategic consultation for complete digital transformation."
@@ -42,7 +42,7 @@ export default function ModernizationPremiumPackage() {
                 <meta property="og:url" content="https://graveyardjokes.com/services/modernization-premium" />
                 {/* Twitter */}
                 <meta name="twitter:card" content="summary_large_image" />
-                <meta name="twitter:title" content="Website Modernization - Premium Package - $599 | Graveyard Jokes Studios" />
+                <meta name="twitter:title" content="Website Modernization - Premium Package - $1,999 | Graveyard Jokes Studios" />
                 <meta
                     name="twitter:description"
                     content="Premium modernization: full tech stack migration, advanced security, analytics setup, and strategic consultation for complete digital transformation."
@@ -64,7 +64,7 @@ export default function ModernizationPremiumPackage() {
   },
   "offers": {
     "@type": "Offer",
-    "price": "599",
+    "price": "1999",
     "priceCurrency": "USD",
     "availability": "https://schema.org/InStock"
   },
@@ -89,7 +89,7 @@ export default function ModernizationPremiumPackage() {
                         <h1 className="mb-2 text-4xl font-bold text-white">Website Modernization</h1>
                         <p className="mb-6 text-lg text-[var(--primary)]">Premium Package</p>
                         <div className="mb-6">
-                            <span className="text-5xl font-bold text-(--primary)">$599</span>
+                            <span className="text-5xl font-bold text-(--primary)">$1,999</span>
                             <p className="mt-2 text-lg text-white/80">
                                 Full tech stack migration, advanced security, analytics, and strategic consultation for complete digital
                                 transformation.
@@ -130,7 +130,7 @@ export default function ModernizationPremiumPackage() {
                                 Complete the short project questionnaire first. Once submitted, payment unlocks instantly for this package.
                             </p>
                             <div className="min-h-[50px]">
-                                <PackagePaymentGate amount={599} item="Website Modernization - Premium" packageSlug="modernization-premium" />
+                                <PackagePaymentGate amount={1999} item="Website Modernization - Premium" packageSlug="modernization-premium" />
                             </div>
                         </div>
                     </motion.div>

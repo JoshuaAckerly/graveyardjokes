@@ -47,7 +47,7 @@ Find the `packages` array (around line 8) and update the `hostedButtonId` values
 const packages = [
     {
         title: 'Starter Package',
-        price: '$199',
+        price: '$799',
         description: 'Perfect for startups launching their first website',
         features: [
             'Single-page responsive website',
@@ -109,9 +109,9 @@ This is currently used for all three packages. You should create separate button
 ## Pricing Structure Reference
 
 Current packages configured:
-- **Starter**: $199
-- **Professional**: $349 (marked as popular)
-- **Premium**: $499
+- **Starter**: $799
+- **Professional**: $1,499 (marked as popular)
+- **Premium**: $2,499
 
 ## Button Types
 

@@ -20,7 +20,7 @@ export default function Services() {
         {
             slug: 'starter',
             title: 'Starter Package',
-            price: 199,
+            price: 799,
             description: 'Perfect for startups launching their first website',
             features: [
                 'Single-page responsive website',
@@ -36,7 +36,7 @@ export default function Services() {
         {
             slug: 'professional',
             title: 'Professional Package',
-            price: 349,
+            price: 1499,
             description: 'Ideal for growing startups needing more features',
             features: [
                 'Multi-page custom website',
@@ -54,7 +54,7 @@ export default function Services() {
         {
             slug: 'premium',
             title: 'Premium Package',
-            price: 499,
+            price: 2499,
             description: 'Full-featured solution for established startups',
             features: [
                 'Everything in Professional',
@@ -83,7 +83,7 @@ export default function Services() {
         {
             slug: 'design-starter',
             title: 'Design - Starter',
-            price: 199,
+            price: 499,
             description: 'Wireframes and design mockups',
             features: [
                 'Wireframes for 3-5 pages',
@@ -100,7 +100,7 @@ export default function Services() {
         {
             slug: 'design-professional',
             title: 'Design - Professional',
-            price: 349,
+            price: 999,
             description: 'Complete UI design system & prototypes',
             features: [
                 'Everything in Starter',
@@ -118,7 +118,7 @@ export default function Services() {
         {
             slug: 'design-premium',
             title: 'Design - Premium',
-            price: 499,
+            price: 1799,
             description: 'Premium brand identity & ongoing consultation',
             features: [
                 'Everything in Professional',
@@ -147,7 +147,7 @@ export default function Services() {
         {
             slug: 'modernization-starter',
             title: 'Modernization - Starter',
-            price: 249,
+            price: 699,
             description: 'Visual refresh & performance updates',
             features: [
                 'Visual design refresh',
@@ -165,7 +165,7 @@ export default function Services() {
         {
             slug: 'modernization-professional',
             title: 'Modernization - Professional',
-            price: 399,
+            price: 1299,
             description: 'Complete design & code refresh',
             features: [
                 'Everything in Starter',
@@ -183,7 +183,7 @@ export default function Services() {
         {
             slug: 'modernization-premium',
             title: 'Modernization - Premium',
-            price: 599,
+            price: 1999,
             description: 'Full tech migration & strategic consultation',
             features: [
                 'Everything in Professional',

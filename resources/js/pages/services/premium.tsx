@@ -22,7 +22,7 @@ export default function PremiumPackage() {
         <>
             // ...existing code...
             <Head>
-                <title>Premium Package - $499 | Graveyard Jokes Studios</title>
+                <title>Premium Package - $2,499 | Graveyard Jokes Studios</title>
                 <meta
                     name="description"
                     content="Premium plan for established teams: full-service web design and development, priority support, advanced integrations, and ongoing strategic guidance."
@@ -33,7 +33,7 @@ export default function PremiumPackage() {
                 />
                 <link rel="canonical" href="https://graveyardjokes.com/services/premium" />
                 {/* Open Graph */}
-                <meta property="og:title" content="Premium Package - $499 | Graveyard Jokes Studios" />
+                <meta property="og:title" content="Premium Package - $2,499 | Graveyard Jokes Studios" />
                 <meta
                     name="og:description"
                     content="Premium plan for established teams: full-service web design and development, priority support, advanced integrations, and ongoing strategic guidance."
@@ -43,7 +43,7 @@ export default function PremiumPackage() {
                 <meta property="og:url" content="https://graveyardjokes.com/services/premium" />
                 {/* Twitter */}
                 <meta name="twitter:card" content="summary_large_image" />
-                <meta name="twitter:title" content="Premium Package - $499 | Graveyard Jokes Studios" />
+                <meta name="twitter:title" content="Premium Package - $2,499 | Graveyard Jokes Studios" />
                 <meta
                     name="twitter:description"
                     content="Premium plan for established teams: full-service web design and development, priority support, advanced integrations, and ongoing strategic guidance."
@@ -65,7 +65,7 @@ export default function PremiumPackage() {
   },
   "offers": {
     "@type": "Offer",
-    "price": "3000",
+    "price": "2499",
     "priceCurrency": "USD",
     "availability": "https://schema.org/InStock"
   },
@@ -102,7 +102,7 @@ export default function PremiumPackage() {
                     >
                         <h1 className="mb-4 text-4xl font-bold text-white">Premium Package</h1>
                         <div className="mb-6">
-                            <span className="text-5xl font-bold text-(--primary)">$499</span>
+                            <span className="text-5xl font-bold text-(--primary)">$2,499</span>
                             <p className="mt-2 text-lg text-white/80">
                                 Full-featured solution for established startups. E-commerce, streaming, custom integrations, and premium support.
                             </p>
@@ -142,7 +142,7 @@ export default function PremiumPackage() {
                                 Complete the short project questionnaire first. Once submitted, payment unlocks instantly for this package.
                             </p>
                             <div className="min-h-[50px]">
-                                <PackagePaymentGate amount={499} item="Premium Package" packageSlug="premium" />
+                                <PackagePaymentGate amount={2499} item="Premium Package" packageSlug="premium" />
                             </div>
                         </div>
                     </motion.div>

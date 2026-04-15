@@ -184,10 +184,7 @@ export default function Home(): JSX.Element {
                         className="relative z-10 mx-auto w-full max-w-6xl space-y-8 px-6 py-16 sm:px-12"
                     >
                         <div className="text-center">
-                            <span className="inline-block rounded-full bg-[var(--primary)] px-4 py-1 text-xs font-bold tracking-wide text-white uppercase">
-                                Limited Time — First 5 Clients Only
-                            </span>
-                            <h2 className="mt-4 text-2xl font-bold text-white sm:text-3xl">
+                            <h2 className="text-2xl font-bold text-white sm:text-3xl">
                                 Your business deserves a website that doesn't look like it crawled out of the grave.
                             </h2>
                         </div>
@@ -204,8 +201,7 @@ export default function Home(): JSX.Element {
                                 <div className="mb-4 text-3xl">💀</div>
                                 <h3 className="text-xl font-semibold text-white">Full Website Build</h3>
                                 <div className="mt-2 flex items-baseline gap-2">
-                                    <span className="text-lg text-white/40 line-through">$199</span>
-                                    <span className="text-3xl font-bold text-[var(--primary)] sm:text-4xl">$150</span>
+                                    <span className="text-3xl font-bold text-[var(--primary)] sm:text-4xl">$799</span>
                                 </div>
                                 <p className="mt-1 text-xs text-white/50">Up to 5 pages</p>
                                 <ul className="mt-4 space-y-2">
@@ -258,7 +254,7 @@ export default function Home(): JSX.Element {
                                     <div className="mb-3 text-3xl">🛒</div>
                                     <h3 className="text-lg font-semibold text-white">Optional Add-Ons</h3>
                                     <ul className="mt-3 space-y-1 text-sm text-white/70">
-                                        <li>E-commerce setup — starting at $150</li>
+                                        <li>E-commerce setup — starting at $499</li>
                                         <li>Logo design</li>
                                         <li>SEO packages</li>
                                         <li>Monthly maintenance</li>

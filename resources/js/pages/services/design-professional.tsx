@@ -22,7 +22,7 @@ export default function DesignProfessionalPackage() {
     return (
         <>
             <Head>
-                <title>Website Design - Professional Package - $349 | Graveyard Jokes Studios</title>
+                <title>Website Design - Professional Package - $999 | Graveyard Jokes Studios</title>
                 <meta
                     name="description"
                     content="Professional design package: comprehensive UI design system, interactive prototypes, and complete brand guidelines. Perfect for custom websites."
@@ -30,7 +30,7 @@ export default function DesignProfessionalPackage() {
                 <meta name="keywords" content="professional web design, UI design system, brand guidelines, interactive prototypes, custom design" />
                 <link rel="canonical" href="https://graveyardjokes.com/services/design-professional" />
                 {/* Open Graph */}
-                <meta property="og:title" content="Website Design - Professional Package - $349 | Graveyard Jokes Studios" />
+                <meta property="og:title" content="Website Design - Professional Package - $999 | Graveyard Jokes Studios" />
                 <meta
                     property="og:description"
                     content="Professional design package: comprehensive UI design system, interactive prototypes, and complete brand guidelines. Perfect for custom websites."
@@ -40,7 +40,7 @@ export default function DesignProfessionalPackage() {
                 <meta property="og:url" content="https://graveyardjokes.com/services/design-professional" />
                 {/* Twitter */}
                 <meta name="twitter:card" content="summary_large_image" />
-                <meta name="twitter:title" content="Website Design - Professional Package - $349 | Graveyard Jokes Studios" />
+                <meta name="twitter:title" content="Website Design - Professional Package - $999 | Graveyard Jokes Studios" />
                 <meta
                     name="twitter:description"
                     content="Professional design package: comprehensive UI design system, interactive prototypes, and complete brand guidelines. Perfect for custom websites."
@@ -62,7 +62,7 @@ export default function DesignProfessionalPackage() {
   },
   "offers": {
     "@type": "Offer",
-    "price": "349",
+    "price": "999",
     "priceCurrency": "USD",
     "availability": "https://schema.org/InStock"
   },
@@ -87,7 +87,7 @@ export default function DesignProfessionalPackage() {
                         <h1 className="mb-2 text-4xl font-bold text-white">Website Design</h1>
                         <p className="mb-6 text-lg text-[var(--primary)]">Professional Package — Most Popular</p>
                         <div className="mb-6">
-                            <span className="text-5xl font-bold text-(--primary)">$349</span>
+                            <span className="text-5xl font-bold text-(--primary)">$999</span>
                             <p className="mt-2 text-lg text-white/80">
                                 Comprehensive design system, interactive prototypes, and complete brand guidelines.
                             </p>
@@ -127,7 +127,7 @@ export default function DesignProfessionalPackage() {
                                 Complete the short project questionnaire first. Once submitted, payment unlocks instantly for this package.
                             </p>
                             <div className="min-h-[50px]">
-                                <PackagePaymentGate amount={349} item="Website Design - Professional" packageSlug="design-professional" />
+                                <PackagePaymentGate amount={999} item="Website Design - Professional" packageSlug="design-professional" />
                             </div>
                         </div>
                     </motion.div>

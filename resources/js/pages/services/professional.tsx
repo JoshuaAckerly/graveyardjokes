@@ -23,7 +23,7 @@ export default function ProfessionalPackage() {
     return (
         <>
             <Head>
-                <title>Professional Website Package - $349 | GraveYard Jokes Studios</title>
+                <title>Professional Website Package - $1,499 | GraveYard Jokes Studios</title>
                 <meta
                     name="description"
                     content="Professional plan for growing brands: custom design, advanced development, integrations, and conversion-focused improvements that scale results."
@@ -34,7 +34,7 @@ export default function ProfessionalPackage() {
                 />
                 <link rel="canonical" href="https://graveyardjokes.com/services/professional" />
                 {/* Open Graph */}
-                <meta property="og:title" content="Professional Website Package - $349 | GraveYard Jokes Studios" />
+                <meta property="og:title" content="Professional Website Package - $1,499 | GraveYard Jokes Studios" />
                 <meta
                     property="og:description"
                     content="Professional plan for growing brands: custom design, advanced development, integrations, and conversion-focused improvements that scale results."
@@ -44,7 +44,7 @@ export default function ProfessionalPackage() {
                 <meta property="og:url" content="https://graveyardjokes.com/services/professional" />
                 {/* Twitter */}
                 <meta name="twitter:card" content="summary_large_image" />
-                <meta name="twitter:title" content="Professional Website Package - $349 | GraveYard Jokes Studios" />
+                <meta name="twitter:title" content="Professional Website Package - $1,499 | GraveYard Jokes Studios" />
                 <meta
                     name="twitter:description"
                     content="Professional plan for growing brands: custom design, advanced development, integrations, and conversion-focused improvements that scale results."
@@ -66,7 +66,7 @@ export default function ProfessionalPackage() {
                         <div className="mb-4 inline-block rounded-full bg-(--primary) px-4 py-1 text-xs font-bold text-white">MOST POPULAR</div>
                         <h1 className="mb-4 text-4xl font-bold text-white">Professional Package</h1>
                         <div className="mb-6">
-                            <span className="text-5xl font-bold text-(--primary)">$349</span>
+                            <span className="text-5xl font-bold text-(--primary)">$1,499</span>
                         </div>
                         <p className="mb-8 text-lg text-gray-300">Ideal for growing startups needing more features</p>
 
@@ -85,7 +85,7 @@ export default function ProfessionalPackage() {
                                 Complete the short project questionnaire first. Once submitted, payment unlocks instantly for this package.
                             </p>
                             <div className="mb-6" style={{ minHeight: '45px' }}>
-                                <PackagePaymentGate amount={349} item="Professional Package" packageSlug="professional" />
+                                <PackagePaymentGate amount={1499} item="Professional Package" packageSlug="professional" />
                             </div>
                             <p className="text-sm text-gray-400">
                                 Have questions?{' '}

@@ -23,7 +23,7 @@ export default function ModernizationProfessionalPackage() {
     return (
         <>
             <Head>
-                <title>Website Modernization - Professional Package - $399 | Graveyard Jokes Studios</title>
+                <title>Website Modernization - Professional Package - $1,299 | Graveyard Jokes Studios</title>
                 <meta
                     name="description"
                     content="Professional modernization: complete design and code refresh. Update outdated sites with modern frameworks, accessibility compliance, and SEO optimization."
@@ -34,7 +34,7 @@ export default function ModernizationProfessionalPackage() {
                 />
                 <link rel="canonical" href="https://graveyardjokes.com/services/modernization-professional" />
                 {/* Open Graph */}
-                <meta property="og:title" content="Website Modernization - Professional Package - $399 | Graveyard Jokes Studios" />
+                <meta property="og:title" content="Website Modernization - Professional Package - $1,299 | Graveyard Jokes Studios" />
                 <meta
                     property="og:description"
                     content="Professional modernization: complete design and code refresh. Update outdated sites with modern frameworks, accessibility compliance, and SEO optimization."
@@ -44,7 +44,7 @@ export default function ModernizationProfessionalPackage() {
                 <meta property="og:url" content="https://graveyardjokes.com/services/modernization-professional" />
                 {/* Twitter */}
                 <meta name="twitter:card" content="summary_large_image" />
-                <meta name="twitter:title" content="Website Modernization - Professional Package - $399 | Graveyard Jokes Studios" />
+                <meta name="twitter:title" content="Website Modernization - Professional Package - $1,299 | Graveyard Jokes Studios" />
                 <meta
                     name="twitter:description"
                     content="Professional modernization: complete design and code refresh. Update outdated sites with modern frameworks, accessibility compliance, and SEO optimization."
@@ -66,7 +66,7 @@ export default function ModernizationProfessionalPackage() {
   },
   "offers": {
     "@type": "Offer",
-    "price": "399",
+    "price": "1299",
     "priceCurrency": "USD",
     "availability": "https://schema.org/InStock"
   },
@@ -91,7 +91,7 @@ export default function ModernizationProfessionalPackage() {
                         <h1 className="mb-2 text-4xl font-bold text-white">Website Modernization</h1>
                         <p className="mb-6 text-lg text-[var(--primary)]">Professional Package — Most Popular</p>
                         <div className="mb-6">
-                            <span className="text-5xl font-bold text-(--primary)">$399</span>
+                            <span className="text-5xl font-bold text-(--primary)">$1,299</span>
                             <p className="mt-2 text-lg text-white/80">
                                 Complete design and code refresh with modern frameworks and accessibility compliance.
                             </p>
@@ -132,7 +132,7 @@ export default function ModernizationProfessionalPackage() {
                             </p>
                             <div className="min-h-[50px]">
                                 <PackagePaymentGate
-                                    amount={399}
+                                    amount={1299}
                                     item="Website Modernization - Professional"
                                     packageSlug="modernization-professional"
                                 />

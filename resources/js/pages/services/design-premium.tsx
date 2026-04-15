@@ -23,7 +23,7 @@ export default function DesignPremiumPackage() {
     return (
         <>
             <Head>
-                <title>Website Design - Premium Package - $499 | Graveyard Jokes Studios</title>
+                <title>Website Design - Premium Package - $1,799 | Graveyard Jokes Studios</title>
                 <meta
                     name="description"
                     content="Premium design package: full brand identity, custom illustrations, accessibility audit, and ongoing design consultation for your website."
@@ -34,7 +34,7 @@ export default function DesignPremiumPackage() {
                 />
                 <link rel="canonical" href="https://graveyardjokes.com/services/design-premium" />
                 {/* Open Graph */}
-                <meta property="og:title" content="Website Design - Premium Package - $499 | Graveyard Jokes Studios" />
+                <meta property="og:title" content="Website Design - Premium Package - $1,799 | Graveyard Jokes Studios" />
                 <meta
                     property="og:description"
                     content="Premium design package: full brand identity, custom illustrations, accessibility audit, and ongoing design consultation for your website."
@@ -44,7 +44,7 @@ export default function DesignPremiumPackage() {
                 <meta property="og:url" content="https://graveyardjokes.com/services/design-premium" />
                 {/* Twitter */}
                 <meta name="twitter:card" content="summary_large_image" />
-                <meta name="twitter:title" content="Website Design - Premium Package - $499 | Graveyard Jokes Studios" />
+                <meta name="twitter:title" content="Website Design - Premium Package - $1,799 | Graveyard Jokes Studios" />
                 <meta
                     name="twitter:description"
                     content="Premium design package: full brand identity, custom illustrations, accessibility audit, and ongoing design consultation for your website."
@@ -66,7 +66,7 @@ export default function DesignPremiumPackage() {
   },
   "offers": {
     "@type": "Offer",
-    "price": "499",
+    "price": "1799",
     "priceCurrency": "USD",
     "availability": "https://schema.org/InStock"
   },
@@ -91,7 +91,7 @@ export default function DesignPremiumPackage() {
                         <h1 className="mb-2 text-4xl font-bold text-white">Website Design</h1>
                         <p className="mb-6 text-lg text-[var(--primary)]">Premium Package</p>
                         <div className="mb-6">
-                            <span className="text-5xl font-bold text-(--primary)">$499</span>
+                            <span className="text-5xl font-bold text-(--primary)">$1,799</span>
                             <p className="mt-2 text-lg text-white/80">
                                 Full brand identity with custom illustrations, accessibility audit, and ongoing design consultation.
                             </p>
@@ -131,7 +131,7 @@ export default function DesignPremiumPackage() {
                                 Complete the short project questionnaire first. Once submitted, payment unlocks instantly for this package.
                             </p>
                             <div className="min-h-[50px]">
-                                <PackagePaymentGate amount={499} item="Website Design - Premium" packageSlug="design-premium" />
+                                <PackagePaymentGate amount={1799} item="Website Design - Premium" packageSlug="design-premium" />
                             </div>
                         </div>
                     </motion.div>
