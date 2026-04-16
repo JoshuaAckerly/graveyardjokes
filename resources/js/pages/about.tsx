@@ -37,9 +37,9 @@ export default function About() {
             body: 'I design interfaces with personality. The goal is always the same: memorable visuals that still feel intuitive and fast.',
         },
         {
-            icon: 'MU',
-            title: 'Music + Media Platforms',
-            body: 'A major part of my work serves artists, labels, and underground scenes with custom publishing, streaming, and community features.',
+            icon: 'PL',
+            title: 'Platform & App Development',
+            body: 'A major part of my work involves building custom platforms, apps, and community tools for independent brands and growing ventures.',
         },
         {
             icon: 'OS',
@@ -189,7 +189,7 @@ export default function About() {
                 />
                 <meta
                     name="keywords"
-                    content="Joshua Ackerly, Graveyard Jokes Studios, full-stack developer, Laravel, React, TypeScript, Tailwind, web design, music platform development"
+                    content="Joshua Ackerly, Graveyard Jokes Studios, full-stack developer, Laravel, React, TypeScript, Tailwind, web design, platform development, web applications"
                 />
 
                 <link rel="canonical" href={`${projectUrl}about`} />
@@ -273,7 +273,7 @@ export default function About() {
                             transition={{ delay: 0.2, duration: 0.5 }}
                         >
                             Graveyard Jokes Studios is where engineering discipline meets creative identity. I build robust, expressive web platforms
-                            for startups, musicians, and independent brands that need more than a generic template.
+                            for entrepreneurs, creatives, and independent brands that need more than a generic template.
                         </motion.p>
                     </section>
 

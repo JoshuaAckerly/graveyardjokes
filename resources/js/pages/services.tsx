@@ -60,7 +60,7 @@ export default function Services() {
                 'Everything in Professional',
                 'E-commerce/merch store',
                 'Event calendar & ticketing',
-                'Music/video streaming',
+                'Content/media streaming',
                 'Custom animations & effects',
                 'API integrations',
                 '6 months of support',

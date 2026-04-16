@@ -2,7 +2,7 @@ import InertiaHead from '@/Components/InertiaHead';
 import MainLayout from '@/Layouts/MainLayout';
 import { Link } from '@inertiajs/react';
 import { motion } from 'framer-motion';
-import { ArrowUpRight, Code2, Layers, Music, Palette } from 'lucide-react';
+import { ArrowUpRight, Code2, Globe, Layers, Palette } from 'lucide-react';
 import { getProjectUrl } from '../env';
 
 export default function Studio() {
@@ -15,9 +15,9 @@ export default function Studio() {
             body: 'Laravel, Inertia.js, React, and TypeScript — every project built on a clean, maintainable foundation.',
         },
         {
-            icon: <Music className="h-6 w-6" />,
-            title: 'Music & Media Platforms',
-            body: 'Custom streaming, publishing, event management, and community tools built for independent artists and labels.',
+            icon: <Globe className="h-6 w-6" />,
+            title: 'Platform & Product Development',
+            body: 'Custom streaming, publishing, event management, and community tools built for independent brands and growing ventures.',
         },
         {
             icon: <Palette className="h-6 w-6" />,
@@ -46,17 +46,17 @@ export default function Studio() {
                     <title>Studio | Graveyard Jokes Studios</title>
                     <meta
                         name="description"
-                        content="Graveyard Jokes Studios — a creative web development studio building custom platforms for musicians, artists, and independent brands."
+                        content="Graveyard Jokes Studios — a creative web development studio building custom platforms for entrepreneurs, creatives, and independent brands."
                     />
                     <meta
                         name="keywords"
-                        content="Graveyard Jokes Studios, web studio, creative development, music platforms, custom websites, Laravel, React"
+                        content="Graveyard Jokes Studios, web studio, creative development, custom platforms, custom websites, Laravel, React"
                     />
                     <link rel="canonical" href="https://graveyardjokes.com/studio" />
                     <meta property="og:title" content="Studio | Graveyard Jokes Studios" />
                     <meta
                         property="og:description"
-                        content="Graveyard Jokes Studios — a creative web development studio building custom platforms for musicians, artists, and independent brands."
+                        content="Graveyard Jokes Studios — a creative web development studio building custom platforms for entrepreneurs, creatives, and independent brands."
                     />
                     <meta property="og:type" content="website" />
                     <meta property="og:url" content="https://graveyardjokes.com/studio" />
@@ -64,7 +64,7 @@ export default function Studio() {
                     <meta name="twitter:title" content="Studio | Graveyard Jokes Studios" />
                     <meta
                         name="twitter:description"
-                        content="Graveyard Jokes Studios — a creative web development studio building custom platforms for musicians, artists, and independent brands."
+                        content="Graveyard Jokes Studios — a creative web development studio building custom platforms for entrepreneurs, creatives, and independent brands."
                     />
                 </InertiaHead>
 
@@ -79,7 +79,7 @@ export default function Studio() {
                         <p className="mb-2 text-sm font-semibold tracking-widest text-[var(--accent)] uppercase">Creative Studio</p>
                         <h1 className="text-5xl font-extrabold text-[var(--accent)]">Graveyard Jokes Studios</h1>
                         <p className="mt-4 text-lg text-white/70">
-                            A small creative web development studio building custom platforms for musicians, artists, and independent brands. Every
+                            A small creative web development studio building custom platforms for entrepreneurs, creatives, and independent brands. Every
                             project is hand-crafted — no page builders, no shortcuts.
                         </p>
                         <div className="mt-6 flex flex-wrap justify-center gap-4">
@@ -160,7 +160,7 @@ export default function Studio() {
                         className="w-full max-w-4xl rounded-lg border border-[var(--accent)]/30 bg-[var(--accent)]/5 p-8 text-center"
                     >
                         <h2 className="text-2xl font-bold text-white">Want Something Built?</h2>
-                        <p className="mt-2 text-white/60">We take on custom web projects for musicians, artists, and independent brands.</p>
+                        <p className="mt-2 text-white/60">We take on custom web projects for entrepreneurs, creatives, and independent brands.</p>
                         <Link
                             href="/contact"
                             className="mt-6 inline-block rounded-lg bg-[var(--accent)] px-8 py-3 font-semibold text-black transition hover:opacity-90"

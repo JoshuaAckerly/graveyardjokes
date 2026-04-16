@@ -54,7 +54,7 @@ export default function StarterPackage() {
   "@type": "Service",
   "serviceType": "Web Design",
   "name": "Starter Package",
-  "description": "Perfect for artists and musicians starting their online presence. Single-page responsive website with contact form and social media integration.",
+  "description": "Perfect for entrepreneurs and creatives launching their online presence. Single-page responsive website with contact form and social media integration.",
   "provider": {
     "@type": "Organization",
     "name": "GraveYard Jokes Studios Inc.",

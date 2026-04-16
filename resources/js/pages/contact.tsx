@@ -101,7 +101,7 @@ export default function ContactPricing() {
             <InertiaHead>
                 <title>Contact | Graveyard Jokes Studios</title>
                 <meta name="description" content="Contact Graveyard Jokes Studios for custom websites. Get in touch to discuss your project." />
-                <meta name="keywords" content="contact, custom websites, web design, web development, musicians, artists, creatives" />
+                <meta name="keywords" content="contact, custom websites, web design, web development, entrepreneurs, creatives, independent brands" />
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
 
                 {/* Canonical */}

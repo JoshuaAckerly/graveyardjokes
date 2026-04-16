@@ -44,14 +44,14 @@ export default function Home(): JSX.Element {
         <MainLayout>
             <>
                 <InertiaHead>
-                    <title>Graveyard Jokes Studios | Custom Websites for Musicians, Artists, and Creatives</title>
+                    <title>Graveyard Jokes Studios | Custom Websites for Entrepreneurs, Creatives, and Independent Brands</title>
                     <meta
                         name="description"
                         content="GraveyardJokes is a web design and development company creating fast, modern websites that help businesses generate leads and grow online."
                     />
                     <meta
                         name="keywords"
-                        content="custom websites, musicians, artists, creatives, web design, web development, portfolio, online presence"
+                        content="custom websites, entrepreneurs, creatives, independent brands, small business, web design, web development, portfolio, online presence"
                     />
                     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
@@ -59,7 +59,7 @@ export default function Home(): JSX.Element {
                     <link rel="canonical" href={projectUrl} />
 
                     {/* Open Graph */}
-                    <meta property="og:title" content="Graveyard Jokes Studios | Custom Websites for Musicians, Artists, and Creatives" />
+                    <meta property="og:title" content="Graveyard Jokes Studios | Custom Websites for Entrepreneurs, Creatives, and Independent Brands" />
                     <meta
                         property="og:description"
                         content="GraveyardJokes is a web design and development company creating fast, modern websites that help businesses generate leads and grow online."
@@ -70,7 +70,7 @@ export default function Home(): JSX.Element {
 
                     {/* Twitter */}
                     <meta name="twitter:card" content="summary_large_image" />
-                    <meta name="twitter:title" content="Graveyard Jokes Studios | Custom Websites for Musicians, Artists, and Creatives" />
+                    <meta name="twitter:title" content="Graveyard Jokes Studios | Custom Websites for Entrepreneurs, Creatives, and Independent Brands" />
                     <meta
                         name="twitter:description"
                         content="GraveyardJokes is a web design and development company creating fast, modern websites that help businesses generate leads and grow online."
@@ -139,8 +139,8 @@ export default function Home(): JSX.Element {
                                 transition={{ duration: 0.8, delay: 0.5 }}
                                 className="mx-auto text-center text-lg text-white opacity-70 sm:text-xl md:w-1/2"
                             >
-                                Custom websites for musicians, artists, and creatives who want to stand out online
-                                <br />— whether you're promoting your latest album or building a portfolio to showcase your skills.
+                                Custom websites for entrepreneurs, creatives, and independent brands who want to stand out online
+                                <br />— whether you're launching a business, promoting a project, or building your portfolio.
                             </motion.p>
 
                             <motion.div
@@ -326,8 +326,8 @@ export default function Home(): JSX.Element {
                                 <div className="mb-4 text-3xl">🎭</div>
                                 <h3 className="mb-2 text-xl font-semibold text-white">Portfolio & Showcase Sites</h3>
                                 <p className="text-sm text-white/70">
-                                    Beautiful, responsive portfolios that highlight your work. Perfect for artists, musicians, photographers, and
-                                    creatives who need to make an impact.
+                                    Beautiful, responsive portfolios that highlight your work. Perfect for entrepreneurs, consultants, creatives, and
+                                    independent brands who need to make an impact.
                                 </p>
                             </motion.div>
 
@@ -342,7 +342,7 @@ export default function Home(): JSX.Element {
                                 <div className="mb-4 text-3xl">🛒</div>
                                 <h3 className="mb-2 text-xl font-semibold text-white">E-commerce & Merch Stores</h3>
                                 <p className="text-sm text-white/70">
-                                    Sell your music, art, or merchandise online with a custom e-commerce solution. Integrated payments, inventory
+                                    Sell your products or services online with a custom e-commerce solution. Integrated payments, inventory
                                     management, and seamless checkout.
                                 </p>
                             </motion.div>
@@ -358,7 +358,7 @@ export default function Home(): JSX.Element {
                                 <div className="mb-4 text-3xl">🚀</div>
                                 <h3 className="mb-2 text-xl font-semibold text-white">Landing Pages & Promo Sites</h3>
                                 <p className="text-sm text-white/70">
-                                    High-converting landing pages for album releases, tours, events, or product launches. Fast, focused, and optimized
+                                    High-converting landing pages for launches, campaigns, events, or product releases. Fast, focused, and optimized
                                     to drive action.
                                 </p>
                             </motion.div>
@@ -437,7 +437,7 @@ export default function Home(): JSX.Element {
                                     <p className="mt-1 text-sm font-medium text-[var(--primary)]">Founder & Developer — Graveyard Jokes Studios</p>
                                     <p className="mt-4 text-base text-white/70">
                                         I'm a full-stack developer based in Cheektowaga, New York, and I built Graveyard Jokes Studios to give
-                                        musicians, artists, and creatives access to professional-quality websites without the agency price tag.
+                                        entrepreneurs, creatives, and independent brands access to professional-quality websites without the agency price tag.
                                     </p>
                                     <p className="mt-3 text-base text-white/70">
                                         I handle everything — design, code, deployment, and ongoing support. No handoffs, no middlemen. You deal
