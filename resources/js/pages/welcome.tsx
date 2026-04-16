@@ -59,7 +59,10 @@ export default function Home(): JSX.Element {
                     <link rel="canonical" href={projectUrl} />
 
                     {/* Open Graph */}
-                    <meta property="og:title" content="Graveyard Jokes Studios | Custom Websites for Entrepreneurs, Creatives, and Independent Brands" />
+                    <meta
+                        property="og:title"
+                        content="Graveyard Jokes Studios | Custom Websites for Entrepreneurs, Creatives, and Independent Brands"
+                    />
                     <meta
                         property="og:description"
                         content="GraveyardJokes is a web design and development company creating fast, modern websites that help businesses generate leads and grow online."
@@ -70,7 +73,10 @@ export default function Home(): JSX.Element {
 
                     {/* Twitter */}
                     <meta name="twitter:card" content="summary_large_image" />
-                    <meta name="twitter:title" content="Graveyard Jokes Studios | Custom Websites for Entrepreneurs, Creatives, and Independent Brands" />
+                    <meta
+                        name="twitter:title"
+                        content="Graveyard Jokes Studios | Custom Websites for Entrepreneurs, Creatives, and Independent Brands"
+                    />
                     <meta
                         name="twitter:description"
                         content="GraveyardJokes is a web design and development company creating fast, modern websites that help businesses generate leads and grow online."
@@ -437,7 +443,8 @@ export default function Home(): JSX.Element {
                                     <p className="mt-1 text-sm font-medium text-[var(--primary)]">Founder & Developer — Graveyard Jokes Studios</p>
                                     <p className="mt-4 text-base text-white/70">
                                         I'm a full-stack developer based in Cheektowaga, New York, and I built Graveyard Jokes Studios to give
-                                        entrepreneurs, creatives, and independent brands access to professional-quality websites without the agency price tag.
+                                        entrepreneurs, creatives, and independent brands access to professional-quality websites without the agency
+                                        price tag.
                                     </p>
                                     <p className="mt-3 text-base text-white/70">
                                         I handle everything — design, code, deployment, and ongoing support. No handoffs, no middlemen. You deal

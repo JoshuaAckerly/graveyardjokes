@@ -21,7 +21,10 @@ const Portfolio: React.FC = () => {
                         name="description"
                         content="Explore the portfolio of Graveyard Jokes Studios, showcasing custom websites for entrepreneurs, creatives, and independent brands."
                     />
-                    <meta name="keywords" content="portfolio, custom websites, entrepreneurs, creatives, independent brands, web design, web development" />
+                    <meta
+                        name="keywords"
+                        content="portfolio, custom websites, entrepreneurs, creatives, independent brands, web design, web development"
+                    />
                     <meta name="viewport" content="width=device-width, initial-scale=1" />
                     <link rel="canonical" href="https://graveyardjokes.com/portfolio" />
 

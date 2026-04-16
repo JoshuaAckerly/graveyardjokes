@@ -79,8 +79,8 @@ export default function Studio() {
                         <p className="mb-2 text-sm font-semibold tracking-widest text-[var(--accent)] uppercase">Creative Studio</p>
                         <h1 className="text-5xl font-extrabold text-[var(--accent)]">Graveyard Jokes Studios</h1>
                         <p className="mt-4 text-lg text-white/70">
-                            A small creative web development studio building custom platforms for entrepreneurs, creatives, and independent brands. Every
-                            project is hand-crafted — no page builders, no shortcuts.
+                            A small creative web development studio building custom platforms for entrepreneurs, creatives, and independent brands.
+                            Every project is hand-crafted — no page builders, no shortcuts.
                         </p>
                         <div className="mt-6 flex flex-wrap justify-center gap-4">
                             <a
