@@ -20,7 +20,7 @@
 - [ ] Review and update caching strategies
 
 ### Code Quality
-- [ ] Continue reducing PHPStan baseline errors (currently 36)
+- [x] Continue reducing PHPStan baseline errors (baseline cleared — 0 errors at level max)
 - [ ] Add more test coverage for edge cases
 - [ ] Review and update documentation as features evolve
 - [x] Update all documentation to reflect Linux backend setup (remove Windows references)
