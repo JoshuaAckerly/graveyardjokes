@@ -12,7 +12,8 @@ use Illuminate\Console\Command;
 
 class SocialDispatch extends Command
 {
-    protected $signature   = 'social:dispatch';
+    protected $signature = 'social:dispatch';
+
     protected $description = 'Fire all social media posts that are due right now.';
 
     public function handle(): int
@@ -21,6 +22,7 @@ class SocialDispatch extends Command
 
         if ($posts->isEmpty()) {
             $this->line('No posts due.');
+
             return self::SUCCESS;
         }
 
@@ -31,18 +33,18 @@ class SocialDispatch extends Command
                 $this->fire($post, $client);
 
                 $post->update([
-                    'status'    => 'posted',
+                    'status' => 'posted',
                     'posted_at' => now(),
                 ]);
 
-                $this->info("[{$post->platform}] Posted: " . \Str::limit($post->content, 60));
+                $this->info("[{$post->platform}] Posted: ".\Str::limit($post->content, 60));
             } catch (\Throwable $e) {
                 $post->update([
-                    'status'        => 'failed',
+                    'status' => 'failed',
                     'error_message' => $e->getMessage(),
                 ]);
 
-                $this->error("[{$post->platform}] Failed: " . $e->getMessage());
+                $this->error("[{$post->platform}] Failed: ".$e->getMessage());
             }
         }
 
@@ -52,11 +54,11 @@ class SocialDispatch extends Command
     private function fire(SocialScheduledPost $post, Client $client): void
     {
         match ($post->platform) {
-            'discord'   => (new DiscordService($client))->post($post->content, $post->media_url),
-            'twitter'   => (new TwitterService($client))->post($post->content),
-            'facebook'  => (new FacebookService($client))->post($post->content, $post->media_url),
+            'discord' => (new DiscordService($client))->post($post->content, $post->media_url),
+            'twitter' => (new TwitterService($client))->post($post->content),
+            'facebook' => (new FacebookService($client))->post($post->content, $post->media_url),
             'instagram' => $this->fireInstagram($post, $client),
-            default     => throw new \RuntimeException("Unknown platform: {$post->platform}"),
+            default => throw new \RuntimeException("Unknown platform: {$post->platform}"),
         };
     }
 

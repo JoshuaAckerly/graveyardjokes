@@ -20,7 +20,7 @@ class DiscordService
 
         if ($mediaUrl !== null) {
             // Discord auto-embeds image URLs appended to content
-            $body['content'] = $content . "\n" . $mediaUrl;
+            $body['content'] = $content."\n".$mediaUrl;
         }
 
         $this->client->post($webhookUrl, ['json' => $body]);

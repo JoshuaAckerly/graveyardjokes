@@ -12,7 +12,7 @@ class FacebookService
 
     public function post(string $content, ?string $mediaUrl = null): void
     {
-        $pageId      = config('social.facebook.page_id');
+        $pageId = config('social.facebook.page_id');
         $accessToken = config('social.facebook.access_token');
 
         if (empty($pageId) || empty($accessToken)) {
@@ -20,7 +20,7 @@ class FacebookService
         }
 
         $body = [
-            'message'      => $content,
+            'message' => $content,
             'access_token' => $accessToken,
         ];
 
@@ -28,7 +28,7 @@ class FacebookService
             $body['link'] = $mediaUrl;
         }
 
-        $this->client->post(self::GRAPH_URL . '/' . $pageId . '/feed', [
+        $this->client->post(self::GRAPH_URL.'/'.$pageId.'/feed', [
             'form_params' => $body,
         ]);
     }

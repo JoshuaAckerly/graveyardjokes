@@ -26,7 +26,8 @@ class SocialSchedule extends Command
         );
 
         if (! in_array($platform, self::PLATFORMS, true)) {
-            $this->error("Invalid platform: {$platform}. Choose from: " . implode(', ', self::PLATFORMS));
+            $this->error("Invalid platform: {$platform}. Choose from: ".implode(', ', self::PLATFORMS));
+
             return self::FAILURE;
         }
 
@@ -34,6 +35,7 @@ class SocialSchedule extends Command
 
         if (empty($content)) {
             $this->error('Content cannot be empty.');
+
             return self::FAILURE;
         }
 
@@ -43,6 +45,7 @@ class SocialSchedule extends Command
             $scheduledAt = \Carbon\Carbon::parse($atRaw);
         } catch (\Exception) {
             $this->error("Could not parse date/time: {$atRaw}");
+
             return self::FAILURE;
         }
 
@@ -52,16 +55,17 @@ class SocialSchedule extends Command
             $mediaUrl = $this->ask('Instagram requires a public image URL. Enter it now (or leave blank to cancel)');
             if (empty($mediaUrl)) {
                 $this->error('Cancelled — Instagram posts require a media_url.');
+
                 return self::FAILURE;
             }
         }
 
         $post = SocialScheduledPost::create([
-            'platform'     => $platform,
-            'content'      => $content,
-            'media_url'    => $mediaUrl ?: null,
+            'platform' => $platform,
+            'content' => $content,
+            'media_url' => $mediaUrl ?: null,
             'scheduled_at' => $scheduledAt,
-            'status'       => 'pending',
+            'status' => 'pending',
         ]);
 
         $this->info("Scheduled post #{$post->id} on {$platform} for {$scheduledAt->toDateTimeString()}.");

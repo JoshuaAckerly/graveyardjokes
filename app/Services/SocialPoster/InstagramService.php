@@ -16,7 +16,7 @@ class InstagramService
      */
     public function post(string $content, string $mediaUrl): void
     {
-        $userId      = config('social.instagram.user_id');
+        $userId = config('social.instagram.user_id');
         $accessToken = config('social.instagram.access_token');
 
         if (empty($userId) || empty($accessToken)) {
@@ -24,16 +24,16 @@ class InstagramService
         }
 
         // Step 1: Create media container
-        $createResponse = $this->client->post(self::GRAPH_URL . '/' . $userId . '/media', [
+        $createResponse = $this->client->post(self::GRAPH_URL.'/'.$userId.'/media', [
             'form_params' => [
-                'image_url'    => $mediaUrl,
-                'caption'      => $content,
+                'image_url' => $mediaUrl,
+                'caption' => $content,
                 'access_token' => $accessToken,
             ],
         ]);
 
         /** @var array{id: string} $data */
-        $data        = json_decode((string) $createResponse->getBody(), true);
+        $data = json_decode((string) $createResponse->getBody(), true);
         $containerId = $data['id'] ?? null;
 
         if (empty($containerId)) {
@@ -41,9 +41,9 @@ class InstagramService
         }
 
         // Step 2: Publish the container
-        $this->client->post(self::GRAPH_URL . '/' . $userId . '/media_publish', [
+        $this->client->post(self::GRAPH_URL.'/'.$userId.'/media_publish', [
             'form_params' => [
-                'creation_id'  => $containerId,
+                'creation_id' => $containerId,
                 'access_token' => $accessToken,
             ],
         ]);

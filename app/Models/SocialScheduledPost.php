@@ -18,9 +18,9 @@ class SocialScheduledPost extends Model
     ];
 
     protected $casts = [
-        'extra'        => 'array',
+        'extra' => 'array',
         'scheduled_at' => 'datetime',
-        'posted_at'    => 'datetime',
+        'posted_at' => 'datetime',
     ];
 
     /** Posts due to fire right now. */
