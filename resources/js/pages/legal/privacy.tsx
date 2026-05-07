@@ -90,8 +90,8 @@ const Privacy: React.FC = () => {
                 <p>
                     You can disable cookies in your browser, though this may affect site functionality. If you have questions about your data or wish
                     to request information about data we may have collected, contact us at{' '}
-                    <a href="mailto:info@graveyardjokes.com" className="text-blue-600 underline">
-                        info@graveyardjokes.com
+                    <a href="mailto:joshua@graveyardjokes.com" className="text-blue-600 underline">
+                        joshua@graveyardjokes.com
                     </a>
                     .
                 </p>

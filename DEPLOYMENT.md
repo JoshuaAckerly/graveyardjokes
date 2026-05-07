@@ -1464,11 +1464,11 @@ For deployment issues:
 1. Check logs first: `storage/logs/laravel.log`
 2. Review [DEVELOPMENT.md](./DEVELOPMENT.md) for local testing
 3. Check [GitHub Issues](https://github.com/JoshuaAckerly/graveyardjokes/issues)
-4. Contact: admin@graveyardjokes.com
+4. Contact: joshua@graveyardjokes.com
 
 ### Deployment Emergency Contacts
 
-- **Primary**: admin@graveyardjokes.com
+- **Primary**: joshua@graveyardjokes.com
 - **GitHub**: @JoshuaAckerly
 - **AWS Console**: For production server issues
 - **Server Provider**: Check your hosting dashboard

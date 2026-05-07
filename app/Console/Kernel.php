@@ -14,6 +14,9 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         \App\Console\Commands\GenerateSitemapIndex::class,
+        \App\Console\Commands\SocialDispatch::class,
+        \App\Console\Commands\SocialSchedule::class,
+        \App\Console\Commands\FacebookPageTokens::class,
     ];
 
     /**
@@ -23,6 +26,9 @@ class Kernel extends ConsoleKernel
     {
         // Regenerate sitemap index daily at 02:00
         $schedule->command('app:generate-sitemap-index --url=https://graveyardjokes.com')->dailyAt('02:00');
+
+        // Fire due social media posts every minute
+        $schedule->command('social:dispatch')->everyMinute();
     }
 
     /**

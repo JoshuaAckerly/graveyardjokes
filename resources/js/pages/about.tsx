@@ -317,7 +317,7 @@ export default function About() {
 
                             <div className="mt-7 flex flex-col gap-3 sm:flex-row">
                                 <a
-                                    href={`${cdn}/documents/Joshua.pdf`}
+                                    href={`${cdn}/documents/JoshuaAckerlyResume.pdf`}
                                     download
                                     className="inline-flex items-center justify-center rounded-lg bg-[var(--primary)] px-6 py-3 font-semibold text-white transition hover:bg-[var(--accent)]"
                                 >

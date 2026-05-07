@@ -47,7 +47,7 @@ export default function PayPalDonateButton({ variant = 'default', className = ''
     }, [variant, hostedButtonId]);
 
     const handleDonate = () => {
-        const paypalUrl = 'https://www.paypal.com/donate/?business=admin@graveyardjokes.com&currency_code=USD';
+        const paypalUrl = 'https://www.paypal.com/donate/?business=joshua@graveyardjokes.com&currency_code=USD';
         window.open(paypalUrl, '_blank', 'noopener,noreferrer');
     };
 
