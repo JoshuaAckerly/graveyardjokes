@@ -24,10 +24,10 @@ class SocialScheduleController extends Controller
 
         // Validate payload
         $data = $request->validate([
-            'platform'     => ['required', 'string', 'in:'.implode(',', self::PLATFORMS)],
-            'content'      => ['required', 'string', 'max:5000'],
+            'platform' => ['required', 'string', 'in:'.implode(',', self::PLATFORMS)],
+            'content' => ['required', 'string', 'max:5000'],
             'scheduled_at' => ['required', 'string'],
-            'media_url'    => ['nullable', 'url'],
+            'media_url' => ['nullable', 'url'],
         ]);
 
         // Parse human-friendly date strings ("tomorrow 9am", "2026-05-11 09:00", "now")
@@ -38,18 +38,18 @@ class SocialScheduleController extends Controller
         }
 
         $post = SocialScheduledPost::create([
-            'platform'     => $data['platform'],
-            'content'      => $data['content'],
-            'media_url'    => $data['media_url'] ?? null,
+            'platform' => $data['platform'],
+            'content' => $data['content'],
+            'media_url' => $data['media_url'] ?? null,
             'scheduled_at' => $scheduledAt,
-            'status'       => 'pending',
+            'status' => 'pending',
         ]);
 
         return response()->json([
-            'id'           => $post->id,
-            'platform'     => $post->platform,
+            'id' => $post->id,
+            'platform' => $post->platform,
             'scheduled_at' => $scheduledAt->toDateTimeString(),
-            'status'       => 'scheduled',
+            'status' => 'scheduled',
         ], 201);
     }
 

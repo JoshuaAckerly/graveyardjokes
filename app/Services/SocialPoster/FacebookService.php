@@ -21,18 +21,18 @@ class FacebookService
 
         if ($mediaUrl !== null) {
             // Photo post — use /photos endpoint, caption holds the text
-            $this->client->post(self::GRAPH_URL . '/' . $pageId . '/photos', [
+            $this->client->post(self::GRAPH_URL.'/'.$pageId.'/photos', [
                 'form_params' => [
-                    'url'          => $mediaUrl,
-                    'caption'      => $content,
+                    'url' => $mediaUrl,
+                    'caption' => $content,
                     'access_token' => $accessToken,
                 ],
             ]);
         } else {
             // Text-only post
-            $this->client->post(self::GRAPH_URL . '/' . $pageId . '/feed', [
+            $this->client->post(self::GRAPH_URL.'/'.$pageId.'/feed', [
                 'form_params' => [
-                    'message'      => $content,
+                    'message' => $content,
                     'access_token' => $accessToken,
                 ],
             ]);
