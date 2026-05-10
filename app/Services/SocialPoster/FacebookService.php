@@ -19,17 +19,23 @@ class FacebookService
             throw new \RuntimeException('Facebook page credentials are not fully configured.');
         }
 
-        $body = [
-            'message' => $content,
-            'access_token' => $accessToken,
-        ];
-
         if ($mediaUrl !== null) {
-            $body['link'] = $mediaUrl;
+            // Photo post — use /photos endpoint, caption holds the text
+            $this->client->post(self::GRAPH_URL . '/' . $pageId . '/photos', [
+                'form_params' => [
+                    'url'          => $mediaUrl,
+                    'caption'      => $content,
+                    'access_token' => $accessToken,
+                ],
+            ]);
+        } else {
+            // Text-only post
+            $this->client->post(self::GRAPH_URL . '/' . $pageId . '/feed', [
+                'form_params' => [
+                    'message'      => $content,
+                    'access_token' => $accessToken,
+                ],
+            ]);
         }
-
-        $this->client->post(self::GRAPH_URL.'/'.$pageId.'/feed', [
-            'form_params' => $body,
-        ]);
     }
 }

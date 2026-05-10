@@ -17,6 +17,7 @@ class Kernel extends ConsoleKernel
         \App\Console\Commands\SocialDispatch::class,
         \App\Console\Commands\SocialSchedule::class,
         \App\Console\Commands\FacebookPageTokens::class,
+        \App\Console\Commands\FacebookRefreshToken::class,
     ];
 
     /**

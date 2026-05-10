@@ -17,6 +17,7 @@ Route::middleware(['throttle:60,1'])->group(function () {
 Route::get('/random-joke', [JokeController::class, 'random'])->name('api.random-joke');
 
 use App\Http\Controllers\Api\MessageProxyController;
+use App\Http\Controllers\Api\SocialScheduleController;
 use App\Http\Controllers\Api\UserProxyController;
 
 Route::middleware('auth-system')->group(function () {
@@ -27,3 +28,7 @@ Route::middleware('auth-system')->group(function () {
 Route::get('/messages', [MessageProxyController::class, 'index']);
 Route::patch('/messages/read-all', [MessageProxyController::class, 'markAllRead']);
 Route::patch('/messages/{id}/read', [MessageProxyController::class, 'markRead']);
+
+// Social media post scheduling — protected by SOCIAL_SCHEDULE_SECRET bearer token
+Route::post('/social/schedule', [SocialScheduleController::class, 'store']);
+Route::get('/social/schedule', [SocialScheduleController::class, 'index']);

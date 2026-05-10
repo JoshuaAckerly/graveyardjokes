@@ -88,3 +88,16 @@ echo ""
 echo "✅ Production deployment completed successfully!"
 echo "🌐 Site: https://graveyardjokes.com"
 echo "🔧 SSR running on port: $SSR_PORT"
+
+# Install Laravel scheduler cron for www-data (idempotent)
+echo ""
+echo "⏰ Installing Laravel scheduler cron for www-data..."
+CRON_CMD="/usr/bin/php${PHP_VERSION} ${DEPLOY_PATH}/artisan schedule:run >> /var/log/graveyardjokes-scheduler.log 2>&1"
+CRON_ENTRY="* * * * * ${CRON_CMD}"
+# Create log file if it doesn't exist
+sudo touch /var/log/graveyardjokes-scheduler.log
+sudo chown www-data:www-data /var/log/graveyardjokes-scheduler.log
+# Add cron entry only if not already present
+sudo crontab -u www-data -l 2>/dev/null | grep -qF "$CRON_CMD" || \
+    (sudo crontab -u www-data -l 2>/dev/null; echo "$CRON_ENTRY") | sudo crontab -u www-data -
+echo "✅ Cron installed: ${CRON_ENTRY}"

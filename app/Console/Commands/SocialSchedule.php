@@ -11,7 +11,7 @@ class SocialSchedule extends Command
         {--platform= : discord, twitter, facebook, or instagram}
         {--content=  : The post body text}
         {--at=       : When to post — any Carbon-parseable date/time (e.g. "2026-05-10 09:00", "tomorrow 9am")}
-        {--media-url=: Public image URL (required for Instagram, optional for others)}';
+        {--media-url= : Public image URL (required for Instagram, optional for others)}';
 
     protected $description = 'Add a post to the social media scheduling queue.';
 
