@@ -15,7 +15,7 @@ class SocialScheduleController extends Controller
     public function store(Request $request): JsonResponse
     {
         // Validate bearer token
-        $secret = env('SOCIAL_SCHEDULE_SECRET');
+        $secret = config('social.schedule_secret');
         $provided = $request->bearerToken();
 
         if (empty($secret) || ! hash_equals($secret, (string) $provided)) {
@@ -56,7 +56,7 @@ class SocialScheduleController extends Controller
     public function index(Request $request): JsonResponse
     {
         // Validate bearer token
-        $secret = env('SOCIAL_SCHEDULE_SECRET');
+        $secret = config('social.schedule_secret');
         $provided = $request->bearerToken();
 
         if (empty($secret) || ! hash_equals($secret, (string) $provided)) {

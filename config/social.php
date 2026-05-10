@@ -23,4 +23,6 @@ return [
         'access_token' => env('INSTAGRAM_ACCESS_TOKEN'),
     ],
 
+    'schedule_secret' => env('SOCIAL_SCHEDULE_SECRET'),
+
 ];
