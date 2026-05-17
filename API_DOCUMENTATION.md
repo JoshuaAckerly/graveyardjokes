@@ -201,6 +201,82 @@ Retrieves a previously cached Open Graph image by filename.
 **Error Response**:
 - `404 Not Found`: Cached image does not exist
 
+### 8. Social Media — Schedule Post
+
+Adds a post to the social media scheduling queue. Posts are dispatched automatically by the `social:dispatch` cron job when their `scheduled_at` time is reached.
+
+**Endpoint**: `POST /api/social/schedule`
+
+**Authentication**: Bearer token (`SOCIAL_SCHEDULE_SECRET`)
+
+**Content-Type**: `application/json`
+
+**Request Body**:
+```json
+{
+  "platform":     "discord | twitter | facebook | instagram",
+  "content":      "string (required, max: 5000)",
+  "scheduled_at": "string — any Carbon-parseable date/time (e.g. \"2026-06-01 10:00\", \"tomorrow 9am\")",
+  "media_url":    "string (optional URL) — required for Instagram, optional for Facebook/Discord"
+}
+```
+
+**Success Response** (201):
+```json
+{
+  "id": 42,
+  "platform": "facebook",
+  "scheduled_at": "2026-06-01 10:00:00",
+  "status": "scheduled"
+}
+```
+
+**Error Responses**:
+- `401 Unauthorized`: Missing or invalid bearer token
+- `422 Unprocessable Entity`: Validation failure or unparseable `scheduled_at`
+
+**Supported Platforms**:
+| Platform  | Text | Image | Notes |
+|-----------|------|-------|-------|
+| `discord` | ✅   | ✅    | Image URL appended to content; uses webhook |
+| `twitter` | ✅   | ❌    | OAuth 1.0a; text only |
+| `facebook`| ✅   | ✅    | Graph API v19.0; uses `/photos` or `/feed` |
+| `instagram`| ✅  | ✅ (required) | Graph API v19.0; two-step container + publish |
+
+### 9. Social Media — List Scheduled Posts
+
+Returns all scheduled posts in the queue, ordered by `scheduled_at`.
+
+**Endpoint**: `GET /api/social/schedule`
+
+**Authentication**: Bearer token (`SOCIAL_SCHEDULE_SECRET`)
+
+**Success Response** (200):
+```json
+{
+  "data": [
+    {
+      "id": 42,
+      "platform": "facebook",
+      "content": "Hello world!",
+      "media_url": null,
+      "scheduled_at": "2026-06-01T10:00:00.000000Z",
+      "status": "pending",
+      "posted_at": null,
+      "error_message": null
+    }
+  ]
+}
+```
+
+**Post Statuses**:
+- `pending` — waiting to be dispatched
+- `posted` — successfully published
+- `failed` — dispatch attempted but an error occurred (`error_message` will be set)
+
+**Error Response**:
+- `401 Unauthorized`: Missing or invalid bearer token
+
 ---
 
 ## Error Handling
@@ -248,6 +324,23 @@ All API endpoints follow consistent error response patterns:
   "country": "string", 
   "region": "string",
   "timezone": "string"
+}
+```
+
+### SocialScheduledPost
+```json
+{
+  "id": "integer",
+  "platform": "discord | twitter | facebook | instagram",
+  "content": "text",
+  "media_url": "string | null",
+  "extra": "object | null",
+  "scheduled_at": "timestamp",
+  "posted_at": "timestamp | null",
+  "status": "pending | posted | failed",
+  "error_message": "text | null",
+  "created_at": "timestamp",
+  "updated_at": "timestamp"
 }
 ```
 
@@ -322,12 +415,91 @@ MAIL_HOST=your-smtp-host
 MAIL_PORT=587
 MAIL_USERNAME=your-username
 MAIL_PASSWORD=your-password
+
+# Social media scheduling — bearer token for the schedule API
+SOCIAL_SCHEDULE_SECRET=your-secret-here
+
+# Discord
+DISCORD_WEBHOOK_URL=https://discord.com/api/webhooks/...
+
+# Twitter / X (OAuth 1.0a)
+TWITTER_API_KEY=
+TWITTER_API_SECRET=
+TWITTER_ACCESS_TOKEN=
+TWITTER_ACCESS_SECRET=
+
+# Facebook (Graph API v19.0)
+FACEBOOK_PAGE_ID=
+FACEBOOK_PAGE_ACCESS_TOKEN=
+
+# Instagram (Graph API v19.0 — same app as Facebook)
+INSTAGRAM_USER_ID=
+INSTAGRAM_ACCESS_TOKEN=
 ```
 
 ### Storage Configuration
 - **Public Disk**: Used for Open Graph image caching
 - **Cache Driver**: Configured in `config/cache.php`
 - **Session Driver**: Configured in `config/session.php`
+
+## Artisan Commands
+
+### social:schedule
+
+Interactively adds a post to the scheduling queue. Prompts for missing options.
+
+```bash
+php artisan social:schedule \
+  --platform=facebook \
+  --content="Hello world!" \
+  --at="2026-06-01 10:00" \
+  --media-url="https://example.com/image.jpg"
+```
+
+**Options**:
+| Option | Description |
+|--------|-------------|
+| `--platform` | `discord`, `twitter`, `facebook`, or `instagram` |
+| `--content` | Post body text |
+| `--at` | Scheduled time — any Carbon-parseable string |
+| `--media-url` | Public image URL (required for Instagram) |
+
+### social:dispatch
+
+Fires all pending posts whose `scheduled_at` has passed. Runs automatically every minute in production via the Laravel scheduler. No-ops outside of the `production` environment.
+
+```bash
+# Manual dispatch (production only)
+php artisan social:dispatch
+```
+
+On each run it:
+1. Queries `social_scheduled_posts` where `status = pending` and `scheduled_at <= now()`
+2. Calls the appropriate platform service for each post
+3. Sets `status = posted` and records `posted_at` on success
+4. Sets `status = failed` and records `error_message` on failure
+
+### Shell Script: scripts/social-post.sh
+
+A convenience wrapper around the schedule API for local use. Reads `SOCIAL_SCHEDULE_SECRET` and `SOCIAL_API_URL` from the project `.env`.
+
+```bash
+# Schedule a post
+./scripts/social-post.sh \
+  --platform=facebook \
+  --content="Hello!" \
+  --at="tomorrow 9am"
+
+# Schedule with an image
+./scripts/social-post.sh \
+  --platform=instagram \
+  --content="Caption here" \
+  --at="2026-06-01 10:00" \
+  --media-url="https://graveyardjokes.com/storage/image.jpg"
+
+# List all queued posts
+./scripts/social-post.sh --list
+```
 
 ## Testing
 
