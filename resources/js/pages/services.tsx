@@ -83,7 +83,7 @@ export default function Services() {
         {
             slug: 'design-starter',
             title: 'Design - Starter',
-            price: 499,
+            price: 799,
             description: 'Wireframes and design mockups',
             features: [
                 'Wireframes for 3-5 pages',
@@ -147,7 +147,7 @@ export default function Services() {
         {
             slug: 'modernization-starter',
             title: 'Modernization - Starter',
-            price: 699,
+            price: 799,
             description: 'Visual refresh & performance updates',
             features: [
                 'Visual design refresh',

@@ -21,7 +21,7 @@ export default function ModernizationStarterPackage() {
     return (
         <>
             <Head>
-                <title>Website Modernization - Starter Package - $699 | Graveyard Jokes Studios</title>
+                <title>Website Modernization - Starter Package - $799 | Graveyard Jokes Studios</title>
                 <meta
                     name="description"
                     content="Starter modernization: give your existing website a fresh look. Visual refresh, responsiveness updates, and performance optimization."
@@ -29,7 +29,7 @@ export default function ModernizationStarterPackage() {
                 <meta name="keywords" content="website modernization, website redesign, responsive design, performance optimization, SEO update" />
                 <link rel="canonical" href="https://graveyardjokes.com/services/modernization-starter" />
                 {/* Open Graph */}
-                <meta property="og:title" content="Website Modernization - Starter Package - $699 | Graveyard Jokes Studios" />
+                <meta property="og:title" content="Website Modernization - Starter Package - $799 | Graveyard Jokes Studios" />
                 <meta
                     property="og:description"
                     content="Starter modernization: give your existing website a fresh look. Visual refresh, responsiveness updates, and performance optimization."
@@ -39,7 +39,7 @@ export default function ModernizationStarterPackage() {
                 <meta property="og:url" content="https://graveyardjokes.com/services/modernization-starter" />
                 {/* Twitter */}
                 <meta name="twitter:card" content="summary_large_image" />
-                <meta name="twitter:title" content="Website Modernization - Starter Package - $699 | Graveyard Jokes Studios" />
+                <meta name="twitter:title" content="Website Modernization - Starter Package - $799 | Graveyard Jokes Studios" />
                 <meta
                     name="twitter:description"
                     content="Starter modernization: give your existing website a fresh look. Visual refresh, responsiveness updates, and performance optimization."
@@ -61,7 +61,7 @@ export default function ModernizationStarterPackage() {
   },
   "offers": {
     "@type": "Offer",
-    "price": "699",
+    "price": "799",
     "priceCurrency": "USD",
     "availability": "https://schema.org/InStock"
   },
@@ -86,7 +86,7 @@ export default function ModernizationStarterPackage() {
                         <h1 className="mb-2 text-4xl font-bold text-white">Website Modernization</h1>
                         <p className="mb-6 text-lg text-gray-300">Starter Package</p>
                         <div className="mb-6">
-                            <span className="text-5xl font-bold text-(--primary)">$699</span>
+                            <span className="text-5xl font-bold text-(--primary)">$799</span>
                             <p className="mt-2 text-lg text-white/80">
                                 Give your existing website a fresh look with visual refresh and performance improvements.
                             </p>
@@ -126,7 +126,7 @@ export default function ModernizationStarterPackage() {
                                 Complete the short project questionnaire first. Once submitted, payment unlocks instantly for this package.
                             </p>
                             <div className="min-h-[50px]">
-                                <PackagePaymentGate amount={699} item="Website Modernization - Starter" packageSlug="modernization-starter" />
+                                <PackagePaymentGate amount={799} item="Website Modernization - Starter" packageSlug="modernization-starter" />
                             </div>
                         </div>
                     </motion.div>
