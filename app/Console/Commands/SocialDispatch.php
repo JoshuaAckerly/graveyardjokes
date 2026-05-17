@@ -18,6 +18,12 @@ class SocialDispatch extends Command
 
     public function handle(): int
     {
+        if (! app()->isProduction()) {
+            $this->warn('social:dispatch is disabled outside of production. No posts were sent.');
+
+            return self::SUCCESS;
+        }
+
         $posts = SocialScheduledPost::due()->get();
 
         if ($posts->isEmpty()) {

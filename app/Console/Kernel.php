@@ -28,8 +28,8 @@ class Kernel extends ConsoleKernel
         // Regenerate sitemap index daily at 02:00
         $schedule->command('app:generate-sitemap-index --url=https://graveyardjokes.com')->dailyAt('02:00');
 
-        // Fire due social media posts every minute
-        $schedule->command('social:dispatch')->everyMinute();
+        // Fire due social media posts every minute — production only
+        $schedule->command('social:dispatch')->everyMinute()->environments(['production']);
     }
 
     /**

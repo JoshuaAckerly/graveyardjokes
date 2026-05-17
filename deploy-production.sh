@@ -54,6 +54,10 @@ sudo chown -R www-data:www-data storage bootstrap/cache
 sudo find storage bootstrap/cache -type d -exec chmod 775 {} \;
 sudo find storage bootstrap/cache -type f -exec chmod 664 {} \;
 
+# Ensure public storage symlink exists
+echo "🔗 Ensuring storage symlink..."
+sudo -u www-data php artisan storage:link --force 2>/dev/null || true
+
 # Cache Laravel artifacts as the web server user
 echo "⚡ Optimizing Laravel..."
 sudo -u www-data php artisan config:cache
