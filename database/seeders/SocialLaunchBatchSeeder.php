@@ -34,9 +34,9 @@ class SocialLaunchBatchSeeder extends Seeder
             // ─── Day 1: Agency Intro / Portfolio ─────────────────────────────
 
             [
-                'platform'     => 'facebook',
+                'platform' => 'facebook',
                 'scheduled_at' => $day1,
-                'content'      => <<<'POST'
+                'content' => <<<'POST'
 Graveyard Jokes Studios builds websites and digital experiences for businesses that take their online presence seriously.
 
 We are a full-service creative web studio based in Cheektowaga, New York. Our services cover web development, web design, eCommerce development, SEO, and digital marketing — everything you need to build a site that works and grows with your business.
@@ -60,9 +60,9 @@ POST,
             ],
 
             [
-                'platform'     => 'discord',
+                'platform' => 'discord',
                 'scheduled_at' => $day1,
-                'content'      => <<<'POST'
+                'content' => <<<'POST'
 Hey everyone — I am Joshua, the founder of **Graveyard Jokes Studios**, a small web development and design agency out of Cheektowaga, NY.
 
 I have been heads-down building for the past several months and figured it was time to actually show up in places where people doing this kind of work gather.
@@ -87,9 +87,9 @@ POST,
             // ─── Day 2: Service Packages ──────────────────────────────────────
 
             [
-                'platform'     => 'facebook',
+                'platform' => 'facebook',
                 'scheduled_at' => $day2,
-                'content'      => <<<'POST'
+                'content' => <<<'POST'
 New Website Design & Modernization packages are now available at Graveyard Jokes Studios.
 
 If your website is outdated, slow, hard to navigate, or simply not converting visitors into clients — this is the fix.
@@ -117,9 +117,9 @@ POST,
             ],
 
             [
-                'platform'     => 'discord',
+                'platform' => 'discord',
                 'scheduled_at' => $day2,
-                'content'      => <<<'POST'
+                'content' => <<<'POST'
 **Studio Update — New Service Packages Available**
 
 Graveyard Jokes Studios just launched dedicated Website Design and Modernization packages for businesses whose current site no longer reflects the quality of what they actually do.
@@ -142,9 +142,9 @@ POST,
             // ─── Day 3: May 2026 Blog Update ─────────────────────────────────
 
             [
-                'platform'     => 'facebook',
+                'platform' => 'facebook',
                 'scheduled_at' => $day3,
-                'content'      => <<<'POST'
+                'content' => <<<'POST'
 Posted a new update on the studio blog.
 
 Things went quiet here for a while — worth acknowledging that directly. The past few weeks included a loss in the family and a slower pace. But the studio did not disappear. The codebases stayed clean. The documentation is solid. The work from March and April is all still there.
@@ -160,9 +160,9 @@ POST,
             ],
 
             [
-                'platform'     => 'discord',
+                'platform' => 'discord',
                 'scheduled_at' => $day3,
-                'content'      => <<<'POST'
+                'content' => <<<'POST'
 **Studio Update — May 2026**
 
 Things went quiet here for a while. Worth acknowledging that directly.
@@ -183,9 +183,9 @@ POST,
             // 280-character limit. URLs count as 23 chars regardless of length.
 
             [
-                'platform'     => 'twitter',
+                'platform' => 'twitter',
                 'scheduled_at' => $day1,
-                'content'      => <<<'POST'
+                'content' => <<<'POST'
 Graveyard Jokes Studios — a full-service web agency based in Cheektowaga, NY.
 
 Seven live portfolio projects. Clean builds. Zero errors in production.
@@ -199,9 +199,9 @@ POST,
             ],
 
             [
-                'platform'     => 'twitter',
+                'platform' => 'twitter',
                 'scheduled_at' => $day2,
-                'content'      => <<<'POST'
+                'content' => <<<'POST'
 New: Website Design & Modernization packages are live.
 
 If your site is outdated, slow, or not converting — we fix that.
@@ -215,9 +215,9 @@ POST,
             ],
 
             [
-                'platform'     => 'twitter',
+                'platform' => 'twitter',
                 'scheduled_at' => $day3,
-                'content'      => <<<'POST'
+                'content' => <<<'POST'
 Things went quiet here for a while. The studio did not disappear.
 
 The work is clean. The docs are solid. The foundation held.
@@ -234,11 +234,11 @@ POST,
 
         foreach ($posts as $post) {
             SocialScheduledPost::create([
-                'platform'     => $post['platform'],
-                'content'      => trim($post['content']),
-                'media_url'    => null,
+                'platform' => $post['platform'],
+                'content' => trim($post['content']),
+                'media_url' => null,
                 'scheduled_at' => $post['scheduled_at'],
-                'status'       => 'pending',
+                'status' => 'pending',
             ]);
         }
 

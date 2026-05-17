@@ -25,8 +25,8 @@ class SocialInstagramBatchSeeder extends Seeder
 {
     private array $imageUrls = [
         'portfolio' => 'https://graveyardjokes.com/storage/instagram/Copilot_20260516_201107.png',
-        'packages'  => 'https://graveyardjokes.com/storage/instagram/Copilot_20260516_201400.png',
-        'blog'      => 'https://graveyardjokes.com/storage/instagram/Copilot_20260516_201630.png',
+        'packages' => 'https://graveyardjokes.com/storage/instagram/Copilot_20260516_201400.png',
+        'blog' => 'https://graveyardjokes.com/storage/instagram/Copilot_20260516_201630.png',
     ];
 
     public function run(): void
@@ -43,8 +43,8 @@ class SocialInstagramBatchSeeder extends Seeder
 
             [
                 'scheduled_at' => $day1,
-                'media_url'    => $this->imageUrls['portfolio'],
-                'content'      => <<<'POST'
+                'media_url' => $this->imageUrls['portfolio'],
+                'content' => <<<'POST'
 Graveyard Jokes Studios is a full-service web development and design agency based in Cheektowaga, NY.
 
 We build websites and digital experiences for businesses that take their online presence seriously.
@@ -72,8 +72,8 @@ POST,
 
             [
                 'scheduled_at' => $day2,
-                'media_url'    => $this->imageUrls['packages'],
-                'content'      => <<<'POST'
+                'media_url' => $this->imageUrls['packages'],
+                'content' => <<<'POST'
 New Website Design & Modernization packages are now available.
 
 If your website is outdated, slow, difficult to navigate, or simply not converting visitors into clients — this is the fix.
@@ -100,8 +100,8 @@ POST,
 
             [
                 'scheduled_at' => $day3,
-                'media_url'    => $this->imageUrls['blog'],
-                'content'      => <<<'POST'
+                'media_url' => $this->imageUrls['blog'],
+                'content' => <<<'POST'
 Things went quiet here for a while. Worth acknowledging that before anything else.
 
 The past few weeks included a loss in the family — someone I did not talk to enough while there was still time. That kind of absence has a particular weight to it.
@@ -130,11 +130,11 @@ POST,
 
         foreach ($posts as $post) {
             SocialScheduledPost::create([
-                'platform'     => 'instagram',
-                'content'      => trim($post['content']),
-                'media_url'    => $post['media_url'],
+                'platform' => 'instagram',
+                'content' => trim($post['content']),
+                'media_url' => $post['media_url'],
                 'scheduled_at' => $post['scheduled_at'],
-                'status'       => 'pending',
+                'status' => 'pending',
             ]);
         }
 
@@ -157,7 +157,7 @@ POST,
                 $this->command->error(
                     "Cannot seed Instagram posts: image file missing for '{$key}'.\n"
                     ."Expected at: {$fullPath}\n"
-                    ."Copy images to the server first — see deployment notes."
+                    .'Copy images to the server first — see deployment notes.'
                 );
                 exit(1);
             }
