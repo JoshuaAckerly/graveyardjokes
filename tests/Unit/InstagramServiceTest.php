@@ -15,7 +15,7 @@ class InstagramServiceTest extends TestCase
     public function test_throws_when_user_id_not_configured(): void
     {
         config(['social.instagram.user_id' => null, 'social.instagram.access_token' => 'token']);
-        $service = new InstagramService(new Client());
+        $service = new InstagramService(new Client);
 
         $this->expectException(\RuntimeException::class);
         $this->expectExceptionMessage('Instagram credentials are not fully configured.');
@@ -26,7 +26,7 @@ class InstagramServiceTest extends TestCase
     public function test_throws_when_access_token_not_configured(): void
     {
         config(['social.instagram.user_id' => 'user123', 'social.instagram.access_token' => null]);
-        $service = new InstagramService(new Client());
+        $service = new InstagramService(new Client);
 
         $this->expectException(\RuntimeException::class);
         $this->expectExceptionMessage('Instagram credentials are not fully configured.');

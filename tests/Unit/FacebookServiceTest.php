@@ -15,7 +15,7 @@ class FacebookServiceTest extends TestCase
     public function test_throws_when_page_id_not_configured(): void
     {
         config(['social.facebook.page_id' => null, 'social.facebook.access_token' => 'token']);
-        $service = new FacebookService(new Client());
+        $service = new FacebookService(new Client);
 
         $this->expectException(\RuntimeException::class);
         $this->expectExceptionMessage('Facebook page credentials are not fully configured.');
@@ -26,7 +26,7 @@ class FacebookServiceTest extends TestCase
     public function test_throws_when_access_token_not_configured(): void
     {
         config(['social.facebook.page_id' => 'page123', 'social.facebook.access_token' => null]);
-        $service = new FacebookService(new Client());
+        $service = new FacebookService(new Client);
 
         $this->expectException(\RuntimeException::class);
         $this->expectExceptionMessage('Facebook page credentials are not fully configured.');

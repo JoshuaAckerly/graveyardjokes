@@ -15,9 +15,9 @@ class TwitterServiceTest extends TestCase
     private function twitterConfig(): array
     {
         return [
-            'social.twitter.api_key'       => 'api_key',
-            'social.twitter.api_secret'    => 'api_secret',
-            'social.twitter.access_token'  => 'access_token',
+            'social.twitter.api_key' => 'api_key',
+            'social.twitter.api_secret' => 'api_secret',
+            'social.twitter.access_token' => 'access_token',
             'social.twitter.access_secret' => 'access_secret',
         ];
     }
@@ -25,7 +25,7 @@ class TwitterServiceTest extends TestCase
     public function test_throws_when_api_key_not_configured(): void
     {
         config(array_merge($this->twitterConfig(), ['social.twitter.api_key' => '']));
-        $service = new TwitterService(new Client());
+        $service = new TwitterService(new Client);
 
         $this->expectException(\RuntimeException::class);
         $this->expectExceptionMessage('Twitter API credentials are not fully configured.');
@@ -36,7 +36,7 @@ class TwitterServiceTest extends TestCase
     public function test_throws_when_api_secret_not_configured(): void
     {
         config(array_merge($this->twitterConfig(), ['social.twitter.api_secret' => '']));
-        $service = new TwitterService(new Client());
+        $service = new TwitterService(new Client);
 
         $this->expectException(\RuntimeException::class);
         $this->expectExceptionMessage('Twitter API credentials are not fully configured.');
@@ -47,7 +47,7 @@ class TwitterServiceTest extends TestCase
     public function test_throws_when_access_token_not_configured(): void
     {
         config(array_merge($this->twitterConfig(), ['social.twitter.access_token' => '']));
-        $service = new TwitterService(new Client());
+        $service = new TwitterService(new Client);
 
         $this->expectException(\RuntimeException::class);
         $this->expectExceptionMessage('Twitter API credentials are not fully configured.');
@@ -58,7 +58,7 @@ class TwitterServiceTest extends TestCase
     public function test_throws_when_access_secret_not_configured(): void
     {
         config(array_merge($this->twitterConfig(), ['social.twitter.access_secret' => '']));
-        $service = new TwitterService(new Client());
+        $service = new TwitterService(new Client);
 
         $this->expectException(\RuntimeException::class);
         $this->expectExceptionMessage('Twitter API credentials are not fully configured.');

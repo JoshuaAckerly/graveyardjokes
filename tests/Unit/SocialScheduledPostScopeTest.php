@@ -13,10 +13,10 @@ class SocialScheduledPostScopeTest extends TestCase
     private function makePost(array $overrides = []): SocialScheduledPost
     {
         return SocialScheduledPost::create(array_merge([
-            'platform'     => 'discord',
-            'content'      => 'Test post content',
+            'platform' => 'discord',
+            'content' => 'Test post content',
             'scheduled_at' => now()->subMinutes(5),
-            'status'       => 'pending',
+            'status' => 'pending',
         ], $overrides));
     }
 

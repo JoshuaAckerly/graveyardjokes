@@ -15,7 +15,7 @@ class DiscordServiceTest extends TestCase
     public function test_throws_when_webhook_url_not_configured(): void
     {
         config(['social.discord.webhook_url' => null]);
-        $service = new DiscordService(new Client());
+        $service = new DiscordService(new Client);
 
         $this->expectException(\RuntimeException::class);
         $this->expectExceptionMessage('DISCORD_WEBHOOK_URL is not configured.');
@@ -26,7 +26,7 @@ class DiscordServiceTest extends TestCase
     public function test_throws_when_webhook_url_is_empty_string(): void
     {
         config(['social.discord.webhook_url' => '']);
-        $service = new DiscordService(new Client());
+        $service = new DiscordService(new Client);
 
         $this->expectException(\RuntimeException::class);
 

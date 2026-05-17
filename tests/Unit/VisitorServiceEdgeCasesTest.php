@@ -83,7 +83,7 @@ class VisitorServiceEdgeCasesTest extends TestCase
 
     public function test_null_ip_returns_local_development(): void
     {
-        $service = new VisitorService();
+        $service = new VisitorService;
 
         $result = $service->getLocationFromIP(null);
 
@@ -93,7 +93,7 @@ class VisitorServiceEdgeCasesTest extends TestCase
 
     public function test_ipv6_loopback_returns_local_development(): void
     {
-        $service = new VisitorService();
+        $service = new VisitorService;
 
         $result = $service->getLocationFromIP('::1');
 
