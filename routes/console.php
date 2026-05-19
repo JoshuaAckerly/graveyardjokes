@@ -10,5 +10,3 @@ Artisan::command('inspire', function () {
 
 // Regenerate sitemap index daily at 02:00
 Schedule::command('app:generate-sitemap-index --url=https://graveyardjokes.com')->dailyAt('02:00');
-
-
