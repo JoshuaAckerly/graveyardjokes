@@ -33,9 +33,9 @@ class SocialInstagramBatchSeeder extends Seeder
     {
         $this->guardPlaceholderUrls();
 
-        $day1 = Carbon::parse('2026-06-01 10:00:00');
-        $day2 = Carbon::parse('2026-06-02 10:00:00');
-        $day3 = Carbon::parse('2026-06-03 10:00:00');
+        $day1 = Carbon::parse('2026-05-19 10:00:00');
+        $day2 = Carbon::parse('2026-05-20 10:00:00');
+        $day3 = Carbon::parse('2026-05-21 10:00:00');
 
         $posts = [
 
@@ -58,7 +58,7 @@ We build websites and digital experiences for businesses that take their online 
 
 Seven live portfolio projects. Clean builds. Documented code. Production-ready work.
 
-Packages starting at $499.
+Packages starting at $799.
 
 Link in bio → graveyardjokes.com
 
@@ -81,8 +81,8 @@ If your website is outdated, slow, difficult to navigate, or simply not converti
 —
 
 → Website Development — from $799
-→ Website Design — from $499
-→ Website Modernization — from $699
+→ Website Design — from $799
+→ Website Modernization — from $799
 
 All projects include clean, documented, version-controlled code and a handoff that makes sense.
 
@@ -138,7 +138,7 @@ POST,
             ]);
         }
 
-        $this->command->info('Seeded 3 Instagram posts for the launch batch (June 1–3).');
+        $this->command->info('Seeded 3 Instagram posts for the launch batch (May 19–21).');
     }
 
     /**

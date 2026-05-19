@@ -53,7 +53,7 @@ Every project shares the same standard: zero TypeScript errors, comprehensive do
 
 If you are looking for a development partner who delivers clean, documented, production-ready work — that is what we do.
 
-Packages starting at $499. Currently taking on new clients.
+Packages starting at $799. Currently taking on new clients.
 
 🌐 graveyardjokes.com
 POST,
@@ -100,12 +100,12 @@ Three service categories:
 Starter ($799) · Professional ($1,499) · Premium ($2,499)
 New builds from the ground up. Single-page sites to full platforms with eCommerce, streaming, and custom integrations.
 
-🎨 Website Design — from $499
-Starter ($499) · Professional ($999) · Premium ($1,799)
+🎨 Website Design — from $799
+Starter ($799) · Professional ($999) · Premium ($1,799)
 Wireframes, Figma mockups, UI design systems, brand guidelines, and interactive prototypes.
 
-⚙️ Website Modernization — from $699
-Starter ($699) · Professional ($1,299) · Premium ($1,999)
+⚙️ Website Modernization — from $799
+Starter ($799) · Professional ($1,299) · Premium ($1,999)
 Visual refresh, performance optimization, modern framework updates, accessibility compliance, and full tech stack migrations.
 
 All projects include clean documentation, version-controlled code, and a handoff that actually makes sense.
@@ -127,10 +127,10 @@ Graveyard Jokes Studios just launched dedicated Website Design and Modernization
 **Website Development** — from $799
 New builds, single-page to full platform. eCommerce, streaming, custom API integrations.
 
-**Website Design** — from $499
+**Website Design** — from $799
 Wireframes, Figma mockups, UI design systems, brand guidelines, interactive prototypes.
 
-**Website Modernization** — from $699
+**Website Modernization** — from $799
 Visual refresh, performance optimization, framework updates, accessibility compliance, full stack migrations.
 
 All work is documented, version-controlled, and handed off properly.
@@ -190,7 +190,7 @@ Graveyard Jokes Studios — a full-service web agency based in Cheektowaga, NY.
 
 Seven live portfolio projects. Clean builds. Zero errors in production.
 
-Packages starting at $499.
+Packages starting at $799.
 
 🌐 graveyardjokes.com
 
@@ -206,7 +206,7 @@ New: Website Design & Modernization packages are live.
 
 If your site is outdated, slow, or not converting — we fix that.
 
-Dev from $799. Design from $499. Modernization from $699.
+Dev from $799. Design from $799. Modernization from $799.
 
 🌐 graveyardjokes.com
 

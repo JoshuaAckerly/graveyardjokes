@@ -11,5 +11,4 @@ Artisan::command('inspire', function () {
 // Regenerate sitemap index daily at 02:00
 Schedule::command('app:generate-sitemap-index --url=https://graveyardjokes.com')->dailyAt('02:00');
 
-// Fire due social media posts every minute
-Schedule::command('social:dispatch')->everyMinute();
+
