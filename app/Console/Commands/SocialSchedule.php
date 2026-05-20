@@ -68,7 +68,7 @@ class SocialSchedule extends Command
             ->exists();
 
         if ($exists) {
-            $this->warn("A pending post with identical platform, content, and scheduled_at already exists. Skipping to avoid duplicates.");
+            $this->warn('A pending post with identical platform, content, and scheduled_at already exists. Skipping to avoid duplicates.');
 
             return self::FAILURE;
         }

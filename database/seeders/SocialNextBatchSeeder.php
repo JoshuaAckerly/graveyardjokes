@@ -55,10 +55,10 @@ class SocialNextBatchSeeder extends Seeder
             // ═══════════════════════════════════════════════════════════════
 
             [
-                'platform'     => 'facebook',
+                'platform' => 'facebook',
                 'scheduled_at' => $days[0],
-                'media_url'    => null,
-                'content'      => <<<'POST'
+                'media_url' => null,
+                'content' => <<<'POST'
 75% of people judge a business's credibility based on its website design.
 
 That is not a UX statistic. That is a sales statistic.
@@ -79,10 +79,10 @@ POST,
             ],
 
             [
-                'platform'     => 'discord',
+                'platform' => 'discord',
                 'scheduled_at' => $days[0],
-                'media_url'    => null,
-                'content'      => <<<'POST'
+                'media_url' => null,
+                'content' => <<<'POST'
 Something I think about a lot when building client sites:
 
 **75% of people judge a business's credibility based on its website design.**
@@ -102,10 +102,10 @@ POST,
             ],
 
             [
-                'platform'     => 'twitter',
+                'platform' => 'twitter',
                 'scheduled_at' => $days[0],
-                'media_url'    => null,
-                'content'      => <<<'POST'
+                'media_url' => null,
+                'content' => <<<'POST'
 75% of people judge a business's credibility based on its website design.
 
 That's not a design problem — it's a sales problem.
@@ -119,10 +119,10 @@ POST,
             ],
 
             [
-                'platform'     => 'instagram',
+                'platform' => 'instagram',
                 'scheduled_at' => $days[0],
-                'media_url'    => self::IMAGES[0],
-                'content'      => <<<'POST'
+                'media_url' => self::IMAGES[0],
+                'content' => <<<'POST'
 First impressions happen before anyone reads a word.
 
 75% of people judge credibility based on design alone. Users decide in 3.5 seconds — before they've seen your offer, your price, or your story.
@@ -142,10 +142,10 @@ POST,
             // ═══════════════════════════════════════════════════════════════
 
             [
-                'platform'     => 'facebook',
+                'platform' => 'facebook',
                 'scheduled_at' => $days[1],
-                'media_url'    => null,
-                'content'      => <<<'POST'
+                'media_url' => null,
+                'content' => <<<'POST'
 63% of all web traffic now comes from mobile devices.
 
 If your website was not built mobile-first, you are designing for the minority — and losing more than half of your visitors before they reach your offer.
@@ -163,10 +163,10 @@ POST,
             ],
 
             [
-                'platform'     => 'discord',
+                'platform' => 'discord',
                 'scheduled_at' => $days[1],
-                'media_url'    => null,
-                'content'      => <<<'POST'
+                'media_url' => null,
+                'content' => <<<'POST'
 A dev reminder that gets overlooked more than it should:
 
 **63% of all web traffic is mobile.**
@@ -185,10 +185,10 @@ POST,
             ],
 
             [
-                'platform'     => 'twitter',
+                'platform' => 'twitter',
                 'scheduled_at' => $days[1],
-                'media_url'    => null,
-                'content'      => <<<'POST'
+                'media_url' => null,
+                'content' => <<<'POST'
 63% of all web traffic is mobile.
 
 Mobile converts at 2.1%. Desktop converts at 4.3%.
@@ -204,10 +204,10 @@ POST,
             ],
 
             [
-                'platform'     => 'instagram',
+                'platform' => 'instagram',
                 'scheduled_at' => $days[1],
-                'media_url'    => self::IMAGES[1],
-                'content'      => <<<'POST'
+                'media_url' => self::IMAGES[1],
+                'content' => <<<'POST'
 63% of your visitors are on a phone right now.
 
 Mobile-first is not a feature. It is the baseline.
@@ -227,10 +227,10 @@ POST,
             // ═══════════════════════════════════════════════════════════════
 
             [
-                'platform'     => 'facebook',
+                'platform' => 'facebook',
                 'scheduled_at' => $days[2],
-                'media_url'    => null,
-                'content'      => <<<'POST'
+                'media_url' => null,
+                'content' => <<<'POST'
 Every $1 invested in UX can return up to $100.
 
 That is a potential 9,900% ROI — from improving how users move through your site.
@@ -248,10 +248,10 @@ POST,
             ],
 
             [
-                'platform'     => 'discord',
+                'platform' => 'discord',
                 'scheduled_at' => $days[2],
-                'media_url'    => null,
-                'content'      => <<<'POST'
+                'media_url' => null,
+                'content' => <<<'POST'
 **$1 invested in UX → up to $100 in return. That's a 9,900% ROI.**
 
 A well-designed UI: up to 200% more conversions.
@@ -270,10 +270,10 @@ POST,
             ],
 
             [
-                'platform'     => 'twitter',
+                'platform' => 'twitter',
                 'scheduled_at' => $days[2],
-                'media_url'    => null,
-                'content'      => <<<'POST'
+                'media_url' => null,
+                'content' => <<<'POST'
 $1 invested in UX → up to $100 return.
 
 9,900% ROI from better user experience.
@@ -287,10 +287,10 @@ POST,
             ],
 
             [
-                'platform'     => 'instagram',
+                'platform' => 'instagram',
                 'scheduled_at' => $days[2],
-                'media_url'    => self::IMAGES[2],
-                'content'      => <<<'POST'
+                'media_url' => self::IMAGES[2],
+                'content' => <<<'POST'
 $1 invested in UX.
 Up to $100 in return.
 
@@ -311,10 +311,10 @@ POST,
             // ═══════════════════════════════════════════════════════════════
 
             [
-                'platform'     => 'facebook',
+                'platform' => 'facebook',
                 'scheduled_at' => $days[3],
-                'media_url'    => null,
-                'content'      => <<<'POST'
+                'media_url' => null,
+                'content' => <<<'POST'
 70.22% of online shopping carts are abandoned before checkout.
 
 For mobile, that number climbs to 85%.
@@ -334,10 +334,10 @@ POST,
             ],
 
             [
-                'platform'     => 'discord',
+                'platform' => 'discord',
                 'scheduled_at' => $days[3],
-                'media_url'    => null,
-                'content'      => <<<'POST'
+                'media_url' => null,
+                'content' => <<<'POST'
 An eCommerce stat that hits differently the more you think about it:
 
 **70.22% of shopping carts are abandoned. On mobile: 85%.**
@@ -357,10 +357,10 @@ POST,
             ],
 
             [
-                'platform'     => 'twitter',
+                'platform' => 'twitter',
                 'scheduled_at' => $days[3],
-                'media_url'    => null,
-                'content'      => <<<'POST'
+                'media_url' => null,
+                'content' => <<<'POST'
 85% of mobile shoppers abandon their cart.
 
 That's a checkout UX problem — not a product problem.
@@ -374,10 +374,10 @@ POST,
             ],
 
             [
-                'platform'     => 'instagram',
+                'platform' => 'instagram',
                 'scheduled_at' => $days[3],
-                'media_url'    => self::IMAGES[3],
-                'content'      => <<<'POST'
+                'media_url' => self::IMAGES[3],
+                'content' => <<<'POST'
 85% of mobile shoppers abandon their cart before checkout.
 
 That is not a product problem.
@@ -398,10 +398,10 @@ POST,
             // ═══════════════════════════════════════════════════════════════
 
             [
-                'platform'     => 'facebook',
+                'platform' => 'facebook',
                 'scheduled_at' => $days[4],
-                'media_url'    => null,
-                'content'      => <<<'POST'
+                'media_url' => null,
+                'content' => <<<'POST'
 The median load time of Google's top 10 ranking pages is 1.65 seconds.
 
 Only 42% of websites pass all Core Web Vitals.
@@ -419,10 +419,10 @@ POST,
             ],
 
             [
-                'platform'     => 'discord',
+                'platform' => 'discord',
                 'scheduled_at' => $days[4],
-                'media_url'    => null,
-                'content'      => <<<'POST'
+                'media_url' => null,
+                'content' => <<<'POST'
 **Only 42% of websites pass all Core Web Vitals.**
 
 That leaves 58% of the web underperforming in speed, stability, and responsiveness — which directly hits rankings and conversions.
@@ -442,10 +442,10 @@ POST,
             ],
 
             [
-                'platform'     => 'twitter',
+                'platform' => 'twitter',
                 'scheduled_at' => $days[4],
-                'media_url'    => null,
-                'content'      => <<<'POST'
+                'media_url' => null,
+                'content' => <<<'POST'
 Only 42% of websites pass Core Web Vitals.
 
 Google's top 10 median load time: 1.65 seconds.
@@ -460,10 +460,10 @@ POST,
             ],
 
             [
-                'platform'     => 'instagram',
+                'platform' => 'instagram',
                 'scheduled_at' => $days[4],
-                'media_url'    => self::IMAGES[4],
-                'content'      => <<<'POST'
+                'media_url' => self::IMAGES[4],
+                'content' => <<<'POST'
 Only 42% of websites pass Core Web Vitals.
 
 The median load time for Google's top 10 pages is 1.65 seconds. Every 100ms slower costs 7% in conversions.
@@ -482,11 +482,11 @@ POST,
 
         foreach ($posts as $post) {
             SocialScheduledPost::create([
-                'platform'     => $post['platform'],
-                'content'      => trim($post['content']),
-                'media_url'    => $post['media_url'] ?? null,
+                'platform' => $post['platform'],
+                'content' => trim($post['content']),
+                'media_url' => $post['media_url'] ?? null,
                 'scheduled_at' => $post['scheduled_at'],
-                'status'       => 'pending',
+                'status' => 'pending',
             ]);
         }
 
