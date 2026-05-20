@@ -37,6 +37,20 @@ class SocialScheduleController extends Controller
             return response()->json(['error' => 'Invalid scheduled_at: '.$e->getMessage()], 422);
         }
 
+        // Reject if an identical pending post already exists — prevents the
+        // triple-post bug caused by scheduling the same content multiple times.
+        $exists = SocialScheduledPost::where('platform', $data['platform'])
+            ->where('content', $data['content'])
+            ->where('scheduled_at', $scheduledAt)
+            ->whereIn('status', ['pending', 'processing'])
+            ->exists();
+
+        if ($exists) {
+            return response()->json([
+                'error' => 'A post with identical platform, content, and scheduled_at already exists.',
+            ], 409);
+        }
+
         $post = SocialScheduledPost::create([
             'platform' => $data['platform'],
             'content' => $data['content'],

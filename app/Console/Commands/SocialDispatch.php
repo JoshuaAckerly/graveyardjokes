@@ -9,6 +9,7 @@ use App\Services\SocialPoster\InstagramService;
 use App\Services\SocialPoster\TwitterService;
 use GuzzleHttp\Client;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\DB;
 
 class SocialDispatch extends Command
 {
@@ -24,7 +25,21 @@ class SocialDispatch extends Command
             return self::SUCCESS;
         }
 
-        $posts = SocialScheduledPost::due()->get();
+        // Atomically claim all due posts by transitioning them from pending →
+        // processing inside a single transaction with a row-level lock.  Any
+        // concurrent dispatch process that reaches this point simultaneously
+        // will block on lockForUpdate() and find no rows left to claim once
+        // the lock is released.
+        $posts = DB::transaction(function () {
+            $due = SocialScheduledPost::due()->lockForUpdate()->get();
+
+            if ($due->isNotEmpty()) {
+                SocialScheduledPost::whereIn('id', $due->pluck('id'))
+                    ->update(['status' => 'processing']);
+            }
+
+            return $due;
+        });
 
         if ($posts->isEmpty()) {
             $this->line('No posts due.');

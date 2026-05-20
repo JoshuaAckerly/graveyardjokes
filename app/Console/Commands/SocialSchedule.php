@@ -60,6 +60,19 @@ class SocialSchedule extends Command
             }
         }
 
+        // Warn if an identical pending post already exists.
+        $exists = SocialScheduledPost::where('platform', $platform)
+            ->where('content', $content)
+            ->where('scheduled_at', $scheduledAt)
+            ->whereIn('status', ['pending', 'processing'])
+            ->exists();
+
+        if ($exists) {
+            $this->warn("A pending post with identical platform, content, and scheduled_at already exists. Skipping to avoid duplicates.");
+
+            return self::FAILURE;
+        }
+
         $post = SocialScheduledPost::create([
             'platform' => $platform,
             'content' => $content,

@@ -23,11 +23,22 @@ class SocialScheduledPost extends Model
         'posted_at' => 'datetime',
     ];
 
-    /** Posts due to fire right now. */
+    // Valid statuses: pending → processing → posted | failed
+    // 'processing' means a dispatch worker has claimed the row and is actively
+    // sending it.  Rows stuck in 'processing' for > 5 minutes can be reset
+    // back to 'pending' via `php artisan social:dispatch:reset-stuck`.
+
+    /** Posts due to fire right now (only unclaimed/pending rows). */
     public function scopeDue(\Illuminate\Database\Eloquent\Builder $query): \Illuminate\Database\Eloquent\Builder
     {
         return $query
             ->where('status', 'pending')
             ->where('scheduled_at', '<=', now());
+    }
+
+    /** Posts currently being processed by a dispatch worker. */
+    public function scopeProcessing(\Illuminate\Database\Eloquent\Builder $query): \Illuminate\Database\Eloquent\Builder
+    {
+        return $query->where('status', 'processing');
     }
 }

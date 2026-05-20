@@ -15,6 +15,7 @@ class Kernel extends ConsoleKernel
     protected $commands = [
         \App\Console\Commands\GenerateSitemapIndex::class,
         \App\Console\Commands\SocialDispatch::class,
+        \App\Console\Commands\SocialDispatchResetStuck::class,
         \App\Console\Commands\SocialSchedule::class,
         \App\Console\Commands\FacebookPageTokens::class,
         \App\Console\Commands\FacebookRefreshToken::class,
@@ -30,6 +31,9 @@ class Kernel extends ConsoleKernel
 
         // Fire due social media posts every minute — production only
         $schedule->command('social:dispatch')->everyMinute()->withoutOverlapping()->environments(['production']);
+
+        // Reset any posts stuck in 'processing' (e.g. after a mid-send crash) — production only
+        $schedule->command('social:dispatch:reset-stuck')->everyFiveMinutes()->environments(['production']);
     }
 
     /**
