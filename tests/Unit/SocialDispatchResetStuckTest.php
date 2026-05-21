@@ -13,10 +13,10 @@ class SocialDispatchResetStuckTest extends TestCase
     private function makePost(array $overrides = []): SocialScheduledPost
     {
         return SocialScheduledPost::create(array_merge([
-            'platform'     => 'facebook',
-            'content'      => 'Test content',
+            'platform' => 'facebook',
+            'content' => 'Test content',
             'scheduled_at' => now()->subMinutes(10),
-            'status'       => 'processing',
+            'status' => 'processing',
         ], $overrides));
     }
 
@@ -33,7 +33,7 @@ class SocialDispatchResetStuckTest extends TestCase
         $this->artisan('social:dispatch:reset-stuck')->assertExitCode(0);
 
         $this->assertDatabaseHas('social_scheduled_posts', [
-            'id'     => $post->id,
+            'id' => $post->id,
             'status' => 'pending',
         ]);
     }
@@ -46,7 +46,7 @@ class SocialDispatchResetStuckTest extends TestCase
         $this->artisan('social:dispatch:reset-stuck')->assertExitCode(0);
 
         $this->assertDatabaseHas('social_scheduled_posts', [
-            'id'     => $post->id,
+            'id' => $post->id,
             'status' => 'processing',
         ]);
     }
@@ -61,7 +61,7 @@ class SocialDispatchResetStuckTest extends TestCase
         $this->artisan('social:dispatch:reset-stuck')->assertExitCode(0);
 
         $this->assertDatabaseHas('social_scheduled_posts', [
-            'id'     => $post->id,
+            'id' => $post->id,
             'status' => 'pending',
         ]);
     }
@@ -76,7 +76,7 @@ class SocialDispatchResetStuckTest extends TestCase
         $this->artisan('social:dispatch:reset-stuck')->assertExitCode(0);
 
         $this->assertDatabaseHas('social_scheduled_posts', [
-            'id'     => $post->id,
+            'id' => $post->id,
             'status' => 'posted',
         ]);
     }
@@ -91,7 +91,7 @@ class SocialDispatchResetStuckTest extends TestCase
         $this->artisan('social:dispatch:reset-stuck')->assertExitCode(0);
 
         $this->assertDatabaseHas('social_scheduled_posts', [
-            'id'     => $post->id,
+            'id' => $post->id,
             'status' => 'failed',
         ]);
     }
@@ -133,7 +133,7 @@ class SocialDispatchResetStuckTest extends TestCase
             ->assertExitCode(0);
 
         $this->assertDatabaseHas('social_scheduled_posts', [
-            'id'     => $post->id,
+            'id' => $post->id,
             'status' => 'pending',
         ]);
     }

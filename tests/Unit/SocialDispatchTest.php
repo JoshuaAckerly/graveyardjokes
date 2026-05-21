@@ -13,10 +13,10 @@ class SocialDispatchTest extends TestCase
     private function makePost(array $overrides = []): SocialScheduledPost
     {
         return SocialScheduledPost::create(array_merge([
-            'platform'     => 'facebook',
-            'content'      => 'Test post content',
+            'platform' => 'facebook',
+            'content' => 'Test post content',
             'scheduled_at' => now()->subMinutes(5),
-            'status'       => 'pending',
+            'status' => 'pending',
         ], $overrides));
     }
 
@@ -57,7 +57,7 @@ class SocialDispatchTest extends TestCase
 
         // Still processing — dispatch must not touch it
         $this->assertDatabaseHas('social_scheduled_posts', [
-            'id'     => $post->id,
+            'id' => $post->id,
             'status' => 'processing',
         ]);
     }
@@ -71,7 +71,7 @@ class SocialDispatchTest extends TestCase
         $this->artisan('social:dispatch')->assertExitCode(0);
 
         $this->assertDatabaseHas('social_scheduled_posts', [
-            'id'     => $post->id,
+            'id' => $post->id,
             'status' => 'posted',
         ]);
     }
@@ -85,7 +85,7 @@ class SocialDispatchTest extends TestCase
         $this->artisan('social:dispatch')->assertExitCode(0);
 
         $this->assertDatabaseHas('social_scheduled_posts', [
-            'id'     => $post->id,
+            'id' => $post->id,
             'status' => 'failed',
         ]);
     }
@@ -99,7 +99,7 @@ class SocialDispatchTest extends TestCase
         $this->artisan('social:dispatch')->assertExitCode(0);
 
         $this->assertDatabaseHas('social_scheduled_posts', [
-            'id'     => $post->id,
+            'id' => $post->id,
             'status' => 'pending',
         ]);
     }
@@ -120,7 +120,7 @@ class SocialDispatchTest extends TestCase
         $this->artisan('social:dispatch')->assertExitCode(0);
 
         $this->assertDatabaseHas('social_scheduled_posts', [
-            'id'     => $post->id,
+            'id' => $post->id,
             'status' => 'failed',
         ]);
 
@@ -147,12 +147,12 @@ class SocialDispatchTest extends TestCase
         $this->app['env'] = 'production';
 
         config([
-            'social.facebook.page_id'      => null,
-            'social.discord.webhook_url'   => null,
+            'social.facebook.page_id' => null,
+            'social.discord.webhook_url' => null,
         ]);
 
         $facebook = $this->makePost(['platform' => 'facebook']);
-        $discord  = $this->makePost(['platform' => 'discord']);
+        $discord = $this->makePost(['platform' => 'discord']);
 
         $this->artisan('social:dispatch')->assertExitCode(0);
 

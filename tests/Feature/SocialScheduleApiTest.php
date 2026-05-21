@@ -28,8 +28,8 @@ class SocialScheduleApiTest extends TestCase
     public function test_returns_401_when_no_token_provided(): void
     {
         $this->postJson('/api/social/schedule', [
-            'platform'     => 'facebook',
-            'content'      => 'Hello',
+            'platform' => 'facebook',
+            'content' => 'Hello',
             'scheduled_at' => now()->addHour()->toDateTimeString(),
         ])->assertStatus(401);
     }
@@ -37,8 +37,8 @@ class SocialScheduleApiTest extends TestCase
     public function test_returns_401_when_wrong_token_provided(): void
     {
         $this->postJson('/api/social/schedule', [
-            'platform'     => 'facebook',
-            'content'      => 'Hello',
+            'platform' => 'facebook',
+            'content' => 'Hello',
             'scheduled_at' => now()->addHour()->toDateTimeString(),
         ], ['Authorization' => 'Bearer wrong-secret'])->assertStatus(401);
     }
@@ -48,7 +48,7 @@ class SocialScheduleApiTest extends TestCase
     public function test_returns_422_when_platform_is_missing(): void
     {
         $this->postJson('/api/social/schedule', [
-            'content'      => 'Hello',
+            'content' => 'Hello',
             'scheduled_at' => now()->addHour()->toDateTimeString(),
         ], $this->authHeader())->assertStatus(422)->assertJsonValidationErrors(['platform']);
     }
@@ -56,8 +56,8 @@ class SocialScheduleApiTest extends TestCase
     public function test_returns_422_when_platform_is_invalid(): void
     {
         $this->postJson('/api/social/schedule', [
-            'platform'     => 'tiktok',
-            'content'      => 'Hello',
+            'platform' => 'tiktok',
+            'content' => 'Hello',
             'scheduled_at' => now()->addHour()->toDateTimeString(),
         ], $this->authHeader())->assertStatus(422)->assertJsonValidationErrors(['platform']);
     }
@@ -65,7 +65,7 @@ class SocialScheduleApiTest extends TestCase
     public function test_returns_422_when_content_is_missing(): void
     {
         $this->postJson('/api/social/schedule', [
-            'platform'     => 'facebook',
+            'platform' => 'facebook',
             'scheduled_at' => now()->addHour()->toDateTimeString(),
         ], $this->authHeader())->assertStatus(422)->assertJsonValidationErrors(['content']);
     }
@@ -74,7 +74,7 @@ class SocialScheduleApiTest extends TestCase
     {
         $this->postJson('/api/social/schedule', [
             'platform' => 'facebook',
-            'content'  => 'Hello',
+            'content' => 'Hello',
         ], $this->authHeader())->assertStatus(422)->assertJsonValidationErrors(['scheduled_at']);
     }
 
@@ -85,8 +85,8 @@ class SocialScheduleApiTest extends TestCase
         $scheduledAt = now()->addDay()->toDateTimeString();
 
         $response = $this->postJson('/api/social/schedule', [
-            'platform'     => 'facebook',
-            'content'      => 'Hello world',
+            'platform' => 'facebook',
+            'content' => 'Hello world',
             'scheduled_at' => $scheduledAt,
         ], $this->authHeader());
 
@@ -96,8 +96,8 @@ class SocialScheduleApiTest extends TestCase
 
         $this->assertDatabaseHas('social_scheduled_posts', [
             'platform' => 'facebook',
-            'content'  => 'Hello world',
-            'status'   => 'pending',
+            'content' => 'Hello world',
+            'status' => 'pending',
         ]);
     }
 
@@ -105,8 +105,8 @@ class SocialScheduleApiTest extends TestCase
     {
         foreach (['facebook', 'discord', 'twitter', 'instagram'] as $i => $platform) {
             $this->postJson('/api/social/schedule', [
-                'platform'     => $platform,
-                'content'      => "Post for {$platform}",
+                'platform' => $platform,
+                'content' => "Post for {$platform}",
                 'scheduled_at' => now()->addDays($i + 1)->toDateTimeString(),
             ], $this->authHeader())->assertStatus(201);
         }
@@ -121,15 +121,15 @@ class SocialScheduleApiTest extends TestCase
         $scheduledAt = now()->addDay();
 
         SocialScheduledPost::create([
-            'platform'     => 'facebook',
-            'content'      => 'Duplicate content',
+            'platform' => 'facebook',
+            'content' => 'Duplicate content',
             'scheduled_at' => $scheduledAt,
-            'status'       => 'pending',
+            'status' => 'pending',
         ]);
 
         $this->postJson('/api/social/schedule', [
-            'platform'     => 'facebook',
-            'content'      => 'Duplicate content',
+            'platform' => 'facebook',
+            'content' => 'Duplicate content',
             'scheduled_at' => $scheduledAt->toDateTimeString(),
         ], $this->authHeader())
             ->assertStatus(409)
@@ -141,15 +141,15 @@ class SocialScheduleApiTest extends TestCase
         $scheduledAt = now()->subMinutes(5);
 
         SocialScheduledPost::create([
-            'platform'     => 'twitter',
-            'content'      => 'Being processed right now',
+            'platform' => 'twitter',
+            'content' => 'Being processed right now',
             'scheduled_at' => $scheduledAt,
-            'status'       => 'processing',
+            'status' => 'processing',
         ]);
 
         $this->postJson('/api/social/schedule', [
-            'platform'     => 'twitter',
-            'content'      => 'Being processed right now',
+            'platform' => 'twitter',
+            'content' => 'Being processed right now',
             'scheduled_at' => $scheduledAt->toDateTimeString(),
         ], $this->authHeader())
             ->assertStatus(409);
@@ -160,16 +160,16 @@ class SocialScheduleApiTest extends TestCase
         $scheduledAt = now()->addDay();
 
         SocialScheduledPost::create([
-            'platform'     => 'facebook',
-            'content'      => 'Same content',
+            'platform' => 'facebook',
+            'content' => 'Same content',
             'scheduled_at' => $scheduledAt,
-            'status'       => 'pending',
+            'status' => 'pending',
         ]);
 
         // Same content + time, different platform — should succeed
         $this->postJson('/api/social/schedule', [
-            'platform'     => 'twitter',
-            'content'      => 'Same content',
+            'platform' => 'twitter',
+            'content' => 'Same content',
             'scheduled_at' => $scheduledAt->toDateTimeString(),
         ], $this->authHeader())->assertStatus(201);
     }
@@ -177,16 +177,16 @@ class SocialScheduleApiTest extends TestCase
     public function test_allows_same_content_at_different_time(): void
     {
         SocialScheduledPost::create([
-            'platform'     => 'facebook',
-            'content'      => 'Recurring post',
+            'platform' => 'facebook',
+            'content' => 'Recurring post',
             'scheduled_at' => now()->addDay(),
-            'status'       => 'pending',
+            'status' => 'pending',
         ]);
 
         // Same platform + content, different time — should succeed
         $this->postJson('/api/social/schedule', [
-            'platform'     => 'facebook',
-            'content'      => 'Recurring post',
+            'platform' => 'facebook',
+            'content' => 'Recurring post',
             'scheduled_at' => now()->addDays(2)->toDateTimeString(),
         ], $this->authHeader())->assertStatus(201);
     }
@@ -196,17 +196,17 @@ class SocialScheduleApiTest extends TestCase
         $scheduledAt = now()->addDay();
 
         SocialScheduledPost::create([
-            'platform'     => 'facebook',
-            'content'      => 'Already sent',
+            'platform' => 'facebook',
+            'content' => 'Already sent',
             'scheduled_at' => $scheduledAt,
-            'status'       => 'posted',
-            'posted_at'    => now(),
+            'status' => 'posted',
+            'posted_at' => now(),
         ]);
 
         // 'posted' status should not block a new scheduling of the same content
         $this->postJson('/api/social/schedule', [
-            'platform'     => 'facebook',
-            'content'      => 'Already sent',
+            'platform' => 'facebook',
+            'content' => 'Already sent',
             'scheduled_at' => $scheduledAt->toDateTimeString(),
         ], $this->authHeader())->assertStatus(201);
     }

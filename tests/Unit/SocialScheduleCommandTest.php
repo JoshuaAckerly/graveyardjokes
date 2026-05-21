@@ -16,8 +16,8 @@ class SocialScheduleCommandTest extends TestCase
     {
         $this->artisan('social:schedule', [
             '--platform' => 'tiktok',
-            '--content'  => 'Hello',
-            '--at'       => now()->addDay()->toDateTimeString(),
+            '--content' => 'Hello',
+            '--at' => now()->addDay()->toDateTimeString(),
         ])->assertExitCode(1);
 
         $this->assertDatabaseCount('social_scheduled_posts', 0);
@@ -27,8 +27,8 @@ class SocialScheduleCommandTest extends TestCase
     {
         $this->artisan('social:schedule', [
             '--platform' => 'facebook',
-            '--content'  => 'Hello',
-            '--at'       => 'not-a-date-xyzzy-12345',
+            '--content' => 'Hello',
+            '--at' => 'not-a-date-xyzzy-12345',
         ])
             ->expectsOutputToContain('Could not parse date/time')
             ->assertExitCode(1);
@@ -39,14 +39,14 @@ class SocialScheduleCommandTest extends TestCase
     public function test_fails_for_instagram_without_media_url(): void
     {
         $this->artisan('social:schedule', [
-            '--platform'  => 'instagram',
-            '--content'   => 'Hello',
-            '--at'        => now()->addDay()->toDateTimeString(),
+            '--platform' => 'instagram',
+            '--content' => 'Hello',
+            '--at' => now()->addDay()->toDateTimeString(),
             '--media-url' => null,
         ])
         // The command will interactively ask for media-url; simulate an empty answer
-        ->expectsQuestion('Instagram requires a public image URL. Enter it now (or leave blank to cancel)', '')
-        ->assertExitCode(1);
+            ->expectsQuestion('Instagram requires a public image URL. Enter it now (or leave blank to cancel)', '')
+            ->assertExitCode(1);
 
         $this->assertDatabaseCount('social_scheduled_posts', 0);
     }
@@ -59,30 +59,30 @@ class SocialScheduleCommandTest extends TestCase
 
         $this->artisan('social:schedule', [
             '--platform' => 'facebook',
-            '--content'  => 'Scheduled via CLI',
-            '--at'       => $at,
+            '--content' => 'Scheduled via CLI',
+            '--at' => $at,
         ])->assertExitCode(0);
 
         $this->assertDatabaseHas('social_scheduled_posts', [
             'platform' => 'facebook',
-            'content'  => 'Scheduled via CLI',
-            'status'   => 'pending',
+            'content' => 'Scheduled via CLI',
+            'status' => 'pending',
         ]);
     }
 
     public function test_creates_post_with_media_url(): void
     {
         $this->artisan('social:schedule', [
-            '--platform'  => 'instagram',
-            '--content'   => 'Instagram post',
-            '--at'        => now()->addDay()->toDateTimeString(),
+            '--platform' => 'instagram',
+            '--content' => 'Instagram post',
+            '--at' => now()->addDay()->toDateTimeString(),
             '--media-url' => 'https://example.com/image.jpg',
         ])->assertExitCode(0);
 
         $this->assertDatabaseHas('social_scheduled_posts', [
-            'platform'  => 'instagram',
+            'platform' => 'instagram',
             'media_url' => 'https://example.com/image.jpg',
-            'status'    => 'pending',
+            'status' => 'pending',
         ]);
     }
 
@@ -93,16 +93,16 @@ class SocialScheduleCommandTest extends TestCase
         $at = now()->addDay();
 
         SocialScheduledPost::create([
-            'platform'     => 'facebook',
-            'content'      => 'Duplicate post',
+            'platform' => 'facebook',
+            'content' => 'Duplicate post',
             'scheduled_at' => $at,
-            'status'       => 'pending',
+            'status' => 'pending',
         ]);
 
         $this->artisan('social:schedule', [
             '--platform' => 'facebook',
-            '--content'  => 'Duplicate post',
-            '--at'       => $at->toDateTimeString(),
+            '--content' => 'Duplicate post',
+            '--at' => $at->toDateTimeString(),
         ])
             ->expectsOutputToContain('already exists')
             ->assertExitCode(1);
@@ -116,16 +116,16 @@ class SocialScheduleCommandTest extends TestCase
         $at = now()->subMinutes(5);
 
         SocialScheduledPost::create([
-            'platform'     => 'twitter',
-            'content'      => 'Being sent right now',
+            'platform' => 'twitter',
+            'content' => 'Being sent right now',
             'scheduled_at' => $at,
-            'status'       => 'processing',
+            'status' => 'processing',
         ]);
 
         $this->artisan('social:schedule', [
             '--platform' => 'twitter',
-            '--content'  => 'Being sent right now',
-            '--at'       => $at->toDateTimeString(),
+            '--content' => 'Being sent right now',
+            '--at' => $at->toDateTimeString(),
         ])
             ->expectsOutputToContain('already exists')
             ->assertExitCode(1);
@@ -138,16 +138,16 @@ class SocialScheduleCommandTest extends TestCase
         $at = now()->addDay();
 
         SocialScheduledPost::create([
-            'platform'     => 'facebook',
-            'content'      => 'Cross-platform post',
+            'platform' => 'facebook',
+            'content' => 'Cross-platform post',
             'scheduled_at' => $at,
-            'status'       => 'pending',
+            'status' => 'pending',
         ]);
 
         $this->artisan('social:schedule', [
             '--platform' => 'twitter',
-            '--content'  => 'Cross-platform post',
-            '--at'       => $at->toDateTimeString(),
+            '--content' => 'Cross-platform post',
+            '--at' => $at->toDateTimeString(),
         ])->assertExitCode(0);
 
         $this->assertDatabaseCount('social_scheduled_posts', 2);
@@ -156,16 +156,16 @@ class SocialScheduleCommandTest extends TestCase
     public function test_allows_same_content_at_different_time(): void
     {
         SocialScheduledPost::create([
-            'platform'     => 'discord',
-            'content'      => 'Weekly update',
+            'platform' => 'discord',
+            'content' => 'Weekly update',
             'scheduled_at' => now()->addDay(),
-            'status'       => 'pending',
+            'status' => 'pending',
         ]);
 
         $this->artisan('social:schedule', [
             '--platform' => 'discord',
-            '--content'  => 'Weekly update',
-            '--at'       => now()->addDays(7)->toDateTimeString(),
+            '--content' => 'Weekly update',
+            '--at' => now()->addDays(7)->toDateTimeString(),
         ])->assertExitCode(0);
 
         $this->assertDatabaseCount('social_scheduled_posts', 2);
