@@ -43,7 +43,7 @@ class SocialSchedule extends Command
 
         try {
             $scheduledAt = \Carbon\Carbon::parse($atRaw);
-        } catch (\Exception) {
+        } catch (\Throwable) {
             $this->error("Could not parse date/time: {$atRaw}");
 
             return self::FAILURE;

@@ -63,4 +63,50 @@ class SocialScheduledPostScopeTest extends TestCase
 
         $this->assertCount(2, SocialScheduledPost::due()->get());
     }
+
+    public function test_due_scope_excludes_processing_status(): void
+    {
+        $this->makePost(['status' => 'processing']);
+
+        $this->assertCount(0, SocialScheduledPost::due()->get());
+    }
+
+    // ── scopeProcessing ──────────────────────────────────────────────────────
+
+    public function test_processing_scope_returns_processing_posts(): void
+    {
+        $this->makePost(['status' => 'processing']);
+
+        $this->assertCount(1, SocialScheduledPost::processing()->get());
+    }
+
+    public function test_processing_scope_excludes_pending_posts(): void
+    {
+        $this->makePost(['status' => 'pending']);
+
+        $this->assertCount(0, SocialScheduledPost::processing()->get());
+    }
+
+    public function test_processing_scope_excludes_posted_posts(): void
+    {
+        $this->makePost(['status' => 'posted', 'posted_at' => now()]);
+
+        $this->assertCount(0, SocialScheduledPost::processing()->get());
+    }
+
+    public function test_processing_scope_excludes_failed_posts(): void
+    {
+        $this->makePost(['status' => 'failed', 'error_message' => 'timeout']);
+
+        $this->assertCount(0, SocialScheduledPost::processing()->get());
+    }
+
+    public function test_processing_scope_returns_multiple_processing_posts(): void
+    {
+        $this->makePost(['platform' => 'facebook', 'status' => 'processing']);
+        $this->makePost(['platform' => 'twitter', 'status' => 'processing']);
+        $this->makePost(['platform' => 'discord', 'status' => 'pending']);
+
+        $this->assertCount(2, SocialScheduledPost::processing()->get());
+    }
 }
