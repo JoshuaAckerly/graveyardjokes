@@ -1,2 +1,529 @@
 parameters:
-	ignoreErrors: []
+	ignoreErrors:
+		-
+			message: '#^Binary operation "\." between ''Facebook API error\: '' and mixed results in an error\.$#'
+			identifier: binaryOp.invalid
+			count: 1
+			path: app/Console/Commands/FacebookPageTokens.php
+
+		-
+			message: '#^Called ''env'' outside of the config directory which returns null when the config is cached, use ''config''\.$#'
+			identifier: larastan.noEnvCallsOutsideOfConfig
+			count: 1
+			path: app/Console/Commands/FacebookPageTokens.php
+
+		-
+			message: '#^Cannot access offset ''error'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: app/Console/Commands/FacebookPageTokens.php
+
+		-
+			message: '#^Cannot access offset ''message'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: app/Console/Commands/FacebookPageTokens.php
+
+		-
+			message: '#^Offset ''category'' on array\{id\: string, name\: string, access_token\: string, category\: string\} on left side of \?\? always exists and is not nullable\.$#'
+			identifier: nullCoalesce.offset
+			count: 1
+			path: app/Console/Commands/FacebookPageTokens.php
+
+		-
+			message: '#^Offset ''data'' on array\{data\: array\<int, array\{id\: string, name\: string, access_token\: string, category\: string\}\>\} on left side of \?\? always exists and is not nullable\.$#'
+			identifier: nullCoalesce.offset
+			count: 1
+			path: app/Console/Commands/FacebookPageTokens.php
+
+		-
+			message: '#^Binary operation "\." between ''Failed to fetch…'' and mixed results in an error\.$#'
+			identifier: binaryOp.invalid
+			count: 1
+			path: app/Console/Commands/FacebookRefreshToken.php
+
+		-
+			message: '#^Binary operation "\." between ''Token exchange…'' and mixed results in an error\.$#'
+			identifier: binaryOp.invalid
+			count: 1
+			path: app/Console/Commands/FacebookRefreshToken.php
+
+		-
+			message: '#^Called ''env'' outside of the config directory which returns null when the config is cached, use ''config''\.$#'
+			identifier: larastan.noEnvCallsOutsideOfConfig
+			count: 2
+			path: app/Console/Commands/FacebookRefreshToken.php
+
+		-
+			message: '#^Cannot access offset ''error'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 2
+			path: app/Console/Commands/FacebookRefreshToken.php
+
+		-
+			message: '#^Cannot access offset ''message'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 2
+			path: app/Console/Commands/FacebookRefreshToken.php
+
+		-
+			message: '#^Offset ''access_token'' on array\{access_token\: string, expires_in\?\: int\} on left side of \?\? always exists and is not nullable\.$#'
+			identifier: nullCoalesce.offset
+			count: 1
+			path: app/Console/Commands/FacebookRefreshToken.php
+
+		-
+			message: '#^Parameter \#1 \$time of static method Carbon\\Carbon\:\:parse\(\) expects Carbon\\Month\|Carbon\\WeekDay\|DateTimeInterface\|float\|int\|string\|null, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Console/Commands/SocialSchedule.php
+
+		-
+			message: '#^Part \$atRaw \(mixed\) of encapsed string cannot be cast to string\.$#'
+			identifier: encapsedStringPart.nonString
+			count: 1
+			path: app/Console/Commands/SocialSchedule.php
+
+		-
+			message: '#^Part \$platform \(array\|string\) of encapsed string cannot be cast to string\.$#'
+			identifier: encapsedStringPart.nonString
+			count: 1
+			path: app/Console/Commands/SocialSchedule.php
+
+		-
+			message: '#^Cannot access offset ''content'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 2
+			path: app/Http/Controllers/Api/SocialScheduleController.php
+
+		-
+			message: '#^Cannot access offset ''media_url'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: app/Http/Controllers/Api/SocialScheduleController.php
+
+		-
+			message: '#^Cannot access offset ''platform'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 2
+			path: app/Http/Controllers/Api/SocialScheduleController.php
+
+		-
+			message: '#^Cannot access offset ''scheduled_at'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: app/Http/Controllers/Api/SocialScheduleController.php
+
+		-
+			message: '#^Parameter \#1 \$known_string of function hash_equals expects string, mixed given\.$#'
+			identifier: argument.type
+			count: 2
+			path: app/Http/Controllers/Api/SocialScheduleController.php
+
+		-
+			message: '#^Parameter \#1 \$time of static method Carbon\\Carbon\:\:parse\(\) expects Carbon\\Month\|Carbon\\WeekDay\|DateTimeInterface\|float\|int\|string\|null, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Http/Controllers/Api/SocialScheduleController.php
+
+		-
+			message: '#^Call to function is_array\(\) with array\<string, mixed\> will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: app/Http/Controllers/JokeController.php
+
+		-
+			message: '#^Method App\\Models\\SocialScheduledPost\:\:scopeDue\(\) has parameter \$query with generic class Illuminate\\Database\\Eloquent\\Builder but does not specify its types\: TModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Models/SocialScheduledPost.php
+
+		-
+			message: '#^Method App\\Models\\SocialScheduledPost\:\:scopeDue\(\) return type with generic class Illuminate\\Database\\Eloquent\\Builder does not specify its types\: TModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Models/SocialScheduledPost.php
+
+		-
+			message: '#^Method App\\Models\\SocialScheduledPost\:\:scopeProcessing\(\) has parameter \$query with generic class Illuminate\\Database\\Eloquent\\Builder but does not specify its types\: TModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Models/SocialScheduledPost.php
+
+		-
+			message: '#^Method App\\Models\\SocialScheduledPost\:\:scopeProcessing\(\) return type with generic class Illuminate\\Database\\Eloquent\\Builder does not specify its types\: TModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Models/SocialScheduledPost.php
+
+		-
+			message: '#^Instanceof between Illuminate\\Http\\Client\\Response and Illuminate\\Http\\Client\\Response will always evaluate to true\.$#'
+			identifier: instanceof.alwaysTrue
+			count: 5
+			path: app/Services/AuthSystemService.php
+
+		-
+			message: '#^Parameter \#1 \$uri of method GuzzleHttp\\Client\:\:post\(\) expects Psr\\Http\\Message\\UriInterface\|string, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Services/SocialPoster/DiscordService.php
+
+		-
+			message: '#^Binary operation "\." between ''https\://graph…'' and mixed results in an error\.$#'
+			identifier: binaryOp.invalid
+			count: 2
+			path: app/Services/SocialPoster/FacebookService.php
+
+		-
+			message: '#^Binary operation "\." between ''https\://graph…'' and mixed results in an error\.$#'
+			identifier: binaryOp.invalid
+			count: 2
+			path: app/Services/SocialPoster/InstagramService.php
+
+		-
+			message: '#^Offset ''id'' on array\{id\: string\} on left side of \?\? always exists and is not nullable\.$#'
+			identifier: nullCoalesce.offset
+			count: 1
+			path: app/Services/SocialPoster/InstagramService.php
+
+		-
+			message: '#^Cannot cast mixed to string\.$#'
+			identifier: cast.string
+			count: 4
+			path: app/Services/SocialPoster/TwitterService.php
+
+		-
+			message: '#^Parameter \#1 \$path of function basename expects string, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: database/seeders/SocialInstagramBatchSeeder.php
+
+		-
+			message: '#^Property Database\\Seeders\\SocialInstagramBatchSeeder\:\:\$imageUrls type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: database/seeders/SocialInstagramBatchSeeder.php
+
+		-
+			message: '#^Method Tests\\Feature\\SocialScheduleApiTest\:\:authHeader\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: tests/Feature/SocialScheduleApiTest.php
+
+		-
+			message: '#^Method Tests\\Feature\\WebsiteIntakeEdgeCasesTest\:\:validPayload\(\) has parameter \$overrides with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: tests/Feature/WebsiteIntakeEdgeCasesTest.php
+
+		-
+			message: '#^Method Tests\\Feature\\WebsiteIntakeEdgeCasesTest\:\:validPayload\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: tests/Feature/WebsiteIntakeEdgeCasesTest.php
+
+		-
+			message: '#^Cannot access offset ''content'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 3
+			path: tests/Unit/DiscordServiceTest.php
+
+		-
+			message: '#^Cannot access offset ''request'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 3
+			path: tests/Unit/DiscordServiceTest.php
+
+		-
+			message: '#^Cannot call method getBody\(\) on mixed\.$#'
+			identifier: method.nonObject
+			count: 3
+			path: tests/Unit/DiscordServiceTest.php
+
+		-
+			message: '#^Cannot call method getMethod\(\) on mixed\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: tests/Unit/DiscordServiceTest.php
+
+		-
+			message: '#^Cannot call method getUri\(\) on mixed\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: tests/Unit/DiscordServiceTest.php
+
+		-
+			message: '#^Cannot cast mixed to string\.$#'
+			identifier: cast.string
+			count: 4
+			path: tests/Unit/DiscordServiceTest.php
+
+		-
+			message: '#^Parameter \#2 \$haystack of method PHPUnit\\Framework\\Assert\:\:assertCount\(\) expects Countable\|iterable, array\|ArrayAccess\<int, array\> given\.$#'
+			identifier: argument.type
+			count: 1
+			path: tests/Unit/DiscordServiceTest.php
+
+		-
+			message: '#^Cannot access offset ''request'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 2
+			path: tests/Unit/FacebookServiceTest.php
+
+		-
+			message: '#^Cannot call method getBody\(\) on mixed\.$#'
+			identifier: method.nonObject
+			count: 2
+			path: tests/Unit/FacebookServiceTest.php
+
+		-
+			message: '#^Cannot call method getMethod\(\) on mixed\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: tests/Unit/FacebookServiceTest.php
+
+		-
+			message: '#^Cannot call method getUri\(\) on mixed\.$#'
+			identifier: method.nonObject
+			count: 2
+			path: tests/Unit/FacebookServiceTest.php
+
+		-
+			message: '#^Cannot cast mixed to string\.$#'
+			identifier: cast.string
+			count: 4
+			path: tests/Unit/FacebookServiceTest.php
+
+		-
+			message: '#^Parameter \#2 \$haystack of method PHPUnit\\Framework\\Assert\:\:assertCount\(\) expects Countable\|iterable, array\|ArrayAccess\<int, array\> given\.$#'
+			identifier: argument.type
+			count: 1
+			path: tests/Unit/FacebookServiceTest.php
+
+		-
+			message: '#^Cannot call method assertExitCode\(\) on Illuminate\\Testing\\PendingCommand\|int\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: tests/Unit/GenerateSitemapTest.php
+
+		-
+			message: '#^Cannot call method expectsOutputToContain\(\) on Illuminate\\Testing\\PendingCommand\|int\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: tests/Unit/GenerateSitemapTest.php
+
+		-
+			message: '#^Parameter \#1 \$data of function simplexml_load_string expects string, string\|false given\.$#'
+			identifier: argument.type
+			count: 1
+			path: tests/Unit/GenerateSitemapTest.php
+
+		-
+			message: '#^Parameter \#2 \$haystack of method PHPUnit\\Framework\\Assert\:\:assertStringContainsString\(\) expects string, string\|false given\.$#'
+			identifier: argument.type
+			count: 8
+			path: tests/Unit/GenerateSitemapTest.php
+
+		-
+			message: '#^Parameter \#2 \$haystack of method PHPUnit\\Framework\\Assert\:\:assertStringNotContainsString\(\) expects string, string\|false given\.$#'
+			identifier: argument.type
+			count: 3
+			path: tests/Unit/GenerateSitemapTest.php
+
+		-
+			message: '#^Cannot access offset ''request'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 2
+			path: tests/Unit/InstagramServiceTest.php
+
+		-
+			message: '#^Cannot call method getBody\(\) on mixed\.$#'
+			identifier: method.nonObject
+			count: 2
+			path: tests/Unit/InstagramServiceTest.php
+
+		-
+			message: '#^Cannot call method getUri\(\) on mixed\.$#'
+			identifier: method.nonObject
+			count: 2
+			path: tests/Unit/InstagramServiceTest.php
+
+		-
+			message: '#^Cannot cast mixed to string\.$#'
+			identifier: cast.string
+			count: 4
+			path: tests/Unit/InstagramServiceTest.php
+
+		-
+			message: '#^Parameter \#2 \$haystack of method PHPUnit\\Framework\\Assert\:\:assertCount\(\) expects Countable\|iterable, array\|ArrayAccess\<int, array\> given\.$#'
+			identifier: argument.type
+			count: 1
+			path: tests/Unit/InstagramServiceTest.php
+
+		-
+			message: '#^Cannot call method assertExitCode\(\) on Illuminate\\Testing\\PendingCommand\|int\.$#'
+			identifier: method.nonObject
+			count: 5
+			path: tests/Unit/SocialDispatchResetStuckTest.php
+
+		-
+			message: '#^Cannot call method expectsOutputToContain\(\) on Illuminate\\Testing\\PendingCommand\|int\.$#'
+			identifier: method.nonObject
+			count: 3
+			path: tests/Unit/SocialDispatchResetStuckTest.php
+
+		-
+			message: '#^Method Tests\\Unit\\SocialDispatchResetStuckTest\:\:makePost\(\) has parameter \$overrides with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: tests/Unit/SocialDispatchResetStuckTest.php
+
+		-
+			message: '#^Parameter \#1 \$attributes of static method Illuminate\\Database\\Eloquent\\Builder\<App\\Models\\SocialScheduledPost\>\:\:create\(\) expects array\<string, mixed\>, array given\.$#'
+			identifier: argument.type
+			count: 1
+			path: tests/Unit/SocialDispatchResetStuckTest.php
+
+		-
+			message: '#^Cannot access property \$error_message on App\\Models\\SocialScheduledPost\|null\.$#'
+			identifier: property.nonObject
+			count: 2
+			path: tests/Unit/SocialDispatchTest.php
+
+		-
+			message: '#^Cannot access property \$status on App\\Models\\SocialScheduledPost\|null\.$#'
+			identifier: property.nonObject
+			count: 3
+			path: tests/Unit/SocialDispatchTest.php
+
+		-
+			message: '#^Cannot call method assertExitCode\(\) on Illuminate\\Testing\\PendingCommand\|int\.$#'
+			identifier: method.nonObject
+			count: 8
+			path: tests/Unit/SocialDispatchTest.php
+
+		-
+			message: '#^Cannot call method expectsOutputToContain\(\) on Illuminate\\Testing\\PendingCommand\|int\.$#'
+			identifier: method.nonObject
+			count: 3
+			path: tests/Unit/SocialDispatchTest.php
+
+		-
+			message: '#^Method Tests\\Unit\\SocialDispatchTest\:\:makePost\(\) has parameter \$overrides with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: tests/Unit/SocialDispatchTest.php
+
+		-
+			message: '#^Parameter \#1 \$attributes of static method Illuminate\\Database\\Eloquent\\Builder\<App\\Models\\SocialScheduledPost\>\:\:create\(\) expects array\<string, mixed\>, array given\.$#'
+			identifier: argument.type
+			count: 1
+			path: tests/Unit/SocialDispatchTest.php
+
+		-
+			message: '#^Parameter \#2 \$haystack of method PHPUnit\\Framework\\Assert\:\:assertStringContainsString\(\) expects string, string\|null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: tests/Unit/SocialDispatchTest.php
+
+		-
+			message: '#^Cannot call method assertExitCode\(\) on Illuminate\\Testing\\PendingCommand\|int\.$#'
+			identifier: method.nonObject
+			count: 5
+			path: tests/Unit/SocialScheduleCommandTest.php
+
+		-
+			message: '#^Cannot call method expectsOutputToContain\(\) on Illuminate\\Testing\\PendingCommand\|int\.$#'
+			identifier: method.nonObject
+			count: 3
+			path: tests/Unit/SocialScheduleCommandTest.php
+
+		-
+			message: '#^Cannot call method expectsQuestion\(\) on Illuminate\\Testing\\PendingCommand\|int\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: tests/Unit/SocialScheduleCommandTest.php
+
+		-
+			message: '#^Method Tests\\Unit\\SocialScheduledPostScopeTest\:\:makePost\(\) has parameter \$overrides with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: tests/Unit/SocialScheduledPostScopeTest.php
+
+		-
+			message: '#^Parameter \#1 \$attributes of static method Illuminate\\Database\\Eloquent\\Builder\<App\\Models\\SocialScheduledPost\>\:\:create\(\) expects array\<string, mixed\>, array given\.$#'
+			identifier: argument.type
+			count: 1
+			path: tests/Unit/SocialScheduledPostScopeTest.php
+
+		-
+			message: '#^Cannot access offset ''request'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 3
+			path: tests/Unit/TwitterServiceTest.php
+
+		-
+			message: '#^Cannot access offset ''text'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: tests/Unit/TwitterServiceTest.php
+
+		-
+			message: '#^Cannot call method getBody\(\) on mixed\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: tests/Unit/TwitterServiceTest.php
+
+		-
+			message: '#^Cannot call method getHeaderLine\(\) on mixed\.$#'
+			identifier: method.nonObject
+			count: 2
+			path: tests/Unit/TwitterServiceTest.php
+
+		-
+			message: '#^Cannot call method getMethod\(\) on mixed\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: tests/Unit/TwitterServiceTest.php
+
+		-
+			message: '#^Cannot call method getUri\(\) on mixed\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: tests/Unit/TwitterServiceTest.php
+
+		-
+			message: '#^Cannot cast mixed to string\.$#'
+			identifier: cast.string
+			count: 2
+			path: tests/Unit/TwitterServiceTest.php
+
+		-
+			message: '#^Method Tests\\Unit\\TwitterServiceTest\:\:twitterConfig\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: tests/Unit/TwitterServiceTest.php
+
+		-
+			message: '#^Parameter \#1 \$key of function config expects array\<string, mixed\>\|string\|null, array given\.$#'
+			identifier: argument.type
+			count: 7
+			path: tests/Unit/TwitterServiceTest.php
+
+		-
+			message: '#^Parameter \#2 \$haystack of method PHPUnit\\Framework\\Assert\:\:assertCount\(\) expects Countable\|iterable, array\|ArrayAccess\<int, array\> given\.$#'
+			identifier: argument.type
+			count: 1
+			path: tests/Unit/TwitterServiceTest.php
+
+		-
+			message: '#^Parameter \#2 \$haystack of method PHPUnit\\Framework\\Assert\:\:assertStringContainsString\(\) expects string, mixed given\.$#'
+			identifier: argument.type
+			count: 4
+			path: tests/Unit/TwitterServiceTest.php
+
+		-
+			message: '#^Parameter \#2 \$string of method PHPUnit\\Framework\\Assert\:\:assertStringStartsWith\(\) expects string, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: tests/Unit/TwitterServiceTest.php
