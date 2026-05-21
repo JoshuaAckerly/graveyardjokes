@@ -13,6 +13,7 @@ class Kernel extends ConsoleKernel
      * @var array<int, class-string>
      */
     protected $commands = [
+        \App\Console\Commands\GenerateSitemap::class,
         \App\Console\Commands\GenerateSitemapIndex::class,
         \App\Console\Commands\SocialDispatch::class,
         \App\Console\Commands\SocialDispatchResetStuck::class,
@@ -26,7 +27,8 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule): void
     {
-        // Regenerate sitemap index daily at 02:00
+        // Regenerate sitemap.xml at 01:55, then regenerate sitemap_index.xml at 02:00
+        $schedule->command('app:generate-sitemap --url=https://graveyardjokes.com')->dailyAt('01:55');
         $schedule->command('app:generate-sitemap-index --url=https://graveyardjokes.com')->dailyAt('02:00');
 
         // Fire due social media posts every minute — production only

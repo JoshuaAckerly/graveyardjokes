@@ -23,17 +23,29 @@ class GenerateSitemap extends Command
         $base = rtrim($baseUrl, '/');
 
         Sitemap::create()
-            ->add(Url::create($base.'/'))
-            ->add(Url::create($base.'/about'))
-            ->add(Url::create($base.'/contact'))
-            ->add(Url::create($base.'/portfolio'))
-            ->add(Url::create($base.'/services'))
-            ->add(Url::create($base.'/services/starter'))
-            ->add(Url::create($base.'/services/professional'))
-            ->add(Url::create($base.'/services/premium'))
-            ->add(Url::create($base.'/terms'))
-            ->add(Url::create($base.'/privacy'))
-            ->add(Url::create($base.'/cookies'))
+            // Core pages
+            ->add(Url::create($base.'/')->setPriority(1.0)->setChangeFrequency(Url::CHANGE_FREQUENCY_WEEKLY))
+            ->add(Url::create($base.'/about')->setPriority(0.7)->setChangeFrequency(Url::CHANGE_FREQUENCY_MONTHLY))
+            ->add(Url::create($base.'/contact')->setPriority(0.6)->setChangeFrequency(Url::CHANGE_FREQUENCY_MONTHLY))
+            ->add(Url::create($base.'/portfolio')->setPriority(0.8)->setChangeFrequency(Url::CHANGE_FREQUENCY_MONTHLY))
+            ->add(Url::create($base.'/studio')->setPriority(0.5)->setChangeFrequency(Url::CHANGE_FREQUENCY_MONTHLY))
+            // Services overview + pricing tiers
+            ->add(Url::create($base.'/services')->setPriority(0.9)->setChangeFrequency(Url::CHANGE_FREQUENCY_MONTHLY))
+            ->add(Url::create($base.'/services/starter')->setPriority(0.8)->setChangeFrequency(Url::CHANGE_FREQUENCY_MONTHLY))
+            ->add(Url::create($base.'/services/professional')->setPriority(0.8)->setChangeFrequency(Url::CHANGE_FREQUENCY_MONTHLY))
+            ->add(Url::create($base.'/services/premium')->setPriority(0.8)->setChangeFrequency(Url::CHANGE_FREQUENCY_MONTHLY))
+            // Design service detail pages
+            ->add(Url::create($base.'/services/design-starter')->setPriority(0.7)->setChangeFrequency(Url::CHANGE_FREQUENCY_MONTHLY))
+            ->add(Url::create($base.'/services/design-professional')->setPriority(0.7)->setChangeFrequency(Url::CHANGE_FREQUENCY_MONTHLY))
+            ->add(Url::create($base.'/services/design-premium')->setPriority(0.7)->setChangeFrequency(Url::CHANGE_FREQUENCY_MONTHLY))
+            // Modernization service detail pages
+            ->add(Url::create($base.'/services/modernization-starter')->setPriority(0.7)->setChangeFrequency(Url::CHANGE_FREQUENCY_MONTHLY))
+            ->add(Url::create($base.'/services/modernization-professional')->setPriority(0.7)->setChangeFrequency(Url::CHANGE_FREQUENCY_MONTHLY))
+            ->add(Url::create($base.'/services/modernization-premium')->setPriority(0.7)->setChangeFrequency(Url::CHANGE_FREQUENCY_MONTHLY))
+            // Legal pages
+            ->add(Url::create($base.'/terms')->setPriority(0.3)->setChangeFrequency(Url::CHANGE_FREQUENCY_YEARLY))
+            ->add(Url::create($base.'/privacy')->setPriority(0.3)->setChangeFrequency(Url::CHANGE_FREQUENCY_YEARLY))
+            ->add(Url::create($base.'/cookies')->setPriority(0.3)->setChangeFrequency(Url::CHANGE_FREQUENCY_YEARLY))
             ->writeToFile(public_path('sitemap.xml'));
 
         $this->info('✅ sitemap.xml written to '.public_path('sitemap.xml'));
