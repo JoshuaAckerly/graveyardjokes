@@ -2,6 +2,7 @@
 
 namespace Tests\Unit;
 
+use App\Contracts\VisitorServiceInterface;
 use Illuminate\Http\Request;
 use Tests\TestCase;
 
@@ -9,7 +10,7 @@ class VisitorServiceTest extends TestCase
 {
     public function test_localhost_returns_local_development_location(): void
     {
-        $service = $this->app->make(\App\Contracts\VisitorServiceInterface::class);
+        $service = $this->app->make(VisitorServiceInterface::class);
 
         $request = Request::create('/track-visit', 'POST');
         // Simulate localhost IP

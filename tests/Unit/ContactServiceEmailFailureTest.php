@@ -2,6 +2,7 @@
 
 namespace Tests\Unit;
 
+use App\Contracts\ContactServiceInterface;
 use App\Modules\Contact\Mail\ContactMessage;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Request;
@@ -20,7 +21,7 @@ class ContactServiceEmailFailureTest extends TestCase
             ->with('dev@graveyardjokes.com')
             ->andThrow(new \Exception('SMTP connection refused'));
 
-        $service = $this->app->make(\App\Contracts\ContactServiceInterface::class);
+        $service = $this->app->make(ContactServiceInterface::class);
 
         $request = Request::create('/contact', 'POST', [
             'first_name' => 'Jane',
@@ -44,7 +45,7 @@ class ContactServiceEmailFailureTest extends TestCase
     {
         Mail::fake();
 
-        $service = $this->app->make(\App\Contracts\ContactServiceInterface::class);
+        $service = $this->app->make(ContactServiceInterface::class);
 
         $request = Request::create('/contact', 'POST', [
             'first_name' => 'John',
@@ -63,7 +64,7 @@ class ContactServiceEmailFailureTest extends TestCase
     {
         Mail::fake();
 
-        $service = $this->app->make(\App\Contracts\ContactServiceInterface::class);
+        $service = $this->app->make(ContactServiceInterface::class);
 
         $request = Request::create('/contact', 'POST', [
             'first_name' => str_repeat('a', 255),

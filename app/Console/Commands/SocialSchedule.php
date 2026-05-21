@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Models\SocialScheduledPost;
+use Carbon\Carbon;
 use Illuminate\Console\Command;
 
 class SocialSchedule extends Command
@@ -42,7 +43,7 @@ class SocialSchedule extends Command
         $atRaw = $this->option('at') ?? $this->ask('Schedule date/time (e.g. "2026-05-10 09:00")');
 
         try {
-            $scheduledAt = \Carbon\Carbon::parse($atRaw);
+            $scheduledAt = Carbon::parse($atRaw);
         } catch (\Throwable) {
             $this->error("Could not parse date/time: {$atRaw}");
 

@@ -2,6 +2,7 @@
 
 namespace Tests\Unit;
 
+use App\Contracts\ContactServiceInterface;
 use App\Modules\Contact\Mail\ContactMessage;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Request;
@@ -16,7 +17,7 @@ class ContactServiceTest extends TestCase
     {
         Mail::fake();
 
-        $service = $this->app->make(\App\Contracts\ContactServiceInterface::class);
+        $service = $this->app->make(ContactServiceInterface::class);
 
         $data = [
             'first_name' => 'John',

@@ -2,6 +2,13 @@
 
 namespace App\Console;
 
+use App\Console\Commands\FacebookPageTokens;
+use App\Console\Commands\FacebookRefreshToken;
+use App\Console\Commands\GenerateSitemap;
+use App\Console\Commands\GenerateSitemapIndex;
+use App\Console\Commands\SocialDispatch;
+use App\Console\Commands\SocialDispatchResetStuck;
+use App\Console\Commands\SocialSchedule;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -13,13 +20,13 @@ class Kernel extends ConsoleKernel
      * @var array<int, class-string>
      */
     protected $commands = [
-        \App\Console\Commands\GenerateSitemap::class,
-        \App\Console\Commands\GenerateSitemapIndex::class,
-        \App\Console\Commands\SocialDispatch::class,
-        \App\Console\Commands\SocialDispatchResetStuck::class,
-        \App\Console\Commands\SocialSchedule::class,
-        \App\Console\Commands\FacebookPageTokens::class,
-        \App\Console\Commands\FacebookRefreshToken::class,
+        GenerateSitemap::class,
+        GenerateSitemapIndex::class,
+        SocialDispatch::class,
+        SocialDispatchResetStuck::class,
+        SocialSchedule::class,
+        FacebookPageTokens::class,
+        FacebookRefreshToken::class,
     ];
 
     /**

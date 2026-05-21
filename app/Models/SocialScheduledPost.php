@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
 class SocialScheduledPost extends Model
@@ -29,7 +30,7 @@ class SocialScheduledPost extends Model
     // back to 'pending' via `php artisan social:dispatch:reset-stuck`.
 
     /** Posts due to fire right now (only unclaimed/pending rows). */
-    public function scopeDue(\Illuminate\Database\Eloquent\Builder $query): \Illuminate\Database\Eloquent\Builder
+    public function scopeDue(Builder $query): Builder
     {
         return $query
             ->where('status', 'pending')
@@ -37,7 +38,7 @@ class SocialScheduledPost extends Model
     }
 
     /** Posts currently being processed by a dispatch worker. */
-    public function scopeProcessing(\Illuminate\Database\Eloquent\Builder $query): \Illuminate\Database\Eloquent\Builder
+    public function scopeProcessing(Builder $query): Builder
     {
         return $query->where('status', 'processing');
     }

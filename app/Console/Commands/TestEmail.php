@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Mail\NewVisitorNotification;
+use App\Modules\Visitor\Services\VisitorService;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Mail;
 
@@ -30,7 +31,7 @@ class TestEmail extends Command
         $this->info('Testing visitor notification email...');
 
         // Use a real IP to test geolocation (Google's public DNS)
-        $visitorService = new \App\Modules\Visitor\Services\VisitorService;
+        $visitorService = new VisitorService;
         $testLocation = $visitorService->getLocationFromIP('8.8.8.8');
 
         /** @var array<string, mixed> $testVisitorData */

@@ -4,8 +4,10 @@ namespace Tests\Unit;
 
 use App\Modules\Visitor\Services\VisitorService;
 use GuzzleHttp\Client as GuzzleClient;
+use GuzzleHttp\Exception\ConnectException;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;
+use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
 use GuzzleHttp\Psr7\Utils;
 use Illuminate\Support\Facades\Cache;
@@ -47,9 +49,9 @@ class VisitorServiceEdgeCasesTest extends TestCase
     {
         // Guzzle throws — exercises the catch branch in getLocationFromIP
         $mock = new MockHandler([
-            new \GuzzleHttp\Exception\ConnectException(
+            new ConnectException(
                 'Connection refused',
-                new \GuzzleHttp\Psr7\Request('GET', 'http://ipinfo.io/1.2.3.4/json')
+                new Request('GET', 'http://ipinfo.io/1.2.3.4/json')
             ),
         ]);
         $client = new GuzzleClient(['handler' => HandlerStack::create($mock)]);

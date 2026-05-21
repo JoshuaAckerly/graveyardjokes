@@ -6,6 +6,7 @@ use App\Contracts\ContactServiceInterface;
 use App\Modules\Contact\Controllers\ContactController;
 use Illuminate\Http\Request;
 use Mockery;
+use Mockery\Expectation;
 use Mockery\MockInterface;
 use Tests\TestCase;
 
@@ -36,7 +37,7 @@ class ModuleContactControllerTest extends TestCase
         $request = new Request;
         $contactData = ['id' => 1, 'email' => 'test@example.com'];
 
-        /** @var \Mockery\Expectation $expect */
+        /** @var Expectation $expect */
         $expect = $this->contactService->shouldReceive('store');
         $expect->with($request)
             ->once()
@@ -51,7 +52,7 @@ class ModuleContactControllerTest extends TestCase
     {
         $request = new Request;
 
-        /** @var \Mockery\Expectation $expect */
+        /** @var Expectation $expect */
         $expect = $this->contactService->shouldReceive('store');
         $expect->with($request)
             ->once()

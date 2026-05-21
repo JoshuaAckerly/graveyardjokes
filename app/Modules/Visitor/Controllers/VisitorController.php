@@ -3,13 +3,14 @@
 namespace App\Modules\Visitor\Controllers;
 
 use App\Contracts\VisitorServiceInterface;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Support\Facades\Log;
 
 class VisitorController extends BaseController
 {
-    public function track(Request $request, VisitorServiceInterface $visitorService): \Illuminate\Http\JsonResponse
+    public function track(Request $request, VisitorServiceInterface $visitorService): JsonResponse
     {
         // Handle OPTIONS request (CORS preflight)
         if ($request->getMethod() === 'OPTIONS') {

@@ -2,6 +2,8 @@
 
 namespace Tests;
 
+use Illuminate\Contracts\Console\Kernel;
+use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -13,13 +15,13 @@ abstract class TestCase extends BaseTestCase
     /**
      * Creates the application.
      */
-    public function createApplication(): \Illuminate\Foundation\Application
+    public function createApplication(): Application
     {
-        /** @var \Illuminate\Foundation\Application $app */
+        /** @var Application $app */
         $app = require __DIR__.'/../bootstrap/app.php';
 
-        /** @var \Illuminate\Contracts\Console\Kernel $kernel */
-        $kernel = $app->make(\Illuminate\Contracts\Console\Kernel::class);
+        /** @var Kernel $kernel */
+        $kernel = $app->make(Kernel::class);
         $kernel->bootstrap();
 
         return $app;

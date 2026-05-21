@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Support\Facades\Cache;
@@ -9,7 +10,7 @@ use Illuminate\Support\Facades\Log;
 
 class JokeController extends BaseController
 {
-    public function random(Request $request): \Illuminate\Http\JsonResponse
+    public function random(Request $request): JsonResponse
     {
         try {
             /** @var array<int, array<string, mixed>>|null $jokes */

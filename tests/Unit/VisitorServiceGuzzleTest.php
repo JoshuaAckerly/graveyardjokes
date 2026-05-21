@@ -2,6 +2,7 @@
 
 namespace Tests\Unit;
 
+use App\Modules\Visitor\Services\VisitorService;
 use GuzzleHttp\Client as GuzzleClient;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;
@@ -29,7 +30,7 @@ class VisitorServiceGuzzleTest extends TestCase
         $handlerStack = HandlerStack::create($mock);
         $client = new GuzzleClient(['handler' => $handlerStack]);
 
-        $service = new \App\Modules\Visitor\Services\VisitorService($client);
+        $service = new VisitorService($client);
 
         $result = $service->getLocationFromIP('1.2.3.4');
 

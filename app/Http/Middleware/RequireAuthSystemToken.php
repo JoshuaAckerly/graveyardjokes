@@ -3,11 +3,13 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class RequireAuthSystemToken
 {
-    public function handle(Request $request, Closure $next): \Illuminate\Http\JsonResponse|\Illuminate\Http\Response
+    public function handle(Request $request, Closure $next): JsonResponse|Response
     {
         $token = $request->bearerToken();
         if (! is_string($token) || empty($token)) {
@@ -15,7 +17,7 @@ class RequireAuthSystemToken
         }
         // Optionally, verify token with auth-system here
         $response = $next($request);
-        if ($response instanceof \Illuminate\Http\JsonResponse || $response instanceof \Illuminate\Http\Response) {
+        if ($response instanceof JsonResponse || $response instanceof Response) {
             return $response;
         }
 

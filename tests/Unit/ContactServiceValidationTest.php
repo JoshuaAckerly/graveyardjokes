@@ -2,6 +2,7 @@
 
 namespace Tests\Unit;
 
+use App\Contracts\ContactServiceInterface;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
@@ -15,7 +16,7 @@ class ContactServiceValidationTest extends TestCase
     {
         $this->expectException(ValidationException::class);
 
-        $service = $this->app->make(\App\Contracts\ContactServiceInterface::class);
+        $service = $this->app->make(ContactServiceInterface::class);
 
         // Missing required fields
         $request = Request::create('/contact', 'POST', []);

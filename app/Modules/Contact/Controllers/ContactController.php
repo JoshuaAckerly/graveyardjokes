@@ -3,12 +3,13 @@
 namespace App\Modules\Contact\Controllers;
 
 use App\Contracts\ContactServiceInterface;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as BaseController;
 
 class ContactController extends BaseController
 {
-    public function store(Request $request, ContactServiceInterface $contactService): \Illuminate\Http\RedirectResponse
+    public function store(Request $request, ContactServiceInterface $contactService): RedirectResponse
     {
         $contact = $contactService->store($request);
 

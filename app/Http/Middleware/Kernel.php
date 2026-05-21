@@ -22,7 +22,7 @@ class Kernel extends HttpKernel
      */
     protected $middlewareGroups = [
         'web' => [
-            \App\Http\Middleware\VerifyCsrfToken::class,
+            VerifyCsrfToken::class,
             // ...existing web middleware...
         ],
 
@@ -37,7 +37,7 @@ class Kernel extends HttpKernel
      * @var array<string, string>
      */
     protected $routeMiddleware = [
-        'auth-system' => \App\Http\Middleware\RequireAuthSystemToken::class,
+        'auth-system' => RequireAuthSystemToken::class,
         // ...existing route middleware...
     ];
 }

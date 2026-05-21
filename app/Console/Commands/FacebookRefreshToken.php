@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\ClientException;
 use Illuminate\Console\Command;
 
 /**
@@ -55,7 +56,7 @@ class FacebookRefreshToken extends Command
                     'fb_exchange_token' => $shortToken,
                 ],
             ]);
-        } catch (\GuzzleHttp\Exception\ClientException $e) {
+        } catch (ClientException $e) {
             $body = json_decode((string) $e->getResponse()->getBody(), true);
             $message = $body['error']['message'] ?? $e->getMessage();
             $this->error('Token exchange failed: '.$message);
@@ -89,7 +90,7 @@ class FacebookRefreshToken extends Command
                     'fields' => 'id,name,access_token',
                 ],
             ]);
-        } catch (\GuzzleHttp\Exception\ClientException $e) {
+        } catch (ClientException $e) {
             $body = json_decode((string) $e->getResponse()->getBody(), true);
             $message = $body['error']['message'] ?? $e->getMessage();
             $this->error('Failed to fetch pages: '.$message);
