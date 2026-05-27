@@ -101,29 +101,29 @@ export default function ProfessionalPackage() {
                             <h2 className="mb-3 text-2xl font-bold text-white">About the Professional Package</h2>
                             <p className="text-white/70">
                                 The Professional Package from Graveyard Jokes Studios is our most popular offering for growing businesses, bands, and
-                                independent artists who need a feature-rich, multi-page website that scales with their success. At $1,499, this package
-                                includes up to ten fully designed and developed pages — covering home, about, portfolio, shop, blog, and contact.
-                                We integrate e-commerce capabilities through Shopify, WooCommerce, or Stripe so you can sell merchandise, music, or
-                                services directly from your site. Mailing list integration, booking forms, and social media connections are all included,
-                                making your website a complete marketing and sales platform from day one.
+                                independent artists who need a feature-rich, multi-page website that scales with their success. At $1,499, this
+                                package includes up to ten fully designed and developed pages — covering home, about, portfolio, shop, blog, and
+                                contact. We integrate e-commerce capabilities through Shopify, WooCommerce, or Stripe so you can sell merchandise,
+                                music, or services directly from your site. Mailing list integration, booking forms, and social media connections are
+                                all included, making your website a complete marketing and sales platform from day one.
                             </p>
                         </section>
                         <section>
                             <h3 className="mb-3 text-xl font-semibold text-white">What Makes the Professional Package Different</h3>
                             <p className="text-white/70">
-                                Unlike basic website packages, the Professional tier includes one full year of free hosting and ongoing support. After your
-                                site launches, you have a dedicated team available to handle updates, performance questions, and technical issues for an
-                                entire year at no additional cost. Performance optimization is built into every project, ensuring your pages load quickly
-                                and score well on Core Web Vitals — a key factor in Google search rankings and organic visibility.
+                                Unlike basic website packages, the Professional tier includes one full year of free hosting and ongoing support. After
+                                your site launches, you have a dedicated team available to handle updates, performance questions, and technical issues
+                                for an entire year at no additional cost. Performance optimization is built into every project, ensuring your pages
+                                load quickly and score well on Core Web Vitals — a key factor in Google search rankings and organic visibility.
                             </p>
                         </section>
                         <section>
                             <h3 className="mb-3 text-xl font-semibold text-white">Why Choose Graveyard Jokes Studios?</h3>
                             <p className="text-white/70">
-                                We have built full-scale platforms for independent musicians, creative studios, and small businesses across the United States.
-                                Our team understands the unique needs of artists and entrepreneurs: you need a website that looks great, functions
-                                flawlessly, and actively brings in business. The Professional Package is engineered to convert visitors into fans, followers,
-                                and customers through strategic design and solid technical execution.
+                                We have built full-scale platforms for independent musicians, creative studios, and small businesses across the United
+                                States. Our team understands the unique needs of artists and entrepreneurs: you need a website that looks great,
+                                functions flawlessly, and actively brings in business. The Professional Package is engineered to convert visitors into
+                                fans, followers, and customers through strategic design and solid technical execution.
                             </p>
                         </section>
                         <section>
@@ -131,15 +131,24 @@ export default function ProfessionalPackage() {
                             <div className="space-y-4">
                                 <div>
                                     <p className="font-semibold text-white">What e-commerce platforms do you integrate with?</p>
-                                    <p className="text-white/70">We work with Shopify, WooCommerce, and Stripe depending on your needs. During onboarding we will discuss which platform best suits your product type, sales volume, and budget.</p>
+                                    <p className="text-white/70">
+                                        We work with Shopify, WooCommerce, and Stripe depending on your needs. During onboarding we will discuss which
+                                        platform best suits your product type, sales volume, and budget.
+                                    </p>
                                 </div>
                                 <div>
                                     <p className="font-semibold text-white">Is one year of hosting included in the $1,499 price?</p>
-                                    <p className="text-white/70">Yes, hosting and support for twelve months are included at no additional charge. After the first year, affordable renewal options are available to keep your site running.</p>
+                                    <p className="text-white/70">
+                                        Yes, hosting and support for twelve months are included at no additional charge. After the first year,
+                                        affordable renewal options are available to keep your site running.
+                                    </p>
                                 </div>
                                 <div>
                                     <p className="font-semibold text-white">Can you migrate content from my existing website?</p>
-                                    <p className="text-white/70">Yes, content migration is available. We will discuss the specifics of your current site during the project intake process and ensure a smooth transition with no data loss.</p>
+                                    <p className="text-white/70">
+                                        Yes, content migration is available. We will discuss the specifics of your current site during the project
+                                        intake process and ensure a smooth transition with no data loss.
+                                    </p>
                                 </div>
                             </div>
                         </section>

@@ -300,33 +300,31 @@ export default function ContactPricing() {
                     <section className="mb-10">
                         <h2 className="mb-3 text-2xl font-bold text-white">Get in Touch with Graveyard Jokes Studios</h2>
                         <p className="text-white/70">
-                            Graveyard Jokes Studios is a custom web design and development agency based in Cheektowaga, New York, serving
-                            musicians, bands, independent artists, and creative businesses across the United States. Whether you are a solo
-                            artist looking for your first professional website, a band ready to launch an online merch store, or an established
-                            business that needs a complete digital overhaul, our team is ready to help. We respond to every inquiry within
-                            24 hours on business days, and we are happy to discuss your project over the phone, email, or social media.
+                            Graveyard Jokes Studios is a custom web design and development agency based in Cheektowaga, New York, serving musicians,
+                            bands, independent artists, and creative businesses across the United States. Whether you are a solo artist looking for
+                            your first professional website, a band ready to launch an online merch store, or an established business that needs a
+                            complete digital overhaul, our team is ready to help. We respond to every inquiry within 24 hours on business days, and we
+                            are happy to discuss your project over the phone, email, or social media.
                         </p>
                     </section>
                     <section className="mb-10">
                         <h3 className="mb-3 text-xl font-semibold text-white">What to Expect After You Reach Out</h3>
                         <p className="text-white/70">
-                            Once you submit the contact form or give us a call, a member of our team will follow up to schedule a free
-                            discovery call. During that call we will discuss your goals, your audience, your timeline, and your budget.
-                            From there we will recommend the right package and walk you through exactly what the project will involve.
-                            There is no pressure and no obligation — we want to make sure we are a good fit before either of us commits
-                            to anything.
+                            Once you submit the contact form or give us a call, a member of our team will follow up to schedule a free discovery call.
+                            During that call we will discuss your goals, your audience, your timeline, and your budget. From there we will recommend
+                            the right package and walk you through exactly what the project will involve. There is no pressure and no obligation — we
+                            want to make sure we are a good fit before either of us commits to anything.
                         </p>
                     </section>
                     <section className="mb-10">
                         <h3 className="mb-3 text-xl font-semibold text-white">Our Services</h3>
                         <p className="text-white/70">
-                            We offer custom website design and development, website modernization and redesign, UI/UX design systems,
-                            brand identity design, e-commerce integration, SEO optimization, and ongoing maintenance and support.
-                            Every project is built from scratch using modern frameworks — no page builders, no pre-made templates.
-                            We specialize in serving the music industry, including custom band websites, musician portfolio sites,
-                            streaming and merch integrations, event calendars, and fan engagement platforms. We also serve small
-                            businesses, creative agencies, and independent professionals who need a high-quality web presence that
-                            performs as well as it looks.
+                            We offer custom website design and development, website modernization and redesign, UI/UX design systems, brand identity
+                            design, e-commerce integration, SEO optimization, and ongoing maintenance and support. Every project is built from scratch
+                            using modern frameworks — no page builders, no pre-made templates. We specialize in serving the music industry, including
+                            custom band websites, musician portfolio sites, streaming and merch integrations, event calendars, and fan engagement
+                            platforms. We also serve small businesses, creative agencies, and independent professionals who need a high-quality web
+                            presence that performs as well as it looks.
                         </p>
                     </section>
                     <section>
@@ -334,15 +332,26 @@ export default function ContactPricing() {
                         <div className="space-y-4">
                             <div>
                                 <p className="font-semibold text-white">How quickly will you respond to my inquiry?</p>
-                                <p className="text-white/70">We respond to all contact form submissions and calls within 24 hours on business days. For urgent matters, calling us directly at (716) 341-5425 is the fastest way to reach us.</p>
+                                <p className="text-white/70">
+                                    We respond to all contact form submissions and calls within 24 hours on business days. For urgent matters, calling
+                                    us directly at (716) 341-5425 is the fastest way to reach us.
+                                </p>
                             </div>
                             <div>
                                 <p className="font-semibold text-white">Do you work with clients outside of New York?</p>
-                                <p className="text-white/70">Yes. While we are based in Cheektowaga, New York, we work with clients across the entire United States and internationally. All project communication is handled remotely via video call, email, and our project management tools.</p>
+                                <p className="text-white/70">
+                                    Yes. While we are based in Cheektowaga, New York, we work with clients across the entire United States and
+                                    internationally. All project communication is handled remotely via video call, email, and our project management
+                                    tools.
+                                </p>
                             </div>
                             <div>
                                 <p className="font-semibold text-white">What information should I include in my message?</p>
-                                <p className="text-white/70">The more detail you can share, the better. Tell us what kind of site you need, what your goals are, whether you have existing branding, and your rough timeline and budget. This helps us respond with specific and useful information rather than generic questions.</p>
+                                <p className="text-white/70">
+                                    The more detail you can share, the better. Tell us what kind of site you need, what your goals are, whether you
+                                    have existing branding, and your rough timeline and budget. This helps us respond with specific and useful
+                                    information rather than generic questions.
+                                </p>
                             </div>
                         </div>
                     </section>

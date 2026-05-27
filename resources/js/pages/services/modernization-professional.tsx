@@ -174,15 +174,26 @@ export default function ModernizationProfessionalPackage() {
                             <div className="space-y-4">
                                 <div>
                                     <p className="font-semibold text-white">Will modernization affect my Google rankings?</p>
-                                    <p className="text-white/70">Done correctly, modernization improves rankings by fixing technical issues that hold your site back. We take care to preserve URL structures and implement proper redirects where necessary to protect your existing SEO equity.</p>
+                                    <p className="text-white/70">
+                                        Done correctly, modernization improves rankings by fixing technical issues that hold your site back. We take
+                                        care to preserve URL structures and implement proper redirects where necessary to protect your existing SEO
+                                        equity.
+                                    </p>
                                 </div>
                                 <div>
                                     <p className="font-semibold text-white">What does advanced SEO optimization involve?</p>
-                                    <p className="text-white/70">Advanced SEO optimization covers page speed improvements, meta tag audits, structured data implementation, internal linking review, and Core Web Vitals fixes — all factors Google uses to rank pages in organic search results.</p>
+                                    <p className="text-white/70">
+                                        Advanced SEO optimization covers page speed improvements, meta tag audits, structured data implementation,
+                                        internal linking review, and Core Web Vitals fixes — all factors Google uses to rank pages in organic search
+                                        results.
+                                    </p>
                                 </div>
                                 <div>
                                     <p className="font-semibold text-white">How long does a Professional modernization project take?</p>
-                                    <p className="text-white/70">Most Professional modernization projects are completed within three to five weeks depending on the size of your existing site and the complexity of the framework migration required.</p>
+                                    <p className="text-white/70">
+                                        Most Professional modernization projects are completed within three to five weeks depending on the size of
+                                        your existing site and the complexity of the framework migration required.
+                                    </p>
                                 </div>
                             </div>
                         </section>

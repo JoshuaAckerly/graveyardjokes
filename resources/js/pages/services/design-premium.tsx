@@ -171,15 +171,25 @@ export default function DesignPremiumPackage() {
                             <div className="space-y-4">
                                 <div>
                                     <p className="font-semibold text-white">What types of custom illustrations can you create?</p>
-                                    <p className="text-white/70">We create spot illustrations, character design, pattern systems, icon sets, and editorial-style artwork. During onboarding we discuss the visual style that best matches your brand identity and audience.</p>
+                                    <p className="text-white/70">
+                                        We create spot illustrations, character design, pattern systems, icon sets, and editorial-style artwork.
+                                        During onboarding we discuss the visual style that best matches your brand identity and audience.
+                                    </p>
                                 </div>
                                 <div>
                                     <p className="font-semibold text-white">What are design tokens and why do they matter?</p>
-                                    <p className="text-white/70">Design tokens are named variables for design decisions like brand colors, font sizes, and spacing values. They keep design and development in sync and make global style changes fast and accurate across your entire product.</p>
+                                    <p className="text-white/70">
+                                        Design tokens are named variables for design decisions like brand colors, font sizes, and spacing values. They
+                                        keep design and development in sync and make global style changes fast and accurate across your entire
+                                        product.
+                                    </p>
                                 </div>
                                 <div>
                                     <p className="font-semibold text-white">How does unlimited revisions work in practice?</p>
-                                    <p className="text-white/70">Within the sixty-day revision window you can request as many design changes as needed with no additional charge. This gives you real creative freedom to explore directions and perfect every detail before handoff.</p>
+                                    <p className="text-white/70">
+                                        Within the sixty-day revision window you can request as many design changes as needed with no additional
+                                        charge. This gives you real creative freedom to explore directions and perfect every detail before handoff.
+                                    </p>
                                 </div>
                             </div>
                         </section>

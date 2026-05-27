@@ -156,42 +156,41 @@ const Portfolio: React.FC = () => {
                     <section>
                         <h2 className="mb-3 text-2xl font-bold text-white">Our Work</h2>
                         <p className="text-white/70">
-                            Every project in this portfolio is a real, live website — designed from scratch, built with modern technology,
-                            and optimized for speed, SEO, and mobile performance. Graveyard Jokes Studios does not use page builders,
-                            pre-made themes, or drag-and-drop editors. Each site is hand-coded by our development team using current
-                            frameworks, giving every client a unique, performant, and maintainable digital product that no template
-                            could replicate. Our clients include independent musicians, bands, creative publishers, fashion labels,
-                            and media brands across the United States.
+                            Every project in this portfolio is a real, live website — designed from scratch, built with modern technology, and
+                            optimized for speed, SEO, and mobile performance. Graveyard Jokes Studios does not use page builders, pre-made themes, or
+                            drag-and-drop editors. Each site is hand-coded by our development team using current frameworks, giving every client a
+                            unique, performant, and maintainable digital product that no template could replicate. Our clients include independent
+                            musicians, bands, creative publishers, fashion labels, and media brands across the United States.
                         </p>
                     </section>
                     <section>
                         <h3 className="mb-3 text-xl font-semibold text-white">What We Build</h3>
                         <p className="text-white/70">
-                            Our portfolio spans musician and band websites, independent publishing platforms, e-commerce storefronts,
-                            streaming and media sites, and artist brand platforms. We specialize in the music and creative industries,
-                            where visual identity, fan experience, and brand storytelling are just as important as technical performance.
-                            Each project begins with a discovery process to understand the client's audience, goals, and aesthetic — and
-                            ends with a launch-ready product built to rank in search engines and convert visitors into fans or customers.
+                            Our portfolio spans musician and band websites, independent publishing platforms, e-commerce storefronts, streaming and
+                            media sites, and artist brand platforms. We specialize in the music and creative industries, where visual identity, fan
+                            experience, and brand storytelling are just as important as technical performance. Each project begins with a discovery
+                            process to understand the client's audience, goals, and aesthetic — and ends with a launch-ready product built to rank in
+                            search engines and convert visitors into fans or customers.
                         </p>
                     </section>
                     <section>
                         <h3 className="mb-3 text-xl font-semibold text-white">Technology and Approach</h3>
                         <p className="text-white/70">
-                            We build with React, TypeScript, Laravel, and Inertia.js, using Tailwind CSS for styling and modern
-                            deployment pipelines for reliability. Every site we deliver is mobile-first, accessible, and optimized
-                            for Core Web Vitals. We take SEO seriously from day one — structuring content, metadata, and performance
-                            with organic visibility in mind rather than bolting on SEO as an afterthought. The result is a website
-                            that not only looks exceptional but actively works to grow your audience over time.
+                            We build with React, TypeScript, Laravel, and Inertia.js, using Tailwind CSS for styling and modern deployment pipelines
+                            for reliability. Every site we deliver is mobile-first, accessible, and optimized for Core Web Vitals. We take SEO
+                            seriously from day one — structuring content, metadata, and performance with organic visibility in mind rather than
+                            bolting on SEO as an afterthought. The result is a website that not only looks exceptional but actively works to grow your
+                            audience over time.
                         </p>
                     </section>
                     <section>
                         <h3 className="mb-3 text-xl font-semibold text-white">Why Choose Graveyard Jokes Studios?</h3>
                         <p className="text-white/70">
-                            We are a small, focused agency that treats every project as a genuine creative partnership. You work
-                            directly with the people building your site — not account managers passing messages between you and an
-                            offshore team. Our rates are transparent, our timelines are realistic, and our work speaks for itself.
-                            Based in Cheektowaga, New York and serving clients across the United States, we bring big-agency craft
-                            to independent artists and businesses who deserve more than a generic template site.
+                            We are a small, focused agency that treats every project as a genuine creative partnership. You work directly with the
+                            people building your site — not account managers passing messages between you and an offshore team. Our rates are
+                            transparent, our timelines are realistic, and our work speaks for itself. Based in Cheektowaga, New York and serving
+                            clients across the United States, we bring big-agency craft to independent artists and businesses who deserve more than a
+                            generic template site.
                         </p>
                     </section>
                 </div>

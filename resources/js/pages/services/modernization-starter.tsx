@@ -166,15 +166,25 @@ export default function ModernizationStarterPackage() {
                             <div className="space-y-4">
                                 <div>
                                     <p className="font-semibold text-white">Do you need access to my website's backend?</p>
-                                    <p className="text-white/70">For Starter-level work we typically need read access to your site's admin panel and server configuration. We work with all major CMS platforms and custom-built sites, and handle access securely.</p>
+                                    <p className="text-white/70">
+                                        For Starter-level work we typically need read access to your site's admin panel and server configuration. We
+                                        work with all major CMS platforms and custom-built sites, and handle access securely.
+                                    </p>
                                 </div>
                                 <div>
                                     <p className="font-semibold text-white">How is modernization different from a full rebuild?</p>
-                                    <p className="text-white/70">Modernization updates and improves your existing site while preserving its established content and structure. A full rebuild starts from scratch. If your current site has substantial content or brand equity, modernization is typically faster and more cost-effective.</p>
+                                    <p className="text-white/70">
+                                        Modernization updates and improves your existing site while preserving its established content and structure.
+                                        A full rebuild starts from scratch. If your current site has substantial content or brand equity,
+                                        modernization is typically faster and more cost-effective.
+                                    </p>
                                 </div>
                                 <div>
                                     <p className="font-semibold text-white">Will my site be offline during modernization?</p>
-                                    <p className="text-white/70">All work is performed on a staging environment first and then deployed in a single controlled transition. Your live site remains online throughout the process with zero unplanned downtime.</p>
+                                    <p className="text-white/70">
+                                        All work is performed on a staging environment first and then deployed in a single controlled transition. Your
+                                        live site remains online throughout the process with zero unplanned downtime.
+                                    </p>
                                 </div>
                             </div>
                         </section>
