@@ -135,6 +135,55 @@ export default function DesignPremiumPackage() {
                             </div>
                         </div>
                     </motion.div>
+
+                    <div className="mt-12 space-y-8 pb-8">
+                        <section>
+                            <h2 className="mb-3 text-2xl font-bold text-white">About the Website Design Premium Package</h2>
+                            <p className="text-white/70">
+                                The Website Design Premium Package from Graveyard Jokes Studios is our most comprehensive design offering, built for
+                                organizations that demand a world-class visual identity and an ongoing creative partnership. At $1,799, this package
+                                includes everything in Professional — then goes further with a premium brand identity package, custom illustration
+                                design, animation design specifications, a complete accessibility audit with WCAG 2.1 compliance recommendations,
+                                design tokens, and a full CSS system. Unlimited revisions over sixty days and six months of ongoing design support
+                                give you exceptional depth of iteration and long-term creative continuity.
+                            </p>
+                        </section>
+                        <section>
+                            <h3 className="mb-3 text-xl font-semibold text-white">Custom Illustrations and Brand Differentiation</h3>
+                            <p className="text-white/70">
+                                Generic stock imagery blends into the background. Custom illustrations created specifically for your brand are
+                                distinctive, memorable, and impossible to replicate. Whether your aesthetic is dark and atmospheric, minimalist and
+                                modern, or bold and expressive, our illustrators create original artwork that makes your website genuinely unique and
+                                gives your audience something they have never seen before in your space.
+                            </p>
+                        </section>
+                        <section>
+                            <h3 className="mb-3 text-xl font-semibold text-white">Accessibility and Design Tokens</h3>
+                            <p className="text-white/70">
+                                Good design serves every user. Our accessibility audit ensures your site meets WCAG 2.1 standards, expanding your
+                                audience and reducing legal exposure. Design tokens — systematic values for colors, spacing, and typography — keep
+                                design and code in sync, making global updates faster and more consistent across every platform and device your
+                                audience uses.
+                            </p>
+                        </section>
+                        <section>
+                            <h3 className="mb-3 text-xl font-semibold text-white">Frequently Asked Questions</h3>
+                            <div className="space-y-4">
+                                <div>
+                                    <p className="font-semibold text-white">What types of custom illustrations can you create?</p>
+                                    <p className="text-white/70">We create spot illustrations, character design, pattern systems, icon sets, and editorial-style artwork. During onboarding we discuss the visual style that best matches your brand identity and audience.</p>
+                                </div>
+                                <div>
+                                    <p className="font-semibold text-white">What are design tokens and why do they matter?</p>
+                                    <p className="text-white/70">Design tokens are named variables for design decisions like brand colors, font sizes, and spacing values. They keep design and development in sync and make global style changes fast and accurate across your entire product.</p>
+                                </div>
+                                <div>
+                                    <p className="font-semibold text-white">How does unlimited revisions work in practice?</p>
+                                    <p className="text-white/70">Within the sixty-day revision window you can request as many design changes as needed with no additional charge. This gives you real creative freedom to explore directions and perfect every detail before handoff.</p>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
                 </div>
             </MainLayout>
         </>

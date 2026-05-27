@@ -129,6 +129,55 @@ export default function DesignStarterPackage() {
                             </div>
                         </div>
                     </motion.div>
+
+                    <div className="mt-12 space-y-8 pb-8">
+                        <section>
+                            <h2 className="mb-3 text-2xl font-bold text-white">About the Website Design Starter Package</h2>
+                            <p className="text-white/70">
+                                The Website Design Starter Package from Graveyard Jokes Studios gives you a professional visual foundation for your
+                                website before a single line of code is written. For $799, our design team creates detailed wireframes for three to five
+                                pages, full-color design mockups in Figma, a brand color palette, and typography recommendations that establish a
+                                consistent visual identity across your entire site. You will receive icon set suggestions and two complete rounds of
+                                revisions, so the final designs reflect exactly what you are looking for. This package is ideal for clients who already
+                                have a developer or want to thoroughly plan their visual direction before committing to full development.
+                            </p>
+                        </section>
+                        <section>
+                            <h3 className="mb-3 text-xl font-semibold text-white">What Good Design Does for Your Business</h3>
+                            <p className="text-white/70">
+                                A professionally designed website communicates credibility and trust within the first few seconds a visitor arrives.
+                                Users form opinions about websites almost instantly, and those impressions directly influence whether they stay, explore,
+                                and ultimately convert into customers or fans. Our design process is rooted in user experience principles, ensuring
+                                layouts are intuitive, calls to action are clear, and visual hierarchy guides visitors toward the outcomes you care about.
+                            </p>
+                        </section>
+                        <section>
+                            <h3 className="mb-3 text-xl font-semibold text-white">Why Graveyard Jokes Studios for Design?</h3>
+                            <p className="text-white/70">
+                                Our design team has experience crafting visual identities for musicians, bands, creative studios, and independent
+                                businesses across the United States. We understand that a musician's website needs to feel different from a corporate firm
+                                — it should capture energy, personality, and genre. We translate your artistic identity into a visual language that
+                                resonates with your audience and sets you apart from every other band or artist in your space.
+                            </p>
+                        </section>
+                        <section>
+                            <h3 className="mb-3 text-xl font-semibold text-white">Frequently Asked Questions</h3>
+                            <div className="space-y-4">
+                                <div>
+                                    <p className="font-semibold text-white">What format will I receive the designs in?</p>
+                                    <p className="text-white/70">All designs are delivered as Figma files, which you can share with any developer or keep as a living reference for your brand going forward. Export assets in any format you need.</p>
+                                </div>
+                                <div>
+                                    <p className="font-semibold text-white">What if I need more than five pages designed?</p>
+                                    <p className="text-white/70">If you need more pages, we recommend upgrading to the Design Professional package, which includes a complete UI design system, component library, and four rounds of revisions.</p>
+                                </div>
+                                <div>
+                                    <p className="font-semibold text-white">Does this package include development?</p>
+                                    <p className="text-white/70">No, this is a design-only package covering wireframes and mockups. If you need development as well, take a look at our Web Development Starter, Professional, or Premium packages.</p>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
                 </div>
             </MainLayout>
         </>

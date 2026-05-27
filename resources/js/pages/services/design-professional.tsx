@@ -131,6 +131,55 @@ export default function DesignProfessionalPackage() {
                             </div>
                         </div>
                     </motion.div>
+
+                    <div className="mt-12 space-y-8 pb-8">
+                        <section>
+                            <h2 className="mb-3 text-2xl font-bold text-white">About the Website Design Professional Package</h2>
+                            <p className="text-white/70">
+                                The Website Design Professional Package from Graveyard Jokes Studios delivers a comprehensive visual and brand system
+                                for businesses and artists who need more than basic mockups. At $999, this package builds on our Starter tier by adding
+                                a full custom UI design system, interactive prototypes that simulate real user interactions, and a complete brand
+                                guidelines document covering logo usage, typography rules, color systems, and spacing standards. For clients whose
+                                existing logo needs refinement — or who need a new logo designed from scratch — logo work is included. A component
+                                library ensures visual consistency across every page and every future iteration of your site.
+                            </p>
+                        </section>
+                        <section>
+                            <h3 className="mb-3 text-xl font-semibold text-white">Interactive Prototypes and What They Mean for You</h3>
+                            <p className="text-white/70">
+                                Rather than just showing what your website looks like, our interactive prototypes demonstrate how it behaves. Hover
+                                states, transitions, navigation flows, and mobile interactions are all modeled before development begins. This reduces
+                                surprises during the build phase and gives all stakeholders a clear, realistic preview of the finished product — making
+                                feedback rounds faster and more productive.
+                            </p>
+                        </section>
+                        <section>
+                            <h3 className="mb-3 text-xl font-semibold text-white">Why Choose the Professional Design Package?</h3>
+                            <p className="text-white/70">
+                                Three months of ongoing design support means that as your business evolves, your design system can evolve with it.
+                                Adding a new product line, updating your branding, or launching a campaign are all easier when you have a structured
+                                design system and a design team you can call on. Four rounds of revisions give you real flexibility to explore
+                                creative directions and refine the final outcome to exactly what you envision.
+                            </p>
+                        </section>
+                        <section>
+                            <h3 className="mb-3 text-xl font-semibold text-white">Frequently Asked Questions</h3>
+                            <div className="space-y-4">
+                                <div>
+                                    <p className="font-semibold text-white">Is the logo work a full branding project?</p>
+                                    <p className="text-white/70">Logo work in this package covers a professional logo design or refinement of your existing mark. For a full brand identity project with custom illustrations and multi-platform asset creation, consider the Design Premium Package.</p>
+                                </div>
+                                <div>
+                                    <p className="font-semibold text-white">Can I use the component library with any developer?</p>
+                                    <p className="text-white/70">Yes. The component library and design specifications are delivered in formats compatible with all major development frameworks. Any competent developer can implement from these deliverables.</p>
+                                </div>
+                                <div>
+                                    <p className="font-semibold text-white">How is a UI design system different from simple mockups?</p>
+                                    <p className="text-white/70">A UI design system defines reusable components, design rules, and standards that scale across your entire product. Simple mockups show one snapshot; a design system governs every screen you ever build.</p>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
                 </div>
             </MainLayout>
         </>

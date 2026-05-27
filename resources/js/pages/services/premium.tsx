@@ -146,6 +146,55 @@ export default function PremiumPackage() {
                             </div>
                         </div>
                     </motion.div>
+
+                    <div className="mt-12 space-y-8 pb-8">
+                        <section>
+                            <h2 className="mb-3 text-2xl font-bold text-white">About the Premium Package</h2>
+                            <p className="text-white/70">
+                                The Premium Package represents the full scope of what Graveyard Jokes Studios can build. At $2,499, this package is
+                                designed for established businesses, professional musicians, record labels, and creative organizations that need a
+                                comprehensive digital platform rather than a simple website. Building on everything in the Professional Package, Premium
+                                adds a fully integrated e-commerce and merchandise store, an event calendar with ticketing capabilities, music and video
+                                streaming support, custom animations and interactive effects, and advanced API integrations with third-party platforms.
+                            </p>
+                        </section>
+                        <section>
+                            <h3 className="mb-3 text-xl font-semibold text-white">Who the Premium Package is For</h3>
+                            <p className="text-white/70">
+                                This tier is built for clients who need their website to function as a complete business tool. If you are running ticket
+                                sales for live events, managing a merch store, streaming exclusive content, and coordinating fan communication all from
+                                a single platform, the Premium Package delivers. Bands on tour, independent labels managing multiple artists, content
+                                creators with subscriber communities, and businesses with complex operational requirements all benefit from the
+                                capabilities this package provides.
+                            </p>
+                        </section>
+                        <section>
+                            <h3 className="mb-3 text-xl font-semibold text-white">Our Build Process</h3>
+                            <p className="text-white/70">
+                                Every Premium project begins with a discovery call where we map out your technical requirements, content strategy, and
+                                business goals. From there we move into design, development, integration, and testing phases before a carefully planned
+                                launch. Our team handles everything from front-end animation to back-end API configuration, giving you a seamless,
+                                polished finished product. Six months of priority support after launch means expert help is always available.
+                            </p>
+                        </section>
+                        <section>
+                            <h3 className="mb-3 text-xl font-semibold text-white">Frequently Asked Questions</h3>
+                            <div className="space-y-4">
+                                <div>
+                                    <p className="font-semibold text-white">What streaming platforms can you integrate?</p>
+                                    <p className="text-white/70">We can build native audio and video players or integrate with external platforms such as SoundCloud, Vimeo, and YouTube based on your preferences and audience needs.</p>
+                                </div>
+                                <div>
+                                    <p className="font-semibold text-white">How long does a Premium project take?</p>
+                                    <p className="text-white/70">Premium projects typically run six to ten weeks from start to launch, depending on the scope of integrations and the complexity of the design and feature set.</p>
+                                </div>
+                                <div>
+                                    <p className="font-semibold text-white">What is included in the six months of priority support?</p>
+                                    <p className="text-white/70">Priority support covers bug fixes, minor feature updates, performance monitoring, and direct access to the development team for questions and guidance throughout the support period.</p>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
                 </div>
             </MainLayout>
         </>

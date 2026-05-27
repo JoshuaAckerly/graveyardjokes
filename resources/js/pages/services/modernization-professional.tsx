@@ -139,6 +139,54 @@ export default function ModernizationProfessionalPackage() {
                             </div>
                         </div>
                     </motion.div>
+
+                    <div className="mt-12 space-y-8 pb-8">
+                        <section>
+                            <h2 className="mb-3 text-2xl font-bold text-white">About the Website Modernization Professional Package</h2>
+                            <p className="text-white/70">
+                                The Website Modernization Professional Package from Graveyard Jokes Studios delivers a comprehensive overhaul of your
+                                existing website — not just a surface-level refresh. At $1,299, this package includes a complete design and code
+                                refresh using a modern responsive framework, a full WCAG 2.1 accessibility compliance audit, advanced SEO
+                                optimization, performance monitoring setup, image optimization with lazy loading, content security policy
+                                implementation, migration assistance, and one full month of dedicated post-project support.
+                            </p>
+                        </section>
+                        <section>
+                            <h3 className="mb-3 text-xl font-semibold text-white">Modern Frameworks and Why They Matter</h3>
+                            <p className="text-white/70">
+                                Many older websites were built on outdated frameworks or legacy code that makes maintenance difficult and performance
+                                ceilings low. Updating your site to a modern responsive framework improves load speed, mobile compatibility, developer
+                                experience, and long-term maintainability. Our team handles the migration carefully to preserve your content, URL
+                                structure, and existing SEO equity wherever possible.
+                            </p>
+                        </section>
+                        <section>
+                            <h3 className="mb-3 text-xl font-semibold text-white">Accessibility Compliance</h3>
+                            <p className="text-white/70">
+                                WCAG 2.1 accessibility compliance ensures your website serves users with visual, auditory, motor, and cognitive
+                                disabilities. Beyond the ethical importance of inclusive design, accessibility compliance reduces legal exposure and
+                                expands your effective audience. Our audit identifies specific failures and our implementation addresses them
+                                systematically and thoroughly.
+                            </p>
+                        </section>
+                        <section>
+                            <h3 className="mb-3 text-xl font-semibold text-white">Frequently Asked Questions</h3>
+                            <div className="space-y-4">
+                                <div>
+                                    <p className="font-semibold text-white">Will modernization affect my Google rankings?</p>
+                                    <p className="text-white/70">Done correctly, modernization improves rankings by fixing technical issues that hold your site back. We take care to preserve URL structures and implement proper redirects where necessary to protect your existing SEO equity.</p>
+                                </div>
+                                <div>
+                                    <p className="font-semibold text-white">What does advanced SEO optimization involve?</p>
+                                    <p className="text-white/70">Advanced SEO optimization covers page speed improvements, meta tag audits, structured data implementation, internal linking review, and Core Web Vitals fixes — all factors Google uses to rank pages in organic search results.</p>
+                                </div>
+                                <div>
+                                    <p className="font-semibold text-white">How long does a Professional modernization project take?</p>
+                                    <p className="text-white/70">Most Professional modernization projects are completed within three to five weeks depending on the size of your existing site and the complexity of the framework migration required.</p>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
                 </div>
             </MainLayout>
         </>

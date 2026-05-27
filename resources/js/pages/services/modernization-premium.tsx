@@ -134,6 +134,56 @@ export default function ModernizationPremiumPackage() {
                             </div>
                         </div>
                     </motion.div>
+
+                    <div className="mt-12 space-y-8 pb-8">
+                        <section>
+                            <h2 className="mb-3 text-2xl font-bold text-white">About the Website Modernization Premium Package</h2>
+                            <p className="text-white/70">
+                                The Website Modernization Premium Package from Graveyard Jokes Studios represents complete digital transformation
+                                for your web presence. At $1,999, this package covers everything in the Professional tier and extends it with a full
+                                tech stack migration, advanced security audit and hardening, analytics and monitoring infrastructure setup, a
+                                conversion rate optimization audit, content management system setup, email automation integration, backup and
+                                disaster recovery implementation, three months of ongoing support, quarterly performance reviews, and strategic
+                                consultation including a long-term digital roadmap.
+                            </p>
+                        </section>
+                        <section>
+                            <h3 className="mb-3 text-xl font-semibold text-white">Full Tech Stack Migration</h3>
+                            <p className="text-white/70">
+                                If your website is running on an outdated CMS, deprecated hosting infrastructure, or legacy code becoming a
+                                liability, a full tech stack migration moves you to a modern, maintainable, and scalable foundation. Our team
+                                handles the entire migration process — from database exports and content mapping through DNS transitions and
+                                post-launch monitoring — ensuring a smooth cutover with minimal downtime and zero data loss.
+                            </p>
+                        </section>
+                        <section>
+                            <h3 className="mb-3 text-xl font-semibold text-white">Security Hardening and Conversion Rate Optimization</h3>
+                            <p className="text-white/70">
+                                Outdated websites are prime targets for exploitation. Our advanced security audit identifies vulnerabilities including
+                                outdated dependencies, weak authentication configurations, exposed admin paths, and misconfigured headers. After
+                                identifying issues, we implement hardening measures and set up backup and disaster recovery systems. We also conduct
+                                a CRO audit analyzing user flows, calls to action, and friction points — providing concrete recommendations that
+                                turn more of your existing traffic into customers.
+                            </p>
+                        </section>
+                        <section>
+                            <h3 className="mb-3 text-xl font-semibold text-white">Frequently Asked Questions</h3>
+                            <div className="space-y-4">
+                                <div>
+                                    <p className="font-semibold text-white">What does the quarterly performance review include?</p>
+                                    <p className="text-white/70">Each quarterly review covers site performance metrics, security status, traffic and conversion data, and recommendations for the next quarter. Reviews are conducted remotely via call or written report based on your preference.</p>
+                                </div>
+                                <div>
+                                    <p className="font-semibold text-white">How long does a Premium modernization project take?</p>
+                                    <p className="text-white/70">Depending on the complexity of your current tech stack and the scope of migration required, Premium modernization projects typically take six to ten weeks from kickoff to launch.</p>
+                                </div>
+                                <div>
+                                    <p className="font-semibold text-white">What CMS platforms do you work with?</p>
+                                    <p className="text-white/70">We work with WordPress, Statamic, custom Laravel applications, headless CMS solutions, and other platforms. During discovery we assess your content needs and recommend the best CMS for your team's workflow.</p>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
                 </div>
             </MainLayout>
         </>
