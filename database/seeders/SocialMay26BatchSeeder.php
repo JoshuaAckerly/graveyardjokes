@@ -26,12 +26,13 @@ use Illuminate\Database\Seeder;
 class SocialMay26BatchSeeder extends Seeder
 {
     private const SITE = 'https://graveyardjokes.com';
+
     private const BLOG_POST_URL = 'https://studio.graveyardjokes.com/blog/week-four-may-2026';
 
     private const IMAGES = [
-        self::SITE . '/storage/instagram/Copilot_20260516_201107.png',
-        self::SITE . '/storage/instagram/Copilot_20260516_201400.png',
-        self::SITE . '/storage/instagram/Copilot_20260516_201630.png',
+        self::SITE.'/storage/instagram/Copilot_20260516_201107.png',
+        self::SITE.'/storage/instagram/Copilot_20260516_201400.png',
+        self::SITE.'/storage/instagram/Copilot_20260516_201630.png',
     ];
 
     public function run(): void
@@ -448,11 +449,11 @@ POST,
 
         foreach ($posts as $post) {
             SocialScheduledPost::create([
-                'platform'     => $post['platform'],
-                'content'      => trim($post['content']),
-                'media_url'    => $post['media_url'] ?? null,
+                'platform' => $post['platform'],
+                'content' => trim($post['content']),
+                'media_url' => $post['media_url'] ?? null,
                 'scheduled_at' => $post['scheduled_at'],
-                'status'       => 'pending',
+                'status' => 'pending',
             ]);
         }
 
