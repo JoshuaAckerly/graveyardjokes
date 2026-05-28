@@ -301,7 +301,9 @@ export default function Home(): JSX.Element {
                     >
                         <div className="text-center">
                             <h2 className="text-3xl font-bold text-white sm:text-4xl">What I Offer</h2>
-                            <p className="mt-4 text-lg text-white/70">Social media management, SEO, and website management — your full online presence, handled</p>
+                            <p className="mt-4 text-lg text-white/70">
+                                Social media management, SEO, and website management — your full online presence, handled
+                            </p>
                         </div>
 
                         <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
@@ -332,8 +334,8 @@ export default function Home(): JSX.Element {
                                 <div className="mb-4 text-3xl">📈</div>
                                 <h3 className="mb-2 text-xl font-semibold text-white">SEO Management</h3>
                                 <p className="text-sm text-white/70">
-                                    Improve your search rankings with strategic keyword targeting, on-page optimization, technical audits, and
-                                    regular reporting. Get found by the right audience.
+                                    Improve your search rankings with strategic keyword targeting, on-page optimization, technical audits, and regular
+                                    reporting. Get found by the right audience.
                                 </p>
                             </motion.div>
 
@@ -352,13 +354,12 @@ export default function Home(): JSX.Element {
                                     so your website always works when it matters.
                                 </p>
                             </motion.div>
-
                         </div>
 
                         <div className="pt-8 text-center">
                             <p className="text-lg text-white/80">
-                                All packages include dedicated support, transparent reporting, and hands-on management — so your online presence
-                                keeps working for you every day.
+                                All packages include dedicated support, transparent reporting, and hands-on management — so your online presence keeps
+                                working for you every day.
                             </p>
                         </div>
                     </motion.section>

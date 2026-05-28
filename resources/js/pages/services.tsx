@@ -206,7 +206,10 @@ export default function Services() {
                     name="description"
                     content="Graveyard Jokes Studios offers social media management, SEO management, and website management services for small businesses and independent brands."
                 />
-                <meta name="keywords" content="social media management, SEO management, website management, small business, online presence, digital marketing services" />
+                <meta
+                    name="keywords"
+                    content="social media management, SEO management, website management, small business, online presence, digital marketing services"
+                />
                 <link rel="canonical" href={`${projectUrl}services`} />
 
                 {/* Open Graph */}
