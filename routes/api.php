@@ -16,9 +16,23 @@ Route::middleware(['throttle:60,1'])->group(function () {
 // Random joke endpoint (returns JSON)
 Route::get('/random-joke', [JokeController::class, 'random'])->name('api.random-joke');
 
+use App\Http\Controllers\Api\BusinessProfileController;
 use App\Http\Controllers\Api\MessageProxyController;
 use App\Http\Controllers\Api\SocialScheduleController;
 use App\Http\Controllers\Api\UserProxyController;
+
+// Google Business Profile — public read endpoints (cached server-side)
+Route::prefix('business')->group(function () {
+    Route::get('/reviews', [BusinessProfileController::class, 'reviews']);
+    Route::get('/info', [BusinessProfileController::class, 'info']);
+    Route::get('/posts', [BusinessProfileController::class, 'posts']);
+});
+
+// Google Business Profile — write endpoints (admin only via auth-system bearer token)
+Route::prefix('business')->middleware('auth-system')->group(function () {
+    Route::post('/reviews/{reviewId}/reply', [BusinessProfileController::class, 'replyToReview']);
+    Route::post('/posts', [BusinessProfileController::class, 'createPost']);
+});
 
 Route::middleware('auth-system')->group(function () {
     Route::get('/user', [UserProxyController::class, 'user']);

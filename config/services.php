@@ -62,4 +62,11 @@ return [
         'track_token' => env('AUTHSYSTEM_TRACK_TOKEN'),
     ],
 
+    'google_business' => [
+        'client_id' => env('GOOGLE_BUSINESS_CLIENT_ID'),
+        'client_secret' => env('GOOGLE_BUSINESS_CLIENT_SECRET'),
+        'refresh_token' => env('GOOGLE_BUSINESS_REFRESH_TOKEN'),
+        'location_name' => env('GOOGLE_BUSINESS_LOCATION_NAME'),
+    ],
+
 ];

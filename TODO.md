@@ -7,6 +7,16 @@
 - [ ] Monitor server logs for errors after deployment
 - [ ] Set up automated backups verification
 
+### Google Business Profile Integration
+- [ ] **Awaiting Google API access approval (7–10 days from May 28, 2026)**
+- [ ] Once approved: run `php artisan google-business:list-locations` to get `GOOGLE_BUSINESS_LOCATION_NAME` and add to `.env`
+- [ ] Wire up Google Places API fallback (reviews, rating, hours on contact + services pages while waiting for Business Profile API access):
+  - Enable Places API in Google Cloud Console
+  - Create a restricted API key (Places API only, IP-restricted)
+  - Find Place ID via https://developers.google.com/maps/documentation/javascript/examples/places-placeid-finder
+  - Add `GOOGLE_PLACES_API_KEY` and `GOOGLE_PLACES_PLACE_ID` to `.env`
+  - Implement `GooglePlacesService` + update `BusinessProfileController` to use it as fallback
+
 ### Dependencies
 - [ ] Monitor for security updates in npm packages
 - [ ] Monitor for security updates in Composer packages

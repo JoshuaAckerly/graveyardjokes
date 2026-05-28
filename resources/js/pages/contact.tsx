@@ -1,3 +1,5 @@
+import BusinessHours from '@/Components/BusinessHours';
+import GoogleReviews from '@/Components/GoogleReviews';
 import InertiaHead from '@/Components/InertiaHead';
 import MainLayout from '@/Layouts/MainLayout';
 import { trackFormSubmission } from '@/hooks/use-google-analytics';
@@ -327,6 +329,10 @@ export default function ContactPricing() {
                             presence that performs as well as it looks.
                         </p>
                     </section>
+                    <section className="mb-10">
+                        <BusinessHours />
+                    </section>
+
                     <section>
                         <h3 className="mb-3 text-xl font-semibold text-white">Frequently Asked Questions</h3>
                         <div className="space-y-4">
@@ -355,7 +361,7 @@ export default function ContactPricing() {
                             </div>
                         </div>
                     </section>
-                </div>
+                    <GoogleReviews />                </div>
             </MainLayout>
         </>
     );

@@ -1,3 +1,4 @@
+import GoogleReviews from '@/Components/GoogleReviews';
 import PackagePaymentGate, { type PackageSlug } from '@/Components/PackagePaymentGate';
 import MainLayout from '@/Layouts/MainLayout';
 import { Head, Link } from '@inertiajs/react';
@@ -440,6 +441,10 @@ export default function Services() {
                                 ))}
                             </div>
                         </div>
+                    </div>
+
+                    <div className="relative mx-auto max-w-7xl px-3 pb-12 sm:px-4">
+                        <GoogleReviews />
                     </div>
                 </div>
             </MainLayout>
