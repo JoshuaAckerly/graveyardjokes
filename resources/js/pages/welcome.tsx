@@ -301,11 +301,11 @@ export default function Home(): JSX.Element {
                     >
                         <div className="text-center">
                             <h2 className="text-3xl font-bold text-white sm:text-4xl">What I Offer</h2>
-                            <p className="mt-4 text-lg text-white/70">Full-stack web development services tailored to your creative vision</p>
+                            <p className="mt-4 text-lg text-white/70">Social media management, SEO, and website management — your full online presence, handled</p>
                         </div>
 
-                        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-                            {/* Service Card 1 */}
+                        <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+                            {/* Service Card 1 — Social Media */}
                             <motion.div
                                 initial={{ opacity: 0, y: 20 }}
                                 whileInView={{ opacity: 1, y: 0 }}
@@ -313,15 +313,15 @@ export default function Home(): JSX.Element {
                                 transition={{ duration: 0.6, delay: 0.1 }}
                                 className="rounded-lg bg-white/5 p-6 text-left shadow-lg transition-all hover:bg-white/10"
                             >
-                                <div className="mb-4 text-3xl">🎨</div>
-                                <h3 className="mb-2 text-xl font-semibold text-white">Custom Website Development</h3>
+                                <div className="mb-4 text-3xl">📱</div>
+                                <h3 className="mb-2 text-xl font-semibold text-white">Social Media Management</h3>
                                 <p className="text-sm text-white/70">
-                                    Fully custom websites built from scratch using modern technologies like Laravel, React, and TypeScript. Your
-                                    unique vision, perfectly realized.
+                                    Grow and manage your social presence across platforms. Content planning, scheduling, engagement, and analytics —
+                                    so you stay consistent without the stress.
                                 </p>
                             </motion.div>
 
-                            {/* Service Card 2 */}
+                            {/* Service Card 2 — SEO */}
                             <motion.div
                                 initial={{ opacity: 0, y: 20 }}
                                 whileInView={{ opacity: 1, y: 0 }}
@@ -329,15 +329,15 @@ export default function Home(): JSX.Element {
                                 transition={{ duration: 0.6, delay: 0.2 }}
                                 className="rounded-lg bg-white/5 p-6 text-left shadow-lg transition-all hover:bg-white/10"
                             >
-                                <div className="mb-4 text-3xl">🎭</div>
-                                <h3 className="mb-2 text-xl font-semibold text-white">Portfolio & Showcase Sites</h3>
+                                <div className="mb-4 text-3xl">📈</div>
+                                <h3 className="mb-2 text-xl font-semibold text-white">SEO Management</h3>
                                 <p className="text-sm text-white/70">
-                                    Beautiful, responsive portfolios that highlight your work. Perfect for entrepreneurs, consultants, creatives, and
-                                    independent brands who need to make an impact.
+                                    Improve your search rankings with strategic keyword targeting, on-page optimization, technical audits, and
+                                    regular reporting. Get found by the right audience.
                                 </p>
                             </motion.div>
 
-                            {/* Service Card 3 */}
+                            {/* Service Card 3 — Website Management */}
                             <motion.div
                                 initial={{ opacity: 0, y: 20 }}
                                 whileInView={{ opacity: 1, y: 0 }}
@@ -345,84 +345,20 @@ export default function Home(): JSX.Element {
                                 transition={{ duration: 0.6, delay: 0.3 }}
                                 className="rounded-lg bg-white/5 p-6 text-left shadow-lg transition-all hover:bg-white/10"
                             >
-                                <div className="mb-4 text-3xl">🛒</div>
-                                <h3 className="mb-2 text-xl font-semibold text-white">E-commerce & Merch Stores</h3>
+                                <div className="mb-4 text-3xl">🌐</div>
+                                <h3 className="mb-2 text-xl font-semibold text-white">Website Management</h3>
                                 <p className="text-sm text-white/70">
-                                    Sell your products or services online with a custom e-commerce solution. Integrated payments, inventory
-                                    management, and seamless checkout.
+                                    Keep your site secure, fast, and up to date. Maintenance, content updates, performance monitoring, and backups —
+                                    so your website always works when it matters.
                                 </p>
                             </motion.div>
 
-                            {/* Service Card 4 */}
-                            <motion.div
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true, amount: 0.2 }}
-                                transition={{ duration: 0.6, delay: 0.4 }}
-                                className="rounded-lg bg-white/5 p-6 text-left shadow-lg transition-all hover:bg-white/10"
-                            >
-                                <div className="mb-4 text-3xl">🚀</div>
-                                <h3 className="mb-2 text-xl font-semibold text-white">Landing Pages & Promo Sites</h3>
-                                <p className="text-sm text-white/70">
-                                    High-converting landing pages for launches, campaigns, events, or product releases. Fast, focused, and optimized
-                                    to drive action.
-                                </p>
-                            </motion.div>
-
-                            {/* Service Card 5 */}
-                            <motion.div
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true, amount: 0.2 }}
-                                transition={{ duration: 0.6, delay: 0.5 }}
-                                className="rounded-lg bg-white/5 p-6 text-left shadow-lg transition-all hover:bg-white/10"
-                            >
-                                <div className="mb-4 text-3xl">⚙️</div>
-                                <h3 className="mb-2 text-xl font-semibold text-white">API Development & Integrations</h3>
-                                <p className="text-sm text-white/70">
-                                    Custom APIs and third-party integrations. Connect your site to Spotify, Shopify, payment processors, analytics,
-                                    and more.
-                                </p>
-                            </motion.div>
-
-                            {/* Service Card 6 */}
-                            <motion.div
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true, amount: 0.2 }}
-                                transition={{ duration: 0.6, delay: 0.6 }}
-                                className="rounded-lg bg-white/5 p-6 text-left shadow-lg transition-all hover:bg-white/10"
-                            >
-                                <div className="mb-4 text-3xl">🔧</div>
-                                <h3 className="mb-2 text-xl font-semibold text-white">Maintenance & Support</h3>
-                                <p className="text-sm text-white/70">
-                                    Keep your site running smoothly with ongoing maintenance, updates, security patches, and technical support. You
-                                    create, I maintain.
-                                </p>
-                            </motion.div>
-
-                            {/* Service Card 7 — SEO */}
-                            <motion.div
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true, amount: 0.2 }}
-                                transition={{ duration: 0.6, delay: 0.7 }}
-                                className="rounded-lg bg-white/5 p-6 text-left shadow-lg transition-all hover:bg-white/10 md:col-span-2 lg:col-span-1"
-                            >
-                                <div className="mb-4 text-3xl">📈</div>
-                                <h3 className="mb-2 text-xl font-semibold text-white">SEO & Search Visibility</h3>
-                                <p className="text-sm text-white/70">
-                                    Every site ships with on-page SEO built in — clean semantic markup, fast load times, structured data, and
-                                    mobile-first indexing. Need more? Add a dedicated SEO package with keyword research, meta strategy, and monthly
-                                    reporting so your audience can actually find you.
-                                </p>
-                            </motion.div>
                         </div>
 
                         <div className="pt-8 text-center">
                             <p className="text-lg text-white/80">
-                                All services include mobile-responsive design, on-page SEO, structured data markup, and lightning-fast performance —
-                                so you rank higher from day one.
+                                All packages include dedicated support, transparent reporting, and hands-on management — so your online presence
+                                keeps working for you every day.
                             </p>
                         </div>
                     </motion.section>
@@ -440,20 +376,15 @@ export default function Home(): JSX.Element {
                                 <div className="flex h-28 w-28 shrink-0 items-center justify-center rounded-full bg-white/10 text-5xl">👨‍💻</div>
                                 <div>
                                     <h2 className="text-2xl font-bold text-white sm:text-3xl">Hey, I'm Joshua</h2>
-                                    <p className="mt-1 text-sm font-medium text-[var(--primary)]">Founder & Developer — Graveyard Jokes Studios</p>
+                                    <p className="mt-1 text-sm font-medium text-[var(--primary)]">Founder — Graveyard Jokes Studios</p>
                                     <p className="mt-4 text-base text-white/70">
-                                        I'm a full-stack developer based in Cheektowaga, New York, and I built Graveyard Jokes Studios to give
-                                        entrepreneurs, creatives, and independent brands access to professional-quality websites without the agency
-                                        price tag.
+                                        I'm based in Cheektowaga, New York, and I built Graveyard Jokes Studios to give small businesses,
+                                        entrepreneurs, and independent brands access to professional social media management, SEO, and website
+                                        management — without the agency price tag.
                                     </p>
                                     <p className="mt-3 text-base text-white/70">
-                                        I handle everything — design, code, deployment, and ongoing support. No handoffs, no middlemen. You deal
-                                        directly with the person writing the code, which means faster communication and work that actually reflects
-                                        your vision.
-                                    </p>
-                                    <p className="mt-3 text-base text-white/70">
-                                        My stack of choice is Laravel, React, and TypeScript — built for speed, security, and scalability from day
-                                        one.
+                                        I handle everything — strategy, content, optimization, and ongoing support. No handoffs, no middlemen. You
+                                        deal directly with me, which means faster communication and results that actually reflect your goals.
                                     </p>
                                     <div className="mt-6 flex flex-wrap gap-3">
                                         <a

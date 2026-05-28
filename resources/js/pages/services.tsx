@@ -21,13 +21,13 @@ export default function Services() {
             slug: 'starter',
             title: 'Starter Package',
             price: 799,
-            description: 'Perfect for startups launching their first website',
+            description: 'Get your social presence off the ground on 3 platforms',
             features: [
-                'Single-page responsive website',
-                'Contact form integration',
-                'Social media links',
-                'Mobile-optimized design',
-                'Basic SEO setup',
+                'Account setup & branding on 3 platforms',
+                'Monthly content calendar',
+                'Up to 12 posts per month',
+                'Caption writing & hashtag strategy',
+                'Monthly analytics report',
                 '1 month of support',
             ],
             link: '/services/starter',
@@ -37,16 +37,15 @@ export default function Services() {
             slug: 'professional',
             title: 'Professional Package',
             price: 1499,
-            description: 'Ideal for growing startups needing more features',
+            description: 'Full management across 5 platforms with content creation',
             features: [
-                'Multi-page custom website',
-                'Blog or news section',
-                'Photo/video galleries',
-                'Newsletter integration',
-                'Advanced SEO optimization',
-                'Analytics setup',
+                'Everything in Starter',
+                'Up to 20 posts per month',
+                'Reels & short-form video content',
+                'Audience engagement & community management',
+                'Competitor analysis',
+                'Bi-weekly performance reports',
                 '3 months of support',
-                'Social media integration',
             ],
             link: '/services/professional',
             popular: true,
@@ -55,16 +54,16 @@ export default function Services() {
             slug: 'premium',
             title: 'Premium Package',
             price: 2499,
-            description: 'Full-featured solution for established startups',
+            description: 'Complete social media strategy with ad campaigns',
             features: [
                 'Everything in Professional',
-                'E-commerce/merch store',
-                'Event calendar & ticketing',
-                'Content/media streaming',
-                'Custom animations & effects',
-                'API integrations',
+                'Paid ad campaign management',
+                'Influencer outreach',
+                '7+ platform coverage',
+                'Weekly strategy calls',
+                'Monthly brand story content',
                 '6 months of support',
-                'Priority updates',
+                'Priority response',
             ],
             link: '/services/premium',
             popular: false,
@@ -82,16 +81,16 @@ export default function Services() {
     }> = [
         {
             slug: 'design-starter',
-            title: 'Design - Starter',
+            title: 'SEO - Starter',
             price: 799,
-            description: 'Wireframes and design mockups',
+            description: 'Keyword research and on-page SEO foundations',
             features: [
-                'Wireframes for 3-5 pages',
-                'Design mockups in Figma',
-                'Brand color palette',
-                'Mobile-first design',
-                'Icon set suggestions',
-                '2 rounds of revisions',
+                'Keyword research (up to 10 keywords)',
+                'On-page SEO audit',
+                'Meta title & description optimization',
+                'Google Search Console setup',
+                'Sitemap & robots.txt review',
+                'Monthly traffic report',
                 '1 month of support',
             ],
             link: '/services/design-starter',
@@ -99,17 +98,17 @@ export default function Services() {
         },
         {
             slug: 'design-professional',
-            title: 'Design - Professional',
+            title: 'SEO - Professional',
             price: 999,
-            description: 'Complete UI design system & prototypes',
+            description: 'Full on-page and technical SEO with competitor analysis',
             features: [
                 'Everything in Starter',
-                'Custom UI design system',
-                'Interactive prototypes',
-                'Design specifications',
-                'Full brand guidelines',
-                'Logo design or refinement',
-                '4 rounds of revisions',
+                'Technical SEO audit & fixes',
+                'Backlink analysis',
+                'Content optimization for 10 pages',
+                'Local SEO setup',
+                'Competitor keyword analysis',
+                'Bi-monthly reporting',
                 '3 months of support',
             ],
             link: '/services/design-professional',
@@ -117,17 +116,17 @@ export default function Services() {
         },
         {
             slug: 'design-premium',
-            title: 'Design - Premium',
+            title: 'SEO - Premium',
             price: 1799,
-            description: 'Premium brand identity & ongoing consultation',
+            description: 'Full SEO strategy with backlink building and content planning',
             features: [
                 'Everything in Professional',
-                'Premium brand identity',
-                'Custom illustrations',
-                'Animation design specs',
-                'Accessibility audit',
-                'Design tokens & CSS system',
-                'Unlimited revisions',
+                '20+ keyword targets',
+                'Backlink building campaign',
+                'Full content strategy & planning',
+                'Structured data / schema markup',
+                'Monthly strategy call',
+                'Quarterly SEO audit',
                 '6 months of support',
             ],
             link: '/services/design-premium',
@@ -146,17 +145,16 @@ export default function Services() {
     }> = [
         {
             slug: 'modernization-starter',
-            title: 'Modernization - Starter',
+            title: 'Website Mgmt - Starter',
             price: 799,
-            description: 'Visual refresh & performance updates',
+            description: 'Monthly maintenance & security keeping your site healthy',
             features: [
-                'Visual design refresh',
-                'Navigation updates',
-                'Mobile responsiveness',
-                'Performance optimization',
-                'SEO recommendations',
-                'Security scan',
-                'Improvement roadmap',
+                'Monthly security scans',
+                'Plugin & dependency updates',
+                'Uptime monitoring',
+                'Weekly automated backups',
+                'Bug fixes (up to 2/month)',
+                'Monthly health report',
                 '2 weeks of support',
             ],
             link: '/services/modernization-starter',
@@ -164,17 +162,16 @@ export default function Services() {
         },
         {
             slug: 'modernization-professional',
-            title: 'Modernization - Professional',
+            title: 'Website Mgmt - Professional',
             price: 1299,
-            description: 'Complete design & code refresh',
+            description: 'Full maintenance plus performance tuning and content updates',
             features: [
                 'Everything in Starter',
-                'Design & code refresh',
-                'Modern framework update',
-                'Accessibility compliance',
-                'Advanced SEO',
-                'Performance monitoring',
+                'Performance optimization',
+                'Content updates (up to 5/month)',
                 'Image optimization',
+                'Analytics review & reporting',
+                'Priority support',
                 '1 month of support',
             ],
             link: '/services/modernization-professional',
@@ -182,17 +179,17 @@ export default function Services() {
         },
         {
             slug: 'modernization-premium',
-            title: 'Modernization - Premium',
+            title: 'Website Mgmt - Premium',
             price: 1999,
-            description: 'Full tech migration & strategic consultation',
+            description: 'Unlimited updates, strategy consultation & growth reviews',
             features: [
                 'Everything in Professional',
-                'Full tech stack migration',
-                'Advanced security',
-                'Analytics & monitoring setup',
-                'CMS & automation setup',
-                'Backup & recovery setup',
-                'Quarterly reviews',
+                'Unlimited content updates',
+                'A/B testing',
+                'E-commerce support',
+                'Advanced security & firewall',
+                'Monthly strategy consultation',
+                'Quarterly site redesign review',
                 '3 months of support',
             ],
             link: '/services/modernization-premium',
@@ -207,16 +204,16 @@ export default function Services() {
                 <title>Services & Pricing | Graveyard Jokes Studios</title>
                 <meta
                     name="description"
-                    content="Explore GraveyardJokes web design and development services, from custom websites and redesigns to SEO foundations, performance tuning, and support."
+                    content="Graveyard Jokes Studios offers social media management, SEO management, and website management services for small businesses and independent brands."
                 />
-                <meta name="keywords" content="web design packages, pricing, custom websites, startups, small businesses, web development services" />
+                <meta name="keywords" content="social media management, SEO management, website management, small business, online presence, digital marketing services" />
                 <link rel="canonical" href={`${projectUrl}services`} />
 
                 {/* Open Graph */}
                 <meta property="og:title" content="Services & Pricing | Graveyard Jokes Studios" />
                 <meta
                     name="og:description"
-                    content="Explore GraveyardJokes web design and development services, from custom websites and redesigns to SEO foundations, performance tuning, and support."
+                    content="Graveyard Jokes Studios offers social media management, SEO management, and website management services for small businesses and independent brands."
                 />
                 <meta property="og:image" content={`${cdn}/images/aboutBanner.webp`} />
                 <meta property="og:type" content="website" />
@@ -227,7 +224,7 @@ export default function Services() {
                 <meta name="twitter:title" content="Services & Pricing | Graveyard Jokes Studios" />
                 <meta
                     name="twitter:description"
-                    content="Explore GraveyardJokes web design and development services, from custom websites and redesigns to SEO foundations, performance tuning, and support."
+                    content="Graveyard Jokes Studios offers social media management, SEO management, and website management services for small businesses and independent brands."
                 />
                 <meta name="twitter:image" content={`${cdn}/images/aboutBanner.webp`} />
             </Head>
@@ -261,8 +258,8 @@ export default function Services() {
                             animate={{ opacity: 1 }}
                             transition={{ delay: 0.2, duration: 0.6 }}
                         >
-                            Choose the package that fits your needs. All packages include responsive design, modern tech stack, and ongoing support
-                            tailored for startups.
+                            Choose the package that fits your needs. All packages include dedicated support, regular reporting, and hands-on
+                            management tailored for small businesses and independent brands.
                         </motion.p>
                         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3, duration: 0.6 }}>
                             <Link
@@ -276,9 +273,9 @@ export default function Services() {
 
                     {/* Packages Grid */}
                     <div className="relative mx-auto mt-6 max-w-7xl px-3 pb-20 sm:mt-8 sm:px-4 sm:pb-32" style={{ maxWidth: '100vw' }}>
-                        {/* Website Development Section */}
+                        {/* Social Media Management Section */}
                         <div className="mb-16">
-                            <h2 className="mb-8 text-center text-2xl font-bold text-white sm:text-3xl">Website Development</h2>
+                            <h2 className="mb-8 text-center text-2xl font-bold text-white sm:text-3xl">Social Media Management</h2>
                             <div className="grid grid-cols-1 gap-6 sm:gap-8 md:grid-cols-2 lg:grid-cols-3" style={{ maxWidth: '100%' }}>
                                 {websitePackages.map((pkg) => (
                                     <motion.div
@@ -331,9 +328,9 @@ export default function Services() {
                             </div>
                         </div>
 
-                        {/* Website Design Section */}
+                        {/* SEO Management Section */}
                         <div className="mb-16">
-                            <h2 className="mb-8 text-center text-2xl font-bold text-white sm:text-3xl">Website Design Services</h2>
+                            <h2 className="mb-8 text-center text-2xl font-bold text-white sm:text-3xl">SEO Management</h2>
                             <div className="grid grid-cols-1 gap-6 sm:gap-8 md:grid-cols-2 lg:grid-cols-3" style={{ maxWidth: '100%' }}>
                                 {designPackages.map((pkg) => (
                                     <motion.div
@@ -386,9 +383,9 @@ export default function Services() {
                             </div>
                         </div>
 
-                        {/* Website Modernization Section */}
+                        {/* Website Management Section */}
                         <div>
-                            <h2 className="mb-8 text-center text-2xl font-bold text-white sm:text-3xl">Website Modernization Services</h2>
+                            <h2 className="mb-8 text-center text-2xl font-bold text-white sm:text-3xl">Website Management</h2>
                             <div className="grid grid-cols-1 gap-6 sm:gap-8 md:grid-cols-2 lg:grid-cols-3" style={{ maxWidth: '100%' }}>
                                 {modernizationPackages.map((pkg) => (
                                     <motion.div
