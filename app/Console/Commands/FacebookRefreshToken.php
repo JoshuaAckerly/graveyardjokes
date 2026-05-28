@@ -21,7 +21,7 @@ class FacebookRefreshToken extends Command
 
     protected $description = 'Exchange a short-lived Facebook token for a long-lived Page Access Token.';
 
-    private const GRAPH_URL = 'https://graph.facebook.com/v19.0';
+    private const GRAPH_URL = 'https://graph.facebook.com/v22.0';
 
     public function handle(): int
     {

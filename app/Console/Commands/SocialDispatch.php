@@ -47,7 +47,9 @@ class SocialDispatch extends Command
             return self::SUCCESS;
         }
 
-        $client = new Client(['timeout' => 15]);
+        // Timeout raised to 60 s to accommodate Instagram's container-status polling
+        // (up to 10 polls × 3 s interval + HTTP round-trips per poll).
+        $client = new Client(['timeout' => 60]);
 
         foreach ($posts as $post) {
             try {

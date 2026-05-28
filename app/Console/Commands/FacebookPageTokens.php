@@ -25,7 +25,7 @@ class FacebookPageTokens extends Command
 
     protected $description = 'List Facebook pages you manage and their Page Access Tokens.';
 
-    private const GRAPH_URL = 'https://graph.facebook.com/v19.0';
+    private const GRAPH_URL = 'https://graph.facebook.com/v22.0';
 
     public function handle(): int
     {

@@ -6,7 +6,7 @@ use GuzzleHttp\Client;
 
 class FacebookService
 {
-    private const GRAPH_URL = 'https://graph.facebook.com/v19.0';
+    private const GRAPH_URL = 'https://graph.facebook.com/v22.0';
 
     public function __construct(private Client $client) {}
 
