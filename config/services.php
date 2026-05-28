@@ -69,4 +69,14 @@ return [
         'location_name' => env('GOOGLE_BUSINESS_LOCATION_NAME'),
     ],
 
+    'google_places' => [
+        'api_key'  => env('GOOGLE_PLACES_API_KEY'),
+        'place_id' => env('GOOGLE_PLACES_PLACE_ID'),
+    ],
+
+    'facebook' => [
+        'app_id'     => env('FACEBOOK_APP_ID'),
+        'app_secret' => env('FACEBOOK_APP_SECRET'),
+    ],
+
 ];

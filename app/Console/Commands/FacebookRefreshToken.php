@@ -33,8 +33,8 @@ class FacebookRefreshToken extends Command
             return self::FAILURE;
         }
 
-        $appId = (string) env('FACEBOOK_APP_ID');
-        $appSecret = (string) env('FACEBOOK_APP_SECRET');
+        $appId = (string) config('services.facebook.app_id');
+        $appSecret = (string) config('services.facebook.app_secret');
 
         if (empty($appId) || empty($appSecret)) {
             $this->error('FACEBOOK_APP_ID and FACEBOOK_APP_SECRET must be set in .env.');
