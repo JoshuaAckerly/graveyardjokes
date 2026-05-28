@@ -60,7 +60,7 @@ function ReviewCard({ review }: { review: Review }) {
             {review.comment && <p className="text-sm leading-relaxed text-gray-300">{review.comment}</p>}
 
             {review.reviewReply && (
-                <div className="rounded border-l-2 border-(--primary) bg-(--foreground)/50 pl-3 pt-2 pb-2 pr-3">
+                <div className="rounded border-l-2 border-(--primary) bg-(--foreground)/50 pt-2 pr-3 pb-2 pl-3">
                     <p className="mb-1 text-xs font-semibold text-(--primary)">Response from owner</p>
                     <p className="text-xs text-gray-400">{review.reviewReply.comment}</p>
                 </div>
@@ -71,7 +71,7 @@ function ReviewCard({ review }: { review: Review }) {
 
 function SkeletonCard() {
     return (
-        <div className="flex flex-col gap-3 rounded-lg border border-(--accent) bg-(--card) p-5 shadow-sm animate-pulse">
+        <div className="flex animate-pulse flex-col gap-3 rounded-lg border border-(--accent) bg-(--card) p-5 shadow-sm">
             <div className="flex items-center gap-3">
                 <div className="h-10 w-10 rounded-full bg-gray-700" />
                 <div className="flex flex-col gap-1.5">

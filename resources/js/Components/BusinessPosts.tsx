@@ -18,14 +18,7 @@ function PostCard({ post }: { post: LocalPost }) {
 
     return (
         <div className="flex flex-col overflow-hidden rounded-lg border border-(--accent) bg-(--card) shadow-sm">
-            {thumb && (
-                <img
-                    src={thumb}
-                    alt=""
-                    className="h-40 w-full object-cover"
-                    loading="lazy"
-                />
-            )}
+            {thumb && <img src={thumb} alt="" className="h-40 w-full object-cover" loading="lazy" />}
             <div className="flex flex-1 flex-col gap-3 p-4">
                 <p className="text-xs text-gray-500">{date}</p>
                 <p className="flex-1 text-sm leading-relaxed text-gray-300">{post.summary}</p>
@@ -46,7 +39,7 @@ function PostCard({ post }: { post: LocalPost }) {
 
 function SkeletonCard() {
     return (
-        <div className="flex flex-col overflow-hidden rounded-lg border border-(--accent) bg-(--card) animate-pulse">
+        <div className="flex animate-pulse flex-col overflow-hidden rounded-lg border border-(--accent) bg-(--card)">
             <div className="h-40 w-full bg-gray-700" />
             <div className="flex flex-col gap-3 p-4">
                 <div className="h-2.5 w-20 rounded bg-gray-700" />

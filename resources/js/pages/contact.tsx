@@ -332,7 +332,6 @@ export default function ContactPricing() {
                     <section className="mb-10">
                         <BusinessHours />
                     </section>
-
                     <section>
                         <h3 className="mb-3 text-xl font-semibold text-white">Frequently Asked Questions</h3>
                         <div className="space-y-4">
@@ -361,7 +360,8 @@ export default function ContactPricing() {
                             </div>
                         </div>
                     </section>
-                    <GoogleReviews />                </div>
+                    <GoogleReviews />{' '}
+                </div>
             </MainLayout>
         </>
     );
