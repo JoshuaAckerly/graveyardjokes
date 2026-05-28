@@ -28,12 +28,12 @@ class GoogleBusinessAuthorize extends Command
         $scope = 'https://www.googleapis.com/auth/business.manage';
 
         $authUrl = 'https://accounts.google.com/o/oauth2/v2/auth?'.http_build_query([
-            'client_id'             => $clientId,
-            'redirect_uri'          => $redirectUri,
-            'response_type'         => 'code',
-            'scope'                 => $scope,
-            'access_type'           => 'offline',
-            'prompt'                => 'consent',
+            'client_id' => $clientId,
+            'redirect_uri' => $redirectUri,
+            'response_type' => 'code',
+            'scope' => $scope,
+            'access_type' => 'offline',
+            'prompt' => 'consent',
         ]);
 
         $this->newLine();
@@ -57,11 +57,11 @@ class GoogleBusinessAuthorize extends Command
         $this->info('Exchanging authorization code for tokens...');
 
         $response = Http::asForm()->post('https://oauth2.googleapis.com/token', [
-            'client_id'     => $clientId,
+            'client_id' => $clientId,
             'client_secret' => $clientSecret,
-            'code'          => trim($code),
-            'redirect_uri'  => $redirectUri,
-            'grant_type'    => 'authorization_code',
+            'code' => trim($code),
+            'redirect_uri' => $redirectUri,
+            'grant_type' => 'authorization_code',
         ]);
 
         if (! $response->successful()) {

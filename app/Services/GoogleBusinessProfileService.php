@@ -9,14 +9,21 @@ use Illuminate\Support\Facades\Http;
 class GoogleBusinessProfileService
 {
     private const TOKEN_URL = 'https://oauth2.googleapis.com/token';
+
     private const REVIEWS_BASE = 'https://mybusiness.googleapis.com/v4';
+
     private const INFO_BASE = 'https://mybusinessbusinessinformation.googleapis.com/v1';
+
     private const POSTS_BASE = 'https://mybusiness.googleapis.com/v4';
+
     private const TOKEN_CACHE_KEY = 'google_business_access_token';
 
     private string $clientId;
+
     private string $clientSecret;
+
     private string $refreshToken;
+
     private string $locationName;
 
     public function __construct()
@@ -39,10 +46,10 @@ class GoogleBusinessProfileService
         }
 
         $response = Http::asForm()->post(self::TOKEN_URL, [
-            'client_id'     => $this->clientId,
+            'client_id' => $this->clientId,
             'client_secret' => $this->clientSecret,
             'refresh_token' => $this->refreshToken,
-            'grant_type'    => 'refresh_token',
+            'grant_type' => 'refresh_token',
         ]);
 
         $token = $response->json('access_token');

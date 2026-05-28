@@ -70,10 +70,10 @@ class BusinessProfileController extends Controller
     public function createPost(Request $request): JsonResponse
     {
         $validated = $request->validate([
-            'topicType'             => ['required', 'string', 'in:STANDARD,EVENT,OFFER,ALERT'],
-            'summary'               => ['required', 'string', 'max:1500'],
+            'topicType' => ['required', 'string', 'in:STANDARD,EVENT,OFFER,ALERT'],
+            'summary' => ['required', 'string', 'max:1500'],
             'callToAction.actionType' => ['nullable', 'string'],
-            'callToAction.url'      => ['nullable', 'url'],
+            'callToAction.url' => ['nullable', 'url'],
         ]);
 
         try {
