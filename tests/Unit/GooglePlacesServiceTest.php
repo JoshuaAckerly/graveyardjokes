@@ -16,7 +16,7 @@ class GooglePlacesServiceTest extends TestCase
         parent::setUp();
 
         config([
-            'services.google_places.api_key'  => 'test-api-key',
+            'services.google_places.api_key' => 'test-api-key',
             'services.google_places.place_id' => 'ChIJtest123',
         ]);
 
@@ -54,9 +54,9 @@ class GooglePlacesServiceTest extends TestCase
             'maps.googleapis.com/*' => Http::response([
                 'status' => 'OK',
                 'result' => [
-                    'rating'              => 4.8,
-                    'user_ratings_total'  => 42,
-                    'reviews'             => [
+                    'rating' => 4.8,
+                    'user_ratings_total' => 42,
+                    'reviews' => [
                         ['author_name' => 'Alice', 'rating' => 5, 'text' => 'Great!'],
                     ],
                 ],
@@ -108,11 +108,11 @@ class GooglePlacesServiceTest extends TestCase
             'maps.googleapis.com/*' => Http::response([
                 'status' => 'OK',
                 'result' => [
-                    'name'              => 'Graveyard Jokes',
-                    'rating'            => 4.9,
+                    'name' => 'Graveyard Jokes',
+                    'rating' => 4.9,
                     'formatted_address' => '26 Wells Ave, Cheektowaga, NY 14227',
-                    'opening_hours'     => [
-                        'open_now'     => true,
+                    'opening_hours' => [
+                        'open_now' => true,
                         'weekday_text' => ['Monday: 9:00 AM – 5:00 PM'],
                     ],
                 ],

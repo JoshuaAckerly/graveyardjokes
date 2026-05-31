@@ -60,10 +60,10 @@ class BusinessProfileControllerTest extends TestCase
         /** @var Expectation $er */
         $er = $places->shouldReceive('getReviews');
         $er->once()->andReturn([
-            'averageRating'    => 4.7,
+            'averageRating' => 4.7,
             'totalReviewCount' => 8,
-            'reviews'          => [],
-            'source'           => 'places',
+            'reviews' => [],
+            'source' => 'places',
         ]);
         $this->app->instance(GooglePlacesService::class, $places);
 
@@ -134,11 +134,11 @@ class BusinessProfileControllerTest extends TestCase
         /** @var Expectation $ei */
         $ei = $places->shouldReceive('getBusinessInfo');
         $ei->once()->andReturn([
-            'name'         => 'Graveyard Jokes',
-            'rating'       => 4.9,
+            'name' => 'Graveyard Jokes',
+            'rating' => 4.9,
             'openingHours' => null,
-            'address'      => '26 Wells Ave, Cheektowaga, NY 14227',
-            'source'       => 'places',
+            'address' => '26 Wells Ave, Cheektowaga, NY 14227',
+            'source' => 'places',
         ]);
         $this->app->instance(GooglePlacesService::class, $places);
 

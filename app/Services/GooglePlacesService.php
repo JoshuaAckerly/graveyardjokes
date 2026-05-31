@@ -37,8 +37,8 @@ class GooglePlacesService
     {
         $response = Http::get(self::BASE_URL, [
             'place_id' => $this->placeId,
-            'fields'   => 'rating,user_ratings_total,reviews',
-            'key'      => $this->apiKey,
+            'fields' => 'rating,user_ratings_total,reviews',
+            'key' => $this->apiKey,
         ]);
 
         if (! $response instanceof Response || ! $response->successful()) {
@@ -57,10 +57,10 @@ class GooglePlacesService
         $result = is_array($data['result'] ?? null) ? $data['result'] : [];
 
         return [
-            'averageRating'    => is_float($result['rating'] ?? null) || is_int($result['rating'] ?? null) ? $result['rating'] : null,
+            'averageRating' => is_float($result['rating'] ?? null) || is_int($result['rating'] ?? null) ? $result['rating'] : null,
             'totalReviewCount' => is_int($result['user_ratings_total'] ?? null) ? $result['user_ratings_total'] : 0,
-            'reviews'          => is_array($result['reviews'] ?? null) ? $result['reviews'] : [],
-            'source'           => 'places',
+            'reviews' => is_array($result['reviews'] ?? null) ? $result['reviews'] : [],
+            'source' => 'places',
         ];
     }
 
@@ -73,8 +73,8 @@ class GooglePlacesService
     {
         $response = Http::get(self::BASE_URL, [
             'place_id' => $this->placeId,
-            'fields'   => 'name,rating,opening_hours,formatted_address',
-            'key'      => $this->apiKey,
+            'fields' => 'name,rating,opening_hours,formatted_address',
+            'key' => $this->apiKey,
         ]);
 
         if (! $response instanceof Response || ! $response->successful()) {
@@ -93,11 +93,11 @@ class GooglePlacesService
         $result = is_array($data['result'] ?? null) ? $data['result'] : [];
 
         return [
-            'name'         => is_string($result['name'] ?? null) ? $result['name'] : null,
-            'rating'       => is_float($result['rating'] ?? null) || is_int($result['rating'] ?? null) ? $result['rating'] : null,
+            'name' => is_string($result['name'] ?? null) ? $result['name'] : null,
+            'rating' => is_float($result['rating'] ?? null) || is_int($result['rating'] ?? null) ? $result['rating'] : null,
             'openingHours' => is_array($result['opening_hours'] ?? null) ? $result['opening_hours'] : null,
-            'address'      => is_string($result['formatted_address'] ?? null) ? $result['formatted_address'] : null,
-            'source'       => 'places',
+            'address' => is_string($result['formatted_address'] ?? null) ? $result['formatted_address'] : null,
+            'source' => 'places',
         ];
     }
 }
