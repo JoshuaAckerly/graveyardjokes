@@ -1,0 +1,65 @@
+name: Weekly Security Audit
+
+on:
+  schedule:
+    - cron: '0 9 * * 1'   # Every Monday at 09:00 UTC
+  workflow_dispatch:
+
+jobs:
+  audit:
+    name: Security Audit
+    runs-on: ubuntu-latest
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          tools: composer:v2
+
+      - name: Install dependencies
+        run: |
+          npm ci
+          composer install --no-interaction --prefer-dist --optimize-autoloader
+
+      - name: NPM audit
+        id: npm_audit
+        run: npm audit --audit-level=moderate 2>&1 | tee /tmp/npm-audit.txt; echo "exit=${PIPESTATUS[0]}" >> $GITHUB_OUTPUT
+        continue-on-error: true
+
+      - name: Composer audit
+        id: composer_audit
+        run: composer audit 2>&1 | tee /tmp/composer-audit.txt; echo "exit=${PIPESTATUS[0]}" >> $GITHUB_OUTPUT
+        continue-on-error: true
+
+      - name: Report results
+        run: |
+          NPM_EXIT="${{ steps.npm_audit.outputs.exit }}"
+          COMPOSER_EXIT="${{ steps.composer_audit.outputs.exit }}"
+
+          echo "## NPM Audit"
+          cat /tmp/npm-audit.txt
+
+          echo ""
+          echo "## Composer Audit"
+          cat /tmp/composer-audit.txt
+
+          if [ "$NPM_EXIT" != "0" ] || [ "$COMPOSER_EXIT" != "0" ]; then
+            echo ""
+            echo "❌ Vulnerabilities found — review audit output above."
+            exit 1
+          fi
+
+          echo ""
+          echo "✅ No vulnerabilities found."

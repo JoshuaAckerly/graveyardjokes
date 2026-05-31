@@ -1,0 +1,48 @@
+name: Production Uptime Check
+
+on:
+  schedule:
+    - cron: '0 8 * * *'   # Daily at 08:00 UTC
+  workflow_dispatch:
+
+jobs:
+  uptime:
+    name: Check Production Sites
+    runs-on: ubuntu-latest
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
+    steps:
+      - name: Check all production subdomains
+        run: |
+          SITES=(
+            "https://graveyardjokes.com"
+            "https://hollowpress.graveyardjokes.com"
+            "https://lunarblood.graveyardjokes.com"
+            "https://synthveil.graveyardjokes.com"
+            "https://thevelvetpulse.graveyardjokes.com"
+            "https://velvetradio.graveyardjokes.com"
+            "https://noteleks.graveyardjokes.com"
+          )
+
+          FAILED=()
+
+          for site in "${SITES[@]}"; do
+            status=$(curl -o /dev/null -s -w "%{http_code}" --max-time 15 "$site" || echo "000")
+            if [[ "$status" =~ ^(200|301|302)$ ]]; then
+              echo "✅ $site → $status"
+            else
+              echo "❌ $site → $status"
+              FAILED+=("$site ($status)")
+            fi
+          done
+
+          if [ ${#FAILED[@]} -gt 0 ]; then
+            echo ""
+            echo "FAILURES:"
+            for f in "${FAILED[@]}"; do echo "  - $f"; done
+            exit 1
+          fi
+
+          echo ""
+          echo "All sites healthy."
