@@ -4,13 +4,17 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Services\GoogleBusinessProfileService;
+use App\Services\GooglePlacesService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 
 class BusinessProfileController extends Controller
 {
-    public function __construct(private GoogleBusinessProfileService $service) {}
+    public function __construct(
+        private GoogleBusinessProfileService $service,
+        private GooglePlacesService $places,
+    ) {}
 
     public function reviews(): JsonResponse
     {
@@ -21,6 +25,18 @@ class BusinessProfileController extends Controller
 
             return response()->json($data);
         } catch (\RuntimeException $e) {
+            if ($this->places->isConfigured()) {
+                try {
+                    $data = Cache::remember('places_reviews', 1800, function () {
+                        return $this->places->getReviews();
+                    });
+
+                    return response()->json($data);
+                } catch (\RuntimeException) {
+                    // fall through to 503
+                }
+            }
+
             return response()->json(['error' => 'Unable to fetch reviews'], 503);
         }
     }
@@ -34,6 +50,18 @@ class BusinessProfileController extends Controller
 
             return response()->json($data);
         } catch (\RuntimeException $e) {
+            if ($this->places->isConfigured()) {
+                try {
+                    $data = Cache::remember('places_info', 21600, function () {
+                        return $this->places->getBusinessInfo();
+                    });
+
+                    return response()->json($data);
+                } catch (\RuntimeException) {
+                    // fall through to 503
+                }
+            }
+
             return response()->json(['error' => 'Unable to fetch business info'], 503);
         }
     }
@@ -53,6 +81,7 @@ class BusinessProfileController extends Controller
 
     public function replyToReview(Request $request, string $reviewId): JsonResponse
     {
+        /** @var array{comment: string} $validated */
         $validated = $request->validate([
             'comment' => ['required', 'string', 'max:4096'],
         ]);
@@ -77,6 +106,7 @@ class BusinessProfileController extends Controller
         ]);
 
         try {
+            /** @var array<string, mixed> $validated */
             $data = $this->service->createPost($validated);
             Cache::forget('gbp_posts');
 
