@@ -36,6 +36,11 @@
 
 ---
 
+## Automation
+- [ ] Add Dependabot (`.github/dependabot.yml`) for npm + composer automated dependency PRs
+- [ ] Add weekly scheduled production uptime check workflow (curl all subdomains, fail on non-200)
+- [ ] Add weekly scheduled security audit workflow (npm audit + composer audit, open issue on findings)
+
 ## Completed Items
 
 ### Testing ✅
