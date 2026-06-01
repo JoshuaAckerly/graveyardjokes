@@ -6,7 +6,7 @@ import { createRoot } from 'react-dom/client';
 import { initializeTheme } from './hooks/use-appearance';
 
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
-const resolvablePages = import.meta.glob(['./pages/**/*.tsx', '!./pages/**/__tests__/**', '!./pages/**/*.test.tsx', '!./pages/**/*.spec.tsx']);
+const resolvablePages = import.meta.glob<any>(['./pages/**/*.tsx', '!./pages/**/__tests__/**', '!./pages/**/*.test.tsx', '!./pages/**/*.spec.tsx']);
 
 createInertiaApp({
     title: (title) => (title ? `${title} - ${appName}` : appName),

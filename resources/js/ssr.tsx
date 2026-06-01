@@ -5,7 +5,7 @@ import ReactDOMServer from 'react-dom/server';
 import { type RouteName, route } from 'ziggy-js';
 
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
-const resolvablePages = import.meta.glob(['./pages/**/*.tsx', '!./pages/**/__tests__/**', '!./pages/**/*.test.tsx', '!./pages/**/*.spec.tsx']);
+const resolvablePages = import.meta.glob<any>(['./pages/**/*.tsx', '!./pages/**/__tests__/**', '!./pages/**/*.test.tsx', '!./pages/**/*.spec.tsx']);
 
 createServer(
     (page) =>

@@ -137,7 +137,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
 
-    <title inertia>{{ config('app.name', 'Laravel') }}</title>
+    <title data-inertia>{{ config('app.name', 'Laravel') }}</title>
 
     @php
         // Build an absolute canonical URL without query strings.
