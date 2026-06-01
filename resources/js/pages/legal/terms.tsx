@@ -17,7 +17,7 @@ const Terms: React.FC = () => {
             <div title="Terms of Service" className="mx-auto max-w-4xl space-y-4 bg-gray-900 p-6 text-white">
                 <h1 className="text-2xl font-bold">Terms of Service</h1>
                 <p>
-                    <strong>Effective Date:</strong> March 25, 2026
+                    <strong>Effective Date:</strong> May 31, 2026
                 </p>
 
                 <p>
@@ -79,24 +79,51 @@ const Terms: React.FC = () => {
 
                 <h2 className="text-xl font-semibold">5. External Links</h2>
                 <p>
-                    This site may link to third-party services including Fiverr, YouTube, Instagram, and others. We are not responsible for the
-                    content or privacy practices of those sites.
+                    This site may link to third-party services including YouTube, Instagram, and others. We are not responsible for the content or
+                    privacy practices of those sites.
                 </p>
 
-                <h2 className="text-xl font-semibold">6. Contact and Services</h2>
+                <h2 className="text-xl font-semibold">6. Refund Policy (Contract Work)</h2>
+                <p>
+                    All contracted work is governed by a project agreement. Our general refund policy is as follows:
+                </p>
+                <ul className="ml-6 list-inside list-disc">
+                    <li>
+                        <strong>Full refund</strong> if no work has begun and no project materials have been delivered.
+                    </li>
+                    <li>
+                        <strong>Partial refund</strong> based on milestone completion — the percentage of work delivered is non-refundable.
+                    </li>
+                    <li>
+                        <strong>No refund</strong> once work has been completed and approved by the client.
+                    </li>
+                    <li>
+                        <strong>Deposits are non-refundable</strong> unless otherwise agreed in writing prior to project start.
+                    </li>
+                </ul>
+                <p>
+                    We aim to resolve concerns through revisions and support before refunds are discussed. All refund requests must be submitted in
+                    writing to{' '}
+                    <a href="mailto:joshua@graveyardjokes.com" className="text-blue-600 underline">
+                        joshua@graveyardjokes.com
+                    </a>
+                    .
+                </p>
+
+                <h2 className="text-xl font-semibold">7. Contact and Services</h2>
                 <p>
                     This site serves as a portfolio and contact point. Any business inquiries or service discussions should be made through the
-                    contact form or email. Terms for any contracted work would be agreed upon separately.
+                    contact form or email. Terms for any contracted work would be agreed upon separately in a project agreement.
                 </p>
 
-                <h2 className="text-xl font-semibold">7. Messaging and Notifications</h2>
+                <h2 className="text-xl font-semibold">8. Messaging and Notifications</h2>
                 <p>
                     Registered users may receive in-app notifications and messages delivered directly to their account inbox. By creating an account,
                     you consent to receiving in-app messages from us. You may mark messages as read or dismiss them through the notification
                     interface. You may not use any messaging feature to send unsolicited communications or to harass others.
                 </p>
 
-                <h2 className="text-xl font-semibold">8. Modifications</h2>
+                <h2 className="text-xl font-semibold">9. Modifications</h2>
                 <p>We may update these Terms at any time. Continued use of the site after changes means you accept the new Terms.</p>
             </div>
         </>
