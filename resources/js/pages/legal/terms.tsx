@@ -84,9 +84,7 @@ const Terms: React.FC = () => {
                 </p>
 
                 <h2 className="text-xl font-semibold">6. Refund Policy (Contract Work)</h2>
-                <p>
-                    All contracted work is governed by a project agreement. Our general refund policy is as follows:
-                </p>
+                <p>All contracted work is governed by a project agreement. Our general refund policy is as follows:</p>
                 <ul className="ml-6 list-inside list-disc">
                     <li>
                         <strong>Full refund</strong> if no work has begun and no project materials have been delivered.
