@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4beed8294af662f672ab476abe2e16e2",
+    "content-hash": "6aa005a313a90d8668c24e704a1286cd",
     "packages": [
         {
             "name": "brick/math",
@@ -645,16 +645,16 @@
         },
         {
             "name": "google/analytics-data",
-            "version": "v0.23.3",
+            "version": "v0.24.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/php-analytics-data.git",
-                "reference": "7c043b2b26ab15bcc579122fe16244d61a48ed93"
+                "reference": "dbfc4ed4b41dcda544b23c15b09b36970fe21189"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/php-analytics-data/zipball/7c043b2b26ab15bcc579122fe16244d61a48ed93",
-                "reference": "7c043b2b26ab15bcc579122fe16244d61a48ed93",
+                "url": "https://api.github.com/repos/googleapis/php-analytics-data/zipball/dbfc4ed4b41dcda544b23c15b09b36970fe21189",
+                "reference": "dbfc4ed4b41dcda544b23c15b09b36970fe21189",
                 "shasum": ""
             },
             "require": {
@@ -689,22 +689,22 @@
             ],
             "description": "Google Analytics Data Client for PHP",
             "support": {
-                "source": "https://github.com/googleapis/php-analytics-data/tree/v0.23.3"
+                "source": "https://github.com/googleapis/php-analytics-data/tree/v0.24.0"
             },
-            "time": "2026-03-17T23:07:39+00:00"
+            "time": "2026-05-04T19:26:03+00:00"
         },
         {
             "name": "google/auth",
-            "version": "v1.50.1",
+            "version": "v1.50.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/google-auth-library-php.git",
-                "reference": "870c17ee3a1d73338d39a9ffa77a700ba77f5a83"
+                "reference": "58788f86d47e59de692c0dae0bb0c006bd0b6018"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/google-auth-library-php/zipball/870c17ee3a1d73338d39a9ffa77a700ba77f5a83",
-                "reference": "870c17ee3a1d73338d39a9ffa77a700ba77f5a83",
+                "url": "https://api.github.com/repos/googleapis/google-auth-library-php/zipball/58788f86d47e59de692c0dae0bb0c006bd0b6018",
+                "reference": "58788f86d47e59de692c0dae0bb0c006bd0b6018",
                 "shasum": ""
             },
             "require": {
@@ -751,9 +751,9 @@
             "support": {
                 "docs": "https://cloud.google.com/php/docs/reference/auth/latest",
                 "issues": "https://github.com/googleapis/google-auth-library-php/issues",
-                "source": "https://github.com/googleapis/google-auth-library-php/tree/v1.50.1"
+                "source": "https://github.com/googleapis/google-auth-library-php/tree/v1.50.2"
             },
-            "time": "2026-03-18T20:03:29+00:00"
+            "time": "2026-05-29T19:22:31+00:00"
         },
         {
             "name": "google/common-protos",
