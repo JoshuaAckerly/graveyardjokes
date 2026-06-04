@@ -16,24 +16,23 @@ class ContactPageTest extends TestCase
         $response = $this->get('/contact');
 
         $response->assertStatus(200);
-        // The page is rendered via Inertia; extract the JSON from the data-page attribute
+        // Inertia v3 embeds the page payload in a <script data-page="app" type="application/json">
+        // tag rather than a data-page attribute on the #app div.
         $html = (string) $response->getContent();
 
-        // Load into DOM and find the #app div
         $dom = new \DOMDocument;
-        // Suppress warnings from invalid HTML fragments
-        // Suppress warnings and cast result to bool to satisfy phpstan
         @(bool) $dom->loadHTML($html);
-        $app = $dom->getElementById('app');
-        $this->assertNotNull($app, 'Could not find #app element in response HTML');
+        $xpath = new \DOMXPath($dom);
 
-        $dataPage = $app->getAttribute('data-page');
-        $this->assertNotEmpty($dataPage, 'data-page attribute is empty');
+        /** @var \DOMNodeList<\DOMElement> $nodes */
+        $nodes = $xpath->query('//script[@data-page="app"]');
+        $this->assertGreaterThan(0, $nodes->length, 'Could not find <script data-page="app"> element in response HTML');
 
-        // HTML entities are encoded in the attribute; decode before JSON parsing
-        $decoded = html_entity_decode($dataPage, ENT_QUOTES | ENT_HTML5);
-        $json = json_decode($decoded, true);
-        $this->assertIsArray($json, 'data-page did not decode to valid JSON');
+        $dataPage = $nodes->item(0)->textContent;
+        $this->assertNotEmpty($dataPage, 'Inertia page script tag is empty');
+
+        $json = json_decode($dataPage, true);
+        $this->assertIsArray($json, 'Inertia page script did not decode to valid JSON');
         $this->assertEquals('contact', $json['component']);
     }
 }
