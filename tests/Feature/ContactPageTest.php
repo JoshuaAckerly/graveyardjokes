@@ -28,7 +28,10 @@ class ContactPageTest extends TestCase
         $nodes = $xpath->query('//script[@data-page="app"]');
         $this->assertGreaterThan(0, $nodes->length, 'Could not find <script data-page="app"> element in response HTML');
 
-        $dataPage = $nodes->item(0)->textContent;
+        $node = $nodes->item(0);
+        $this->assertNotNull($node, 'Could not retrieve <script data-page="app"> node');
+
+        $dataPage = $node->textContent;
         $this->assertNotEmpty($dataPage, 'Inertia page script tag is empty');
 
         $json = json_decode($dataPage, true);
