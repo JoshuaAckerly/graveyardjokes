@@ -1,11 +1,12 @@
 import { createInertiaApp } from '@inertiajs/react';
 import createServer from '@inertiajs/react/server';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
+import { type ComponentType } from 'react';
 import ReactDOMServer from 'react-dom/server';
 import { type RouteName, route } from 'ziggy-js';
 
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
-const resolvablePages = import.meta.glob<any>(['./pages/**/*.tsx', '!./pages/**/__tests__/**', '!./pages/**/*.test.tsx', '!./pages/**/*.spec.tsx']);
+const resolvablePages = import.meta.glob<{ default: ComponentType }>(['./pages/**/*.tsx', '!./pages/**/__tests__/**', '!./pages/**/*.test.tsx', '!./pages/**/*.spec.tsx']);
 
 createServer(
     (page) =>
