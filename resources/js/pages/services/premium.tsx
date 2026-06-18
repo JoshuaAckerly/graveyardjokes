@@ -151,10 +151,15 @@ export default function PremiumPackage() {
 
                     {/* Social Media Add-On */}
                     <div className="mt-8 rounded-lg border border-white/20 bg-white/5 p-6">
-                        <p className="text-xs font-semibold uppercase tracking-widest text-(--primary)">Optional Add-On</p>
+                        <p className="text-xs font-semibold tracking-widest text-(--primary) uppercase">Optional Add-On</p>
                         <h2 className="mt-2 text-xl font-bold text-white">Add Social Media Management</h2>
-                        <p className="mt-2 text-sm text-white/60">Keep your platforms active and growing every month. Pair with this package from $99/mo.</p>
-                        <Link href="/services/modernization-starter" className="mt-4 inline-flex rounded-md border border-(--primary) px-4 py-2 text-sm font-semibold text-white transition hover:bg-(--primary)">
+                        <p className="mt-2 text-sm text-white/60">
+                            Keep your platforms active and growing every month. Pair with this package from $99/mo.
+                        </p>
+                        <Link
+                            href="/services/modernization-starter"
+                            className="mt-4 inline-flex rounded-md border border-(--primary) px-4 py-2 text-sm font-semibold text-white transition hover:bg-(--primary)"
+                        >
                             View Social Media Plans →
                         </Link>
                     </div>

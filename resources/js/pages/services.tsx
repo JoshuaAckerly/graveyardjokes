@@ -216,7 +216,9 @@ export default function Services() {
                         {/* Web Development & Design Section */}
                         <div className="mb-16">
                             <h2 className="mb-2 text-center text-2xl font-bold text-white sm:text-3xl">Web Development & Design</h2>
-                            <p className="mb-8 text-center text-sm text-white/50">Every package includes both development and design — built and designed by hand, no templates.</p>
+                            <p className="mb-8 text-center text-sm text-white/50">
+                                Every package includes both development and design — built and designed by hand, no templates.
+                            </p>
                             <div className="grid grid-cols-1 gap-6 sm:gap-8 md:grid-cols-2 lg:grid-cols-3" style={{ maxWidth: '100%' }}>
                                 {websitePackages.map((pkg) => (
                                     <motion.div
@@ -272,9 +274,11 @@ export default function Services() {
                         {/* Social Media Management Add-On Section */}
                         <div className="border-t border-white/10 pt-16">
                             <div className="mb-8 text-center">
-                                <p className="text-xs font-semibold uppercase tracking-widest text-(--primary)">Optional Add-On</p>
+                                <p className="text-xs font-semibold tracking-widest text-(--primary) uppercase">Optional Add-On</p>
                                 <h2 className="mt-2 text-2xl font-bold text-white sm:text-3xl">Social Media Management</h2>
-                                <p className="mt-3 text-sm text-white/60">Pair with any package. Keep your platforms active and growing every month.</p>
+                                <p className="mt-3 text-sm text-white/60">
+                                    Pair with any package. Keep your platforms active and growing every month.
+                                </p>
                             </div>
                             <div className="grid grid-cols-1 gap-6 sm:gap-8 md:grid-cols-2 lg:grid-cols-3" style={{ maxWidth: '100%' }}>
                                 {modernizationPackages.map((pkg) => (
