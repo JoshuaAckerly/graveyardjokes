@@ -4,56 +4,52 @@ import { Head, Link } from '@inertiajs/react';
 import { motion } from 'framer-motion';
 import { ArrowLeft, Check } from 'lucide-react';
 
-export default function ModernizationStarterPackage() {
+export default function SocialMediaStarterPackage() {
     const cdn = import.meta.env.VITE_ASSET_URL || '';
 
     const features = [
-        'Visual design refresh',
-        'Navigation & layout updates',
-        'Mobile responsiveness audit',
-        'Performance optimization basics',
-        'SEO recommendations report',
-        'Security vulnerability scan',
-        '2 weeks of support',
-        'Actionable improvement roadmap',
+        '3 platforms managed',
+        '8 posts per month',
+        'Content calendar & scheduling',
+        'Caption writing & hashtag strategy',
+        'Monthly analytics report',
     ];
 
     return (
         <>
             <Head>
-                <title>Website Modernization - Starter Package - $799 | Graveyard Jokes Studios</title>
+                <title>Social Media Management - Starter - $99/mo | Graveyard Jokes Studios</title>
                 <meta
                     name="description"
-                    content="Starter modernization: give your existing website a fresh look. Visual refresh, responsiveness updates, and performance optimization."
+                    content="Starter social media management: consistent posting across 3 platforms every month. Content calendar, captions, hashtags, and monthly reporting."
                 />
-                <meta name="keywords" content="website modernization, website redesign, responsive design, performance optimization, SEO update" />
+                <meta name="keywords" content="social media management, small business social media, content calendar, Instagram management, affordable social media" />
                 <link rel="canonical" href="https://graveyardjokes.com/services/modernization-starter" />
                 {/* Open Graph */}
-                <meta property="og:title" content="Website Modernization - Starter Package - $799 | Graveyard Jokes Studios" />
+                <meta property="og:title" content="Social Media Management - Starter - $99/mo | Graveyard Jokes Studios" />
                 <meta
                     property="og:description"
-                    content="Starter modernization: give your existing website a fresh look. Visual refresh, responsiveness updates, and performance optimization."
+                    content="Starter social media management: consistent posting across 3 platforms every month."
                 />
                 <meta property="og:image" content={`${cdn}/images/aboutBanner.webp`} />
                 <meta property="og:type" content="website" />
                 <meta property="og:url" content="https://graveyardjokes.com/services/modernization-starter" />
                 {/* Twitter */}
                 <meta name="twitter:card" content="summary_large_image" />
-                <meta name="twitter:title" content="Website Modernization - Starter Package - $799 | Graveyard Jokes Studios" />
+                <meta name="twitter:title" content="Social Media Management - Starter - $99/mo | Graveyard Jokes Studios" />
                 <meta
                     name="twitter:description"
-                    content="Starter modernization: give your existing website a fresh look. Visual refresh, responsiveness updates, and performance optimization."
+                    content="Starter social media management: consistent posting across 3 platforms every month."
                 />
                 <meta name="twitter:image" content={`${cdn}/images/aboutBanner.webp`} />
-                {/* Structured Data (JSON-LD) */}
                 <script type="application/ld+json">
                     {`
 {
   "@context": "https://schema.org",
   "@type": "Service",
-  "serviceType": "Web Design",
-  "name": "Website Modernization - Starter",
-  "description": "Modernize your existing website with visual updates, responsiveness fixes, and performance optimization.",
+  "serviceType": "Social Media Management",
+  "name": "Social Media Management - Starter",
+  "description": "Consistent posting across 3 platforms every month with content calendar, captions, and monthly reporting.",
   "provider": {
     "@type": "Organization",
     "name": "GraveYard Jokes Studios Inc.",
@@ -61,7 +57,7 @@ export default function ModernizationStarterPackage() {
   },
   "offers": {
     "@type": "Offer",
-    "price": "799",
+    "price": "99",
     "priceCurrency": "USD",
     "availability": "https://schema.org/InStock"
   },
@@ -83,107 +79,80 @@ export default function ModernizationStarterPackage() {
                         transition={{ duration: 0.5 }}
                         className="rounded-lg border-2 border-(--accent) bg-(--card) p-8"
                     >
-                        <h1 className="mb-2 text-4xl font-bold text-white">Website Modernization</h1>
-                        <p className="mb-6 text-lg text-gray-300">Starter Package</p>
-                        <div className="mb-6">
-                            <span className="text-5xl font-bold text-(--primary)">$799</span>
-                            <p className="mt-2 text-lg text-white/80">
-                                Give your existing website a fresh look with visual refresh and performance improvements.
-                            </p>
+                        <div className="mb-4 flex flex-wrap items-center gap-3">
+                            <h1 className="text-4xl font-bold text-white">Social Media Starter</h1>
+                        </div>
+                        <div className="mb-2 flex items-baseline gap-3">
+                            <span className="text-5xl font-bold text-(--primary)">$99</span>
+                            <span className="text-lg text-white/60">/mo</span>
                         </div>
 
-                        <div className="mb-8">
-                            <h2 className="mb-4 text-2xl font-semibold text-white">What's Included:</h2>
-                            <ul className="space-y-3">
-                                {features.map((feature, index) => (
-                                    <motion.li
-                                        key={index}
-                                        initial={{ opacity: 0, x: -20 }}
-                                        animate={{ opacity: 1, x: 0 }}
-                                        transition={{ delay: index * 0.1 }}
-                                        className="flex items-center gap-3"
-                                    >
-                                        <Check className="h-5 w-5 shrink-0 text-(--primary)" />
-                                        <span className="text-white">{feature}</span>
-                                    </motion.li>
-                                ))}
-                            </ul>
-                        </div>
-
-                        <div className="mb-8">
-                            <h3 className="mb-4 text-xl font-semibold text-white">Perfect For:</h3>
-                            <ul className="space-y-2 text-white/80">
-                                <li>• Websites that feel outdated</li>
-                                <li>• Sites with poor mobile experience</li>
-                                <li>• Quick visual modernization needs</li>
-                                <li>• Performance improvement projects</li>
-                            </ul>
-                        </div>
-
-                        <div className="rounded-lg bg-black/50 p-6">
-                            <h3 className="mb-4 text-xl font-semibold text-white">Ready to Get Started?</h3>
-                            <p className="mb-6 text-white/80">
+                        <p className="mb-8 text-lg text-gray-300">Consistent presence on 3 platforms every month</p>
+                        <h2 className="mb-4 text-2xl font-bold text-white">What's Included:</h2>
+                        <ul className="mb-8 space-y-3">
+                            {features.map((feature, index) => (
+                                <li key={index} className="flex items-start gap-3 text-gray-200">
+                                    <Check className="mt-1 h-6 w-6 shrink-0 text-(--primary)" />
+                                    <span className="text-lg">{feature}</span>
+                                </li>
+                            ))}
+                        </ul>
+                        <div className="border-t border-gray-700 pt-8">
+                            <h2 className="mb-4 text-2xl font-bold text-white">Ready to Get Started?</h2>
+                            <p className="mb-6 text-gray-300">
                                 Complete the short project questionnaire first. Once submitted, payment unlocks instantly for this package.
                             </p>
-                            <div className="min-h-[50px]">
-                                <PackagePaymentGate amount={799} item="Website Modernization - Starter" packageSlug="modernization-starter" />
+                            <div className="mb-6" style={{ minHeight: '45px' }}>
+                                <PackagePaymentGate amount={99} item="Social Media Starter" packageSlug="modernization-starter" />
                             </div>
+                            <p className="text-sm text-gray-400">
+                                Have questions?{' '}
+                                <Link href="/contact" className="text-(--primary) hover:underline">
+                                    Contact us
+                                </Link>
+                            </p>
                         </div>
                     </motion.div>
 
                     <div className="mt-12 space-y-8 pb-8">
                         <section>
-                            <h2 className="mb-3 text-2xl font-bold text-white">About the Website Modernization Starter Package</h2>
+                            <h2 className="mb-3 text-2xl font-bold text-white">About the Social Media Starter</h2>
                             <p className="text-white/70">
-                                The Website Modernization Starter Package from Graveyard Jokes Studios is designed for businesses and artists with
-                                existing websites that feel outdated, load slowly, or perform poorly on mobile devices. For $799, our team conducts a
-                                full assessment of your current site, delivers a visual design refresh, updates navigation and layout to modern
-                                standards, performs a mobile responsiveness audit, applies basic performance optimizations, and provides a detailed
-                                SEO recommendations report along with a security vulnerability scan. You will finish the engagement with an actionable
-                                improvement roadmap and two weeks of dedicated post-project support.
+                                The Social Media Starter from Graveyard Jokes Studios is designed for small businesses and independent brands that need
+                                a consistent, professional presence online without the cost or complexity of a full marketing team. At $99/mo, this
+                                package keeps you posting regularly on 3 platforms — with content that reflects your brand and speaks to your audience.
+                                Everything is handled for you: the calendar, the captions, the hashtags, and the reporting.
                             </p>
                         </section>
                         <section>
-                            <h3 className="mb-3 text-xl font-semibold text-white">Why Website Modernization Matters</h3>
+                            <h3 className="mb-3 text-xl font-semibold text-white">What You Get</h3>
                             <p className="text-white/70">
-                                Search engines, particularly Google, factor page speed, mobile usability, and Core Web Vitals into organic search
-                                rankings. An outdated website with slow load times, unresponsive layouts, or poor navigation is actively penalized in
-                                search results. Beyond SEO, user expectations have shifted — a site that looked acceptable five years ago may now
-                                drive potential customers or fans away within seconds of arrival. Modernization is one of the highest-return
-                                investments a business can make in its digital presence.
-                            </p>
-                        </section>
-                        <section>
-                            <h3 className="mb-3 text-xl font-semibold text-white">What an Actionable Roadmap Means</h3>
-                            <p className="text-white/70">
-                                After completing the core Starter work, we deliver a clear written roadmap listing prioritized improvements for your
-                                site going forward. This roadmap covers design suggestions, technical debt, SEO opportunities, and content strategy
-                                recommendations — giving you a practical plan for continued growth whether you execute it with us or independently.
+                                Each month you get 8 posts scheduled across your 3 chosen platforms, written and formatted for each channel. A content
+                                calendar keeps everything organized so you always know what is going up and when. At the end of the month, you receive
+                                an analytics report showing reach, engagement, and growth — so you can see the work paying off.
                             </p>
                         </section>
                         <section>
                             <h3 className="mb-3 text-xl font-semibold text-white">Frequently Asked Questions</h3>
                             <div className="space-y-4">
                                 <div>
-                                    <p className="font-semibold text-white">Do you need access to my website's backend?</p>
+                                    <p className="font-semibold text-white">Which platforms are included?</p>
                                     <p className="text-white/70">
-                                        For Starter-level work we typically need read access to your site's admin panel and server configuration. We
-                                        work with all major CMS platforms and custom-built sites, and handle access securely.
+                                        You choose any 3 from Instagram, Facebook, X (Twitter), TikTok, or LinkedIn. We set up the content to match
+                                        each platform's format and audience.
                                     </p>
                                 </div>
                                 <div>
-                                    <p className="font-semibold text-white">How is modernization different from a full rebuild?</p>
+                                    <p className="font-semibold text-white">Can I approve posts before they go live?</p>
                                     <p className="text-white/70">
-                                        Modernization updates and improves your existing site while preserving its established content and structure.
-                                        A full rebuild starts from scratch. If your current site has substantial content or brand equity,
-                                        modernization is typically faster and more cost-effective.
+                                        Yes. We share the content calendar with you at the start of each month so you can review and approve
+                                        everything before it is scheduled.
                                     </p>
                                 </div>
                                 <div>
-                                    <p className="font-semibold text-white">Will my site be offline during modernization?</p>
+                                    <p className="font-semibold text-white">Can I upgrade to a higher tier later?</p>
                                     <p className="text-white/70">
-                                        All work is performed on a staging environment first and then deployed in a single controlled transition. Your
-                                        live site remains online throughout the process with zero unplanned downtime.
+                                        Absolutely. You can move up to the Professional or Premium tier at any time as your needs grow.
                                     </p>
                                 </div>
                             </div>

@@ -12,14 +12,14 @@ export default function StarterPackage() {
         'Contact form integration',
         'Social media links',
         'Mobile-optimized design',
-        'Basic SEO setup',
+        'Fast load speeds',
         '1 month of support',
     ];
 
     return (
         <>
             <Head>
-                <title>Starter Package - $799 | Graveyard Jokes Studios</title>
+                <title>Starter Package - $99 | Graveyard Jokes Studios</title>
                 <meta
                     name="description"
                     content="Starter plan for new businesses: responsive web design, core development features, and a clean, launch-ready website at an affordable monthly cost."
@@ -30,7 +30,7 @@ export default function StarterPackage() {
                 />
                 <link rel="canonical" href="https://graveyardjokes.com/services/starter" />
                 {/* Open Graph */}
-                <meta property="og:title" content="Starter Package - $799 | Graveyard Jokes Studios" />
+                <meta property="og:title" content="Starter Package - $99 | Graveyard Jokes Studios" />
                 <meta
                     property="og:description"
                     content="Starter plan for new businesses: responsive web design, core development features, and a clean, launch-ready website at an affordable monthly cost."
@@ -40,7 +40,7 @@ export default function StarterPackage() {
                 <meta property="og:url" content="https://graveyardjokes.com/services/starter" />
                 {/* Twitter */}
                 <meta name="twitter:card" content="summary_large_image" />
-                <meta name="twitter:title" content="Starter Package - $799 | Graveyard Jokes Studios" />
+                <meta name="twitter:title" content="Starter Package - $99 | Graveyard Jokes Studios" />
                 <meta
                     name="twitter:description"
                     content="Starter plan for new businesses: responsive web design, core development features, and a clean, launch-ready website at an affordable monthly cost."
@@ -62,7 +62,7 @@ export default function StarterPackage() {
   },
   "offers": {
     "@type": "Offer",
-    "price": "799",
+    "price": "99",
     "priceCurrency": "USD",
     "availability": "https://schema.org/InStock"
   },
@@ -75,7 +75,7 @@ export default function StarterPackage() {
       { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Contact form integration" } },
       { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Social media links" } },
       { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Mobile-optimized design" } },
-      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Basic SEO setup" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Fast load speeds" } },
       { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "1 month of support" } }
     ]
   }
@@ -119,7 +119,7 @@ export default function StarterPackage() {
                                 Complete the short project questionnaire first. Once submitted, payment unlocks instantly for this package.
                             </p>
                             <div className="mb-6" style={{ minHeight: '45px' }}>
-                                <PackagePaymentGate amount={799} item="Starter Package" packageSlug="starter" />
+                                <PackagePaymentGate amount={99} item="Starter Package" packageSlug="starter" />
                             </div>
                             <p className="text-sm text-gray-400">
                                 Have questions?{' '}
@@ -135,7 +135,7 @@ export default function StarterPackage() {
                             <h2 className="mb-3 text-2xl font-bold text-white">About the Starter Package</h2>
                             <p className="text-white/70">
                                 The Starter Package from Graveyard Jokes Studios is designed for entrepreneurs, musicians, bands, and small business
-                                owners who need a polished, professional online presence without a large upfront investment. At $799, this package
+                                owners who need a polished, professional online presence without a large upfront investment. At $99, this package
                                 delivers a fully responsive, single-page website built from scratch — no page builders, no generic templates. Every
                                 line of code is written specifically for your brand and your audience. Whether you are a musician launching your first
                                 fan page, a local business ready to go digital, or a creative freelancer establishing your portfolio, the Starter
@@ -147,7 +147,7 @@ export default function StarterPackage() {
                             <p className="text-white/70">
                                 Your Starter website includes a mobile-first design that looks great on every device from smartphones to widescreen
                                 desktops. We integrate a functional contact form so visitors can reach you directly, connect your social media
-                                profiles, and set up basic on-page SEO so search engines can index your site from day one. One month of post-launch
+                                profiles, and set up One month of post-launch
                                 support is included to handle any questions, minor adjustments, or technical issues that arise after your site goes
                                 live.
                             </p>
@@ -158,7 +158,7 @@ export default function StarterPackage() {
                                 Graveyard Jokes Studios is a full-service digital agency based in Cheektowaga, New York, specializing in custom
                                 websites for independent artists, musicians, bands, and creative entrepreneurs across the United States. Unlike
                                 agencies that rely on drag-and-drop page builders, every site we build is hand-coded using modern frameworks — meaning
-                                faster load times, better SEO performance, and a unique look that generic templates simply cannot deliver. We work
+                                faster load times, better performance, and a unique look that generic templates simply cannot deliver. We work
                                 closely with every client to translate their vision into a website that genuinely represents their brand.
                             </p>
                         </section>

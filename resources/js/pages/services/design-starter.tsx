@@ -20,7 +20,7 @@ export default function DesignStarterPackage() {
     return (
         <>
             <Head>
-                <title>Website Design - Starter Package - $799 | Graveyard Jokes Studios</title>
+                <title>Website Design - Starter Package - $99 | Graveyard Jokes Studios</title>
                 <meta
                     name="description"
                     content="Starter design package: get professional wireframes and mockups for your website. Perfect for planning your visual direction before development."
@@ -28,7 +28,7 @@ export default function DesignStarterPackage() {
                 <meta name="keywords" content="website design, starter design, wireframes, mockups, UI design, UX design, affordable design" />
                 <link rel="canonical" href="https://graveyardjokes.com/services/design-starter" />
                 {/* Open Graph */}
-                <meta property="og:title" content="Website Design - Starter Package - $799 | Graveyard Jokes Studios" />
+                <meta property="og:title" content="Website Design - Starter Package - $99 | Graveyard Jokes Studios" />
                 <meta
                     property="og:description"
                     content="Starter design package: get professional wireframes and mockups for your website. Perfect for planning your visual direction before development."
@@ -38,7 +38,7 @@ export default function DesignStarterPackage() {
                 <meta property="og:url" content="https://graveyardjokes.com/services/design-starter" />
                 {/* Twitter */}
                 <meta name="twitter:card" content="summary_large_image" />
-                <meta name="twitter:title" content="Website Design - Starter Package - $799 | Graveyard Jokes Studios" />
+                <meta name="twitter:title" content="Website Design - Starter Package - $99 | Graveyard Jokes Studios" />
                 <meta
                     name="twitter:description"
                     content="Starter design package: get professional wireframes and mockups for your website. Perfect for planning your visual direction before development."
@@ -60,7 +60,7 @@ export default function DesignStarterPackage() {
   },
   "offers": {
     "@type": "Offer",
-    "price": "799",
+    "price": "99",
     "priceCurrency": "USD",
     "availability": "https://schema.org/InStock"
   },
@@ -85,7 +85,7 @@ export default function DesignStarterPackage() {
                         <h1 className="mb-2 text-4xl font-bold text-white">Website Design</h1>
                         <p className="mb-6 text-lg text-gray-300">Starter Package</p>
                         <div className="mb-6">
-                            <span className="text-5xl font-bold text-(--primary)">$799</span>
+                            <span className="text-5xl font-bold text-(--primary)">$99</span>
                             <p className="mt-2 text-lg text-white/80">
                                 Professional wireframes and design mockups. Perfect for planning your visual direction before development.
                             </p>
@@ -125,7 +125,7 @@ export default function DesignStarterPackage() {
                                 Complete the short project questionnaire first. Once submitted, payment unlocks instantly for this package.
                             </p>
                             <div className="min-h-[50px]">
-                                <PackagePaymentGate amount={799} item="Website Design - Starter" packageSlug="design-starter" />
+                                <PackagePaymentGate amount={99} item="Website Design - Starter" packageSlug="design-starter" />
                             </div>
                         </div>
                     </motion.div>
@@ -135,7 +135,7 @@ export default function DesignStarterPackage() {
                             <h2 className="mb-3 text-2xl font-bold text-white">About the Website Design Starter Package</h2>
                             <p className="text-white/70">
                                 The Website Design Starter Package from Graveyard Jokes Studios gives you a professional visual foundation for your
-                                website before a single line of code is written. For $799, our design team creates detailed wireframes for three to
+                                website before a single line of code is written. For $99, our design team creates detailed wireframes for three to
                                 five pages, full-color design mockups in Figma, a brand color palette, and typography recommendations that establish a
                                 consistent visual identity across your entire site. You will receive icon set suggestions and two complete rounds of
                                 revisions, so the final designs reflect exactly what you are looking for. This package is ideal for clients who

@@ -9,45 +9,43 @@ export default function ProfessionalPackage() {
 
     const features = [
         'Custom, mobile-friendly website design',
-        'Up to 10 pages (Home, About, Portfolio, Shop, etc.)',
-        'Integrated e-commerce (Shopify, WooCommerce, or Stripe)',
-        'Blog or news section',
+        'Up to 5 pages',
+        'Blog or portfolio section',
         'Mailing list integration (Mailchimp, ConvertKit, etc.)',
         'Social media & business profile links',
         'Contact & booking forms',
-        'Basic SEO optimization',
         'Performance optimization',
-        '1 year of free hosting & support',
+        '3 months of support',
     ];
 
     return (
         <>
             <Head>
-                <title>Professional Website Package - $1,499 | GraveYard Jokes Studios</title>
+                <title>Professional Website Package - $149 | GraveYard Jokes Studios</title>
                 <meta
                     name="description"
-                    content="Professional plan for growing brands: custom design, advanced development, integrations, and conversion-focused improvements that scale results."
+                    content="Professional plan for growing brands: custom multi-page design, advanced integrations, and performance optimization."
                 />
                 <meta
                     name="keywords"
-                    content="professional package, custom website, e-commerce, SEO optimization, mobile-friendly design, web development, small business website"
+                    content="professional package, custom website, multi-page design, web development, small business website"
                 />
                 <link rel="canonical" href="https://graveyardjokes.com/services/professional" />
                 {/* Open Graph */}
-                <meta property="og:title" content="Professional Website Package - $1,499 | GraveYard Jokes Studios" />
+                <meta property="og:title" content="Professional Website Package - $149 | GraveYard Jokes Studios" />
                 <meta
                     property="og:description"
-                    content="Professional plan for growing brands: custom design, advanced development, integrations, and conversion-focused improvements that scale results."
+                    content="Professional plan for growing brands: custom multi-page design, advanced integrations, and performance optimization."
                 />
                 <meta property="og:image" content={`${cdn}/images/aboutBanner.webp`} />
                 <meta property="og:type" content="website" />
                 <meta property="og:url" content="https://graveyardjokes.com/services/professional" />
                 {/* Twitter */}
                 <meta name="twitter:card" content="summary_large_image" />
-                <meta name="twitter:title" content="Professional Website Package - $1,499 | GraveYard Jokes Studios" />
+                <meta name="twitter:title" content="Professional Website Package - $149 | GraveYard Jokes Studios" />
                 <meta
                     name="twitter:description"
-                    content="Professional plan for growing brands: custom design, advanced development, integrations, and conversion-focused improvements that scale results."
+                    content="Professional plan for growing brands: custom multi-page design, advanced integrations, and performance optimization."
                 />
                 <meta name="twitter:image" content={`${cdn}/images/aboutBanner.webp`} />
             </Head>
@@ -66,7 +64,7 @@ export default function ProfessionalPackage() {
                         <div className="mb-4 inline-block rounded-full bg-(--primary) px-4 py-1 text-xs font-bold text-white">MOST POPULAR</div>
                         <h1 className="mb-4 text-4xl font-bold text-white">Professional Package</h1>
                         <div className="mb-6">
-                            <span className="text-5xl font-bold text-(--primary)">$1,499</span>
+                            <span className="text-5xl font-bold text-(--primary)">$149</span>
                         </div>
                         <p className="mb-8 text-lg text-gray-300">Ideal for growing startups needing more features</p>
 
@@ -85,7 +83,7 @@ export default function ProfessionalPackage() {
                                 Complete the short project questionnaire first. Once submitted, payment unlocks instantly for this package.
                             </p>
                             <div className="mb-6" style={{ minHeight: '45px' }}>
-                                <PackagePaymentGate amount={1499} item="Professional Package" packageSlug="professional" />
+                                <PackagePaymentGate amount={149} item="Professional Package" packageSlug="professional" />
                             </div>
                             <p className="text-sm text-gray-400">
                                 Have questions?{' '}
@@ -101,20 +99,15 @@ export default function ProfessionalPackage() {
                             <h2 className="mb-3 text-2xl font-bold text-white">About the Professional Package</h2>
                             <p className="text-white/70">
                                 The Professional Package from Graveyard Jokes Studios is our most popular offering for growing businesses, bands, and
-                                independent artists who need a feature-rich, multi-page website that scales with their success. At $1,499, this
-                                package includes up to ten fully designed and developed pages — covering home, about, portfolio, shop, blog, and
-                                contact. We integrate e-commerce capabilities through Shopify, WooCommerce, or Stripe so you can sell merchandise,
-                                music, or services directly from your site. Mailing list integration, booking forms, and social media connections are
-                                all included, making your website a complete marketing and sales platform from day one.
+                                independent artists who need a feature-rich, multi-page website that scales with their success. At $149, this
+                                package includes up to five fully designed and developed pages — covering home, about, portfolio, shop, blog, and
+                                contact. Mailing list integration, booking forms, and social media connections are all included, making your website a complete online platform from day one.
                             </p>
                         </section>
                         <section>
                             <h3 className="mb-3 text-xl font-semibold text-white">What Makes the Professional Package Different</h3>
                             <p className="text-white/70">
-                                Unlike basic website packages, the Professional tier includes one full year of free hosting and ongoing support. After
-                                your site launches, you have a dedicated team available to handle updates, performance questions, and technical issues
-                                for an entire year at no additional cost. Performance optimization is built into every project, ensuring your pages
-                                load quickly and score well on Core Web Vitals — a key factor in Google search rankings and organic visibility.
+                                The Professional tier includes three months of support after launch. Performance optimization is built into every project, ensuring your pages load quickly and look great on every device.
                             </p>
                         </section>
                         <section>
@@ -137,10 +130,9 @@ export default function ProfessionalPackage() {
                                     </p>
                                 </div>
                                 <div>
-                                    <p className="font-semibold text-white">Is one year of hosting included in the $1,499 price?</p>
+                                    <p className="font-semibold text-white">Is one year of hosting included in the $149 price?</p>
                                     <p className="text-white/70">
-                                        Yes, hosting and support for twelve months are included at no additional charge. After the first year,
-                                        affordable renewal options are available to keep your site running.
+                                        The 3 months of support covers content updates, bug fixes, performance questions, and any tweaks needed after launch. After that, affordable maintenance options are available.
                                     </p>
                                 </div>
                                 <div>

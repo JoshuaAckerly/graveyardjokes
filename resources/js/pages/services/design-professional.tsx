@@ -22,7 +22,7 @@ export default function DesignProfessionalPackage() {
     return (
         <>
             <Head>
-                <title>Website Design - Professional Package - $999 | Graveyard Jokes Studios</title>
+                <title>Website Design - Professional Package - $149 | Graveyard Jokes Studios</title>
                 <meta
                     name="description"
                     content="Professional design package: comprehensive UI design system, interactive prototypes, and complete brand guidelines. Perfect for custom websites."
@@ -30,7 +30,7 @@ export default function DesignProfessionalPackage() {
                 <meta name="keywords" content="professional web design, UI design system, brand guidelines, interactive prototypes, custom design" />
                 <link rel="canonical" href="https://graveyardjokes.com/services/design-professional" />
                 {/* Open Graph */}
-                <meta property="og:title" content="Website Design - Professional Package - $999 | Graveyard Jokes Studios" />
+                <meta property="og:title" content="Website Design - Professional Package - $149 | Graveyard Jokes Studios" />
                 <meta
                     property="og:description"
                     content="Professional design package: comprehensive UI design system, interactive prototypes, and complete brand guidelines. Perfect for custom websites."
@@ -40,7 +40,7 @@ export default function DesignProfessionalPackage() {
                 <meta property="og:url" content="https://graveyardjokes.com/services/design-professional" />
                 {/* Twitter */}
                 <meta name="twitter:card" content="summary_large_image" />
-                <meta name="twitter:title" content="Website Design - Professional Package - $999 | Graveyard Jokes Studios" />
+                <meta name="twitter:title" content="Website Design - Professional Package - $149 | Graveyard Jokes Studios" />
                 <meta
                     name="twitter:description"
                     content="Professional design package: comprehensive UI design system, interactive prototypes, and complete brand guidelines. Perfect for custom websites."
@@ -62,7 +62,7 @@ export default function DesignProfessionalPackage() {
   },
   "offers": {
     "@type": "Offer",
-    "price": "999",
+    "price": "149",
     "priceCurrency": "USD",
     "availability": "https://schema.org/InStock"
   },
@@ -87,7 +87,7 @@ export default function DesignProfessionalPackage() {
                         <h1 className="mb-2 text-4xl font-bold text-white">Website Design</h1>
                         <p className="mb-6 text-lg text-[var(--primary)]">Professional Package — Most Popular</p>
                         <div className="mb-6">
-                            <span className="text-5xl font-bold text-(--primary)">$999</span>
+                            <span className="text-5xl font-bold text-(--primary)">$149</span>
                             <p className="mt-2 text-lg text-white/80">
                                 Comprehensive design system, interactive prototypes, and complete brand guidelines.
                             </p>
@@ -127,7 +127,7 @@ export default function DesignProfessionalPackage() {
                                 Complete the short project questionnaire first. Once submitted, payment unlocks instantly for this package.
                             </p>
                             <div className="min-h-[50px]">
-                                <PackagePaymentGate amount={999} item="Website Design - Professional" packageSlug="design-professional" />
+                                <PackagePaymentGate amount={149} item="Website Design - Professional" packageSlug="design-professional" />
                             </div>
                         </div>
                     </motion.div>
@@ -137,7 +137,7 @@ export default function DesignProfessionalPackage() {
                             <h2 className="mb-3 text-2xl font-bold text-white">About the Website Design Professional Package</h2>
                             <p className="text-white/70">
                                 The Website Design Professional Package from Graveyard Jokes Studios delivers a comprehensive visual and brand system
-                                for businesses and artists who need more than basic mockups. At $999, this package builds on our Starter tier by
+                                for businesses and artists who need more than basic mockups. At $149, this package builds on our Starter tier by
                                 adding a full custom UI design system, interactive prototypes that simulate real user interactions, and a complete
                                 brand guidelines document covering logo usage, typography rules, color systems, and spacing standards. For clients
                                 whose existing logo needs refinement — or who need a new logo designed from scratch — logo work is included. A

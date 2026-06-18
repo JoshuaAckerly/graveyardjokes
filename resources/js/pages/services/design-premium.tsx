@@ -23,7 +23,7 @@ export default function DesignPremiumPackage() {
     return (
         <>
             <Head>
-                <title>Website Design - Premium Package - $1,799 | Graveyard Jokes Studios</title>
+                <title>Website Design - Premium Package - $299 | Graveyard Jokes Studios</title>
                 <meta
                     name="description"
                     content="Premium design package: full brand identity, custom illustrations, accessibility audit, and ongoing design consultation for your website."
@@ -34,7 +34,7 @@ export default function DesignPremiumPackage() {
                 />
                 <link rel="canonical" href="https://graveyardjokes.com/services/design-premium" />
                 {/* Open Graph */}
-                <meta property="og:title" content="Website Design - Premium Package - $1,799 | Graveyard Jokes Studios" />
+                <meta property="og:title" content="Website Design - Premium Package - $299 | Graveyard Jokes Studios" />
                 <meta
                     property="og:description"
                     content="Premium design package: full brand identity, custom illustrations, accessibility audit, and ongoing design consultation for your website."
@@ -44,7 +44,7 @@ export default function DesignPremiumPackage() {
                 <meta property="og:url" content="https://graveyardjokes.com/services/design-premium" />
                 {/* Twitter */}
                 <meta name="twitter:card" content="summary_large_image" />
-                <meta name="twitter:title" content="Website Design - Premium Package - $1,799 | Graveyard Jokes Studios" />
+                <meta name="twitter:title" content="Website Design - Premium Package - $299 | Graveyard Jokes Studios" />
                 <meta
                     name="twitter:description"
                     content="Premium design package: full brand identity, custom illustrations, accessibility audit, and ongoing design consultation for your website."
@@ -66,7 +66,7 @@ export default function DesignPremiumPackage() {
   },
   "offers": {
     "@type": "Offer",
-    "price": "1799",
+    "price": "299",
     "priceCurrency": "USD",
     "availability": "https://schema.org/InStock"
   },
@@ -91,7 +91,7 @@ export default function DesignPremiumPackage() {
                         <h1 className="mb-2 text-4xl font-bold text-white">Website Design</h1>
                         <p className="mb-6 text-lg text-[var(--primary)]">Premium Package</p>
                         <div className="mb-6">
-                            <span className="text-5xl font-bold text-(--primary)">$1,799</span>
+                            <span className="text-5xl font-bold text-(--primary)">$299</span>
                             <p className="mt-2 text-lg text-white/80">
                                 Full brand identity with custom illustrations, accessibility audit, and ongoing design consultation.
                             </p>
@@ -131,7 +131,7 @@ export default function DesignPremiumPackage() {
                                 Complete the short project questionnaire first. Once submitted, payment unlocks instantly for this package.
                             </p>
                             <div className="min-h-[50px]">
-                                <PackagePaymentGate amount={1799} item="Website Design - Premium" packageSlug="design-premium" />
+                                <PackagePaymentGate amount={299} item="Website Design - Premium" packageSlug="design-premium" />
                             </div>
                         </div>
                     </motion.div>
@@ -141,7 +141,7 @@ export default function DesignPremiumPackage() {
                             <h2 className="mb-3 text-2xl font-bold text-white">About the Website Design Premium Package</h2>
                             <p className="text-white/70">
                                 The Website Design Premium Package from Graveyard Jokes Studios is our most comprehensive design offering, built for
-                                organizations that demand a world-class visual identity and an ongoing creative partnership. At $1,799, this package
+                                organizations that demand a world-class visual identity and an ongoing creative partnership. At $299, this package
                                 includes everything in Professional — then goes further with a premium brand identity package, custom illustration
                                 design, animation design specifications, a complete accessibility audit with WCAG 2.1 compliance recommendations,
                                 design tokens, and a full CSS system. Unlimited revisions over sixty days and six months of ongoing design support
