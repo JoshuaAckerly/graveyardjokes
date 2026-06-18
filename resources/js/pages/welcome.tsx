@@ -215,7 +215,6 @@ export default function Home(): JSX.Element {
                                         'Clean, modern design',
                                         'Mobile-optimized',
                                         'Fast load speeds',
-                                        'Basic SEO',
                                         'Contact form + call-to-action setup',
                                         'Domain + hosting assistance',
                                     ].map((feature) => (
@@ -260,10 +259,9 @@ export default function Home(): JSX.Element {
                                     <div className="mb-3 text-3xl">🛒</div>
                                     <h3 className="text-lg font-semibold text-white">Optional Add-Ons</h3>
                                     <ul className="mt-3 space-y-1 text-sm text-white/70">
-                                        <li>E-commerce setup — starting at $499</li>
                                         <li>Logo design</li>
-                                        <li>SEO packages</li>
                                         <li>Monthly maintenance</li>
+                                        <li>Social media management</li>
                                     </ul>
                                 </motion.div>
                             </div>
@@ -302,7 +300,7 @@ export default function Home(): JSX.Element {
                         <div className="text-center">
                             <h2 className="text-3xl font-bold text-white sm:text-4xl">What I Offer</h2>
                             <p className="mt-4 text-lg text-white/70">
-                                Social media management, SEO, and website management — your full online presence, handled
+                                Web development, design, and social media management — your full online presence, handled
                             </p>
                         </div>
 
@@ -323,7 +321,7 @@ export default function Home(): JSX.Element {
                                 </p>
                             </motion.div>
 
-                            {/* Service Card 2 — SEO */}
+                            {/* Service Card 2 — Web Design */}
                             <motion.div
                                 initial={{ opacity: 0, y: 20 }}
                                 whileInView={{ opacity: 1, y: 0 }}
@@ -331,11 +329,11 @@ export default function Home(): JSX.Element {
                                 transition={{ duration: 0.6, delay: 0.2 }}
                                 className="rounded-lg bg-white/5 p-6 text-left shadow-lg transition-all hover:bg-white/10"
                             >
-                                <div className="mb-4 text-3xl">📈</div>
-                                <h3 className="mb-2 text-xl font-semibold text-white">SEO Management</h3>
+                                <div className="mb-4 text-3xl">🎨</div>
+                                <h3 className="mb-2 text-xl font-semibold text-white">Web Design</h3>
                                 <p className="text-sm text-white/70">
-                                    Improve your search rankings with strategic keyword targeting, on-page optimization, technical audits, and regular
-                                    reporting. Get found by the right audience.
+                                    Pixel-perfect, responsive UI/UX design that reflects your brand. Wireframes, high-fidelity mockups, and
+                                    brand-aligned component systems built to convert.
                                 </p>
                             </motion.div>
 
@@ -380,7 +378,7 @@ export default function Home(): JSX.Element {
                                     <p className="mt-1 text-sm font-medium text-[var(--primary)]">Founder — Graveyard Jokes Studios</p>
                                     <p className="mt-4 text-base text-white/70">
                                         I'm based in Cheektowaga, New York, and I built Graveyard Jokes Studios to give small businesses,
-                                        entrepreneurs, and independent brands access to professional social media management, SEO, and website
+                                        entrepreneurs, and independent brands access to professional web development, design, and social media
                                         management — without the agency price tag.
                                     </p>
                                     <p className="mt-3 text-base text-white/70">
