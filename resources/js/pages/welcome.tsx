@@ -207,7 +207,7 @@ export default function Home(): JSX.Element {
                                 <div className="mb-4 text-3xl">💀</div>
                                 <h3 className="text-xl font-semibold text-white">Full Website Build</h3>
                                 <div className="mt-2 flex items-baseline gap-2">
-                                    <span className="text-3xl font-bold text-[var(--primary)] sm:text-4xl">$799</span>
+                                    <span className="text-3xl font-bold text-[var(--primary)] sm:text-4xl">$299</span>
                                 </div>
                                 <p className="mt-1 text-xs text-white/50">Up to 5 pages</p>
                                 <ul className="mt-4 space-y-2">
@@ -259,9 +259,8 @@ export default function Home(): JSX.Element {
                                     <div className="mb-3 text-3xl">🛒</div>
                                     <h3 className="text-lg font-semibold text-white">Optional Add-Ons</h3>
                                     <ul className="mt-3 space-y-1 text-sm text-white/70">
-                                        <li>Logo design</li>
                                         <li>Monthly maintenance</li>
-                                        <li>Social media management</li>
+                                        <li>Social media management — from $299/mo</li>
                                     </ul>
                                 </motion.div>
                             </div>
