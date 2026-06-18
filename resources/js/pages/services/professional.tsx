@@ -26,10 +26,7 @@ export default function ProfessionalPackage() {
                     name="description"
                     content="Professional plan for growing brands: custom multi-page design, advanced integrations, and performance optimization."
                 />
-                <meta
-                    name="keywords"
-                    content="professional package, custom website, multi-page design, web development, small business website"
-                />
+                <meta name="keywords" content="professional package, custom website, multi-page design, web development, small business website" />
                 <link rel="canonical" href="https://graveyardjokes.com/services/professional" />
                 {/* Open Graph */}
                 <meta property="og:title" content="Professional Website Package - $149 | GraveYard Jokes Studios" />
@@ -99,15 +96,17 @@ export default function ProfessionalPackage() {
                             <h2 className="mb-3 text-2xl font-bold text-white">About the Professional Package</h2>
                             <p className="text-white/70">
                                 The Professional Package from Graveyard Jokes Studios is our most popular offering for growing businesses, bands, and
-                                independent artists who need a feature-rich, multi-page website that scales with their success. At $149, this
-                                package includes up to five fully designed and developed pages — covering home, about, portfolio, shop, blog, and
-                                contact. Mailing list integration, booking forms, and social media connections are all included, making your website a complete online platform from day one.
+                                independent artists who need a feature-rich, multi-page website that scales with their success. At $149, this package
+                                includes up to five fully designed and developed pages — covering home, about, portfolio, shop, blog, and contact.
+                                Mailing list integration, booking forms, and social media connections are all included, making your website a complete
+                                online platform from day one.
                             </p>
                         </section>
                         <section>
                             <h3 className="mb-3 text-xl font-semibold text-white">What Makes the Professional Package Different</h3>
                             <p className="text-white/70">
-                                The Professional tier includes three months of support after launch. Performance optimization is built into every project, ensuring your pages load quickly and look great on every device.
+                                The Professional tier includes three months of support after launch. Performance optimization is built into every
+                                project, ensuring your pages load quickly and look great on every device.
                             </p>
                         </section>
                         <section>
@@ -132,7 +131,8 @@ export default function ProfessionalPackage() {
                                 <div>
                                     <p className="font-semibold text-white">Is one year of hosting included in the $149 price?</p>
                                     <p className="text-white/70">
-                                        The 3 months of support covers content updates, bug fixes, performance questions, and any tweaks needed after launch. After that, affordable maintenance options are available.
+                                        The 3 months of support covers content updates, bug fixes, performance questions, and any tweaks needed after
+                                        launch. After that, affordable maintenance options are available.
                                     </p>
                                 </div>
                                 <div>

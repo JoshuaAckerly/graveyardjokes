@@ -23,24 +23,21 @@ export default function SocialMediaStarterPackage() {
                     name="description"
                     content="Starter social media management: consistent posting across 3 platforms every month. Content calendar, captions, hashtags, and monthly reporting."
                 />
-                <meta name="keywords" content="social media management, small business social media, content calendar, Instagram management, affordable social media" />
+                <meta
+                    name="keywords"
+                    content="social media management, small business social media, content calendar, Instagram management, affordable social media"
+                />
                 <link rel="canonical" href="https://graveyardjokes.com/services/modernization-starter" />
                 {/* Open Graph */}
                 <meta property="og:title" content="Social Media Management - Starter - $99/mo | Graveyard Jokes Studios" />
-                <meta
-                    property="og:description"
-                    content="Starter social media management: consistent posting across 3 platforms every month."
-                />
+                <meta property="og:description" content="Starter social media management: consistent posting across 3 platforms every month." />
                 <meta property="og:image" content={`${cdn}/images/aboutBanner.webp`} />
                 <meta property="og:type" content="website" />
                 <meta property="og:url" content="https://graveyardjokes.com/services/modernization-starter" />
                 {/* Twitter */}
                 <meta name="twitter:card" content="summary_large_image" />
                 <meta name="twitter:title" content="Social Media Management - Starter - $99/mo | Graveyard Jokes Studios" />
-                <meta
-                    name="twitter:description"
-                    content="Starter social media management: consistent posting across 3 platforms every month."
-                />
+                <meta name="twitter:description" content="Starter social media management: consistent posting across 3 platforms every month." />
                 <meta name="twitter:image" content={`${cdn}/images/aboutBanner.webp`} />
                 <script type="application/ld+json">
                     {`
@@ -118,10 +115,10 @@ export default function SocialMediaStarterPackage() {
                         <section>
                             <h2 className="mb-3 text-2xl font-bold text-white">About the Social Media Starter</h2>
                             <p className="text-white/70">
-                                The Social Media Starter from Graveyard Jokes Studios is designed for small businesses and independent brands that need
-                                a consistent, professional presence online without the cost or complexity of a full marketing team. At $99/mo, this
-                                package keeps you posting regularly on 3 platforms — with content that reflects your brand and speaks to your audience.
-                                Everything is handled for you: the calendar, the captions, the hashtags, and the reporting.
+                                The Social Media Starter from Graveyard Jokes Studios is designed for small businesses and independent brands that
+                                need a consistent, professional presence online without the cost or complexity of a full marketing team. At $99/mo,
+                                this package keeps you posting regularly on 3 platforms — with content that reflects your brand and speaks to your
+                                audience. Everything is handled for you: the calendar, the captions, the hashtags, and the reporting.
                             </p>
                         </section>
                         <section>

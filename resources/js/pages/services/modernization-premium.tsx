@@ -24,16 +24,25 @@ export default function SocialMediaPremiumPackage() {
                     name="description"
                     content="Premium social media management: complete strategy with unlimited posts, ad campaigns, influencer outreach, and weekly strategy calls."
                 />
-                <meta name="keywords" content="social media management, social media advertising, influencer outreach, ad campaigns, full social media strategy" />
+                <meta
+                    name="keywords"
+                    content="social media management, social media advertising, influencer outreach, ad campaigns, full social media strategy"
+                />
                 <link rel="canonical" href="https://graveyardjokes.com/services/modernization-premium" />
                 <meta property="og:title" content="Social Media Management - Premium - $199/mo | Graveyard Jokes Studios" />
-                <meta property="og:description" content="Complete social media strategy with unlimited posts, ad campaigns, influencer outreach, and weekly calls." />
+                <meta
+                    property="og:description"
+                    content="Complete social media strategy with unlimited posts, ad campaigns, influencer outreach, and weekly calls."
+                />
                 <meta property="og:image" content={`${cdn}/images/aboutBanner.webp`} />
                 <meta property="og:type" content="website" />
                 <meta property="og:url" content="https://graveyardjokes.com/services/modernization-premium" />
                 <meta name="twitter:card" content="summary_large_image" />
                 <meta name="twitter:title" content="Social Media Management - Premium - $199/mo | Graveyard Jokes Studios" />
-                <meta name="twitter:description" content="Complete social media strategy with unlimited posts, ad campaigns, and influencer outreach." />
+                <meta
+                    name="twitter:description"
+                    content="Complete social media strategy with unlimited posts, ad campaigns, and influencer outreach."
+                />
                 <meta name="twitter:image" content={`${cdn}/images/aboutBanner.webp`} />
             </Head>
 

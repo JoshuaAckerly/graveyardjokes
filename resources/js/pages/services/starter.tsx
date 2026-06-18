@@ -147,9 +147,8 @@ export default function StarterPackage() {
                             <p className="text-white/70">
                                 Your Starter website includes a mobile-first design that looks great on every device from smartphones to widescreen
                                 desktops. We integrate a functional contact form so visitors can reach you directly, connect your social media
-                                profiles, and set up One month of post-launch
-                                support is included to handle any questions, minor adjustments, or technical issues that arise after your site goes
-                                live.
+                                profiles, and set up One month of post-launch support is included to handle any questions, minor adjustments, or
+                                technical issues that arise after your site goes live.
                             </p>
                         </section>
                         <section>
@@ -158,8 +157,8 @@ export default function StarterPackage() {
                                 Graveyard Jokes Studios is a full-service digital agency based in Cheektowaga, New York, specializing in custom
                                 websites for independent artists, musicians, bands, and creative entrepreneurs across the United States. Unlike
                                 agencies that rely on drag-and-drop page builders, every site we build is hand-coded using modern frameworks — meaning
-                                faster load times, better performance, and a unique look that generic templates simply cannot deliver. We work
-                                closely with every client to translate their vision into a website that genuinely represents their brand.
+                                faster load times, better performance, and a unique look that generic templates simply cannot deliver. We work closely
+                                with every client to translate their vision into a website that genuinely represents their brand.
                             </p>
                         </section>
                         <section>

@@ -24,10 +24,16 @@ export default function SocialMediaProfessionalPackage() {
                     name="description"
                     content="Professional social media management: full management across 5 platforms with stories, reels, community engagement, and bi-weekly reporting."
                 />
-                <meta name="keywords" content="social media management, professional social media, Instagram reels, community management, content creation" />
+                <meta
+                    name="keywords"
+                    content="social media management, professional social media, Instagram reels, community management, content creation"
+                />
                 <link rel="canonical" href="https://graveyardjokes.com/services/modernization-professional" />
                 <meta property="og:title" content="Social Media Management - Professional - $149/mo | Graveyard Jokes Studios" />
-                <meta property="og:description" content="Full management across 5 platforms with stories, reels, community engagement, and bi-weekly reporting." />
+                <meta
+                    property="og:description"
+                    content="Full management across 5 platforms with stories, reels, community engagement, and bi-weekly reporting."
+                />
                 <meta property="og:image" content={`${cdn}/images/aboutBanner.webp`} />
                 <meta property="og:type" content="website" />
                 <meta property="og:url" content="https://graveyardjokes.com/services/modernization-professional" />
@@ -86,10 +92,10 @@ export default function SocialMediaProfessionalPackage() {
                         <section>
                             <h2 className="mb-3 text-2xl font-bold text-white">About the Social Media Professional</h2>
                             <p className="text-white/70">
-                                The Professional tier is built for brands that are ready to show up consistently and build a real audience. At $149/mo,
-                                you get full management across 5 platforms — including Stories and Reels content that keeps you visible in the algorithm.
-                                Community engagement is handled for you, so comments and messages get responses and your audience feels seen. Bi-weekly
-                                analytics reports keep you informed on what is working and where to push harder.
+                                The Professional tier is built for brands that are ready to show up consistently and build a real audience. At
+                                $149/mo, you get full management across 5 platforms — including Stories and Reels content that keeps you visible in
+                                the algorithm. Community engagement is handled for you, so comments and messages get responses and your audience feels
+                                seen. Bi-weekly analytics reports keep you informed on what is working and where to push harder.
                             </p>
                         </section>
                         <section>
