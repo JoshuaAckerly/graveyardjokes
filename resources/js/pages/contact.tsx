@@ -321,12 +321,11 @@ export default function ContactPricing() {
                     <section className="mb-10">
                         <h3 className="mb-3 text-xl font-semibold text-white">Our Services</h3>
                         <p className="text-white/70">
-                            We offer custom website design and development, website modernization and redesign, UI/UX design systems, brand identity
-                            design, e-commerce integration, SEO optimization, and ongoing maintenance and support. Every project is built from scratch
-                            using modern frameworks — no page builders, no pre-made templates. We specialize in serving the music industry, including
-                            custom band websites, musician portfolio sites, streaming and merch integrations, event calendars, and fan engagement
-                            platforms. We also serve small businesses, creative agencies, and independent professionals who need a high-quality web
-                            presence that performs as well as it looks.
+                            We offer custom web development and design — built and designed from scratch, no templates. Every package includes both
+                            development and Photoshop design work, from single-page starter sites to full multi-page platforms with animations, API
+                            integrations, and streaming support. We also offer Social Media Management as a monthly add-on, starting at $99/mo. We
+                            specialize in serving musicians, bands, and independent artists, and we work with small businesses and creative
+                            entrepreneurs across the United States.
                         </p>
                     </section>
                     <section className="mb-10">

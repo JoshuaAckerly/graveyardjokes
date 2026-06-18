@@ -8,11 +8,12 @@ export default function ProfessionalPackage() {
     const cdn = import.meta.env.VITE_ASSET_URL || '';
 
     const features = [
-        'Custom, mobile-friendly website design',
+        'Everything in Starter',
         'Up to 5 pages',
+        'Custom UI design system',
+        'Full brand guidelines',
         'Blog or portfolio section',
-        'Mailing list integration (Mailchimp, ConvertKit, etc.)',
-        'Social media & business profile links',
+        'Mailing list integration',
         'Contact & booking forms',
         'Performance optimization',
         '3 months of support',
@@ -90,6 +91,16 @@ export default function ProfessionalPackage() {
                             </p>
                         </div>
                     </motion.div>
+
+                    {/* Social Media Add-On */}
+                    <div className="mt-8 rounded-lg border border-white/20 bg-white/5 p-6">
+                        <p className="text-xs font-semibold uppercase tracking-widest text-(--primary)">Optional Add-On</p>
+                        <h2 className="mt-2 text-xl font-bold text-white">Add Social Media Management</h2>
+                        <p className="mt-2 text-sm text-white/60">Keep your platforms active and growing every month. Pair with this package from $99/mo.</p>
+                        <Link href="/services/modernization-starter" className="mt-4 inline-flex rounded-md border border-(--primary) px-4 py-2 text-sm font-semibold text-white transition hover:bg-(--primary)">
+                            View Social Media Plans →
+                        </Link>
+                    </div>
 
                     <div className="mt-12 space-y-8 pb-8">
                         <section>

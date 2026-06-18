@@ -22,12 +22,13 @@ export default function Services() {
             slug: 'starter',
             title: 'Starter Package',
             price: 99,
-            description: 'A clean, launch-ready single-page site for new businesses',
+            description: 'A clean, launch-ready single-page site — built and designed from scratch',
             features: [
                 'Single-page responsive website',
+                'Photoshop mockups & design',
+                'Brand color palette & typography',
                 'Contact form integration',
-                'Social media links',
-                'Mobile-optimized design',
+                'Mobile-optimized',
                 'Domain & hosting assistance',
                 '1 month of support',
             ],
@@ -38,10 +39,12 @@ export default function Services() {
             slug: 'professional',
             title: 'Professional Package',
             price: 149,
-            description: 'Multi-page site with custom design and more features',
+            description: 'Multi-page site with full UI design system and brand guidelines',
             features: [
                 'Everything in Starter',
                 'Up to 5 pages',
+                'Custom UI design system',
+                'Full brand guidelines',
                 'Blog or portfolio section',
                 'Mailing list integration',
                 'Contact & booking forms',
@@ -55,11 +58,13 @@ export default function Services() {
             slug: 'premium',
             title: 'Premium Package',
             price: 299,
-            description: 'Full-featured platform with custom animations and integrations',
+            description: 'Full-featured platform with custom animations, illustrations, and integrations',
             features: [
                 'Everything in Professional',
                 'Up to 10 pages',
                 'Custom animations & effects',
+                'Animation design specifications',
+                'Custom illustration design',
                 'API integrations',
                 'Event calendar or merch store',
                 'Music/video streaming support',
@@ -67,70 +72,6 @@ export default function Services() {
                 'Priority updates',
             ],
             link: '/services/premium',
-            popular: false,
-        },
-    ];
-
-    const designPackages: Array<{
-        slug: PackageSlug;
-        title: string;
-        price: number;
-        description: string;
-        features: string[];
-        link: string;
-        popular: boolean;
-    }> = [
-        {
-            slug: 'design-starter',
-            title: 'Design - Starter',
-            price: 99,
-            description: 'Wireframes & mockups to plan your visual direction',
-            features: [
-                'Wireframes for 3–5 pages',
-                'Design mockups in Figma',
-                'Brand color palette & typography',
-                'Mobile-first responsive design',
-                'Icon set suggestions',
-                '2 rounds of revisions',
-                '1 month of design support',
-            ],
-            link: '/services/design-starter',
-            popular: false,
-        },
-        {
-            slug: 'design-professional',
-            title: 'Design - Professional',
-            price: 149,
-            description: 'Full UI system with brand guidelines and interactive prototypes',
-            features: [
-                'Everything in Starter',
-                'Custom UI design system',
-                'Interactive prototypes',
-                'Full brand guidelines pack',
-                'Logo design or refinement',
-                '4 rounds of revisions',
-                'Component library',
-                '3 months of design support',
-            ],
-            link: '/services/design-professional',
-            popular: true,
-        },
-        {
-            slug: 'design-premium',
-            title: 'Design - Premium',
-            price: 299,
-            description: 'Premium brand identity with custom illustrations and animations',
-            features: [
-                'Everything in Professional',
-                'Premium brand identity package',
-                'Custom illustration design',
-                'Animation design specifications',
-                'Accessibility audit & recommendations',
-                'Design tokens & CSS system',
-                'Unlimited revisions (60 days)',
-                '6 months of design support',
-            ],
-            link: '/services/design-premium',
             popular: false,
         },
     ];
@@ -272,9 +213,10 @@ export default function Services() {
 
                     {/* Packages Grid */}
                     <div className="relative mx-auto mt-6 max-w-7xl px-3 pb-20 sm:mt-8 sm:px-4 sm:pb-32" style={{ maxWidth: '100vw' }}>
-                        {/* Social Media Management section uses modernizationPackages */}
+                        {/* Web Development & Design Section */}
                         <div className="mb-16">
-                            <h2 className="mb-8 text-center text-2xl font-bold text-white sm:text-3xl">Web Development</h2>
+                            <h2 className="mb-2 text-center text-2xl font-bold text-white sm:text-3xl">Web Development & Design</h2>
+                            <p className="mb-8 text-center text-sm text-white/50">Every package includes both development and design — built and designed by hand, no templates.</p>
                             <div className="grid grid-cols-1 gap-6 sm:gap-8 md:grid-cols-2 lg:grid-cols-3" style={{ maxWidth: '100%' }}>
                                 {websitePackages.map((pkg) => (
                                     <motion.div
@@ -327,72 +269,21 @@ export default function Services() {
                             </div>
                         </div>
 
-                        {/* Web Design Section */}
-                        <div className="mb-16">
-                            <h2 className="mb-8 text-center text-2xl font-bold text-white sm:text-3xl">Web Design</h2>
-                            <div className="grid grid-cols-1 gap-6 sm:gap-8 md:grid-cols-2 lg:grid-cols-3" style={{ maxWidth: '100%' }}>
-                                {designPackages.map((pkg) => (
-                                    <motion.div
-                                        key={pkg.title}
-                                        className={`relative z-0 flex flex-col rounded-lg border-2 p-4 shadow-lg transition sm:p-6 ${
-                                            pkg.popular
-                                                ? 'border-(--primary) bg-(--card) shadow-(--primary)/20 shadow-xl'
-                                                : 'border-(--accent) bg-(--card)'
-                                        }`}
-                                        initial={{ opacity: 0, y: 20 }}
-                                        whileInView={{ opacity: 1, y: 0 }}
-                                        viewport={{ once: true }}
-                                        transition={{ duration: 0.5 }}
-                                        whileHover={{ scale: 1.02 }}
-                                    >
-                                        {pkg.popular && (
-                                            <div className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-(--primary) px-4 py-1 text-xs font-bold text-white">
-                                                MOST POPULAR
-                                            </div>
-                                        )}
-
-                                        <div className="mb-3 text-center sm:mb-4">
-                                            <h3 className="text-xl font-bold text-white sm:text-2xl">{pkg.title}</h3>
-                                            <div className="mt-2 flex items-baseline justify-center gap-1">
-                                                <span className="text-3xl font-bold text-(--primary) sm:text-4xl">${pkg.price}</span>
-                                            </div>
-                                            <p className="mt-2 text-xs text-gray-300 sm:text-sm">{pkg.description}</p>
-                                        </div>
-
-                                        <ul className="mb-6 flex-1 space-y-3">
-                                            {pkg.features.map((feature, index) => (
-                                                <li key={index} className="flex items-start gap-2 text-sm text-gray-200">
-                                                    <Check className="mt-0.5 h-5 w-5 shrink-0 text-(--primary)" />
-                                                    <span>{feature}</span>
-                                                </li>
-                                            ))}
-                                        </ul>
-
-                                        <div className="mt-auto flex flex-col gap-2">
-                                            <Link
-                                                href={pkg.link}
-                                                className="block w-full rounded-lg bg-(--primary) px-6 py-3 text-center font-semibold text-white transition hover:bg-(--accent)"
-                                            >
-                                                View Details
-                                            </Link>
-                                            <PackagePaymentGate amount={pkg.price} item={pkg.title} packageSlug={pkg.slug} />
-                                        </div>
-                                    </motion.div>
-                                ))}
+                        {/* Social Media Management Add-On Section */}
+                        <div className="border-t border-white/10 pt-16">
+                            <div className="mb-8 text-center">
+                                <p className="text-xs font-semibold uppercase tracking-widest text-(--primary)">Optional Add-On</p>
+                                <h2 className="mt-2 text-2xl font-bold text-white sm:text-3xl">Social Media Management</h2>
+                                <p className="mt-3 text-sm text-white/60">Pair with any package. Keep your platforms active and growing every month.</p>
                             </div>
-                        </div>
-
-                        {/* Social Media Management Section */}
-                        <div>
-                            <h2 className="mb-8 text-center text-2xl font-bold text-white sm:text-3xl">Social Media Management</h2>
                             <div className="grid grid-cols-1 gap-6 sm:gap-8 md:grid-cols-2 lg:grid-cols-3" style={{ maxWidth: '100%' }}>
                                 {modernizationPackages.map((pkg) => (
                                     <motion.div
                                         key={pkg.title}
                                         className={`relative z-0 flex flex-col rounded-lg border-2 p-4 shadow-lg transition sm:p-6 ${
                                             pkg.popular
-                                                ? 'border-(--primary) bg-(--card) shadow-(--primary)/20 shadow-xl'
-                                                : 'border-(--accent) bg-(--card)'
+                                                ? 'border-(--primary) bg-white/5 shadow-(--primary)/20 shadow-xl'
+                                                : 'border-white/20 bg-white/5'
                                         }`}
                                         initial={{ opacity: 0, y: 20 }}
                                         whileInView={{ opacity: 1, y: 0 }}
@@ -410,6 +301,7 @@ export default function Services() {
                                             <h3 className="text-xl font-bold text-white sm:text-2xl">{pkg.title}</h3>
                                             <div className="mt-2 flex items-baseline justify-center gap-1">
                                                 <span className="text-3xl font-bold text-(--primary) sm:text-4xl">${pkg.price}</span>
+                                                <span className="text-sm text-white/50">/mo</span>
                                             </div>
                                             <p className="mt-2 text-xs text-gray-300 sm:text-sm">{pkg.description}</p>
                                         </div>
@@ -426,7 +318,7 @@ export default function Services() {
                                         <div className="mt-auto flex flex-col gap-2">
                                             <Link
                                                 href={pkg.link}
-                                                className="block w-full rounded-lg bg-(--primary) px-6 py-3 text-center font-semibold text-white transition hover:bg-(--accent)"
+                                                className="block w-full rounded-lg border border-(--primary) px-6 py-3 text-center font-semibold text-white transition hover:bg-(--primary)"
                                             >
                                                 View Details
                                             </Link>

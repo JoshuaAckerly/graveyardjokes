@@ -9,11 +9,13 @@ export default function PremiumPackage() {
 
     const features = [
         'Everything in Professional',
-        'E-commerce/merch store',
-        'Event calendar & ticketing',
-        'Music/video streaming',
+        'Up to 10 pages',
         'Custom animations & effects',
+        'Animation design specifications',
+        'Custom illustration design',
         'API integrations',
+        'Event calendar or merch store',
+        'Music/video streaming support',
         '6 months of support',
         'Priority updates',
     ];
@@ -146,6 +148,16 @@ export default function PremiumPackage() {
                             </div>
                         </div>
                     </motion.div>
+
+                    {/* Social Media Add-On */}
+                    <div className="mt-8 rounded-lg border border-white/20 bg-white/5 p-6">
+                        <p className="text-xs font-semibold uppercase tracking-widest text-(--primary)">Optional Add-On</p>
+                        <h2 className="mt-2 text-xl font-bold text-white">Add Social Media Management</h2>
+                        <p className="mt-2 text-sm text-white/60">Keep your platforms active and growing every month. Pair with this package from $99/mo.</p>
+                        <Link href="/services/modernization-starter" className="mt-4 inline-flex rounded-md border border-(--primary) px-4 py-2 text-sm font-semibold text-white transition hover:bg-(--primary)">
+                            View Social Media Plans →
+                        </Link>
+                    </div>
 
                     <div className="mt-12 space-y-8 pb-8">
                         <section>

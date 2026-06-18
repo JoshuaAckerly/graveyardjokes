@@ -59,18 +59,10 @@ Route::get('/services/premium', function () {
     return Inertia::render('services/premium');
 })->name('services.premium');
 
-// Website Design Services
-Route::get('/services/design-starter', function () {
-    return Inertia::render('services/design-starter');
-})->name('services.design-starter');
-
-Route::get('/services/design-professional', function () {
-    return Inertia::render('services/design-professional');
-})->name('services.design-professional');
-
-Route::get('/services/design-premium', function () {
-    return Inertia::render('services/design-premium');
-})->name('services.design-premium');
+// Legacy design routes — 301 redirect to merged Web Dev & Design packages
+Route::redirect('/services/design-starter', '/services/starter', 301)->name('services.design-starter');
+Route::redirect('/services/design-professional', '/services/professional', 301)->name('services.design-professional');
+Route::redirect('/services/design-premium', '/services/premium', 301)->name('services.design-premium');
 
 // Website Modernization Services
 Route::get('/services/modernization-starter', function () {

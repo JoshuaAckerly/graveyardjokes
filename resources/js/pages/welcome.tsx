@@ -303,8 +303,8 @@ export default function Home(): JSX.Element {
                             </p>
                         </div>
 
-                        <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
-                            {/* Service Card 1 — Social Media */}
+                        <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+                            {/* Service Card 1 — Web Dev & Design */}
                             <motion.div
                                 initial={{ opacity: 0, y: 20 }}
                                 whileInView={{ opacity: 1, y: 0 }}
@@ -312,15 +312,15 @@ export default function Home(): JSX.Element {
                                 transition={{ duration: 0.6, delay: 0.1 }}
                                 className="rounded-lg bg-white/5 p-6 text-left shadow-lg transition-all hover:bg-white/10"
                             >
-                                <div className="mb-4 text-3xl">📱</div>
-                                <h3 className="mb-2 text-xl font-semibold text-white">Social Media Management</h3>
+                                <div className="mb-4 text-3xl">⚡</div>
+                                <h3 className="mb-2 text-xl font-semibold text-white">Web Development & Design</h3>
                                 <p className="text-sm text-white/70">
-                                    Grow and manage your social presence across platforms. Content planning, scheduling, engagement, and analytics —
-                                    so you stay consistent without the stress.
+                                    Custom-built websites designed in Photoshop and coded from scratch. Responsive, fast, and built to reflect your
+                                    brand — from single-page launches to full multi-page platforms.
                                 </p>
                             </motion.div>
 
-                            {/* Service Card 2 — Web Design */}
+                            {/* Service Card 2 — Social Media */}
                             <motion.div
                                 initial={{ opacity: 0, y: 20 }}
                                 whileInView={{ opacity: 1, y: 0 }}
@@ -328,27 +328,14 @@ export default function Home(): JSX.Element {
                                 transition={{ duration: 0.6, delay: 0.2 }}
                                 className="rounded-lg bg-white/5 p-6 text-left shadow-lg transition-all hover:bg-white/10"
                             >
-                                <div className="mb-4 text-3xl">🎨</div>
-                                <h3 className="mb-2 text-xl font-semibold text-white">Web Design</h3>
+                                <div className="mb-4 text-3xl">📱</div>
+                                <h3 className="mb-2 text-xl font-semibold text-white">
+                                    Social Media Management{' '}
+                                    <span className="ml-1 rounded-full bg-white/10 px-2 py-0.5 text-xs text-white/50">Add-On from $99/mo</span>
+                                </h3>
                                 <p className="text-sm text-white/70">
-                                    Pixel-perfect, responsive UI/UX design that reflects your brand. Wireframes, high-fidelity mockups, and
-                                    brand-aligned component systems built to convert.
-                                </p>
-                            </motion.div>
-
-                            {/* Service Card 3 — Website Management */}
-                            <motion.div
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true, amount: 0.2 }}
-                                transition={{ duration: 0.6, delay: 0.3 }}
-                                className="rounded-lg bg-white/5 p-6 text-left shadow-lg transition-all hover:bg-white/10"
-                            >
-                                <div className="mb-4 text-3xl">🌐</div>
-                                <h3 className="mb-2 text-xl font-semibold text-white">Website Management</h3>
-                                <p className="text-sm text-white/70">
-                                    Keep your site secure, fast, and up to date. Maintenance, content updates, performance monitoring, and backups —
-                                    so your website always works when it matters.
+                                    Grow and manage your social presence across platforms. Content planning, scheduling, engagement, and analytics —
+                                    so you stay consistent without the stress.
                                 </p>
                             </motion.div>
                         </div>
