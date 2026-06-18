@@ -59,8 +59,8 @@ jobs:
       - name: Install NPM dependencies
         run: npm ci
 
-      - name: Build frontend assets
-        run: npm run build
+      - name: Build frontend assets (including SSR)
+        run: npm run build:ssr
 
       - name: Run Laravel Pint (auto-fix)
         run: vendor/bin/pint
