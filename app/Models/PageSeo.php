@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class PageSeo extends Model
 {
+    protected $connection = 'auth';
+
     protected $fillable = [
         'project',
         'page_key',

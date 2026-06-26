@@ -13,6 +13,8 @@ class User extends Authenticatable
     /** @use HasFactory<UserFactory> */
     use HasFactory, Notifiable;
 
+    protected $connection = 'auth';
+
     /**
      * The attributes that are mass assignable.
      *
