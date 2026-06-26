@@ -1,7 +1,7 @@
 import GoogleReviews from '@/Components/GoogleReviews';
+import InertiaHead from '@/Components/InertiaHead';
 import PackagePaymentGate, { type PackageSlug } from '@/Components/PackagePaymentGate';
 import MainLayout from '@/Layouts/MainLayout';
-import InertiaHead from '@/Components/InertiaHead';
 import { Link } from '@inertiajs/react';
 import { motion } from 'framer-motion';
 import { Check } from 'lucide-react';

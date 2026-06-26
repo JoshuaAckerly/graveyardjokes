@@ -1,5 +1,5 @@
-import { Head } from '@inertiajs/react';
 import { getAuthSystemUrl } from '@/env';
+import { Head } from '@inertiajs/react';
 
 // This page is no longer used. Login is handled by the auth-system project.
 

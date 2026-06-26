@@ -1,7 +1,7 @@
-import { vi } from 'vitest';
 import { act, render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { useState } from 'react';
+import { vi } from 'vitest';
 
 // Mirrors the real welcome.tsx joke section and key structural elements.
 // Tests exercise the fetch-on-mount and re-fetch-on-click behaviour.

@@ -1,5 +1,5 @@
-import { vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
+import { vi } from 'vitest';
 
 // Mock component for testing
 const Portfolio = () => (

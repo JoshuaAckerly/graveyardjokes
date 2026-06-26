@@ -1,5 +1,5 @@
-import { vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
+import { vi } from 'vitest';
 import PackagePaymentGate from '../PackagePaymentGate';
 
 const mockUsePage = vi.fn();

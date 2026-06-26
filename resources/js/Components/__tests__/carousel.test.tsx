@@ -1,6 +1,6 @@
 import { getProjectUrl } from '@/env';
-import { vi } from 'vitest';
 import { act, fireEvent, render, screen } from '@testing-library/react';
+import { vi } from 'vitest';
 import Carousel from '../carousel';
 
 describe('Carousel', () => {
@@ -64,7 +64,9 @@ describe('Carousel', () => {
         render(<Carousel />);
 
         const nextButton = screen.getAllByRole('button').find((btn) => btn.textContent === '❯');
-        act(() => { fireEvent.click(nextButton!); });
+        act(() => {
+            fireEvent.click(nextButton!);
+        });
 
         const indicators = screen.getAllByRole('button').filter((btn) => btn.className.includes('h-3 w-3 rounded-full'));
 
@@ -76,7 +78,9 @@ describe('Carousel', () => {
         render(<Carousel />);
 
         const prevButton = screen.getAllByRole('button').find((btn) => btn.textContent === '❮');
-        act(() => { fireEvent.click(prevButton!); });
+        act(() => {
+            fireEvent.click(prevButton!);
+        });
 
         // Should wrap around to last slide
         const indicators = screen.getAllByRole('button').filter((btn) => btn.className.includes('h-3 w-3 rounded-full'));
@@ -89,7 +93,9 @@ describe('Carousel', () => {
 
         const indicators = screen.getAllByRole('button').filter((btn) => btn.className.includes('h-3 w-3 rounded-full'));
 
-        act(() => { fireEvent.click(indicators[2]); });
+        act(() => {
+            fireEvent.click(indicators[2]);
+        });
 
         expect(indicators[2]).toHaveClass('bg-white');
         expect(indicators[0]).toHaveClass('bg-gray-600');
@@ -98,12 +104,13 @@ describe('Carousel', () => {
     it('auto-advances slides every 5 seconds', () => {
         render(<Carousel />);
 
-        const getIndicators = () =>
-            screen.getAllByRole('button').filter((btn) => btn.className.includes('h-3 w-3 rounded-full'));
+        const getIndicators = () => screen.getAllByRole('button').filter((btn) => btn.className.includes('h-3 w-3 rounded-full'));
 
         expect(getIndicators()[0]).toHaveClass('bg-white');
 
-        act(() => { vi.advanceTimersByTime(5000); });
+        act(() => {
+            vi.advanceTimersByTime(5000);
+        });
         expect(getIndicators()[1]).toHaveClass('bg-white');
     });
 

@@ -1,8 +1,8 @@
 import { render, screen } from '@testing-library/react';
 import { vi } from 'vitest';
-import GoogleReviews from '../GoogleReviews';
 import BusinessHours from '../BusinessHours';
 import BusinessPosts from '../BusinessPosts';
+import GoogleReviews from '../GoogleReviews';
 
 vi.mock('@gj/hooks', () => ({
     useFetchApi: vi.fn(),
@@ -61,9 +61,7 @@ describe('BusinessHours', () => {
             data: {
                 name: 'GraveyardJokes Studios',
                 regularHours: {
-                    periods: [
-                        { openDay: 'MONDAY', openTime: { hours: 9, minutes: 0 }, closeDay: 'MONDAY', closeTime: { hours: 17, minutes: 0 } },
-                    ],
+                    periods: [{ openDay: 'MONDAY', openTime: { hours: 9, minutes: 0 }, closeDay: 'MONDAY', closeTime: { hours: 17, minutes: 0 } }],
                 },
             },
             loading: false,

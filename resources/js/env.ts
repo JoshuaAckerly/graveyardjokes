@@ -3,5 +3,4 @@
 export { getEnvVar } from '@gj/env';
 import { createEnvResolver } from '@gj/env';
 
-export const { getAuthSystemUrl, getProjectUrl, getMainSiteUrl, getLoginUrl } =
-    createEnvResolver('graveyardjokes.com');
+export const { getAuthSystemUrl, getProjectUrl, getMainSiteUrl, getLoginUrl } = createEnvResolver('graveyardjokes.com');

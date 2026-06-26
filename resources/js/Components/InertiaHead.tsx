@@ -53,13 +53,10 @@ export default function InertiaHead({ children }: InertiaHeadProps) {
             {seo.twitter_image && <meta name="twitter:image" content={seo.twitter_image} />}
 
             {/* JSON-LD Structured Data */}
-            {seo.schema_json && (
-                <script type="application/ld+json">{JSON.stringify(seo.schema_json)}</script>
-            )}
+            {seo.schema_json && <script type="application/ld+json">{JSON.stringify(seo.schema_json)}</script>}
 
             {/* Page-level overrides / additional tags */}
             {children}
         </Head>
     );
 }
-

@@ -1,5 +1,5 @@
-import { vi, type MockedFunction } from 'vitest';
 import { render, screen, waitFor } from '@testing-library/react';
+import { vi, type MockedFunction } from 'vitest';
 import ProjectCard from '../ProjectCard';
 
 const fetchMock = vi.fn() as MockedFunction<typeof fetch>;

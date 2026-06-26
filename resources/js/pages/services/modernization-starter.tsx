@@ -1,12 +1,11 @@
+import InertiaHead from '@/Components/InertiaHead';
 import PackagePaymentGate from '@/Components/PackagePaymentGate';
 import MainLayout from '@/Layouts/MainLayout';
-import InertiaHead from '@/Components/InertiaHead';
 import { Link } from '@inertiajs/react';
 import { motion } from 'framer-motion';
 import { ArrowLeft, Check } from 'lucide-react';
 
 export default function SocialMediaStarterPackage() {
-
     const features = [
         '3 platforms managed',
         '8 posts per month',

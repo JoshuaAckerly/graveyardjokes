@@ -1,5 +1,5 @@
-import { vi } from 'vitest';
 import { fireEvent, render, screen } from '@testing-library/react';
+import { vi } from 'vitest';
 import ServicesIntake from '../intake';
 
 const mockSetData = vi.fn();

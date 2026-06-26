@@ -1,6 +1,6 @@
 import { getProjectUrl } from '@/env';
-import { vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
+import { vi } from 'vitest';
 import Menu from '../Menu';
 
 // Mock Inertia Link

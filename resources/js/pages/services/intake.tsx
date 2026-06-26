@@ -1,6 +1,6 @@
+import InertiaHead from '@/Components/InertiaHead';
 import MainLayout from '@/Layouts/MainLayout';
 import { trackFormSubmission, trackPackageSelection } from '@/hooks/use-google-analytics';
-import InertiaHead from '@/Components/InertiaHead';
 import { Link, useForm } from '@inertiajs/react';
 import { ArrowLeft } from 'lucide-react';
 import type { FormEvent } from 'react';
