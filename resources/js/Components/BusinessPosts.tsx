@@ -1,5 +1,5 @@
 import { type LocalPost, type PostsResponse } from '@/types/business-profile';
-import { useEffect, useState } from 'react';
+import { useFetchApi } from '@gj/hooks';
 
 const ACTION_TYPE_LABELS: Record<string, string> = {
     BOOK: 'Book Now',
@@ -53,28 +53,7 @@ function SkeletonCard() {
 }
 
 export default function BusinessPosts() {
-    const [data, setData] = useState<PostsResponse | null>(null);
-    const [loading, setLoading] = useState(true);
-
-    useEffect(() => {
-        let cancelled = false;
-
-        fetch('/api/business/posts')
-            .then((r) => (r.ok ? (r.json() as Promise<PostsResponse>) : Promise.reject()))
-            .then((json) => {
-                if (!cancelled) setData(json);
-            })
-            .catch(() => {
-                // Silently fail — no posts to show
-            })
-            .finally(() => {
-                if (!cancelled) setLoading(false);
-            });
-
-        return () => {
-            cancelled = true;
-        };
-    }, []);
+    const { data, loading } = useFetchApi<PostsResponse>('/api/business/posts');
 
     const posts = (data?.localPosts ?? []).slice(0, 3);
 

@@ -1,15 +1,15 @@
-import { jest } from '@jest/globals';
+import { vi, type MockedFunction } from 'vitest';
 import { render, screen, waitFor } from '@testing-library/react';
 import ProjectCard from '../ProjectCard';
 
-const fetchMock = jest.fn() as jest.MockedFunction<typeof fetch>;
+const fetchMock = vi.fn() as MockedFunction<typeof fetch>;
 global.fetch = fetchMock;
 
 const localStorageMock = {
-    getItem: jest.fn(),
-    setItem: jest.fn(),
-    removeItem: jest.fn(),
-    clear: jest.fn(),
+    getItem: vi.fn(),
+    setItem: vi.fn(),
+    removeItem: vi.fn(),
+    clear: vi.fn(),
 };
 Object.defineProperty(window, 'localStorage', {
     value: localStorageMock,
@@ -24,7 +24,7 @@ describe('ProjectCard', () => {
     };
 
     beforeEach(() => {
-        jest.clearAllMocks();
+        vi.clearAllMocks();
         fetchMock.mockClear();
         fetchMock.mockRejectedValue(new Error('API error'));
         localStorageMock.getItem.mockReturnValue(null);

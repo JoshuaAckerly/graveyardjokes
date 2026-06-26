@@ -1,10 +1,10 @@
 import GoogleReviews from '@/Components/GoogleReviews';
 import PackagePaymentGate, { type PackageSlug } from '@/Components/PackagePaymentGate';
 import MainLayout from '@/Layouts/MainLayout';
-import { Head, Link } from '@inertiajs/react';
+import InertiaHead from '@/Components/InertiaHead';
+import { Link } from '@inertiajs/react';
 import { motion } from 'framer-motion';
 import { Check } from 'lucide-react';
-import { getProjectUrl } from '../env';
 
 export default function Services() {
     const cdn = import.meta.env.VITE_ASSET_URL || '';
@@ -134,40 +134,9 @@ export default function Services() {
         },
     ];
 
-    const projectUrl = getProjectUrl('graveyardjokes');
     return (
         <>
-            <Head>
-                <title>Services & Pricing | Graveyard Jokes Studios</title>
-                <meta
-                    name="description"
-                    content="Graveyard Jokes Studios offers affordable web development, web design, and social media management for small businesses and independent brands."
-                />
-                <meta
-                    name="keywords"
-                    content="web development, web design, social media management, small business, affordable websites, digital presence"
-                />
-                <link rel="canonical" href={`${projectUrl}services`} />
-
-                {/* Open Graph */}
-                <meta property="og:title" content="Services & Pricing | Graveyard Jokes Studios" />
-                <meta
-                    name="og:description"
-                    content="Graveyard Jokes Studios offers affordable web development, web design, and social media management for small businesses and independent brands."
-                />
-                <meta property="og:image" content={`${cdn}/images/aboutBanner.webp`} />
-                <meta property="og:type" content="website" />
-                <meta property="og:url" content={`${projectUrl}services`} />
-
-                {/* Twitter */}
-                <meta name="twitter:card" content="summary_large_image" />
-                <meta name="twitter:title" content="Services & Pricing | Graveyard Jokes Studios" />
-                <meta
-                    name="twitter:description"
-                    content="Graveyard Jokes Studios offers affordable web development, web design, and social media management for small businesses and independent brands."
-                />
-                <meta name="twitter:image" content={`${cdn}/images/aboutBanner.webp`} />
-            </Head>
+            <InertiaHead />
 
             <MainLayout>
                 <div className="relative max-w-full bg-foreground text-center shadow-lg">

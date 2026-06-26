@@ -2,11 +2,14 @@
 
 namespace Tests\Unit;
 
+use App\Models\PageSeo;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\File;
 use Tests\TestCase;
 
 class GenerateSitemapTest extends TestCase
 {
+    use RefreshDatabase;
     private string $sitemapPath;
 
     protected function setUp(): void
@@ -127,6 +130,35 @@ class GenerateSitemapTest extends TestCase
         $content = file_get_contents($this->sitemapPath);
 
         $this->assertStringContainsString('fallback.example.com', $content);
+    }
+
+    public function test_sitemap_excludes_noindex_pages(): void
+    {
+        PageSeo::create([
+            'page_key'            => 'test.noindex',
+            'page_label'          => 'Test Noindex',
+            'page_url'            => '/services/intake',
+            'robots'              => 'noindex,nofollow',
+            'sitemap_priority'    => 0.50,
+            'sitemap_change_freq' => 'monthly',
+        ]);
+
+        $this->artisan('app:generate-sitemap --url=https://example.com');
+
+        $content = (string) file_get_contents($this->sitemapPath);
+
+        $this->assertStringNotContainsString('https://example.com/services/intake', $content);
+    }
+
+    public function test_sitemap_includes_indexable_pages_not_in_db(): void
+    {
+        // With an empty DB (no noindex overrides), core pages should still appear
+        $this->artisan('app:generate-sitemap --url=https://example.com');
+
+        $content = (string) file_get_contents($this->sitemapPath);
+
+        $this->assertStringContainsString('https://example.com/', $content);
+        $this->assertStringContainsString('https://example.com/about', $content);
     }
 
     public function test_sitemap_contains_priority_attributes(): void

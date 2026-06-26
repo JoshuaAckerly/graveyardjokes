@@ -1,11 +1,11 @@
 import PackagePaymentGate from '@/Components/PackagePaymentGate';
 import MainLayout from '@/Layouts/MainLayout';
-import { Head, Link } from '@inertiajs/react';
+import InertiaHead from '@/Components/InertiaHead';
+import { Link } from '@inertiajs/react';
 import { motion } from 'framer-motion';
 import { ArrowLeft, Check } from 'lucide-react';
 
 export default function PremiumPackage() {
-    const cdn = import.meta.env.VITE_ASSET_URL || '';
 
     const features = [
         'Everything in Professional',
@@ -22,74 +22,7 @@ export default function PremiumPackage() {
 
     return (
         <>
-            // ...existing code...
-            <Head>
-                <title>Premium Package - $299 | Graveyard Jokes Studios</title>
-                <meta
-                    name="description"
-                    content="Premium plan for established teams: full-service web design and development, priority support, advanced integrations, and ongoing strategic guidance."
-                />
-                <meta
-                    name="keywords"
-                    content="premium package, e-commerce, merch store, streaming, custom website, API integration, priority support, full-stack development"
-                />
-                <link rel="canonical" href="https://graveyardjokes.com/services/premium" />
-                {/* Open Graph */}
-                <meta property="og:title" content="Premium Package - $299 | Graveyard Jokes Studios" />
-                <meta
-                    name="og:description"
-                    content="Premium plan for established teams: full-service web design and development, priority support, advanced integrations, and ongoing strategic guidance."
-                />
-                <meta property="og:image" content={`${cdn}/images/aboutBanner.webp`} />
-                <meta property="og:type" content="website" />
-                <meta property="og:url" content="https://graveyardjokes.com/services/premium" />
-                {/* Twitter */}
-                <meta name="twitter:card" content="summary_large_image" />
-                <meta name="twitter:title" content="Premium Package - $299 | Graveyard Jokes Studios" />
-                <meta
-                    name="twitter:description"
-                    content="Premium plan for established teams: full-service web design and development, priority support, advanced integrations, and ongoing strategic guidance."
-                />
-                <meta name="twitter:image" content={`${cdn}/images/aboutBanner.webp`} />
-
-                <script type="application/ld+json">
-                    {`
-{
-  "@context": "https://schema.org",
-  "@type": "Service",
-  "serviceType": "Web Design",
-  "name": "Premium Package",
-  "description": "Full-featured solution for serious professionals. E-commerce, streaming, custom integrations, and premium support.",
-  "provider": {
-    "@type": "Organization",
-    "name": "GraveYard Jokes Studios Inc.",
-    "url": "https://graveyardjokes.com"
-  },
-  "offers": {
-    "@type": "Offer",
-    "price": "299",
-    "priceCurrency": "USD",
-    "availability": "https://schema.org/InStock"
-  },
-  "areaServed": "US",
-  "hasOfferCatalog": {
-    "@type": "OfferCatalog",
-    "name": "Premium Package Features",
-    "itemListElement": [
-      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Everything in Professional" } },
-      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "E-commerce/merch store" } },
-      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Event calendar & ticketing" } },
-      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Music/video streaming" } },
-      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Custom animations & effects" } },
-      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "API integrations" } },
-      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "6 months of support" } },
-      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Priority updates" } }
-    ]
-  }
-}
-`}
-                </script>
-            </Head>
+            <InertiaHead />
             <MainLayout>
                 <div className="mx-auto max-w-4xl px-4 py-8">
                     <Link href="/services" className="mb-6 inline-flex items-center gap-2 text-white transition hover:text-(--primary)">

@@ -1,11 +1,11 @@
 import PackagePaymentGate from '@/Components/PackagePaymentGate';
 import MainLayout from '@/Layouts/MainLayout';
-import { Head, Link } from '@inertiajs/react';
+import InertiaHead from '@/Components/InertiaHead';
+import { Link } from '@inertiajs/react';
 import { motion } from 'framer-motion';
 import { ArrowLeft, Check } from 'lucide-react';
 
 export default function StarterPackage() {
-    const cdn = import.meta.env.VITE_ASSET_URL || '';
 
     const features = [
         'Single-page responsive website',
@@ -19,71 +19,7 @@ export default function StarterPackage() {
 
     return (
         <>
-            <Head>
-                <title>Starter Package - $99 | Graveyard Jokes Studios</title>
-                <meta
-                    name="description"
-                    content="Starter plan for new businesses: responsive web design, core development features, and a clean, launch-ready website at an affordable monthly cost."
-                />
-                <meta
-                    name="keywords"
-                    content="starter package, web design, single page website, startup website, small business website, affordable web design, basic SEO"
-                />
-                <link rel="canonical" href="https://graveyardjokes.com/services/starter" />
-                {/* Open Graph */}
-                <meta property="og:title" content="Starter Package - $99 | Graveyard Jokes Studios" />
-                <meta
-                    property="og:description"
-                    content="Starter plan for new businesses: responsive web design, core development features, and a clean, launch-ready website at an affordable monthly cost."
-                />
-                <meta property="og:image" content={`${cdn}/images/aboutBanner.webp`} />
-                <meta property="og:type" content="website" />
-                <meta property="og:url" content="https://graveyardjokes.com/services/starter" />
-                {/* Twitter */}
-                <meta name="twitter:card" content="summary_large_image" />
-                <meta name="twitter:title" content="Starter Package - $99 | Graveyard Jokes Studios" />
-                <meta
-                    name="twitter:description"
-                    content="Starter plan for new businesses: responsive web design, core development features, and a clean, launch-ready website at an affordable monthly cost."
-                />
-                <meta name="twitter:image" content={`${cdn}/images/aboutBanner.webp`} />
-                {/* Structured Data (JSON-LD) */}
-                <script type="application/ld+json">
-                    {`
-{
-  "@context": "https://schema.org",
-  "@type": "Service",
-  "serviceType": "Web Design",
-  "name": "Starter Package",
-  "description": "Perfect for entrepreneurs and creatives launching their online presence. Single-page responsive website with contact form and social media integration.",
-  "provider": {
-    "@type": "Organization",
-    "name": "GraveYard Jokes Studios Inc.",
-    "url": "https://graveyardjokes.com"
-  },
-  "offers": {
-    "@type": "Offer",
-    "price": "99",
-    "priceCurrency": "USD",
-    "availability": "https://schema.org/InStock"
-  },
-  "areaServed": "US",
-  "hasOfferCatalog": {
-    "@type": "OfferCatalog",
-    "name": "Starter Package Features",
-    "itemListElement": [
-      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Single-page responsive website" } },
-      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Contact form integration" } },
-      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Social media links" } },
-      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Mobile-optimized design" } },
-      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Fast load speeds" } },
-      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "1 month of support" } }
-    ]
-  }
-}
-`}
-                </script>
-            </Head>
+            <InertiaHead />
 
             <MainLayout>
                 <div className="mx-auto max-w-4xl px-4 py-8">

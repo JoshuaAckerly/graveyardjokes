@@ -74,6 +74,13 @@ return [
         'place_id' => env('GOOGLE_PLACES_PLACE_ID'),
     ],
 
+    'google_search_console' => [
+        'client_id'     => env('GOOGLE_SEARCH_CONSOLE_CLIENT_ID'),
+        'client_secret' => env('GOOGLE_SEARCH_CONSOLE_CLIENT_SECRET'),
+        'refresh_token' => env('GOOGLE_SEARCH_CONSOLE_REFRESH_TOKEN'),
+        'site_url'      => env('GOOGLE_SEARCH_CONSOLE_SITE_URL', 'https://graveyardjokes.com'),
+    ],
+
     'facebook' => [
         'app_id' => env('FACEBOOK_APP_ID'),
         'app_secret' => env('FACEBOOK_APP_SECRET'),

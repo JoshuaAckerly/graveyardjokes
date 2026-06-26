@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\OgImageController;
 use App\Http\Controllers\WebsiteIntakeController;
 use App\Modules\Contact\Controllers\ContactController;
@@ -24,6 +25,8 @@ Route::domain('www.graveyardjokes.com')->group(function () {
         return redirect()->to($target, 301);
     })->where('any', '.*');
 });
+
+Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
 
 Route::get('/', function () {
     return Inertia::render('welcome');

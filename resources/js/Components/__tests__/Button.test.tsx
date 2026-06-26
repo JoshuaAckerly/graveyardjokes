@@ -1,4 +1,4 @@
-import { jest } from '@jest/globals';
+import { vi } from 'vitest';
 import { fireEvent, render, screen } from '@testing-library/react';
 import React from 'react';
 
@@ -25,7 +25,7 @@ describe('Button Component', () => {
     });
 
     it('calls onClick when clicked', () => {
-        const handleClick = jest.fn();
+        const handleClick = vi.fn();
         render(<Button onClick={handleClick}>Click me</Button>);
 
         fireEvent.click(screen.getByTestId('button'));

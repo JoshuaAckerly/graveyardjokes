@@ -18,65 +18,42 @@ class BusinessProfileController extends Controller
 
     public function reviews(): JsonResponse
     {
-        try {
-            $data = Cache::remember('gbp_reviews', 1800, function () {
-                return $this->service->getReviews(20);
-            });
+        $data = $this->cachedWithFallback(
+            'gbp_reviews', 1800,
+            fn () => $this->service->getReviews(20),
+            'places_reviews',
+            fn () => $this->places->getReviews(),
+        );
 
-            return response()->json($data);
-        } catch (\RuntimeException $e) {
-            if ($this->places->isConfigured()) {
-                try {
-                    $data = Cache::remember('places_reviews', 1800, function () {
-                        return $this->places->getReviews();
-                    });
-
-                    return response()->json($data);
-                } catch (\RuntimeException) {
-                    // fall through to 503
-                }
-            }
-
-            return response()->json(['error' => 'Unable to fetch reviews'], 503);
-        }
+        return $data
+            ? response()->json($data)
+            : response()->json(['error' => 'Unable to fetch reviews'], 503);
     }
 
     public function info(): JsonResponse
     {
-        try {
-            $data = Cache::remember('gbp_info', 21600, function () {
-                return $this->service->getBusinessInfo();
-            });
+        $data = $this->cachedWithFallback(
+            'gbp_info', 21600,
+            fn () => $this->service->getBusinessInfo(),
+            'places_info',
+            fn () => $this->places->getBusinessInfo(),
+        );
 
-            return response()->json($data);
-        } catch (\RuntimeException $e) {
-            if ($this->places->isConfigured()) {
-                try {
-                    $data = Cache::remember('places_info', 21600, function () {
-                        return $this->places->getBusinessInfo();
-                    });
-
-                    return response()->json($data);
-                } catch (\RuntimeException) {
-                    // fall through to 503
-                }
-            }
-
-            return response()->json(['error' => 'Unable to fetch business info'], 503);
-        }
+        return $data
+            ? response()->json($data)
+            : response()->json(['error' => 'Unable to fetch business info'], 503);
     }
 
     public function posts(): JsonResponse
     {
-        try {
-            $data = Cache::remember('gbp_posts', 900, function () {
-                return $this->service->getPosts(10);
-            });
+        $data = $this->cachedWithFallback(
+            'gbp_posts', 900,
+            fn () => $this->service->getPosts(10),
+        );
 
-            return response()->json($data);
-        } catch (\RuntimeException $e) {
-            return response()->json(['error' => 'Unable to fetch posts'], 503);
-        }
+        return $data
+            ? response()->json($data)
+            : response()->json(['error' => 'Unable to fetch posts'], 503);
     }
 
     public function replyToReview(Request $request, string $reviewId): JsonResponse
@@ -113,6 +90,39 @@ class BusinessProfileController extends Controller
             return response()->json($data, 201);
         } catch (\RuntimeException $e) {
             return response()->json(['error' => 'Unable to create post'], 503);
+        }
+    }
+
+    /**
+     * Try primary cached fetch; on failure try optional fallback cached fetch.
+     *
+     * @return array<string, mixed>|null  Returns data on success, null if all sources fail.
+     */
+    private function cachedWithFallback(
+        string $primaryKey,
+        int $ttl,
+        callable $primary,
+        ?string $fallbackKey = null,
+        ?callable $fallback = null,
+    ): ?array {
+        try {
+            /** @var array<string, mixed> $data */
+            $data = Cache::remember($primaryKey, $ttl, $primary);
+
+            return $data;
+        } catch (\RuntimeException) {
+            if ($fallback !== null && $fallbackKey !== null && $this->places->isConfigured()) {
+                try {
+                    /** @var array<string, mixed> $data */
+                    $data = Cache::remember($fallbackKey, $ttl, $fallback);
+
+                    return $data;
+                } catch (\RuntimeException) {
+                    // fall through
+                }
+            }
+
+            return null;
         }
     }
 }

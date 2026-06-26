@@ -1,19 +1,18 @@
 import { getProjectUrl } from '@/env';
-import { jest } from '@jest/globals';
-import { act, render, screen, waitFor } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
+import { vi } from 'vitest';
+import { act, fireEvent, render, screen } from '@testing-library/react';
 import Carousel from '../carousel';
 
 describe('Carousel', () => {
     beforeEach(() => {
-        jest.useFakeTimers();
+        vi.useFakeTimers();
     });
 
     afterEach(() => {
         act(() => {
-            jest.runOnlyPendingTimers();
+            vi.runOnlyPendingTimers();
         });
-        jest.useRealTimers();
+        vi.useRealTimers();
     });
 
     it('renders carousel with all slides', () => {
@@ -61,12 +60,11 @@ describe('Carousel', () => {
         expect(indicators[2]).toHaveClass('bg-gray-600');
     });
 
-    it('advances to next slide when next button is clicked', async () => {
-        const user = userEvent.setup({ delay: null });
+    it('advances to next slide when next button is clicked', () => {
         render(<Carousel />);
 
         const nextButton = screen.getAllByRole('button').find((btn) => btn.textContent === '❯');
-        await user.click(nextButton!);
+        act(() => { fireEvent.click(nextButton!); });
 
         const indicators = screen.getAllByRole('button').filter((btn) => btn.className.includes('h-3 w-3 rounded-full'));
 
@@ -74,12 +72,11 @@ describe('Carousel', () => {
         expect(indicators[1]).toHaveClass('bg-white');
     });
 
-    it('goes to previous slide when previous button is clicked', async () => {
-        const user = userEvent.setup({ delay: null });
+    it('goes to previous slide when previous button is clicked', () => {
         render(<Carousel />);
 
         const prevButton = screen.getAllByRole('button').find((btn) => btn.textContent === '❮');
-        await user.click(prevButton!);
+        act(() => { fireEvent.click(prevButton!); });
 
         // Should wrap around to last slide
         const indicators = screen.getAllByRole('button').filter((btn) => btn.className.includes('h-3 w-3 rounded-full'));
@@ -87,51 +84,40 @@ describe('Carousel', () => {
         expect(indicators[2]).toHaveClass('bg-white');
     });
 
-    it('jumps to specific slide when indicator is clicked', async () => {
-        const user = userEvent.setup({ delay: null });
+    it('jumps to specific slide when indicator is clicked', () => {
         render(<Carousel />);
 
         const indicators = screen.getAllByRole('button').filter((btn) => btn.className.includes('h-3 w-3 rounded-full'));
 
-        await user.click(indicators[2]);
+        act(() => { fireEvent.click(indicators[2]); });
 
         expect(indicators[2]).toHaveClass('bg-white');
         expect(indicators[0]).toHaveClass('bg-gray-600');
     });
 
-    it('auto-advances slides every 5 seconds', async () => {
+    it('auto-advances slides every 5 seconds', () => {
         render(<Carousel />);
 
-        const indicators = screen.getAllByRole('button').filter((btn) => btn.className.includes('h-3 w-3 rounded-full'));
+        const getIndicators = () =>
+            screen.getAllByRole('button').filter((btn) => btn.className.includes('h-3 w-3 rounded-full'));
 
-        // Initially on first slide
-        expect(indicators[0]).toHaveClass('bg-white');
+        expect(getIndicators()[0]).toHaveClass('bg-white');
 
-        // Advance 5 seconds
-        act(() => {
-            jest.advanceTimersByTime(5000);
-        });
-
-        await waitFor(() => {
-            const updatedIndicators = screen.getAllByRole('button').filter((btn) => btn.className.includes('h-3 w-3 rounded-full'));
-            expect(updatedIndicators[1]).toHaveClass('bg-white');
-        });
+        act(() => { vi.advanceTimersByTime(5000); });
+        expect(getIndicators()[1]).toHaveClass('bg-white');
     });
 
-    it('wraps around to first slide after last slide', async () => {
+    it('wraps around to first slide after last slide', () => {
         render(<Carousel />);
 
-        // Advance through all slides
         act(() => {
-            jest.advanceTimersByTime(5000); // Slide 2
-            jest.advanceTimersByTime(5000); // Slide 3
-            jest.advanceTimersByTime(5000); // Back to slide 1
+            vi.advanceTimersByTime(5000); // Slide 2
+            vi.advanceTimersByTime(5000); // Slide 3
+            vi.advanceTimersByTime(5000); // Back to slide 1
         });
 
-        await waitFor(() => {
-            const indicators = screen.getAllByRole('button').filter((btn) => btn.className.includes('h-3 w-3 rounded-full'));
-            expect(indicators[0]).toHaveClass('bg-white');
-        });
+        const indicators = screen.getAllByRole('button').filter((btn) => btn.className.includes('h-3 w-3 rounded-full'));
+        expect(indicators[0]).toHaveClass('bg-white');
     });
 
     it('renders links for slides', () => {
@@ -180,7 +166,7 @@ describe('Carousel', () => {
     it('cleans up interval on unmount', () => {
         const { unmount } = render(<Carousel />);
 
-        const clearIntervalSpy = jest.spyOn(global, 'clearInterval');
+        const clearIntervalSpy = vi.spyOn(global, 'clearInterval');
 
         unmount();
 

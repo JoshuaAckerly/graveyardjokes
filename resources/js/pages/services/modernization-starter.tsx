@@ -1,11 +1,11 @@
 import PackagePaymentGate from '@/Components/PackagePaymentGate';
 import MainLayout from '@/Layouts/MainLayout';
-import { Head, Link } from '@inertiajs/react';
+import InertiaHead from '@/Components/InertiaHead';
+import { Link } from '@inertiajs/react';
 import { motion } from 'framer-motion';
 import { ArrowLeft, Check } from 'lucide-react';
 
 export default function SocialMediaStarterPackage() {
-    const cdn = import.meta.env.VITE_ASSET_URL || '';
 
     const features = [
         '3 platforms managed',
@@ -17,52 +17,7 @@ export default function SocialMediaStarterPackage() {
 
     return (
         <>
-            <Head>
-                <title>Social Media Management - Starter - $99/mo | Graveyard Jokes Studios</title>
-                <meta
-                    name="description"
-                    content="Starter social media management: consistent posting across 3 platforms every month. Content calendar, captions, hashtags, and monthly reporting."
-                />
-                <meta
-                    name="keywords"
-                    content="social media management, small business social media, content calendar, Instagram management, affordable social media"
-                />
-                <link rel="canonical" href="https://graveyardjokes.com/services/modernization-starter" />
-                {/* Open Graph */}
-                <meta property="og:title" content="Social Media Management - Starter - $99/mo | Graveyard Jokes Studios" />
-                <meta property="og:description" content="Starter social media management: consistent posting across 3 platforms every month." />
-                <meta property="og:image" content={`${cdn}/images/aboutBanner.webp`} />
-                <meta property="og:type" content="website" />
-                <meta property="og:url" content="https://graveyardjokes.com/services/modernization-starter" />
-                {/* Twitter */}
-                <meta name="twitter:card" content="summary_large_image" />
-                <meta name="twitter:title" content="Social Media Management - Starter - $99/mo | Graveyard Jokes Studios" />
-                <meta name="twitter:description" content="Starter social media management: consistent posting across 3 platforms every month." />
-                <meta name="twitter:image" content={`${cdn}/images/aboutBanner.webp`} />
-                <script type="application/ld+json">
-                    {`
-{
-  "@context": "https://schema.org",
-  "@type": "Service",
-  "serviceType": "Social Media Management",
-  "name": "Social Media Management - Starter",
-  "description": "Consistent posting across 3 platforms every month with content calendar, captions, and monthly reporting.",
-  "provider": {
-    "@type": "Organization",
-    "name": "GraveYard Jokes Studios Inc.",
-    "url": "https://graveyardjokes.com"
-  },
-  "offers": {
-    "@type": "Offer",
-    "price": "99",
-    "priceCurrency": "USD",
-    "availability": "https://schema.org/InStock"
-  },
-  "areaServed": "US"
-}
-`}
-                </script>
-            </Head>
+            <InertiaHead />
 
             <MainLayout>
                 <div className="mx-auto max-w-4xl px-4 py-8">

@@ -1,11 +1,11 @@
 import PackagePaymentGate from '@/Components/PackagePaymentGate';
 import MainLayout from '@/Layouts/MainLayout';
-import { Head, Link } from '@inertiajs/react';
+import InertiaHead from '@/Components/InertiaHead';
+import { Link } from '@inertiajs/react';
 import { motion } from 'framer-motion';
 import { ArrowLeft, Check } from 'lucide-react';
 
 export default function SocialMediaProfessionalPackage() {
-    const cdn = import.meta.env.VITE_ASSET_URL || '';
 
     const features = [
         'Everything in Starter',
@@ -18,30 +18,7 @@ export default function SocialMediaProfessionalPackage() {
 
     return (
         <>
-            <Head>
-                <title>Social Media Management - Professional - $149/mo | Graveyard Jokes Studios</title>
-                <meta
-                    name="description"
-                    content="Professional social media management: full management across 5 platforms with stories, reels, community engagement, and bi-weekly reporting."
-                />
-                <meta
-                    name="keywords"
-                    content="social media management, professional social media, Instagram reels, community management, content creation"
-                />
-                <link rel="canonical" href="https://graveyardjokes.com/services/modernization-professional" />
-                <meta property="og:title" content="Social Media Management - Professional - $149/mo | Graveyard Jokes Studios" />
-                <meta
-                    property="og:description"
-                    content="Full management across 5 platforms with stories, reels, community engagement, and bi-weekly reporting."
-                />
-                <meta property="og:image" content={`${cdn}/images/aboutBanner.webp`} />
-                <meta property="og:type" content="website" />
-                <meta property="og:url" content="https://graveyardjokes.com/services/modernization-professional" />
-                <meta name="twitter:card" content="summary_large_image" />
-                <meta name="twitter:title" content="Social Media Management - Professional - $149/mo | Graveyard Jokes Studios" />
-                <meta name="twitter:description" content="Full management across 5 platforms with stories, reels, and community engagement." />
-                <meta name="twitter:image" content={`${cdn}/images/aboutBanner.webp`} />
-            </Head>
+            <InertiaHead />
 
             <MainLayout>
                 <div className="mx-auto max-w-4xl px-4 py-8">

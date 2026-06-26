@@ -47,14 +47,9 @@ export default function Menu() {
             </li>
             <li className="text-[var(--color-text)]">
                 {isAuthenticated ? (
-                    <Link
-                        href={`${getAuthSystemUrl()}/logout`}
-                        method="post"
-                        as="button"
-                        className="font-inherit cursor-pointer border-none bg-transparent p-0 hover:underline"
-                    >
-                        Log Out
-                    </Link>
+                    <a href={`${getAuthSystemUrl()}/dashboard`} className="hover:underline">
+                        Dashboard
+                    </a>
                 ) : (
                     <a href={getLoginUrl('')} className="hover:underline">
                         Login

@@ -1,19 +1,10 @@
-import { Head } from '@inertiajs/react';
+import InertiaHead from '@/Components/InertiaHead';
 import React from 'react';
 
 const Terms: React.FC = () => {
     return (
         <>
-            <Head>
-                <title>Terms of Service | Graveyard Jokes Studios</title>
-                <meta
-                    name="description"
-                    content="Terms of Service for GraveYard Jokes Studios Inc. Learn about site usage, visitor tracking, intellectual property, and user conduct policies."
-                />
-                <meta name="keywords" content="terms of service, legal, user agreement, site policies, terms and conditions" />
-                <link rel="canonical" href="https://graveyardjokes.com/terms" />
-                <meta name="robots" content="noindex, follow" />
-            </Head>
+            <InertiaHead />
             <div title="Terms of Service" className="mx-auto max-w-4xl space-y-4 bg-gray-900 p-6 text-white">
                 <h1 className="text-2xl font-bold">Terms of Service</h1>
                 <p>

@@ -1,10 +1,10 @@
 import { getProjectUrl } from '@/env';
-import { jest } from '@jest/globals';
+import { vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import Menu from '../Menu';
 
 // Mock Inertia Link
-jest.mock('@inertiajs/react', () => ({
+vi.mock('@inertiajs/react', () => ({
     Link: ({ href, children, className }: any) => (
         <a href={href} className={className}>
             {children}

@@ -100,52 +100,7 @@ export default function ContactPricing() {
 
     return (
         <>
-            <InertiaHead>
-                <title>Contact | Graveyard Jokes Studios</title>
-                <meta name="description" content="Contact Graveyard Jokes Studios for custom websites. Get in touch to discuss your project." />
-                <meta name="keywords" content="contact, custom websites, web design, web development, entrepreneurs, creatives, independent brands" />
-                <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-                {/* Canonical */}
-                <link rel="canonical" href="https://graveyardjokes.com/contact" />
-
-                {/* Open Graph */}
-                <meta property="og:title" content="Contact | Graveyard Jokes Studios" />
-                <meta
-                    property="og:description"
-                    content="Contact Graveyard Jokes Studios for custom websites. Get in touch to discuss your project."
-                />
-                <meta property="og:image" content={`${cdn}/images/ContactBanner.webp`} />
-                <meta property="og:type" content="website" />
-                <meta property="og:url" content="https://graveyardjokes.com/contact" />
-
-                {/* Twitter */}
-                <meta name="twitter:card" content="summary_large_image" />
-                <meta name="twitter:title" content="Contact | Graveyard Jokes Studios" />
-                <meta
-                    name="twitter:description"
-                    content="Contact Graveyard Jokes Studios for custom websites. Get in touch to discuss your project."
-                />
-                <meta name="twitter:image" content={`${cdn}/images/ContactBanner.webp`} />
-
-                {/* Structured Data (JSON-LD) */}
-                <script type="application/ld+json">
-                    {`
-    {
-      "@context": "https://schema.org",
-  "@type": "Organization",
-  "name": "GraveYard Jokes Studios Inc.",
-      "url": "https://graveyardjokes.com",
-      "logo": "${cdn}/images/logo.webp",
-      "sameAs": [
-        "https://www.linkedin.com/in/graveyardjokes/",
-        "https://github.com/joshua-ackerly",
-        "https://www.instagram.com/graveyardjokesofficial/"
-      ]
-    }
-    `}
-                </script>
-            </InertiaHead>
+            <InertiaHead />
 
             <MainLayout>
                 {/* Contact Section */}

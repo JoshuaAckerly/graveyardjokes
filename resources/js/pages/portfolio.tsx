@@ -15,38 +15,7 @@ const Portfolio: React.FC = () => {
     return (
         <MainLayout>
             <>
-                <InertiaHead>
-                    <title>Portfolio | Graveyard Jokes Studios</title>
-                    <meta
-                        name="description"
-                        content="Explore the portfolio of Graveyard Jokes Studios, showcasing custom websites for entrepreneurs, creatives, and independent brands."
-                    />
-                    <meta
-                        name="keywords"
-                        content="portfolio, custom websites, entrepreneurs, creatives, independent brands, web design, web development"
-                    />
-                    <meta name="viewport" content="width=device-width, initial-scale=1" />
-                    <link rel="canonical" href="https://graveyardjokes.com/portfolio" />
-
-                    {/* Open Graph */}
-                    <meta property="og:title" content="Portfolio | Graveyard Jokes Studios" />
-                    <meta
-                        property="og:description"
-                        content="Explore the portfolio of Graveyard Jokes Studios, showcasing custom websites for entrepreneurs, creatives, and independent brands."
-                    />
-                    <meta property="og:image" content={`${cdn}/images/PortfolioBanner.webp`} />
-                    <meta property="og:type" content="website" />
-                    <meta property="og:url" content="https://graveyardjokes.com/portfolio" />
-
-                    {/* Twitter */}
-                    <meta name="twitter:card" content="summary_large_image" />
-                    <meta name="twitter:title" content="Portfolio | Graveyard Jokes Studios" />
-                    <meta
-                        name="twitter:description"
-                        content="Explore the portfolio of Graveyard Jokes Studios, showcasing custom websites for entrepreneurs, creatives, and independent brands."
-                    />
-                    <meta name="twitter:image" content={`${cdn}/images/PortfolioBanner.webp`} />
-                </InertiaHead>
+                <InertiaHead />
             </>
 
             <section className="relative z-0 flex flex-col items-center gap-12 rounded-lg bg-[var(--color-foreground)] p-6 text-white shadow-lg sm:p-10">

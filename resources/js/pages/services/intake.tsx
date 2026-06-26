@@ -1,6 +1,7 @@
 import MainLayout from '@/Layouts/MainLayout';
 import { trackFormSubmission, trackPackageSelection } from '@/hooks/use-google-analytics';
-import { Head, Link, useForm } from '@inertiajs/react';
+import InertiaHead from '@/Components/InertiaHead';
+import { Link, useForm } from '@inertiajs/react';
 import { ArrowLeft } from 'lucide-react';
 import type { FormEvent } from 'react';
 
@@ -170,14 +171,7 @@ export default function ServicesIntake({
 
     return (
         <>
-            <Head>
-                <title>Project Intake Form | Graveyard Jokes Studios</title>
-                <meta
-                    name="description"
-                    content="Complete this pre-payment project questionnaire so we can collect your website goals, requirements, and launch details before checkout."
-                />
-                <meta name="robots" content="noindex, nofollow" />
-            </Head>
+            <InertiaHead />
 
             <MainLayout>
                 <div className="mx-auto max-w-5xl px-4 py-8 text-white">

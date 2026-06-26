@@ -1,12 +1,12 @@
-import { jest } from '@jest/globals';
+import { vi } from 'vitest';
 import { fireEvent, render, screen } from '@testing-library/react';
 import ServicesIntake from '../intake';
 
-const mockSetData = jest.fn();
-const mockPost = jest.fn();
-const mockUseForm = jest.fn();
+const mockSetData = vi.fn();
+const mockPost = vi.fn();
+const mockUseForm = vi.fn();
 
-jest.mock('@inertiajs/react', () => ({
+vi.mock('@inertiajs/react', () => ({
     Head: ({ children }: any) => <>{children}</>,
     Link: ({ href, children, className }: any) => (
         <a href={href} className={className}>
@@ -16,7 +16,7 @@ jest.mock('@inertiajs/react', () => ({
     useForm: (...args: any[]) => mockUseForm(...args),
 }));
 
-jest.mock('@/Layouts/MainLayout', () => ({
+vi.mock('@/Layouts/MainLayout', () => ({
     __esModule: true,
     default: ({ children }: { children: any }) => <div data-testid="main-layout">{children}</div>,
 }));

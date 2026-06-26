@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { useEffect, useRef } from 'react';
 import { loadPayPalSdk } from '../lib/paypalSdk';
 
@@ -59,15 +58,16 @@ export default function PayPalCheckoutButton({ amount, item, onSuccess }: PayPal
                     onApprove: async (_data, actions) => {
                         const details = await actions.order.capture();
                         // Send payment details to auth-system
-                        await axios.post(
-                            'http://localhost:8007/api/purchases',
-                            {
+                        await fetch('/api/purchases', {
+                            method: 'POST',
+                            credentials: 'include',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({
                                 item,
                                 amount,
                                 paypal_transaction_id: (details as Record<string, unknown>).id,
-                            },
-                            { withCredentials: true },
-                        );
+                            }),
+                        });
                         if (onSuccess) onSuccess(details as Record<string, unknown>);
                         alert('Payment successful!');
                     },

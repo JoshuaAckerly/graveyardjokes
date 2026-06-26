@@ -1,10 +1,12 @@
 import { Head } from '@inertiajs/react';
+import { getAuthSystemUrl } from '@/env';
 
 // This page is no longer used. Login is handled by the auth-system project.
 
 export default function Login() {
     if (typeof window !== 'undefined') {
-        window.location.replace('http://auth-system.test/login');
+        const returnUrl = window.location.href;
+        window.location.replace(`${getAuthSystemUrl()}/login?return_url=${encodeURIComponent(returnUrl)}`);
         return null;
     }
     return (

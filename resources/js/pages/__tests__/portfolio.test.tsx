@@ -1,4 +1,4 @@
-import { jest } from '@jest/globals';
+import { vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
 
 // Mock component for testing
@@ -19,7 +19,7 @@ const Portfolio = () => (
 
 describe('Portfolio Page', () => {
     beforeEach(() => {
-        (global as any).fetch = jest.fn().mockImplementation(() => new Promise(() => {}));
+        (global as any).fetch = vi.fn().mockImplementation(() => new Promise(() => {}));
     });
 
     it('renders page heading and intro copy', () => {

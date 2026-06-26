@@ -79,15 +79,13 @@ export default function MobileMenu() {
                                 </li>
                                 <li className="mb-4 bg-[var(--primary)]">
                                     {isAuthenticated ? (
-                                        <Link
-                                            href={`${getAuthSystemUrl()}/logout`}
-                                            method="post"
-                                            as="button"
-                                            className="font-inherit cursor-pointer border-none bg-transparent p-0 text-black hover:underline"
+                                        <a
+                                            href={`${getAuthSystemUrl()}/dashboard`}
+                                            className="text-black hover:underline"
                                             onClick={() => setIsOpen(false)}
                                         >
-                                            Log Out
-                                        </Link>
+                                            Dashboard
+                                        </a>
                                     ) : (
                                         <a href={getLoginUrl('')} className="text-black hover:underline" onClick={() => setIsOpen(false)}>
                                             Login

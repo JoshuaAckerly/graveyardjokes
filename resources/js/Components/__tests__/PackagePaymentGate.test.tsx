@@ -1,10 +1,10 @@
-import { jest } from '@jest/globals';
+import { vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import PackagePaymentGate from '../PackagePaymentGate';
 
-const mockUsePage = jest.fn();
+const mockUsePage = vi.fn();
 
-jest.mock('@inertiajs/react', () => ({
+vi.mock('@inertiajs/react', () => ({
     Link: ({ href, children, className }: any) => (
         <a href={href} className={className}>
             {children}
@@ -13,7 +13,7 @@ jest.mock('@inertiajs/react', () => ({
     usePage: () => mockUsePage(),
 }));
 
-jest.mock('@/Components/PayPalCheckoutButton', () => ({
+vi.mock('@/Components/PayPalCheckoutButton', () => ({
     __esModule: true,
     default: ({ amount, item }: { amount: number; item: string }) => <div data-testid="paypal-checkout">{`${item}-${amount}`}</div>,
 }));

@@ -30,23 +30,7 @@ export default function LinkedIn() {
     return (
         <MainLayout>
             <>
-                <InertiaHead>
-                    <title>LinkedIn | Graveyard Jokes Studios</title>
-                    <meta
-                        name="description"
-                        content="Connect with Graveyard Jokes Studios on LinkedIn — a creative web development studio building custom platforms for entrepreneurs, creatives, and independent brands."
-                    />
-                    <link rel="canonical" href="https://graveyardjokes.com/linkedin" />
-                    <meta property="og:title" content="LinkedIn | Graveyard Jokes Studios" />
-                    <meta
-                        property="og:description"
-                        content="Connect with Graveyard Jokes Studios on LinkedIn — a creative web development studio for entrepreneurs, creatives, and independent brands."
-                    />
-                    <meta property="og:type" content="website" />
-                    <meta property="og:url" content="https://graveyardjokes.com/linkedin" />
-                    <meta name="twitter:card" content="summary" />
-                    <meta name="twitter:title" content="LinkedIn | Graveyard Jokes Studios" />
-                </InertiaHead>
+                <InertiaHead />
 
                 <section className="relative z-0 flex flex-col items-center gap-10 rounded-lg bg-[var(--color-foreground)] p-6 text-white shadow-lg sm:p-10">
                     {/* Hero */}

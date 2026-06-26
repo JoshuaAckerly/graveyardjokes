@@ -1,5 +1,5 @@
 import { type Review, type ReviewsResponse, type StarRating } from '@/types/business-profile';
-import { useEffect, useState } from 'react';
+import { useFetchApi } from '@gj/hooks';
 
 const STAR_MAP: Record<StarRating, number> = {
     ONE: 1,
@@ -88,32 +88,7 @@ function SkeletonCard() {
 }
 
 export default function GoogleReviews() {
-    const [data, setData] = useState<ReviewsResponse | null>(null);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(false);
-
-    useEffect(() => {
-        let cancelled = false;
-
-        fetch('/api/business/reviews')
-            .then((r) => {
-                if (!r.ok) throw new Error('non-ok');
-                return r.json() as Promise<ReviewsResponse>;
-            })
-            .then((json) => {
-                if (!cancelled) setData(json);
-            })
-            .catch(() => {
-                if (!cancelled) setError(true);
-            })
-            .finally(() => {
-                if (!cancelled) setLoading(false);
-            });
-
-        return () => {
-            cancelled = true;
-        };
-    }, []);
+    const { data, loading, error } = useFetchApi<ReviewsResponse>('/api/business/reviews');
 
     const reviews = data?.reviews ?? [];
     const totalCount = data?.totalReviewCount ?? reviews.length;

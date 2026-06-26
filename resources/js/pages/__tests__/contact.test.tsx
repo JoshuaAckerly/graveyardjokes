@@ -1,4 +1,4 @@
-import { jest } from '@jest/globals';
+import { vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
@@ -50,8 +50,8 @@ const ContactPricing = () => {
 
 describe('ContactPricing', () => {
     beforeEach(() => {
-        jest.clearAllMocks();
-        (global as any).fetch = jest.fn().mockImplementation(() => Promise.resolve({ ok: true }));
+        vi.clearAllMocks();
+        (global as any).fetch = vi.fn().mockImplementation(() => Promise.resolve({ ok: true }));
     });
 
     it('renders contact heading and call-to-action text', () => {

@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Models\PageSeo;
 use Illuminate\Console\Command;
 use Spatie\Sitemap\Sitemap;
 use Spatie\Sitemap\Tags\Url;
@@ -22,31 +23,53 @@ class GenerateSitemap extends Command
         }
         $base = rtrim($baseUrl, '/');
 
-        Sitemap::create()
+        // Paths marked noindex in the DB should be excluded from the sitemap
+        $noindexPaths = PageSeo::where('robots', 'like', '%noindex%')
+            ->pluck('page_url')
+            ->map(fn (string $p) => rtrim($p, '/'))
+            ->all();
+
+        $shouldInclude = function (string $path) use ($base, $noindexPaths): bool {
+            $stripped = str_replace($base, '', rtrim($path, '/'));
+
+            return ! in_array($stripped, $noindexPaths, true);
+        };
+
+        $sitemap = Sitemap::create();
+
+        $entries = [
             // Core pages
-            ->add(Url::create($base.'/')->setPriority(1.0)->setChangeFrequency(Url::CHANGE_FREQUENCY_WEEKLY))
-            ->add(Url::create($base.'/about')->setPriority(0.7)->setChangeFrequency(Url::CHANGE_FREQUENCY_MONTHLY))
-            ->add(Url::create($base.'/contact')->setPriority(0.6)->setChangeFrequency(Url::CHANGE_FREQUENCY_MONTHLY))
-            ->add(Url::create($base.'/portfolio')->setPriority(0.8)->setChangeFrequency(Url::CHANGE_FREQUENCY_MONTHLY))
-            ->add(Url::create($base.'/studio')->setPriority(0.5)->setChangeFrequency(Url::CHANGE_FREQUENCY_MONTHLY))
+            [$base.'/', 1.0, Url::CHANGE_FREQUENCY_WEEKLY],
+            [$base.'/about', 0.7, Url::CHANGE_FREQUENCY_MONTHLY],
+            [$base.'/contact', 0.6, Url::CHANGE_FREQUENCY_MONTHLY],
+            [$base.'/portfolio', 0.8, Url::CHANGE_FREQUENCY_MONTHLY],
+            [$base.'/studio', 0.5, Url::CHANGE_FREQUENCY_MONTHLY],
             // Services overview + pricing tiers
-            ->add(Url::create($base.'/services')->setPriority(0.9)->setChangeFrequency(Url::CHANGE_FREQUENCY_MONTHLY))
-            ->add(Url::create($base.'/services/starter')->setPriority(0.8)->setChangeFrequency(Url::CHANGE_FREQUENCY_MONTHLY))
-            ->add(Url::create($base.'/services/professional')->setPriority(0.8)->setChangeFrequency(Url::CHANGE_FREQUENCY_MONTHLY))
-            ->add(Url::create($base.'/services/premium')->setPriority(0.8)->setChangeFrequency(Url::CHANGE_FREQUENCY_MONTHLY))
+            [$base.'/services', 0.9, Url::CHANGE_FREQUENCY_MONTHLY],
+            [$base.'/services/starter', 0.8, Url::CHANGE_FREQUENCY_MONTHLY],
+            [$base.'/services/professional', 0.8, Url::CHANGE_FREQUENCY_MONTHLY],
+            [$base.'/services/premium', 0.8, Url::CHANGE_FREQUENCY_MONTHLY],
             // Design service detail pages
-            ->add(Url::create($base.'/services/design-starter')->setPriority(0.7)->setChangeFrequency(Url::CHANGE_FREQUENCY_MONTHLY))
-            ->add(Url::create($base.'/services/design-professional')->setPriority(0.7)->setChangeFrequency(Url::CHANGE_FREQUENCY_MONTHLY))
-            ->add(Url::create($base.'/services/design-premium')->setPriority(0.7)->setChangeFrequency(Url::CHANGE_FREQUENCY_MONTHLY))
+            [$base.'/services/design-starter', 0.7, Url::CHANGE_FREQUENCY_MONTHLY],
+            [$base.'/services/design-professional', 0.7, Url::CHANGE_FREQUENCY_MONTHLY],
+            [$base.'/services/design-premium', 0.7, Url::CHANGE_FREQUENCY_MONTHLY],
             // Modernization service detail pages
-            ->add(Url::create($base.'/services/modernization-starter')->setPriority(0.7)->setChangeFrequency(Url::CHANGE_FREQUENCY_MONTHLY))
-            ->add(Url::create($base.'/services/modernization-professional')->setPriority(0.7)->setChangeFrequency(Url::CHANGE_FREQUENCY_MONTHLY))
-            ->add(Url::create($base.'/services/modernization-premium')->setPriority(0.7)->setChangeFrequency(Url::CHANGE_FREQUENCY_MONTHLY))
+            [$base.'/services/modernization-starter', 0.7, Url::CHANGE_FREQUENCY_MONTHLY],
+            [$base.'/services/modernization-professional', 0.7, Url::CHANGE_FREQUENCY_MONTHLY],
+            [$base.'/services/modernization-premium', 0.7, Url::CHANGE_FREQUENCY_MONTHLY],
             // Legal pages
-            ->add(Url::create($base.'/terms')->setPriority(0.3)->setChangeFrequency(Url::CHANGE_FREQUENCY_YEARLY))
-            ->add(Url::create($base.'/privacy')->setPriority(0.3)->setChangeFrequency(Url::CHANGE_FREQUENCY_YEARLY))
-            ->add(Url::create($base.'/cookies')->setPriority(0.3)->setChangeFrequency(Url::CHANGE_FREQUENCY_YEARLY))
-            ->writeToFile(public_path('sitemap.xml'));
+            [$base.'/terms', 0.3, Url::CHANGE_FREQUENCY_YEARLY],
+            [$base.'/privacy', 0.3, Url::CHANGE_FREQUENCY_YEARLY],
+            [$base.'/cookies', 0.3, Url::CHANGE_FREQUENCY_YEARLY],
+        ];
+
+        foreach ($entries as [$url, $priority, $changeFreq]) {
+            if ($shouldInclude($url)) {
+                $sitemap->add(Url::create($url)->setPriority($priority)->setChangeFrequency($changeFreq));
+            }
+        }
+
+        $sitemap->writeToFile(public_path('sitemap.xml'));
 
         $this->info('✅ sitemap.xml written to '.public_path('sitemap.xml'));
 

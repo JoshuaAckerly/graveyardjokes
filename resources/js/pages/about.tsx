@@ -1,7 +1,7 @@
 import InertiaHead from '@/Components/InertiaHead';
 import MainLayout from '@/Layouts/MainLayout';
 import { motion } from 'framer-motion';
-import { getEnvVar, getProjectUrl } from '../env';
+import { getEnvVar } from '../env';
 
 export default function About() {
     const cdn = getEnvVar('VITE_ASSET_URL');
@@ -177,60 +177,9 @@ export default function About() {
         'Jest',
     ];
 
-    const projectUrl = getProjectUrl('graveyardjokes');
-
     return (
         <>
-            <InertiaHead>
-                <title>About Joshua Ackerly | Graveyard Jokes Studios</title>
-                <meta
-                    name="description"
-                    content="Meet GraveyardJokes, a web design and development team focused on clean UX, reliable code, and websites built to convert visitors into customers."
-                />
-                <meta
-                    name="keywords"
-                    content="Joshua Ackerly, Graveyard Jokes Studios, full-stack developer, Laravel, React, TypeScript, Tailwind, web design, platform development, web applications"
-                />
-
-                <link rel="canonical" href={`${projectUrl}about`} />
-
-                <meta property="og:title" content="About Joshua Ackerly | Graveyard Jokes Studios" />
-                <meta
-                    property="og:description"
-                    content="Meet GraveyardJokes, a web design and development team focused on clean UX, reliable code, and websites built to convert visitors into customers."
-                />
-                <meta property="og:image" content={`${cdn}/images/aboutBanner.webp`} />
-                <meta property="og:type" content="website" />
-                <meta property="og:url" content={`${projectUrl}about`} />
-
-                <meta name="twitter:card" content="summary_large_image" />
-                <meta name="twitter:title" content="About Joshua Ackerly | Graveyard Jokes Studios" />
-                <meta
-                    name="twitter:description"
-                    content="Meet GraveyardJokes, a web design and development team focused on clean UX, reliable code, and websites built to convert visitors into customers."
-                />
-                <meta name="twitter:image" content={`${cdn}/images/aboutBanner.webp`} />
-
-                <script type="application/ld+json">
-                    {`
-{
-  "@context": "https://schema.org",
-  "@type": "Person",
-  "name": "Joshua Ackerly",
-  "url": "https://graveyardjokes.com",
-  "sameAs": [
-    "https://www.linkedin.com/in/joshua-ackerly",
-    "https://github.com/JoshuaAckerly"
-  ],
-  "jobTitle": "Full-Stack Web Developer",
-  "worksFor": {
-    "@type": "Organization",
-    "name": "GraveYard Jokes Studios Inc."
-  }
-}
-                    `}
-                </script>
-            </InertiaHead>
+            <InertiaHead />
 
             <MainLayout>
                 <motion.main

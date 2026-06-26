@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\PageSeo;
 use Illuminate\Foundation\Inspiring;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
@@ -75,12 +76,14 @@ class HandleInertiaRequests extends Middleware
             'quote' => ['message' => trim($message), 'author' => trim($author)],
             'auth' => [
                 'user' => $request->user(),
+                'is_admin' => $request->user()?->email === config('app.admin_email'),
             ],
             'ziggy' => fn (): array => [
                 ...(new Ziggy)->toArray(),
                 'location' => $request->url(),
             ],
             'sidebarOpen' => ! $request->hasCookie('sidebar_state') || $request->cookie('sidebar_state') === 'true',
+            'seo' => PageSeo::forPath($request->path(), 'graveyardjokes'),
             'websiteIntake' => [
                 'completed' => (bool) ($intakeSession['completed'] ?? false),
                 'submissionId' => $submissionId !== null ? (int) $submissionId : null,

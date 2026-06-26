@@ -39,67 +39,10 @@ export default function Home(): JSX.Element {
         fetchJoke();
     }, []);
 
-    const projectUrl = getProjectUrl('graveyardjokes');
     return (
         <MainLayout>
             <>
-                <InertiaHead>
-                    <title>Graveyard Jokes Studios | Custom Websites for Entrepreneurs, Creatives, and Independent Brands</title>
-                    <meta
-                        name="description"
-                        content="GraveyardJokes is a web design and development company creating fast, modern websites that help businesses generate leads and grow online."
-                    />
-                    <meta
-                        name="keywords"
-                        content="custom websites, entrepreneurs, creatives, independent brands, small business, web design, web development, portfolio, online presence"
-                    />
-                    <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-                    {/* Canonical */}
-                    <link rel="canonical" href={projectUrl} />
-
-                    {/* Open Graph */}
-                    <meta
-                        property="og:title"
-                        content="Graveyard Jokes Studios | Custom Websites for Entrepreneurs, Creatives, and Independent Brands"
-                    />
-                    <meta
-                        property="og:description"
-                        content="GraveyardJokes is a web design and development company creating fast, modern websites that help businesses generate leads and grow online."
-                    />
-                    <meta property="og:image" content={`${cdn}/images/AdobeStock_327183052.webp`} />
-                    <meta property="og:type" content="website" />
-                    <meta property="og:url" content={projectUrl} />
-
-                    {/* Twitter */}
-                    <meta name="twitter:card" content="summary_large_image" />
-                    <meta
-                        name="twitter:title"
-                        content="Graveyard Jokes Studios | Custom Websites for Entrepreneurs, Creatives, and Independent Brands"
-                    />
-                    <meta
-                        name="twitter:description"
-                        content="GraveyardJokes is a web design and development company creating fast, modern websites that help businesses generate leads and grow online."
-                    />
-                    <meta name="twitter:image" content={`${cdn}/images/AdobeStock_327183052.webp`} />
-
-                    {/* Structured Data (JSON-LD) */}
-                    <script type="application/ld+json">
-                        {`
-    {
-      "@context": "https://schema.org",
-      "@type": "Organization",
-      "name": "GraveYard Jokes Studios Inc.",
-      "url": "${projectUrl}",
-      "logo": "${cdn}/images/logo.webp",
-      "sameAs": [
-        "https://www.linkedin.com/in/joshua-ackerly",
-        "https://github.com/joshua-ackerly"
-      ]
-    }
-    `}
-                    </script>
-                </InertiaHead>
+                <InertiaHead />
 
                 <a href="/" className="sr-only">
                     Home Page

@@ -1,4 +1,4 @@
-import { jest } from '@jest/globals';
+import { vi } from 'vitest';
 import { act, render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { useState } from 'react';
@@ -61,7 +61,7 @@ const Home = () => {
 
 describe('Welcome Page (Home)', () => {
     beforeEach(() => {
-        const fetchMock = jest.fn((input: unknown, init?: { method?: string }) => {
+        const fetchMock = vi.fn((input: unknown, init?: { method?: string }) => {
             const url = String(input);
 
             if (init?.method === 'HEAD') {
@@ -82,7 +82,7 @@ describe('Welcome Page (Home)', () => {
     });
 
     afterEach(() => {
-        jest.restoreAllMocks();
+        vi.restoreAllMocks();
     });
 
     it('renders the main heading', () => {
@@ -134,7 +134,7 @@ describe('Welcome Page (Home)', () => {
 
     it('shows loading state while fetching', async () => {
         // Delay the fetch resolution so we can observe the loading state
-        (global as any).fetch = jest.fn(
+        (global as any).fetch = vi.fn(
             () =>
                 new Promise((resolve) =>
                     setTimeout(
@@ -162,7 +162,7 @@ describe('Welcome Page (Home)', () => {
     });
 
     it('handles fetch failure gracefully without crashing', async () => {
-        (global as any).fetch = jest.fn(() => Promise.resolve({ ok: false, json: async () => ({}) }));
+        (global as any).fetch = vi.fn(() => Promise.resolve({ ok: false, json: async () => ({}) }));
 
         render(<Home />);
 

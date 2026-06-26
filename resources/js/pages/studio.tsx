@@ -42,31 +42,7 @@ export default function Studio() {
     return (
         <MainLayout>
             <>
-                <InertiaHead>
-                    <title>Studio | Graveyard Jokes Studios</title>
-                    <meta
-                        name="description"
-                        content="Graveyard Jokes Studios — a creative web development studio building custom platforms for entrepreneurs, creatives, and independent brands."
-                    />
-                    <meta
-                        name="keywords"
-                        content="Graveyard Jokes Studios, web studio, creative development, custom platforms, custom websites, Laravel, React"
-                    />
-                    <link rel="canonical" href="https://graveyardjokes.com/studio" />
-                    <meta property="og:title" content="Studio | Graveyard Jokes Studios" />
-                    <meta
-                        property="og:description"
-                        content="Graveyard Jokes Studios — a creative web development studio building custom platforms for entrepreneurs, creatives, and independent brands."
-                    />
-                    <meta property="og:type" content="website" />
-                    <meta property="og:url" content="https://graveyardjokes.com/studio" />
-                    <meta name="twitter:card" content="summary_large_image" />
-                    <meta name="twitter:title" content="Studio | Graveyard Jokes Studios" />
-                    <meta
-                        name="twitter:description"
-                        content="Graveyard Jokes Studios — a creative web development studio building custom platforms for entrepreneurs, creatives, and independent brands."
-                    />
-                </InertiaHead>
+                <InertiaHead />
 
                 <section className="relative z-0 flex flex-col items-center gap-12 rounded-lg bg-[var(--color-foreground)] p-6 text-white shadow-lg sm:p-10">
                     {/* Hero */}

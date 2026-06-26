@@ -1,5 +1,5 @@
 import { type BusinessInfo, type DayOfWeek, type TimePeriod } from '@/types/business-profile';
-import { useEffect, useState } from 'react';
+import { useFetchApi } from '@gj/hooks';
 
 const DAY_ORDER: DayOfWeek[] = ['MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY', 'SUNDAY'];
 const DAY_LABELS: Record<DayOfWeek, string> = {
@@ -54,28 +54,7 @@ function periodForDay(periods: TimePeriod[], day: DayOfWeek): TimePeriod | undef
 }
 
 export default function BusinessHours() {
-    const [data, setData] = useState<BusinessInfo | null>(null);
-    const [loading, setLoading] = useState(true);
-
-    useEffect(() => {
-        let cancelled = false;
-
-        fetch('/api/business/info')
-            .then((r) => (r.ok ? (r.json() as Promise<BusinessInfo>) : Promise.reject()))
-            .then((json) => {
-                if (!cancelled) setData(json);
-            })
-            .catch(() => {
-                // Silently fail — no hours to show
-            })
-            .finally(() => {
-                if (!cancelled) setLoading(false);
-            });
-
-        return () => {
-            cancelled = true;
-        };
-    }, []);
+    const { data, loading } = useFetchApi<BusinessInfo>('/api/business/info');
 
     if (loading) {
         return (

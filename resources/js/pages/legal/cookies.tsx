@@ -1,19 +1,10 @@
 // resources/js/Pages/Legal/Cookies.tsx
-import { Head } from '@inertiajs/react';
+import InertiaHead from '@/Components/InertiaHead';
 
 const Cookies = () => {
     return (
         <>
-            <Head>
-                <title>Cookie Policy | Graveyard Jokes Studios</title>
-                <meta
-                    name="description"
-                    content="Cookie Policy for GraveYard Jokes Studios Inc. Learn about the cookies we use, including session cookies and Google Analytics."
-                />
-                <meta name="keywords" content="cookie policy, cookies, tracking, analytics, GDPR compliance, data privacy" />
-                <link rel="canonical" href="https://graveyardjokes.com/cookies" />
-                <meta name="robots" content="noindex, follow" />
-            </Head>
+            <InertiaHead />
             <div title="Cookie Policy" className="mx-auto max-w-4xl space-y-4 bg-gray-900 p-6 text-white">
                 <h1 className="text-2xl font-bold">Cookie Policy</h1>
                 <p>

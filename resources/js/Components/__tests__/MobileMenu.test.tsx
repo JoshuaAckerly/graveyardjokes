@@ -1,11 +1,11 @@
 import { getProjectUrl } from '@/env';
-import { jest } from '@jest/globals';
+import { vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import MobileMenu from '../MobileMenu';
 
 // Mock Inertia Link
-jest.mock('@inertiajs/react', () => ({
+vi.mock('@inertiajs/react', () => ({
     Link: ({ href, children, className, onClick }: any) => (
         <a href={href} className={className} onClick={onClick}>
             {children}

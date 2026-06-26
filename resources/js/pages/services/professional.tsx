@@ -1,11 +1,11 @@
 import PackagePaymentGate from '@/Components/PackagePaymentGate';
 import MainLayout from '@/Layouts/MainLayout';
-import { Head, Link } from '@inertiajs/react';
+import InertiaHead from '@/Components/InertiaHead';
+import { Link } from '@inertiajs/react';
 import { motion } from 'framer-motion';
 import { ArrowLeft, Check } from 'lucide-react';
 
 export default function ProfessionalPackage() {
-    const cdn = import.meta.env.VITE_ASSET_URL || '';
 
     const features = [
         'Everything in Starter',
@@ -21,32 +21,7 @@ export default function ProfessionalPackage() {
 
     return (
         <>
-            <Head>
-                <title>Professional Website Package - $149 | GraveYard Jokes Studios</title>
-                <meta
-                    name="description"
-                    content="Professional plan for growing brands: custom multi-page design, advanced integrations, and performance optimization."
-                />
-                <meta name="keywords" content="professional package, custom website, multi-page design, web development, small business website" />
-                <link rel="canonical" href="https://graveyardjokes.com/services/professional" />
-                {/* Open Graph */}
-                <meta property="og:title" content="Professional Website Package - $149 | GraveYard Jokes Studios" />
-                <meta
-                    property="og:description"
-                    content="Professional plan for growing brands: custom multi-page design, advanced integrations, and performance optimization."
-                />
-                <meta property="og:image" content={`${cdn}/images/aboutBanner.webp`} />
-                <meta property="og:type" content="website" />
-                <meta property="og:url" content="https://graveyardjokes.com/services/professional" />
-                {/* Twitter */}
-                <meta name="twitter:card" content="summary_large_image" />
-                <meta name="twitter:title" content="Professional Website Package - $149 | GraveYard Jokes Studios" />
-                <meta
-                    name="twitter:description"
-                    content="Professional plan for growing brands: custom multi-page design, advanced integrations, and performance optimization."
-                />
-                <meta name="twitter:image" content={`${cdn}/images/aboutBanner.webp`} />
-            </Head>
+            <InertiaHead />
             <MainLayout>
                 <div className="mx-auto max-w-4xl px-4 py-8">
                     <Link href="/services" className="mb-6 inline-flex items-center gap-2 text-white transition hover:text-(--primary)">
