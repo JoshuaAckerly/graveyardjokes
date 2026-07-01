@@ -26,11 +26,11 @@ Route::domain('www.graveyardjokes.com')->group(function () {
     })->where('any', '.*');
 });
 
-// ─── MAINTENANCE MODE ────────────────────────────────────────────────────────
-// Remove this block when the security audit is complete.
-Route::get('/{any}', function () {
-    return response()->view('errors.503', [], 503);
-})->where('any', '.*')->name('maintenance');
+// ─── MAINTENANCE MODE (disabled — security audit complete) ──────────────────
+// Uncomment to re-enable:
+// Route::get('/{any}', function () {
+//     return response()->view('errors.503', [], 503);
+// })->where('any', '.*')->name('maintenance');
 // ─────────────────────────────────────────────────────────────────────────────
 
 Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');

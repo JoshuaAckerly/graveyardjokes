@@ -95,6 +95,12 @@ class OgImageController
             // Resolve relative URLs
             $imgUrl = $this->resolveUrl($ogImage, $target);
 
+            // SSRF protection on the resolved image URL too (og:image could point anywhere)
+            $imgHost = parse_url($imgUrl, PHP_URL_HOST);
+            if (! $imgHost || $this->isPrivateAddress($imgHost)) {
+                return response()->json(['error' => 'Invalid image host'], 422);
+            }
+
             // Fetch image
             /** @var Response $imgResp */
             $imgResp = Http::withHeaders(['User-Agent' => 'GraveyardJokesBot/1.0'])->timeout(10)->get($imgUrl);

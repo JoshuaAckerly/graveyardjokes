@@ -24,8 +24,13 @@ dotenv.config({ path: join(__dirname, '..', '.env') });
 
 // Configuration
 const BUCKET_NAME = 'graveyardjokes-cdn';
-const AWS_REGION = 'us-east-2';
+const AWS_REGION = process.env.AWS_DEFAULT_REGION || 'us-east-2';
 const DRY_RUN = true; // Set to false to actually move files
+
+// Files that must never be moved — already in the correct prefix for their app
+const EXCLUSION_LIST = new Set([
+  'studio/images/GraveYardJokesLogoJester.svg', // referenced by studio app at this exact path
+]);
 
 // Project mapping configuration
 const PROJECT_MAPPING = {
@@ -100,12 +105,14 @@ const PROJECT_MAPPING = {
   },
 };
 
-// Initialize S3 client
+// Initialize S3 client — prefers admin credentials (AWS_ACCESS_KEY_ID_ADMIN) which
+// have full-bucket access needed for copy/move operations. Falls back to the
+// regular app key if admin key is not set.
 const s3Client = new S3Client({
   region: AWS_REGION,
   credentials: {
-    accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+    accessKeyId: process.env.AWS_ACCESS_KEY_ID_ADMIN || process.env.AWS_ACCESS_KEY_ID,
+    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY_ADMIN || process.env.AWS_SECRET_ACCESS_KEY,
   },
 });
 
@@ -138,6 +145,11 @@ async function listAllObjects() {
  * Determine which project a file belongs to based on its key/name
  */
 function determineProject(key) {
+  // Skip explicitly excluded keys
+  if (EXCLUSION_LIST.has(key)) {
+    return { project: null, alreadyOrganized: true, currentFolder: key.split('/')[0] };
+  }
+
   const filename = basename(key).toLowerCase();
   const keyLower = key.toLowerCase();
 
