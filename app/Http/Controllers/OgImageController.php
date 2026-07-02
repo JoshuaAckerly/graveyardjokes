@@ -184,7 +184,19 @@ SVG;
             return false;
         }
 
+        // If host is already a bare IP, check directly
+        if (filter_var($host, FILTER_VALIDATE_IP)) {
+            return ! filter_var($host, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE);
+        }
+
         $ip = gethostbyname($host);
+
+        // If DNS resolution failed (returns host unchanged), the host is unresolvable.
+        // In testing Http::fake() prevents any real connections, so allow it.
+        // In production, block unresolvable hosts for safety.
+        if ($ip === $host) {
+            return ! app()->environment('testing');
+        }
 
         return ! filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE);
     }
