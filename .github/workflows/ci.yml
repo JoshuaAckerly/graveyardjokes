@@ -34,6 +34,13 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Checkout shared packages
+        uses: actions/checkout@v4
+        with:
+          repository: JoshuaAckerly/packages
+          token: ${{ secrets.GH_PAT }}
+          path: ../packages
+
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
@@ -104,6 +111,13 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+
+      - name: Checkout shared packages
+        uses: actions/checkout@v4
+        with:
+          repository: JoshuaAckerly/packages
+          token: ${{ secrets.GH_PAT }}
+          path: ../packages
 
       - name: Setup Node
         uses: actions/setup-node@v4
