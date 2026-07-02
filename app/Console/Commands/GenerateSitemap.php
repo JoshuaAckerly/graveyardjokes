@@ -26,7 +26,7 @@ class GenerateSitemap extends Command
         // Paths marked noindex in the DB should be excluded from the sitemap
         $noindexPaths = PageSeo::where('robots', 'like', '%noindex%')
             ->pluck('page_url')
-            ->map(fn (string $p) => rtrim($p, '/'))
+            ->map(fn (mixed $p) => rtrim((string) $p, '/'))
             ->all();
 
         $shouldInclude = function (string $path) use ($base, $noindexPaths): bool {

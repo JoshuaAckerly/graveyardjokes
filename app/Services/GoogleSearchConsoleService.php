@@ -79,10 +79,10 @@ class GoogleSearchConsoleService
 
         $rows = array_map(fn (array $row) => [
             'query' => $row['keys'][0] ?? '',
-            'clicks' => (int) ($row['clicks'] ?? 0),
-            'impressions' => (int) ($row['impressions'] ?? 0),
-            'ctr' => round((float) ($row['ctr'] ?? 0) * 100, 2),
-            'position' => round((float) ($row['position'] ?? 0), 1),
+            'clicks' => $row['clicks'],
+            'impressions' => $row['impressions'],
+            'ctr' => round($row['ctr'] * 100, 2),
+            'position' => round($row['position'], 1),
         ], $rawRows);
 
         return ['rows' => $rows];

@@ -101,9 +101,9 @@ class BusinessProfileController extends Controller
     private function cachedWithFallback(
         string $primaryKey,
         int $ttl,
-        callable $primary,
+        \Closure $primary,
         ?string $fallbackKey = null,
-        ?callable $fallback = null,
+        ?\Closure $fallback = null,
     ): ?array {
         try {
             /** @var array<string, mixed> $data */

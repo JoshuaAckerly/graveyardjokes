@@ -37,7 +37,7 @@ class PageSeo extends Model
 
     public function isNoindex(): bool
     {
-        return str_contains($this->robots ?? '', 'noindex');
+        return str_contains((string) ($this->robots ?? ''), 'noindex');
     }
 
     public static function forPath(string $path, string $project = 'graveyardjokes'): ?self

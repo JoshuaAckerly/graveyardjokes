@@ -73,6 +73,12 @@ parameters:
 			path: app/Console/Commands/FacebookRefreshToken.php
 
 		-
+			message: '#^Cannot cast mixed to string\.$#'
+			identifier: cast.string
+			count: 1
+			path: app/Console/Commands/GenerateSitemap.php
+
+		-
 			message: '#^Call to function is_string\(\) with string will always evaluate to true\.$#'
 			identifier: function.alreadyNarrowedType
 			count: 1
@@ -107,6 +113,18 @@ parameters:
 			identifier: encapsedStringPart.nonString
 			count: 1
 			path: app/Console/Commands/GoogleBusinessListLocations.php
+
+		-
+			message: '#^Call to function is_string\(\) with string will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: app/Console/Commands/GoogleSearchConsoleAuthorize.php
+
+		-
+			message: '#^Cannot cast mixed to string\.$#'
+			identifier: cast.string
+			count: 3
+			path: app/Console/Commands/GoogleSearchConsoleAuthorize.php
 
 		-
 			message: '#^Parameter \#1 \$time of static method Carbon\\Carbon\:\:parse\(\) expects Carbon\\Month\|Carbon\\WeekDay\|DateTimeInterface\|float\|int\|string\|null, mixed given\.$#'
@@ -167,6 +185,12 @@ parameters:
 			identifier: function.alreadyNarrowedType
 			count: 1
 			path: app/Http/Controllers/JokeController.php
+
+		-
+			message: '#^Cannot cast mixed to string\.$#'
+			identifier: cast.string
+			count: 1
+			path: app/Models/PageSeo.php
 
 		-
 			message: '#^Method App\\Models\\SocialScheduledPost\:\:scopeDue\(\) has parameter \$query with generic class Illuminate\\Database\\Eloquent\\Builder but does not specify its types\: TModel$#'
@@ -247,6 +271,18 @@ parameters:
 			path: app/Services/GoogleBusinessProfileService.php
 
 		-
+			message: '#^Cannot cast mixed to int\.$#'
+			identifier: cast.int
+			count: 1
+			path: app/Services/GoogleSearchConsoleService.php
+
+		-
+			message: '#^Cannot cast mixed to string\.$#'
+			identifier: cast.string
+			count: 4
+			path: app/Services/GoogleSearchConsoleService.php
+
+		-
 			message: '#^Parameter \#1 \$uri of method GuzzleHttp\\Client\:\:post\(\) expects Psr\\Http\\Message\\UriInterface\|string, mixed given\.$#'
 			identifier: argument.type
 			count: 1
@@ -281,6 +317,12 @@ parameters:
 			identifier: cast.string
 			count: 4
 			path: app/Services/SocialPoster/TwitterService.php
+
+		-
+			message: '#^Parameter \#1 \$string of function rtrim expects string, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: database/seeders/PageSeoSeeder.php
 
 		-
 			message: '#^Parameter \#1 \$path of function basename expects string, mixed given\.$#'
