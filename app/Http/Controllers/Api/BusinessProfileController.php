@@ -96,7 +96,7 @@ class BusinessProfileController extends Controller
     /**
      * Try primary cached fetch; on failure try optional fallback cached fetch.
      *
-     * @return array<string, mixed>|null  Returns data on success, null if all sources fail.
+     * @return array<string, mixed>|null Returns data on success, null if all sources fail.
      */
     private function cachedWithFallback(
         string $primaryKey,

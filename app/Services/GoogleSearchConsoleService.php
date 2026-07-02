@@ -41,8 +41,8 @@ class GoogleSearchConsoleService
             return ['rows' => [], 'error' => 'Failed to obtain access token.'];
         }
 
-        $pageUrl = $this->siteUrl . '/' . ltrim($pagePath, '/');
-        $encodedSite = rawurlencode($this->siteUrl . '/');
+        $pageUrl = $this->siteUrl.'/'.ltrim($pagePath, '/');
+        $encodedSite = rawurlencode($this->siteUrl.'/');
 
         $endDate = now()->toDateString();
         $startDate = now()->subDays(28)->toDateString();
@@ -70,7 +70,7 @@ class GoogleSearchConsoleService
             ]);
 
         if (! $response->successful()) {
-            return ['rows' => [], 'error' => 'Search Console API error: ' . $response->body()];
+            return ['rows' => [], 'error' => 'Search Console API error: '.$response->body()];
         }
 
         /** @var array{rows?: array<int, array{keys: string[], clicks: int, impressions: int, ctr: float, position: float}>} $body */
@@ -78,11 +78,11 @@ class GoogleSearchConsoleService
         $rawRows = $body['rows'] ?? [];
 
         $rows = array_map(fn (array $row) => [
-            'query'       => $row['keys'][0] ?? '',
-            'clicks'      => (int) ($row['clicks'] ?? 0),
+            'query' => $row['keys'][0] ?? '',
+            'clicks' => (int) ($row['clicks'] ?? 0),
             'impressions' => (int) ($row['impressions'] ?? 0),
-            'ctr'         => round((float) ($row['ctr'] ?? 0) * 100, 2),
-            'position'    => round((float) ($row['position'] ?? 0), 1),
+            'ctr' => round((float) ($row['ctr'] ?? 0) * 100, 2),
+            'position' => round((float) ($row['position'] ?? 0), 1),
         ], $rawRows);
 
         return ['rows' => $rows];

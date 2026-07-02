@@ -42,7 +42,7 @@ class PageSeo extends Model
 
     public static function forPath(string $path, string $project = 'graveyardjokes'): ?self
     {
-        $normalised = '/' . ltrim($path, '/');
+        $normalised = '/'.ltrim($path, '/');
 
         return self::where('project', $project)
             ->where('page_url', $normalised)

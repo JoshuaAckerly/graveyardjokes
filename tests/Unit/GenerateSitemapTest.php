@@ -10,6 +10,7 @@ use Tests\TestCase;
 class GenerateSitemapTest extends TestCase
 {
     use RefreshDatabase;
+
     private string $sitemapPath;
 
     protected function setUp(): void
@@ -135,11 +136,11 @@ class GenerateSitemapTest extends TestCase
     public function test_sitemap_excludes_noindex_pages(): void
     {
         PageSeo::create([
-            'page_key'            => 'test.noindex',
-            'page_label'          => 'Test Noindex',
-            'page_url'            => '/services/intake',
-            'robots'              => 'noindex,nofollow',
-            'sitemap_priority'    => 0.50,
+            'page_key' => 'test.noindex',
+            'page_label' => 'Test Noindex',
+            'page_url' => '/services/intake',
+            'robots' => 'noindex,nofollow',
+            'sitemap_priority' => 0.50,
             'sitemap_change_freq' => 'monthly',
         ]);
 
