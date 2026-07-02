@@ -1,11 +1,6 @@
 export const getEnvironmentUrl = (url: string): string => {
     const currentHost = typeof window !== 'undefined' ? window.location.hostname : '';
 
-    // If we're on local development, replace .com with .local
-    if (currentHost.includes('.local') || currentHost === 'localhost') {
-        return url.replace(/\.com/g, '.local');
-    }
-
     // On test environments we currently reuse production-captured screenshots.
     // This maps incoming project URLs to the .com cache naming convention.
     if (currentHost.includes('.test')) {
