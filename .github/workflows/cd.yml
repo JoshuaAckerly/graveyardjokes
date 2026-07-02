@@ -22,6 +22,8 @@ jobs:
           key: ${{ secrets.PROD_SSH_KEY }}
           script: |
             cd /var/www/graveyardjokes
+            git fetch origin main
+            git reset --hard origin/main
             bash deploy-production.sh
 
       - name: Post-deploy health check
