@@ -31,13 +31,38 @@ class PageSeoSeeder extends Seeder
                 'twitter_image' => $cdn.'/images/AdobeStock_327183052.webp',
                 'schema_json' => [
                     '@context' => 'https://schema.org',
-                    '@type' => 'Organization',
-                    'name' => 'GraveYard Jokes Studios Inc.',
-                    'url' => $base,
-                    'logo' => $cdn.'/images/logo.webp',
-                    'sameAs' => [
-                        'https://www.linkedin.com/in/joshua-ackerly',
-                        'https://github.com/joshua-ackerly',
+                    '@graph' => [
+                        [
+                            '@type' => 'Organization',
+                            'name' => 'GraveYard Jokes Studios Inc.',
+                            'url' => $base,
+                            'logo' => $cdn.'/images/logo.webp',
+                            'description' => 'Custom web design and development for entrepreneurs, creatives, and independent brands.',
+                            'foundingDate' => '2026',
+                            'priceRange' => '$$',
+                            'address' => [
+                                '@type' => 'PostalAddress',
+                                'streetAddress' => '26 Wells Ave',
+                                'addressLocality' => 'Cheektowaga',
+                                'addressRegion' => 'NY',
+                                'postalCode' => '14227',
+                                'addressCountry' => 'US',
+                            ],
+                            'contactPoint' => [
+                                '@type' => 'ContactPoint',
+                                'contactType' => 'customer service',
+                                'url' => $base.'/contact',
+                            ],
+                            'sameAs' => [
+                                'https://www.linkedin.com/in/joshua-ackerly',
+                                'https://github.com/joshua-ackerly',
+                            ],
+                        ],
+                        [
+                            '@type' => 'WebSite',
+                            'name' => 'Graveyard Jokes Studios',
+                            'url' => $base,
+                        ],
                     ],
                 ],
                 'sitemap_priority' => 1.00,
@@ -93,7 +118,20 @@ class PageSeoSeeder extends Seeder
                 'twitter_title' => 'Contact | Graveyard Jokes Studios',
                 'twitter_description' => 'Contact Graveyard Jokes Studios for custom websites. Get in touch to discuss your project.',
                 'twitter_image' => $cdn.'/images/ContactBanner.webp',
-                'schema_json' => null,
+                'schema_json' => [
+                    '@context' => 'https://schema.org',
+                    '@type' => 'ContactPage',
+                    'name' => 'Contact Graveyard Jokes Studios',
+                    'url' => $base.'/contact',
+                    'description' => 'Get in touch with Graveyard Jokes Studios to discuss your custom website project.',
+                    'breadcrumb' => [
+                        '@type' => 'BreadcrumbList',
+                        'itemListElement' => [
+                            ['@type' => 'ListItem', 'position' => 1, 'name' => 'Home', 'item' => $base.'/'],
+                            ['@type' => 'ListItem', 'position' => 2, 'name' => 'Contact', 'item' => $base.'/contact'],
+                        ],
+                    ],
+                ],
                 'sitemap_priority' => 0.60,
                 'sitemap_change_freq' => 'monthly',
             ],
@@ -113,7 +151,20 @@ class PageSeoSeeder extends Seeder
                 'twitter_title' => 'Portfolio | Graveyard Jokes Studios',
                 'twitter_description' => 'Explore the portfolio of Graveyard Jokes Studios, showcasing custom websites for entrepreneurs, creatives, and independent brands.',
                 'twitter_image' => $cdn.'/images/PortfolioBanner.webp',
-                'schema_json' => null,
+                'schema_json' => [
+                    '@context' => 'https://schema.org',
+                    '@type' => 'CollectionPage',
+                    'name' => 'Portfolio | Graveyard Jokes Studios',
+                    'url' => $base.'/portfolio',
+                    'description' => 'Real, live websites designed from scratch and built with modern technology — showcasing what Graveyard Jokes Studios creates for entrepreneurs, creatives, and independent brands.',
+                    'breadcrumb' => [
+                        '@type' => 'BreadcrumbList',
+                        'itemListElement' => [
+                            ['@type' => 'ListItem', 'position' => 1, 'name' => 'Home', 'item' => $base.'/'],
+                            ['@type' => 'ListItem', 'position' => 2, 'name' => 'Portfolio', 'item' => $base.'/portfolio'],
+                        ],
+                    ],
+                ],
                 'sitemap_priority' => 0.80,
                 'sitemap_change_freq' => 'monthly',
             ],
@@ -175,22 +226,63 @@ class PageSeoSeeder extends Seeder
                 'twitter_image' => $cdn.'/images/aboutBanner.webp',
                 'schema_json' => [
                     '@context' => 'https://schema.org',
-                    '@type' => 'Service',
-                    'serviceType' => 'Web Design',
-                    'name' => 'Starter Package',
-                    'description' => 'Perfect for entrepreneurs and creatives launching their online presence. Single-page responsive website with contact form and social media integration.',
-                    'provider' => [
-                        '@type' => 'Organization',
-                        'name' => 'GraveYard Jokes Studios Inc.',
-                        'url' => $base,
+                    '@graph' => [
+                        [
+                            '@type' => 'Service',
+                            'serviceType' => 'Web Design',
+                            'name' => 'Starter Package',
+                            'description' => 'Perfect for entrepreneurs and creatives launching their online presence. Single-page responsive website with contact form and social media integration.',
+                            'provider' => [
+                                '@type' => 'Organization',
+                                'name' => 'GraveYard Jokes Studios Inc.',
+                                'url' => $base,
+                            ],
+                            'offers' => [
+                                '@type' => 'Offer',
+                                'price' => '99',
+                                'priceCurrency' => 'USD',
+                                'availability' => 'https://schema.org/InStock',
+                            ],
+                            'areaServed' => 'US',
+                        ],
+                        [
+                            '@type' => 'FAQPage',
+                            'mainEntity' => [
+                                [
+                                    '@type' => 'Question',
+                                    'name' => 'How long does the Starter Package take to complete?',
+                                    'acceptedAnswer' => [
+                                        '@type' => 'Answer',
+                                        'text' => 'Most Starter websites are completed within two to four weeks from the date we receive your project questionnaire and initial payment. The exact timeline depends on how quickly we receive your content including text, images, and branding materials.',
+                                    ],
+                                ],
+                                [
+                                    '@type' => 'Question',
+                                    'name' => 'Can I upgrade to a larger package later?',
+                                    'acceptedAnswer' => [
+                                        '@type' => 'Answer',
+                                        'text' => 'Absolutely. Our packages are designed to grow with your business. If you start with the Starter Package and later need more pages, e-commerce, or advanced features, you can upgrade to the Professional or Premium package at any time.',
+                                    ],
+                                ],
+                                [
+                                    '@type' => 'Question',
+                                    'name' => 'Do I need to provide my own hosting?',
+                                    'acceptedAnswer' => [
+                                        '@type' => 'Answer',
+                                        'text' => 'For the Starter Package, you will need to arrange your own hosting. We are happy to recommend reliable providers and help you get set up. Our Professional and Premium packages include one year of free hosting and support.',
+                                    ],
+                                ],
+                            ],
+                        ],
+                        [
+                            '@type' => 'BreadcrumbList',
+                            'itemListElement' => [
+                                ['@type' => 'ListItem', 'position' => 1, 'name' => 'Home', 'item' => $base.'/'],
+                                ['@type' => 'ListItem', 'position' => 2, 'name' => 'Services', 'item' => $base.'/services'],
+                                ['@type' => 'ListItem', 'position' => 3, 'name' => 'Starter Package', 'item' => $base.'/services/starter'],
+                            ],
+                        ],
                     ],
-                    'offers' => [
-                        '@type' => 'Offer',
-                        'price' => '99',
-                        'priceCurrency' => 'USD',
-                        'availability' => 'https://schema.org/InStock',
-                    ],
-                    'areaServed' => 'US',
                 ],
                 'sitemap_priority' => 0.80,
                 'sitemap_change_freq' => 'monthly',
@@ -211,7 +303,66 @@ class PageSeoSeeder extends Seeder
                 'twitter_title' => 'Professional Website Package - $149 | GraveYard Jokes Studios',
                 'twitter_description' => 'Professional plan for growing brands: custom multi-page design, advanced integrations, and performance optimization.',
                 'twitter_image' => $cdn.'/images/aboutBanner.webp',
-                'schema_json' => null,
+                'schema_json' => [
+                    '@context' => 'https://schema.org',
+                    '@graph' => [
+                        [
+                            '@type' => 'Service',
+                            'serviceType' => 'Web Design',
+                            'name' => 'Professional Package',
+                            'description' => 'For independent artists and growing brands that need a feature-rich, multi-page website with advanced integrations and three months of post-launch support.',
+                            'provider' => [
+                                '@type' => 'Organization',
+                                'name' => 'GraveYard Jokes Studios Inc.',
+                                'url' => $base,
+                            ],
+                            'offers' => [
+                                '@type' => 'Offer',
+                                'price' => '149',
+                                'priceCurrency' => 'USD',
+                                'availability' => 'https://schema.org/InStock',
+                            ],
+                            'areaServed' => 'US',
+                        ],
+                        [
+                            '@type' => 'FAQPage',
+                            'mainEntity' => [
+                                [
+                                    '@type' => 'Question',
+                                    'name' => 'What e-commerce platforms do you integrate with?',
+                                    'acceptedAnswer' => [
+                                        '@type' => 'Answer',
+                                        'text' => 'We work with Shopify, WooCommerce, and Stripe depending on your needs. During onboarding we will discuss which platform best suits your product type, sales volume, and budget.',
+                                    ],
+                                ],
+                                [
+                                    '@type' => 'Question',
+                                    'name' => 'Is one year of hosting included in the $149 price?',
+                                    'acceptedAnswer' => [
+                                        '@type' => 'Answer',
+                                        'text' => 'The 3 months of support covers content updates, bug fixes, performance questions, and any tweaks needed after launch. After that, affordable maintenance options are available.',
+                                    ],
+                                ],
+                                [
+                                    '@type' => 'Question',
+                                    'name' => 'Can you migrate content from my existing website?',
+                                    'acceptedAnswer' => [
+                                        '@type' => 'Answer',
+                                        'text' => 'Yes, content migration is available. We will discuss the specifics of your current site during the project intake process and ensure a smooth transition with no data loss.',
+                                    ],
+                                ],
+                            ],
+                        ],
+                        [
+                            '@type' => 'BreadcrumbList',
+                            'itemListElement' => [
+                                ['@type' => 'ListItem', 'position' => 1, 'name' => 'Home', 'item' => $base.'/'],
+                                ['@type' => 'ListItem', 'position' => 2, 'name' => 'Services', 'item' => $base.'/services'],
+                                ['@type' => 'ListItem', 'position' => 3, 'name' => 'Professional Package', 'item' => $base.'/services/professional'],
+                            ],
+                        ],
+                    ],
+                ],
                 'sitemap_priority' => 0.80,
                 'sitemap_change_freq' => 'monthly',
             ],
@@ -231,7 +382,66 @@ class PageSeoSeeder extends Seeder
                 'twitter_title' => 'Premium Package - $299 | Graveyard Jokes Studios',
                 'twitter_description' => 'Premium plan for established teams: full-service web design and development, priority support, advanced integrations, and ongoing strategic guidance.',
                 'twitter_image' => $cdn.'/images/aboutBanner.webp',
-                'schema_json' => null,
+                'schema_json' => [
+                    '@context' => 'https://schema.org',
+                    '@graph' => [
+                        [
+                            '@type' => 'Service',
+                            'serviceType' => 'Web Development',
+                            'name' => 'Premium Package',
+                            'description' => 'The full scope of what Graveyard Jokes Studios can build. Custom platform development with advanced integrations, streaming, e-commerce, and six months of priority support.',
+                            'provider' => [
+                                '@type' => 'Organization',
+                                'name' => 'GraveYard Jokes Studios Inc.',
+                                'url' => $base,
+                            ],
+                            'offers' => [
+                                '@type' => 'Offer',
+                                'price' => '299',
+                                'priceCurrency' => 'USD',
+                                'availability' => 'https://schema.org/InStock',
+                            ],
+                            'areaServed' => 'US',
+                        ],
+                        [
+                            '@type' => 'FAQPage',
+                            'mainEntity' => [
+                                [
+                                    '@type' => 'Question',
+                                    'name' => 'What streaming platforms can you integrate?',
+                                    'acceptedAnswer' => [
+                                        '@type' => 'Answer',
+                                        'text' => 'We can build native audio and video players or integrate with external platforms such as SoundCloud, Vimeo, and YouTube based on your preferences and audience needs.',
+                                    ],
+                                ],
+                                [
+                                    '@type' => 'Question',
+                                    'name' => 'How long does a Premium project take?',
+                                    'acceptedAnswer' => [
+                                        '@type' => 'Answer',
+                                        'text' => 'Premium projects typically run six to ten weeks from start to launch, depending on the scope of integrations and the complexity of the design and feature set.',
+                                    ],
+                                ],
+                                [
+                                    '@type' => 'Question',
+                                    'name' => 'What is included in the six months of priority support?',
+                                    'acceptedAnswer' => [
+                                        '@type' => 'Answer',
+                                        'text' => 'Priority support covers bug fixes, minor feature updates, performance monitoring, and direct access to the development team for questions and guidance throughout the support period.',
+                                    ],
+                                ],
+                            ],
+                        ],
+                        [
+                            '@type' => 'BreadcrumbList',
+                            'itemListElement' => [
+                                ['@type' => 'ListItem', 'position' => 1, 'name' => 'Home', 'item' => $base.'/'],
+                                ['@type' => 'ListItem', 'position' => 2, 'name' => 'Services', 'item' => $base.'/services'],
+                                ['@type' => 'ListItem', 'position' => 3, 'name' => 'Premium Package', 'item' => $base.'/services/premium'],
+                            ],
+                        ],
+                    ],
+                ],
                 'sitemap_priority' => 0.80,
                 'sitemap_change_freq' => 'monthly',
             ],
@@ -251,7 +461,43 @@ class PageSeoSeeder extends Seeder
                 'twitter_title' => 'Social Media Management - Starter - $99/mo | Graveyard Jokes Studios',
                 'twitter_description' => 'Starter social media management: consistent posting across 3 platforms every month.',
                 'twitter_image' => $cdn.'/images/aboutBanner.webp',
-                'schema_json' => null,
+                'schema_json' => [
+                    '@context' => 'https://schema.org',
+                    '@graph' => [
+                        [
+                            '@type' => 'Service',
+                            'serviceType' => 'Social Media Management',
+                            'name' => 'Social Media Management - Starter',
+                            'description' => 'Consistent social media presence on 3 platforms every month. Includes content calendar, captions, hashtags, and monthly analytics report.',
+                            'provider' => [
+                                '@type' => 'Organization',
+                                'name' => 'GraveYard Jokes Studios Inc.',
+                                'url' => $base,
+                            ],
+                            'offers' => [
+                                '@type' => 'Offer',
+                                'price' => '99',
+                                'priceCurrency' => 'USD',
+                                'priceSpecification' => [
+                                    '@type' => 'UnitPriceSpecification',
+                                    'price' => '99',
+                                    'priceCurrency' => 'USD',
+                                    'unitText' => 'MONTH',
+                                ],
+                                'availability' => 'https://schema.org/InStock',
+                            ],
+                            'areaServed' => 'US',
+                        ],
+                        [
+                            '@type' => 'BreadcrumbList',
+                            'itemListElement' => [
+                                ['@type' => 'ListItem', 'position' => 1, 'name' => 'Home', 'item' => $base.'/'],
+                                ['@type' => 'ListItem', 'position' => 2, 'name' => 'Services', 'item' => $base.'/services'],
+                                ['@type' => 'ListItem', 'position' => 3, 'name' => 'Social Media Starter', 'item' => $base.'/services/modernization-starter'],
+                            ],
+                        ],
+                    ],
+                ],
                 'sitemap_priority' => 0.70,
                 'sitemap_change_freq' => 'monthly',
             ],
@@ -271,7 +517,43 @@ class PageSeoSeeder extends Seeder
                 'twitter_title' => 'Social Media Management - Professional - $149/mo | Graveyard Jokes Studios',
                 'twitter_description' => 'Full management across 5 platforms with stories, reels, and community engagement.',
                 'twitter_image' => $cdn.'/images/aboutBanner.webp',
-                'schema_json' => null,
+                'schema_json' => [
+                    '@context' => 'https://schema.org',
+                    '@graph' => [
+                        [
+                            '@type' => 'Service',
+                            'serviceType' => 'Social Media Management',
+                            'name' => 'Social Media Management - Professional',
+                            'description' => 'Full social media management across 5 platforms with stories, reels, community engagement, and bi-weekly reporting.',
+                            'provider' => [
+                                '@type' => 'Organization',
+                                'name' => 'GraveYard Jokes Studios Inc.',
+                                'url' => $base,
+                            ],
+                            'offers' => [
+                                '@type' => 'Offer',
+                                'price' => '149',
+                                'priceCurrency' => 'USD',
+                                'priceSpecification' => [
+                                    '@type' => 'UnitPriceSpecification',
+                                    'price' => '149',
+                                    'priceCurrency' => 'USD',
+                                    'unitText' => 'MONTH',
+                                ],
+                                'availability' => 'https://schema.org/InStock',
+                            ],
+                            'areaServed' => 'US',
+                        ],
+                        [
+                            '@type' => 'BreadcrumbList',
+                            'itemListElement' => [
+                                ['@type' => 'ListItem', 'position' => 1, 'name' => 'Home', 'item' => $base.'/'],
+                                ['@type' => 'ListItem', 'position' => 2, 'name' => 'Services', 'item' => $base.'/services'],
+                                ['@type' => 'ListItem', 'position' => 3, 'name' => 'Social Media Professional', 'item' => $base.'/services/modernization-professional'],
+                            ],
+                        ],
+                    ],
+                ],
                 'sitemap_priority' => 0.70,
                 'sitemap_change_freq' => 'monthly',
             ],
@@ -291,7 +573,43 @@ class PageSeoSeeder extends Seeder
                 'twitter_title' => 'Social Media Management - Premium - $199/mo | Graveyard Jokes Studios',
                 'twitter_description' => 'Complete social media strategy with unlimited posts, ad campaigns, and influencer outreach.',
                 'twitter_image' => $cdn.'/images/aboutBanner.webp',
-                'schema_json' => null,
+                'schema_json' => [
+                    '@context' => 'https://schema.org',
+                    '@graph' => [
+                        [
+                            '@type' => 'Service',
+                            'serviceType' => 'Social Media Management',
+                            'name' => 'Social Media Management - Premium',
+                            'description' => 'Complete social media strategy with unlimited posts, ad campaigns, influencer outreach, and weekly strategy calls.',
+                            'provider' => [
+                                '@type' => 'Organization',
+                                'name' => 'GraveYard Jokes Studios Inc.',
+                                'url' => $base,
+                            ],
+                            'offers' => [
+                                '@type' => 'Offer',
+                                'price' => '199',
+                                'priceCurrency' => 'USD',
+                                'priceSpecification' => [
+                                    '@type' => 'UnitPriceSpecification',
+                                    'price' => '199',
+                                    'priceCurrency' => 'USD',
+                                    'unitText' => 'MONTH',
+                                ],
+                                'availability' => 'https://schema.org/InStock',
+                            ],
+                            'areaServed' => 'US',
+                        ],
+                        [
+                            '@type' => 'BreadcrumbList',
+                            'itemListElement' => [
+                                ['@type' => 'ListItem', 'position' => 1, 'name' => 'Home', 'item' => $base.'/'],
+                                ['@type' => 'ListItem', 'position' => 2, 'name' => 'Services', 'item' => $base.'/services'],
+                                ['@type' => 'ListItem', 'position' => 3, 'name' => 'Social Media Premium', 'item' => $base.'/services/modernization-premium'],
+                            ],
+                        ],
+                    ],
+                ],
                 'sitemap_priority' => 0.70,
                 'sitemap_change_freq' => 'monthly',
             ],

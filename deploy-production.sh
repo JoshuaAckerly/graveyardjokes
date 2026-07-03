@@ -38,6 +38,10 @@ npm run build:ssr
 echo "🗄️ Running database migrations..."
 php artisan migrate --force
 
+# Refresh SEO metadata (schema, OG tags) via seeder
+echo "🔍 Refreshing page SEO data..."
+php artisan db:seed --class=PageSeoSeeder --force
+
 # Ensure writable directories and permissions
 echo "🔒 Setting permissions..."
 sudo mkdir -p storage/framework/{cache,sessions,views} bootstrap/cache

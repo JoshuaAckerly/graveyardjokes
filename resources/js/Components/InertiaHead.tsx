@@ -40,6 +40,8 @@ export default function InertiaHead({ children }: InertiaHeadProps) {
             {seo.robots && <meta name="robots" content={seo.robots} />}
 
             {/* Open Graph */}
+            <meta property="og:site_name" content="Graveyard Jokes Studios" />
+            <meta property="og:locale" content="en_US" />
             {seo.og_title && <meta property="og:title" content={seo.og_title} />}
             {seo.og_description && <meta property="og:description" content={seo.og_description} />}
             {seo.og_image && <meta property="og:image" content={seo.og_image} />}

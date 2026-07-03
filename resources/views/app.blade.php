@@ -155,6 +155,9 @@
     <link rel="icon" href="/favicon.ico" sizes="any">
 
     <link rel="preconnect" href="https://fonts.bunny.net">
+    <link rel="preconnect" href="https://assets.graveyardjokes.com" crossorigin>
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
     <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />
 
     @routes
