@@ -8,7 +8,7 @@ const Terms: React.FC = () => {
             <div title="Terms of Service" className="mx-auto max-w-4xl space-y-4 bg-gray-900 p-6 text-white">
                 <h1 className="text-2xl font-bold">Terms of Service</h1>
                 <p>
-                    <strong>Effective Date:</strong> May 31, 2026
+                    <strong>Effective Date:</strong> July 6, 2026
                 </p>
 
                 <p>

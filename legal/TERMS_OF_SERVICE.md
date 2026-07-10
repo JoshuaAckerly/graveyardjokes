@@ -1,6 +1,6 @@
 # Terms of Service
 
-**Last Updated:** March 25, 2026
+**Last Updated:** July 6, 2026
 
 ## 1. Agreement to Terms
 
@@ -60,7 +60,7 @@ You may not:
 
 ## 6. Intellectual Property
 
-The Service and its original content, features, and functionality are and will remain the exclusive property of [Your Company Name] and its licensors.
+The Service and its original content, features, and functionality are and will remain the exclusive property of Graveyard Jokes Studios and its licensors.
 
 ## 7. Disclaimers
 
@@ -77,11 +77,11 @@ We do not warrant that:
 
 ## 8. Limitation of Liability
 
-In no event shall [Your Company Name], nor its directors, employees, partners, agents, suppliers, or affiliates, be liable for any indirect, incidental, special, consequential, or punitive damages resulting from your access to or use of the Service.
+In no event shall Graveyard Jokes Studios, nor its directors, employees, partners, agents, suppliers, or affiliates, be liable for any indirect, incidental, special, consequential, or punitive damages resulting from your access to or use of the Service.
 
 ## 9. Indemnification
 
-You agree to defend, indemnify, and hold harmless [Your Company Name] from and against any claims, damages, obligations, losses, liabilities, costs, or debt arising from:
+You agree to defend, indemnify, and hold harmless Graveyard Jokes Studios from and against any claims, damages, obligations, losses, liabilities, costs, or debt arising from:
 
 - Your use of the Service
 - Your violation of these Terms
@@ -115,15 +115,15 @@ We reserve the right to modify or replace these Terms at any time. If a revision
 
 ## 13. Governing Law
 
-These Terms shall be governed by the laws of [Your Jurisdiction], without regard to its conflict of law provisions.
+These Terms shall be governed by the laws of New York, United States, without regard to its conflict of law provisions.
 
 ## 14. Contact Us
 
 If you have any questions about these Terms, please contact us at:
 
-**[Your Company Name]**  
-Email: [your-email@example.com]  
-Address: [Your Company Address]
+**Graveyard Jokes Studios**  
+Email: admin@graveyardjokes.com  
+Address: 26 Wells Ave, Cheektowaga, New York 14227
 
 ---
 

@@ -1,10 +1,10 @@
 # Acceptable Use Policy
 
-**Last Updated:** March 25, 2026
+**Last Updated:** July 6, 2026
 
 ## 1. Purpose
 
-This Acceptable Use Policy ("Policy") governs your use of Graveyard Jokes ("Service") operated by [Your Company Name]. This Policy is designed to protect our users, our Service, and the general Internet community from irresponsible or illegal activities.
+This Acceptable Use Policy ("Policy") governs your use of Graveyard Jokes ("Service") operated by Graveyard Jokes Studios. This Policy is designed to protect our users, our Service, and the general Internet community from irresponsible or illegal activities.
 
 ## 2. Prohibited Activities
 
@@ -63,7 +63,7 @@ All content you post, upload, or share through the Service must:
 
 ## 4. Reporting Violations
 
-If you become aware of any violation of this Policy, please report it to us immediately at [your-email@example.com].
+If you become aware of any violation of this Policy, please report it to us immediately at admin@graveyardjokes.com.
 
 ## 5. Consequences of Violations
 

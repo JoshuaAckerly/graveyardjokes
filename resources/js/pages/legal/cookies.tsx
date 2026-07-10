@@ -8,7 +8,7 @@ const Cookies = () => {
             <div title="Cookie Policy" className="mx-auto max-w-4xl space-y-4 bg-gray-900 p-6 text-white">
                 <h1 className="text-2xl font-bold">Cookie Policy</h1>
                 <p>
-                    <strong>Effective Date:</strong> October 7, 2025
+                    <strong>Effective Date:</strong> July 6, 2026
                 </p>
 
                 <p>

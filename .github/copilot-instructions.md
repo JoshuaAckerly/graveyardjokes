@@ -5,8 +5,8 @@ Joke-sharing platform and web development services portfolio site. Doubles as a 
 
 ## Tech Stack
 - **Backend**: Laravel 12, PHP 8.2+, Sanctum (session), Spatie Sitemap, Google Analytics Data API
-- **Frontend**: React 19, TypeScript 5.7, Inertia.js 2, Tailwind CSS 4, Vite
-- **Testing**: PHPUnit 11 (`php artisan test`), Jest + React Testing Library, Playwright (E2E)
+- **Frontend**: React 19, TypeScript 5.7, Inertia.js 3, Tailwind CSS 4, Vite
+- **Testing**: PHPUnit 11 (`php artisan test`), Vitest + React Testing Library, Playwright (E2E)
 - **Storage**: MySQL (prod), SQLite (tests), AWS S3 (OG images), Redis (optional)
 - **Integrations**: PayPal, Google Analytics Data API, auth-system SSO proxy
 
@@ -54,7 +54,7 @@ Business logic is organized into `app/Modules/` with self-contained sub-director
 ## Build & Test
 ```bash
 php artisan test
-npm run test            # Jest
+npm run test            # Vitest
 npm run build:ssr       # Production SSR build
 npm run capture:homepages   # Screenshot utility (scripts/capture-homepages.mjs)
 npm run organize:s3     # Dry-run S3 image organizer

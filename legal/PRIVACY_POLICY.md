@@ -1,10 +1,10 @@
 # Privacy Policy
 
-**Last Updated:** March 25, 2026
+**Last Updated:** July 6, 2026
 
 ## 1. Introduction
 
-[Your Company Name] ("we," "our," or "us") operates Graveyard Jokes (the "Service"). This page informs you of our policies regarding the collection, use, and disclosure of personal data when you use our Service.
+Graveyard Jokes Studios ("we," "our," or "us") operates Graveyard Jokes (the "Service"). This page informs you of our policies regarding the collection, use, and disclosure of personal data when you use our Service.
 
 ## 2. Information We Collect
 
@@ -46,7 +46,7 @@ When you use messaging or contact features of the Service, we may collect:
 
 ## 3. How We Use Your Information
 
-[Your Company Name] uses the collected data for various purposes:
+Graveyard Jokes Studios uses the collected data for various purposes:
 
 - To provide and maintain the Service
 - To notify you about changes to our Service
@@ -61,7 +61,7 @@ When you use messaging or contact features of the Service, we may collect:
 
 ## 4. Legal Basis for Processing (GDPR)
 
-If you are from the European Economic Area (EEA), [Your Company Name]'s legal basis for collecting and using personal information depends on the data we collect and the context in which we collect it.
+If you are from the European Economic Area (EEA), Graveyard Jokes Studios' legal basis for collecting and using personal information depends on the data we collect and the context in which we collect it.
 
 We may process your personal data because:
 
@@ -150,9 +150,9 @@ We may update our Privacy Policy from time to time. We will notify you of any ch
 
 If you have any questions about this Privacy Policy, please contact us:
 
-**[Your Company Name]**  
-Email: [your-email@example.com]  
-Address: [Your Company Address]
+**Graveyard Jokes Studios**  
+Email: admin@graveyardjokes.com  
+Address: 26 Wells Ave, Cheektowaga, New York 14227
 
 ---
 
