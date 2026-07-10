@@ -8,15 +8,15 @@
 - [x] Set up automated backups verification
 
 ### Google Business Profile Integration
-- [x] Google API access approved and OAuth flow completed
-- [x] Ran `php artisan google-business:list-locations`, set `GOOGLE_BUSINESS_LOCATION_NAME` in `.env`
+- [x] OAuth flow completed — `GOOGLE_BUSINESS_CLIENT_ID`, `CLIENT_SECRET`, `REFRESH_TOKEN` all set
 - [x] Reviews, business info, and posts endpoints live at `/api/business/*`
 - [x] Frontend components: `GoogleReviews`, `BusinessHours`, `BusinessPosts` wired up
-- [ ] **Places API fallback** (resilience if GBP goes down):
-  - Enable Places API in Google Cloud Console
-  - Create a restricted API key (Places API only, IP-restricted)
-  - Find Place ID via https://developers.google.com/maps/documentation/javascript/examples/places-placeid-finder
-  - Add `GOOGLE_PLACES_API_KEY` and `GOOGLE_PLACES_PLACE_ID` to `.env` on production server
+- [x] `GooglePlacesService` implemented as automatic fallback in `BusinessProfileController`
+- [x] Places API key + Place ID obtained and set in local `.env`
+- [ ] **Add `GOOGLE_PLACES_API_KEY` and `GOOGLE_PLACES_PLACE_ID` to production server `.env`**, then `php artisan cache:clear` — Places API will then serve reviews/hours as the live data source
+- [ ] **GBP API quota is 0** — Google never granted access. `GOOGLE_BUSINESS_LOCATION_NAME` is blank until resolved. Options:
+  - Request quota increase: https://console.cloud.google.com → APIs & Services → Quotas → `mybusinessaccountmanagement.googleapis.com`
+  - Or re-apply via https://developers.google.com/my-business/content/prereqs if original request was not actioned
 
 ### Dependencies
 - [ ] Monitor for security updates in npm packages
