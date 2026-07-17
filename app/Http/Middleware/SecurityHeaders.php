@@ -27,7 +27,7 @@ class SecurityHeaders
                 "font-src 'self' https://fonts.gstatic.com",
                 "img-src 'self' data: blob: https: http:",
                 "connect-src 'self' https://www.paypal.com https://api.paypal.com https://www.google-analytics.com https://stats.g.doubleclick.net https://hcaptcha.com https://newassets.hcaptcha.com",
-                "frame-src https://www.paypal.com https://newassets.hcaptcha.com https://hcaptcha.com https://googleads.g.doubleclick.net",
+                'frame-src https://www.paypal.com https://newassets.hcaptcha.com https://hcaptcha.com https://googleads.g.doubleclick.net',
                 "object-src 'none'",
                 "base-uri 'self'",
                 "form-action 'self'",
