@@ -204,6 +204,11 @@ export default function Home(): JSX.Element {
                                     <ul className="mt-3 space-y-1 text-sm text-white/70">
                                         <li>Monthly maintenance</li>
                                         <li>Social media management — from $299/mo</li>
+                                        <li>
+                                            <Link href="/services/seo" className="text-[var(--primary)] hover:underline">
+                                                SEO Management — $79/mo
+                                            </Link>
+                                        </li>
                                     </ul>
                                 </motion.div>
                             </div>
@@ -247,6 +252,35 @@ export default function Home(): JSX.Element {
                         </div>
 
                         <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+                            {/* Service Card 3 — SEO */}
+                            <motion.div
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true, amount: 0.2 }}
+                                transition={{ duration: 0.6, delay: 0.3 }}
+                                className="rounded-lg bg-white/5 p-6 text-left shadow-lg transition-all hover:bg-white/10 md:col-span-2"
+                            >
+                                <div className="flex items-start justify-between gap-4">
+                                    <div>
+                                        <div className="mb-4 text-3xl">🔍</div>
+                                        <h3 className="mb-2 text-xl font-semibold text-white">
+                                            SEO Management{' '}
+                                            <span className="ml-1 rounded-full bg-[var(--primary)]/20 px-2 py-0.5 text-xs text-[var(--primary)]">Special Price $79/mo</span>
+                                        </h3>
+                                        <p className="text-sm text-white/70">
+                                            Ongoing SEO to help your site rank higher and get found. Keyword research, on-page optimization, technical
+                                            audits, and monthly reporting — everything you need to grow organic traffic.
+                                        </p>
+                                    </div>
+                                    <Link
+                                        href="/services/seo"
+                                        className="shrink-0 rounded bg-[var(--primary)] px-4 py-2 text-sm font-semibold text-white transition hover:bg-[var(--accent)]"
+                                    >
+                                        Learn More
+                                    </Link>
+                                </div>
+                            </motion.div>
+
                             {/* Service Card 1 — Web Dev & Design */}
                             <motion.div
                                 initial={{ opacity: 0, y: 20 }}

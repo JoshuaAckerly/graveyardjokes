@@ -11,7 +11,8 @@ export type PackageSlug =
     | 'design-premium'
     | 'modernization-starter'
     | 'modernization-professional'
-    | 'modernization-premium';
+    | 'modernization-premium'
+    | 'seo';
 
 interface PackagePaymentGateProps {
     amount: number;
@@ -29,6 +30,7 @@ const packageLabelMap: Record<PackageSlug, string> = {
     'modernization-starter': 'Modernization - Starter Package',
     'modernization-professional': 'Modernization - Professional Package',
     'modernization-premium': 'Modernization - Premium Package',
+    seo: 'SEO Management',
 };
 
 function getPackageLabel(slug: string | null): string | null {

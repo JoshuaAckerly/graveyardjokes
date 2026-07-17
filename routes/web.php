@@ -87,6 +87,10 @@ Route::get('/services/modernization-premium', function () {
     return Inertia::render('services/modernization-premium');
 })->name('services.modernization-premium');
 
+Route::get('/services/seo', function () {
+    return Inertia::render('services/seo');
+})->name('services.seo');
+
 Route::get('/services/intake', [WebsiteIntakeController::class, 'create'])->name('services.intake.create');
 Route::post('/services/intake', [WebsiteIntakeController::class, 'store'])->name('services.intake.store');
 
@@ -142,6 +146,7 @@ Route::get('/generate-sitemap', function () {
         ->add(Url::create($base.'/services/starter'))
         ->add(Url::create($base.'/services/professional'))
         ->add(Url::create($base.'/services/premium'))
+        ->add(Url::create($base.'/services/seo'))
         ->add(Url::create($base.'/terms'))
         ->add(Url::create($base.'/privacy'))
         ->add(Url::create($base.'/cookies'));
