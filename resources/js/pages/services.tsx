@@ -259,7 +259,7 @@ export default function Services() {
                                     whileHover={{ scale: 1.02 }}
                                 >
                                     <div className="mb-3 text-center sm:mb-4">
-                                        <div className="mb-2 inline-block rounded-full bg-(--primary)/20 px-3 py-1 text-xs font-bold text-(--primary) uppercase tracking-widest">
+                                        <div className="mb-2 inline-block rounded-full bg-(--primary)/20 px-3 py-1 text-xs font-bold tracking-widest text-(--primary) uppercase">
                                             Special Price
                                         </div>
                                         <h3 className="text-xl font-bold text-white sm:text-2xl">SEO Management</h3>
@@ -270,7 +270,13 @@ export default function Services() {
                                         <p className="mt-2 text-xs text-gray-300 sm:text-sm">Get found on Google — hands-free, every month</p>
                                     </div>
                                     <ul className="mb-6 flex-1 space-y-3">
-                                        {['Keyword research & strategy', 'On-page SEO optimization', 'Meta tags & schema markup', 'Google Search Console monitoring', 'Monthly performance report'].map((feature, index) => (
+                                        {[
+                                            'Keyword research & strategy',
+                                            'On-page SEO optimization',
+                                            'Meta tags & schema markup',
+                                            'Google Search Console monitoring',
+                                            'Monthly performance report',
+                                        ].map((feature, index) => (
                                             <li key={index} className="flex items-start gap-2 text-sm text-gray-200">
                                                 <Check className="mt-0.5 h-5 w-5 shrink-0 text-(--primary)" />
                                                 <span>{feature}</span>

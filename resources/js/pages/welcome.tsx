@@ -265,7 +265,9 @@ export default function Home(): JSX.Element {
                                         <div className="mb-4 text-3xl">🔍</div>
                                         <h3 className="mb-2 text-xl font-semibold text-white">
                                             SEO Management{' '}
-                                            <span className="ml-1 rounded-full bg-[var(--primary)]/20 px-2 py-0.5 text-xs text-[var(--primary)]">Special Price $79/mo</span>
+                                            <span className="ml-1 rounded-full bg-[var(--primary)]/20 px-2 py-0.5 text-xs text-[var(--primary)]">
+                                                Special Price $79/mo
+                                            </span>
                                         </h3>
                                         <p className="text-sm text-white/70">
                                             Ongoing SEO to help your site rank higher and get found. Keyword research, on-page optimization, technical

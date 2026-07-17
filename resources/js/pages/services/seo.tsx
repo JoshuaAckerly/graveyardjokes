@@ -31,7 +31,7 @@ export default function SeoPackage() {
                         transition={{ duration: 0.5 }}
                         className="rounded-lg border-2 border-(--accent) bg-(--card) p-8"
                     >
-                        <div className="mb-2 inline-block rounded-full bg-(--primary)/20 px-4 py-1 text-xs font-bold text-(--primary) uppercase tracking-widest">
+                        <div className="mb-2 inline-block rounded-full bg-(--primary)/20 px-4 py-1 text-xs font-bold tracking-widest text-(--primary) uppercase">
                             Special Add-On Price
                         </div>
                         <h1 className="mb-4 text-4xl font-bold text-white">SEO Management</h1>
@@ -73,17 +73,17 @@ export default function SeoPackage() {
                             <h2 className="mb-3 text-2xl font-bold text-white">About SEO Management</h2>
                             <p className="text-white/70">
                                 Most websites never get found on Google — not because they look bad, but because they were never optimized to rank.
-                                Our SEO Management add-on fixes that. At $79/mo, it's the most cost-effective way to grow your organic traffic
-                                without lifting a finger. We handle everything from keyword research and on-page optimization to monthly reporting,
-                                so you always know exactly how your site is performing and what we're doing to improve it.
+                                Our SEO Management add-on fixes that. At $79/mo, it's the most cost-effective way to grow your organic traffic without
+                                lifting a finger. We handle everything from keyword research and on-page optimization to monthly reporting, so you
+                                always know exactly how your site is performing and what we're doing to improve it.
                             </p>
                         </section>
                         <section>
                             <h3 className="mb-3 text-xl font-semibold text-white">Why SEO Matters</h3>
                             <p className="text-white/70">
-                                Paid ads stop the moment you stop paying. SEO compounds over time — the work we do this month keeps paying off
-                                next month and beyond. For small businesses, musicians, and independent brands, organic search traffic is one of
-                                the highest-converting channels available. We make sure your site is structured, tagged, and optimized so Google
+                                Paid ads stop the moment you stop paying. SEO compounds over time — the work we do this month keeps paying off next
+                                month and beyond. For small businesses, musicians, and independent brands, organic search traffic is one of the
+                                highest-converting channels available. We make sure your site is structured, tagged, and optimized so Google
                                 understands exactly what you offer and who you serve.
                             </p>
                         </section>
@@ -93,22 +93,22 @@ export default function SeoPackage() {
                                 <div>
                                     <p className="font-semibold text-white">How long before I see results?</p>
                                     <p className="text-white/70">
-                                        SEO is a long-term strategy. Most clients start seeing measurable improvements in rankings and traffic
-                                        within 60 to 90 days. The longer we work together, the stronger your results become.
+                                        SEO is a long-term strategy. Most clients start seeing measurable improvements in rankings and traffic within
+                                        60 to 90 days. The longer we work together, the stronger your results become.
                                     </p>
                                 </div>
                                 <div>
                                     <p className="font-semibold text-white">Do I need a website package to add SEO?</p>
                                     <p className="text-white/70">
-                                        No — SEO Management can be added to any existing website, not just sites built by us. As long as you
-                                        have a live site, we can start optimizing it.
+                                        No — SEO Management can be added to any existing website, not just sites built by us. As long as you have a
+                                        live site, we can start optimizing it.
                                     </p>
                                 </div>
                                 <div>
                                     <p className="font-semibold text-white">Can I cancel anytime?</p>
                                     <p className="text-white/70">
-                                        Yes. There are no long-term contracts. You can cancel your SEO Management subscription at any time with
-                                        30 days notice.
+                                        Yes. There are no long-term contracts. You can cancel your SEO Management subscription at any time with 30
+                                        days notice.
                                     </p>
                                 </div>
                             </div>
