@@ -58,7 +58,7 @@ ENDPOINT="${API_URL}/api/social/schedule"
 
 # List mode
 if [[ "$LIST" == true ]]; then
-    curl -sf -H "Authorization: Bearer $SECRET" "$ENDPOINT" | \
+    curl -s -H "Authorization: Bearer $SECRET" "$ENDPOINT" | \
         python3 -c "
 import json, sys
 data = json.load(sys.stdin)
@@ -95,7 +95,7 @@ print(json.dumps(p))
 " "$PLATFORM" "$CONTENT" "$SCHEDULED_AT" "$MEDIA_URL")
 
 # POST to API
-RESPONSE=$(curl -sf -w '\n%{http_code}' \
+RESPONSE=$(curl -s -w '\n%{http_code}' \
     -H "Authorization: Bearer $SECRET" \
     -H "Content-Type: application/json" \
     -d "$PAYLOAD" \

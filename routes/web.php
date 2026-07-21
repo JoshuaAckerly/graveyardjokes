@@ -230,21 +230,33 @@ Route::redirect('/pricing', '/services', 301);
 
 Route::get('/login', function () {
     $rawUrl = config('services.auth_system.url', '');
-    $base = rtrim(is_string($rawUrl) ? $rawUrl : '', '/api');
+    $base = preg_replace('#/api/?$#', '', is_string($rawUrl) ? $rawUrl : '') ?: 'https://auth-system.graveyardjokes.com';
+
+    if (app()->environment('local') && $base === 'http://auth-system.graveyardjokes.local') {
+        $base = 'http://auth-system.graveyardjokes.local:8007';
+    }
 
     return redirect()->away("{$base}/login", 302);
 });
 
 Route::get('/register', function () {
     $rawUrl = config('services.auth_system.url', '');
-    $base = rtrim(is_string($rawUrl) ? $rawUrl : '', '/api');
+    $base = preg_replace('#/api/?$#', '', is_string($rawUrl) ? $rawUrl : '') ?: 'https://auth-system.graveyardjokes.com';
+
+    if (app()->environment('local') && $base === 'http://auth-system.graveyardjokes.local') {
+        $base = 'http://auth-system.graveyardjokes.local:8007';
+    }
 
     return redirect()->away("{$base}/register", 302);
 });
 
 Route::get('/forgot-password', function () {
     $rawUrl = config('services.auth_system.url', '');
-    $base = rtrim(is_string($rawUrl) ? $rawUrl : '', '/api');
+    $base = preg_replace('#/api/?$#', '', is_string($rawUrl) ? $rawUrl : '') ?: 'https://auth-system.graveyardjokes.com';
+
+    if (app()->environment('local') && $base === 'http://auth-system.graveyardjokes.local') {
+        $base = 'http://auth-system.graveyardjokes.local:8007';
+    }
 
     return redirect()->away("{$base}/forgot-password", 302);
 });

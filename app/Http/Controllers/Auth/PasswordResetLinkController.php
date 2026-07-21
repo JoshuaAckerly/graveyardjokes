@@ -7,19 +7,27 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Validation\ValidationException;
-use Inertia\Inertia;
-use Inertia\Response;
 
 class PasswordResetLinkController extends Controller
 {
     /**
      * Show the password reset link request page.
      */
-    public function create(Request $request): Response
+    public function create(Request $request): RedirectResponse
     {
-        return Inertia::render('auth/forgot-password', [
-            'status' => $request->session()->get('status'),
-        ]);
+        return redirect()->away($this->authSystemUrl('/forgot-password'), 302);
+    }
+
+    private function authSystemUrl(string $path = ''): string
+    {
+        $rawUrl = config('services.auth_system.url', '');
+        $base = preg_replace('#/api/?$#', '', is_string($rawUrl) ? $rawUrl : '') ?: 'https://auth-system.graveyardjokes.com';
+
+        if (app()->environment('local') && $base === 'http://auth-system.graveyardjokes.local') {
+            $base = 'http://auth-system.graveyardjokes.local:8007';
+        }
+
+        return rtrim($base, '/').'/'.ltrim($path, '/');
     }
 
     /**

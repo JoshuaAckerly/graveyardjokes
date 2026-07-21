@@ -23,9 +23,10 @@ return [
         'https://graveyardjokes.test',
         'https://graveyardjokes.com',
         'http://graveyardjokes.local',
+        'http://graveyardjokes.local:8000',
     ],
 
-    'allowed_origins_patterns' => ['/^https?:\/\/.*\.graveyardjokes\.(com|test|local)$/'],
+    'allowed_origins_patterns' => ['/^https?:\/\/.*\.graveyardjokes\.(com|test|local)(?::\d+)?$/'],
 
     'allowed_headers' => ['*'],
 

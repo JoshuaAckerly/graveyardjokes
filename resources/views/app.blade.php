@@ -157,14 +157,16 @@
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link rel="preconnect" href="https://assets.graveyardjokes.com" crossorigin>
     <link rel="dns-prefetch" href="https://www.googletagmanager.com">
-    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    @production
+        <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    @endproduction
     <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />
 
     @routes
     @viteReactRefresh
     @vite(['resources/js/app.tsx', "resources/js/pages/{$page['component']}.tsx"])
     @inertiaHead
-    @if(config('services.google_adsense.client_id'))
+    @if(app()->environment('production') && config('services.google_adsense.client_id'))
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client={{ config('services.google_adsense.client_id') }}" crossorigin="anonymous"></script>
     @endif
 </head>

@@ -34,11 +34,21 @@ export default defineConfig(({ mode }) => {
                     'http://localhost:8000',
                     'http://graveyardjokes.local:8000',
                     'http://thevelvetpulse.graveyardjokes.local',
+                    'http://thevelvetpulse.graveyardjokes.local:8005',
                     'http://hollowpress.graveyardjokes.local',
+                    'http://hollowpress.graveyardjokes.local:8001',
                     'http://lunarblood.graveyardjokes.local',
+                    'http://lunarblood.graveyardjokes.local:8002',
                     'http://velvetradio.graveyardjokes.local',
+                    'http://velvetradio.graveyardjokes.local:8006',
                     'http://synthveil.graveyardjokes.local',
-                    'http://auth-system.graveyardjokes.local'
+                    'http://synthveil.graveyardjokes.local:8004',
+                    'http://studio.graveyardjokes.local',
+                    'http://studio.graveyardjokes.local:8003',
+                    'http://auth-system.graveyardjokes.local',
+                    'http://auth-system.graveyardjokes.local:8007',
+                    'http://noteleks.graveyardjokes.local',
+                    'http://noteleks.graveyardjokes.local:8009'
                 ],
                 credentials: true
             },
