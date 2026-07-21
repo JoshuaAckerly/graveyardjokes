@@ -81,14 +81,14 @@ jobs:
           find . -name '*.php' -not -path './vendor/*' -print0 | \
           xargs -0 -n1 php -l
 
-      - name: Run PHPStan
-        run: vendor/bin/phpstan analyse -c phpstan.neon --memory-limit=2G --error-format=github
-
       - name: Copy CI environment file
         run: cp .env.ci .env
 
       - name: Generate application key
         run: php artisan key:generate
+
+      - name: Run PHPStan
+        run: vendor/bin/phpstan analyse -c phpstan.neon --memory-limit=2G --error-format=github
 
       - name: Run PHPUnit tests
         run: vendor/bin/phpunit --colors=always --coverage-text

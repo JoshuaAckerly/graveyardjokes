@@ -23,6 +23,8 @@ jobs:
             "https://thevelvetpulse.graveyardjokes.com"
             "https://velvetradio.graveyardjokes.com"
             "https://noteleks.graveyardjokes.com"
+            "https://studio.graveyardjokes.com"
+            "https://auth-system.graveyardjokes.com"
           )
 
           FAILED=()
