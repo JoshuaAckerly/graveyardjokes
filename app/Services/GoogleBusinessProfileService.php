@@ -39,6 +39,8 @@ class GoogleBusinessProfileService
      */
     public function getAccessToken(): string
     {
+        $this->ensureOAuthConfigured();
+
         /** @var string|null $cached */
         $cached = Cache::get(self::TOKEN_CACHE_KEY);
         if ($cached !== null) {
@@ -72,6 +74,8 @@ class GoogleBusinessProfileService
      */
     public function getReviews(int $pageSize = 20): array
     {
+        $this->ensureLocationConfigured();
+
         $response = Http::withToken($this->getAccessToken())
             ->get(self::REVIEWS_BASE.'/'.$this->locationName.'/reviews', [
                 'pageSize' => $pageSize,
@@ -93,6 +97,8 @@ class GoogleBusinessProfileService
      */
     public function getBusinessInfo(): array
     {
+        $this->ensureLocationConfigured();
+
         $response = Http::withToken($this->getAccessToken())
             ->get(self::INFO_BASE.'/'.$this->locationName, [
                 'readMask' => 'regularHours,specialHours,metadata,description,name,title',
@@ -114,6 +120,8 @@ class GoogleBusinessProfileService
      */
     public function getPosts(int $pageSize = 10): array
     {
+        $this->ensureLocationConfigured();
+
         $response = Http::withToken($this->getAccessToken())
             ->get(self::POSTS_BASE.'/'.$this->locationName.'/localPosts', [
                 'pageSize' => $pageSize,
@@ -135,6 +143,8 @@ class GoogleBusinessProfileService
      */
     public function replyToReview(string $reviewId, string $comment): array
     {
+        $this->ensureLocationConfigured();
+
         $url = self::REVIEWS_BASE.'/'.$this->locationName.'/reviews/'.$reviewId.'/reply';
 
         $response = Http::withToken($this->getAccessToken())
@@ -157,6 +167,8 @@ class GoogleBusinessProfileService
      */
     public function createPost(array $postData): array
     {
+        $this->ensureLocationConfigured();
+
         $response = Http::withToken($this->getAccessToken())
             ->post(self::POSTS_BASE.'/'.$this->locationName.'/localPosts', $postData);
 
@@ -167,5 +179,33 @@ class GoogleBusinessProfileService
         $data = $response->json();
 
         return is_array($data) ? $data : [];
+    }
+
+    private function ensureOAuthConfigured(): void
+    {
+        $missing = [];
+
+        if ($this->clientId === '') {
+            $missing[] = 'GOOGLE_BUSINESS_CLIENT_ID';
+        }
+
+        if ($this->clientSecret === '') {
+            $missing[] = 'GOOGLE_BUSINESS_CLIENT_SECRET';
+        }
+
+        if ($this->refreshToken === '') {
+            $missing[] = 'GOOGLE_BUSINESS_REFRESH_TOKEN';
+        }
+
+        if ($missing !== []) {
+            throw new \RuntimeException('Google Business OAuth config missing: '.implode(', ', $missing));
+        }
+    }
+
+    private function ensureLocationConfigured(): void
+    {
+        if ($this->locationName === '') {
+            throw new \RuntimeException('GOOGLE_BUSINESS_LOCATION_NAME is not configured. Run `php artisan google-business:list-locations` after refreshing OAuth access.');
+        }
     }
 }

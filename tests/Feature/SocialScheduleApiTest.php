@@ -103,7 +103,7 @@ class SocialScheduleApiTest extends TestCase
 
     public function test_accepts_all_valid_platforms(): void
     {
-        foreach (['facebook', 'discord', 'twitter', 'instagram'] as $i => $platform) {
+        foreach (['facebook', 'discord', 'twitter', 'instagram', 'google_business'] as $i => $platform) {
             $this->postJson('/api/social/schedule', [
                 'platform' => $platform,
                 'content' => "Post for {$platform}",
@@ -111,7 +111,7 @@ class SocialScheduleApiTest extends TestCase
             ], $this->authHeader())->assertStatus(201);
         }
 
-        $this->assertDatabaseCount('social_scheduled_posts', 4);
+        $this->assertDatabaseCount('social_scheduled_posts', 5);
     }
 
     // ── Deduplication guard ───────────────────────────────────────────────────

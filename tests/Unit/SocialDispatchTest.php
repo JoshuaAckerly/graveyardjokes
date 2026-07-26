@@ -4,6 +4,8 @@ namespace Tests\Unit;
 
 use App\Models\SocialScheduledPost;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Http;
 use Tests\TestCase;
 
 class SocialDispatchTest extends TestCase
@@ -179,5 +181,42 @@ class SocialDispatchTest extends TestCase
         $this->artisan('social:dispatch')
             ->expectsOutputToContain('No posts due')
             ->assertExitCode(0);
+    }
+
+    public function test_dispatches_google_business_post(): void
+    {
+        $this->app['env'] = 'production';
+
+        Cache::flush();
+        config([
+            'services.google_business.client_id' => 'client-id',
+            'services.google_business.client_secret' => 'client-secret',
+            'services.google_business.refresh_token' => 'refresh-token',
+            'services.google_business.location_name' => 'accounts/123/locations/456',
+        ]);
+
+        Http::fake([
+            'https://oauth2.googleapis.com/token' => Http::response([
+                'access_token' => 'access-token',
+                'expires_in' => 3600,
+            ]),
+            'https://mybusiness.googleapis.com/v4/accounts/123/locations/456/localPosts' => Http::response([
+                'name' => 'accounts/123/locations/456/localPosts/789',
+            ], 200),
+        ]);
+
+        $post = $this->makePost([
+            'platform' => 'google_business',
+            'content' => 'A GBP scheduled post',
+        ]);
+
+        $this->artisan('social:dispatch')->assertExitCode(0);
+
+        $this->assertSame('posted', SocialScheduledPost::find($post->id)->status);
+        Http::assertSent(fn ($request) =>
+            $request->url() === 'https://mybusiness.googleapis.com/v4/accounts/123/locations/456/localPosts'
+            && $request['topicType'] === 'STANDARD'
+            && $request['summary'] === 'A GBP scheduled post'
+        );
     }
 }

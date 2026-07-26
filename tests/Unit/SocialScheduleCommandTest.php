@@ -86,6 +86,21 @@ class SocialScheduleCommandTest extends TestCase
         ]);
     }
 
+    public function test_schedules_google_business_post(): void
+    {
+        $this->artisan('social:schedule', [
+            '--platform' => 'google_business',
+            '--content' => 'GBP post',
+            '--at' => 'tomorrow 9am',
+        ])->assertExitCode(0);
+
+        $this->assertDatabaseHas('social_scheduled_posts', [
+            'platform' => 'google_business',
+            'content' => 'GBP post',
+            'status' => 'pending',
+        ]);
+    }
+
     // ── Deduplication guard ───────────────────────────────────────────────────
 
     public function test_warns_and_fails_when_identical_pending_post_exists(): void

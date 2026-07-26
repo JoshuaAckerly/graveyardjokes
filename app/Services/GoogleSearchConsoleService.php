@@ -41,8 +41,8 @@ class GoogleSearchConsoleService
             return ['rows' => [], 'error' => 'Failed to obtain access token.'];
         }
 
-        $pageUrl = $this->siteUrl.'/'.ltrim($pagePath, '/');
-        $encodedSite = rawurlencode($this->siteUrl.'/');
+        $pageUrl = $this->pageUrl($pagePath);
+        $encodedSite = rawurlencode($this->searchConsoleSiteUrl());
 
         $endDate = now()->toDateString();
         $startDate = now()->subDays(28)->toDateString();
@@ -86,6 +86,24 @@ class GoogleSearchConsoleService
         ], $rawRows);
 
         return ['rows' => $rows];
+    }
+
+    private function searchConsoleSiteUrl(): string
+    {
+        if (str_starts_with($this->siteUrl, 'sc-domain:')) {
+            return $this->siteUrl;
+        }
+
+        return rtrim($this->siteUrl, '/').'/';
+    }
+
+    private function pageUrl(string $pagePath): string
+    {
+        if (str_starts_with($this->siteUrl, 'sc-domain:')) {
+            return 'https://'.substr($this->siteUrl, strlen('sc-domain:')).'/'.ltrim($pagePath, '/');
+        }
+
+        return rtrim($this->siteUrl, '/').'/'.ltrim($pagePath, '/');
     }
 
     private function getAccessToken(): ?string

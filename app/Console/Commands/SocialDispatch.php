@@ -7,6 +7,7 @@ use App\Services\SocialPoster\DiscordService;
 use App\Services\SocialPoster\FacebookService;
 use App\Services\SocialPoster\InstagramService;
 use App\Services\SocialPoster\TwitterService;
+use App\Services\GoogleBusinessProfileService;
 use GuzzleHttp\Client;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
@@ -81,6 +82,7 @@ class SocialDispatch extends Command
             'twitter' => (new TwitterService($client))->post($post->content),
             'facebook' => (new FacebookService($client))->post($post->content, $post->media_url),
             'instagram' => $this->fireInstagram($post, $client),
+            'google_business' => $this->fireGoogleBusiness($post),
             default => throw new \RuntimeException("Unknown platform: {$post->platform}"),
         };
     }
@@ -92,5 +94,13 @@ class SocialDispatch extends Command
         }
 
         (new InstagramService($client))->post($post->content, $post->media_url);
+    }
+
+    private function fireGoogleBusiness(SocialScheduledPost $post): void
+    {
+        (new GoogleBusinessProfileService)->createPost([
+            'topicType' => 'STANDARD',
+            'summary' => $post->content,
+        ]);
     }
 }
