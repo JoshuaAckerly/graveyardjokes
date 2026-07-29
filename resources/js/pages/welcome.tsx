@@ -203,10 +203,15 @@ export default function Home(): JSX.Element {
                                     <h3 className="text-lg font-semibold text-white">Optional Add-Ons</h3>
                                     <ul className="mt-3 space-y-1 text-sm text-white/70">
                                         <li>Monthly maintenance</li>
-                                        <li>Social media management — from $299/mo</li>
+                                        <li>Social media management — from $99/mo</li>
                                         <li>
                                             <Link href="/services/seo" className="text-[var(--primary)] hover:underline">
                                                 SEO Management — $79/mo
+                                            </Link>
+                                        </li>
+                                        <li>
+                                            <Link href="/services" className="text-[var(--primary)] hover:underline">
+                                                eCommerce storefront — $299
                                             </Link>
                                         </li>
                                     </ul>
@@ -276,6 +281,35 @@ export default function Home(): JSX.Element {
                                     </div>
                                     <Link
                                         href="/services/seo"
+                                        className="shrink-0 rounded bg-[var(--primary)] px-4 py-2 text-sm font-semibold text-white transition hover:bg-[var(--accent)]"
+                                    >
+                                        Learn More
+                                    </Link>
+                                </div>
+                            </motion.div>
+
+                            {/* Service Card — eCommerce */}
+                            <motion.div
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true, amount: 0.2 }}
+                                transition={{ duration: 0.6, delay: 0.4 }}
+                                className="rounded-lg bg-white/5 p-6 text-left shadow-lg transition-all hover:bg-white/10 md:col-span-2"
+                            >
+                                <div className="flex items-start justify-between gap-4">
+                                    <div>
+                                        <div className="mb-4 text-3xl">🛒</div>
+                                        <h3 className="mb-2 text-xl font-semibold text-white">
+                                            eCommerce{' '}
+                                            <span className="ml-1 rounded-full bg-white/10 px-2 py-0.5 text-xs text-white/50">Add-On $299</span>
+                                        </h3>
+                                        <p className="text-sm text-white/70">
+                                            Add a full storefront to any web package. Product catalog, cart, Stripe checkout, order management, and
+                                            coupon support — built to your brand, not a template.
+                                        </p>
+                                    </div>
+                                    <Link
+                                        href="/services"
                                         className="shrink-0 rounded bg-[var(--primary)] px-4 py-2 text-sm font-semibold text-white transition hover:bg-[var(--accent)]"
                                     >
                                         Learn More
