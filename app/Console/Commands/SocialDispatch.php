@@ -3,11 +3,11 @@
 namespace App\Console\Commands;
 
 use App\Models\SocialScheduledPost;
+use App\Services\GoogleBusinessProfileService;
 use App\Services\SocialPoster\DiscordService;
 use App\Services\SocialPoster\FacebookService;
 use App\Services\SocialPoster\InstagramService;
 use App\Services\SocialPoster\TwitterService;
-use App\Services\GoogleBusinessProfileService;
 use GuzzleHttp\Client;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;

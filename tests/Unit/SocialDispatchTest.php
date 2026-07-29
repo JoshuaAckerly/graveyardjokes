@@ -213,8 +213,7 @@ class SocialDispatchTest extends TestCase
         $this->artisan('social:dispatch')->assertExitCode(0);
 
         $this->assertSame('posted', SocialScheduledPost::find($post->id)->status);
-        Http::assertSent(fn ($request) =>
-            $request->url() === 'https://mybusiness.googleapis.com/v4/accounts/123/locations/456/localPosts'
+        Http::assertSent(fn ($request) => $request->url() === 'https://mybusiness.googleapis.com/v4/accounts/123/locations/456/localPosts'
             && $request['topicType'] === 'STANDARD'
             && $request['summary'] === 'A GBP scheduled post'
         );
