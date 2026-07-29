@@ -94,7 +94,7 @@ class SocialScheduleController extends Controller
         }
 
         $data = $request->validate([
-            'status'   => ['nullable', 'string', 'in:pending,processing,posted,failed,cancelled'],
+            'status' => ['nullable', 'string', 'in:pending,processing,posted,failed,cancelled'],
             'platform' => ['nullable', 'string', 'in:'.implode(',', self::PLATFORMS)],
         ]);
 
