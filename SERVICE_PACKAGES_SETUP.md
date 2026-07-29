@@ -127,7 +127,7 @@ The donation button on the About page uses a different setup (simple donation fl
 ## Important Notes
 
 - Each package should have its own unique `hostedButtonId`
-- All buttons must be created in the same PayPal account: `joshua@graveyardjokes.com`
+- All buttons must be created in the same PayPal account: `admin@graveyardjokes.com`
 - The PayPal SDK is already loaded globally (no need to add it again)
 - Test all buttons before going live
 - PayPal handles all payment processing - no sensitive data in your app

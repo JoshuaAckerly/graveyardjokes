@@ -210,7 +210,7 @@
 
             <p class="contact-link">
                 Urgent? Reach out at
-                <a href="mailto:joshua@graveyardjokes.com">joshua@graveyardjokes.com</a>
+                <a href="mailto:admin@graveyardjokes.com">admin@graveyardjokes.com</a>
             </p>
         </div>
 

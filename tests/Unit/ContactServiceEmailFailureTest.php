@@ -18,7 +18,7 @@ class ContactServiceEmailFailureTest extends TestCase
         // Mail::to()->send() will throw, but the exception is caught inside ContactService
         Mail::shouldReceive('to')
             ->once()
-            ->with('dev@graveyardjokes.com')
+            ->with('admin@graveyardjokes.com')
             ->andThrow(new \Exception('SMTP connection refused'));
 
         $service = $this->app->make(ContactServiceInterface::class);

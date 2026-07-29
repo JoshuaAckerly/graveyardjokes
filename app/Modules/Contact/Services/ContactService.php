@@ -36,12 +36,12 @@ class ContactService implements ContactServiceInterface
             $message = $validatedData['message'] ?? '';
 
             Log::info('Sending contact email', [
-                'to' => 'dev@graveyardjokes.com',
+                'to' => 'admin@graveyardjokes.com',
                 'from_name' => $firstName.' '.$lastName,
                 'from_email' => $email,
             ]);
 
-            Mail::to('dev@graveyardjokes.com')->send(
+            Mail::to('admin@graveyardjokes.com')->send(
                 new ContactMessage($firstName, $lastName, $email, $message)
             );
 

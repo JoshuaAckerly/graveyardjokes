@@ -93,8 +93,8 @@ const Terms: React.FC = () => {
                 <p>
                     We aim to resolve concerns through revisions and support before refunds are discussed. All refund requests must be submitted in
                     writing to{' '}
-                    <a href="mailto:joshua@graveyardjokes.com" className="text-blue-600 underline">
-                        joshua@graveyardjokes.com
+                    <a href="mailto:admin@graveyardjokes.com" className="text-blue-600 underline">
+                        admin@graveyardjokes.com
                     </a>
                     .
                 </p>
