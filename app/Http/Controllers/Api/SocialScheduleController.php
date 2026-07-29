@@ -93,6 +93,7 @@ class SocialScheduleController extends Controller
             return response()->json(['error' => 'Unauthorized'], 401);
         }
 
+        /** @var array{status?: string|null, platform?: string|null} $data */
         $data = $request->validate([
             'status' => ['nullable', 'string', 'in:pending,processing,posted,failed,cancelled'],
             'platform' => ['nullable', 'string', 'in:'.implode(',', self::PLATFORMS)],
