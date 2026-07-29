@@ -42,6 +42,10 @@ php artisan migrate --force
 echo "🔍 Refreshing page SEO data..."
 php artisan db:seed --class=PageSeoSeeder --force
 
+# Schedule July 30 – Aug 5 social batch (idempotent — skips if already seeded)
+echo "📅 Seeding July 30 social batch..."
+php artisan db:seed --class=SocialJuly30BatchSeeder --force
+
 # Ensure writable directories and permissions
 echo "🔒 Setting permissions..."
 sudo mkdir -p storage/framework/{cache,sessions,views} bootstrap/cache
