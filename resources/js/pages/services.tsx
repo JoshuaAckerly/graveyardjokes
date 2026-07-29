@@ -240,6 +240,59 @@ export default function Services() {
                             </div>
                         </div>
 
+                        {/* eCommerce Add-On Section */}
+                        <div className="border-t border-white/10 pt-16">
+                            <div className="mb-8 text-center">
+                                <p className="text-xs font-semibold tracking-widest text-(--primary) uppercase">Optional Add-On</p>
+                                <h2 className="mt-2 text-2xl font-bold text-white sm:text-3xl">eCommerce</h2>
+                                <p className="mt-3 text-sm text-white/60">
+                                    Add a full storefront to any package. Stripe payments, product catalog, cart & checkout — built to your brand.
+                                </p>
+                            </div>
+                            <div className="mx-auto max-w-sm">
+                                <motion.div
+                                    className="relative z-0 flex flex-col rounded-lg border-2 border-(--accent) bg-(--card) p-4 shadow-lg sm:p-6"
+                                    initial={{ opacity: 0, y: 20 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ duration: 0.5 }}
+                                    whileHover={{ scale: 1.02 }}
+                                >
+                                    <div className="mb-3 text-center sm:mb-4">
+                                        <h3 className="text-xl font-bold text-white sm:text-2xl">eCommerce Add-On</h3>
+                                        <div className="mt-2 flex items-baseline justify-center gap-1">
+                                            <span className="text-3xl font-bold text-(--primary) sm:text-4xl">$299</span>
+                                        </div>
+                                        <p className="mt-2 text-xs text-gray-300 sm:text-sm">One-time add-on to any web package</p>
+                                    </div>
+                                    <ul className="mb-6 flex-1 space-y-3">
+                                        {[
+                                            'Product catalog & inventory management',
+                                            'Shopping cart & checkout flow',
+                                            'Stripe payment integration',
+                                            'Order management & email receipts',
+                                            'Coupon & discount code support',
+                                            'Mobile-optimized storefront',
+                                        ].map((feature, index) => (
+                                            <li key={index} className="flex items-start gap-2 text-sm text-gray-200">
+                                                <Check className="mt-0.5 h-5 w-5 shrink-0 text-(--primary)" />
+                                                <span>{feature}</span>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                    <div className="mt-auto flex flex-col gap-2">
+                                        <Link
+                                            href="/services/intake?package=ecommerce"
+                                            className="block w-full rounded-lg bg-(--primary) px-6 py-3 text-center font-semibold text-white transition hover:bg-(--accent)"
+                                        >
+                                            Get Started
+                                        </Link>
+                                        <PackagePaymentGate amount={299} item="eCommerce Add-On" packageSlug="ecommerce" />
+                                    </div>
+                                </motion.div>
+                            </div>
+                        </div>
+
                         {/* SEO Add-On Section */}
                         <div className="border-t border-white/10 pt-16">
                             <div className="mb-8 text-center">
