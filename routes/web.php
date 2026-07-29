@@ -276,6 +276,27 @@ Route::get('/reset-password/{token}', function (Request $request, string $token)
 // so crawlers get a clear signal instead of a redirect or soft-404.
 // $goneRoutes and 410 aborts removed to re-enable auth routes
 
+// OAuth callback — only used during gsc:authorize one-time setup
+Route::get('/admin/oauth/gsc/callback', function (Request $request) {
+    $code = $request->query('code');
+    $error = $request->query('error');
+
+    if ($error) {
+        return response('<h1>OAuth Error</h1><p>'.htmlspecialchars((string) $error).'</p>', 400);
+    }
+
+    if (! $code) {
+        return response('<h1>No code returned</h1>', 400);
+    }
+
+    return response(
+        '<h1 style="font-family:monospace">Authorization Code</h1>'
+        .'<p style="font-family:monospace;font-size:1.2em;word-break:break-all">'.htmlspecialchars((string) $code).'</p>'
+        .'<p>Copy the code above and paste it into the <code>php artisan gsc:authorize</code> prompt.</p>',
+        200
+    );
+})->name('oauth.gsc.callback');
+
 Route::fallback(function () {
     abort(404);
 });

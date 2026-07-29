@@ -7,6 +7,7 @@ return [
         'hollowpress',
         'studio',
         'lunarblood',
+        'noteleks',
         'synthveil',
         'thevelvetpulse',
         'velvetradio',
