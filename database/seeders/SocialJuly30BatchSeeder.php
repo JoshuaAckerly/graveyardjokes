@@ -24,7 +24,6 @@ use Illuminate\Database\Seeder;
  */
 class SocialJuly30BatchSeeder extends Seeder
 {
-
     public function run(): void
     {
         // Idempotency guard — skip if any post is already scheduled for this batch window.
