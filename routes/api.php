@@ -46,3 +46,4 @@ Route::patch('/messages/{id}/read', [MessageProxyController::class, 'markRead'])
 // Social media post scheduling — protected by SOCIAL_SCHEDULE_SECRET bearer token
 Route::post('/social/schedule', [SocialScheduleController::class, 'store']);
 Route::get('/social/schedule', [SocialScheduleController::class, 'index']);
+Route::delete('/social/schedule', [SocialScheduleController::class, 'destroyBulk']);

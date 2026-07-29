@@ -82,4 +82,40 @@ class SocialScheduleController extends Controller
 
         return response()->json(['data' => $posts]);
     }
+
+    /** DELETE /api/social/schedule?status=failed&platform=facebook — bulk delete by filter. */
+    public function destroyBulk(Request $request): JsonResponse
+    {
+        $secret = config('social.schedule_secret');
+        $provided = $request->bearerToken();
+
+        if (empty($secret) || ! hash_equals($secret, (string) $provided)) {
+            return response()->json(['error' => 'Unauthorized'], 401);
+        }
+
+        $data = $request->validate([
+            'status'   => ['nullable', 'string', 'in:pending,processing,posted,failed,cancelled'],
+            'platform' => ['nullable', 'string', 'in:'.implode(',', self::PLATFORMS)],
+        ]);
+
+        $query = SocialScheduledPost::query();
+
+        if (! empty($data['status'])) {
+            $query->where('status', $data['status']);
+        }
+
+        if (! empty($data['platform'])) {
+            $query->where('platform', $data['platform']);
+        }
+
+        // Require at least one filter to prevent accidental wipe of everything.
+        if (empty($data['status']) && empty($data['platform'])) {
+            return response()->json(['error' => 'Provide at least one filter: status or platform.'], 422);
+        }
+
+        $count = $query->count();
+        $query->delete();
+
+        return response()->json(['deleted' => $count]);
+    }
 }

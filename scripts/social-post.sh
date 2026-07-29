@@ -35,14 +35,18 @@ CONTENT=""
 SCHEDULED_AT=""
 MEDIA_URL=""
 LIST=false
+CLEAR_STATUS=""
+CLEAR_PLATFORM=""
 
 for arg in "$@"; do
     case "$arg" in
-        --platform=*)  PLATFORM="${arg#--platform=}"   ;;
-        --content=*)   CONTENT="${arg#--content=}"     ;;
-        --at=*)        SCHEDULED_AT="${arg#--at=}"     ;;
-        --media-url=*) MEDIA_URL="${arg#--media-url=}" ;;
-        --list)        LIST=true                        ;;
+        --platform=*)        PLATFORM="${arg#--platform=}"           ;;
+        --content=*)         CONTENT="${arg#--content=}"             ;;
+        --at=*)              SCHEDULED_AT="${arg#--at=}"             ;;
+        --media-url=*)       MEDIA_URL="${arg#--media-url=}"         ;;
+        --list)              LIST=true                                ;;
+        --clear-status=*)    CLEAR_STATUS="${arg#--clear-status=}"   ;;
+        --clear-platform=*)  CLEAR_PLATFORM="${arg#--clear-platform=}" ;;
         --help|-h)
             grep '^#' "$0" | head -12 | sed 's/^# \{0,1\}//'
             exit 0
@@ -55,6 +59,27 @@ for arg in "$@"; do
 done
 
 ENDPOINT="${API_URL}/api/social/schedule"
+
+# Bulk-delete mode
+if [[ -n "$CLEAR_STATUS" || -n "$CLEAR_PLATFORM" ]]; then
+    PARAMS=""
+    [[ -n "$CLEAR_STATUS" ]]   && PARAMS+="status=${CLEAR_STATUS}&"
+    [[ -n "$CLEAR_PLATFORM" ]] && PARAMS+="platform=${CLEAR_PLATFORM}&"
+    PARAMS="${PARAMS%&}"
+    RESULT=$(curl -s -w '\n%{http_code}' -X DELETE \
+        -H "Authorization: Bearer $SECRET" \
+        "${ENDPOINT}?${PARAMS}")
+    HTTP_CODE=$(echo "$RESULT" | tail -1)
+    BODY=$(echo "$RESULT" | head -n -1)
+    if [[ "$HTTP_CODE" == "200" ]]; then
+        COUNT=$(echo "$BODY" | python3 -c "import json,sys; print(json.load(sys.stdin)['deleted'])")
+        echo "✅ Deleted ${COUNT} post(s) (${PARAMS})"
+    else
+        echo "Error ($HTTP_CODE): $BODY" >&2
+        exit 1
+    fi
+    exit 0
+fi
 
 # List mode
 if [[ "$LIST" == true ]]; then
