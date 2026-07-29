@@ -24,7 +24,6 @@ use Illuminate\Database\Seeder;
  */
 class SocialJuly30BatchSeeder extends Seeder
 {
-    private const SITE = 'https://graveyardjokes.com';
 
     public function run(): void
     {
