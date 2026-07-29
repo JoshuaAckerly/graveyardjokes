@@ -187,12 +187,6 @@ parameters:
 			path: app/Http/Controllers/JokeController.php
 
 		-
-			message: '#^Cannot cast mixed to string\.$#'
-			identifier: cast.string
-			count: 1
-			path: app/Models/PageSeo.php
-
-		-
 			message: '#^Method App\\Models\\SocialScheduledPost\:\:scopeDue\(\) has parameter \$query with generic class Illuminate\\Database\\Eloquent\\Builder but does not specify its types\: TModel$#'
 			identifier: missingType.generics
 			count: 1
@@ -523,6 +517,18 @@ parameters:
 			path: tests/Unit/SocialDispatchResetStuckTest.php
 
 		-
+			message: '#^Cannot access offset ''summary'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: tests/Unit/SocialDispatchTest.php
+
+		-
+			message: '#^Cannot access offset ''topicType'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: tests/Unit/SocialDispatchTest.php
+
+		-
 			message: '#^Cannot access property \$error_message on App\\Models\\SocialScheduledPost\|null\.$#'
 			identifier: property.nonObject
 			count: 2
@@ -531,19 +537,25 @@ parameters:
 		-
 			message: '#^Cannot access property \$status on App\\Models\\SocialScheduledPost\|null\.$#'
 			identifier: property.nonObject
-			count: 3
+			count: 4
 			path: tests/Unit/SocialDispatchTest.php
 
 		-
 			message: '#^Cannot call method assertExitCode\(\) on Illuminate\\Testing\\PendingCommand\|int\.$#'
 			identifier: method.nonObject
-			count: 8
+			count: 9
 			path: tests/Unit/SocialDispatchTest.php
 
 		-
 			message: '#^Cannot call method expectsOutputToContain\(\) on Illuminate\\Testing\\PendingCommand\|int\.$#'
 			identifier: method.nonObject
 			count: 3
+			path: tests/Unit/SocialDispatchTest.php
+
+		-
+			message: '#^Cannot call method url\(\) on mixed\.$#'
+			identifier: method.nonObject
+			count: 1
 			path: tests/Unit/SocialDispatchTest.php
 
 		-
@@ -567,7 +579,7 @@ parameters:
 		-
 			message: '#^Cannot call method assertExitCode\(\) on Illuminate\\Testing\\PendingCommand\|int\.$#'
 			identifier: method.nonObject
-			count: 5
+			count: 6
 			path: tests/Unit/SocialScheduleCommandTest.php
 
 		-
