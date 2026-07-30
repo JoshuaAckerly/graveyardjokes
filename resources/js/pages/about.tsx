@@ -240,7 +240,17 @@ export default function About() {
                                         loading="lazy"
                                         alt="Joshua Ackerly profile photo"
                                         className="h-52 w-52 rounded-full object-cover sm:h-60 sm:w-60"
+                                        onError={(e) => {
+                                            const img = e.target as HTMLImageElement;
+                                            img.style.display = 'none';
+                                            const fallback = img.nextElementSibling as HTMLElement | null;
+                                            if (fallback) fallback.style.display = 'flex';
+                                        }}
                                     />
+                                    {/* Shown only when profile image fails to load */}
+                                    <div style={{ display: 'none' }} className="flex h-52 w-52 items-center justify-center rounded-full bg-[var(--primary)] text-6xl font-bold text-white sm:h-60 sm:w-60">
+                                        JA
+                                    </div>
                                 </div>
                             </div>
                         </motion.div>
