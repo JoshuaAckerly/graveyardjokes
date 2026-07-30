@@ -4,14 +4,62 @@ import InertiaHead from '@/Components/InertiaHead';
 import ProjectCard from '@/Components/ProjectCard';
 import portfolioItems from '@/data/portfolioItems';
 import MainLayout from '@/Layouts/MainLayout';
+import { useGSAP } from '@gsap/react';
 import { Link, router } from '@inertiajs/react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { motion } from 'framer-motion';
 import { Check } from 'lucide-react';
-import { JSX, useEffect, useState } from 'react';
+import { JSX, useEffect, useRef, useState } from 'react';
 import { getAuthSystemUrl, getEnvVar, getProjectUrl } from '../env';
 
 export default function Home(): JSX.Element {
     const cdn = getEnvVar('VITE_ASSET_URL');
+    const heroRef = useRef<HTMLDivElement>(null);
+    const heroBgRef = useRef<HTMLImageElement>(null);
+
+    // GSAP: hero parallax + scroll-triggered section reveals + card tilt
+    useGSAP(() => {
+        // Hero background parallax
+        if (heroBgRef.current) {
+            gsap.to(heroBgRef.current, {
+                yPercent: 30,
+                ease: 'none',
+                scrollTrigger: {
+                    trigger: heroRef.current,
+                    start: 'top top',
+                    end: 'bottom top',
+                    scrub: true,
+                },
+            });
+        }
+
+        // Scroll-triggered stagger reveals on section headings + cards
+        gsap.utils.toArray<HTMLElement>('.gjk-reveal').forEach((el) => {
+            gsap.fromTo(el,
+                { opacity: 0, y: 40 },
+                { opacity: 1, y: 0, duration: 0.7, ease: 'power2.out',
+                  scrollTrigger: { trigger: el, start: 'top 85%', once: true } }
+            );
+        });
+
+        // 3D tilt on cards
+        document.querySelectorAll<HTMLElement>('.gjk-card').forEach((card) => {
+            const onMove = (e: MouseEvent) => {
+                const rect = card.getBoundingClientRect();
+                const cx = rect.left + rect.width / 2;
+                const cy = rect.top + rect.height / 2;
+                const rx = ((e.clientY - cy) / rect.height) * -12;
+                const ry = ((e.clientX - cx) / rect.width) * 12;
+                gsap.to(card, { rotationX: rx, rotationY: ry, transformPerspective: 800, duration: 0.3, ease: 'power1.out' });
+            };
+            const onLeave = () => {
+                gsap.to(card, { rotationX: 0, rotationY: 0, duration: 0.5, ease: 'elastic.out(1, 0.5)' });
+            };
+            card.addEventListener('mousemove', onMove);
+            card.addEventListener('mouseleave', onLeave);
+        });
+    }, { scope: heroRef, dependencies: [] });
 
     const handleClick = (): void => {
         router.visit('/contact');
@@ -48,14 +96,15 @@ export default function Home(): JSX.Element {
                     Home Page
                 </a>
 
-                <div className="relative z-0 max-w-full space-y-10 bg-[var(--color-foreground)] text-center">
+                <div ref={heroRef} className="relative z-0 max-w-full space-y-10 bg-[var(--color-foreground)] text-center">
                     {/* Background Image and Gradient */}
-                    <div className="absolute inset-0 max-h-96">
+                    <div className="absolute inset-0 max-h-96 overflow-hidden">
                         <img
+                            ref={heroBgRef}
                             src={`${cdn}/images/AdobeStock_327183052.webp`}
                             loading="lazy"
                             alt="Overlay Image"
-                            className="pointer-events-none h-full w-full object-cover opacity-80"
+                            className="pointer-events-none h-full w-full object-cover opacity-80 will-change-transform"
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-foreground)] to-transparent"></div>
                     </div>
@@ -132,7 +181,7 @@ export default function Home(): JSX.Element {
                         transition={{ duration: 0.8 }}
                         className="relative z-10 mx-auto w-full max-w-6xl space-y-8 px-6 py-16 sm:px-12"
                     >
-                        <div className="text-center">
+                        <div className="gjk-reveal text-center">
                             <h2 className="text-2xl font-bold text-white sm:text-3xl">
                                 Your business deserves a website that doesn't look like it crawled out of the grave.
                             </h2>
@@ -145,7 +194,7 @@ export default function Home(): JSX.Element {
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true, amount: 0.2 }}
                                 transition={{ duration: 0.6, delay: 0.1 }}
-                                className="rounded-lg bg-white/5 p-6 text-left shadow-lg"
+                                className="gjk-card rounded-lg bg-white/5 p-6 text-left shadow-lg"
                             >
                                 <div className="mb-4 text-3xl">💀</div>
                                 <h3 className="text-xl font-semibold text-white">Full Website Build</h3>
@@ -249,7 +298,7 @@ export default function Home(): JSX.Element {
                         transition={{ duration: 0.8 }}
                         className="relative z-10 mx-auto w-full max-w-6xl space-y-8 px-6 py-16 sm:px-12"
                     >
-                        <div className="text-center">
+                        <div className="gjk-reveal text-center">
                             <h2 className="text-3xl font-bold text-white sm:text-4xl">What I Offer</h2>
                             <p className="mt-4 text-lg text-white/70">
                                 Web development, design, and social media management — your full online presence, handled

@@ -1,13 +1,34 @@
 import Menu from '@/Components/Menu';
 import MobileMenu from '@/Components/MobileMenu';
 import NotificationBell from '@/Components/NotificationBell';
-import React, { ReactNode, useEffect } from 'react';
+import { router } from '@inertiajs/react';
+import gsap from 'gsap';
+import React, { ReactNode, useEffect, useRef } from 'react';
 
 interface MainLayoutProps {
     children: ReactNode;
 }
 
 const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
+    const overlayRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        // Page transition: fade-out overlay before navigate, fade-in on arrive
+        const beforeLeave = router.on('before', () => {
+            if (overlayRef.current) {
+                gsap.fromTo(overlayRef.current,
+                    { opacity: 0, pointerEvents: 'none' },
+                    { opacity: 1, pointerEvents: 'all', duration: 0.25, ease: 'power1.in' }
+                );
+            }
+        });
+        const onFinish = router.on('finish', () => {
+            if (overlayRef.current) {
+                gsap.to(overlayRef.current, { opacity: 0, pointerEvents: 'none', duration: 0.35, ease: 'power2.out', delay: 0.05 });
+            }
+        });
+        return () => { beforeLeave(); onFinish(); };
+    }, []);
     useEffect(() => {
         // Track visitor on layout mount (every page visit)
         const trackVisit = async () => {
@@ -53,6 +74,8 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
     }, []); // Empty dependency array means it runs once per component mount
     return (
         <div id="app" className="min-h-screen bg-[var(--color-background)]">
+            {/* Page transition overlay */}
+            <div ref={overlayRef} className="pointer-events-none fixed inset-0 z-[999] bg-[var(--color-background)] opacity-0" aria-hidden="true" />
             <header className="relative z-50 flex items-center justify-between p-4">
                 <div className="md:hidden">
                     <MobileMenu />

@@ -1,11 +1,18 @@
 import '../css/app.css';
 
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { createInertiaApp, type ResolvedComponent } from '@inertiajs/react';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import { createRoot } from 'react-dom/client';
 import { initializeTheme } from './hooks/use-appearance';
 
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
+
+// Register GSAP plugins once on the client
+if (typeof window !== 'undefined') {
+    gsap.registerPlugin(ScrollTrigger);
+}
 const resolvablePages = import.meta.glob<{ default: ResolvedComponent }>([
     './pages/**/*.tsx',
     '!./pages/**/__tests__/**',
