@@ -9,6 +9,8 @@ import { Link, router } from '@inertiajs/react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { motion } from 'framer-motion';
+
+gsap.registerPlugin(ScrollTrigger);
 import { Check } from 'lucide-react';
 import { JSX, useEffect, useRef, useState } from 'react';
 import { getAuthSystemUrl, getEnvVar, getProjectUrl } from '../env';
