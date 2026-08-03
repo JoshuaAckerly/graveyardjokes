@@ -1,3 +1,4 @@
+import GuestPromptModal from '@/Components/GuestPromptModal';
 import Menu from '@/Components/Menu';
 import MobileMenu from '@/Components/MobileMenu';
 import NotificationBell from '@/Components/NotificationBell';
@@ -78,6 +79,7 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
     }, []); // Empty dependency array means it runs once per component mount
     return (
         <div id="app" className="min-h-screen bg-[var(--color-background)]">
+            <GuestPromptModal />
             {/* Page transition overlay */}
             <div ref={overlayRef} className="pointer-events-none fixed inset-0 z-[999] bg-[var(--color-background)] opacity-0" aria-hidden="true" />
             <header className="relative z-50 flex items-center justify-between p-4">
