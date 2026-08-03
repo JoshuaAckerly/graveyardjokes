@@ -16,9 +16,10 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
         // Page transition: fade-out overlay before navigate, fade-in on arrive
         const beforeLeave = router.on('before', () => {
             if (overlayRef.current) {
-                gsap.fromTo(overlayRef.current,
+                gsap.fromTo(
+                    overlayRef.current,
                     { opacity: 0, pointerEvents: 'none' },
-                    { opacity: 1, pointerEvents: 'all', duration: 0.25, ease: 'power1.in' }
+                    { opacity: 1, pointerEvents: 'all', duration: 0.25, ease: 'power1.in' },
                 );
             }
         });
@@ -27,7 +28,10 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
                 gsap.to(overlayRef.current, { opacity: 0, pointerEvents: 'none', duration: 0.35, ease: 'power2.out', delay: 0.05 });
             }
         });
-        return () => { beforeLeave(); onFinish(); };
+        return () => {
+            beforeLeave();
+            onFinish();
+        };
     }, []);
     useEffect(() => {
         // Track visitor on layout mount (every page visit)

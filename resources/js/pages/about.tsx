@@ -248,7 +248,10 @@ export default function About() {
                                         }}
                                     />
                                     {/* Shown only when profile image fails to load */}
-                                    <div style={{ display: 'none' }} className="flex h-52 w-52 items-center justify-center rounded-full bg-[var(--primary)] text-6xl font-bold text-white sm:h-60 sm:w-60">
+                                    <div
+                                        style={{ display: 'none' }}
+                                        className="flex h-52 w-52 items-center justify-center rounded-full bg-[var(--primary)] text-6xl font-bold text-white sm:h-60 sm:w-60"
+                                    >
                                         JA
                                     </div>
                                 </div>

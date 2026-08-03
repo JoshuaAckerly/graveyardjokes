@@ -6,14 +6,14 @@ import portfolioItems from '@/data/portfolioItems';
 import MainLayout from '@/Layouts/MainLayout';
 import { useGSAP } from '@gsap/react';
 import { Link, router } from '@inertiajs/react';
+import { motion } from 'framer-motion';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { motion } from 'framer-motion';
-
-gsap.registerPlugin(ScrollTrigger);
 import { Check } from 'lucide-react';
 import { JSX, useEffect, useRef, useState } from 'react';
 import { getAuthSystemUrl, getEnvVar, getProjectUrl } from '../env';
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function Home(): JSX.Element {
     const cdn = getEnvVar('VITE_ASSET_URL');
@@ -21,47 +21,50 @@ export default function Home(): JSX.Element {
     const heroBgRef = useRef<HTMLImageElement>(null);
 
     // GSAP: hero parallax + scroll-triggered section reveals + card tilt
-    useGSAP(() => {
-        // Hero background parallax
-        if (heroBgRef.current) {
-            gsap.to(heroBgRef.current, {
-                yPercent: 30,
-                ease: 'none',
-                scrollTrigger: {
-                    trigger: heroRef.current,
-                    start: 'top top',
-                    end: 'bottom top',
-                    scrub: true,
-                },
+    useGSAP(
+        () => {
+            // Hero background parallax
+            if (heroBgRef.current) {
+                gsap.to(heroBgRef.current, {
+                    yPercent: 30,
+                    ease: 'none',
+                    scrollTrigger: {
+                        trigger: heroRef.current,
+                        start: 'top top',
+                        end: 'bottom top',
+                        scrub: true,
+                    },
+                });
+            }
+
+            // Scroll-triggered stagger reveals on section headings + cards
+            gsap.utils.toArray<HTMLElement>('.gjk-reveal').forEach((el) => {
+                gsap.fromTo(
+                    el,
+                    { opacity: 0, y: 40 },
+                    { opacity: 1, y: 0, duration: 0.7, ease: 'power2.out', scrollTrigger: { trigger: el, start: 'top 85%', once: true } },
+                );
             });
-        }
 
-        // Scroll-triggered stagger reveals on section headings + cards
-        gsap.utils.toArray<HTMLElement>('.gjk-reveal').forEach((el) => {
-            gsap.fromTo(el,
-                { opacity: 0, y: 40 },
-                { opacity: 1, y: 0, duration: 0.7, ease: 'power2.out',
-                  scrollTrigger: { trigger: el, start: 'top 85%', once: true } }
-            );
-        });
-
-        // 3D tilt on cards
-        document.querySelectorAll<HTMLElement>('.gjk-card').forEach((card) => {
-            const onMove = (e: MouseEvent) => {
-                const rect = card.getBoundingClientRect();
-                const cx = rect.left + rect.width / 2;
-                const cy = rect.top + rect.height / 2;
-                const rx = ((e.clientY - cy) / rect.height) * -12;
-                const ry = ((e.clientX - cx) / rect.width) * 12;
-                gsap.to(card, { rotationX: rx, rotationY: ry, transformPerspective: 800, duration: 0.3, ease: 'power1.out' });
-            };
-            const onLeave = () => {
-                gsap.to(card, { rotationX: 0, rotationY: 0, duration: 0.5, ease: 'elastic.out(1, 0.5)' });
-            };
-            card.addEventListener('mousemove', onMove);
-            card.addEventListener('mouseleave', onLeave);
-        });
-    }, { scope: heroRef, dependencies: [] });
+            // 3D tilt on cards
+            document.querySelectorAll<HTMLElement>('.gjk-card').forEach((card) => {
+                const onMove = (e: MouseEvent) => {
+                    const rect = card.getBoundingClientRect();
+                    const cx = rect.left + rect.width / 2;
+                    const cy = rect.top + rect.height / 2;
+                    const rx = ((e.clientY - cy) / rect.height) * -12;
+                    const ry = ((e.clientX - cx) / rect.width) * 12;
+                    gsap.to(card, { rotationX: rx, rotationY: ry, transformPerspective: 800, duration: 0.3, ease: 'power1.out' });
+                };
+                const onLeave = () => {
+                    gsap.to(card, { rotationX: 0, rotationY: 0, duration: 0.5, ease: 'elastic.out(1, 0.5)' });
+                };
+                card.addEventListener('mousemove', onMove);
+                card.addEventListener('mouseleave', onLeave);
+            });
+        },
+        { scope: heroRef, dependencies: [] },
+    );
 
     const handleClick = (): void => {
         router.visit('/contact');
