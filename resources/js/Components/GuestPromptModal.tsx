@@ -37,31 +37,27 @@ export default function GuestPromptModal() {
             className="fixed inset-0 z-[9998] flex items-center justify-center p-4"
         >
             {/* Backdrop */}
-            <div
-                className="absolute inset-0 bg-black/70 backdrop-blur-sm"
-                onClick={dismiss}
-                aria-hidden="true"
-            />
+            <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" onClick={dismiss} aria-hidden="true" />
 
             {/* Panel */}
             <div className="relative z-10 w-full max-w-md rounded-lg border border-white/10 bg-[var(--color-foreground)] p-8 shadow-2xl">
-                <button
-                    onClick={dismiss}
-                    aria-label="Close"
-                    className="absolute top-4 right-4 text-white/50 transition hover:text-white"
-                >
+                <button onClick={dismiss} aria-label="Close" className="absolute top-4 right-4 text-white/50 transition hover:text-white">
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                        <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
+                        <path
+                            fillRule="evenodd"
+                            d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                            clipRule="evenodd"
+                        />
                     </svg>
                 </button>
 
-                <p className="mb-1 text-sm font-semibold uppercase tracking-widest text-[var(--primary)]">Hey there 👋</p>
+                <p className="mb-1 text-sm font-semibold tracking-widest text-[var(--primary)] uppercase">Hey there 👋</p>
                 <h2 id="guest-prompt-title" className="mb-3 text-2xl font-bold text-white">
                     Thinking about a new website?
                 </h2>
                 <p className="mb-6 text-white/70">
-                    We build custom sites for musicians, artists, and creative businesses — no templates, no cookie‑cutter designs. Tell us about
-                    your project and we'll put together a free quote.
+                    We build custom sites for musicians, artists, and creative businesses — no templates, no cookie‑cutter designs. Tell us about your
+                    project and we'll put together a free quote.
                 </p>
 
                 <div className="flex flex-col gap-3">
@@ -87,10 +83,7 @@ export default function GuestPromptModal() {
                     </div>
                 </div>
 
-                <button
-                    onClick={dismiss}
-                    className="mt-5 w-full text-center text-xs text-white/30 transition hover:text-white/50"
-                >
+                <button onClick={dismiss} className="mt-5 w-full text-center text-xs text-white/30 transition hover:text-white/50">
                     Maybe later
                 </button>
             </div>
