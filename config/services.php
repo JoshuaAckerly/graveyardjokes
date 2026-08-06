@@ -74,6 +74,11 @@ return [
         'place_id' => env('GOOGLE_PLACES_PLACE_ID'),
     ],
 
+    'linkedin' => [
+        'client_id' => env('LINKEDIN_CLIENT_ID'),
+        'client_secret' => env('LINKEDIN_CLIENT_SECRET'),
+    ],
+
     'google_search_console' => [
         'client_id' => env('GOOGLE_SEARCH_CONSOLE_CLIENT_ID'),
         'client_secret' => env('GOOGLE_SEARCH_CONSOLE_CLIENT_SECRET'),

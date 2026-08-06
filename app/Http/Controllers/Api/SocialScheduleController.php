@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 
 class SocialScheduleController extends Controller
 {
-    private const PLATFORMS = ['discord', 'twitter', 'facebook', 'instagram', 'google_business'];
+    private const PLATFORMS = ['discord', 'twitter', 'facebook', 'instagram', 'google_business', 'linkedin'];
 
     public function store(Request $request): JsonResponse
     {

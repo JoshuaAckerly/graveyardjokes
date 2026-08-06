@@ -23,6 +23,11 @@ return [
         'access_token' => env('INSTAGRAM_ACCESS_TOKEN'),
     ],
 
+    'linkedin' => [
+        'access_token' => env('LINKEDIN_ACCESS_TOKEN'),
+        'author_urn' => env('LINKEDIN_AUTHOR_URN'),
+    ],
+
     'schedule_secret' => env('SOCIAL_SCHEDULE_SECRET'),
 
 ];

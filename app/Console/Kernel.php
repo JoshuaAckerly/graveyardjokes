@@ -6,6 +6,7 @@ use App\Console\Commands\FacebookPageTokens;
 use App\Console\Commands\FacebookRefreshToken;
 use App\Console\Commands\GenerateSitemap;
 use App\Console\Commands\GenerateSitemapIndex;
+use App\Console\Commands\LinkedInAuthorize;
 use App\Console\Commands\SocialDispatch;
 use App\Console\Commands\SocialDispatchResetStuck;
 use App\Console\Commands\SocialSchedule;
@@ -27,6 +28,7 @@ class Kernel extends ConsoleKernel
         SocialSchedule::class,
         FacebookPageTokens::class,
         FacebookRefreshToken::class,
+        LinkedInAuthorize::class,
     ];
 
     /**

@@ -16,7 +16,7 @@ class SocialSchedule extends Command
 
     protected $description = 'Add a post to the social media scheduling queue.';
 
-    private const PLATFORMS = ['discord', 'twitter', 'facebook', 'instagram', 'google_business'];
+    private const PLATFORMS = ['discord', 'twitter', 'facebook', 'instagram', 'google_business', 'linkedin'];
 
     public function handle(): int
     {
