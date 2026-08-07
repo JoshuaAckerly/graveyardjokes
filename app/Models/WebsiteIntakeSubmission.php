@@ -33,7 +33,6 @@ class WebsiteIntakeSubmission extends Model
         'integrations',
         'needs_seo',
         'launch_date',
-        'budget_range',
         'hard_deadline',
         'phased_rollout_ok',
         'approval_commitment',

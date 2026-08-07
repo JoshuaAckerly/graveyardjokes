@@ -169,7 +169,6 @@ describe('Services Intake Page', () => {
             needs_email_setup: 'Error needs email setup',
             needs_seo: 'Error needs seo',
             launch_date: 'Error launch date',
-            budget_range: 'Error budget range',
             hard_deadline: 'Error hard deadline',
             phased_rollout_ok: 'Error phased rollout',
             legal_pages_needed: 'Error legal pages',
@@ -229,7 +228,6 @@ describe('Services Intake Page', () => {
         fireEvent.change(screen.getByLabelText('Need domain email setup?'), { target: { value: '0' } });
         fireEvent.change(screen.getByLabelText('Need SEO setup included?'), { target: { value: '0' } });
         fireEvent.change(screen.getByLabelText('Ideal launch date'), { target: { value: '2026-04-01' } });
-        fireEvent.change(screen.getByLabelText('Budget range'), { target: { value: '3k_5k' } });
         fireEvent.change(screen.getByLabelText('Is your launch date a hard deadline?'), { target: { value: '1' } });
         fireEvent.change(screen.getByLabelText('Are phased rollouts okay?'), { target: { value: '0' } });
 
@@ -268,7 +266,6 @@ describe('Services Intake Page', () => {
         expect(mockSetData).toHaveBeenCalledWith('needs_email_setup', false);
         expect(mockSetData).toHaveBeenCalledWith('needs_seo', false);
         expect(mockSetData).toHaveBeenCalledWith('launch_date', '2026-04-01');
-        expect(mockSetData).toHaveBeenCalledWith('budget_range', '3k_5k');
         expect(mockSetData).toHaveBeenCalledWith('hard_deadline', true);
         expect(mockSetData).toHaveBeenCalledWith('phased_rollout_ok', false);
 

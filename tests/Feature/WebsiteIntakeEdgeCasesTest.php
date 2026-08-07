@@ -30,7 +30,6 @@ class WebsiteIntakeEdgeCasesTest extends TestCase
             'hosting_status' => 'owned',
             'needs_email_setup' => false,
             'needs_seo' => false,
-            'budget_range' => '1k_3k',
             'hard_deadline' => false,
             'phased_rollout_ok' => true,
             'approval_commitment' => true,
@@ -50,16 +49,6 @@ class WebsiteIntakeEdgeCasesTest extends TestCase
         ]));
 
         $response->assertSessionHasErrors('selected_package');
-    }
-
-    #[Test]
-    public function invalid_budget_range_is_rejected(): void
-    {
-        $response = $this->post('/services/intake', $this->validPayload([
-            'budget_range' => 'very_expensive',
-        ]));
-
-        $response->assertSessionHasErrors('budget_range');
     }
 
     #[Test]
@@ -100,16 +89,4 @@ class WebsiteIntakeEdgeCasesTest extends TestCase
         }
     }
 
-    #[Test]
-    public function all_valid_budget_ranges_are_accepted(): void
-    {
-        foreach (['under_1k', '1k_3k', '3k_5k', '5k_plus'] as $budget) {
-            $response = $this->post('/services/intake', $this->validPayload([
-                'budget_range' => $budget,
-            ]));
-
-            $response->assertRedirect();
-            $response->assertSessionMissing('errors');
-        }
-    }
 }

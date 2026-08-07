@@ -48,7 +48,6 @@ type IntakeFormData = {
     integrations: string;
     needs_seo: boolean;
     launch_date: string;
-    budget_range: string;
     hard_deadline: boolean;
     phased_rollout_ok: boolean;
     approval_commitment: boolean;
@@ -70,13 +69,6 @@ const statusOptions: IntakeOption[] = [
     { value: 'ready', label: 'Ready now' },
     { value: 'partial', label: 'Partially ready' },
     { value: 'need_help', label: 'Need help creating this' },
-];
-
-const budgetOptions: IntakeOption[] = [
-    { value: 'under_1k', label: 'Under $1,000' },
-    { value: '1k_3k', label: '$1,000 - $3,000' },
-    { value: '3k_5k', label: '$3,000 - $5,000' },
-    { value: '5k_plus', label: '$5,000+' },
 ];
 
 function boolToSelectValue(value: boolean): '1' | '0' {
@@ -125,7 +117,6 @@ export default function ServicesIntake({
         integrations: '',
         needs_seo: true,
         launch_date: '',
-        budget_range: '1k_3k',
         hard_deadline: false,
         phased_rollout_ok: true,
         approval_commitment: false,
@@ -623,27 +614,6 @@ export default function ServicesIntake({
                                             className="w-full rounded-md border border-white/20 bg-black/30 px-3 py-2"
                                         />
                                         {getFieldError('launch_date') && <p className="mt-1 text-sm text-red-300">{getFieldError('launch_date')}</p>}
-                                    </div>
-
-                                    <div>
-                                        <label htmlFor="budget_range" className="mb-1 block text-sm font-medium">
-                                            Budget range
-                                        </label>
-                                        <select
-                                            id="budget_range"
-                                            value={data.budget_range}
-                                            onChange={(event) => setData('budget_range', event.target.value)}
-                                            className="w-full rounded-md border border-white/20 bg-black/30 px-3 py-2"
-                                        >
-                                            {budgetOptions.map((option) => (
-                                                <option key={option.value} value={option.value}>
-                                                    {option.label}
-                                                </option>
-                                            ))}
-                                        </select>
-                                        {getFieldError('budget_range') && (
-                                            <p className="mt-1 text-sm text-red-300">{getFieldError('budget_range')}</p>
-                                        )}
                                     </div>
 
                                     <div>
