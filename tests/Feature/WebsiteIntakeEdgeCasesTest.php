@@ -88,5 +88,4 @@ class WebsiteIntakeEdgeCasesTest extends TestCase
             $response->assertRedirect('/services/'.$package);
         }
     }
-
 }
