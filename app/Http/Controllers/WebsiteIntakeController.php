@@ -13,14 +13,14 @@ use Inertia\Response;
 class WebsiteIntakeController extends Controller
 {
     private const PACKAGE_OPTIONS = [
-        'starter'                    => 'Starter Package — $99',
-        'professional'               => 'Professional Package — $149',
-        'premium'                    => 'Premium Package — $299',
-        'modernization-starter'      => 'Social Media Starter — $99/mo',
+        'starter' => 'Starter Package — $99',
+        'professional' => 'Professional Package — $149',
+        'premium' => 'Premium Package — $299',
+        'modernization-starter' => 'Social Media Starter — $99/mo',
         'modernization-professional' => 'Social Media Professional — $149/mo',
-        'modernization-premium'      => 'Social Media Premium — $199/mo',
-        'ecommerce'                  => 'eCommerce Add-On — $299',
-        'seo'                        => 'SEO Management — $79/mo',
+        'modernization-premium' => 'Social Media Premium — $199/mo',
+        'ecommerce' => 'eCommerce Add-On — $299',
+        'seo' => 'SEO Management — $79/mo',
     ];
 
     private const GOAL_OPTIONS = [
