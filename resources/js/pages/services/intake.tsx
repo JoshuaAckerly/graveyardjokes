@@ -20,10 +20,10 @@ type IntakePageProps = {
     legalPageOptions: IntakeOption[];
 };
 
-type CheckboxField = 'top_goals' | 'required_pages' | 'must_have_features' | 'brand_personality' | 'legal_pages_needed';
+type CheckboxField = 'selected_packages' | 'top_goals' | 'required_pages' | 'must_have_features' | 'brand_personality' | 'legal_pages_needed';
 
 type IntakeFormData = {
-    selected_package: string;
+    selected_packages: string[];
     full_name: string;
     business_name: string;
     email: string;
@@ -79,6 +79,33 @@ function selectValueToBool(value: string): boolean {
     return value === '1';
 }
 
+type PackageGroup = {
+    label: string;
+    options: IntakeOption[];
+};
+
+function groupPackageOptions(options: IntakeOption[]): PackageGroup[] {
+    const webDev: IntakeOption[] = [];
+    const social: IntakeOption[] = [];
+    const addons: IntakeOption[] = [];
+
+    for (const opt of options) {
+        if (opt.value.startsWith('modernization-')) {
+            social.push(opt);
+        } else if (opt.value === 'ecommerce' || opt.value === 'seo') {
+            addons.push(opt);
+        } else {
+            webDev.push(opt);
+        }
+    }
+
+    return [
+        { label: 'Web Development & Design', options: webDev },
+        { label: 'Social Media Management', options: social },
+        { label: 'Add-Ons', options: addons },
+    ].filter((g) => g.options.length > 0);
+}
+
 export default function ServicesIntake({
     prefillPackage,
     packageOptions,
@@ -89,10 +116,10 @@ export default function ServicesIntake({
     legalPageOptions,
 }: IntakePageProps) {
     const hasPrefillPackage = packageOptions.some((option) => option.value === prefillPackage);
-    const defaultPackage = hasPrefillPackage ? prefillPackage : (packageOptions[0]?.value ?? 'professional');
+    const defaultPackages = hasPrefillPackage ? [prefillPackage] : [];
 
     const { data, setData, post, processing, errors } = useForm<IntakeFormData>({
-        selected_package: defaultPackage,
+        selected_packages: defaultPackages,
         full_name: '',
         business_name: '',
         email: '',
@@ -151,9 +178,9 @@ export default function ServicesIntake({
 
         // Track intake form submission and package selection
         trackFormSubmission('intake_form', {
-            package: data.selected_package,
+            packages: data.selected_packages.join(','),
         });
-        trackPackageSelection(data.selected_package);
+        data.selected_packages.forEach((pkg) => trackPackageSelection(pkg));
 
         post('/services/intake', {
             preserveScroll: true,
@@ -182,29 +209,44 @@ export default function ServicesIntake({
                             <section className="space-y-4 rounded-lg border border-white/10 p-4 sm:p-6">
                                 <h2 className="text-xl font-semibold">1. Contact and Package</h2>
 
-                                <div className="grid gap-4 sm:grid-cols-2">
-                                    <div>
-                                        <label htmlFor="selected_package" className="mb-1 block text-sm font-medium">
-                                            Selected package
-                                        </label>
-                                        <select
-                                            id="selected_package"
-                                            value={data.selected_package}
-                                            onChange={(event) => setData('selected_package', event.target.value)}
-                                            className="w-full rounded-md border border-white/20 bg-black/30 px-3 py-2"
-                                            required
-                                        >
-                                            {packageOptions.map((option) => (
-                                                <option key={option.value} value={option.value}>
-                                                    {option.label}
-                                                </option>
-                                            ))}
-                                        </select>
-                                        {getFieldError('selected_package') && (
-                                            <p className="mt-1 text-sm text-red-300">{getFieldError('selected_package')}</p>
-                                        )}
+                                <div>
+                                    <p className="mb-3 text-sm font-medium">Select one or more packages</p>
+                                    <div className="space-y-4">
+                                        {groupPackageOptions(packageOptions).map((group) => (
+                                            <div key={group.label}>
+                                                <p className="mb-2 text-xs font-semibold tracking-widest text-(--primary) uppercase">
+                                                    {group.label}
+                                                </p>
+                                                <div className="grid gap-2 sm:grid-cols-2">
+                                                    {group.options.map((option) => (
+                                                        <label
+                                                            key={option.value}
+                                                            className={`flex cursor-pointer items-start gap-2 rounded border p-2 text-sm ${
+                                                                data.selected_packages.includes(option.value)
+                                                                    ? 'border-(--primary) bg-(--primary)/10'
+                                                                    : 'border-white/10 bg-black/20'
+                                                            }`}
+                                                        >
+                                                            <input
+                                                                type="checkbox"
+                                                                value={option.value}
+                                                                checked={data.selected_packages.includes(option.value)}
+                                                                onChange={() => toggleArrayValue('selected_packages', option.value)}
+                                                                className="mt-1"
+                                                            />
+                                                            <span>{option.label}</span>
+                                                        </label>
+                                                    ))}
+                                                </div>
+                                            </div>
+                                        ))}
                                     </div>
+                                    {getFieldError('selected_packages') && (
+                                        <p className="mt-1 text-sm text-red-300">{getFieldError('selected_packages')}</p>
+                                    )}
+                                </div>
 
+                                <div className="grid gap-4 sm:grid-cols-2">
                                     <div>
                                         <label htmlFor="preferred_contact_method" className="mb-1 block text-sm font-medium">
                                             Preferred contact method

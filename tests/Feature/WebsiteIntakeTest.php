@@ -28,7 +28,7 @@ class WebsiteIntakeTest extends TestCase
         $response = $this->post('/services/intake', []);
 
         $response->assertSessionHasErrors([
-            'selected_package',
+            'selected_packages',
             'full_name',
             'email',
             'project_summary',
@@ -53,7 +53,7 @@ class WebsiteIntakeTest extends TestCase
     public function it_stores_submission_and_unlocks_checkout_session(): void
     {
         $payload = [
-            'selected_package' => 'professional',
+            'selected_packages' => ['professional'],
             'full_name' => 'Jane Client',
             'business_name' => 'Client Co',
             'email' => 'jane@example.com',
@@ -91,7 +91,7 @@ class WebsiteIntakeTest extends TestCase
 
         $response = $this->post('/services/intake', $payload);
 
-        $response->assertRedirect('/services/professional');
+        $response->assertRedirect('/services');
 
         $this->assertDatabaseHas('website_intake_submissions', [
             'email' => 'jane@example.com',
@@ -100,6 +100,6 @@ class WebsiteIntakeTest extends TestCase
         ]);
 
         $response->assertSessionHas('website_intake.completed', true);
-        $response->assertSessionHas('website_intake.selected_package', 'professional');
+        $response->assertSessionHas('website_intake.selected_packages', ['professional']);
     }
 }

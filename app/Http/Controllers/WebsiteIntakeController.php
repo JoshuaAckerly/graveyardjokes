@@ -13,15 +13,14 @@ use Inertia\Response;
 class WebsiteIntakeController extends Controller
 {
     private const PACKAGE_OPTIONS = [
-        'starter' => 'Starter Package - Website Development',
-        'professional' => 'Professional Package - Website Development',
-        'premium' => 'Premium Package - Website Development',
-        'design-starter' => 'Starter Package - Website Design',
-        'design-professional' => 'Professional Package - Website Design',
-        'design-premium' => 'Premium Package - Website Design',
-        'modernization-starter' => 'Starter Package - Website Modernization',
-        'modernization-professional' => 'Professional Package - Website Modernization',
-        'modernization-premium' => 'Premium Package - Website Modernization',
+        'starter'                    => 'Starter Package — $99',
+        'professional'               => 'Professional Package — $149',
+        'premium'                    => 'Premium Package — $299',
+        'modernization-starter'      => 'Social Media Starter — $99/mo',
+        'modernization-professional' => 'Social Media Professional — $149/mo',
+        'modernization-premium'      => 'Social Media Premium — $199/mo',
+        'ecommerce'                  => 'eCommerce Add-On — $299',
+        'seo'                        => 'SEO Management — $79/mo',
     ];
 
     private const GOAL_OPTIONS = [
@@ -105,7 +104,7 @@ class WebsiteIntakeController extends Controller
     public function store(Request $request): RedirectResponse
     {
         /** @var array{
-         *   selected_package: string,
+         *   selected_packages: array<int, string>,
          *   full_name: string,
          *   business_name: string|null,
          *   email: string,
@@ -141,7 +140,8 @@ class WebsiteIntakeController extends Controller
          *   additional_notes: string|null,
          * } $validated */
         $validated = $request->validate([
-            'selected_package' => ['required', 'string', Rule::in(array_keys(self::PACKAGE_OPTIONS))],
+            'selected_packages' => ['required', 'array', 'min:1'],
+            'selected_packages.*' => ['required', 'string', Rule::in(array_keys(self::PACKAGE_OPTIONS))],
             'full_name' => ['required', 'string', 'max:120'],
             'business_name' => ['nullable', 'string', 'max:160'],
             'email' => ['required', 'email', 'max:255'],
@@ -184,7 +184,8 @@ class WebsiteIntakeController extends Controller
 
         $submission = WebsiteIntakeSubmission::create([
             'reference' => (string) Str::uuid(),
-            'selected_package' => (string) $validated['selected_package'],
+            'selected_package' => (string) ($validated['selected_packages'][0] ?? ''),
+            'selected_packages' => array_values((array) $validated['selected_packages']),
             'full_name' => (string) $validated['full_name'],
             'business_name' => isset($validated['business_name']) ? (string) $validated['business_name'] : null,
             'email' => (string) $validated['email'],
@@ -225,11 +226,11 @@ class WebsiteIntakeController extends Controller
         $request->session()->put('website_intake', [
             'completed' => true,
             'submission_id' => $submission->id,
-            'selected_package' => $submission->selected_package,
+            'selected_packages' => $submission->selected_packages,
             'submitted_at' => now()->toIso8601String(),
         ]);
 
-        return redirect('/services/'.$submission->selected_package);
+        return redirect('/services');
     }
 
     /**

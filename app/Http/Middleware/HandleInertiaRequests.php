@@ -55,10 +55,14 @@ class HandleInertiaRequests extends Middleware
             $intakeSession = [];
         }
 
-        $selectedPackage = $intakeSession['selected_package'] ?? null;
-        if (! is_string($selectedPackage) || $selectedPackage === '') {
-            $selectedPackage = null;
+        $selectedPackages = $intakeSession['selected_packages'] ?? [];
+        if (! is_array($selectedPackages)) {
+            $selectedPackages = [];
         }
+
+        $selectedPackage = isset($selectedPackages[0]) && is_string($selectedPackages[0]) && $selectedPackages[0] !== ''
+            ? $selectedPackages[0]
+            : null;
 
         $submittedAt = $intakeSession['submitted_at'] ?? null;
         if (! is_string($submittedAt) || $submittedAt === '') {
@@ -88,6 +92,7 @@ class HandleInertiaRequests extends Middleware
                 'completed' => (bool) ($intakeSession['completed'] ?? false),
                 'submissionId' => $submissionId !== null ? (int) $submissionId : null,
                 'selectedPackage' => $selectedPackage,
+                'selectedPackages' => $selectedPackages,
                 'submittedAt' => $submittedAt,
             ],
         ];

@@ -9,6 +9,7 @@ class WebsiteIntakeSubmission extends Model
     protected $fillable = [
         'reference',
         'selected_package',
+        'selected_packages',
         'full_name',
         'business_name',
         'email',
@@ -47,6 +48,7 @@ class WebsiteIntakeSubmission extends Model
     ];
 
     protected $casts = [
+        'selected_packages' => 'array',
         'top_goals' => 'array',
         'required_pages' => 'array',
         'must_have_features' => 'array',

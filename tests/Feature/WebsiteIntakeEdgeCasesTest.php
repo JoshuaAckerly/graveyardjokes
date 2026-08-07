@@ -14,7 +14,7 @@ class WebsiteIntakeEdgeCasesTest extends TestCase
     private function validPayload(array $overrides = []): array
     {
         return array_merge([
-            'selected_package' => 'starter',
+            'selected_packages' => ['starter'],
             'full_name' => 'Test User',
             'email' => 'test@example.com',
             'project_summary' => 'Need a basic site.',
@@ -45,10 +45,10 @@ class WebsiteIntakeEdgeCasesTest extends TestCase
     public function invalid_package_value_is_rejected(): void
     {
         $response = $this->post('/services/intake', $this->validPayload([
-            'selected_package' => 'deluxe_ultra_package',
+            'selected_packages' => ['deluxe_ultra_package'],
         ]));
 
-        $response->assertSessionHasErrors('selected_package');
+        $response->assertSessionHasErrors('selected_packages.0');
     }
 
     #[Test]
@@ -76,16 +76,22 @@ class WebsiteIntakeEdgeCasesTest extends TestCase
     {
         $validPackages = [
             'starter', 'professional', 'premium',
-            'design-starter', 'design-professional', 'design-premium',
+            'seo',
             'modernization-starter', 'modernization-professional', 'modernization-premium',
         ];
 
         foreach ($validPackages as $package) {
             $response = $this->post('/services/intake', $this->validPayload([
-                'selected_package' => $package,
+                'selected_packages' => [$package],
             ]));
 
-            $response->assertRedirect('/services/'.$package);
+            $response->assertRedirect('/services');
         }
+
+        // ecommerce has no dedicated page — redirects to services listing
+        $response = $this->post('/services/intake', $this->validPayload([
+            'selected_packages' => ['ecommerce'],
+        ]));
+        $response->assertRedirect('/services');
     }
 }

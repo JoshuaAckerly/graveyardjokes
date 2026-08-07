@@ -5,19 +5,38 @@ import { getAuthSystemUrl, getLoginUrl } from '../env';
 const STORAGE_KEY = 'gj_guest_prompt_dismissed';
 const DELAY_MS = 15_000;
 
+// Suppress on pages where the prompt would be intrusive or redundant
+const SUPPRESSED_PATH_PREFIXES = [
+    '/services/intake',
+    '/contact',
+    '/terms',
+    '/privacy',
+    '/cookies',
+    '/login',
+    '/register',
+    '/forgot-password',
+    '/reset-password',
+];
+
 export default function GuestPromptModal() {
     const [visible, setVisible] = useState(false);
 
-    const page = usePage().props as { auth?: { user?: unknown } };
-    const isGuest = !page.auth?.user;
+    const page = usePage();
+    const props = page.props as { auth?: { user?: unknown } };
+    const isGuest = !props.auth?.user;
+    const currentPath = (page.url ?? '').split('?')[0];
+    const isSuppressed = SUPPRESSED_PATH_PREFIXES.some(
+        (prefix) => currentPath === prefix || currentPath.startsWith(prefix + '/'),
+    );
 
     useEffect(() => {
         if (!isGuest) return;
+        if (isSuppressed) return;
         if (sessionStorage.getItem(STORAGE_KEY)) return;
 
         const id = setTimeout(() => setVisible(true), DELAY_MS);
         return () => clearTimeout(id);
-    }, [isGuest]);
+    }, [isGuest, isSuppressed]);
 
     const dismiss = () => {
         setVisible(false);
@@ -53,11 +72,11 @@ export default function GuestPromptModal() {
 
                 <p className="mb-1 text-sm font-semibold tracking-widest text-[var(--primary)] uppercase">Hey there 👋</p>
                 <h2 id="guest-prompt-title" className="mb-3 text-2xl font-bold text-white">
-                    Thinking about a new website?
+                    Have a project in mind?
                 </h2>
                 <p className="mb-6 text-white/70">
-                    We build custom sites for musicians, artists, and creative businesses — no templates, no cookie‑cutter designs. Tell us about your
-                    project and we'll put together a free quote.
+                    Fill out the project questionnaire and we'll scope your build — or create a free account to stay in the loop and get direct
+                    feedback from us.
                 </p>
 
                 <div className="flex flex-col gap-3">
@@ -66,7 +85,7 @@ export default function GuestPromptModal() {
                         className="block w-full rounded bg-[var(--primary)] py-3 text-center font-semibold text-black transition hover:opacity-90"
                         onClick={dismiss}
                     >
-                        Get a Free Quote
+                        Fill Out Questionnaire
                     </a>
                     <a
                         href={registerUrl}

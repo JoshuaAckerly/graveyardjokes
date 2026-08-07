@@ -27,6 +27,11 @@ const baseProps = {
         { value: 'starter', label: 'Starter Package' },
         { value: 'professional', label: 'Professional Package' },
         { value: 'premium', label: 'Premium Package' },
+        { value: 'modernization-starter', label: 'Social Media Starter' },
+        { value: 'modernization-professional', label: 'Social Media Professional' },
+        { value: 'modernization-premium', label: 'Social Media Premium' },
+        { value: 'ecommerce', label: 'eCommerce Add-On' },
+        { value: 'seo', label: 'SEO Management' },
     ],
     goalOptions: [
         { value: 'lead_generation', label: 'Get leads' },
@@ -79,22 +84,22 @@ describe('Services Intake Page', () => {
     it('uses provided prefill package when valid', () => {
         render(<ServicesIntake {...baseProps} prefillPackage="premium" />);
 
-        const initialData = mockUseForm.mock.calls[0][0] as { selected_package: string };
-        expect(initialData.selected_package).toBe('premium');
+        const initialData = mockUseForm.mock.calls[0][0] as { selected_packages: string[] };
+        expect(initialData.selected_packages).toEqual(['premium']);
     });
 
     it('falls back to first package option when prefill package is invalid', () => {
         render(<ServicesIntake {...baseProps} prefillPackage="unknown" />);
 
-        const initialData = mockUseForm.mock.calls[0][0] as { selected_package: string };
-        expect(initialData.selected_package).toBe('starter');
+        const initialData = mockUseForm.mock.calls[0][0] as { selected_packages: string[] };
+        expect(initialData.selected_packages).toEqual([]);
     });
 
     it('falls back to professional when no package options are provided', () => {
         render(<ServicesIntake {...baseProps} prefillPackage="unknown" packageOptions={[]} />);
 
-        const initialData = mockUseForm.mock.calls[0][0] as { selected_package: string };
-        expect(initialData.selected_package).toBe('professional');
+        const initialData = mockUseForm.mock.calls[0][0] as { selected_packages: string[] };
+        expect(initialData.selected_packages).toEqual([]);
     });
 
     it('submits to the intake endpoint with preserveScroll enabled', () => {
@@ -118,7 +123,7 @@ describe('Services Intake Page', () => {
             post: mockPost,
             processing: false,
             errors: {
-                selected_package: 'Please pick a package.',
+                selected_packages: 'Please pick a package.',
                 top_goals: 'Choose at least one goal.',
             },
         }));
@@ -147,7 +152,7 @@ describe('Services Intake Page', () => {
 
     it('renders all supported field-level errors', () => {
         const allFieldErrors: Record<string, string> = {
-            selected_package: 'Error selected package',
+            selected_packages: 'Error selected packages',
             full_name: 'Error full name',
             business_name: 'Error business name',
             email: 'Error email',
@@ -200,7 +205,7 @@ describe('Services Intake Page', () => {
     it('wires key form interactions to setData with expected values', () => {
         render(<ServicesIntake {...baseProps} />);
 
-        fireEvent.change(screen.getByLabelText('Selected package'), { target: { value: 'starter' } });
+        fireEvent.click(screen.getByRole('checkbox', { name: 'Starter Package' }));
         fireEvent.change(screen.getByLabelText('Preferred contact method'), { target: { value: 'phone' } });
         fireEvent.change(screen.getByLabelText('Full name'), { target: { value: 'Jane Client' } });
         fireEvent.change(screen.getByLabelText('Business name'), { target: { value: 'Client Co' } });
@@ -238,7 +243,7 @@ describe('Services Intake Page', () => {
         fireEvent.click(screen.getByLabelText(/timelines begin after required assets/i));
         fireEvent.click(screen.getByLabelText(/intake information is accurate/i));
 
-        expect(mockSetData).toHaveBeenCalledWith('selected_package', 'starter');
+        expect(mockSetData).toHaveBeenCalledWith('selected_packages', ['professional', 'starter']);
         expect(mockSetData).toHaveBeenCalledWith('preferred_contact_method', 'phone');
         expect(mockSetData).toHaveBeenCalledWith('full_name', 'Jane Client');
         expect(mockSetData).toHaveBeenCalledWith('business_name', 'Client Co');
