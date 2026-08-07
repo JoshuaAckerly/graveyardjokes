@@ -175,7 +175,7 @@ export default function Services() {
                                 href="/services/intake"
                                 className="mt-4 inline-flex rounded-md border border-(--primary) bg-black/40 px-4 py-2 text-sm font-semibold text-white transition hover:bg-(--primary)"
                             >
-                                Start Project Questionnaire First
+                                Fill Out Project Questionnaire (Optional)
                             </Link>
                         </motion.div>
                     </div>

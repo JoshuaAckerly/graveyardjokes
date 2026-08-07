@@ -38,6 +38,12 @@
 
 ---
 
+## LinkedIn Integration
+- [ ] Create LinkedIn app at https://www.linkedin.com/developers/apps → add "Share on LinkedIn" product
+- [ ] Add `LINKEDIN_CLIENT_ID` and `LINKEDIN_CLIENT_SECRET` to `.env`
+- [ ] Run `php artisan linkedin:authorize` → copy `LINKEDIN_ACCESS_TOKEN` and `LINKEDIN_AUTHOR_URN` to production `.env` + `cache:clear`
+- [ ] Note: access token expires ~60 days — re-run `linkedin:authorize` to refresh
+
 ## Automation
 - [x] Add Dependabot (`.github/dependabot.yml`) for npm + composer automated dependency PRs
 - [x] Add weekly scheduled production uptime check workflow (curl all subdomains, fail on non-200)
