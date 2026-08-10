@@ -349,6 +349,61 @@ export default function Services() {
                             </div>
                         </div>
 
+                        {/* Website Maintenance Add-On Section */}
+                        <div className="border-t border-white/10 pt-16">
+                            <div className="mb-8 text-center">
+                                <p className="text-xs font-semibold tracking-widest text-(--primary) uppercase">Optional Add-On</p>
+                                <h2 className="mt-2 text-2xl font-bold text-white sm:text-3xl">Website Maintenance</h2>
+                                <p className="mt-3 text-sm text-white/60">
+                                    We keep your site running, updated, and secure every month — you never have to touch the backend.
+                                </p>
+                            </div>
+                            <div className="mx-auto max-w-sm">
+                                <motion.div
+                                    className="relative z-0 flex flex-col rounded-lg border-2 border-(--accent) bg-(--card) p-4 shadow-lg sm:p-6"
+                                    initial={{ opacity: 0, y: 20 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ duration: 0.5 }}
+                                    whileHover={{ scale: 1.02 }}
+                                >
+                                    <div className="mb-3 text-center sm:mb-4">
+                                        <h3 className="text-xl font-bold text-white sm:text-2xl">Website Maintenance</h3>
+                                        <div className="mt-2 flex items-baseline justify-center gap-1">
+                                            <span className="text-3xl font-bold text-(--primary) sm:text-4xl">$49</span>
+                                            <span className="text-sm text-white/50">/mo</span>
+                                        </div>
+                                        <p className="mt-2 text-xs text-gray-300 sm:text-sm">Ongoing care so your site never goes stale or breaks</p>
+                                    </div>
+                                    <ul className="mb-6 flex-1 space-y-3">
+                                        {[
+                                            'Monthly content updates (text, images, links)',
+                                            'Security & dependency updates',
+                                            'Uptime monitoring',
+                                            'Full site administration — no login needed',
+                                            'Monthly backups',
+                                            'Bug fixes & small tweaks',
+                                            'Priority support response',
+                                        ].map((feature, index) => (
+                                            <li key={index} className="flex items-start gap-2 text-sm text-gray-200">
+                                                <Check className="mt-0.5 h-5 w-5 shrink-0 text-(--primary)" />
+                                                <span>{feature}</span>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                    <div className="mt-auto flex flex-col gap-2">
+                                        <Link
+                                            href="/services/maintenance"
+                                            className="block w-full rounded-lg border border-(--primary) px-6 py-3 text-center font-semibold text-white transition hover:bg-(--primary)"
+                                        >
+                                            View Details
+                                        </Link>
+                                        <PackagePaymentGate amount={49} item="Website Maintenance" packageSlug="maintenance" />
+                                    </div>
+                                </motion.div>
+                            </div>
+                        </div>
+
                         {/* Social Media Management Add-On Section */}
                         <div className="border-t border-white/10 pt-16">
                             <div className="mb-8 text-center">

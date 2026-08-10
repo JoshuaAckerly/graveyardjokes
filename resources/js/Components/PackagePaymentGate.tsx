@@ -12,7 +12,8 @@ export type PackageSlug =
     | 'modernization-professional'
     | 'modernization-premium'
     | 'seo'
-    | 'ecommerce';
+    | 'ecommerce'
+    | 'maintenance';
 
 interface PackagePaymentGateProps {
     amount: number;
