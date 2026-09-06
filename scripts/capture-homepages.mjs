@@ -26,25 +26,31 @@ const getEnvironmentUrl = (url, environment) => {
 };
 
 const loadItems = () => {
+  // portfolioItems.json is a legacy, git-ignored mirror — parse the real source of truth instead.
+  if (fs.existsSync(tsDataPath)) {
+    const tsContent = fs.readFileSync(tsDataPath, 'utf8');
+    const items = [];
+
+    // Match `getProjectUrl('subdomain')` and plain string `url: '...'` / `url: "..."` values.
+    const urlPattern = /url:\s*(?:getProjectUrl\('([^']+)'\)|'([^']+)'|"([^"]+)")/g;
+    for (const match of tsContent.matchAll(urlPattern)) {
+      const [, subdomain, singleQuoted, doubleQuoted] = match;
+      const url = subdomain ? `http://${subdomain}.${getBaseDomain(env)}` : (singleQuoted ?? doubleQuoted);
+      items.push({ title: subdomain ?? url, url });
+    }
+
+    if (!items.length) {
+      throw new Error(`No project URLs found in ${tsDataPath}`);
+    }
+
+    return items;
+  }
+
   if (fs.existsSync(jsonDataPath)) {
     return JSON.parse(fs.readFileSync(jsonDataPath, 'utf8'));
   }
 
-  if (fs.existsSync(tsDataPath)) {
-    const tsContent = fs.readFileSync(tsDataPath, 'utf8');
-    const subdomains = [...tsContent.matchAll(/getProjectUrl\('([^']+)'\)/g)].map((m) => m[1]);
-
-    if (!subdomains.length) {
-      throw new Error(`No project URLs found in ${tsDataPath}`);
-    }
-
-    return subdomains.map((subdomain) => ({
-      title: subdomain,
-      url: `http://${subdomain}.${getBaseDomain(env)}`,
-    }));
-  }
-
-  throw new Error(`Could not find portfolio data file at ${jsonDataPath} or ${tsDataPath}`);
+  throw new Error(`Could not find portfolio data file at ${tsDataPath} or ${jsonDataPath}`);
 };
 
 if (!fs.existsSync(outDir)) fs.mkdirSync(outDir, { recursive: true });
