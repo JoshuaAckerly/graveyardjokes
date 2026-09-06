@@ -24,12 +24,25 @@ export default defineConfig(({ mode }) => {
         };
     } else {
         // default: local/development
+        const developmentHost = env.VITE_HOST || 'graveyardjokes.local';
+        const developmentPort = Number(env.VITE_PORT || 8081);
+        const developmentOrigin = env.VITE_ORIGIN || `http://${developmentHost}:${developmentPort}`;
+        const allowedHosts = (env.VITE_ALLOWED_HOSTS || developmentHost)
+            .split(',')
+            .map((host) => host.trim())
+            .filter(Boolean);
+
         server = {
-            port: 8081,
+            port: developmentPort,
             host: '0.0.0.0',
-            origin: 'http://graveyardjokes.local:8081',
+            origin: developmentOrigin,
+            hmr: {
+                host: developmentHost,
+                port: developmentPort,
+            },
             cors: {
                 origin: [
+                    env.APP_URL,
                     'http://graveyardjokes.local',
                     'http://localhost:8000',
                     'http://graveyardjokes.local:8000',
@@ -53,6 +66,7 @@ export default defineConfig(({ mode }) => {
                 credentials: true
             },
             allowedHosts: [
+                ...allowedHosts,
                 'graveyardjokes.local',
                 'thevelvetpulse.graveyardjokes.local',
                 'hollowpress.graveyardjokes.local',

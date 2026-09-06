@@ -13,6 +13,17 @@ export type PortfolioItem = {
 
 const portfolioItems: PortfolioItem[] = [
     {
+        title: 'Paline',
+        description: 'A booking and inquiry platform for a touring performing artist.',
+        longDescription:
+            'Paline is a full booking platform built for a performing artist juggling solo, duo, and full-lineup shows across a busy touring calendar. It features live availability with Available, Limited, Held, and Blocked date states, an automated pricing engine that adjusts for lineup size, day of week, and season, and a guided request flow that lets buyers build most of a booking anonymously before verifying identity for private pricing. Legal riders and confidentiality agreements are handled with scroll-gated e-signature at final review, and accounts use passwordless magic-link authentication end to end.',
+        url: 'https://palineofficial.com',
+        tech: ['Laravel', 'React', 'Inertia.js', 'TypeScript', 'MySQL', 'Tailwind CSS'],
+        category: 'Booking Platform',
+        year: 2026,
+        featured: true,
+    },
+    {
         title: 'Hollow Press',
         description: 'A blog site covering technology, lifestyle, and more.',
         longDescription:
