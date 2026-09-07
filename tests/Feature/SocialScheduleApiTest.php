@@ -103,7 +103,7 @@ class SocialScheduleApiTest extends TestCase
 
     public function test_accepts_all_valid_platforms(): void
     {
-        foreach (['facebook', 'discord', 'twitter', 'instagram', 'google_business'] as $i => $platform) {
+        foreach (['facebook', 'discord', 'linkedin', 'instagram', 'google_business'] as $i => $platform) {
             $this->postJson('/api/social/schedule', [
                 'platform' => $platform,
                 'content' => "Post for {$platform}",
@@ -141,14 +141,14 @@ class SocialScheduleApiTest extends TestCase
         $scheduledAt = now()->subMinutes(5);
 
         SocialScheduledPost::create([
-            'platform' => 'twitter',
+            'platform' => 'linkedin',
             'content' => 'Being processed right now',
             'scheduled_at' => $scheduledAt,
             'status' => 'processing',
         ]);
 
         $this->postJson('/api/social/schedule', [
-            'platform' => 'twitter',
+            'platform' => 'linkedin',
             'content' => 'Being processed right now',
             'scheduled_at' => $scheduledAt->toDateTimeString(),
         ], $this->authHeader())
@@ -168,7 +168,7 @@ class SocialScheduleApiTest extends TestCase
 
         // Same content + time, different platform — should succeed
         $this->postJson('/api/social/schedule', [
-            'platform' => 'twitter',
+            'platform' => 'linkedin',
             'content' => 'Same content',
             'scheduled_at' => $scheduledAt->toDateTimeString(),
         ], $this->authHeader())->assertStatus(201);

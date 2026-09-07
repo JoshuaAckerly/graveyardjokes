@@ -58,7 +58,7 @@ class SocialScheduledPostScopeTest extends TestCase
     public function test_due_scope_returns_all_pending_past_posts(): void
     {
         $this->makePost(['platform' => 'discord', 'scheduled_at' => now()->subHour()]);
-        $this->makePost(['platform' => 'twitter', 'scheduled_at' => now()->subMinutes(30)]);
+        $this->makePost(['platform' => 'linkedin', 'scheduled_at' => now()->subMinutes(30)]);
         $this->makePost(['platform' => 'facebook', 'scheduled_at' => now()->addMinutes(5)]); // future, excluded
 
         $this->assertCount(2, SocialScheduledPost::due()->get());
@@ -104,7 +104,7 @@ class SocialScheduledPostScopeTest extends TestCase
     public function test_processing_scope_returns_multiple_processing_posts(): void
     {
         $this->makePost(['platform' => 'facebook', 'status' => 'processing']);
-        $this->makePost(['platform' => 'twitter', 'status' => 'processing']);
+        $this->makePost(['platform' => 'linkedin', 'status' => 'processing']);
         $this->makePost(['platform' => 'discord', 'status' => 'pending']);
 
         $this->assertCount(2, SocialScheduledPost::processing()->get());

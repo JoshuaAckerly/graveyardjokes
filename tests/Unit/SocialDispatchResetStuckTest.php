@@ -108,7 +108,7 @@ class SocialDispatchResetStuckTest extends TestCase
     public function test_outputs_count_of_reset_posts(): void
     {
         $this->makePost();
-        $this->makePost(['platform' => 'twitter']);
+        $this->makePost(['platform' => 'linkedin']);
 
         SocialScheduledPost::where('status', 'processing')
             ->update(['updated_at' => now()->subMinutes(10)]);

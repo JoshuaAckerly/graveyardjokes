@@ -23,6 +23,17 @@ class SocialScheduleCommandTest extends TestCase
         $this->assertDatabaseCount('social_scheduled_posts', 0);
     }
 
+    public function test_fails_for_twitter_since_it_is_no_longer_supported(): void
+    {
+        $this->artisan('social:schedule', [
+            '--platform' => 'twitter',
+            '--content' => 'Hello',
+            '--at' => now()->addDay()->toDateTimeString(),
+        ])->assertExitCode(1);
+
+        $this->assertDatabaseCount('social_scheduled_posts', 0);
+    }
+
     public function test_fails_when_unparseable_date_passed(): void
     {
         $this->artisan('social:schedule', [
@@ -131,14 +142,14 @@ class SocialScheduleCommandTest extends TestCase
         $at = now()->subMinutes(5);
 
         SocialScheduledPost::create([
-            'platform' => 'twitter',
+            'platform' => 'linkedin',
             'content' => 'Being sent right now',
             'scheduled_at' => $at,
             'status' => 'processing',
         ]);
 
         $this->artisan('social:schedule', [
-            '--platform' => 'twitter',
+            '--platform' => 'linkedin',
             '--content' => 'Being sent right now',
             '--at' => $at->toDateTimeString(),
         ])
@@ -160,7 +171,7 @@ class SocialScheduleCommandTest extends TestCase
         ]);
 
         $this->artisan('social:schedule', [
-            '--platform' => 'twitter',
+            '--platform' => 'linkedin',
             '--content' => 'Cross-platform post',
             '--at' => $at->toDateTimeString(),
         ])->assertExitCode(0);

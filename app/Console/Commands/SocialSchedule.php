@@ -9,14 +9,15 @@ use Illuminate\Console\Command;
 class SocialSchedule extends Command
 {
     protected $signature = 'social:schedule
-        {--platform= : discord, twitter, facebook, instagram, or google_business}
+        {--platform= : discord, facebook, instagram, google_business, or linkedin}
         {--content=  : The post body text}
         {--at=       : When to post — any Carbon-parseable date/time (e.g. "2026-05-10 09:00", "tomorrow 9am")}
         {--media-url= : Public image URL (required for Instagram, optional for others)}';
 
     protected $description = 'Add a post to the social media scheduling queue.';
 
-    private const PLATFORMS = ['discord', 'twitter', 'facebook', 'instagram', 'google_business', 'linkedin'];
+    // Twitter/X removed — not paid for, API returns 402 credits depleted
+    private const PLATFORMS = ['discord', 'facebook', 'instagram', 'google_business', 'linkedin'];
 
     public function handle(): int
     {

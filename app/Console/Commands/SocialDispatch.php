@@ -8,7 +8,6 @@ use App\Services\SocialPoster\DiscordService;
 use App\Services\SocialPoster\FacebookService;
 use App\Services\SocialPoster\InstagramService;
 use App\Services\SocialPoster\LinkedInService;
-use App\Services\SocialPoster\TwitterService;
 use GuzzleHttp\Client;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
@@ -80,7 +79,6 @@ class SocialDispatch extends Command
     {
         match ($post->platform) {
             'discord' => (new DiscordService($client))->post($post->content, $post->media_url),
-            'twitter' => (new TwitterService($client))->post($post->content),
             'facebook' => (new FacebookService($client))->post($post->content, $post->media_url),
             'instagram' => $this->fireInstagram($post, $client),
             'google_business' => $this->fireGoogleBusiness($post),
