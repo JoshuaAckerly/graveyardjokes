@@ -119,7 +119,7 @@ class GenerateSitemapTest extends TestCase
         $content = file_get_contents($this->sitemapPath);
 
         $this->assertStringContainsString('graveyardjokes.com', $content);
-        $this->assertStringNotContainsString('graveyardjokes.local', $content);
+        $this->assertStringNotContainsString('graveyardjokes.test', $content);
     }
 
     public function test_sitemap_falls_back_to_app_url_when_no_url_option(): void

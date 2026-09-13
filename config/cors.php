@@ -22,11 +22,15 @@ return [
     'allowed_origins' => [
         'https://graveyardjokes.test',
         'https://graveyardjokes.com',
-        'http://graveyardjokes.local',
-        'http://graveyardjokes.local:8000',
+        'http://graveyardjokes.test',
+        'http://graveyardjokes.test:8000',
+        'http://10.0.1.20:8000',
     ],
 
-    'allowed_origins_patterns' => ['/^https?:\/\/.*\.graveyardjokes\.(com|test|local)(?::\d+)?$/'],
+    'allowed_origins_patterns' => [
+        '/^https?:\/\/.*\.graveyardjokes\.(com|test|local)(?::\d+)?$/',
+        '/^http:\/\/10\.0\.1\.20(?::\d+)?$/',
+    ],
 
     'allowed_headers' => ['*'],
 

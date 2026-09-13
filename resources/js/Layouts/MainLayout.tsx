@@ -40,8 +40,9 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
             try {
                 // Determine if we're on the main domain or a subdomain
                 const currentHost = window.location.hostname;
-                const isMainLocal = currentHost === 'graveyardjokes.local' || currentHost === 'localhost' || currentHost === '127.0.0.1';
-                const isLocalSubdomain = currentHost.endsWith('.graveyardjokes.local');
+                const isIP = /^\d+\.\d+\.\d+\.\d+$/.test(currentHost);
+                const isMainLocal = isIP || currentHost === 'graveyardjokes.test' || currentHost === 'localhost' || currentHost === '127.0.0.1';
+                const isLocalSubdomain = currentHost.endsWith('.graveyardjokes.test');
                 const isTest = currentHost === 'graveyardjokes.test' || currentHost.endsWith('.graveyardjokes.test');
 
                 // Use /api/track-visit for local and main domain, full URL for subdomains
@@ -49,7 +50,7 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
                     isMainLocal || isTest || currentHost === 'graveyardjokes.com'
                         ? '/api/track-visit'
                         : isLocalSubdomain
-                          ? 'http://graveyardjokes.local:8000/api/track-visit'
+                          ? `http://${currentHost.replace('.graveyardjokes.test', '')}.graveyardjokes.test:8000/api/track-visit`
                           : 'https://graveyardjokes.com/api/track-visit';
 
                 const fetchOptions: RequestInit = {

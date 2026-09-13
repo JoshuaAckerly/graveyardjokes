@@ -24,7 +24,7 @@ export default defineConfig(({ mode }) => {
         };
     } else {
         // default: local/development
-        const developmentHost = env.VITE_HOST || 'graveyardjokes.local';
+        const developmentHost = env.VITE_HOST || 'graveyardjokes.test';
         const developmentPort = Number(env.VITE_PORT || 8081);
         const developmentOrigin = env.VITE_ORIGIN || `http://${developmentHost}:${developmentPort}`;
         const allowedHosts = (env.VITE_ALLOWED_HOSTS || developmentHost)
@@ -43,37 +43,47 @@ export default defineConfig(({ mode }) => {
             cors: {
                 origin: [
                     env.APP_URL,
-                    'http://graveyardjokes.local',
+                    'http://graveyardjokes.test',
                     'http://localhost:8000',
-                    'http://graveyardjokes.local:8000',
-                    'http://thevelvetpulse.graveyardjokes.local',
-                    'http://thevelvetpulse.graveyardjokes.local:8005',
-                    'http://hollowpress.graveyardjokes.local',
-                    'http://hollowpress.graveyardjokes.local:8001',
-                    'http://lunarblood.graveyardjokes.local',
-                    'http://lunarblood.graveyardjokes.local:8002',
-                    'http://velvetradio.graveyardjokes.local',
-                    'http://velvetradio.graveyardjokes.local:8006',
-                    'http://synthveil.graveyardjokes.local',
-                    'http://synthveil.graveyardjokes.local:8004',
-                    'http://studio.graveyardjokes.local',
-                    'http://studio.graveyardjokes.local:8003',
-                    'http://auth-system.graveyardjokes.local',
-                    'http://auth-system.graveyardjokes.local:8007',
-                    'http://noteleks.graveyardjokes.local',
-                    'http://noteleks.graveyardjokes.local:8009'
+                    'http://graveyardjokes.test:8000',
+                    'http://10.0.1.20:8000',
+                    'http://10.0.1.20:8001',
+                    'http://10.0.1.20:8002',
+                    'http://10.0.1.20:8003',
+                    'http://10.0.1.20:8004',
+                    'http://10.0.1.20:8005',
+                    'http://10.0.1.20:8006',
+                    'http://10.0.1.20:8007',
+                    'http://10.0.1.20:8009',
+                    'http://10.0.1.20:8091',
+                    'http://thevelvetpulse.graveyardjokes.test',
+                    'http://thevelvetpulse.graveyardjokes.test:8005',
+                    'http://hollowpress.graveyardjokes.test',
+                    'http://hollowpress.graveyardjokes.test:8001',
+                    'http://lunarblood.graveyardjokes.test',
+                    'http://lunarblood.graveyardjokes.test:8002',
+                    'http://velvetradio.graveyardjokes.test',
+                    'http://velvetradio.graveyardjokes.test:8006',
+                    'http://synthveil.graveyardjokes.test',
+                    'http://synthveil.graveyardjokes.test:8004',
+                    'http://studio.graveyardjokes.test',
+                    'http://studio.graveyardjokes.test:8003',
+                    'http://auth-system.graveyardjokes.test',
+                    'http://auth-system.graveyardjokes.test:8007',
+                    'http://noteleks.graveyardjokes.test',
+                    'http://noteleks.graveyardjokes.test:8009'
                 ],
                 credentials: true
             },
             allowedHosts: [
                 ...allowedHosts,
-                'graveyardjokes.local',
-                'thevelvetpulse.graveyardjokes.local',
-                'hollowpress.graveyardjokes.local',
-                'lunarblood.graveyardjokes.local',
-                'velvetradio.graveyardjokes.local',
-                'synthveil.graveyardjokes.local',
-                'auth-system.graveyardjokes.local'
+                'graveyardjokes.test',
+                'thevelvetpulse.graveyardjokes.test',
+                'hollowpress.graveyardjokes.test',
+                'lunarblood.graveyardjokes.test',
+                'velvetradio.graveyardjokes.test',
+                'synthveil.graveyardjokes.test',
+                'auth-system.graveyardjokes.test'
             ],
         };
     }

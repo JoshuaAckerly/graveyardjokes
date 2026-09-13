@@ -23,8 +23,8 @@ class PasswordResetLinkController extends Controller
         $rawUrl = config('services.auth_system.url', '');
         $base = preg_replace('#/api/?$#', '', is_string($rawUrl) ? $rawUrl : '') ?: 'https://auth-system.graveyardjokes.com';
 
-        if (app()->environment('local') && $base === 'http://auth-system.graveyardjokes.local') {
-            $base = 'http://auth-system.graveyardjokes.local:8007';
+        if (app()->environment('local') && $base === 'http://auth-system.graveyardjokes.test') {
+            $base = 'http://auth-system.graveyardjokes.test:8007';
         }
 
         return rtrim($base, '/').'/'.ltrim($path, '/');
