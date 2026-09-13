@@ -15,7 +15,7 @@ const outDir = path.resolve(__dirname, '../storage/app/public/og-cache');
 const env = process.argv[2] || 'production';
 
 const getBaseDomain = (environment) => {
-  if (environment === 'local') return 'graveyardjokes.local';
+  if (environment === 'local') return 'graveyardjokes.test';
   if (environment === 'test' || environment === 'testing') return 'graveyardjokes.test';
   return 'graveyardjokes.com';
 };
