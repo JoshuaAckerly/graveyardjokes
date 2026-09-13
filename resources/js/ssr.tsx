@@ -34,5 +34,5 @@ createServer(
                 return <App {...props} />;
             },
         }),
-    13714, // graveyardjokes SSR port
+    { port: 13714, host: '127.0.0.1' }, // graveyardjokes SSR port
 );
