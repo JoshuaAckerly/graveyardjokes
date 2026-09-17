@@ -1,39 +1,30 @@
 import { render, screen } from '@testing-library/react';
-import { vi } from 'vitest';
+import About from '../about';
 
-// Mock component for testing
-const About = () => (
-    <div>
-        <h1>About the Creator</h1>
-        <img src="https://cdn.example.com/images/profileImage.webp" alt="Joshua Ackerly's profile picture" />
-        <a href="https://cdn.example.com/documents/Joshua.pdf">Download My Resume</a>
-    </div>
-);
+// MainLayout runs browser-only effects (Lenis, visit tracking); jsdom-safe stubs.
+beforeEach(() => {
+    (global as any).fetch = vi.fn().mockImplementation(() => Promise.resolve({ ok: true, json: async () => ({}) }));
+});
 
 describe('About Page', () => {
-    beforeEach(() => {
-        (global as any).fetch = vi.fn().mockImplementation(() => Promise.resolve({ ok: true }));
+    it('renders the music project heading', () => {
+        render(<About />);
+        expect(screen.getByRole('heading', { name: 'Graveyard Jokes' })).toBeInTheDocument();
     });
 
-    it('renders main heading', () => {
+    it('describes the songwriting project', () => {
         render(<About />);
-
-        expect(screen.getByText('About the Creator')).toBeInTheDocument();
+        expect(screen.getByText(/two people writing songs together/i)).toBeInTheDocument();
     });
 
-    it('renders profile image from CDN', () => {
+    it('links to the Links and Contact pages', () => {
         render(<About />);
-
-        const profileImage = screen.getByAltText("Joshua Ackerly's profile picture");
-        expect(profileImage).toBeInTheDocument();
-        expect(profileImage.getAttribute('src')).toContain('/images/profileImage.webp');
+        expect(screen.getByRole('link', { name: /Where to find us/i })).toHaveAttribute('href', '/links');
+        expect(screen.getByRole('link', { name: /Say hello/i })).toHaveAttribute('href', '/contact');
     });
 
-    it('renders resume download link', () => {
+    it('has no web-development or agency content', () => {
         render(<About />);
-
-        const resumeLink = screen.getByRole('link', { name: /Download My Resume/i });
-        expect(resumeLink).toBeInTheDocument();
-        expect(resumeLink.getAttribute('href')).toContain('/documents/Joshua.pdf');
+        expect(screen.queryByText(/web develop|resume|founder|agency|services/i)).not.toBeInTheDocument();
     });
 });

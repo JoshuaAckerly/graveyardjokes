@@ -331,12 +331,6 @@ parameters:
 			path: database/seeders/SocialInstagramBatchSeeder.php
 
 		-
-			message: '#^Constant Database\\Seeders\\SocialMay26BatchSeeder\:\:BLOG_POST_URL is unused\.$#'
-			identifier: classConstant.unused
-			count: 1
-			path: database/seeders/SocialMay26BatchSeeder.php
-
-		-
 			message: '#^Method Tests\\Feature\\SocialScheduleApiTest\:\:authHeader\(\) return type has no value type specified in iterable type array\.$#'
 			identifier: missingType.iterableValue
 			count: 1

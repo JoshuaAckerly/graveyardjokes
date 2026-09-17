@@ -18,9 +18,9 @@ describe('Carousel', () => {
     it('renders carousel with all slides', () => {
         render(<Carousel />);
 
-        expect(screen.getByText('Follow us on Instagram')).toBeInTheDocument();
-        expect(screen.getByText("Let's build your site")).toBeInTheDocument();
-        expect(screen.getByText('Fast launches available')).toBeInTheDocument();
+        expect(screen.getByText('Follow along')).toBeInTheDocument();
+        expect(screen.getByText('Songs in progress')).toBeInTheDocument();
+        expect(screen.getByText('Games & things')).toBeInTheDocument();
     });
 
     it('renders images for all slides', () => {
@@ -29,8 +29,8 @@ describe('Carousel', () => {
         const images = screen.getAllByRole('img');
         expect(images).toHaveLength(3);
 
-        expect(images[0]).toHaveAttribute('alt', 'Follow us on Instagram');
-        expect(images[0]).toHaveAttribute('src', 'https://cdn.example.com/images/AdobeStock_283463385.webp');
+        expect(images[0]).toHaveAttribute('alt', 'Follow along');
+        expect(images[0]).toHaveAttribute('src', 'https://cdn.example.com/images/carousel-1.webp');
     });
 
     it('renders navigation buttons', () => {
@@ -134,7 +134,7 @@ describe('Carousel', () => {
         expect(links).toHaveLength(3);
 
         expect(links[0].closest('a')).toHaveAttribute('href', 'https://instagram.com/graveyardjokes');
-        expect(links[1].closest('a')).toHaveAttribute('href', '/contact');
+        expect(links[1].closest('a')).toHaveAttribute('href', '/links');
         expect(links[2].closest('a')).toHaveAttribute('href', getProjectUrl('portfolio'));
     });
 
@@ -165,9 +165,9 @@ describe('Carousel', () => {
     it('renders slide descriptions', () => {
         render(<Carousel />);
 
-        expect(screen.getByText(/Stay in the loop/)).toBeInTheDocument();
-        expect(screen.getByText(/Ready to start/)).toBeInTheDocument();
-        expect(screen.getByText(/Need a simple promo page/)).toBeInTheDocument();
+        expect(screen.getByText(/Behind-the-scenes/)).toBeInTheDocument();
+        expect(screen.getByText(/writing songs together/)).toBeInTheDocument();
+        expect(screen.getByText(/Noteleks and other things/)).toBeInTheDocument();
     });
 
     it('cleans up interval on unmount', () => {

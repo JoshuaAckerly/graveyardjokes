@@ -38,7 +38,7 @@ describe('ProjectCard', () => {
 
         await waitFor(() => {
             const img = screen.getByAltText('Test Project');
-            expect(img).toHaveAttribute('src', '/images/AdobeStock_471779082.webp');
+            expect(img).toHaveAttribute('src', '/images/portfolio-placeholder.webp');
         });
     });
 
@@ -52,7 +52,7 @@ describe('ProjectCard', () => {
 
         await waitFor(() => {
             const img = screen.getByAltText('Test Project');
-            expect(img).toHaveAttribute('src', '/images/AdobeStock_471779082.webp');
+            expect(img).toHaveAttribute('src', '/images/portfolio-placeholder.webp');
         });
     });
 
@@ -75,7 +75,7 @@ describe('ProjectCard', () => {
 
         await waitFor(() => {
             const img = screen.getByAltText('Test Project');
-            expect(img).toHaveAttribute('src', '/images/AdobeStock_471779082.webp');
+            expect(img).toHaveAttribute('src', '/images/portfolio-placeholder.webp');
         });
     });
 

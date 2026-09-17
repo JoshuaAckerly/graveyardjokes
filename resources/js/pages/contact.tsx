@@ -1,5 +1,3 @@
-import BusinessHours from '@/Components/BusinessHours';
-import GoogleReviews from '@/Components/GoogleReviews';
 import InertiaHead from '@/Components/InertiaHead';
 import MainLayout from '@/Layouts/MainLayout';
 import { trackFormSubmission } from '@/hooks/use-google-analytics';
@@ -111,8 +109,7 @@ export default function ContactPricing() {
 
                     <div className="relative z-10 px-6 py-24 sm:py-32 lg:mx-auto lg:w-1/2 lg:px-8">
                         <p className="mb-6 text-center text-lg text-[var(--primary)]">
-                            Ready to bring your vision to life? Let's discuss your project and create something amazing together. Contact us below and
-                            we'll get back to you within 24 hours.
+                            Want to say hello or share something? Reach out below — we read everything.
                         </p>
                         <p className="mb-6 text-center text-xl font-semibold text-[var(--primary)]">
                             Call us:{' '}
@@ -255,66 +252,13 @@ export default function ContactPricing() {
 
                 <div className="mx-auto max-w-4xl px-6 py-12 text-left">
                     <section className="mb-10">
-                        <h2 className="mb-3 text-2xl font-bold text-white">Get in Touch with Graveyard Jokes Studios</h2>
+                        <h2 className="mb-3 text-2xl font-bold text-white">Get in touch</h2>
                         <p className="text-white/70">
-                            Graveyard Jokes Studios is a custom web design and development agency based in Cheektowaga, New York, serving musicians,
-                            bands, independent artists, and creative businesses across the United States. Whether you are a solo artist looking for
-                            your first professional website, a band ready to launch an online merch store, or an established business that needs a
-                            complete digital overhaul, our team is ready to help. We respond to every inquiry within 24 hours on business days, and we
-                            are happy to discuss your project over the phone, email, or social media.
+                            Graveyard Jokes is a small songwriting project. If you want to say hello, share something, or just
+                            reach out, the form above or any of the links below will get to us. No shows or recordings yet —
+                            more will show up here as it comes.
                         </p>
                     </section>
-                    <section className="mb-10">
-                        <h3 className="mb-3 text-xl font-semibold text-white">What to Expect After You Reach Out</h3>
-                        <p className="text-white/70">
-                            Once you submit the contact form or give us a call, a member of our team will follow up to schedule a free discovery call.
-                            During that call we will discuss your goals, your audience, your timeline, and your budget. From there we will recommend
-                            the right package and walk you through exactly what the project will involve. There is no pressure and no obligation — we
-                            want to make sure we are a good fit before either of us commits to anything.
-                        </p>
-                    </section>
-                    <section className="mb-10">
-                        <h3 className="mb-3 text-xl font-semibold text-white">Our Services</h3>
-                        <p className="text-white/70">
-                            We offer custom web development and design — built and designed from scratch, no templates. Every package includes both
-                            development and Photoshop design work, from single-page starter sites to full multi-page platforms with animations, API
-                            integrations, and streaming support. We also offer Social Media Management as a monthly add-on, starting at $99/mo. We
-                            specialize in serving musicians, bands, and independent artists, and we work with small businesses and creative
-                            entrepreneurs across the United States.
-                        </p>
-                    </section>
-                    <section className="mb-10">
-                        <BusinessHours />
-                    </section>
-                    <section>
-                        <h3 className="mb-3 text-xl font-semibold text-white">Frequently Asked Questions</h3>
-                        <div className="space-y-4">
-                            <div>
-                                <p className="font-semibold text-white">How quickly will you respond to my inquiry?</p>
-                                <p className="text-white/70">
-                                    We respond to all contact form submissions and calls within 24 hours on business days. For urgent matters, calling
-                                    us directly at (716) 341-5425 is the fastest way to reach us.
-                                </p>
-                            </div>
-                            <div>
-                                <p className="font-semibold text-white">Do you work with clients outside of New York?</p>
-                                <p className="text-white/70">
-                                    Yes. While we are based in Cheektowaga, New York, we work with clients across the entire United States and
-                                    internationally. All project communication is handled remotely via video call, email, and our project management
-                                    tools.
-                                </p>
-                            </div>
-                            <div>
-                                <p className="font-semibold text-white">What information should I include in my message?</p>
-                                <p className="text-white/70">
-                                    The more detail you can share, the better. Tell us what kind of site you need, what your goals are, whether you
-                                    have existing branding, and your rough timeline and budget. This helps us respond with specific and useful
-                                    information rather than generic questions.
-                                </p>
-                            </div>
-                        </div>
-                    </section>
-                    <GoogleReviews />{' '}
                 </div>
             </MainLayout>
         </>

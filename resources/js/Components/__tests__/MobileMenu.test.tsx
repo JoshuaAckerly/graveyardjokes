@@ -38,7 +38,7 @@ describe('MobileMenu', () => {
         expect(screen.getByText('Home')).toBeInTheDocument();
         expect(screen.getByText('About')).toBeInTheDocument();
         expect(screen.getByText('Contact')).toBeInTheDocument();
-        expect(screen.getByText('Portfolio')).toBeInTheDocument();
+        expect(screen.getByText('Links')).toBeInTheDocument();
         expect(screen.getByText('Studio')).toBeInTheDocument();
     });
 
@@ -84,7 +84,7 @@ describe('MobileMenu', () => {
         expect(screen.getByText('Home').closest('a')).toHaveAttribute('href', '/');
         expect(screen.getByText('About').closest('a')).toHaveAttribute('href', '/about');
         expect(screen.getByText('Contact').closest('a')).toHaveAttribute('href', '/contact');
-        expect(screen.getByText('Portfolio').closest('a')).toHaveAttribute('href', '/portfolio');
+        expect(screen.getByText('Links').closest('a')).toHaveAttribute('href', '/links');
         expect(screen.getByText('Studio').closest('a')).toHaveAttribute('href', getProjectUrl('studio'));
     });
 

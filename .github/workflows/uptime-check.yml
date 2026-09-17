@@ -17,11 +17,6 @@ jobs:
         run: |
           SITES=(
             "https://graveyardjokes.com"
-            "https://hollowpress.graveyardjokes.com"
-            "https://lunarblood.graveyardjokes.com"
-            "https://synthveil.graveyardjokes.com"
-            "https://thevelvetpulse.graveyardjokes.com"
-            "https://velvetradio.graveyardjokes.com"
             "https://noteleks.graveyardjokes.com"
             "https://studio.graveyardjokes.com"
             "https://auth-system.graveyardjokes.com"

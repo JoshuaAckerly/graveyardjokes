@@ -7,7 +7,7 @@ const DELAY_MS = 15_000;
 
 // Suppress on pages where the prompt would be intrusive or redundant
 const SUPPRESSED_PATH_PREFIXES = [
-    '/services/intake',
+    '/links',
     '/contact',
     '/terms',
     '/privacy',
@@ -72,20 +72,20 @@ export default function GuestPromptModal() {
 
                 <p className="mb-1 text-sm font-semibold tracking-widest text-[var(--primary)] uppercase">Hey there 👋</p>
                 <h2 id="guest-prompt-title" className="mb-3 text-2xl font-bold text-white">
-                    Have a project in mind?
+                    Want to follow along?
                 </h2>
                 <p className="mb-6 text-white/70">
-                    Fill out the project questionnaire and we'll scope your build — or create a free account to stay in the loop and get direct
-                    feedback from us.
+                    Graveyard Jokes is just getting started. Find us on socials, or create a free account to get updates
+                    when there's something new to share.
                 </p>
 
                 <div className="flex flex-col gap-3">
                     <a
-                        href="/services/intake"
+                        href="/links"
                         className="block w-full rounded bg-[var(--primary)] py-3 text-center font-semibold text-black transition hover:opacity-90"
                         onClick={dismiss}
                     >
-                        Fill Out Questionnaire
+                        Where to find us
                     </a>
                     <a
                         href={registerUrl}

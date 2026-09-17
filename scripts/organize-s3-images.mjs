@@ -34,42 +34,6 @@ const EXCLUSION_LIST = new Set([
 
 // Project mapping configuration
 const PROJECT_MAPPING = {
-  cryptescape: {
-    patterns: [
-      /cyrpt.*escape/i,
-      /crypt.*escape/i,
-      /games\/cyr/i,
-    ],
-    folder: 'cryptescape',
-  },
-  hollowpress: {
-    patterns: [
-      /hollow.*press/i,
-      /hollowpress/i,
-    ],
-    folder: 'hollowpress',
-  },
-  lunarblood: {
-    patterns: [
-      /lunar.*blood/i,
-      /lunarblood/i,
-    ],
-    folder: 'lunarblood',
-  },
-  thevelvetpulse: {
-    patterns: [
-      /velvet.*pulse/i,
-      /thevelvetpulse/i,
-    ],
-    folder: 'thevelvetpulse',
-  },
-  velvetradio: {
-    patterns: [
-      /velvet.*radio/i,
-      /velvetradio/i,
-    ],
-    folder: 'velvetradio',
-  },
   studio: {
     patterns: [
       /illustration/i,

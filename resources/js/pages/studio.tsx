@@ -2,7 +2,7 @@ import InertiaHead from '@/Components/InertiaHead';
 import MainLayout from '@/Layouts/MainLayout';
 import { Link } from '@inertiajs/react';
 import { motion } from 'framer-motion';
-import { ArrowUpRight, Code2, Globe, Layers, Palette } from 'lucide-react';
+import { ArrowUpRight, Gamepad2, Music2, PenLine } from 'lucide-react';
 import { getProjectUrl } from '../env';
 
 export default function Studio() {
@@ -10,34 +10,23 @@ export default function Studio() {
 
     const focuses = [
         {
-            icon: <Code2 className="h-6 w-6" />,
-            title: 'Full-Stack Architecture',
-            body: 'Laravel, Inertia.js, React, and TypeScript — every project built on a clean, maintainable foundation.',
+            icon: <PenLine className="h-6 w-6" />,
+            title: 'Songwriting',
+            body: 'The core of it — two people writing songs together, one at a time. Acoustic, unhurried.',
         },
         {
-            icon: <Globe className="h-6 w-6" />,
-            title: 'Platform & Product Development',
-            body: 'Custom streaming, publishing, event management, and community tools built for independent brands and growing ventures.',
+            icon: <Gamepad2 className="h-6 w-6" />,
+            title: 'Games',
+            body: 'Small game projects built under the Graveyard Jokes name, like Noteleks.',
         },
         {
-            icon: <Palette className="h-6 w-6" />,
-            title: 'Brand-Driven Design',
-            body: 'Interfaces built with personality. Fast, accessible, and memorable — no templates.',
-        },
-        {
-            icon: <Layers className="h-6 w-6" />,
-            title: 'Portfolio Ecosystem',
-            body: 'Six live sister platforms — The Velvet Pulse, Hollow Press, Lunar Blood, Velvet Radio, Synth Veil — all running in production.',
+            icon: <Music2 className="h-6 w-6" />,
+            title: 'Whatever comes next',
+            body: 'A place to make things and keep going. More will show up here as it is ready.',
         },
     ];
 
-    const platforms = [
-        { name: 'The Velvet Pulse', slug: 'thevelvetpulse', desc: 'Artist newsletter & music platform' },
-        { name: 'Hollow Press', slug: 'hollowpress', desc: 'CMS and publishing platform' },
-        { name: 'Lunar Blood', slug: 'lunarblood', desc: 'Event & show management' },
-        { name: 'Velvet Radio', slug: 'velvetradio', desc: 'Live streaming radio' },
-        { name: 'Synth Veil', slug: 'synthveil', desc: 'SSR-optimized creative platform' },
-    ];
+    const projects = [{ name: 'Noteleks', slug: 'noteleks', desc: 'A game being built under Graveyard Jokes' }];
 
     return (
         <MainLayout>
@@ -52,11 +41,11 @@ export default function Studio() {
                         transition={{ duration: 0.6 }}
                         className="max-w-3xl text-center"
                     >
-                        <p className="mb-2 text-sm font-semibold tracking-widest text-[var(--accent)] uppercase">Creative Studio</p>
-                        <h1 className="text-5xl font-extrabold text-[var(--accent)]">Graveyard Jokes Studios</h1>
+                        <p className="mb-2 font-serif text-sm tracking-widest text-[var(--accent)] uppercase">Behind the scenes</p>
+                        <h1 className="font-serif text-5xl font-extrabold text-[var(--accent)]">The Studio</h1>
                         <p className="mt-4 text-lg text-white/70">
-                            A small creative web development studio building custom platforms for entrepreneurs, creatives, and independent brands.
-                            Every project is hand-crafted — no page builders, no shortcuts.
+                            The workspace behind Graveyard Jokes — where the songs get written and the side projects get made.
+                            Vlogs, notes, and works in progress live over on the studio site.
                         </p>
                         <div className="mt-6 flex flex-wrap justify-center gap-4">
                             <a
@@ -65,13 +54,13 @@ export default function Studio() {
                                 rel="noopener noreferrer"
                                 className="inline-flex items-center gap-2 rounded-lg bg-[var(--accent)] px-6 py-3 font-semibold text-black transition hover:opacity-90"
                             >
-                                Visit Studio Lab <ArrowUpRight className="h-4 w-4" />
+                                Visit the Studio <ArrowUpRight className="h-4 w-4" />
                             </a>
                             <Link
-                                href="/services"
+                                href="/links"
                                 className="inline-flex items-center gap-2 rounded-lg border border-white/20 px-6 py-3 font-semibold text-white transition hover:border-[var(--accent)] hover:text-[var(--accent)]"
                             >
-                                View Services
+                                Find us
                             </Link>
                         </div>
                     </motion.div>
@@ -83,8 +72,8 @@ export default function Studio() {
                         transition={{ duration: 0.6, delay: 0.15 }}
                         className="w-full max-w-4xl"
                     >
-                        <h2 className="mb-6 text-center text-2xl font-bold text-white">What We Build</h2>
-                        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+                        <h2 className="mb-6 text-center text-2xl font-bold text-white">What happens here</h2>
+                        <div className="grid grid-cols-1 gap-6 sm:grid-cols-3">
                             {focuses.map((item) => (
                                 <div
                                     key={item.title}
@@ -100,16 +89,16 @@ export default function Studio() {
                         </div>
                     </motion.div>
 
-                    {/* Live platforms */}
+                    {/* Projects */}
                     <motion.div
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.6, delay: 0.25 }}
                         className="w-full max-w-4xl"
                     >
-                        <h2 className="mb-6 text-center text-2xl font-bold text-white">Live Platforms</h2>
+                        <h2 className="mb-6 text-center text-2xl font-bold text-white">Being built</h2>
                         <ul className="divide-y divide-white/10 overflow-hidden rounded-lg border border-white/10 bg-white/5">
-                            {platforms.map((p) => (
+                            {projects.map((p) => (
                                 <li key={p.slug}>
                                     <a
                                         href={getProjectUrl(p.slug)}
@@ -121,28 +110,11 @@ export default function Studio() {
                                             <p className="font-semibold text-white">{p.name}</p>
                                             <p className="text-sm text-white/50">{p.desc}</p>
                                         </div>
-                                        <ArrowUpRight className="h-4 w-4 shrink-0 text-white/40 transition group-hover:text-[var(--accent)]" />
+                                        <ArrowUpRight className="h-4 w-4 shrink-0 text-white/40" />
                                     </a>
                                 </li>
                             ))}
                         </ul>
-                    </motion.div>
-
-                    {/* CTA */}
-                    <motion.div
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.6, delay: 0.35 }}
-                        className="w-full max-w-4xl rounded-lg border border-[var(--accent)]/30 bg-[var(--accent)]/5 p-8 text-center"
-                    >
-                        <h2 className="text-2xl font-bold text-white">Want Something Built?</h2>
-                        <p className="mt-2 text-white/60">We take on custom web projects for entrepreneurs, creatives, and independent brands.</p>
-                        <Link
-                            href="/contact"
-                            className="mt-6 inline-block rounded-lg bg-[var(--accent)] px-8 py-3 font-semibold text-black transition hover:opacity-90"
-                        >
-                            Start a Conversation
-                        </Link>
                     </motion.div>
                 </section>
             </>

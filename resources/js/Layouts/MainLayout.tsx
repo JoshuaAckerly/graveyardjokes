@@ -2,6 +2,7 @@ import GuestPromptModal from '@/Components/GuestPromptModal';
 import Menu from '@/Components/Menu';
 import MobileMenu from '@/Components/MobileMenu';
 import NotificationBell from '@/Components/NotificationBell';
+import { useSmoothScroll } from '@/hooks/use-smooth-scroll';
 import { router } from '@inertiajs/react';
 import gsap from 'gsap';
 import React, { ReactNode, useEffect, useRef } from 'react';
@@ -12,6 +13,8 @@ interface MainLayoutProps {
 
 const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
     const overlayRef = useRef<HTMLDivElement>(null);
+
+    useSmoothScroll();
 
     useEffect(() => {
         // Page transition: fade-out overlay before navigate, fade-in on arrive
@@ -108,12 +111,12 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
                     <a href="/contact" className="text-white hover:underline">
                         Contact
                     </a>
-                    <a href="/linkedin" className="text-white hover:underline">
-                        LinkedIn
+                    <a href="/links" className="text-white hover:underline">
+                        Links
                     </a>
                 </div>
                 <div className="mt-2 text-white/80">
-                    &copy; {new Date().getFullYear()} GraveYard Jokes Studios Inc. —{' '}
+                    &copy; {new Date().getFullYear()} Graveyard Jokes —{' '}
                     <a href="mailto:admin@graveyardjokes.com" className="text-white hover:underline">
                         admin@graveyardjokes.com
                     </a>

@@ -2,38 +2,38 @@ import { render, screen } from '@testing-library/react';
 import ApplicationLogo from '../applicationLogo';
 
 describe('ApplicationLogo', () => {
-    it('renders logo image with correct src', () => {
+    it('renders the wordmark logo', () => {
         render(<ApplicationLogo />);
 
-        const img = screen.getByAltText('GraveYardJokes Studios Logo');
-        expect(img).toBeInTheDocument();
-        expect(img).toHaveAttribute('src', 'https://cdn.example.com/images/GraveYardJokesLogoJester.svg');
+        const logo = screen.getByRole('img', { name: 'Graveyard Jokes' });
+        expect(logo).toBeInTheDocument();
+        expect(logo.tagName.toLowerCase()).toBe('svg');
     });
 
     it('applies default logo size', () => {
         render(<ApplicationLogo />);
 
-        const img = screen.getByAltText('GraveYardJokes Studios Logo');
-        expect(img).toHaveClass('h-24', 'w-24');
+        const logo = screen.getByRole('img', { name: 'Graveyard Jokes' });
+        expect(logo).toHaveClass('h-24', 'w-24');
     });
 
     it('applies custom logo size', () => {
         render(<ApplicationLogo logoSize="h-12 w-12" />);
 
-        const img = screen.getByAltText('GraveYardJokes Studios Logo');
-        expect(img).toHaveClass('h-12', 'w-12');
+        const logo = screen.getByRole('img', { name: 'Graveyard Jokes' });
+        expect(logo).toHaveClass('h-12', 'w-12');
     });
 
     it('applies container classes', () => {
         render(<ApplicationLogo containerClasses="justify-center items-center" />);
 
-        const container = screen.getByAltText('GraveYardJokes Studios Logo').parentElement;
+        const container = screen.getByRole('img', { name: 'Graveyard Jokes' }).parentElement;
         expect(container).toHaveClass('justify-center', 'items-center');
     });
 
-    it('has correct alt text for accessibility', () => {
+    it('has an accessible name', () => {
         render(<ApplicationLogo />);
 
-        expect(screen.getByAltText('GraveYardJokes Studios Logo')).toBeInTheDocument();
+        expect(screen.getByRole('img', { name: 'Graveyard Jokes' })).toBeInTheDocument();
     });
 });

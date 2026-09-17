@@ -52,7 +52,7 @@ const ProjectCard: React.FC<Props> = ({ title, description, longDescription, url
                 }
             } catch {
                 // fallback image
-                if (mounted) setImgSrc(cdn ? `${cdn}/images/portfolio-placeholder.webp` : '/images/AdobeStock_471779082.webp');
+                if (mounted) setImgSrc(cdn ? `${cdn}/images/portfolio-placeholder.webp` : '/images/portfolio-placeholder.webp');
             }
         })();
 
@@ -79,7 +79,7 @@ const ProjectCard: React.FC<Props> = ({ title, description, longDescription, url
             {/* Screenshot */}
             <div className="aspect-video w-full overflow-hidden bg-gray-800">
                 <img
-                    src={imgSrc ?? (cdn ? `${cdn}/images/portfolio-placeholder.webp` : '/images/AdobeStock_471779082.webp')}
+                    src={imgSrc ?? (cdn ? `${cdn}/images/portfolio-placeholder.webp` : '/images/portfolio-placeholder.webp')}
                     alt={title}
                     loading="lazy"
                     className="h-full w-full object-cover opacity-90 transition group-hover:scale-[1.03] group-hover:opacity-100"

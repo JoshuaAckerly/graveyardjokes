@@ -21,10 +21,7 @@ const ContactPricing = () => {
     return (
         <div>
             <h1>Contact</h1>
-            <p>
-                Ready to bring your vision to life? Let's discuss your project and create something amazing together. Contact us below and we'll get
-                back to you within 24 hours.
-            </p>
+            <p>Want to say hello or share something? Reach out below — we read everything.</p>
             <form onSubmit={handleSubmit}>
                 <label htmlFor="first_name">First Name</label>
                 <input id="first_name" name="first_name" />
@@ -58,7 +55,7 @@ describe('ContactPricing', () => {
         render(<ContactPricing />);
 
         expect(screen.getByRole('heading', { name: 'Contact' })).toBeInTheDocument();
-        expect(screen.getByText(/Ready to bring your vision to life/i)).toBeInTheDocument();
+        expect(screen.getByText(/Want to say hello or share something/i)).toBeInTheDocument();
     });
 
     it('renders contact form with required fields', () => {

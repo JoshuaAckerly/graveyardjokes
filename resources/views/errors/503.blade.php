@@ -182,7 +182,7 @@
 <body>
     <div class="hero">
         <img class="hero-img"
-             src="https://d3fjkusrpksks7.cloudfront.net/graveyardjokes/images/AdobeStock_327183052.webp"
+             src="https://d3fjkusrpksks7.cloudfront.net/graveyardjokes/images/hero.webp"
              alt="">
         <div class="hero-gradient-top"></div>
 
@@ -215,7 +215,7 @@
         </div>
 
         <div class="footer-img-wrap">
-            <img src="https://d3fjkusrpksks7.cloudfront.net/graveyardjokes/images/AdobeStock_471779082.webp" alt="">
+            <img src="https://d3fjkusrpksks7.cloudfront.net/graveyardjokes/images/carousel-1.webp" alt="">
         </div>
     </div>
 

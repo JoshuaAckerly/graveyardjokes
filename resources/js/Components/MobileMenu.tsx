@@ -63,13 +63,8 @@ export default function MobileMenu() {
                                     </Link>
                                 </li>
                                 <li className="mb-4 bg-[var(--primary)]">
-                                    <Link href="/portfolio" className="text-black hover:underline" onClick={() => setIsOpen(false)}>
-                                        Portfolio
-                                    </Link>
-                                </li>
-                                <li className="mb-4 bg-[var(--primary)]">
-                                    <Link href="/services" className="text-black hover:underline" onClick={() => setIsOpen(false)}>
-                                        Services
+                                    <Link href="/links" className="text-black hover:underline" onClick={() => setIsOpen(false)}>
+                                        Links
                                     </Link>
                                 </li>
                                 <li className="mb-4 bg-[var(--primary)]">

@@ -10,21 +10,21 @@ interface Slide {
 
 const carouselSlides: Slide[] = [
     {
-        image: '/images/AdobeStock_283463385.webp',
-        title: 'Follow us on Instagram',
-        description: 'Stay in the loop — behind-the-scenes, new launches, and quick tips. Follow @graveyardjokes.',
+        image: '/images/carousel-1.webp',
+        title: 'Follow along',
+        description: 'Behind-the-scenes and whatever we are working on. Follow @graveyardjokes.',
         link: 'https://instagram.com/graveyardjokes',
     },
     {
-        image: '/images/AdobeStock_348397404.webp',
-        title: "Let's build your site",
-        description: "Ready to start? Reach out for a free consultation and we'll craft a site that'll make you proud.",
-        link: '/contact',
+        image: '/images/carousel-2.webp',
+        title: 'Songs in progress',
+        description: 'Two people writing songs together, one at a time. More coming as we go.',
+        link: '/links',
     },
     {
-        image: '/images/AdobeStock_621659086.webp',
-        title: 'Fast launches available',
-        description: 'Need a simple promo page or EP launch? Ask about our 48-hour quick-launch option.',
+        image: '/images/carousel-3.webp',
+        title: 'Games & things',
+        description: 'Noteleks and other things being built under the Graveyard Jokes name.',
         link: getProjectUrl('portfolio'),
     },
 ];

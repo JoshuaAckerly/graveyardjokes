@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\OgImageController;
-use App\Http\Controllers\WebsiteIntakeController;
 use App\Modules\Contact\Controllers\ContactController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -49,54 +48,14 @@ Route::get('/contact', function () {
 
 Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
 
-Route::get('/portfolio', function () {
-    return Inertia::render('portfolio');
-})->name('portfolio');
-
-Route::get('/services', function () {
-    return Inertia::render('services');
-})->name('services');
-
-Route::get('/services/starter', function () {
-    return Inertia::render('services/starter');
-})->name('services.starter');
-
-Route::get('/services/professional', function () {
-    return Inertia::render('services/professional');
-})->name('services.professional');
-
-Route::get('/services/premium', function () {
-    return Inertia::render('services/premium');
-})->name('services.premium');
-
-// Legacy design routes — 301 redirect to merged Web Dev & Design packages
-Route::redirect('/services/design-starter', '/services/starter', 301)->name('services.design-starter');
-Route::redirect('/services/design-professional', '/services/professional', 301)->name('services.design-professional');
-Route::redirect('/services/design-premium', '/services/premium', 301)->name('services.design-premium');
-
-// Website Modernization Services
-Route::get('/services/modernization-starter', function () {
-    return Inertia::render('services/modernization-starter');
-})->name('services.modernization-starter');
-
-Route::get('/services/modernization-professional', function () {
-    return Inertia::render('services/modernization-professional');
-})->name('services.modernization-professional');
-
-Route::get('/services/modernization-premium', function () {
-    return Inertia::render('services/modernization-premium');
-})->name('services.modernization-premium');
-
-Route::get('/services/seo', function () {
-    return Inertia::render('services/seo');
-})->name('services.seo');
-
-Route::get('/services/maintenance', function () {
-    return Inertia::render('services/maintenance');
-})->name('services.maintenance');
-
-Route::get('/services/intake', [WebsiteIntakeController::class, 'create'])->name('services.intake.create');
-Route::post('/services/intake', [WebsiteIntakeController::class, 'store'])->name('services.intake.store');
+// ─── Web-dev/agency pages permanently removed in the music rebrand ──────────
+// Return 410 Gone so search engines drop the old agency URLs cleanly.
+Route::get('/portfolio', fn () => abort(410))->name('portfolio');
+Route::get('/services', fn () => abort(410))->name('services');
+Route::get('/services/{any}', fn () => abort(410))->where('any', '.*');
+Route::post('/services/{any}', fn () => abort(410))->where('any', '.*');
+Route::get('/linkedin', fn () => abort(410))->name('linkedin');
+// ────────────────────────────────────────────────────────────────────────────
 
 // API endpoint to fetch and cache Open Graph images for external sites
 Route::get('/api/fetch-og-image', [OgImageController::class, 'fetch'])->name('api.fetch-og-image');
@@ -108,9 +67,9 @@ Route::get('/studio', function () {
     return Inertia::render('studio');
 })->name('studio');
 
-Route::get('/linkedin', function () {
-    return Inertia::render('linkedin');
-})->name('linkedin');
+Route::get('/links', function () {
+    return Inertia::render('links');
+})->name('links');
 
 Route::get('/terms', fn () => Inertia::render('legal/terms'))->name('terms');
 Route::get('/privacy', fn () => Inertia::render('legal/privacy'))->name('privacy');
@@ -144,14 +103,8 @@ Route::get('/generate-sitemap', function () {
     $sitemap = Sitemap::create()
         ->add(Url::create($base.'/'))
         ->add(Url::create($base.'/about'))
+        ->add(Url::create($base.'/links'))
         ->add(Url::create($base.'/contact'))
-        ->add(Url::create($base.'/portfolio'))
-        ->add(Url::create($base.'/services'))
-        ->add(Url::create($base.'/services/starter'))
-        ->add(Url::create($base.'/services/professional'))
-        ->add(Url::create($base.'/services/premium'))
-        ->add(Url::create($base.'/services/seo'))
-        ->add(Url::create($base.'/services/maintenance'))
         ->add(Url::create($base.'/terms'))
         ->add(Url::create($base.'/privacy'))
         ->add(Url::create($base.'/cookies'));
@@ -222,7 +175,7 @@ Route::get('/demo', function () {
 });
 
 // Redirect old pages to homepage or anchors
-Route::redirect('/WBG410/home.php', '/portfolio', 301);
+Route::redirect('/WBG410/home.php', '/', 301);
 Route::redirect('/legal/terms', '/terms', 301);
 Route::redirect('/legal/privacy', '/privacy', 301);
 Route::redirect('/legal/cookies', '/cookies', 301);
@@ -231,7 +184,7 @@ Route::redirect('/legal/cookies', '/cookies', 301);
 
 // Redirects for missing pages
 Route::redirect('/illustrations', '/contact', 301);
-Route::redirect('/pricing', '/services', 301);
+Route::redirect('/pricing', '/', 301);
 
 Route::get('/login', function () {
     $rawUrl = config('services.auth_system.url', '');

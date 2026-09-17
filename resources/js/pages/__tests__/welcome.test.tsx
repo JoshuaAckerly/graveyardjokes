@@ -30,7 +30,7 @@ const Home = () => {
 
     return (
         <div>
-            <h1>GraveYard Jokes Studios</h1>
+            <h1>Graveyard Jokes</h1>
 
             {/* Joke section — matches real structure */}
             <div>
@@ -41,19 +41,9 @@ const Home = () => {
                 </button>
             </div>
 
-            {/* Services section */}
+            {/* Songwriting note */}
             <section>
-                <h2>What I Offer</h2>
-            </section>
-
-            {/* Portfolio section */}
-            <section>
-                <h3>Selected Projects</h3>
-            </section>
-
-            {/* About section */}
-            <section>
-                <h2>Hey, I&apos;m Joshua</h2>
+                <h2>Two people writing songs together, one at a time.</h2>
             </section>
         </div>
     );
@@ -87,7 +77,7 @@ describe('Welcome Page (Home)', () => {
 
     it('renders the main heading', () => {
         render(<Home />);
-        expect(screen.getByText('GraveYard Jokes Studios')).toBeInTheDocument();
+        expect(screen.getByText('Graveyard Jokes')).toBeInTheDocument();
     });
 
     it('renders the "Another joke" button', () => {
@@ -95,19 +85,9 @@ describe('Welcome Page (Home)', () => {
         expect(screen.getByRole('button', { name: /Another joke/i })).toBeInTheDocument();
     });
 
-    it('renders the services section', () => {
+    it('renders the songwriting note', () => {
         render(<Home />);
-        expect(screen.getByText('What I Offer')).toBeInTheDocument();
-    });
-
-    it('renders the portfolio section', () => {
-        render(<Home />);
-        expect(screen.getByText('Selected Projects')).toBeInTheDocument();
-    });
-
-    it('renders the about section', () => {
-        render(<Home />);
-        expect(screen.getByText("Hey, I'm Joshua")).toBeInTheDocument();
+        expect(screen.getByText(/writing songs together/i)).toBeInTheDocument();
     });
 
     it('shows joke setup and punchline after fetching', async () => {
