@@ -45,7 +45,7 @@ export default function About() {
                     {/* CTA */}
                     <Reveal className="flex flex-wrap justify-center gap-4">
                         <Link
-                            href="/links"
+                            href="/studio"
                             className="inline-flex items-center gap-2 rounded-full border border-white/20 px-7 py-3 font-serif text-sm tracking-wide text-white/90 transition hover:border-[var(--primary)] hover:text-[var(--primary)]"
                         >
                             Where to find us

@@ -7,7 +7,7 @@ const DELAY_MS = 15_000;
 
 // Suppress on pages where the prompt would be intrusive or redundant
 const SUPPRESSED_PATH_PREFIXES = [
-    '/links',
+    '/studio',
     '/contact',
     '/terms',
     '/privacy',
@@ -81,7 +81,7 @@ export default function GuestPromptModal() {
 
                 <div className="flex flex-col gap-3">
                     <a
-                        href="/links"
+                        href="/studio"
                         className="block w-full rounded bg-[var(--primary)] py-3 text-center font-semibold text-black transition hover:opacity-90"
                         onClick={dismiss}
                     >

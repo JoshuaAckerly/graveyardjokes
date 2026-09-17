@@ -111,8 +111,8 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
                     <a href="/contact" className="text-white hover:underline">
                         Contact
                     </a>
-                    <a href="/links" className="text-white hover:underline">
-                        Links
+                    <a href="/studio" className="text-white hover:underline">
+                        Studio
                     </a>
                 </div>
                 <div className="mt-2 text-white/80">

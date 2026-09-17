@@ -53,10 +53,10 @@ export default function Studio() {
                                 Read the Blog <ArrowUpRight className="h-4 w-4" />
                             </Link>
                             <Link
-                                href="/links"
+                                href="/contact"
                                 className="inline-flex items-center gap-2 rounded-lg border border-white/20 px-6 py-3 font-semibold text-white transition hover:border-[var(--accent)] hover:text-[var(--accent)]"
                             >
-                                Find us
+                                Say hello
                             </Link>
                         </div>
                     </motion.div>
@@ -85,6 +85,34 @@ export default function Studio() {
                                     {s.name}
                                     <ArrowUpRight className="h-4 w-4 text-white/40" />
                                 </Link>
+                            ))}
+                        </div>
+                    </motion.div>
+
+                    {/* Find us — social profiles */}
+                    <motion.div
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.6, delay: 0.2 }}
+                        className="w-full max-w-4xl"
+                    >
+                        <h2 className="mb-6 text-center text-2xl font-bold text-white">Find us</h2>
+                        <div className="mx-auto grid max-w-xl grid-cols-1 gap-3 sm:grid-cols-3">
+                            {[
+                                { name: 'TikTok', handle: '@graveyardjokes', href: 'https://www.tiktok.com/@graveyardjokes' },
+                                { name: 'Instagram', handle: '@graveyardjokes', href: 'https://www.instagram.com/graveyardjokes' },
+                                { name: 'Facebook', handle: '/graveyardjokes', href: 'https://www.facebook.com/graveyardjokes' },
+                            ].map((s) => (
+                                <a
+                                    key={s.name}
+                                    href={s.href}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="flex flex-col items-center rounded-lg border border-white/10 bg-white/5 px-5 py-4 text-center transition hover:border-[var(--accent)]"
+                                >
+                                    <span className="font-serif text-sm font-semibold text-white">{s.name}</span>
+                                    <span className="text-xs text-white/50">{s.handle}</span>
+                                </a>
                             ))}
                         </div>
                     </motion.div>

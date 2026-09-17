@@ -94,9 +94,8 @@ Route::prefix('studio')->name('studio.')->group(function () {
 
 
 
-Route::get('/links', function () {
-    return Inertia::render('links');
-})->name('links');
+// The Links hub was merged into /studio — redirect for anyone with the old URL.
+Route::redirect('/links', '/studio', 301)->name('links');
 
 Route::get('/terms', fn () => Inertia::render('legal/terms'))->name('terms');
 Route::get('/privacy', fn () => Inertia::render('legal/privacy'))->name('privacy');

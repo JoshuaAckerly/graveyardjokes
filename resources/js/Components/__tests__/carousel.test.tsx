@@ -134,7 +134,7 @@ describe('Carousel', () => {
         expect(links).toHaveLength(3);
 
         expect(links[0].closest('a')).toHaveAttribute('href', 'https://instagram.com/graveyardjokes');
-        expect(links[1].closest('a')).toHaveAttribute('href', '/links');
+        expect(links[1].closest('a')).toHaveAttribute('href', '/studio');
         expect(links[2].closest('a')).toHaveAttribute('href', getProjectUrl('portfolio'));
     });
 

@@ -19,7 +19,7 @@ describe('About Page', () => {
 
     it('links to the Links and Contact pages', () => {
         render(<About />);
-        expect(screen.getByRole('link', { name: /Where to find us/i })).toHaveAttribute('href', '/links');
+        expect(screen.getByRole('link', { name: /Where to find us/i })).toHaveAttribute('href', '/studio');
         expect(screen.getByRole('link', { name: /Say hello/i })).toHaveAttribute('href', '/contact');
     });
 

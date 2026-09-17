@@ -63,11 +63,6 @@ export default function MobileMenu() {
                                     </Link>
                                 </li>
                                 <li className="mb-4 bg-[var(--primary)]">
-                                    <Link href="/links" className="text-black hover:underline" onClick={() => setIsOpen(false)}>
-                                        Links
-                                    </Link>
-                                </li>
-                                <li className="mb-4 bg-[var(--primary)]">
                                     <Link href="/studio" className="text-black hover:underline" onClick={() => setIsOpen(false)}>
                                         Studio
                                     </Link>
