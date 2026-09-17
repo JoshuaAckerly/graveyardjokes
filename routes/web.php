@@ -67,6 +67,14 @@ Route::get('/studio', function () {
     return Inertia::render('studio');
 })->name('studio');
 
+// ─── Studio section (merged from the studio app) ────────────────────────────
+Route::prefix('studio')->name('studio.')->group(function () {
+    Route::get('/blog', [\App\Http\Controllers\Studio\BlogPostController::class, 'index'])->name('blog.index');
+    Route::get('/blog/{slug}', [\App\Http\Controllers\Studio\BlogPostController::class, 'show'])->name('blog.show');
+});
+// ────────────────────────────────────────────────────────────────────────────
+
+
 Route::get('/links', function () {
     return Inertia::render('links');
 })->name('links');
