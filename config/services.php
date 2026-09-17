@@ -89,6 +89,26 @@ return [
     'facebook' => [
         'app_id' => env('FACEBOOK_APP_ID'),
         'app_secret' => env('FACEBOOK_APP_SECRET'),
+        'page_access_token' => env('FACEBOOK_PAGE_ACCESS_TOKEN'),
+        'user_access_token' => env('FACEBOOK_USER_ACCESS_TOKEN'),
+        'app_access_token' => env('FACEBOOK_APP_ACCESS_TOKEN'),
+        'page_id' => env('FACEBOOK_PAGE_ID'),
+    ],
+
+    // ─── Studio social feeds (merged from the studio app) ───────────────────
+    'tiktok' => [
+        'username' => env('TIKTOK_USERNAME', 'graveyardjokes'),
+        'access_token' => env('TIKTOK_ACCESS_TOKEN'),
+    ],
+
+    'discord' => [
+        'bot_token' => env('DISCORD_BOT_TOKEN'),
+        'channel_id' => env('DISCORD_CHANNEL_ID'),
+    ],
+
+    'instagram' => [
+        'access_token' => env('INSTAGRAM_ACCESS_TOKEN'),
+        'user_id' => env('INSTAGRAM_USER_ID'),
     ],
 
 ];

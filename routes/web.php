@@ -71,8 +71,27 @@ Route::get('/studio', function () {
 Route::prefix('studio')->name('studio.')->group(function () {
     Route::get('/blog', [\App\Http\Controllers\Studio\BlogPostController::class, 'index'])->name('blog.index');
     Route::get('/blog/{slug}', [\App\Http\Controllers\Studio\BlogPostController::class, 'show'])->name('blog.show');
+
+    Route::get('/video-log', [\App\Http\Controllers\Studio\VideoLogController::class, 'index'])->name('video-log');
+    Route::get('/video-log/api', [\App\Http\Controllers\Studio\VideoLogController::class, 'api'])->name('video-log.api');
+    Route::get('/video-log/serve', [\App\Http\Controllers\Studio\VideoLogController::class, 'serve'])->name('video-log.serve');
+
+    Route::get('/discord', [\App\Http\Controllers\Studio\DiscordPostController::class, 'index'])->name('discord');
+    Route::get('/instagram', [\App\Http\Controllers\Studio\InstagramPostController::class, 'index'])->name('instagram');
+
+    Route::get('/facebook', [\App\Http\Controllers\Studio\FacebookPostController::class, 'index'])->name('facebook');
+    Route::get('/illustrations', [\App\Http\Controllers\Studio\IllustrationController::class, 'index'])->name('illustrations');
+    Route::get('/illustrations/api', [\App\Http\Controllers\Studio\IllustrationController::class, 'api'])->name('illustrations.api');
+
+    Route::post('/newsletter/subscribe', [\App\Http\Controllers\Studio\NewsletterController::class, 'store'])->name('newsletter.subscribe');
+    Route::get('/newsletter/unsubscribe/{token}', [\App\Http\Controllers\Studio\NewsletterController::class, 'unsubscribe'])->name('newsletter.unsubscribe');
+
+    Route::get('/admin/subscribers', [\App\Http\Controllers\Studio\Admin\SubscriberController::class, 'index'])
+        ->middleware('auth')
+        ->name('admin.subscribers');
 });
 // ────────────────────────────────────────────────────────────────────────────
+
 
 
 Route::get('/links', function () {
