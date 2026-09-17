@@ -17,3 +17,6 @@ Schedule::command('social:dispatch')->everyMinute()->withoutOverlapping()->envir
 
 // Reset posts stuck in 'processing' after a mid-send crash — production only
 Schedule::command('social:dispatch:reset-stuck')->everyFiveMinutes()->environments(['production']);
+
+// Studio: email newsletter for any newly published blog post — production only
+Schedule::command('app:send-pending-newsletters')->everyTenMinutes()->withoutOverlapping()->environments(['production']);

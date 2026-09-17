@@ -1,4 +1,3 @@
-import { getProjectUrl } from '@/env';
 import { render, screen } from '@testing-library/react';
 import { vi } from 'vitest';
 import Menu from '../Menu';
@@ -29,7 +28,7 @@ describe('Menu', () => {
         expect(screen.getByText('About').closest('a')).toHaveAttribute('href', '/about');
         expect(screen.getByText('Contact').closest('a')).toHaveAttribute('href', '/contact');
         expect(screen.getByText('Links').closest('a')).toHaveAttribute('href', '/links');
-        expect(screen.getByText('Studio').closest('a')).toHaveAttribute('href', getProjectUrl('studio'));
+        expect(screen.getByText('Studio').closest('a')).toHaveAttribute('href', '/studio');
     });
 
     it('applies hover styles to links', () => {

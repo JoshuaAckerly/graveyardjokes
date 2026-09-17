@@ -1,6 +1,6 @@
 import { Link, usePage } from '@inertiajs/react';
 import { MouseEvent, useState } from 'react';
-import { getAuthSystemUrl, getLoginUrl, getProjectUrl } from '../env';
+import { getAuthSystemUrl, getLoginUrl } from '../env';
 
 export default function MobileMenu() {
     const [isOpen, setIsOpen] = useState(false);
@@ -68,9 +68,9 @@ export default function MobileMenu() {
                                     </Link>
                                 </li>
                                 <li className="mb-4 bg-[var(--primary)]">
-                                    <a href={getProjectUrl('studio')} className="text-black hover:underline" onClick={() => setIsOpen(false)}>
+                                    <Link href="/studio" className="text-black hover:underline" onClick={() => setIsOpen(false)}>
                                         Studio
-                                    </a>
+                                    </Link>
                                 </li>
                                 <li className="mb-4 bg-[var(--primary)]">
                                     {isAuthenticated ? (

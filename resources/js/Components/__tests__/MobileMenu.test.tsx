@@ -1,4 +1,3 @@
-import { getProjectUrl } from '@/env';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { vi } from 'vitest';
@@ -85,7 +84,7 @@ describe('MobileMenu', () => {
         expect(screen.getByText('About').closest('a')).toHaveAttribute('href', '/about');
         expect(screen.getByText('Contact').closest('a')).toHaveAttribute('href', '/contact');
         expect(screen.getByText('Links').closest('a')).toHaveAttribute('href', '/links');
-        expect(screen.getByText('Studio').closest('a')).toHaveAttribute('href', getProjectUrl('studio'));
+        expect(screen.getByText('Studio').closest('a')).toHaveAttribute('href', '/studio');
     });
 
     it('updates aria-expanded attribute', async () => {

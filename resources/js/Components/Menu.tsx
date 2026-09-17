@@ -1,5 +1,5 @@
 import { Link, usePage } from '@inertiajs/react';
-import { getAuthSystemUrl, getLoginUrl, getProjectUrl } from '../env';
+import { getAuthSystemUrl, getLoginUrl } from '../env';
 
 export default function Menu() {
     let auth: { user?: { id: number; name: string; email: string } } | undefined;
@@ -36,9 +36,9 @@ export default function Menu() {
                 </Link>
             </li>
             <li className="text-[var(--color-text)]">
-                <a href={getProjectUrl('studio')} className="hover:underline">
+                <Link href="/studio" className="hover:underline">
                     Studio
-                </a>
+                </Link>
             </li>
             <li className="text-[var(--color-text)]">
                 {isAuthenticated ? (
