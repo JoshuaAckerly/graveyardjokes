@@ -38,9 +38,8 @@ npm run build:ssr
 echo "🗄️ Running database migrations..."
 php artisan migrate --force
 
-# Refresh SEO metadata (schema, OG tags) via seeder
-echo "🔍 Refreshing page SEO data..."
-php artisan db:seed --class=PageSeoSeeder --force
+# NOTE: PageSeoSeeder intentionally NOT run — the site uses in-code default SEO
+# after the musician rebrand. Seeding would reintroduce stale agency SEO.
 
 # Ensure writable directories and permissions
 echo "🔒 Setting permissions..."

@@ -8,14 +8,14 @@ return new class extends Migration
 {
     public function up(): void
     {
-        // The shared auth database may already have this table (created by the
-        // former auth-system app). Only create it where it's missing so existing
-        // analytics data is preserved.
-        if (Schema::hasTable('site_visits')) {
+        // site_visits lives on the shared auth database (same as the User model /
+        // SiteVisit model). The former auth-system app already created it there,
+        // so only create it where missing — preserving existing analytics data.
+        if (Schema::connection('auth')->hasTable('site_visits')) {
             return;
         }
 
-        Schema::create('site_visits', function (Blueprint $table) {
+        Schema::connection('auth')->create('site_visits', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->nullable();
             $table->string('host')->nullable();
@@ -34,6 +34,6 @@ return new class extends Migration
 
     public function down(): void
     {
-        Schema::dropIfExists('site_visits');
+        Schema::connection('auth')->dropIfExists('site_visits');
     }
 };
