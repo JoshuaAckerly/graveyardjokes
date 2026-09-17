@@ -32,8 +32,6 @@ Route::domain('www.graveyardjokes.com')->group(function () {
 // })->where('any', '.*')->name('maintenance');
 // ─────────────────────────────────────────────────────────────────────────────
 
-Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
-
 Route::get('/', function () {
     return Inertia::render('welcome');
 })->name('home');
@@ -212,53 +210,9 @@ Route::redirect('/legal/cookies', '/cookies', 301);
 Route::redirect('/illustrations', '/contact', 301);
 Route::redirect('/pricing', '/', 301);
 
-Route::get('/login', function () {
-    $rawUrl = config('services.auth_system.url', '');
-    $base = preg_replace('#/api/?$#', '', is_string($rawUrl) ? $rawUrl : '') ?: 'https://auth-system.graveyardjokes.com';
-
-    if (app()->environment('local') && $base === 'http://auth-system.graveyardjokes.test') {
-        $base = 'http://auth-system.graveyardjokes.test:8007';
-    }
-
-    return redirect()->away("{$base}/login", 302);
-});
-
-Route::get('/register', function () {
-    $rawUrl = config('services.auth_system.url', '');
-    $base = preg_replace('#/api/?$#', '', is_string($rawUrl) ? $rawUrl : '') ?: 'https://auth-system.graveyardjokes.com';
-
-    if (app()->environment('local') && $base === 'http://auth-system.graveyardjokes.test') {
-        $base = 'http://auth-system.graveyardjokes.test:8007';
-    }
-
-    return redirect()->away("{$base}/register", 302);
-});
-
-Route::get('/forgot-password', function () {
-    $rawUrl = config('services.auth_system.url', '');
-    $base = preg_replace('#/api/?$#', '', is_string($rawUrl) ? $rawUrl : '') ?: 'https://auth-system.graveyardjokes.com';
-
-    if (app()->environment('local') && $base === 'http://auth-system.graveyardjokes.test') {
-        $base = 'http://auth-system.graveyardjokes.test:8007';
-    }
-
-    return redirect()->away("{$base}/forgot-password", 302);
-});
-
-Route::get('/reset-password/{token}', function (Request $request, string $token) {
-    $target = 'https://auth-system.graveyardjokes.com/reset-password/'.$token;
-    $query = $request->getQueryString();
-
-    if (is_string($query) && $query !== '') {
-        $target .= '?'.$query;
-    }
-
-    return redirect()->away($target, 302);
-})->where('token', '.*');
-
-// Explicitly mark auth-related endpoints as permanently removed (410 Gone)
-// so crawlers get a clear signal instead of a redirect or soft-404.
-// $goneRoutes and 410 aborts removed to re-enable auth routes
+// Native auth routes (login/register/forgot-password/reset-password) are defined
+// in routes/auth.php — required at the bottom of this file. The old redirects to
+// the external auth-system app have been removed now that auth is in-process.
 
 // OAuth callback — only used during gsc:authorize one-time setup
 Route::get('/admin/oauth/gsc/callback', function (Request $request) {
@@ -289,9 +243,9 @@ Route::get('/test-csrf', function () {
     dd(csrf_token());
 });
 
+Route::get('/dashboard', function () {
+    return Inertia::render('dashboard');
+})->middleware('auth')->name('dashboard');
+
 require __DIR__.'/settings.php';
 require __DIR__.'/auth.php';
-
-Route::get('/auth-system-demo', function () {
-    return Inertia::render('AuthSystemDemoPage');
-})->name('auth-system-demo');
