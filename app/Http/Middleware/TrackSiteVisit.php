@@ -2,10 +2,12 @@
 
 namespace App\Http\Middleware;
 
-use App\Jobs\ReportVisitToAuthSystem;
+use App\Models\SiteVisit;
 use Closure;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Http\Request;
 
 class TrackSiteVisit
 {
@@ -16,6 +18,9 @@ class TrackSiteVisit
         '/horizon',
         '/sanctum',
         '/api',
+        '/admin',
+        '/build',
+        '/storage',
     ];
 
     public function handle(Request $request, Closure $next): Response
@@ -24,16 +29,33 @@ class TrackSiteVisit
         $response = $next($request);
 
         if ($this->shouldTrack($request)) {
-            ReportVisitToAuthSystem::dispatch([
-                'host' => $request->getHost(),
-                'path' => '/'.ltrim($request->path(), '/'),
-                'ip_address' => $request->ip(),
-                'user_agent' => $request->userAgent(),
-                'referer' => $request->headers->get('referer'),
-            ]);
+            $this->record($request);
         }
 
         return $response;
+    }
+
+    private function record(Request $request): void
+    {
+        try {
+            $host = $request->getHost();
+            $path = '/'.ltrim($request->path(), '/');
+            $ip = $request->ip();
+            $userAgent = $request->userAgent();
+
+            SiteVisit::create([
+                'user_id' => Auth::id(),
+                'host' => $host,
+                'ip_address' => $ip,
+                'user_agent' => $userAgent,
+                'path' => $path,
+                'referer' => $request->headers->get('referer'),
+                'is_bot' => SiteVisit::isBot($userAgent, $ip, $path, $host),
+                'created_at' => now(),
+            ]);
+        } catch (\Throwable $e) {
+            Log::warning('Failed to record site visit: '.$e->getMessage());
+        }
     }
 
     private function shouldTrack(Request $request): bool
