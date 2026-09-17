@@ -32,8 +32,6 @@ Route::domain('www.graveyardjokes.com')->group(function () {
 // })->where('any', '.*')->name('maintenance');
 // ─────────────────────────────────────────────────────────────────────────────
 
-Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
-
 Route::get('/', function () {
     return Inertia::render('welcome');
 })->name('home');
@@ -67,9 +65,35 @@ Route::get('/studio', function () {
     return Inertia::render('studio');
 })->name('studio');
 
-Route::get('/links', function () {
-    return Inertia::render('links');
-})->name('links');
+// ─── Studio section (merged from the studio app) ────────────────────────────
+Route::prefix('studio')->name('studio.')->group(function () {
+    Route::get('/blog', [\App\Http\Controllers\Studio\BlogPostController::class, 'index'])->name('blog.index');
+    Route::get('/blog/{slug}', [\App\Http\Controllers\Studio\BlogPostController::class, 'show'])->name('blog.show');
+
+    Route::get('/video-log', [\App\Http\Controllers\Studio\VideoLogController::class, 'index'])->name('video-log');
+    Route::get('/video-log/api', [\App\Http\Controllers\Studio\VideoLogController::class, 'api'])->name('video-log.api');
+    Route::get('/video-log/serve', [\App\Http\Controllers\Studio\VideoLogController::class, 'serve'])->name('video-log.serve');
+
+    Route::get('/discord', [\App\Http\Controllers\Studio\DiscordPostController::class, 'index'])->name('discord');
+    Route::get('/instagram', [\App\Http\Controllers\Studio\InstagramPostController::class, 'index'])->name('instagram');
+
+    Route::get('/facebook', [\App\Http\Controllers\Studio\FacebookPostController::class, 'index'])->name('facebook');
+    Route::get('/illustrations', [\App\Http\Controllers\Studio\IllustrationController::class, 'index'])->name('illustrations');
+    Route::get('/illustrations/api', [\App\Http\Controllers\Studio\IllustrationController::class, 'api'])->name('illustrations.api');
+
+    Route::post('/newsletter/subscribe', [\App\Http\Controllers\Studio\NewsletterController::class, 'store'])->name('newsletter.subscribe');
+    Route::get('/newsletter/unsubscribe/{token}', [\App\Http\Controllers\Studio\NewsletterController::class, 'unsubscribe'])->name('newsletter.unsubscribe');
+
+    Route::get('/admin/subscribers', [\App\Http\Controllers\Studio\Admin\SubscriberController::class, 'index'])
+        ->middleware('auth')
+        ->name('admin.subscribers');
+});
+// ────────────────────────────────────────────────────────────────────────────
+
+
+
+// The Links hub was merged into /studio — redirect for anyone with the old URL.
+Route::redirect('/links', '/studio', 301)->name('links');
 
 Route::get('/terms', fn () => Inertia::render('legal/terms'))->name('terms');
 Route::get('/privacy', fn () => Inertia::render('legal/privacy'))->name('privacy');
@@ -186,53 +210,9 @@ Route::redirect('/legal/cookies', '/cookies', 301);
 Route::redirect('/illustrations', '/contact', 301);
 Route::redirect('/pricing', '/', 301);
 
-Route::get('/login', function () {
-    $rawUrl = config('services.auth_system.url', '');
-    $base = preg_replace('#/api/?$#', '', is_string($rawUrl) ? $rawUrl : '') ?: 'https://auth-system.graveyardjokes.com';
-
-    if (app()->environment('local') && $base === 'http://auth-system.graveyardjokes.test') {
-        $base = 'http://auth-system.graveyardjokes.test:8007';
-    }
-
-    return redirect()->away("{$base}/login", 302);
-});
-
-Route::get('/register', function () {
-    $rawUrl = config('services.auth_system.url', '');
-    $base = preg_replace('#/api/?$#', '', is_string($rawUrl) ? $rawUrl : '') ?: 'https://auth-system.graveyardjokes.com';
-
-    if (app()->environment('local') && $base === 'http://auth-system.graveyardjokes.test') {
-        $base = 'http://auth-system.graveyardjokes.test:8007';
-    }
-
-    return redirect()->away("{$base}/register", 302);
-});
-
-Route::get('/forgot-password', function () {
-    $rawUrl = config('services.auth_system.url', '');
-    $base = preg_replace('#/api/?$#', '', is_string($rawUrl) ? $rawUrl : '') ?: 'https://auth-system.graveyardjokes.com';
-
-    if (app()->environment('local') && $base === 'http://auth-system.graveyardjokes.test') {
-        $base = 'http://auth-system.graveyardjokes.test:8007';
-    }
-
-    return redirect()->away("{$base}/forgot-password", 302);
-});
-
-Route::get('/reset-password/{token}', function (Request $request, string $token) {
-    $target = 'https://auth-system.graveyardjokes.com/reset-password/'.$token;
-    $query = $request->getQueryString();
-
-    if (is_string($query) && $query !== '') {
-        $target .= '?'.$query;
-    }
-
-    return redirect()->away($target, 302);
-})->where('token', '.*');
-
-// Explicitly mark auth-related endpoints as permanently removed (410 Gone)
-// so crawlers get a clear signal instead of a redirect or soft-404.
-// $goneRoutes and 410 aborts removed to re-enable auth routes
+// Native auth routes (login/register/forgot-password/reset-password) are defined
+// in routes/auth.php — required at the bottom of this file. The old redirects to
+// the external auth-system app have been removed now that auth is in-process.
 
 // OAuth callback — only used during gsc:authorize one-time setup
 Route::get('/admin/oauth/gsc/callback', function (Request $request) {
@@ -263,9 +243,9 @@ Route::get('/test-csrf', function () {
     dd(csrf_token());
 });
 
+Route::get('/dashboard', function () {
+    return Inertia::render('dashboard');
+})->middleware('auth')->name('dashboard');
+
 require __DIR__.'/settings.php';
 require __DIR__.'/auth.php';
-
-Route::get('/auth-system-demo', function () {
-    return Inertia::render('AuthSystemDemoPage');
-})->name('auth-system-demo');

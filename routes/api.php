@@ -17,9 +17,7 @@ Route::middleware(['throttle:60,1'])->group(function () {
 Route::get('/random-joke', [JokeController::class, 'random'])->name('api.random-joke');
 
 use App\Http\Controllers\Api\BusinessProfileController;
-use App\Http\Controllers\Api\MessageProxyController;
 use App\Http\Controllers\Api\SocialScheduleController;
-use App\Http\Controllers\Api\UserProxyController;
 
 // Google Business Profile — public read endpoints (cached server-side)
 Route::prefix('business')->group(function () {
@@ -28,20 +26,11 @@ Route::prefix('business')->group(function () {
     Route::get('/posts', [BusinessProfileController::class, 'posts']);
 });
 
-// Google Business Profile — write endpoints (admin only via auth-system bearer token)
-Route::prefix('business')->middleware('auth-system')->group(function () {
+// Google Business Profile — write endpoints (admin only, session auth)
+Route::prefix('business')->middleware(['auth', 'admin'])->group(function () {
     Route::post('/reviews/{reviewId}/reply', [BusinessProfileController::class, 'replyToReview']);
     Route::post('/posts', [BusinessProfileController::class, 'createPost']);
 });
-
-Route::middleware('auth-system')->group(function () {
-    Route::get('/user', [UserProxyController::class, 'user']);
-    Route::get('/purchases', [UserProxyController::class, 'purchases']);
-});
-
-Route::get('/messages', [MessageProxyController::class, 'index']);
-Route::patch('/messages/read-all', [MessageProxyController::class, 'markAllRead']);
-Route::patch('/messages/{id}/read', [MessageProxyController::class, 'markRead']);
 
 // Social media post scheduling — protected by SOCIAL_SCHEDULE_SECRET bearer token
 Route::post('/social/schedule', [SocialScheduleController::class, 'store']);

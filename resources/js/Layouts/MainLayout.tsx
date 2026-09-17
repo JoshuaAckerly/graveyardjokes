@@ -1,7 +1,6 @@
 import GuestPromptModal from '@/Components/GuestPromptModal';
 import Menu from '@/Components/Menu';
 import MobileMenu from '@/Components/MobileMenu';
-import NotificationBell from '@/Components/NotificationBell';
 import { useSmoothScroll } from '@/hooks/use-smooth-scroll';
 import { router } from '@inertiajs/react';
 import gsap from 'gsap';
@@ -92,9 +91,7 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
                 </div>
                 <div className="hidden w-full items-center justify-between md:flex">
                     <Menu />
-                    <NotificationBell />
                 </div>
-                {/*  <Message /> */}
             </header>
             <main className="min-w-full p-4">{children}</main>
             <footer className="relative z-30 mt-8 p-4 text-center text-sm">
@@ -111,8 +108,8 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
                     <a href="/contact" className="text-white hover:underline">
                         Contact
                     </a>
-                    <a href="/links" className="text-white hover:underline">
-                        Links
+                    <a href="/studio" className="text-white hover:underline">
+                        Studio
                     </a>
                 </div>
                 <div className="mt-2 text-white/80">

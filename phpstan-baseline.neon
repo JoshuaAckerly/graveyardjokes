@@ -211,12 +211,6 @@ parameters:
 			path: app/Models/SocialScheduledPost.php
 
 		-
-			message: '#^Instanceof between Illuminate\\Http\\Client\\Response and Illuminate\\Http\\Client\\Response will always evaluate to true\.$#'
-			identifier: instanceof.alwaysTrue
-			count: 5
-			path: app/Services/AuthSystemService.php
-
-		-
 			message: '#^Cannot cast mixed to int\.$#'
 			identifier: cast.int
 			count: 1

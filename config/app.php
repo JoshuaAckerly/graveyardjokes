@@ -15,6 +15,9 @@ return [
 
     'name' => env('APP_NAME', 'GraveYard Jokes Studios Inc.'),
 
+    // Email address treated as the site admin (gates /admin/* via EnsureUserIsAdmin).
+    'admin_email' => env('ADMIN_EMAIL', 'admin@graveyardjokes.com'),
+
     /*
     |--------------------------------------------------------------------------
     | Application Environment

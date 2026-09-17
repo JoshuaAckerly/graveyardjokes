@@ -19,7 +19,7 @@ const carouselSlides: Slide[] = [
         image: '/images/carousel-2.webp',
         title: 'Songs in progress',
         description: 'Two people writing songs together, one at a time. More coming as we go.',
-        link: '/links',
+        link: '/studio',
     },
     {
         image: '/images/carousel-3.webp',

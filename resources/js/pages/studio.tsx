@@ -6,8 +6,6 @@ import { ArrowUpRight, Gamepad2, Music2, PenLine } from 'lucide-react';
 import { getProjectUrl } from '../env';
 
 export default function Studio() {
-    const studioUrl = getProjectUrl('studio');
-
     const focuses = [
         {
             icon: <PenLine className="h-6 w-6" />,
@@ -45,23 +43,77 @@ export default function Studio() {
                         <h1 className="font-serif text-5xl font-extrabold text-[var(--accent)]">The Studio</h1>
                         <p className="mt-4 text-lg text-white/70">
                             The workspace behind Graveyard Jokes — where the songs get written and the side projects get made.
-                            Vlogs, notes, and works in progress live over on the studio site.
+                            Vlogs, notes, feeds, and works in progress.
                         </p>
                         <div className="mt-6 flex flex-wrap justify-center gap-4">
-                            <a
-                                href={studioUrl}
-                                target="_blank"
-                                rel="noopener noreferrer"
+                            <Link
+                                href="/studio/blog"
                                 className="inline-flex items-center gap-2 rounded-lg bg-[var(--accent)] px-6 py-3 font-semibold text-black transition hover:opacity-90"
                             >
-                                Visit the Studio <ArrowUpRight className="h-4 w-4" />
-                            </a>
+                                Read the Blog <ArrowUpRight className="h-4 w-4" />
+                            </Link>
                             <Link
-                                href="/links"
+                                href="/contact"
                                 className="inline-flex items-center gap-2 rounded-lg border border-white/20 px-6 py-3 font-semibold text-white transition hover:border-[var(--accent)] hover:text-[var(--accent)]"
                             >
-                                Find us
+                                Say hello
                             </Link>
+                        </div>
+                    </motion.div>
+
+                    {/* Studio sections */}
+                    <motion.div
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.6, delay: 0.1 }}
+                        className="w-full max-w-4xl"
+                    >
+                        <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
+                            {[
+                                { name: 'Blog', href: '/studio/blog' },
+                                { name: 'Video Log', href: '/studio/video-log' },
+                                { name: 'Illustrations', href: '/studio/illustrations' },
+                                { name: 'Instagram', href: '/studio/instagram' },
+                                { name: 'Facebook', href: '/studio/facebook' },
+                                { name: 'Discord', href: '/studio/discord' },
+                            ].map((s) => (
+                                <Link
+                                    key={s.href}
+                                    href={s.href}
+                                    className="flex items-center justify-between rounded-lg border border-white/10 bg-white/5 px-5 py-4 font-serif text-white transition hover:border-[var(--accent)] hover:text-[var(--accent)]"
+                                >
+                                    {s.name}
+                                    <ArrowUpRight className="h-4 w-4 text-white/40" />
+                                </Link>
+                            ))}
+                        </div>
+                    </motion.div>
+
+                    {/* Find us — social profiles */}
+                    <motion.div
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.6, delay: 0.2 }}
+                        className="w-full max-w-4xl"
+                    >
+                        <h2 className="mb-6 text-center text-2xl font-bold text-white">Find us</h2>
+                        <div className="mx-auto grid max-w-xl grid-cols-1 gap-3 sm:grid-cols-3">
+                            {[
+                                { name: 'TikTok', handle: '@graveyardjokes', href: 'https://www.tiktok.com/@graveyardjokes' },
+                                { name: 'Instagram', handle: '@graveyardjokes', href: 'https://www.instagram.com/graveyardjokes' },
+                                { name: 'Facebook', handle: '/graveyardjokes', href: 'https://www.facebook.com/graveyardjokes' },
+                            ].map((s) => (
+                                <a
+                                    key={s.name}
+                                    href={s.href}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="flex flex-col items-center rounded-lg border border-white/10 bg-white/5 px-5 py-4 text-center transition hover:border-[var(--accent)]"
+                                >
+                                    <span className="font-serif text-sm font-semibold text-white">{s.name}</span>
+                                    <span className="text-xs text-white/50">{s.handle}</span>
+                                </a>
+                            ))}
                         </div>
                     </motion.div>
 
