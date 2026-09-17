@@ -53,15 +53,6 @@ return [
         'notification_ttl' => (int) env('VISITOR_NOTIFICATION_TTL', 300),
     ],
 
-    'auth_system' => [
-        'url' => env('AUTH_SYSTEM_URL', 'http://auth-system.local/api'),
-    ],
-
-    'authsystem' => [
-        'track_url' => env('AUTHSYSTEM_TRACK_URL'),
-        'track_token' => env('AUTHSYSTEM_TRACK_TOKEN'),
-    ],
-
     'google_business' => [
         'client_id' => env('GOOGLE_BUSINESS_CLIENT_ID'),
         'client_secret' => env('GOOGLE_BUSINESS_CLIENT_SECRET'),
