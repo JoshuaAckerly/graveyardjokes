@@ -27,8 +27,10 @@ echo "🐘 Installing PHP dependencies..."
 composer install --no-interaction --prefer-dist --no-progress --optimize-autoloader --classmap-authoritative --no-dev
 
 # Install/Update Node dependencies
+# --legacy-peer-deps: the project has a pre-existing dev-only peer conflict
+# (eslint 10 vs eslint-plugin-react's bound). Harmless; keeps npm from erroring.
 echo "📦 Installing Node dependencies..."
-npm ci --production=false
+npm ci --production=false --legacy-peer-deps
 
 # Build frontend assets with SSR
 echo "🎨 Building frontend assets and SSR bundle..."
