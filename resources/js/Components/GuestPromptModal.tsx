@@ -1,6 +1,5 @@
 import { usePage } from '@inertiajs/react';
 import { useEffect, useState } from 'react';
-import { getAuthSystemUrl, getLoginUrl } from '../env';
 
 const STORAGE_KEY = 'gj_guest_prompt_dismissed';
 const DELAY_MS = 15_000;
@@ -45,8 +44,8 @@ export default function GuestPromptModal() {
 
     if (!visible) return null;
 
-    const registerUrl = `${getAuthSystemUrl()}/register`;
-    const loginUrl = getLoginUrl('');
+    const registerUrl = '/register';
+    const loginUrl = '/login';
 
     return (
         <div
