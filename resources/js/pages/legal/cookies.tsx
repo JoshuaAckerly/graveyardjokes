@@ -8,11 +8,11 @@ const Cookies = () => {
             <div title="Cookie Policy" className="mx-auto max-w-4xl space-y-4 bg-gray-900 p-6 text-white">
                 <h1 className="text-2xl font-bold">Cookie Policy</h1>
                 <p>
-                    <strong>Effective Date:</strong> July 6, 2026
+                    <strong>Effective Date:</strong> September 18, 2026
                 </p>
 
                 <p>
-                    This Cookie Policy explains how GraveYard Jokes Studios Inc. uses cookies and similar technologies when you visit{' '}
+                    This Cookie Policy explains how Graveyard Jokes uses cookies and similar technologies when you visit{' '}
                     <strong>graveyardjokes.com</strong>.
                 </p>
 

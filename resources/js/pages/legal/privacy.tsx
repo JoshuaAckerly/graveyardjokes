@@ -8,10 +8,10 @@ const Privacy: React.FC = () => {
             <div title="Privacy Policy" className="mx-auto max-w-4xl space-y-4 bg-gray-900 p-6 text-white">
                 <h1 className="text-2xl font-bold">Privacy Policy</h1>
                 <p>
-                    <strong>Effective Date:</strong> July 6, 2026
+                    <strong>Effective Date:</strong> September 18, 2026
                 </p>
                 <p>
-                    This Privacy Policy explains how we collect, use, and protect information when you visit GraveYard Jokes Studios Inc.
+                    This Privacy Policy explains how we collect, use, and protect information when you visit Graveyard Jokes
                     (graveyardjokes.com).
                 </p>
                 <h2 className="text-xl font-semibold">1. Information We Collect</h2>
@@ -30,8 +30,8 @@ const Privacy: React.FC = () => {
                 </ul>
                 <p>If you have a registered account, we may also collect:</p>
                 <ul className="list-inside list-disc">
-                    <li>In-app messages and notifications delivered to your account inbox</li>
-                    <li>Message read/unread status and timestamps</li>
+                    <li>Your email address and account details</li>
+                    <li>Account activity such as sign-in timestamps</li>
                 </ul>
                 <h2 className="text-xl font-semibold">2. How We Collect Information</h2>
                 <p>
@@ -54,8 +54,7 @@ const Privacy: React.FC = () => {
                     <li>Respond to contact form inquiries</li>
                     <li>Send email notifications about site visitors (for site administration)</li>
                     <li>Ensure site security and prevent abuse</li>
-                    <li>Deliver in-app notifications and messages to registered accounts</li>
-                    <li>Track message read/unread status to manage notification state</li>
+                    <li>Manage optional user accounts and send occasional updates</li>
                 </ul>
                 <h2 className="text-xl font-semibold">4. Data Sharing and Security</h2>
                 <p>
