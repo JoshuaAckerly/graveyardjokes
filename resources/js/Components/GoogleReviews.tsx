@@ -1,5 +1,5 @@
 import { type Review, type ReviewsResponse, type StarRating } from '@/types/business-profile';
-import { useFetchApi } from '@gj/hooks';
+import { useFetchApi } from '@/hooks/use-fetch-api';
 
 const STAR_MAP: Record<StarRating, number> = {
     ONE: 1,

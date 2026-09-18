@@ -1,5 +1,5 @@
 import { type BusinessInfo, type DayOfWeek, type TimePeriod } from '@/types/business-profile';
-import { useFetchApi } from '@gj/hooks';
+import { useFetchApi } from '@/hooks/use-fetch-api';
 
 const DAY_ORDER: DayOfWeek[] = ['MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY', 'SUNDAY'];
 const DAY_LABELS: Record<DayOfWeek, string> = {

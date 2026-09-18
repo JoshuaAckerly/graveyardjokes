@@ -13,9 +13,6 @@ export default defineConfig({
     resolve: {
         alias: {
             '@': resolve(__dirname, 'resources/js'),
-            '@gj/env': resolve(__dirname, '../packages/env/src/index.ts'),
-            '@gj/utils': resolve(__dirname, '../packages/utils/src/index.ts'),
-            '@gj/hooks': resolve(__dirname, '../packages/hooks/src/index.ts'),
         },
     },
 });

@@ -4,11 +4,11 @@ import BusinessHours from '../BusinessHours';
 import BusinessPosts from '../BusinessPosts';
 import GoogleReviews from '../GoogleReviews';
 
-vi.mock('@gj/hooks', () => ({
+vi.mock('@/hooks/use-fetch-api', () => ({
     useFetchApi: vi.fn(),
 }));
 
-import { useFetchApi } from '@gj/hooks';
+import { useFetchApi } from '@/hooks/use-fetch-api';
 const mockUseFetchApi = vi.mocked(useFetchApi);
 
 describe('GoogleReviews', () => {
