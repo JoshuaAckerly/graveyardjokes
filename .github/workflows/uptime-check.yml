@@ -19,7 +19,6 @@ jobs:
             "https://graveyardjokes.com"
             "https://noteleks.graveyardjokes.com"
             "https://studio.graveyardjokes.com"
-            "https://auth-system.graveyardjokes.com"
           )
 
           FAILED=()

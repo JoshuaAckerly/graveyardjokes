@@ -12,8 +12,6 @@ vi.mock('../env', () => ({
         return env[key] || defaultValue || '';
     }),
     getProjectUrl: vi.fn(() => 'https://example.com'),
-    getAuthSystemUrl: vi.fn(() => 'https://auth-system.example.com'),
-    getLoginUrl: vi.fn((subdomain: string) => `https://auth-system.example.com/login?return_url=https://${subdomain}.example.com`),
 }));
 
 // Mock Inertia

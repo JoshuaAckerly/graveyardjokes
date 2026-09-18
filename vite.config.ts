@@ -58,8 +58,6 @@ export default defineConfig(({ mode }) => {
                     'http://10.0.1.20:8091',
                     'http://studio.graveyardjokes.test',
                     'http://studio.graveyardjokes.test:8003',
-                    'http://auth-system.graveyardjokes.test',
-                    'http://auth-system.graveyardjokes.test:8007',
                     'http://noteleks.graveyardjokes.test',
                     'http://noteleks.graveyardjokes.test:8009'
                 ],
@@ -69,8 +67,7 @@ export default defineConfig(({ mode }) => {
                 ...allowedHosts,
                 'graveyardjokes.test',
                 'studio.graveyardjokes.test',
-                'noteleks.graveyardjokes.test',
-                'auth-system.graveyardjokes.test'
+                'noteleks.graveyardjokes.test'
             ],
         };
     }
