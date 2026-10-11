@@ -47,7 +47,13 @@ class FetchGalleryThumbnails extends Command
         // --import: add new post URLs before fetching thumbnails
         $importUrls = $this->option('import');
         if ($importUrls) {
-            $this->importPosts($importUrls);
+            $validImportUrls = [];
+            foreach ($importUrls as $importUrl) {
+                if (is_string($importUrl)) {
+                    $validImportUrls[] = $importUrl;
+                }
+            }
+            $this->importPosts($validImportUrls);
         }
 
         $useScrape = $this->option('scrape');
@@ -56,22 +62,20 @@ class FetchGalleryThumbnails extends Command
             ?? config('services.facebook.user_access_token')
             ?? config('services.facebook.app_access_token');
         $cookieString = $this->option('cookie');
+        $token = is_string($rawToken) && $rawToken !== '' ? $rawToken : null;
 
         // If no token configured, automatically fall back to scraping
-        if (! $rawToken) {
+        if ($token === null) {
             $useScrape = true;
             $this->warn('No Facebook access token found — falling back to page scraping.');
         }
 
         $client = $discoveryClient;
 
-        $token = null;
-
-        if (! $useScrape) {
+        if (! $useScrape && $token !== null) {
             // If the value looks like APP_ID|APP_SECRET, exchange it for a real app access token
-            $token = $rawToken;
-            if (str_contains($rawToken, '|')) {
-                [$appId, $appSecret] = explode('|', $rawToken, 2);
+            if (str_contains($token, '|')) {
+                [$appId, $appSecret] = explode('|', $token, 2);
                 $this->info('Exchanging credentials for app access token…');
                 try {
                     $resp = $client->get('https://graph.facebook.com/oauth/access_token', [
@@ -82,15 +86,16 @@ class FetchGalleryThumbnails extends Command
                         ],
                     ]);
                     $data = json_decode((string) $resp->getBody(), true);
-                    $token = $data['access_token'] ?? null;
-                    if (! $token) {
+                    $accessToken = is_array($data) ? ($data['access_token'] ?? null) : null;
+                    $token = is_string($accessToken) && $accessToken !== '' ? $accessToken : null;
+                    if ($token === null) {
                         $this->warn('Token exchange failed — falling back to page scraping.');
                         $useScrape = true;
                     } else {
                         $this->info('Token obtained.');
                     }
                 } catch (RequestException $e) {
-                    $errBody = $e->hasResponse() ? (string) $e->getResponse()->getBody() : $e->getMessage();
+                    $errBody = (string) ($e->getResponse()?->getBody() ?? $e->getMessage());
                     $this->warn("Token exchange request failed: {$errBody}");
                     $this->warn('Falling back to page scraping…');
                     $useScrape = true;
@@ -128,7 +133,7 @@ class FetchGalleryThumbnails extends Command
         foreach ($posts as $post) {
             $thumbnail = $useScrape
                 ? $this->fetchViaScraping($client, $post->post_url, $post->id, $cookieString)
-                : $this->fetchViaGraphApi($client, $token, $post->post_url, $post->id);
+                : ($token !== null ? $this->fetchViaGraphApi($client, $token, $post->post_url, $post->id) : null);
 
             if ($thumbnail) {
                 $persisted = $this->persistToS3($client, $thumbnail, $post->id);
@@ -186,24 +191,43 @@ class FetchGalleryThumbnails extends Command
             ]);
 
             $data = json_decode((string) $response->getBody(), true);
-            $images = $data['images'] ?? [];
+            $images = is_array($data) ? ($data['images'] ?? null) : null;
+            if (! is_array($images)) {
+                return null;
+            }
+
+            /** @var list<array{width: int, source: string}> $validImages */
+            $validImages = [];
+            foreach ($images as $image) {
+                if (! is_array($image)) {
+                    continue;
+                }
+
+                $width = $image['width'] ?? null;
+                $source = $image['source'] ?? null;
+                if ((is_int($width) || (is_string($width) && ctype_digit($width))) && is_string($source)) {
+                    $validImages[] = ['width' => (int) $width, 'source' => $source];
+                }
+            }
 
             // Pick the smallest image ≤600px wide, fallback to smallest overall
-            usort($images, fn ($a, $b) => $b['width'] <=> $a['width']); // largest→smallest
-            foreach ($images as $img) {
+            usort($validImages, fn (array $a, array $b): int => $b['width'] <=> $a['width']);
+            foreach ($validImages as $img) {
                 if ($img['width'] <= 600) {
                     return $img['source'];
                 }
             }
-            $thumbnail = $images[count($images) - 1]['source'] ?? null;
+            $thumbnail = $validImages[count($validImages) - 1]['source'] ?? null;
 
-            if ($thumbnail) {
+            if (is_string($thumbnail) && $thumbnail !== '') {
                 return $thumbnail;
             }
         } catch (RequestException $e) {
-            $errBody = $e->hasResponse() ? (string) $e->getResponse()->getBody() : $e->getMessage();
+            $response = $e->getResponse();
+            $errBody = $response !== null ? (string) $response->getBody() : $e->getMessage();
             $errData = json_decode($errBody, true);
-            $errCode = $errData['error']['code'] ?? 0;
+            $error = is_array($errData) ? ($errData['error'] ?? null) : null;
+            $errCode = is_array($error) ? ($error['code'] ?? 0) : 0;
 
             // Code 200 = Missing Permissions (personal profile photo) — fall through to oEmbed
             if ($errCode !== 200) {
@@ -226,13 +250,13 @@ class FetchGalleryThumbnails extends Command
                 'http_errors' => false,
             ]);
             $data = json_decode((string) $response->getBody(), true);
-            $thumbnail = $data['picture'] ?? null;
-            if (! $thumbnail) {
+            $thumbnail = is_array($data) ? ($data['picture'] ?? null) : null;
+            if (! is_string($thumbnail) || $thumbnail === '') {
                 $this->newLine();
                 $this->warn("No picture field for video post #{$postId} (video_id={$videoId})");
             }
 
-            return $thumbnail;
+            return is_string($thumbnail) ? $thumbnail : null;
         } catch (RequestException $e) {
             $this->newLine();
             $this->error("Video thumbnail failed for post #{$postId}: ".$e->getMessage());
@@ -249,13 +273,18 @@ class FetchGalleryThumbnails extends Command
                 'http_errors' => false,
             ]);
             $data = json_decode((string) $response->getBody(), true);
-            $thumbnail = $data['attachments']['data'][0]['media']['image']['src'] ?? null;
-            if (! $thumbnail) {
+            $attachments = is_array($data) ? ($data['attachments'] ?? null) : null;
+            $attachmentData = is_array($attachments) ? ($attachments['data'] ?? null) : null;
+            $firstAttachment = is_array($attachmentData) ? ($attachmentData[0] ?? null) : null;
+            $media = is_array($firstAttachment) ? ($firstAttachment['media'] ?? null) : null;
+            $image = is_array($media) ? ($media['image'] ?? null) : null;
+            $thumbnail = is_array($image) ? ($image['src'] ?? null) : null;
+            if (! is_string($thumbnail) || $thumbnail === '') {
                 $this->newLine();
                 $this->warn("No attachment image for post #{$postId} (graph_id={$graphPostId})");
             }
 
-            return $thumbnail;
+            return is_string($thumbnail) ? $thumbnail : null;
         } catch (RequestException $e) {
             $this->newLine();
             $this->error("Attachment fetch failed for post #{$postId}: ".$e->getMessage());
@@ -280,15 +309,15 @@ class FetchGalleryThumbnails extends Command
             ]);
 
             $data = json_decode((string) $response->getBody(), true);
-            $thumbnail = $data['thumbnail_url'] ?? null;
+            $thumbnail = is_array($data) ? ($data['thumbnail_url'] ?? null) : null;
 
-            if ($thumbnail) {
+            if (is_string($thumbnail) && $thumbnail !== '') {
                 return $thumbnail;
             }
 
             // oEmbed succeeded but no thumbnail — try getting the full photo_url
-            $thumbnail = $data['photo_url'] ?? null;
-            if ($thumbnail) {
+            $thumbnail = is_array($data) ? ($data['photo_url'] ?? null) : null;
+            if (is_string($thumbnail) && $thumbnail !== '') {
                 return $thumbnail;
             }
 
@@ -296,7 +325,8 @@ class FetchGalleryThumbnails extends Command
             $this->warn("oEmbed returned no thumbnail for post #{$postId}");
         } catch (RequestException $e) {
             $this->newLine();
-            $errBody = $e->hasResponse() ? (string) $e->getResponse()->getBody() : $e->getMessage();
+            $response = $e->getResponse();
+            $errBody = $response !== null ? (string) $response->getBody() : $e->getMessage();
             $this->error("oEmbed failed for post #{$postId}: {$errBody}");
         }
 
@@ -387,13 +417,14 @@ class FetchGalleryThumbnails extends Command
             return $photo;
         } catch (RequestException $e) {
             $this->newLine();
-            $status = $e->hasResponse() ? $e->getResponse()->getStatusCode() : 'N/A';
+            $status = $e->getResponse()?->getStatusCode() ?? 'N/A';
             $this->error("Failed post #{$postId} (HTTP {$status}): ".$e->getMessage());
 
             return null;
         }
     }
 
+    /** @return list<string> */
     private function discoverPhotosFromPage(Client $client, string $pageUrl): array
     {
         // mbasic.facebook.com is the lightweight mobile version — much more
@@ -441,7 +472,7 @@ class FetchGalleryThumbnails extends Command
                     $fbids[$id] = true;
                 }
             } catch (RequestException $e) {
-                $status = $e->hasResponse() ? $e->getResponse()->getStatusCode() : 'N/A';
+                $status = $e->getResponse()?->getStatusCode() ?? 'N/A';
                 $this->warn("Could not fetch {$url} (HTTP {$status}) — skipping.");
             }
 
@@ -507,6 +538,7 @@ class FetchGalleryThumbnails extends Command
         }
     }
 
+    /** @param list<string> $urls */
     private function importPosts(array $urls): void
     {
         $this->info('Importing '.count($urls).' post(s)…');

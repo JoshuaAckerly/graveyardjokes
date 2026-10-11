@@ -23,7 +23,7 @@ class CacheInstagramThumbnails extends Command
         $token = config('services.instagram.access_token');
         $userId = config('services.instagram.user_id');
 
-        if (empty($token) || empty($userId)) {
+        if (! is_string($token) || $token === '' || ! is_string($userId) || $userId === '') {
             $this->error('INSTAGRAM_ACCESS_TOKEN and INSTAGRAM_USER_ID must be set.');
 
             return self::FAILURE;
@@ -33,7 +33,10 @@ class CacheInstagramThumbnails extends Command
 
         $query = InstagramPost::query();
         if (! $this->option('force')) {
-            $cloudfrontDomain = (string) config('media.cloudfront_domain', '');
+            $cloudfrontDomain = config('media.cloudfront_domain', '');
+            if (! is_string($cloudfrontDomain)) {
+                $cloudfrontDomain = '';
+            }
             $s3Domain = 'amazonaws.com';
             $query->where(function ($q) use ($cloudfrontDomain, $s3Domain) {
                 $q->whereNull('thumbnail_url')
@@ -116,17 +119,28 @@ class CacheInstagramThumbnails extends Command
             ]);
 
             $data = json_decode((string) $response->getBody(), true);
-
-            if (isset($data['error'])) {
+            if (! is_array($data)) {
                 $this->newLine();
-                $this->warn("API error for {$instagramId}: {$data['error']['message']}");
+                $this->warn("Invalid API response for {$instagramId}.");
 
                 return [];
             }
 
+            $error = $data['error'] ?? null;
+            if (is_array($error)) {
+                $message = $error['message'] ?? null;
+                $this->newLine();
+                $this->warn("API error for {$instagramId}: ".(is_string($message) ? $message : 'Unknown API error'));
+
+                return [];
+            }
+
+            $mediaUrl = $data['media_url'] ?? null;
+            $thumbnailUrl = $data['thumbnail_url'] ?? null;
+
             return [
-                'media_url' => $data['media_url'] ?? null,
-                'thumbnail_url' => $data['thumbnail_url'] ?? null,
+                'media_url' => is_string($mediaUrl) ? $mediaUrl : null,
+                'thumbnail_url' => is_string($thumbnailUrl) ? $thumbnailUrl : null,
             ];
         } catch (RequestException $e) {
             $this->newLine();
