@@ -16,6 +16,9 @@ class VideoLog
 
     public ?string $description;
 
+    /**
+     * @param  array{id?: int, title?: string, date?: string, thumbnail?: string, url?: string, description?: string|null}  $data
+     */
     public function __construct(array $data)
     {
         $this->id = $data['id'] ?? 0;
@@ -26,6 +29,9 @@ class VideoLog
         $this->description = $data['description'] ?? null;
     }
 
+    /**
+     * @return array{id: int, title: string, date: string, thumbnail: string, url: string, description: string|null}
+     */
     public function toArray(): array
     {
         return [

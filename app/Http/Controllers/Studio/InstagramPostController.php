@@ -5,10 +5,11 @@ namespace App\Http\Controllers\Studio;
 use App\Http\Controllers\Controller;
 use App\Models\InstagramPost;
 use Inertia\Inertia;
+use Inertia\Response;
 
 class InstagramPostController extends Controller
 {
-    public function index()
+    public function index(): Response
     {
         $posts = InstagramPost::active()
             ->orderByDesc('posted_at')

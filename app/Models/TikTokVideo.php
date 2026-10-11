@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
 class TikTokVideo extends Model
@@ -31,13 +32,18 @@ class TikTokVideo extends Model
 
     public function getVideoUrlAttribute(): string
     {
-        $username = ltrim(config('services.tiktok.username', 'graveyardjokes'), '@');
+        $configuredUsername = config('services.tiktok.username', 'graveyardjokes');
+        $username = ltrim(is_string($configuredUsername) ? $configuredUsername : 'graveyardjokes', '@');
         $type = $this->post_type ?? 'video';
 
         return "https://www.tiktok.com/@{$username}/{$type}/{$this->tiktok_video_id}";
     }
 
-    public function scopeActive($query)
+    /**
+     * @param  Builder<TikTokVideo>  $query
+     * @return Builder<TikTokVideo>
+     */
+    public function scopeActive(Builder $query): Builder
     {
         return $query->where('is_active', true);
     }

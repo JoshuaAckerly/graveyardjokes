@@ -20,6 +20,7 @@ class FetchTikTokThumbnails extends Command
     public function handle(): int
     {
         $username = config('services.tiktok.username', 'graveyardjokes');
+        $username = is_string($username) && $username !== '' ? $username : 'graveyardjokes';
         $client = new Client([
             'timeout' => 15,
             'allow_redirects' => true,
@@ -31,7 +32,8 @@ class FetchTikTokThumbnails extends Command
 
         // --import: add new video URLs before fetching thumbnails
         $importUrls = $this->option('import');
-        if ($importUrls) {
+        $importUrls = array_values(array_filter($importUrls, 'is_string'));
+        if ($importUrls !== []) {
             $this->importVideos($client, $importUrls, $username);
         }
 
@@ -63,13 +65,15 @@ class FetchTikTokThumbnails extends Command
 
             if ($result) {
                 $data = [];
-                if (! empty($result['thumbnail_url'])) {
-                    $cached = $this->cacheThumbnail($client, $result['thumbnail_url'], $video->tiktok_video_id);
-                    $data['thumbnail_url'] = $cached ?? $result['thumbnail_url'];
+                $thumbnailUrl = $result['thumbnail_url'] ?? null;
+                if (is_string($thumbnailUrl) && $thumbnailUrl !== '') {
+                    $cached = $this->cacheThumbnail($client, $thumbnailUrl, $video->tiktok_video_id);
+                    $data['thumbnail_url'] = $cached ?? $thumbnailUrl;
                 }
                 // Update title only if it's still the default placeholder
-                if (! empty($result['title']) && in_array($video->title, ['Video Log', 'Photo Post', ''])) {
-                    $data['title'] = $result['title'];
+                $title = $result['title'] ?? null;
+                if (is_string($title) && $title !== '' && in_array($video->title, ['Video Log', 'Photo Post', ''])) {
+                    $data['title'] = $title;
                 }
                 if ($data) {
                     $video->update($data);
@@ -92,6 +96,9 @@ class FetchTikTokThumbnails extends Command
         return $failed === 0 ? self::SUCCESS : self::FAILURE;
     }
 
+    /**
+     * @param  list<string>  $urls
+     */
     private function importVideos(Client $client, array $urls, string $username): void
     {
         $this->info('Importing '.count($urls).' video(s)…');
@@ -120,15 +127,17 @@ class FetchTikTokThumbnails extends Command
             $oembed = $this->fetchOEmbed($client, $url);
 
             $thumbnailUrl = null;
-            if (! empty($oembed['thumbnail_url'])) {
-                $thumbnailUrl = $this->cacheThumbnail($client, $oembed['thumbnail_url'], $videoId)
-                    ?? $oembed['thumbnail_url'];
+            $oembedThumbnailUrl = $oembed['thumbnail_url'] ?? null;
+            if (is_string($oembedThumbnailUrl) && $oembedThumbnailUrl !== '') {
+                $thumbnailUrl = $this->cacheThumbnail($client, $oembedThumbnailUrl, $videoId)
+                    ?? $oembedThumbnailUrl;
             }
 
+            $title = $oembed['title'] ?? null;
             TikTokVideo::create([
                 'tiktok_video_id' => $videoId,
                 'post_type' => $postType,
-                'title' => $oembed['title'] ?? 'TikTok Video',
+                'title' => is_string($title) ? $title : 'TikTok Video',
                 'description' => null,
                 'thumbnail_url' => $thumbnailUrl,
                 'is_active' => true,
@@ -184,13 +193,16 @@ class FetchTikTokThumbnails extends Command
     private function cdnUrl(string $s3Path): string
     {
         $cloudfront = config('media.cloudfront_domain');
-        if ($cloudfront) {
+        if (is_string($cloudfront) && $cloudfront !== '') {
             return 'https://'.rtrim($cloudfront, '/').'/'.ltrim($s3Path, '/');
         }
 
         return Storage::disk('s3')->url($s3Path);
     }
 
+    /**
+     * @return array<string, mixed>|null
+     */
     private function fetchOEmbed(Client $client, string $videoUrl): ?array
     {
         try {
@@ -207,14 +219,28 @@ class FetchTikTokThumbnails extends Command
 
             $data = json_decode((string) $response->getBody(), true);
 
-            if (empty($data) || isset($data['status_code'])) {
+            if (! is_array($data) || $data === []) {
                 $this->newLine();
                 $this->warn("oEmbed error for {$videoUrl}: ".json_encode($data));
 
                 return null;
             }
 
-            return $data;
+            $oembed = [];
+            foreach ($data as $key => $value) {
+                if (is_string($key)) {
+                    $oembed[$key] = $value;
+                }
+            }
+
+            if (isset($oembed['status_code'])) {
+                $this->newLine();
+                $this->warn("oEmbed error for {$videoUrl}: ".json_encode($data));
+
+                return null;
+            }
+
+            return $oembed;
         } catch (RequestException $e) {
             $this->newLine();
             $this->error("Request failed for {$videoUrl}: ".$e->getMessage());

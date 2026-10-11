@@ -3,10 +3,11 @@
 namespace App\Services;
 
 use App\Contracts\StorageUrlGeneratorInterface;
+use Illuminate\Contracts\Filesystem\Cloud;
 
 class StorageUrlGenerator implements StorageUrlGeneratorInterface
 {
-    /** @var mixed Underlying filesystem adapter (may be a FilesystemAdapter) */
+    /** @var Cloud */
     protected $disk;
 
     protected ?string $cloudfrontDomain;
@@ -14,13 +15,14 @@ class StorageUrlGenerator implements StorageUrlGeneratorInterface
     protected ?int $defaultExpires;
 
     /**
-     * @param  mixed  $disk
+     * @param  Cloud  $disk
      */
     public function __construct($disk, ?string $cloudfrontDomain = null, ?int $defaultExpires = null)
     {
         $this->disk = $disk;
         $this->cloudfrontDomain = $cloudfrontDomain;
-        $this->defaultExpires = $defaultExpires ?? (int) env('VIDEO_URL_EXPIRES', 60);
+        $configuredExpires = config('media.url_expires_minutes', 60);
+        $this->defaultExpires = $defaultExpires ?? (is_int($configuredExpires) ? $configuredExpires : 60);
     }
 
     /**
@@ -40,24 +42,15 @@ class StorageUrlGenerator implements StorageUrlGeneratorInterface
                 return url('/studio/video-log/serve?path='.rawurlencode($path));
             }
 
-            // If the disk cannot produce temporary URLs, proxy
-            if (! method_exists($this->disk, 'temporaryUrl')) {
-                return url('/studio/video-log/serve?path='.rawurlencode($path));
-            }
-
             // Otherwise, try to probe the disk's url/temporaryUrl to detect fakes that
             // return an application-hosted URL (e.g., https://studio.test/...). If so, use the proxy.
             try {
-                $candidate = '';
-                if (method_exists($this->disk, 'temporaryUrl')) {
-                    $candidate = $this->disk->temporaryUrl($path, now()->addMinutes(5));
-                } else {
-                    $candidate = $this->disk->url($path);
-                }
+                $candidate = $this->disk->temporaryUrl($path, now()->addMinutes(5));
 
                 if ($candidate) {
                     $parsedCandidate = parse_url((string) $candidate);
-                    $appUrl = parse_url(config('app.url') ?: url('/'));
+                    $configuredAppUrl = config('app.url');
+                    $appUrl = parse_url(is_string($configuredAppUrl) && $configuredAppUrl !== '' ? $configuredAppUrl : url('/'));
 
                     // If candidate includes presigned signature/query params, consider it a valid
                     // presigned URL and do NOT proxy (MinIO/AWS presigned URLs include signature-related query params).
@@ -88,11 +81,7 @@ class StorageUrlGenerator implements StorageUrlGeneratorInterface
         $expires = $expiresMinutes ?? $this->defaultExpires;
 
         try {
-            if (method_exists($this->disk, 'temporaryUrl')) {
-                $url = $this->disk->temporaryUrl($path, now()->addMinutes((int) $expires));
-            } else {
-                $url = $this->disk->url($path);
-            }
+            $url = $this->disk->temporaryUrl($path, now()->addMinutes((int) $expires));
         } catch (\Throwable $e) {
             try {
                 $url = $this->disk->url($path);
@@ -102,7 +91,7 @@ class StorageUrlGenerator implements StorageUrlGeneratorInterface
         }
 
         // If we have a URL and a CloudFront domain, rewrite the host.
-        if ($this->cloudfrontDomain && $url) {
+        if ($this->cloudfrontDomain) {
             $parsed = parse_url($url);
             if ($parsed && isset($parsed['scheme'])) {
                 $scheme = $parsed['scheme'];
@@ -116,8 +105,10 @@ class StorageUrlGenerator implements StorageUrlGeneratorInterface
         // If we still don't have a URL (both temporaryUrl and url may have failed),
         // attempt to construct a reasonable S3-compatible URL using env vars.
         if (! $url) {
-            $endpoint = env('AWS_ENDPOINT') ?: config('filesystems.disks.s3.endpoint') ?: '';
-            $bucket = env('AWS_BUCKET') ?: config('filesystems.disks.s3.bucket') ?: '';
+            $configuredEndpoint = config('filesystems.disks.s3.endpoint');
+            $configuredBucket = config('filesystems.disks.s3.bucket');
+            $endpoint = is_string($configuredEndpoint) ? $configuredEndpoint : '';
+            $bucket = is_string($configuredBucket) ? $configuredBucket : '';
 
             if ($endpoint && $bucket) {
                 // Normalize endpoint (remove trailing slash)
@@ -127,7 +118,7 @@ class StorageUrlGenerator implements StorageUrlGeneratorInterface
                 // If endpoint looks like a full URL, use it as base
                 if (preg_match('#^https?://#', $endpoint)) {
                     // If path-style endpoints are used, include bucket in path
-                    $usePathStyle = filter_var(env('AWS_USE_PATH_STYLE_ENDPOINT', config('filesystems.disks.s3.use_path_style_endpoint', false)), FILTER_VALIDATE_BOOLEAN);
+                    $usePathStyle = filter_var(config('filesystems.disks.s3.use_path_style_endpoint', false), FILTER_VALIDATE_BOOLEAN);
                     if ($usePathStyle) {
                         $url = $endpoint.'/'.trim($bucket, '/').'/'.$pathPart;
                     } else {
@@ -143,7 +134,7 @@ class StorageUrlGenerator implements StorageUrlGeneratorInterface
                 }
 
                 // If a CloudFront domain is configured, apply the rewrite now
-                if ($this->cloudfrontDomain && $url) {
+                if ($this->cloudfrontDomain) {
                     $parsed = parse_url($url);
                     $scheme = $parsed['scheme'] ?? 'https';
                     $url = $scheme.'://'.rtrim($this->cloudfrontDomain, '/').(isset($parsed['path']) ? $parsed['path'] : '');

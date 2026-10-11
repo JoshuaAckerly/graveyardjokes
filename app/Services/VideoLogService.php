@@ -4,16 +4,13 @@ namespace App\Services;
 
 use App\Contracts\StorageUrlGeneratorInterface;
 use App\Models\VideoLog;
+use Illuminate\Contracts\Filesystem\Cloud;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class VideoLogService
 {
-    /**
-     * Underlying S3 disk. Kept untyped to allow injection of test doubles in unit tests.
-     *
-     * @var mixed
-     */
+    /** @var Cloud */
     protected $s3;
 
     protected string $videoPrefix;
@@ -22,28 +19,34 @@ class VideoLogService
 
     protected ?string $cloudfrontDomain;
 
-    protected StorageUrlGenerator $urlGenerator;
+    protected StorageUrlGeneratorInterface $urlGenerator;
 
     /**
      * Backwards-compatible constructor: first param may be the disk or the url generator.
      * Prefer injecting a StorageUrlGenerator for URL resolution.
      *
-     * @param  mixed|null  $s3OrGenerator
-     * @param  StorageUrlGenerator|null  $maybeGenerator
+     * @param  Cloud|StorageUrlGeneratorInterface|null  $s3OrGenerator
      */
     public function __construct($s3OrGenerator = null, ?StorageUrlGeneratorInterface $maybeGenerator = null)
     {
-        if ($s3OrGenerator instanceof StorageUrlGenerator) {
+        if ($s3OrGenerator instanceof StorageUrlGeneratorInterface) {
             $this->urlGenerator = $s3OrGenerator;
             $this->s3 = Storage::disk('s3');
         } else {
             $this->s3 = $s3OrGenerator ?? Storage::disk('s3');
-            $this->urlGenerator = $maybeGenerator ?? new StorageUrlGenerator($this->s3, config('media.cloudfront_domain') ?: null);
+            $cloudfrontDomain = config('media.cloudfront_domain');
+            $this->urlGenerator = $maybeGenerator ?? new StorageUrlGenerator(
+                $this->s3,
+                is_string($cloudfrontDomain) && $cloudfrontDomain !== '' ? $cloudfrontDomain : null,
+            );
         }
 
-        $this->videoPrefix = config('media.video_prefix', 'video-logs');
-        $this->imagePrefix = rtrim(config('media.image_prefix', 'images/vlogs'), '/');
-        $this->cloudfrontDomain = config('media.cloudfront_domain') ?: null;
+        $videoPrefix = config('media.video_prefix', 'video-logs');
+        $imagePrefix = config('media.image_prefix', 'images/vlogs');
+        $cloudfrontDomain = config('media.cloudfront_domain');
+        $this->videoPrefix = is_string($videoPrefix) ? $videoPrefix : 'video-logs';
+        $this->imagePrefix = rtrim(is_string($imagePrefix) ? $imagePrefix : 'images/vlogs', '/');
+        $this->cloudfrontDomain = is_string($cloudfrontDomain) && $cloudfrontDomain !== '' ? $cloudfrontDomain : null;
     }
 
     /**
@@ -55,8 +58,10 @@ class VideoLogService
     {
         // Decide whether to use S3: use S3 when the default disk is 's3', or when an AWS_BUCKET is configured
         // and we're not in testing. This mirrors the previous controller logic.
-        $defaultDisk = (string) config('filesystems.default');
-        $s3Bucket = (string) config('filesystems.disks.s3.bucket');
+        $configuredDefaultDisk = config('filesystems.default');
+        $configuredS3Bucket = config('filesystems.disks.s3.bucket');
+        $defaultDisk = is_string($configuredDefaultDisk) ? $configuredDefaultDisk : '';
+        $s3Bucket = is_string($configuredS3Bucket) ? $configuredS3Bucket : '';
         $useS3 = ($defaultDisk === 's3') || (! app()->environment('testing') && $s3Bucket !== '');
 
         if (! $useS3) {

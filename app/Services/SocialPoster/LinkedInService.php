@@ -14,8 +14,10 @@ class LinkedInService
 
     public function post(string $content, ?string $mediaUrl = null): void
     {
-        $accessToken = (string) config('social.linkedin.access_token');
-        $authorUrn = (string) config('social.linkedin.author_urn');
+        $configuredAccessToken = config('social.linkedin.access_token');
+        $configuredAuthorUrn = config('social.linkedin.author_urn');
+        $accessToken = is_string($configuredAccessToken) ? $configuredAccessToken : '';
+        $authorUrn = is_string($configuredAuthorUrn) ? $configuredAuthorUrn : '';
 
         if (empty($accessToken) || empty($authorUrn)) {
             throw new \RuntimeException('LinkedIn credentials are not fully configured (LINKEDIN_ACCESS_TOKEN, LINKEDIN_AUTHOR_URN).');

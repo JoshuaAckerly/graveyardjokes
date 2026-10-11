@@ -13,8 +13,10 @@ class LinkedInAuthorize extends Command
 
     public function handle(): int
     {
-        $clientId = (string) config('services.linkedin.client_id', '');
-        $clientSecret = (string) config('services.linkedin.client_secret', '');
+        $configuredClientId = config('services.linkedin.client_id', '');
+        $configuredClientSecret = config('services.linkedin.client_secret', '');
+        $clientId = is_string($configuredClientId) ? $configuredClientId : '';
+        $clientSecret = is_string($configuredClientSecret) ? $configuredClientSecret : '';
 
         if ($clientId === '' || $clientSecret === '') {
             $this->error('LINKEDIN_CLIENT_ID and LINKEDIN_CLIENT_SECRET must be set in your .env before running this command.');
@@ -46,7 +48,7 @@ class LinkedInAuthorize extends Command
         /** @var string $code */
         $code = $this->ask('Step 2 — Paste the authorization code here');
 
-        if (! is_string($code) || trim($code) === '') {
+        if (trim($code) === '') {
             $this->error('No authorization code provided.');
 
             return self::FAILURE;
@@ -86,6 +88,7 @@ class LinkedInAuthorize extends Command
         $authorUrn = is_string($personId) ? "urn:li:person:{$personId}" : null;
 
         $expiresIn = $response->json('expires_in', 5184000); // default 60 days
+        $expiresIn = is_numeric($expiresIn) ? (float) $expiresIn : 5184000;
         $expiryDays = (int) round($expiresIn / 86400);
 
         $this->newLine();

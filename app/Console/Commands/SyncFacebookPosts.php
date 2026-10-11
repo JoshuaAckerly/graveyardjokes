@@ -24,13 +24,13 @@ class SyncFacebookPosts extends Command
             ?? config('services.facebook.user_access_token');
         $pageId = config('services.facebook.page_id');
 
-        if (empty($token)) {
-            $this->error('FACEBOOK_PAGE_ACCESS_TOKEN or FACEBOOK_USER_ACCESS_TOKEN is not set.');
+        if (! is_string($token) || $token === '') {
+            $this->error('FACEBOOK_PAGE_ACCESS_TOKEN or FACEBOOK_USER_ACCESS_TOKEN must be set to a non-empty string.');
 
             return self::FAILURE;
         }
 
-        if (empty($pageId)) {
+        if (! is_string($pageId) || $pageId === '') {
             // Auto-discover the page ID from the user token
             $pageId = $this->discoverPageId($token);
             if (! $pageId) {
@@ -42,7 +42,7 @@ class SyncFacebookPosts extends Command
 
             // Exchange for a page-scoped token for better permissions
             $pageToken = $this->getPageToken($token, $pageId);
-            if ($pageToken) {
+            if (is_string($pageToken) && $pageToken !== '') {
                 $token = $pageToken;
             }
         }
@@ -61,7 +61,14 @@ class SyncFacebookPosts extends Command
             'type' => 'uploaded',
         ], $token, $limit);
 
-        foreach ($photos as $photo) {
+        foreach ($photos as $rawPhoto) {
+            $photo = $this->normalizePhoto($rawPhoto);
+            if ($photo === null) {
+                $skipped++;
+
+                continue;
+            }
+
             $url = $this->canonicalPhotoUrl($photo['id'], $photo['link'] ?? null);
 
             if (! $dryRun && FacebookGalleryPost::where('post_url', $url)->exists()) {
@@ -71,9 +78,9 @@ class SyncFacebookPosts extends Command
             }
 
             // Pick the largest image available
-            $images = $photo['images'] ?? [];
-            usort($images, fn ($a, $b) => ($b['width'] ?? 0) <=> ($a['width'] ?? 0));
-            $thumbnailUrl = $images[0]['source'] ?? null;
+            $images = $photo['images'];
+            usort($images, fn ($a, $b) => $b['width'] <=> $a['width']);
+            $thumbnailUrl = $images[0]['source'];
 
             $description = $photo['name'] ?? null;
 
@@ -89,7 +96,7 @@ class SyncFacebookPosts extends Command
                 'title' => $description ? \Str::limit($description, 100) : 'Facebook Photo',
                 'description' => $description,
                 'thumbnail_url' => $thumbnailUrl,
-                'posted_at' => isset($photo['created_time']) ? date('Y-m-d', strtotime($photo['created_time'])) : null,
+                'posted_at' => $this->formatPostedAt($photo['created_time']),
                 'is_active' => true,
                 'sort_order' => 0,
             ]);
@@ -107,7 +114,14 @@ class SyncFacebookPosts extends Command
             'fields' => 'id,message,created_time,full_picture,permalink_url',
         ], $token, $limit);
 
-        foreach ($posts as $post) {
+        foreach ($posts as $rawPost) {
+            $post = $this->normalizeFeedPost($rawPost);
+            if ($post === null) {
+                $feedSkipped++;
+
+                continue;
+            }
+
             $message = $post['message'] ?? null;
             $picture = $post['full_picture'] ?? null;
 
@@ -143,7 +157,7 @@ class SyncFacebookPosts extends Command
                 'title' => $title,
                 'description' => $message,
                 'thumbnail_url' => $picture,
-                'posted_at' => isset($post['created_time']) ? date('Y-m-d', strtotime($post['created_time'])) : null,
+                'posted_at' => $this->formatPostedAt($post['created_time']),
                 'is_active' => true,
                 'sort_order' => 0,
             ]);
@@ -196,6 +210,10 @@ class SyncFacebookPosts extends Command
             : "https://www.facebook.com/photo/?fbid={$fbid}";
     }
 
+    /**
+     * @param  array<string, scalar|null>  $params
+     * @return list<mixed>
+     */
     private function fetchPaged(Client $client, string $endpoint, array $params, string $token, int $limit): array
     {
         $results = [];
@@ -208,13 +226,36 @@ class SyncFacebookPosts extends Command
                 $response = $client->get($url, ['query' => $params]);
                 $body = json_decode((string) $response->getBody(), true);
 
-                if (isset($body['error'])) {
-                    $this->warn("Graph API error: {$body['error']['message']}");
+                if (! is_array($body)) {
+                    $this->warn('Graph API returned malformed JSON or a non-object response.');
                     break;
                 }
 
-                $results = array_merge($results, $body['data'] ?? []);
-                $url = $body['paging']['next'] ?? null;
+                if (isset($body['error'])) {
+                    $error = is_array($body['error']) ? $body['error'] : [];
+                    $message = is_string($error['message'] ?? null) ? $error['message'] : 'unknown error';
+                    $this->warn("Graph API error: {$message}");
+                    break;
+                }
+
+                $data = $body['data'] ?? null;
+                if (! is_array($data) || ! array_is_list($data)) {
+                    $this->warn('Graph API returned a malformed data field; expected an array of records.');
+                    break;
+                }
+
+                $results = array_merge($results, $data);
+                $paging = $body['paging'] ?? null;
+                if ($paging !== null && ! is_array($paging)) {
+                    $this->warn('Graph API returned a malformed paging field; stopping pagination.');
+                    break;
+                }
+                $next = is_array($paging) ? ($paging['next'] ?? null) : null;
+                if ($next !== null && ! is_string($next)) {
+                    $this->warn('Graph API returned a non-string next-page URL; stopping pagination.');
+                    break;
+                }
+                $url = $next;
                 $params = []; // next page URL already has all params
             } catch (RequestException $e) {
                 $this->error('Request failed: '.$e->getMessage());
@@ -225,6 +266,122 @@ class SyncFacebookPosts extends Command
         return array_slice($results, 0, $limit);
     }
 
+    /**
+     * @return array{id: string, name: ?string, created_time: ?string, link: ?string, images: list<array{width: int, source: ?string}>}|null
+     */
+    private function normalizePhoto(mixed $photo): ?array
+    {
+        if (! is_array($photo)) {
+            $this->warn('Skipping malformed Facebook photo: expected an object.');
+
+            return null;
+        }
+
+        $id = $photo['id'] ?? null;
+        if (! is_string($id) || $id === '') {
+            $this->warn('Skipping malformed Facebook photo without a string id.');
+
+            return null;
+        }
+
+        $name = $this->optionalString($photo, 'name', 'Facebook photo');
+        $createdTime = $this->optionalString($photo, 'created_time', 'Facebook photo');
+        $link = $this->optionalString($photo, 'link', 'Facebook photo');
+        $images = [];
+        if (isset($photo['images'])) {
+            if (! is_array($photo['images']) || ! array_is_list($photo['images'])) {
+                $this->warn("Ignoring malformed images for Facebook photo {$id}.");
+            } else {
+                foreach ($photo['images'] as $image) {
+                    if (! is_array($image)) {
+                        $this->warn("Ignoring malformed image for Facebook photo {$id}.");
+
+                        continue;
+                    }
+                    $width = $image['width'] ?? null;
+                    if (! is_int($width)) {
+                        $this->warn("Ignoring Facebook photo image without an integer width for {$id}.");
+
+                        continue;
+                    }
+                    $images[] = [
+                        'width' => $width,
+                        'source' => $this->optionalString($image, 'source', 'Facebook photo image'),
+                    ];
+                }
+            }
+        }
+
+        return [
+            'id' => $id,
+            'name' => $name,
+            'created_time' => $createdTime,
+            'link' => $link,
+            'images' => $images,
+        ];
+    }
+
+    /**
+     * @return array{id: string, message: ?string, created_time: ?string, full_picture: ?string, permalink_url: ?string}|null
+     */
+    private function normalizeFeedPost(mixed $post): ?array
+    {
+        if (! is_array($post)) {
+            $this->warn('Skipping malformed Facebook feed post: expected an object.');
+
+            return null;
+        }
+
+        $id = $post['id'] ?? null;
+        if (! is_string($id) || $id === '') {
+            $this->warn('Skipping malformed Facebook feed post without a string id.');
+
+            return null;
+        }
+
+        return [
+            'id' => $id,
+            'message' => $this->optionalString($post, 'message', 'Facebook feed post'),
+            'created_time' => $this->optionalString($post, 'created_time', 'Facebook feed post'),
+            'full_picture' => $this->optionalString($post, 'full_picture', 'Facebook feed post'),
+            'permalink_url' => $this->optionalString($post, 'permalink_url', 'Facebook feed post'),
+        ];
+    }
+
+    /**
+     * @param  array<string|int, mixed>  $data
+     */
+    private function optionalString(array $data, string $key, string $context): ?string
+    {
+        $value = $data[$key] ?? null;
+        if ($value === null) {
+            return null;
+        }
+        if (! is_string($value)) {
+            $this->warn("Ignoring non-string {$key} in {$context}.");
+
+            return null;
+        }
+
+        return $value;
+    }
+
+    private function formatPostedAt(?string $createdTime): ?string
+    {
+        if ($createdTime === null) {
+            return null;
+        }
+
+        $timestamp = strtotime($createdTime);
+        if ($timestamp === false) {
+            $this->warn('Ignoring malformed created_time in Facebook API response.');
+
+            return null;
+        }
+
+        return date('Y-m-d', $timestamp);
+    }
+
     private function discoverPageId(string $userToken): ?string
     {
         $client = new Client(['timeout' => 10, 'http_errors' => false]);
@@ -233,8 +390,26 @@ class SyncFacebookPosts extends Command
                 'query' => ['access_token' => $userToken, 'fields' => 'id,name'],
             ]);
             $body = json_decode((string) $response->getBody(), true);
+            if (! is_array($body)) {
+                $this->warn('Facebook page discovery returned a malformed response.');
 
-            return $body['data'][0]['id'] ?? null;
+                return null;
+            }
+            $pages = $body['data'] ?? null;
+            if (! is_array($pages) || ! array_is_list($pages)) {
+                $this->warn('Facebook page discovery returned a malformed data field.');
+
+                return null;
+            }
+            $firstPage = $pages[0] ?? null;
+            if (! is_array($firstPage)) {
+                $this->warn('Facebook page discovery returned a malformed page record.');
+
+                return null;
+            }
+            $pageId = $firstPage['id'] ?? null;
+
+            return is_string($pageId) && $pageId !== '' ? $pageId : null;
         } catch (\Throwable) {
             return null;
         }
@@ -248,12 +423,31 @@ class SyncFacebookPosts extends Command
                 'query' => ['access_token' => $userToken, 'fields' => 'id,access_token'],
             ]);
             $body = json_decode((string) $response->getBody(), true);
-            foreach ($body['data'] ?? [] as $page) {
-                if ($page['id'] === $pageId) {
-                    return $page['access_token'] ?? null;
+            if (! is_array($body)) {
+                $this->warn('Facebook page-token response was malformed.');
+
+                return null;
+            }
+            $pages = $body['data'] ?? null;
+            if (! is_array($pages) || ! array_is_list($pages)) {
+                $this->warn('Facebook page-token response contained malformed page data.');
+
+                return null;
+            }
+            foreach ($pages as $page) {
+                if (! is_array($page)) {
+                    $this->warn('Ignoring malformed page in Facebook page-token response.');
+
+                    continue;
+                }
+                if (($page['id'] ?? null) === $pageId) {
+                    $pageToken = $page['access_token'] ?? null;
+
+                    return is_string($pageToken) && $pageToken !== '' ? $pageToken : null;
                 }
             }
-        } catch (\Throwable) {
+        } catch (\Throwable $e) {
+            $this->warn('Could not retrieve Facebook page token: '.$e->getMessage());
         }
 
         return null;

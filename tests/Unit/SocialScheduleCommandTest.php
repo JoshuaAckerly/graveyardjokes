@@ -4,6 +4,7 @@ namespace Tests\Unit;
 
 use App\Models\SocialScheduledPost;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Testing\PendingCommand;
 use Tests\TestCase;
 
 class SocialScheduleCommandTest extends TestCase
@@ -188,11 +189,17 @@ class SocialScheduleCommandTest extends TestCase
             'status' => 'pending',
         ]);
 
-        $this->artisan('social:schedule', [
+        $result = $this->artisan('social:schedule', [
             '--platform' => 'discord',
             '--content' => 'Weekly update',
             '--at' => now()->addDays(7)->toDateTimeString(),
-        ])->assertExitCode(0);
+        ]);
+        if ($result instanceof PendingCommand) {
+            $result->run();
+            $result->assertExitCode(0);
+        } else {
+            $this->assertSame(0, $result);
+        }
 
         $this->assertDatabaseCount('social_scheduled_posts', 2);
     }

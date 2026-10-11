@@ -32,6 +32,9 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
+        $configuredAdminEmail = config('app.admin_email');
+        $adminEmail = is_string($configuredAdminEmail) ? strtolower($configuredAdminEmail) : '';
+
         /** @var array{name: string, email: string, password: string} $validated */
         $validated = $request->validate([
             'name' => 'required|string|max:255',
@@ -42,7 +45,7 @@ class RegisteredUserController extends Controller
                 'email',
                 'max:255',
                 'unique:'.User::class,
-                Rule::notIn([strtolower((string) config('app.admin_email'))]),
+                Rule::notIn([$adminEmail]),
             ],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);

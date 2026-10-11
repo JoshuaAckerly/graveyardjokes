@@ -5,10 +5,11 @@ namespace App\Http\Controllers\Studio;
 use App\Http\Controllers\Controller;
 use App\Models\BlogPost;
 use Inertia\Inertia;
+use Inertia\Response;
 
 class BlogPostController extends Controller
 {
-    public function index()
+    public function index(): Response
     {
         $posts = BlogPost::published()
             ->orderByDesc('published_at')
@@ -20,7 +21,7 @@ class BlogPostController extends Controller
         ]);
     }
 
-    public function show(string $slug)
+    public function show(string $slug): Response
     {
         $post = BlogPost::published()
             ->where('slug', $slug)

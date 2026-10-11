@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use App\Services\IllustrationService;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Storage;
+use Symfony\Component\Console\Command\Command as SymfonyCommand;
 
 class GenerateGifThumbnails extends Command
 {
@@ -25,7 +26,7 @@ class GenerateGifThumbnails extends Command
     /**
      * Execute the console command.
      */
-    public function handle()
+    public function handle(): int
     {
         $service = new IllustrationService;
         $illustrations = $service->list();
@@ -36,7 +37,8 @@ class GenerateGifThumbnails extends Command
         $thumbnailCount = 0;
 
         foreach ($illustrations as $illustration) {
-            $filename = basename(parse_url($illustration, PHP_URL_PATH) ?: '');
+            $parsedPath = parse_url($illustration, PHP_URL_PATH);
+            $filename = basename(is_string($parsedPath) ? $parsedPath : '');
 
             if (! preg_match('/\.gif$/i', $filename)) {
                 continue;
@@ -44,6 +46,9 @@ class GenerateGifThumbnails extends Command
 
             $gifCount++;
             $thumbnailFilename = preg_replace('/\.gif$/i', '_thumb.jpg', $filename);
+            if (! is_string($thumbnailFilename)) {
+                continue;
+            }
 
             // Check if thumbnail already exists
             $thumbnailPath = str_replace($filename, $thumbnailFilename, $this->getS3Path($illustration));
@@ -65,13 +70,15 @@ class GenerateGifThumbnails extends Command
         }
 
         $this->info("Processed {$gifCount} GIFs, generated {$thumbnailCount} thumbnails");
+
+        return SymfonyCommand::SUCCESS;
     }
 
     private function getS3Path(string $url): string
     {
         // Extract the path from CloudFront/S3 URL
         $parsed = parse_url($url);
-        $path = $parsed['path'] ?? '';
+        $path = is_array($parsed) && is_string($parsed['path'] ?? null) ? $parsed['path'] : '';
 
         // Remove leading slash if present
         return ltrim($path, '/');
@@ -104,15 +111,20 @@ class GenerateGifThumbnails extends Command
             $maxHeight = 300;
 
             if ($width > $height) {
-                $newWidth = min($width, $maxWidth);
-                $newHeight = intval($height * ($newWidth / $width));
+                $newWidth = max(1, min($width, $maxWidth));
+                $newHeight = max(1, intval($height * ($newWidth / $width)));
             } else {
-                $newHeight = min($height, $maxHeight);
-                $newWidth = intval($width * ($newHeight / $height));
+                $newHeight = max(1, min($height, $maxHeight));
+                $newWidth = max(1, intval($width * ($newHeight / $height)));
             }
 
             // Create thumbnail
             $thumbnail = imagecreatetruecolor($newWidth, $newHeight);
+            if ($thumbnail === false) {
+                imagedestroy($image);
+
+                return false;
+            }
 
             // Enable alpha blending for better quality
             imagealphablending($thumbnail, false);
@@ -125,6 +137,12 @@ class GenerateGifThumbnails extends Command
             ob_start();
             imagejpeg($thumbnail, null, 85);
             $jpegContent = ob_get_clean();
+            if (! is_string($jpegContent)) {
+                imagedestroy($image);
+                imagedestroy($thumbnail);
+
+                return false;
+            }
 
             // Upload to S3
             $result = Storage::disk('s3')->put($thumbnailPath, $jpegContent, 'public');
@@ -133,7 +151,7 @@ class GenerateGifThumbnails extends Command
             imagedestroy($image);
             imagedestroy($thumbnail);
 
-            return $result;
+            return $result !== false;
 
         } catch (\Exception $e) {
             $this->error('Error generating thumbnail: '.$e->getMessage());

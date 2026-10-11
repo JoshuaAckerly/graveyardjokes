@@ -23,6 +23,10 @@ class InstagramPost extends Model
         'posted_at' => 'datetime',
     ];
 
+    /**
+     * @param  Builder<InstagramPost>  $query
+     * @return Builder<InstagramPost>
+     */
     public function scopeActive(Builder $query): Builder
     {
         return $query->where('is_active', true);
