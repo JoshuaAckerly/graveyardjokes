@@ -16,10 +16,22 @@ GitHub repos `auth-system` and `studio` archived.
 ## Pending — after a few days' soak (destructive / irreversible)
 - [ ] **DROP DATABASE `auth_system`** — the point of no return. Do only AFTER real users
       have logged in successfully against the graveyardjokes DB and no issues surface.
-      Before dropping: verify backup is restorable + take a fresh final dump.
+      Before dropping: complete an isolated restore test of the fresh final dump below.
 - [ ] Remove DNS record for `auth-system.graveyardjokes.com` (currently harmless; redirects).
 - [ ] Optional tidy: collapse the `auth` DB connection into the default connection and
       remove `protected $connection = 'auth'` from User/PageSeo/SiteVisit + `config/auth.php`.
+
+## Fresh final dump
+
+- [x] Final dump taken 2026-10-11 18:33 UTC from production database `auth_system`.
+- File: `/var/www/backups/auth-system-retirement-20261011/auth_system.final_20261011T1833Z.sql.gz`
+- Size: 3,553,598 bytes (about 3.39 MiB compressed).
+- SHA-256: `a5875d84a7c1479d08cc45a1c720a8c29f870283882da72c73438a493bc3ca16`
+- Integrity: `gzip -t` passed; dump header identifies `auth_system`; 16 table
+  definitions and 45 insert statements are present.
+- Permissions: backup file `0600`, containing directory `0700` (`ubuntu:ubuntu`).
+- Restore has **not** been tested. Keep `auth_system` until a restore test into an
+  isolated database succeeds and the production soak period is accepted.
 
 ## Backups / rollback path
 - DB dumps + old .env + nginx config backup:
