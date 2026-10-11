@@ -10,10 +10,7 @@ const Privacy: React.FC = () => {
                 <p>
                     <strong>Effective Date:</strong> September 18, 2026
                 </p>
-                <p>
-                    This Privacy Policy explains how we collect, use, and protect information when you visit Graveyard Jokes
-                    (graveyardjokes.com).
-                </p>
+                <p>This Privacy Policy explains how we collect, use, and protect information when you visit Graveyard Jokes (graveyardjokes.com).</p>
                 <h2 className="text-xl font-semibold">1. Information We Collect</h2>
                 <p>We automatically collect certain information when you visit our site:</p>
                 <ul className="list-inside list-disc">

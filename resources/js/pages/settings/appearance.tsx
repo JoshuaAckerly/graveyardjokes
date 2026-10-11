@@ -23,9 +23,15 @@ export default function AppearanceSettings() {
                     <h1 className="mb-8 font-serif text-4xl font-bold">Appearance</h1>
 
                     <div className="mb-6 flex gap-4 text-sm text-white/50">
-                        <Link href="/settings/profile" className="hover:text-white">Profile</Link>
-                        <Link href="/settings/password" className="hover:text-white">Password</Link>
-                        <Link href="/settings/appearance" className="text-[var(--primary)]">Appearance</Link>
+                        <Link href="/settings/profile" className="hover:text-white">
+                            Profile
+                        </Link>
+                        <Link href="/settings/password" className="hover:text-white">
+                            Password
+                        </Link>
+                        <Link href="/settings/appearance" className="text-[var(--primary)]">
+                            Appearance
+                        </Link>
                     </div>
 
                     <div className="rounded-lg border border-white/10 bg-white/5 p-6">

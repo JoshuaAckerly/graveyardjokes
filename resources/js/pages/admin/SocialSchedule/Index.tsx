@@ -24,7 +24,11 @@ const statusOptions = ['all', 'pending', 'processing', 'posted', 'failed', 'canc
 function formatDate(value: string | null): string {
     if (!value) return 'Not set';
     return new Intl.DateTimeFormat(undefined, {
-        month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric', minute: '2-digit',
+        month: 'short',
+        day: 'numeric',
+        year: 'numeric',
+        hour: 'numeric',
+        minute: '2-digit',
     }).format(new Date(value));
 }
 
@@ -50,8 +54,12 @@ export default function SocialScheduleIndex({ posts, stats }: Props) {
     }, [posts, query, statusFilter]);
 
     const statCards: [string, number][] = [
-        ['Total', stats.total], ['Pending', stats.pending], ['Posted', stats.posted],
-        ['Failed', stats.failed], ['Processing', stats.processing], ['Due now', stats.overdue_pending],
+        ['Total', stats.total],
+        ['Pending', stats.pending],
+        ['Posted', stats.posted],
+        ['Failed', stats.failed],
+        ['Processing', stats.processing],
+        ['Due now', stats.overdue_pending],
     ];
 
     return (
@@ -86,7 +94,11 @@ export default function SocialScheduleIndex({ posts, stats }: Props) {
                             onChange={(e) => setStatusFilter(e.target.value)}
                             className="rounded border border-white/15 bg-white/5 px-3 py-2 text-sm text-white outline-none focus:border-[var(--primary)]"
                         >
-                            {statusOptions.map((s) => <option key={s} value={s} className="bg-[var(--color-foreground)]">{s}</option>)}
+                            {statusOptions.map((s) => (
+                                <option key={s} value={s} className="bg-[var(--color-foreground)]">
+                                    {s}
+                                </option>
+                            ))}
                         </select>
                     </div>
 

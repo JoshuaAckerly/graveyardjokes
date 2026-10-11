@@ -32,7 +32,9 @@ export default function ForgotPassword({ status }: Props) {
 
                     <form onSubmit={submit} className="flex flex-col gap-4">
                         <div>
-                            <label htmlFor="email" className="mb-1 block text-sm text-white/70">Email</label>
+                            <label htmlFor="email" className="mb-1 block text-sm text-white/70">
+                                Email
+                            </label>
                             <input
                                 id="email"
                                 type="email"
@@ -43,13 +45,19 @@ export default function ForgotPassword({ status }: Props) {
                             />
                             {errors.email && <p className="mt-1 text-sm text-red-400">{errors.email}</p>}
                         </div>
-                        <button type="submit" disabled={processing} className="rounded-lg bg-[var(--primary)] px-6 py-3 font-semibold text-black transition hover:opacity-90 disabled:opacity-60">
+                        <button
+                            type="submit"
+                            disabled={processing}
+                            className="rounded-lg bg-[var(--primary)] px-6 py-3 font-semibold text-black transition hover:opacity-90 disabled:opacity-60"
+                        >
                             Email reset link
                         </button>
                     </form>
 
                     <div className="text-center text-sm text-white/50">
-                        <Link href="/login" className="hover:text-[var(--primary)]">Back to log in</Link>
+                        <Link href="/login" className="hover:text-[var(--primary)]">
+                            Back to log in
+                        </Link>
                     </div>
                 </section>
             </>

@@ -254,9 +254,8 @@ export default function ContactPricing() {
                     <section className="mb-10">
                         <h2 className="mb-3 text-2xl font-bold text-white">Get in touch</h2>
                         <p className="text-white/70">
-                            Graveyard Jokes is a small songwriting project. If you want to say hello, share something, or just
-                            reach out, the form above or any of the links below will get to us. No shows or recordings yet —
-                            more will show up here as it comes.
+                            Graveyard Jokes is a small songwriting project. If you want to say hello, share something, or just reach out, the form
+                            above or any of the links below will get to us. No shows or recordings yet — more will show up here as it comes.
                         </p>
                     </section>
                 </div>

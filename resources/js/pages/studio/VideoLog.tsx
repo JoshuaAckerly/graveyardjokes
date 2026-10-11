@@ -120,9 +120,7 @@ export default function VideoLog() {
                     >
                         <p className="mb-3 font-serif text-xs tracking-[0.35em] text-[var(--primary)] uppercase">Studio</p>
                         <h1 className="font-serif text-5xl font-bold text-white">Video Log</h1>
-                        <p className="mt-4 font-serif text-lg text-white/60">
-                            A chronological log of short studio updates and process videos.
-                        </p>
+                        <p className="mt-4 font-serif text-lg text-white/60">A chronological log of short studio updates and process videos.</p>
                     </motion.div>
 
                     {items.length === 0 ? (
@@ -145,11 +143,7 @@ export default function VideoLog() {
                         aria-modal="true"
                         aria-label={selected.title}
                     >
-                        <div
-                            className="absolute inset-0 bg-black/70 backdrop-blur-sm"
-                            onClick={() => setSelected(null)}
-                            aria-hidden="true"
-                        />
+                        <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" onClick={() => setSelected(null)} aria-hidden="true" />
 
                         <div className="relative z-10 mx-auto w-full max-w-lg rounded-lg border border-white/10 bg-[#0e1a12] p-5 text-white shadow-2xl">
                             <div className="flex items-start justify-between gap-4">

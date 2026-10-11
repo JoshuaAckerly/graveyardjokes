@@ -24,9 +24,7 @@ export default function GuestPromptModal() {
     const props = page.props as { auth?: { user?: unknown } };
     const isGuest = !props.auth?.user;
     const currentPath = (page.url ?? '').split('?')[0];
-    const isSuppressed = SUPPRESSED_PATH_PREFIXES.some(
-        (prefix) => currentPath === prefix || currentPath.startsWith(prefix + '/'),
-    );
+    const isSuppressed = SUPPRESSED_PATH_PREFIXES.some((prefix) => currentPath === prefix || currentPath.startsWith(prefix + '/'));
 
     useEffect(() => {
         if (!isGuest) return;
@@ -74,8 +72,8 @@ export default function GuestPromptModal() {
                     Want to follow along?
                 </h2>
                 <p className="mb-6 text-white/70">
-                    Graveyard Jokes is just getting started. Find us on socials, or create a free account to get updates
-                    when there's something new to share.
+                    Graveyard Jokes is just getting started. Find us on socials, or create a free account to get updates when there's something new to
+                    share.
                 </p>
 
                 <div className="flex flex-col gap-3">

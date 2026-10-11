@@ -12,12 +12,7 @@ export default function About() {
 
                 <section className="relative z-0 mx-auto flex max-w-3xl flex-col items-center gap-12 rounded-lg bg-[var(--color-foreground)] px-6 py-20 text-white shadow-lg sm:px-10">
                     {/* Hero */}
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.8 }}
-                        className="text-center"
-                    >
+                    <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="text-center">
                         <p className="mb-4 font-serif text-xs tracking-[0.35em] text-[var(--primary)] uppercase">About</p>
                         <h1 className="font-serif text-5xl leading-tight font-bold text-white sm:text-6xl">Graveyard Jokes</h1>
                         <p className="mx-auto mt-6 max-w-xl font-serif text-lg leading-relaxed text-white/70">
@@ -28,17 +23,16 @@ export default function About() {
                     {/* Story */}
                     <div className="w-full max-w-2xl space-y-8">
                         <Reveal as="p" className="text-base leading-relaxed text-white/70 sm:text-lg">
-                            Graveyard Jokes is a small, low-key thing. Two of us — a writing team — sit down and put songs
-                            together. Acoustic, unhurried, written for their own sake before anything else.
+                            Graveyard Jokes is a small, low-key thing. Two of us — a writing team — sit down and put songs together. Acoustic,
+                            unhurried, written for their own sake before anything else.
                         </Reveal>
                         <Reveal as="p" delay={0.05} className="text-base leading-relaxed text-white/70 sm:text-lg">
-                            There are no shows yet, and nothing recorded to share. That is honest, not modest — this is the
-                            beginning of it. When there is something worth hearing, this is where it will live.
+                            There are no shows yet, and nothing recorded to share. That is honest, not modest — this is the beginning of it. When
+                            there is something worth hearing, this is where it will live.
                         </Reveal>
                         <Reveal as="p" delay={0.1} className="text-base leading-relaxed text-white/70 sm:text-lg">
-                            Alongside the music, Graveyard Jokes is also home to a few games and small things being built along
-                            the way. It is all part of the same creative habit — make things, keep going, share when it is
-                            ready.
+                            Alongside the music, Graveyard Jokes is also home to a few games and small things being built along the way. It is all
+                            part of the same creative habit — make things, keep going, share when it is ready.
                         </Reveal>
                     </div>
 

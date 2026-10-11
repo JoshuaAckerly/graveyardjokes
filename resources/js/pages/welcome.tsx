@@ -1,6 +1,6 @@
+import InertiaHead from '@/Components/InertiaHead';
 import Preloader from '@/Components/Preloader';
 import Reveal from '@/Components/Reveal';
-import InertiaHead from '@/Components/InertiaHead';
 import MainLayout from '@/Layouts/MainLayout';
 import { useGSAP } from '@gsap/react';
 import { Link } from '@inertiajs/react';
@@ -195,8 +195,8 @@ export default function Home(): JSX.Element {
                             Two people writing songs together, one at a time.
                         </Reveal>
                         <Reveal as="p" delay={0.1} className="mx-auto mt-6 max-w-xl text-base leading-relaxed text-white/60 sm:text-lg">
-                            No shows, no recordings yet — just the writing, and a few games and things being built along the
-                            way. More will show up here as it comes.
+                            No shows, no recordings yet — just the writing, and a few games and things being built along the way. More will show up
+                            here as it comes.
                         </Reveal>
                         <Reveal delay={0.15} className="mt-10">
                             <Link

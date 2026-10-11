@@ -8,13 +8,33 @@ interface Stats {
     uniqueIpsLast30: number;
     loggedInLast30: number;
 }
-interface DailyPoint { date: string; count: number }
-interface PageRow { path: string; count: number }
-interface CityRow { city: string | null; country: string | null; count: number }
-interface HostRow { host: string | null; count: number }
+interface DailyPoint {
+    date: string;
+    count: number;
+}
+interface PageRow {
+    path: string;
+    count: number;
+}
+interface CityRow {
+    city: string | null;
+    country: string | null;
+    count: number;
+}
+interface HostRow {
+    host: string | null;
+    count: number;
+}
 interface RecentVisit {
-    id: number; user_name: string | null; host: string | null; ip_address: string | null;
-    city: string | null; country: string | null; path: string | null; browser: string | null; visited_at: string | null;
+    id: number;
+    user_name: string | null;
+    host: string | null;
+    ip_address: string | null;
+    city: string | null;
+    country: string | null;
+    path: string | null;
+    browser: string | null;
+    visited_at: string | null;
 }
 interface Props {
     stats: Stats;
@@ -34,8 +54,11 @@ function fmtDate(v: string | null): string {
 export default function AnalyticsIndex({ stats, dailyChart, topPages, topCities, visitsByHost, recentVisits, socialSummary }: Props) {
     const maxDaily = Math.max(1, ...dailyChart.map((d) => d.count));
     const statCards: [string, number][] = [
-        ['Total visits', stats.totalVisits], ['Last 30 days', stats.visitsLast30Days], ['Last 7 days', stats.visitsLast7Days],
-        ['Unique IPs (30d)', stats.uniqueIpsLast30], ['Logged-in (30d)', stats.loggedInLast30],
+        ['Total visits', stats.totalVisits],
+        ['Last 30 days', stats.visitsLast30Days],
+        ['Last 7 days', stats.visitsLast7Days],
+        ['Unique IPs (30d)', stats.uniqueIpsLast30],
+        ['Logged-in (30d)', stats.loggedInLast30],
     ];
     const social = Object.entries(socialSummary ?? {});
 
@@ -68,7 +91,10 @@ export default function AnalyticsIndex({ stats, dailyChart, topPages, topCities,
                         <div className="flex h-32 items-end gap-1">
                             {dailyChart.map((d) => (
                                 <div key={d.date} className="flex flex-1 flex-col items-center gap-1" title={`${d.date}: ${d.count}`}>
-                                    <div className="w-full rounded-t bg-[var(--primary)]" style={{ height: `${(d.count / maxDaily) * 100}%`, minHeight: d.count > 0 ? '2px' : '0' }} />
+                                    <div
+                                        className="w-full rounded-t bg-[var(--primary)]"
+                                        style={{ height: `${(d.count / maxDaily) * 100}%`, minHeight: d.count > 0 ? '2px' : '0' }}
+                                    />
                                     <span className="text-[0.6rem] text-white/30">{d.date.slice(5)}</span>
                                 </div>
                             ))}
@@ -158,7 +184,11 @@ export default function AnalyticsIndex({ stats, dailyChart, topPages, topCities,
                                         </tr>
                                     ))}
                                     {recentVisits.length === 0 && (
-                                        <tr><td colSpan={5} className="py-4 text-center text-white/40">No visits recorded yet.</td></tr>
+                                        <tr>
+                                            <td colSpan={5} className="py-4 text-center text-white/40">
+                                                No visits recorded yet.
+                                            </td>
+                                        </tr>
                                     )}
                                 </tbody>
                             </table>

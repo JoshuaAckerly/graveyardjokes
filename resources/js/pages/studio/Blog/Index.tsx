@@ -53,11 +53,7 @@ export default function BlogIndex({ posts }: Props) {
                                 >
                                     {post.featured_image && (
                                         <Link href={`/studio/blog/${post.slug}`}>
-                                            <img
-                                                src={post.featured_image}
-                                                alt={post.title}
-                                                className="mb-4 h-48 w-full rounded-md object-cover"
-                                            />
+                                            <img src={post.featured_image} alt={post.title} className="mb-4 h-48 w-full rounded-md object-cover" />
                                         </Link>
                                     )}
                                     <div className="mb-2 flex items-center gap-3 text-xs text-white/40">
@@ -70,10 +66,7 @@ export default function BlogIndex({ posts }: Props) {
                                         </Link>
                                     </h2>
                                     {post.excerpt && <p className="mb-4 line-clamp-3 text-sm text-white/60">{post.excerpt}</p>}
-                                    <Link
-                                        href={`/studio/blog/${post.slug}`}
-                                        className="text-sm font-medium text-[var(--primary)] hover:underline"
-                                    >
+                                    <Link href={`/studio/blog/${post.slug}`} className="text-sm font-medium text-[var(--primary)] hover:underline">
                                         Read more →
                                     </Link>
                                 </Reveal>

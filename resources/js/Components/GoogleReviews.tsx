@@ -1,5 +1,5 @@
-import { type Review, type ReviewsResponse, type StarRating } from '@/types/business-profile';
 import { useFetchApi } from '@/hooks/use-fetch-api';
+import { type Review, type ReviewsResponse, type StarRating } from '@/types/business-profile';
 
 const STAR_MAP: Record<StarRating, number> = {
     ONE: 1,

@@ -42,8 +42,8 @@ export default function Studio() {
                         <p className="mb-2 font-serif text-sm tracking-widest text-[var(--accent)] uppercase">Behind the scenes</p>
                         <h1 className="font-serif text-5xl font-extrabold text-[var(--accent)]">The Studio</h1>
                         <p className="mt-4 text-lg text-white/70">
-                            The workspace behind Graveyard Jokes — where the songs get written and the side projects get made.
-                            Vlogs, notes, feeds, and works in progress.
+                            The workspace behind Graveyard Jokes — where the songs get written and the side projects get made. Vlogs, notes, feeds,
+                            and works in progress.
                         </p>
                         <div className="mt-6 flex flex-wrap justify-center gap-4">
                             <Link
