@@ -27,10 +27,7 @@ export default function PackagePaymentGate({ amount, item, packageSlug }: Packag
     return (
         <div className="flex flex-col gap-2">
             <PayPalCheckoutButton amount={amount} item={item} />
-            <Link
-                href={intakeUrl}
-                className="text-center text-xs text-white/40 transition hover:text-white/70"
-            >
+            <Link href={intakeUrl} className="text-center text-xs text-white/40 transition hover:text-white/70">
                 Fill out project questionnaire (optional)
             </Link>
         </div>

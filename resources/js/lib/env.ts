@@ -37,11 +37,7 @@ export interface EnvResolver {
  * @param testDomain       - Optional override for test env, defaults to replacing TLD with '.test'
  * @param localDomain      - Optional override for local env, defaults to replacing TLD with '.test'
  */
-export function createEnvResolver(
-    productionDomain: string,
-    testDomain?: string,
-    localDomain?: string,
-): EnvResolver {
+export function createEnvResolver(productionDomain: string, testDomain?: string, localDomain?: string): EnvResolver {
     const tld = productionDomain.replace(/^[^.]+\./, ''); // 'com' from 'graveyardjokes.com'
     const base = productionDomain.replace(`.${tld}`, ''); // 'graveyardjokes'
 
@@ -67,7 +63,7 @@ export function createEnvResolver(
         // Set VITE_USE_DEV_PORTS=1 to link directly to the Vite/Laravel dev ports instead.
         const useDevPorts = getEnvVar('VITE_USE_DEV_PORTS') === '1';
         const isLocalLike = domain === resolvedLocal || domain === resolvedTest;
-        const port = isLocalLike && useDevPorts ? localPorts[subdomain] ?? '' : '';
+        const port = isLocalLike && useDevPorts ? (localPorts[subdomain] ?? '') : '';
 
         return `${getProtocol()}://${host}${port ? `:${port}` : ''}`;
     };

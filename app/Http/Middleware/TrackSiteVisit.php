@@ -4,10 +4,10 @@ namespace App\Http\Middleware;
 
 use App\Models\SiteVisit;
 use Closure;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Symfony\Component\HttpFoundation\Response;
-use Illuminate\Http\Request;
 
 class TrackSiteVisit
 {

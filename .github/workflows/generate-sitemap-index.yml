@@ -12,6 +12,22 @@ jobs:
       contents: write
     env:
       APP_URL: https://graveyardjokes.com
+      AUTH_DB_HOST: 127.0.0.1
+      AUTH_DB_PORT: 3306
+      AUTH_DB_DATABASE: graveyardjokes_test
+      AUTH_DB_USERNAME: graveyardjokes
+      AUTH_DB_PASSWORD: password
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: password
+          MYSQL_DATABASE: graveyardjokes_test
+          MYSQL_USER: graveyardjokes
+          MYSQL_PASSWORD: password
+        ports:
+          - 3306:3306
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
 
     steps:
       - name: Checkout
@@ -41,9 +57,8 @@ jobs:
       - name: Generate APP_KEY if missing
         run: php artisan key:generate --ansi
 
-      - name: Run migrations (no-op if not configured)
-        run: |
-          php artisan migrate --no-interaction || true
+      - name: Run migrations
+        run: php artisan migrate --no-interaction --force
 
       - name: Generate main sitemap
         run: |

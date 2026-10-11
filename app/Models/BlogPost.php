@@ -30,6 +30,10 @@ class BlogPost extends Model
         ];
     }
 
+    /**
+     * @param  Builder<BlogPost>  $query
+     * @return Builder<BlogPost>
+     */
     public function scopePublished(Builder $query): Builder
     {
         return $query->whereNotNull('published_at')

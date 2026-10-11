@@ -33,32 +33,75 @@ export default function Register() {
 
                     <form onSubmit={submit} className="flex flex-col gap-4">
                         <div>
-                            <label htmlFor="name" className="mb-1 block text-sm text-white/70">Name</label>
-                            <input id="name" type="text" value={data.name} autoComplete="name" onChange={(e) => setData('name', e.target.value)} className={field} />
+                            <label htmlFor="name" className="mb-1 block text-sm text-white/70">
+                                Name
+                            </label>
+                            <input
+                                id="name"
+                                type="text"
+                                value={data.name}
+                                autoComplete="name"
+                                onChange={(e) => setData('name', e.target.value)}
+                                className={field}
+                            />
                             {errors.name && <p className="mt-1 text-sm text-red-400">{errors.name}</p>}
                         </div>
                         <div>
-                            <label htmlFor="email" className="mb-1 block text-sm text-white/70">Email</label>
-                            <input id="email" type="email" value={data.email} autoComplete="username" onChange={(e) => setData('email', e.target.value)} className={field} />
+                            <label htmlFor="email" className="mb-1 block text-sm text-white/70">
+                                Email
+                            </label>
+                            <input
+                                id="email"
+                                type="email"
+                                value={data.email}
+                                autoComplete="username"
+                                onChange={(e) => setData('email', e.target.value)}
+                                className={field}
+                            />
                             {errors.email && <p className="mt-1 text-sm text-red-400">{errors.email}</p>}
                         </div>
                         <div>
-                            <label htmlFor="password" className="mb-1 block text-sm text-white/70">Password</label>
-                            <input id="password" type="password" value={data.password} autoComplete="new-password" onChange={(e) => setData('password', e.target.value)} className={field} />
+                            <label htmlFor="password" className="mb-1 block text-sm text-white/70">
+                                Password
+                            </label>
+                            <input
+                                id="password"
+                                type="password"
+                                value={data.password}
+                                autoComplete="new-password"
+                                onChange={(e) => setData('password', e.target.value)}
+                                className={field}
+                            />
                             {errors.password && <p className="mt-1 text-sm text-red-400">{errors.password}</p>}
                         </div>
                         <div>
-                            <label htmlFor="password_confirmation" className="mb-1 block text-sm text-white/70">Confirm password</label>
-                            <input id="password_confirmation" type="password" value={data.password_confirmation} autoComplete="new-password" onChange={(e) => setData('password_confirmation', e.target.value)} className={field} />
+                            <label htmlFor="password_confirmation" className="mb-1 block text-sm text-white/70">
+                                Confirm password
+                            </label>
+                            <input
+                                id="password_confirmation"
+                                type="password"
+                                value={data.password_confirmation}
+                                autoComplete="new-password"
+                                onChange={(e) => setData('password_confirmation', e.target.value)}
+                                className={field}
+                            />
                             {errors.password_confirmation && <p className="mt-1 text-sm text-red-400">{errors.password_confirmation}</p>}
                         </div>
-                        <button type="submit" disabled={processing} className="mt-2 rounded-lg bg-[var(--primary)] px-6 py-3 font-semibold text-black transition hover:opacity-90 disabled:opacity-60">
+                        <button
+                            type="submit"
+                            disabled={processing}
+                            className="mt-2 rounded-lg bg-[var(--primary)] px-6 py-3 font-semibold text-black transition hover:opacity-90 disabled:opacity-60"
+                        >
                             Create account
                         </button>
                     </form>
 
                     <div className="text-center text-sm text-white/50">
-                        Already have an account? <Link href="/login" className="hover:text-[var(--primary)]">Log in</Link>
+                        Already have an account?{' '}
+                        <Link href="/login" className="hover:text-[var(--primary)]">
+                            Log in
+                        </Link>
                     </div>
                 </section>
             </>

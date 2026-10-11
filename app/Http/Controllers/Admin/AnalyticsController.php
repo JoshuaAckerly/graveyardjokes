@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\SiteVisit;
+use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -39,9 +40,11 @@ class AnalyticsController extends Controller
         $dailyChart = [];
         for ($i = 13; $i >= 0; $i--) {
             $date = $now->copy()->subDays($i)->toDateString();
+            $dailyVisit = $dailyVisits->get($date);
+            $dailyCount = $dailyVisit?->getAttribute('count');
             $dailyChart[] = [
                 'date' => $date,
-                'count' => $dailyVisits->has($date) ? (int) $dailyVisits[$date]->count : 0,
+                'count' => is_numeric($dailyCount) ? (int) $dailyCount : 0,
             ];
         }
 
@@ -79,24 +82,32 @@ class AnalyticsController extends Controller
             ->orderByDesc('created_at')
             ->limit(50)
             ->get()
-            ->map(fn ($v) => [
-                'id' => $v->id,
-                'user_name' => $v->user?->name,
-                'user_email' => $v->user?->email,
-                'host' => $v->host,
-                'ip_address' => $v->ip_address,
-                'city' => $v->city,
-                'region' => $v->region,
-                'country' => $v->country,
-                'path' => $v->path,
-                'browser' => $v->browser,
-                'referer' => $v->referer,
-                'visited_at' => $v->created_at?->toIso8601String(),
-            ]);
+            ->map(static function (SiteVisit $v): array {
+                $user = $v->getRelation('user');
+
+                return [
+                    'id' => $v->id,
+                    'user_name' => $user instanceof User ? $user->name : null,
+                    'user_email' => $user instanceof User ? $user->email : null,
+                    'host' => $v->host,
+                    'ip_address' => $v->ip_address,
+                    'city' => $v->city,
+                    'region' => $v->region,
+                    'country' => $v->country,
+                    'path' => $v->path,
+                    'browser' => $v->browser,
+                    'referer' => $v->referer,
+                    'visited_at' => $v->created_at?->toIso8601String(),
+                ];
+            });
 
         $socialPatterns = ['facebook', 'instagram', 'tiktok', 'twitter', 'x.com', 'linkedin', 'reddit', 'youtube'];
 
-        $detectPlatform = static function (string $referer): string {
+        $detectPlatform = static function (?string $referer): string {
+            if ($referer === null) {
+                return 'Other';
+            }
+
             $r = strtolower($referer);
             if (str_contains($r, 'facebook') || str_contains($r, 'fb.com')) {
                 return 'Facebook';
@@ -137,7 +148,7 @@ class AnalyticsController extends Controller
             ->orderByDesc('created_at')
             ->limit(50)
             ->get()
-            ->map(fn ($v) => [
+            ->map(fn (SiteVisit $v): array => [
                 'platform' => $detectPlatform($v->referer),
                 'referer' => $v->referer,
                 'path' => $v->path,

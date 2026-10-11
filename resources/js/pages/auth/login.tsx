@@ -37,7 +37,9 @@ export default function Login({ canResetPassword = true, status }: Props) {
 
                     <form onSubmit={submit} className="flex flex-col gap-4">
                         <div>
-                            <label htmlFor="email" className="mb-1 block text-sm text-white/70">Email</label>
+                            <label htmlFor="email" className="mb-1 block text-sm text-white/70">
+                                Email
+                            </label>
                             <input
                                 id="email"
                                 type="email"
@@ -49,7 +51,9 @@ export default function Login({ canResetPassword = true, status }: Props) {
                             {errors.email && <p className="mt-1 text-sm text-red-400">{errors.email}</p>}
                         </div>
                         <div>
-                            <label htmlFor="password" className="mb-1 block text-sm text-white/70">Password</label>
+                            <label htmlFor="password" className="mb-1 block text-sm text-white/70">
+                                Password
+                            </label>
                             <input
                                 id="password"
                                 type="password"
@@ -74,8 +78,14 @@ export default function Login({ canResetPassword = true, status }: Props) {
                     </form>
 
                     <div className="flex justify-between text-sm text-white/50">
-                        {canResetPassword && <Link href="/forgot-password" className="hover:text-[var(--primary)]">Forgot password?</Link>}
-                        <Link href="/register" className="hover:text-[var(--primary)]">Create an account</Link>
+                        {canResetPassword && (
+                            <Link href="/forgot-password" className="hover:text-[var(--primary)]">
+                                Forgot password?
+                            </Link>
+                        )}
+                        <Link href="/register" className="hover:text-[var(--primary)]">
+                            Create an account
+                        </Link>
                     </div>
                 </section>
             </>

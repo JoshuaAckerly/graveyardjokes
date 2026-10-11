@@ -34,6 +34,10 @@ class FacebookGalleryPost extends Model
         return 'https://www.facebook.com/plugins/post.php?href='.urlencode($this->post_url).'&width=500&show_text=false';
     }
 
+    /**
+     * @param  Builder<FacebookGalleryPost>  $query
+     * @return Builder<FacebookGalleryPost>
+     */
     public function scopeActive(Builder $query): Builder
     {
         return $query->where('is_active', true);

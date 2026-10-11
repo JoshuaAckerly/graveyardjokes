@@ -6,11 +6,14 @@ use App\Http\Controllers\Controller;
 use App\Models\TikTokVideo;
 use App\Services\VideoLogService;
 use Illuminate\Filesystem\FilesystemAdapter;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
+use Inertia\Response as InertiaResponse;
 
 class VideoLogController extends Controller
 {
@@ -21,12 +24,12 @@ class VideoLogController extends Controller
         $this->videoLogService = $videoLogService;
     }
 
-    public function index()
+    public function index(): InertiaResponse
     {
         return Inertia::render('studio/VideoLog');
     }
 
-    public function api(Request $request)
+    public function api(Request $request): JsonResponse
     {
         $data = Cache::remember('video-log.api', now()->addHours(6), function () {
             $tikTokVideos = TikTokVideo::active()
@@ -39,9 +42,9 @@ class VideoLogController extends Controller
                 return $tikTokVideos->map(fn ($video) => [
                     'id' => $video->id,
                     'title' => $video->title,
-                    'date' => $video->posted_at
-                        ? $video->posted_at->format('Y-m-d')
-                        : $video->created_at->format('Y-m-d'),
+                    'date' => $video->posted_at?->format('Y-m-d')
+                        ?? $video->created_at?->format('Y-m-d')
+                        ?? '',
                     'thumbnail' => $video->thumbnail_url ?? '',
                     'url' => $video->video_url,
                     'embed_url' => $video->embed_url,
@@ -70,7 +73,7 @@ class VideoLogController extends Controller
      *
      * Query param: path (required)
      */
-    public function serve(Request $request)
+    public function serve(Request $request): Response
     {
         // Only expose the proxy outside production to avoid an open S3 read endpoint.
         if (app()->environment('production')) {
@@ -94,8 +97,9 @@ class VideoLogController extends Controller
 
             $mime = 'application/octet-stream';
             try {
-                if (method_exists($disk, 'mimeType')) {
-                    $mime = $disk->mimeType($path) ?: $mime;
+                $detectedMime = $disk->mimeType($path);
+                if (is_string($detectedMime) && $detectedMime !== '') {
+                    $mime = $detectedMime;
                 } else {
                     $ext = strtolower(pathinfo($path, PATHINFO_EXTENSION));
                     $map = [

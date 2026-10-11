@@ -210,10 +210,10 @@ SVG;
             $addresses = [];
 
             foreach ($records ?: [] as $record) {
-                if (isset($record['ip'])) {
+                if (is_string($record['ip'] ?? null)) {
                     $addresses[] = $record['ip'];
                 }
-                if (isset($record['ipv6'])) {
+                if (is_string($record['ipv6'] ?? null)) {
                     $addresses[] = $record['ipv6'];
                 }
             }

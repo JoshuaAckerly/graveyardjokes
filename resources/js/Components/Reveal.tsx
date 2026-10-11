@@ -22,15 +22,7 @@ interface RevealProps {
  * useEffect only) and honors prefers-reduced-motion (renders content visible,
  * no motion).
  */
-const Reveal: React.FC<RevealProps> = ({
-    children,
-    as: Tag = 'div',
-    className = '',
-    from = 'up',
-    delay = 0,
-    distance = 40,
-    duration = 0.9,
-}) => {
+const Reveal: React.FC<RevealProps> = ({ children, as: Tag = 'div', className = '', from = 'up', delay = 0, distance = 40, duration = 0.9 }) => {
     const ref = useRef<HTMLElement>(null);
 
     useEffect(() => {

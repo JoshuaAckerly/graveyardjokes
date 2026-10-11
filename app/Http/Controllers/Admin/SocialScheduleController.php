@@ -19,7 +19,7 @@ class SocialScheduleController extends Controller
                 'platform' => $post->platform ?? 'unknown',
                 'content' => $post->content ?? '',
                 'media_url' => $post->media_url,
-                'scheduled_at' => $post->scheduled_at?->toIso8601String(),
+                'scheduled_at' => $post->scheduled_at->toIso8601String(),
                 'posted_at' => $post->posted_at?->toIso8601String(),
                 'status' => $post->status ?? 'unknown',
                 'error_message' => $post->error_message,
@@ -30,16 +30,21 @@ class SocialScheduleController extends Controller
             ->values();
 
         $counts = $posts->countBy('status');
+        $countFor = static function (string $status) use ($counts): int {
+            $count = $counts->get($status, 0);
+
+            return is_int($count) ? $count : 0;
+        };
 
         return Inertia::render('admin/SocialSchedule/Index', [
             'posts' => $posts,
             'stats' => [
                 'total' => $posts->count(),
-                'pending' => (int) ($counts['pending'] ?? 0),
-                'posted' => (int) ($counts['posted'] ?? 0),
-                'failed' => (int) ($counts['failed'] ?? 0),
-                'processing' => (int) ($counts['processing'] ?? 0),
-                'cancelled' => (int) ($counts['cancelled'] ?? 0),
+                'pending' => $countFor('pending'),
+                'posted' => $countFor('posted'),
+                'failed' => $countFor('failed'),
+                'processing' => $countFor('processing'),
+                'cancelled' => $countFor('cancelled'),
                 'overdue_pending' => $posts->where('is_overdue', true)->count(),
             ],
         ]);

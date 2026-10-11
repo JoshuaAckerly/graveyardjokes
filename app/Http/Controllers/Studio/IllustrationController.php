@@ -5,10 +5,13 @@ namespace App\Http\Controllers\Studio;
 use App\Http\Controllers\Controller;
 use App\Models\FacebookGalleryPost;
 use App\Services\StorageUrlGenerator;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
+use Inertia\Response;
 
 class IllustrationController extends Controller
 {
@@ -16,12 +19,12 @@ class IllustrationController extends Controller
      * Render the gallery/illustrations page. Data is loaded client-side via the
      * `api()` endpoint (kept as JSON so the grid can hydrate + cache independently).
      */
-    public function index()
+    public function index(): Response
     {
         return Inertia::render('studio/Illustrations');
     }
 
-    public function api(Request $request)
+    public function api(Request $request): JsonResponse
     {
         $data = Cache::remember('illustrations.api', now()->addHours(6), function () {
             $fbPosts = FacebookGalleryPost::active()
@@ -31,7 +34,7 @@ class IllustrationController extends Controller
                 ->get();
 
             if ($fbPosts->isNotEmpty()) {
-                return $fbPosts->map(fn ($post) => [
+                return $fbPosts->map(fn (FacebookGalleryPost $post): array => [
                     'id' => $post->id,
                     'title' => $post->title ?? '',
                     'description' => $post->description ?? null,
@@ -41,8 +44,8 @@ class IllustrationController extends Controller
                     'embed_url' => $post->embed_url,
                     'thumbnail_url' => $post->thumbnail_url ?? null,
                     'date' => $post->posted_at
-                        ? $post->posted_at->format('Y-m-d')
-                        : $post->created_at->format('Y-m-d'),
+                        ? Carbon::parse($post->posted_at)->format('Y-m-d')
+                        : $post->created_at?->format('Y-m-d'),
                 ])->values()->all();
             }
 
@@ -59,21 +62,23 @@ class IllustrationController extends Controller
      */
     private function s3Illustrations(): array
     {
-        $s3Bucket = (string) config('filesystems.disks.s3.bucket');
-        if (! $s3Bucket || app()->environment('testing')) {
+        $s3Bucket = config('filesystems.disks.s3.bucket');
+        if (! is_string($s3Bucket) || ! $s3Bucket || app()->environment('testing')) {
             return [];
         }
 
         $s3 = Storage::disk('s3');
-        $urlGenerator = new StorageUrlGenerator($s3, config('media.cloudfront_domain'));
+        $cloudfrontDomain = config('media.cloudfront_domain');
+        $urlGenerator = new StorageUrlGenerator($s3, is_string($cloudfrontDomain) ? $cloudfrontDomain : null);
 
-        $configuredPrefix = trim((string) config('media.illustrations_prefix', 'images/illustrations'), '/');
+        $configuredPrefix = config('media.illustrations_prefix', 'images/illustrations');
+        $configuredPrefix = is_string($configuredPrefix) ? trim($configuredPrefix, '/') : 'images/illustrations';
         $candidates = array_values(array_unique(array_filter([
             $configuredPrefix,
             'studio/images/illustrations',
             'images/illustrations',
             str_starts_with($configuredPrefix, 'studio/') ? $configuredPrefix : 'studio/'.$configuredPrefix,
-        ])));
+        ], static fn (string $prefix): bool => $prefix !== '')));
 
         $imageExtensions = ['gif', 'png', 'jpg', 'jpeg', 'webp'];
         $files = [];
@@ -81,9 +86,12 @@ class IllustrationController extends Controller
         foreach ($candidates as $prefix) {
             try {
                 $all = $s3->files($prefix);
-                $images = array_values(array_filter($all, function ($f) use ($imageExtensions) {
-                    return in_array(strtolower(pathinfo($f, PATHINFO_EXTENSION)), $imageExtensions);
-                }));
+                $images = [];
+                foreach ($all as $file) {
+                    if (is_string($file) && in_array(strtolower(pathinfo($file, PATHINFO_EXTENSION)), $imageExtensions, true)) {
+                        $images[] = $file;
+                    }
+                }
 
                 if (! empty($images)) {
                     $files = $images;
@@ -94,7 +102,7 @@ class IllustrationController extends Controller
             }
         }
 
-        return array_map(function ($file, $idx) use ($urlGenerator) {
+        return array_map(function (string $file, int $idx) use ($urlGenerator): array {
             $filename = pathinfo($file, PATHINFO_BASENAME);
             $url = $urlGenerator->url($file);
 

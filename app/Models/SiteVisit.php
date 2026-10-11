@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Query\Builder as QueryBuilder;
 
 class SiteVisit extends Model
 {
@@ -80,7 +82,10 @@ class SiteVisit extends Model
     }
 
     // Uses indexed is_bot column — set at write time to avoid full table scans
-    public function scopeHuman($query): void
+    /**
+     * @param  Builder<SiteVisit>  $query
+     */
+    public function scopeHuman(Builder $query): void
     {
         $query->where('is_bot', false);
 
@@ -92,7 +97,7 @@ class SiteVisit extends Model
         }
 
         $query->where(function ($q) {
-            $q->whereNull('ip_address')->orWhereNotIn('ip_address', function ($sub) {
+            $q->whereNull('ip_address')->orWhereNotIn('ip_address', function (QueryBuilder $sub) {
                 $sub->select('ip_address')
                     ->from('site_visits')
                     ->where('is_bot', true)
@@ -101,6 +106,7 @@ class SiteVisit extends Model
         });
     }
 
+    /** @return BelongsTo<User, $this> */
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);

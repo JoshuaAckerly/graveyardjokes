@@ -1,5 +1,5 @@
-import { type LocalPost, type PostsResponse } from '@/types/business-profile';
 import { useFetchApi } from '@/hooks/use-fetch-api';
+import { type LocalPost, type PostsResponse } from '@/types/business-profile';
 
 const ACTION_TYPE_LABELS: Record<string, string> = {
     BOOK: 'Book Now',

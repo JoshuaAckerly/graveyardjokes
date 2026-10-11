@@ -23,6 +23,10 @@ class DiscordPost extends Model
         'posted_at' => 'datetime',
     ];
 
+    /**
+     * @param  Builder<DiscordPost>  $query
+     * @return Builder<DiscordPost>
+     */
     public function scopePublished(Builder $query): Builder
     {
         return $query->where('is_published', true);

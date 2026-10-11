@@ -50,7 +50,7 @@ class NormalizeS3Prefix extends Command
         $limit = $this->option('limit') ? (int) $this->option('limit') : null;
 
         $bucket = $this->option('bucket') ?? config('filesystems.disks.s3.bucket');
-        if (! $bucket) {
+        if (! is_string($bucket) || $bucket === '') {
             $this->error('Bucket must be specified via --bucket or filesystems.disks.s3.bucket config');
 
             return 1;
@@ -88,13 +88,12 @@ class NormalizeS3Prefix extends Command
         $total = 0;
         $displayTotal = null;
         $bar = null;
+        $spinnerChars = ['|', '/', '-', '\\'];
+        $spinIndex = 0;
 
         if ($useSpinner) {
             $this->info('Spinner mode enabled: skipping pre-count.');
             $processed = 0;
-            // spinner chars for a simple indeterminate indicator
-            $spinnerChars = ['|', '/', '-', '\\'];
-            $spinIndex = 0;
             $start = microtime(true);
             $paginator = $client->getPaginator('ListObjectsV2', $params);
         } else {
@@ -102,11 +101,15 @@ class NormalizeS3Prefix extends Command
             $total = 0;
             $countPaginator = $client->getPaginator('ListObjectsV2', $params);
             foreach ($countPaginator as $result) {
-                if (empty($result['Contents'])) {
+                $contents = $result['Contents'] ?? null;
+                if (! is_array($contents) || $contents === []) {
                     continue;
                 }
 
-                foreach ($result['Contents'] as $obj) {
+                foreach ($contents as $obj) {
+                    if (! is_array($obj) || ! is_string($obj['Key'] ?? null)) {
+                        continue;
+                    }
                     $key = $obj['Key'];
                     $total++;
                     if ($limit && $total >= $limit) {
@@ -147,11 +150,15 @@ class NormalizeS3Prefix extends Command
         $failed = 0;
         $samples = [];
         foreach ($paginator as $result) {
-            if (empty($result['Contents'])) {
+            $contents = $result['Contents'] ?? null;
+            if (! is_array($contents) || $contents === []) {
                 continue;
             }
 
-            foreach ($result['Contents'] as $obj) {
+            foreach ($contents as $obj) {
+                if (! is_array($obj) || ! is_string($obj['Key'] ?? null)) {
+                    continue;
+                }
                 $key = $obj['Key'];
                 // Ignore keys that don't start with the prefix (defensive)
                 if (strpos($key, $source.'/') !== 0) {

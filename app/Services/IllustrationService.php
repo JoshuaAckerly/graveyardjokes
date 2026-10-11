@@ -3,10 +3,12 @@
 namespace App\Services;
 
 use App\Contracts\StorageUrlGeneratorInterface;
+use Illuminate\Contracts\Filesystem\Cloud;
 use Illuminate\Support\Facades\Storage;
 
 class IllustrationService
 {
+    /** @var Cloud */
     protected $s3;
 
     protected string $prefix;
@@ -18,8 +20,7 @@ class IllustrationService
     /**
      * Backwards-compatible: first param may be the disk or the url generator.
      *
-     * @param  mixed|null  $s3OrGenerator
-     * @param  StorageUrlGenerator|null  $maybeGenerator
+     * @param  Cloud|StorageUrlGeneratorInterface|null  $s3OrGenerator
      */
     public function __construct($s3OrGenerator = null, ?StorageUrlGeneratorInterface $maybeGenerator = null)
     {
@@ -28,12 +29,17 @@ class IllustrationService
             $this->s3 = Storage::disk('s3');
         } else {
             $this->s3 = $s3OrGenerator ?? Storage::disk('s3');
-            $this->urlGenerator = $maybeGenerator ?? new StorageUrlGenerator($this->s3, env('CLOUDFRONT_DOMAIN') ?: null);
+            $cloudfrontDomain = config('media.cloudfront_domain');
+            $this->urlGenerator = $maybeGenerator ?? new StorageUrlGenerator(
+                $this->s3,
+                is_string($cloudfrontDomain) && $cloudfrontDomain !== '' ? $cloudfrontDomain : null,
+            );
         }
 
         // Enforce canonical prefix: trim whitespace, normalize leading/trailing slashes,
         // and ensure lowercase to avoid case-sensitive S3 surprises.
-        $raw = config('media.illustrations_prefix', 'images/illustrations');
+        $configuredPrefix = config('media.illustrations_prefix', 'images/illustrations');
+        $raw = is_string($configuredPrefix) ? $configuredPrefix : 'images/illustrations';
         $normalized = trim($raw);
         $normalized = ltrim($normalized, '/\\');
         if ($normalized === '') {
@@ -44,11 +50,15 @@ class IllustrationService
             $normalized = $normalized.'/';
         }
         $this->prefix = $normalized;
-        $this->cloudfrontDomain = config('media.cloudfront_domain') ?: null;
+        $cloudfrontDomain = config('media.cloudfront_domain');
+        $this->cloudfrontDomain = is_string($cloudfrontDomain) && $cloudfrontDomain !== '' ? $cloudfrontDomain : null;
     }
 
     /**
      * Return a list of illustration URLs (strings).
+     */
+    /**
+     * @return string[]
      */
     public function list(): array
     {
@@ -59,7 +69,7 @@ class IllustrationService
         }
 
         $images = array_values(array_filter($files, function ($f) {
-            return preg_match('/\.(jpg|jpeg|png|webp|gif)$/i', $f);
+            return preg_match('/\.(jpg|jpeg|png|webp|gif)$/i', $f) === 1;
         }));
 
         $items = [];
