@@ -85,7 +85,7 @@ Route::prefix('studio')->name('studio.')->group(function () {
     Route::get('/newsletter/unsubscribe/{token}', [\App\Http\Controllers\Studio\NewsletterController::class, 'unsubscribe'])->name('newsletter.unsubscribe');
 
     Route::get('/admin/subscribers', [\App\Http\Controllers\Studio\Admin\SubscriberController::class, 'index'])
-        ->middleware('auth')
+        ->middleware(['auth', 'admin'])
         ->name('admin.subscribers');
 });
 // ────────────────────────────────────────────────────────────────────────────

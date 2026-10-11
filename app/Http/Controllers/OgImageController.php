@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Client\PendingRequest;
 use Illuminate\Http\Client\Response;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -28,9 +29,8 @@ class OgImageController
 
         $target = $request->query('url');
 
-        // SSRF protection - block private/local addresses
-        $host = parse_url($target, PHP_URL_HOST);
-        if (! $host || $this->isPrivateAddress($host)) {
+        $targetAddress = $this->validatedPublicTarget($target);
+        if ($targetAddress === null) {
             return response()->json(['error' => 'Invalid target host'], 422);
         }
 
@@ -44,9 +44,7 @@ class OgImageController
         try {
             // Fetch page HTML
             /** @var Response $resp */
-            $resp = Http::withHeaders([
-                'User-Agent' => 'GraveyardJokesBot/1.0',
-            ])->timeout(6)->get($target);
+            $resp = $this->requestFor($targetAddress, 6)->get($target);
 
             if (! $resp->successful()) {
                 return response()->json(['error' => 'Failed to fetch target page', 'status' => $resp->status()], 502);
@@ -95,21 +93,21 @@ class OgImageController
             // Resolve relative URLs
             $imgUrl = $this->resolveUrl($ogImage, $target);
 
-            // SSRF protection on the resolved image URL too (og:image could point anywhere)
-            $imgHost = parse_url($imgUrl, PHP_URL_HOST);
-            if (! $imgHost || $this->isPrivateAddress($imgHost)) {
+            $imageAddress = $this->validatedPublicTarget($imgUrl);
+            if ($imageAddress === null) {
                 return response()->json(['error' => 'Invalid image host'], 422);
             }
 
             // Fetch image
             /** @var Response $imgResp */
-            $imgResp = Http::withHeaders(['User-Agent' => 'GraveyardJokesBot/1.0'])->timeout(10)->get($imgUrl);
+            $imgResp = $this->requestFor($imageAddress, 10)->get($imgUrl);
             if (! $imgResp->successful()) {
                 return response()->json(['error' => 'Failed to download image', 'status' => $imgResp->status()], 502);
             }
 
-            $contentType = (string) ($imgResp->header('Content-Type') ?: 'image/jpeg');
-            if (! Str::startsWith($contentType, 'image/')) {
+            $contentType = strtolower(trim(explode(';', (string) ($imgResp->header('Content-Type') ?: ''), 2)[0]));
+            $extension = $this->extensionFromContentType($contentType);
+            if ($extension === null) {
                 return response()->json(['error' => 'Downloaded resource is not an image', 'content-type' => $contentType], 422);
             }
 
@@ -120,11 +118,8 @@ class OgImageController
             }
 
             // Determine extension
-            $urlPath = parse_url($imgUrl, PHP_URL_PATH);
-            $pathExtension = is_string($urlPath) && $urlPath !== '' ? pathinfo($urlPath, PATHINFO_EXTENSION) : '';
-            $ext = $this->extensionFromContentType($contentType) ?: ($pathExtension ?: 'jpg');
             $hash = substr(md5($imgUrl), 0, 16);
-            $filename = "og-cache/{$hash}.{$ext}";
+            $filename = "og-cache/{$hash}.{$extension}";
 
             Storage::disk('public')->put($filename, $body);
 
@@ -177,28 +172,86 @@ SVG;
         ]);
     }
 
-    private function isPrivateAddress(string $host): bool
+    /**
+     * @return array{host: string, port: int, resolve: ?string}|null
+     */
+    private function validatedPublicTarget(string $url): ?array
     {
-        // Allow local development domains
-        if (str_ends_with($host, '.local') || str_ends_with($host, '.localhost') || str_ends_with($host, '.test')) {
-            return false;
+        $parts = parse_url($url);
+        $host = strtolower((string) ($parts['host'] ?? ''));
+        $scheme = strtolower((string) ($parts['scheme'] ?? ''));
+        $port = $parts['port'] ?? ($scheme === 'https' ? 443 : 80);
+
+        if (
+            $host === ''
+            || str_ends_with($host, '.')
+            || $host === 'localhost'
+            || str_ends_with($host, '.localhost')
+            || str_ends_with($host, '.local')
+            || str_ends_with($host, '.test')
+            || ! in_array($scheme, ['http', 'https'], true)
+            || isset($parts['user'])
+            || isset($parts['pass'])
+            || ! in_array([$scheme, $port], [['http', 80], ['https', 443]], true)
+        ) {
+            return null;
         }
 
-        // If host is already a bare IP, check directly
         if (filter_var($host, FILTER_VALIDATE_IP)) {
-            return ! filter_var($host, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE);
+            $addresses = [$host];
+        } elseif (app()->runningUnitTests()) {
+            return ['host' => $host, 'port' => $port, 'resolve' => null];
+        } else {
+            if (! extension_loaded('curl')) {
+                throw new \RuntimeException('Secure external image fetching requires the PHP cURL extension.');
+            }
+
+            $records = dns_get_record($host, DNS_A | DNS_AAAA);
+            $addresses = [];
+
+            foreach ($records ?: [] as $record) {
+                if (isset($record['ip'])) {
+                    $addresses[] = $record['ip'];
+                }
+                if (isset($record['ipv6'])) {
+                    $addresses[] = $record['ipv6'];
+                }
+            }
         }
 
-        $ip = gethostbyname($host);
-
-        // If DNS resolution failed (returns host unchanged), the host is unresolvable.
-        // In testing Http::fake() prevents any real connections, so allow it.
-        // In production, block unresolvable hosts for safety.
-        if ($ip === $host) {
-            return ! app()->environment('testing');
+        if ($addresses === []) {
+            return null;
         }
 
-        return ! filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE);
+        foreach ($addresses as $address) {
+            if (! filter_var($address, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE)) {
+                return null;
+            }
+        }
+
+        $resolve = null;
+        if (! filter_var($host, FILTER_VALIDATE_IP)) {
+            $address = $addresses[0];
+            $curlAddress = str_contains($address, ':') ? "[{$address}]" : $address;
+            $resolve = "{$host}:{$port}:{$curlAddress}";
+        }
+
+        return ['host' => $host, 'port' => $port, 'resolve' => $resolve];
+    }
+
+    /**
+     * @param  array{host: string, port: int, resolve: ?string}  $address
+     */
+    private function requestFor(array $address, int $timeout): PendingRequest
+    {
+        $options = ['allow_redirects' => false];
+        if ($address['resolve'] !== null) {
+            $options['curl'] = [CURLOPT_RESOLVE => [$address['resolve']]];
+        }
+
+        return Http::withOptions($options)
+            ->withHeaders(['User-Agent' => 'GraveyardJokesBot/1.0'])
+            ->timeout($timeout);
     }
 
     /**
@@ -248,7 +301,6 @@ SVG;
             'image/png' => 'png',
             'image/webp' => 'webp',
             'image/gif' => 'gif',
-            'image/svg+xml' => 'svg',
         ];
 
         return $map[$ct] ?? null;

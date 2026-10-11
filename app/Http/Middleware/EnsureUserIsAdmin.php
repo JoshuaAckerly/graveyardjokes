@@ -12,7 +12,9 @@ class EnsureUserIsAdmin
     {
         $adminEmail = config('app.admin_email');
 
-        if (! $adminEmail || $request->user()?->email !== $adminEmail) {
+        $user = $request->user();
+
+        if (! $adminEmail || $user?->email !== $adminEmail || $user->email_verified_at === null) {
             abort(403);
         }
 

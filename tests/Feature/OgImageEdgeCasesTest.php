@@ -42,6 +42,13 @@ class OgImageEdgeCasesTest extends TestCase
             ->assertJson(['error' => 'Invalid target host']);
     }
 
+    public function test_ssrf_protection_blocks_local_hostnames(): void
+    {
+        $this->get('/api/fetch-og-image?url=http://service.local/page')
+            ->assertStatus(422)
+            ->assertJson(['error' => 'Invalid target host']);
+    }
+
     public function test_rate_limiting_returns_429_when_cache_key_already_set(): void
     {
         $url = 'https://example.com';

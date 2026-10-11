@@ -169,7 +169,6 @@ class ApiEndpointsTest extends TestCase
             'image/png' => 'png',
             'image/webp' => 'webp',
             'image/gif' => 'gif',
-            'image/svg+xml' => 'svg',
         ];
 
         foreach ($formats as $contentType => $extension) {
@@ -188,6 +187,33 @@ class ApiEndpointsTest extends TestCase
 
             Cache::flush();
         }
+    }
+
+    public function test_fetch_og_image_rejects_svg_content(): void
+    {
+        $html = '<html><head><meta property="og:image" content="https://example.com/image.svg"></head></html>';
+
+        Http::fake([
+            'example.com' => Http::response($html, 200),
+            'example.com/image.svg' => Http::response(str_repeat('<svg/>', 400), 200, ['Content-Type' => 'image/svg+xml']),
+        ]);
+
+        $this->get('/api/fetch-og-image?url=https://example.com')
+            ->assertStatus(422)
+            ->assertJson(['error' => 'Downloaded resource is not an image']);
+    }
+
+    public function test_fetch_og_image_does_not_follow_redirects(): void
+    {
+        Http::fake([
+            'example.com' => Http::response('', 302, ['Location' => 'http://127.0.0.1/internal']),
+        ]);
+
+        $this->get('/api/fetch-og-image?url=https://example.com')
+            ->assertStatus(502)
+            ->assertJson(['error' => 'Failed to fetch target page']);
+
+        Http::assertSentCount(1);
     }
 
     public function test_fetch_og_image_fallback_to_img_tag(): void
